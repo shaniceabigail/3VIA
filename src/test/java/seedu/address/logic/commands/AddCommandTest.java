@@ -19,6 +19,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTriviaBundle;
+import seedu.address.model.TriviaBundle;
+import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -94,8 +97,18 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addCard(Card card) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void resetData(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetData(ReadOnlyTriviaBundle newData) {
+            throw new AssertionError(("This method should not be called."));
         }
 
         @Override
@@ -104,7 +117,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public ReadOnlyTriviaBundle getTriviaBundle() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasCard(Card card) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -125,6 +148,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredCardList(Predicate<Card> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -150,6 +178,11 @@ public class AddCommandTest {
 
         @Override
         public void commitAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitTriviaBundle() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -198,6 +231,10 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        public ReadOnlyTriviaBundle getTriviaBundle() {
+            return new TriviaBundle();
         }
     }
 

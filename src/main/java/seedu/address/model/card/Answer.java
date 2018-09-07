@@ -1,21 +1,21 @@
-package seedu.address.model.person;
+package seedu.address.model.card;
 
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represent an question to a card.
+ * Represent an answer to a question.
  */
-public class Question {
+public class Answer {
     public final String value;
 
     /**
-     * Constructs a {@code question}.
+     * Constructs a {@code answer}.
      *
-     * @param question A question.
+     * @param answer A answer.
      */
-    public Question(String question) {
-        requireNonNull(question);
-        this.value = question;
+    public Answer(String answer) {
+        requireNonNull(answer);
+        this.value = answer;
     }
 
     @Override
@@ -26,8 +26,8 @@ public class Question {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof Question
-            && value.equals(((Question) other).value));
+                || (other instanceof Answer
+                && value.equals(((Answer) other).value));
     }
 
     @Override
