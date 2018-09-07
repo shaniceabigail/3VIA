@@ -6,6 +6,7 @@ import static java.util.Objects.requireNonNull;
  * Represent an question to a card.
  */
 public class Question {
+    public static final String MESSAGE_QUESTION_CONSTRAINTS = "Question must not be an empty string.";
     public final String value;
 
     /**
@@ -16,6 +17,13 @@ public class Question {
     public Question(String question) {
         requireNonNull(question);
         this.value = question;
+    }
+
+    /**
+     * Returns if a given string is a valid question.
+     */
+    public static boolean isValidQuestion(String test) {
+        return !test.equals("");
     }
 
     @Override
