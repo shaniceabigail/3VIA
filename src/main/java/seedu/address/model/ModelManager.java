@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.TriviaBundleChangedEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
 
@@ -56,6 +57,20 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons = null;
     }
 
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTriviaBundle triviaBundle, UserPrefs userPrefs) {
+        super();
+        requireAllNonNull(addressBook, triviaBundle, userPrefs);
+
+        logger.fine("Initializing with addressbook and trivia bundle: " + triviaBundle
+                + " and user prefs " + userPrefs);
+
+        versionedTriviaBundle = new VersionedTriviaBundle(triviaBundle);
+        filteredCards = new FilteredList<>(versionedTriviaBundle.getCardList());
+
+        versionedAddressBook = new VersionedAddressBook(addressBook);
+        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+    }
+
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
@@ -69,7 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void resetData(ReadOnlyTriviaBundle newData) {
         versionedTriviaBundle.resetData(newData);
-        // TODO indicateAddressBookChanged();
+        indicateTriviaBundleChanged();
     }
 
     @Override
@@ -85,6 +100,11 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
+    }
+
+    /** Raises an event to indicate the model has changed */
+    private void indicateTriviaBundleChanged() {
+        raise(new TriviaBundleChangedEvent(versionedTriviaBundle));
     }
 
     @Override
@@ -116,7 +136,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void addCard(Card card) {
         versionedTriviaBundle.addCard(card);
         updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
-        // TODO: indicateAddressBookChanged();
+        indicateTriviaBundleChanged();
     }
 
     @Override

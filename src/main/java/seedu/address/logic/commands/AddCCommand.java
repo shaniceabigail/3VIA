@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 
 /**
- * Adds a person to the address book.
+ * Adds a card to the trivia bundle.
  */
 public class AddCCommand extends Command {
 
@@ -23,13 +23,13 @@ public class AddCCommand extends Command {
             + PREFIX_ANSWER + "ANSWER "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_QUESTION + "Why is the world round? "
+            + PREFIX_QUESTION + "Why is the earth round? "
             + PREFIX_ANSWER + "Because of gravity! "
             + PREFIX_TAG + "Physics "
             + PREFIX_TAG + "Science";
 
     public static final String MESSAGE_SUCCESS = "New card added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CARD = "This card already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_CARD = "This card already exists in the trivia bundle";
 
     private final Card toAdd;
 
