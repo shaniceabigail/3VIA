@@ -96,6 +96,9 @@ public interface Model {
      */
     void addCard(Card card);
 
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Card> getFilteredCardList();
+
     /**
      * Updates the filter of the filtered card list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

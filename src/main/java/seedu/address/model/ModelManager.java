@@ -158,6 +158,15 @@ public class ModelManager extends ComponentManager implements Model {
         return FXCollections.unmodifiableObservableList(filteredPersons);
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Card} backed by the internal list of
+     * {@code versionedTriviaBundle}
+     */
+    @Override
+    public ObservableList<Card> getFilteredCardList() {
+        return FXCollections.unmodifiableObservableList(filteredCards);
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
