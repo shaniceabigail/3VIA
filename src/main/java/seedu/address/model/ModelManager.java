@@ -147,6 +147,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void updateCard(Card target, Card editedCard) {
+        requireAllNonNull(target, editedCard);
+
+        versionedTriviaBundle.updateCard(target, editedCard);
+        indicateAddressBookChanged();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

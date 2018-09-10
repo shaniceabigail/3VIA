@@ -73,6 +73,18 @@ public class TriviaBundle implements ReadOnlyTriviaBundle {
         cards.add(c);
     }
 
+
+    /**
+     * Replaces the given card {@code target} in the list with {@code editedCard}.
+     * {@code target} must exist in the trivia bundle.
+     * The card identity of {@code editedCard} must not be the same as another existing card in the trivia bundle.
+     */
+    public void updateCard(Card target, Card editedCard) {
+        requireNonNull(editedCard);
+
+        cards.setCard(target, editedCard);
+    }
+
     //// util methods
 
     @Override
