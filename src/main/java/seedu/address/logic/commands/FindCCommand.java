@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.card.QuestionContainsKeywordsPredicate;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.model.card.QuestionContainsKeywordsPredicate;
 
 /**
  * Finds and lists all cards in trivia bundle whose name contains any of the argument keywords.
