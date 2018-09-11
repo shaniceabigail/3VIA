@@ -44,18 +44,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCards = null;
     }
 
-    public ModelManager(ReadOnlyTriviaBundle triviaBundle, UserPrefs userPrefs) {
-        super();
-        requireAllNonNull(triviaBundle, userPrefs);
-
-        logger.fine("Initializing with trivia bundle: " + triviaBundle + " and user prefs " + userPrefs);
-
-        versionedTriviaBundle = new VersionedTriviaBundle(triviaBundle);
-        filteredCards = new FilteredList<>(versionedTriviaBundle.getCardList());
-
-        versionedAddressBook = null;
-        filteredPersons = null;
-    }
 
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTriviaBundle triviaBundle, UserPrefs userPrefs) {
         super();
@@ -235,8 +223,11 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+        return (versionedAddressBook.equals(other.versionedAddressBook)
+                && filteredPersons.equals(other.filteredPersons))
+                && (versionedTriviaBundle == null // short circuit for regression compatibility with addressbook
+                        || (versionedTriviaBundle.equals(other.versionedTriviaBundle)
+                        && filteredCards.equals(other.filteredCards)));
     }
 
 }

@@ -55,7 +55,7 @@ public class SampleDataUtil {
                     new Answer("force = mass * acceleration"), getTagSet("Physics")),
             new Card(new Question("What are the ways to merge 2 branches?"),
                     new Answer("rebase and merge"), getTagSet("Git")),
-            new Card(new Question("What is the captial of Singapore?"), new Answer("Singapore"),
+            new Card(new Question("What is the capital of Singapore?"), new Answer("Singapore"),
                     getTagSet("GeneralKnowledge")),
         };
     }
