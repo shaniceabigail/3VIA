@@ -94,7 +94,7 @@ public class CommandTestUtil {
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
         DESC_EARTH_FALT = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_EARTH_FLAT)
-                .withAnswer(VALID_ANSWER_GIT_COMMIT)
+                .withAnswer(VALID_ANSWER_EARTH_FLAT)
                 .withTags(VALID_TAG_PHYSICS).build();
         DESC_GIT_COMMIT = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_GIT_COMMIT)
                 .withAnswer(VALID_ANSWER_GIT_COMMIT)

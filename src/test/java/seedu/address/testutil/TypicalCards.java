@@ -20,7 +20,7 @@ import seedu.address.model.card.Card;
 public class TypicalCards {
 
     public static final Card Q_EARTH_ROUND = new CardBuilder().withQuestion("Why is the earth round?")
-            .withAnswer("Because of gravity")
+            .withAnswer("Because of gravity!")
             .withTags("Physics").build();
     public static final Card Q_GIT_MERGE = new CardBuilder().withQuestion("What are the ways to merge to branches?")
             .withAnswer("rebase and merge")
