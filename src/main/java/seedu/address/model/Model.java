@@ -106,6 +106,13 @@ public interface Model {
     void updateFilteredCardList(Predicate<Card> predicate);
 
     /**
+     * Replaces the given card {@code target} with {@code editedCard}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     */
+    void updateCard(Card target, Card editedCard);
+
+    /**
      * Saves the current address book state for undo/redo.
      */
     void commitTriviaBundle();

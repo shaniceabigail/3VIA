@@ -1,6 +1,7 @@
 package seedu.address.model.card;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represent an question to a card.
@@ -16,6 +17,7 @@ public class Question {
      */
     public Question(String question) {
         requireNonNull(question);
+        checkArgument(isValidQuestion(question), MESSAGE_QUESTION_CONSTRAINTS);
         this.value = question;
     }
 
@@ -23,7 +25,7 @@ public class Question {
      * Returns if a given string is a valid question.
      */
     public static boolean isValidQuestion(String test) {
-        return !test.equals("");
+        return !test.trim().equals("");
     }
 
     @Override
