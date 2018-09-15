@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import com.google.common.eventbus.Subscribe;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
@@ -10,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.CardPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.card.Card;
 
 /**
@@ -55,12 +57,11 @@ public class CardListPanel extends UiPart<Region> {
         });
     }
 
-    // TODO this event is called from the select command, to change this when implementing select command
-    //    @Subscribe
-    //    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-    //        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-    //        scrollTo(event.targetIndex);
-    //    }
+    @Subscribe
+    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        scrollTo(event.targetIndex);
+    }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Card} using a {@code CardView}.

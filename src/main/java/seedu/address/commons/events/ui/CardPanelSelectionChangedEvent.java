@@ -4,8 +4,8 @@ import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.card.Card;
 
 /**
- * Represents a selection change in the Person List Panel
- * TODO selection command is not implemented yet.
+ * Represents a selection change in the Card List Panel.
+ *
  */
 public class CardPanelSelectionChangedEvent extends BaseEvent {
 
