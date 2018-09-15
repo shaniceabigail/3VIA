@@ -60,7 +60,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new TriviaBundle(), new UserPrefs());
     }
 
     @Override
