@@ -14,9 +14,9 @@ import seedu.address.model.tag.Tag;
 public class Card {
     // identity fields
     private final Question question;
-    private final Answer answer;
 
     // data fields
+    private final Answer answer;
     private final Set<Tag> tags = new HashSet<>();
 
     public Card(Question question, Answer answer, Set<Tag> tags) {
@@ -55,8 +55,7 @@ public class Card {
         }
 
         Card otherPerson = (Card) other;
-        return otherPerson.getQuestion().equals(getQuestion())
-                && otherPerson.getAnswer().equals(getAnswer());
+        return otherPerson.getQuestion().equals(getQuestion());
     }
 
     @Override

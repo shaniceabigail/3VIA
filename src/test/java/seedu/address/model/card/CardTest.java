@@ -2,7 +2,6 @@ package seedu.address.model.card;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_GIT_COMMIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_GIT_COMMIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_GIT;
 import static seedu.address.testutil.TypicalCards.Q_EARTH_ROUND;
@@ -48,7 +47,7 @@ public class CardTest {
         assertFalse(editedEarthRoundQ.equals(Q_EARTH_ROUND));
 
         // different answer -> returns false
-        editedEarthRoundQ = new CardBuilder(Q_EARTH_ROUND).withAnswer(VALID_ANSWER_GIT_COMMIT).build();
+        editedEarthRoundQ = new CardBuilder(Q_EARTH_ROUND).withQuestion(VALID_QUESTION_GIT_COMMIT).build();
         assertFalse(editedEarthRoundQ.equals(Q_EARTH_ROUND));
 
         // different tags -> returns true
