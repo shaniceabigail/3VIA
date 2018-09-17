@@ -28,18 +28,18 @@ public class TypicalCards {
     public static final Card Q_FORCE_FORMULA = new CardBuilder().withQuestion("What is the formula for force?")
             .withAnswer("force = mass * acceleration")
             .withTags("Physics").build();
-    public static final Card Q_CAPITAL_SG = new CardBuilder().withQuestion("What is the capital of Singapore")
+    public static final Card Q_CAPITAL_SG = new CardBuilder().withQuestion("Name of Singapore's capital")
             .withAnswer("Singapore")
             .withTags("GeneralKnowledge").build();
     public static final Card Q_GIT_CLONE = new CardBuilder()
             .withQuestion("Which git command will get a copy of an online repository to your computer?")
             .withAnswer("git clone")
             .withTags("Git").build();
-    public static final Card Q_DENISTY_FORMULA = new CardBuilder().withQuestion("What is the formula of density")
+    public static final Card Q_DENISTY_FORMULA = new CardBuilder().withQuestion("Formula of density")
             .withAnswer("desnity = mass / volume")
             .withTags("Physics").build();
     public static final Card Q_TALLEST_BUILDING = new CardBuilder()
-            .withQuestion("What is the tallest building in the world?")
+            .withQuestion("Tallest building in the world?")
             .withAnswer("Burj Khalifa")
             .withTags("GeneralKnowledge").build();
 
@@ -60,7 +60,7 @@ public class TypicalCards {
             .withTags(VALID_TAG_GIT)
             .build();
 
-    public static final String KEYWORD_MATCHING_WHY = "Why"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_WHAT = "What"; // A keyword that matches MEIER
 
     private TypicalCards() {} // prevents instantiation
 

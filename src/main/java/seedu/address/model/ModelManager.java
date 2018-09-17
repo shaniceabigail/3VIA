@@ -128,19 +128,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updatePerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        versionedAddressBook.updatePerson(target, editedPerson);
-        indicateAddressBookChanged();
-    }
-
-    @Override
     public void updateCard(Card target, Card editedCard) {
         requireAllNonNull(target, editedCard);
 
         versionedTriviaBundle.updateCard(target, editedCard);
-        indicateAddressBookChanged();
+        indicateTriviaBundleChanged();
     }
 
     //=========== Filtered Person List Accessors =============================================================

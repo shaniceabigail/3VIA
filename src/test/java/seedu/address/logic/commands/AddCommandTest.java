@@ -16,7 +16,6 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTriviaBundle;
@@ -24,7 +23,6 @@ import seedu.address.model.TriviaBundle;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.CardBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
 
@@ -36,27 +34,9 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        new AddCommand(null);
-    }
-
-    @Test
     public void constructor_nullCard_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddCCommand(null);
-    }
-
-    @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
-
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub, commandHistory);
-
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
-        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+        new AddCommand(null);
     }
 
     @Test
@@ -64,71 +44,36 @@ public class AddCommandTest {
         ModelStubAcceptingCardAdded modelStub = new ModelStubAcceptingCardAdded();
         Card validCard = new CardBuilder().build();
 
-        CommandResult commandResult = new AddCCommand(validCard).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddCommand(validCard).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCCommand.MESSAGE_SUCCESS, validCard), commandResult.feedbackToUser);
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validCard), commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validCard), modelStub.cardsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
-
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        addCommand.execute(modelStub, commandHistory);
-    }
-
-    @Test
     public void execute_duplicateCard_throwsCommandException() throws Exception {
         Card validCard = new CardBuilder().build();
-        AddCCommand addCommand = new AddCCommand(validCard);
+        AddCommand addCommand = new AddCommand(validCard);
         ModelStub modelStub = new ModelStubWithCard(validCard);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCCommand.MESSAGE_DUPLICATE_CARD);
+        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_CARD);
         addCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
-
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
-
-        // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
-
-        // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
-    }
-
-    @Test
-    public void equalsForTrivia() {
         Card qOnEarthRound = new CardBuilder().withQuestion("Why is the earth round?").build();
         Card qOnEarthFlat = new CardBuilder().withQuestion("Why is the earth flat?").build();
-        AddCCommand addEarthRoundCommand = new AddCCommand(qOnEarthRound);
-        AddCCommand addEarthFlatCommand = new AddCCommand(qOnEarthFlat);
+        AddCommand addEarthRoundCommand = new AddCommand(qOnEarthRound);
+        AddCommand addEarthFlatCommand = new AddCommand(qOnEarthFlat);
 
         // same object -> returns true
         assertTrue(addEarthRoundCommand.equals(addEarthRoundCommand));
 
         // same values -> returns true
-        AddCCommand addEarthRoundCommandCopy = new AddCCommand(qOnEarthRound);
+        AddCommand addEarthRoundCommandCopy = new AddCommand(qOnEarthRound);
         assertTrue(addEarthRoundCommand.equals(addEarthRoundCommandCopy));
 
         // different types -> returns false
@@ -191,11 +136,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updatePerson(Person target, Person editedPerson) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void updateCard(Card target, Card editedCard) {
             throw new AssertionError("This method should not be called.");
         }
@@ -252,24 +192,6 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
-     */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
-
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
-        }
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-    }
-
-    /**
      * A Model stub that contains a single card.
      */
     private class ModelStubWithCard extends ModelStub {
@@ -284,39 +206,6 @@ public class AddCommandTest {
         public boolean hasCard(Card card) {
             requireNonNull(card);
             return this.card.equals(card);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
-        }
-
-        @Override
-        public void commitAddressBook() {
-            // called by {@code AddCommand#execute()}
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
-        }
-
-        public ReadOnlyTriviaBundle getTriviaBundle() {
-            return new TriviaBundle();
         }
     }
 
