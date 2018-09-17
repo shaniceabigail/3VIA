@@ -7,19 +7,19 @@ https://coveralls.io/github/CS2103-AY1819S1-W12-3/main?branch=master[image:https
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
 ifdef::env-github[]
-image::docs/images/Ui.png[width="600"]
+image::/Users/erickoei/Desktop/2103homepage1.png[width="600"]
 endif::[]
 
 ifndef::env-github[]
-image::images/Ui.png[width="600"]
+image::/Users/erickoei/Desktop/2103homepage1.png[width="600"]
 endif::[]
 
-* This is a desktop Trivia / Quiz application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* It is a Java sample application intended for students wanting to test their knowledge, and create their own deck of flashcards.
-* It is *written in OOP fashion*. It provides a *reasonably well-written* code example that is *significantly bigger* (around 6 KLoC)than what students usually write in beginner-level SE modules.
-* What's different from https://github.com/se-edu/addressbook-level4[level 4]:
-** Morphed from addressbook-level4
-** Decks and tags to sort out different groups of information
+* This is a desktop Trivia application. It has a GUI, but it is largely functional using the CLI (Command Line Interface).
+* Purpose: For students to create their deck of flashcards and to test their knowledge, in preparation for finals.
+
+* What's different from https://github.com/se-edu/addressbook-level4[AddressBookLevel 4]:
+** Tags used to sort out input questions into decks 
+** Aspire to create this into a game ((version 2))
 ** Support for _Build Automation_ using Gradle and for _Continuous Integration_ using Travis CI.
 
 == Site Map
@@ -34,6 +34,7 @@ endif::[]
 
 * Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
+* Inspired by https://quizlet.com/[Quizlet]
 * Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
 
 == Licence : link:LICENSE[MIT]
