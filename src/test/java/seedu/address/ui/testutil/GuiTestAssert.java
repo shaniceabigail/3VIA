@@ -5,9 +5,12 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import guitests.guihandles.CardListPanelHandle;
+import guitests.guihandles.CardViewHandle;
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
 
 /**
@@ -39,6 +42,16 @@ public class GuiTestAssert {
     }
 
     /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedCard}.
+     */
+    public static void assertCardViewDisplay(Card expectedCard, CardViewHandle actualCard) {
+        assertEquals(expectedCard.getQuestion().value, actualCard.getQuestion());
+        assertEquals(expectedCard.getAnswer().value, actualCard.getAnswer());
+        assertEquals(expectedCard.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
+                actualCard.getTags());
+    }
+
+    /**
      * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
      * in the correct order.
      */
@@ -50,11 +63,30 @@ public class GuiTestAssert {
     }
 
     /**
+     * Asserts that the list in {@code cardListPanelHandle} displays the details of {@code cards} correctly and
+     * in the correct order.
+     */
+    public static void assertListMatching(CardListPanelHandle cardListPanelHandle, Card... cards) {
+        for (int i = 0; i < cards.length; i++) {
+            cardListPanelHandle.navigateToCard(i);
+            assertCardViewDisplay(cards[i], cardListPanelHandle.getCardViewHandle(i));
+        }
+    }
+
+    /**
      * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
      * in the correct order.
      */
     public static void assertListMatching(PersonListPanelHandle personListPanelHandle, List<Person> persons) {
         assertListMatching(personListPanelHandle, persons.toArray(new Person[0]));
+    }
+
+    /**
+     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
+     * in the correct order.
+     */
+    public static void assertListMatching(CardListPanelHandle cardListPanelHandle, List<Card> cards) {
+        assertListMatching(cardListPanelHandle, cards.toArray(new Card[0]));
     }
 
     /**

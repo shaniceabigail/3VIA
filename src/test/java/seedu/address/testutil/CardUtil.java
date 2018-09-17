@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCCommand;
-import seedu.address.logic.commands.EditCCommand.EditCardDescriptor;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.EditCommand.EditCardDescriptor;
 import seedu.address.model.card.Card;
 import seedu.address.model.tag.Tag;
 
@@ -20,7 +20,7 @@ public class CardUtil {
      * Returns an add command string for adding the {@code card}.
      */
     public static String getAddCommand(Card card) {
-        return AddCCommand.COMMAND_WORD + " " + getCardDetails(card);
+        return AddCommand.COMMAND_WORD + " " + getCardDetails(card);
     }
 
     /**

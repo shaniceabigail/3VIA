@@ -24,8 +24,8 @@ public class CardView extends UiPart<Region> {
 
     public final Card card;
 
-    @javafx.fxml.FXML
-    private HBox cardPane;
+    @FXML
+    private HBox cardViewPane;
     @FXML
     private Label id;
     @FXML

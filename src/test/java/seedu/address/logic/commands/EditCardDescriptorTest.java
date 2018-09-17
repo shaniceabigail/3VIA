@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_GIT;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.EditCCommand.EditCardDescriptor;
+import seedu.address.logic.commands.EditCommand.EditCardDescriptor;
 import seedu.address.testutil.EditCardDescriptorBuilder;
 
 public class EditCardDescriptorTest {
