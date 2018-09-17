@@ -28,18 +28,18 @@ Responsibilities: UI
 
 '''
 
-=== Johnny Doe
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+=== Chua Jun Hui
+image::Chua_Jun_Hui.jpg[width="150", align="left"]
+{empty}[https://github.com/junhui2778[github]] [<<chuajunwei#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data
 
 '''
 
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+=== Shanice Abigal
+image::Shanice_Abigal.jpg[width="150", align="left"]
+{empty}[https://github.com/shaniceabigail[github]] [<<shaniceabigal#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Dev Ops + Threading
