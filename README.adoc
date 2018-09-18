@@ -14,13 +14,11 @@ ifndef::env-github[]
 image::docs/images/2103homepage1.png[width="600"]
 endif::[]
 
-* This is a desktop Trivia application. It has a GUI, but it is largely functional using the CLI (Command Line Interface).
-* Purpose: For students to create their deck of flashcards and to test their knowledge, in preparation for finals.
+* This is a desktop Trivia application. It has a GUI, better utilised using the CLI (Command Line Interface).
+* App design: For _students_ to create their deck of flashcards, to modify and test their knowledge, in preparation for finals.
 
-* What's different from https://github.com/se-edu/addressbook-level4[AddressBookLevel 4]:
-** Tags used to sort out input questions into decks 
-** Aspire to create this into a game ((version 2))
-** Support for _Build Automation_ using Gradle and for _Continuous Integration_ using Travis CI.
+
+* Support for _Build Automation_ using Gradle and for _Continuous Integration_ using Travis CI.
 
 == Site Map
 
@@ -34,6 +32,7 @@ endif::[]
 
 * Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
+* This application was adapted from https://github.com/se-edu/addressbook-level4[AddressBookLevel 4] created by https://github.com/se-edu/[SE-EDU]
 * Inspired by https://quizlet.com/[Quizlet]
 * Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
 
