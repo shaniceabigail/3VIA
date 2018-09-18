@@ -10,18 +10,25 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CARD;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardViewDisplay;
 
-import guitests.guihandles.CardListPanelHandle;
-import guitests.guihandles.CardViewHandle;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.junit.Test;
+
+import guitests.guihandles.CardListPanelHandle;
+import guitests.guihandles.CardViewHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.junit.Test;
+
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
+
 import seedu.address.model.card.Card;
 import seedu.address.storage.XmlSerializableTriviaBundle;
+
+
+
 
 public class CardListPanelTest extends GuiUnitTest {
     private static final ObservableList<Card> TYPICAL_CARDS =

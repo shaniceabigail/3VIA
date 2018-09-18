@@ -74,7 +74,7 @@ public class SelectCommandSystemTest extends AppSystemTest {
         assertCommandSuccess(command, validIndex);
 
         /* ----------------------------------- Perform invalid select operations ------------------------------------ */
-// TODO: Might be sth wrong here but im not sure
+        // TODO: Might be sth wrong here but im not sure
         /* Case: invalid index (-0) -> rejected */
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + 0,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
@@ -101,9 +101,9 @@ public class SelectCommandSystemTest extends AppSystemTest {
 
         // TODO: when delete command is implemented
         /* Case: select from empty address book -> rejected */
-//        deleteAllPersons();
-//        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
-//                MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        // deleteAllPersons();
+        // assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+        //        MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     /**
