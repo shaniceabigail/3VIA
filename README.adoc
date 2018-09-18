@@ -1,4 +1,4 @@
-= 3VIA 
+= 3VIA
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2103-AY1819S1-W12-3/main[image:https://travis-ci.com/CS2103-AY1819S1-W12-3/main.svg?branch=master[Build Status]]
@@ -16,8 +16,6 @@ endif::[]
 
 * This is a desktop Trivia application. It has a GUI, better utilised using the CLI (Command Line Interface).
 * App design: For _students_ to create their deck of flashcards, to modify and test their knowledge, in preparation for finals.
-
-
 * Support for _Build Automation_ using Gradle and for _Continuous Integration_ using Travis CI.
 
 == Site Map
