@@ -15,6 +15,7 @@ image::Koh_Jun_Wei.jpg[width="150", align="left"]
 {empty}[https://github.com/JunWei96[github]] [<<kohjunwei#, portfolio>>]
 
 Role: Developer
+
 '''
 
 === Ziheng Xiu
