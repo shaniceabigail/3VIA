@@ -62,9 +62,10 @@ public class SelectCommandSystemTest extends AppSystemTest {
         showCardsWithQuestion(KEYWORD_MATCHING_WHAT);
         int invalidIndex = getModel().getTriviaBundle().getCardList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex,
-         MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
-        
-        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
+                MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
+
+        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex,
+                MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
 
         /* Case: filtered card list, select index within bounds of address book and card list -> selected */
         Index validIndex = Index.fromOneBased(1);
