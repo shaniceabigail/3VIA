@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_EARTH_FALT;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_GIT_COMMIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_GIT_COMMIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
@@ -153,6 +153,7 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
     }
 
+    // TODO To enable this after undo/redo command is implemented on trivia.
     //    @Test
     //    public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
     //        Person editedPerson = new PersonBuilder().build();
@@ -228,10 +229,10 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_CARD, DESC_EARTH_FALT);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_CARD, DESC_EARTH_FLAT);
 
         // same values -> returns true
-        EditCardDescriptor copyDescriptor = new EditCardDescriptor(DESC_EARTH_FALT);
+        EditCardDescriptor copyDescriptor = new EditCardDescriptor(DESC_EARTH_FLAT);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_CARD, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -245,7 +246,7 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(1));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_CARD, DESC_EARTH_FALT)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_CARD, DESC_EARTH_FLAT)));
 
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_CARD, DESC_GIT_COMMIT)));

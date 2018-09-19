@@ -1,5 +1,6 @@
 package systemtests;
 
+import static org.junit.Assert.assertFalse;
 import static seedu.address.commons.core.Messages.MESSAGE_CARDS_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.TypicalCards.KEYWORD_MATCHING_WHAT;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
@@ -31,8 +33,8 @@ public class FindCommandSystemTest extends AppSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardViewUnchanged();
 
-        /* Case: repeat previous find command where person list is displaying the persons we are finding
-         * -> 2 persons found
+        /* Case: repeat previous find command where card list is displaying the cards we are finding
+         * -> 2 cards found
          */
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_WHAT;
         assertCommandSuccess(command, expectedModel);
@@ -67,7 +69,7 @@ public class FindCommandSystemTest extends AppSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardViewUnchanged();
 
-        // TODO when undo and redo implemented.
+        // TODO To enable this after undo/redo command is implemented on trivia.
         //        /* Case: undo previous find command -> rejected */
         //        command = UndoCommand.COMMAND_WORD;
         //        String expectedResultMessage = UndoCommand.MESSAGE_FAILURE;
@@ -78,8 +80,8 @@ public class FindCommandSystemTest extends AppSystemTest {
         //        expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         //        assertCommandFailure(command, expectedResultMessage);
 
+        // TODO To enable this after delete command is implemented on trivia.
         /* Case: find same cards in trivia bundle after deleting 1 of them -> 1 card found */
-        // TODO after delete command implemented
         //        executeCommand(DeleteCommand.COMMAND_WORD + " 1");
         //        assertFalse(getModel().getAddressBook().getPersonList().contains(BENSON));
         //        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
@@ -116,25 +118,24 @@ public class FindCommandSystemTest extends AppSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardViewUnchanged();
 
-        /* Case: find tags of person in address book -> 0 cards found */
+        /* Case: find tags of card in trivia bundle -> 0 cards found */
         List<Tag> tags = new ArrayList<>(Q_EARTH_ROUND.getTags());
         command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardViewUnchanged();
 
-        /* Case: find while a person is selected -> selected card deselected */
-        // TODO after done implementing list.
-        //        showAllPersons();
-        //        selectPerson(Index.fromOneBased(1));
-        //        assertFalse(getPersonListPanel().getHandleToSelectedCard().getName()
-        // .equals(DANIEL.getName().fullName));
-        //        command = FindCommand.COMMAND_WORD + " Daniel";
-        //        ModelHelper.setFilteredList(expectedModel, DANIEL);
-        //        assertCommandSuccess(command, expectedModel);
-        //        assertSelectedCardDeselected();
+        /* Case: find while a card is selected -> selected card deselected */
+        showAllCards();
+        selectCard(Index.fromOneBased(1));
+        assertFalse(getCardListPanel().getHandleToSelectedCard().getQuestion()
+                .equals(Q_GIT_MERGE.getQuestion().value));
+        command = FindCommand.COMMAND_WORD + " merge";
+        ModelHelper.setFilteredList(expectedModel, true, Q_GIT_MERGE);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardDeselected();
 
+        // TODO To enable this after clear command is implemented on trivia.
         /* Case: find person in empty address book -> 0 persons found */
-        // TODO After implementing clear.
         //        deleteAllPersons();
         //        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         //        expectedModel = getModel();
@@ -149,7 +150,7 @@ public class FindCommandSystemTest extends AppSystemTest {
 
     /**
      * Executes {@code command} and verifies that the command box displays an empty string, the result display
-     * box displays {@code Messages#MESSAGE_PERSONS_LISTED_OVERVIEW} with the number of people in the filtered list,
+     * box displays {@code Messages#MESSAGE_CARDS_LISTED_OVERVIEW} with the number of people in the filtered list,
      * and the model related components equal to {@code expectedModel}.
      * These verifications are done by
      * {@code AppSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>

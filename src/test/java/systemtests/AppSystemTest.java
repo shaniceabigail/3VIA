@@ -161,11 +161,11 @@ public abstract class AppSystemTest {
     }
 
     /**
-     * Displays all persons in the address book.
+     * Displays all cards in the trivia bundle.
      */
-    protected void showAllPersons() {
+    protected void showAllCards() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getPersonList().size(), getModel().getFilteredPersonList().size());
+        assertEquals(getModel().getTriviaBundle().getCardList().size(), getModel().getFilteredCardList().size());
     }
 
     /**
@@ -178,11 +178,11 @@ public abstract class AppSystemTest {
     }
 
     /**
-     * Selects the person at {@code index} of the displayed list.
+     * Selects the card at {@code index} of the displayed list.
      */
-    protected void selectPerson(Index index) {
+    protected void selectCard(Index index) {
         executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
-        assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
+        assertEquals(index.getZeroBased(), getCardListPanel().getSelectedCardIndex());
     }
 
     /**
@@ -226,7 +226,7 @@ public abstract class AppSystemTest {
      */
     protected void assertSelectedCardDeselected() {
         assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getPersonListPanel().isAnyCardSelected());
+        assertFalse(getCardListPanel().isAnyCardSelected());
     }
 
     /**

@@ -29,7 +29,7 @@ public class SelectCommandSystemTest extends AppSystemTest {
         String command = "   " + SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_CARD.getOneBased() + "   ";
         assertCommandSuccess(command, INDEX_FIRST_CARD);
 
-        /* Case: select the last card in the person list -> selected */
+        /* Case: select the last card in the card list -> selected */
         Index cardCount = getLastIndex(getModel());
         command = SelectCommand.COMMAND_WORD + " " + cardCount.getOneBased();
         assertCommandSuccess(command, cardCount);
@@ -55,7 +55,7 @@ public class SelectCommandSystemTest extends AppSystemTest {
 
         /* ------------------------ Perform select operations on the shown filtered list ---------------------------- */
 
-        /* Case: filtered person list, select index within bounds of address book but out of bounds of person list
+        /* Case: filtered card list, select index within bounds of trivia bundle but out of bounds of card list
          * -> rejected
 
          */
@@ -67,14 +67,13 @@ public class SelectCommandSystemTest extends AppSystemTest {
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex,
                 MESSAGE_INVALID_CARD_DISPLAYED_INDEX);
 
-        /* Case: filtered card list, select index within bounds of address book and card list -> selected */
+        /* Case: filtered card list, select index within bounds of trivia bundle and card list -> selected */
         Index validIndex = Index.fromOneBased(1);
         assertTrue(validIndex.getZeroBased() < getModel().getFilteredCardList().size());
         command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased();
         assertCommandSuccess(command, validIndex);
 
         /* ----------------------------------- Perform invalid select operations ------------------------------------ */
-        // TODO: Might be sth wrong here but im not sure
         /* Case: invalid index (-0) -> rejected */
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + 0,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
@@ -99,7 +98,7 @@ public class SelectCommandSystemTest extends AppSystemTest {
         /* Case: mixed case command word -> rejected */
         assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
 
-        // TODO: when delete command is implemented
+        // TODO To enable this after delete command is implemented on trivia.
         /* Case: select from empty address book -> rejected */
         // deleteAllPersons();
         // assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
@@ -111,14 +110,14 @@ public class SelectCommandSystemTest extends AppSystemTest {
      * 1. Command box displays an empty string.<br>
      * 2. Command box has the default style class.<br>
      * 3. Result display box displays the success message of executing select command with the
-     * {@code expectedSelectedCardIndex} of the selected person.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
+     * {@code expectedSelectedCardIndex} of the selected card.<br>
+     * 4. {@code Storage} and {@code CardListPanel} remain unchanged.<br>
      * 5. Selected card is at {@code expectedSelectedCardIndex} and the browser url is updated accordingly.<br>
      * 6. Status bar remains unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code AppSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see AppSystemTest#assertApplicationDisplaysExpected(String, String, Model)
-     * @see AppSystemTest#assertSelectedPersonChanged(Index)
+     * @see AppSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
@@ -144,7 +143,7 @@ public class SelectCommandSystemTest extends AppSystemTest {
      * 1. Command box displays {@code command}.<br>
      * 2. Command box has the error style class.<br>
      * 3. Result display box displays {@code expectedResultMessage}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
+     * 4. {@code Storage} and {@code CardListPanel} remain unchanged.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code AppSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>

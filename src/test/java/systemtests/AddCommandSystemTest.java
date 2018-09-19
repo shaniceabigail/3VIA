@@ -15,10 +15,12 @@ import static seedu.address.testutil.TypicalCards.KEYWORD_MATCHING_WHAT;
 import static seedu.address.testutil.TypicalCards.Q_APP_MADE;
 import static seedu.address.testutil.TypicalCards.Q_CS2103_PROF;
 import static seedu.address.testutil.TypicalCards.Q_FLAT_EARTH;
+import static seedu.address.testutil.TypicalCards.Q_RANDOM_QUESTION;
 
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.Model;
 import seedu.address.model.card.Answer;
@@ -44,6 +46,7 @@ public class AddCommandSystemTest extends AppSystemTest {
                 + ANSWER_DESC_EARTH_FLAT + " " + TAG_DESC_PHYSICS + " ";
         assertCommandSuccess(command, toAdd);
 
+        // TODO To enable this after undo/redo command is implemented on trivia.
         //        /* Case: undo adding Amy to the list -> Amy deleted */
         //        command = UndoCommand.COMMAND_WORD;
         //        String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
@@ -61,26 +64,20 @@ public class AddCommandSystemTest extends AppSystemTest {
                 + TAG_DESC_PHYSICS;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a card with all fields same as another card in the trivia bundle except answer
-         * -> added
-         */
-        toAdd = new CardBuilder(Q_APP_MADE).withAnswer(VALID_ANSWER_GIT_COMMIT).build();
-        command = CardUtil.getAddCommand(toAdd);
-        assertCommandSuccess(command, toAdd);
+        /* Case: add a person, missing tags -> added */
+        assertCommandSuccess(Q_RANDOM_QUESTION);
 
+        // TODO To enable this after clear command is implemented on trivia.
         //        /* Case: add to empty address book -> added */
         //        deleteAllPersons();
         //        assertCommandSuccess(ALICE);
 
-        // TODO after CLEAR command is set up.
+        // TODO To enable this after clear command is implemented on trivia.
         /* Case: add a card with tags, command with parameters in random order -> added */
         //        toAdd = Q_GIT_COMMIT;
         //        command = AddCommand.COMMAND_WORD + TAG_DESC_GIT + QUESTION_DESC_GIT_COMMIT + ANSWER_DESC_GIT_COMMIT
         //                + TAG_DESC_PHYSICS;
         //        assertCommandSuccess(command, toAdd);
-
-        //        /* Case: add a person, missing tags -> added */
-        //        assertCommandSuccess(HOON);
 
         /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
 
@@ -91,8 +88,8 @@ public class AddCommandSystemTest extends AppSystemTest {
         /* ------------------------ Perform add operation while a card is selected --------------------------- */
 
         /* Case: selects first card in the card list, add a card -> added, card selection remains unchanged */
-        //        selectPerson(Index.fromOneBased(1));
-        //        assertCommandSuccess(Q_APP_MADE);
+        selectCard(Index.fromOneBased(1));
+        assertCommandSuccess(Q_APP_MADE);
 
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
 
@@ -146,7 +143,7 @@ public class AddCommandSystemTest extends AppSystemTest {
      * 2. Command box has the default style class.<br>
      * 3. Result display box displays the success message of executing {@code AddCommand} with the details of
      * {@code toAdd}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
+     * 4. {@code Storage} and {@code CardListPanel} equal to the corresponding components in
      * the current model added with {@code toAdd}.<br>
      * 5. Browser url and selected card remain unchanged.<br>
      * 6. Status bar's sync status changes.<br>
@@ -159,7 +156,7 @@ public class AddCommandSystemTest extends AppSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(Person)}. Executes {@code command}
+     * Performs the same verification as {@code assertCommandSuccess(Card)}. Executes {@code command}
      * instead.
      * @see AddCommandSystemTest#assertCommandSuccess(Card)
      */
@@ -172,10 +169,10 @@ public class AddCommandSystemTest extends AppSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Person)} except asserts that
+     * Performs the same verification as {@code assertCommandSuccess(String, Card)} except asserts that
      * the,<br>
      * 1. Result display box displays {@code expectedResultMessage}.<br>
-     * 2. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
+     * 2. {@code Storage} and {@code CardListPanel} equal to the corresponding components in
      * {@code expectedModel}.<br>
      * @see AddCommandSystemTest#assertCommandSuccess(String, Card)
      */
@@ -192,7 +189,7 @@ public class AddCommandSystemTest extends AppSystemTest {
      * 1. Command box displays {@code command}.<br>
      * 2. Command box has the error style class.<br>
      * 3. Result display box displays {@code expectedResultMessage}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
+     * 4. {@code Storage} and {@code CardListPanel} remain unchanged.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code AppSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>

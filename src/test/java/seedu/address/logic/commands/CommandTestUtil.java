@@ -43,6 +43,10 @@ public class CommandTestUtil {
     public static final String VALID_QUESTION_GIT_COMMIT = "How to commit in git?";
     public static final String VALID_ANSWER_GIT_COMMIT = "git commit -m 'whatever you wanna say'";
     public static final String VALID_TAG_GIT = "Git";
+    public static final String VALID_QUESTION_PM_OF_SG = "Who is the prime minister of Singapore?";
+    public static final String VALID_ANSWER_PM_OF_SG = "Who is the prime minister of Singapore?";
+    public static final String VALID_TAG_GEN_KNOWLEDGE = "GeneralKnowledge";
+    public static final String VALID_TAG_NO_TAG = "NoTag";
 
     public static final String QUESTION_DESC_EARTH_FLAT = " " + PREFIX_QUESTION + VALID_QUESTION_EARTH_FLAT;
     public static final String QUESTION_DESC_GIT_COMMIT = " " + PREFIX_QUESTION + VALID_QUESTION_GIT_COMMIT;
@@ -50,6 +54,10 @@ public class CommandTestUtil {
     public static final String ANSWER_DESC_GIT_COMMIT = " " + PREFIX_ANSWER + VALID_ANSWER_GIT_COMMIT;
     public static final String TAG_DESC_PHYSICS = " " + PREFIX_TAG + VALID_TAG_PHYSICS;
     public static final String TAG_DESC_GIT = " " + PREFIX_TAG + VALID_TAG_GIT;
+    public static final String QUESTION_DESC_PM_OF_SG = " " + PREFIX_QUESTION + VALID_QUESTION_PM_OF_SG;
+    public static final String ANSWER_DESC_PM_OF_SG = " " + PREFIX_ANSWER + VALID_ANSWER_PM_OF_SG;
+    public static final String TAG_DESC_GEN_KNOWLEDGE = " " + PREFIX_TAG + VALID_TAG_GEN_KNOWLEDGE;
+    public static final String TAG_DESC_NO_TAG = " " + PREFIX_TAG + VALID_TAG_NO_TAG;
 
     public static final String INVALID_QUESTION_DESC = " " + PREFIX_QUESTION + ""; // empty strings not allowed
     public static final String INVALID_ANSWER_DESC = " " + PREFIX_ANSWER + "  "; // empty strings not allowed
@@ -58,16 +66,20 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditCardDescriptor DESC_EARTH_FALT;
+    public static final EditCommand.EditCardDescriptor DESC_EARTH_FLAT;
     public static final EditCommand.EditCardDescriptor DESC_GIT_COMMIT;
+    public static final EditCommand.EditCardDescriptor DESC_PM_OF_SG;
 
     static {
-        DESC_EARTH_FALT = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_EARTH_FLAT)
+        DESC_EARTH_FLAT = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_EARTH_FLAT)
                 .withAnswer(VALID_ANSWER_EARTH_FLAT)
                 .withTags(VALID_TAG_PHYSICS).build();
         DESC_GIT_COMMIT = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_GIT_COMMIT)
                 .withAnswer(VALID_ANSWER_GIT_COMMIT)
                 .withTags(VALID_TAG_GIT).build();
+        DESC_PM_OF_SG = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_PM_OF_SG)
+                .withAnswer(VALID_ANSWER_PM_OF_SG)
+                .withTags(VALID_TAG_GEN_KNOWLEDGE).build();
     }
 
     /**
