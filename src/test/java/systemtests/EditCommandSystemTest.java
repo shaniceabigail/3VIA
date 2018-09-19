@@ -1,22 +1,26 @@
 package systemtests;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.ANSWER_DESC_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.ANSWER_DESC_GIT_COMMIT;
+import static seedu.address.logic.commands.CommandTestUtil.ANSWER_DESC_PM_OF_SG;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ANSWER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUESTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.QUESTION_DESC_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.QUESTION_DESC_GIT_COMMIT;
+import static seedu.address.logic.commands.CommandTestUtil.QUESTION_DESC_PM_OF_SG;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_GEN_KNOWLEDGE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_GIT;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_EARTH_FLAT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_EARTH_FLAT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_GIT_COMMIT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 import static seedu.address.testutil.TypicalCards.KEYWORD_MATCHING_WHAT;
 import static seedu.address.testutil.TypicalCards.Q_FLAT_EARTH;
-import static seedu.address.testutil.TypicalCards.Q_GIT_COMMIT;
+import static seedu.address.testutil.TypicalCards.Q_PM_OF_SG;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CARD;
 
@@ -31,6 +35,7 @@ import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.CardBuilder;
+import seedu.address.testutil.CardUtil;
 
 public class EditCommandSystemTest extends AppSystemTest {
 
@@ -49,7 +54,7 @@ public class EditCommandSystemTest extends AppSystemTest {
         Card editedCard = new CardBuilder(Q_FLAT_EARTH).build();
         assertCommandSuccess(command, index, editedCard);
 
-        // TODO after undo/redo command is done
+        // TODO To enable this after undo/redo command is implemented on trivia.
         //        /* Case: undo editing the last person in the list -> last person restored */
         //        command = UndoCommand.COMMAND_WORD;
         //        String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
@@ -63,19 +68,20 @@ public class EditCommandSystemTest extends AppSystemTest {
         //        assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a card with new values same as existing values -> edited */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_GIT_COMMIT
-                + ANSWER_DESC_GIT_COMMIT + TAG_DESC_GIT;
-        assertCommandSuccess(command, index, Q_GIT_COMMIT);
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_EARTH_FLAT
+                + ANSWER_DESC_EARTH_FLAT + TAG_DESC_PHYSICS;
+        assertCommandSuccess(command, index, Q_FLAT_EARTH);
 
         /* Case: edit a card with new values same as another card's values but with different question -> edited */
-        assertTrue(getModel().getTriviaBundle().getCardList().contains(Q_GIT_COMMIT));
+        assertTrue(getModel().getTriviaBundle().getCardList().contains(Q_FLAT_EARTH));
         index = INDEX_SECOND_CARD;
         assertNotEquals(getModel().getFilteredCardList().get(index.getZeroBased()), Q_FLAT_EARTH);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_EARTH_FLAT
-                + ANSWER_DESC_GIT_COMMIT + TAG_DESC_GIT;
-        editedCard = new CardBuilder(Q_GIT_COMMIT).withQuestion(VALID_QUESTION_EARTH_FLAT).build();
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_GIT_COMMIT
+                + ANSWER_DESC_EARTH_FLAT + TAG_DESC_PHYSICS;
+        editedCard = new CardBuilder(Q_FLAT_EARTH).withQuestion(VALID_QUESTION_GIT_COMMIT).build();
         assertCommandSuccess(command, index, editedCard);
 
+        // TODO To enable this after tag is made optional and notag will be automatically assigned.
         //        /* Case: clear tags -> cleared */
         //        index = INDEX_FIRST_PERSON;
         //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
@@ -85,7 +91,7 @@ public class EditCommandSystemTest extends AppSystemTest {
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
 
-        /* Case: filtered person list, edit index within bounds of address book and person list -> edited */
+        /* Case: filtered card list, edit index within bounds of trivia bundle and card list -> edited */
         showCardsWithQuestion(KEYWORD_MATCHING_WHAT);
         index = INDEX_FIRST_CARD;
         assertTrue(index.getZeroBased() < getModel().getFilteredCardList().size());
@@ -94,7 +100,7 @@ public class EditCommandSystemTest extends AppSystemTest {
         editedCard = new CardBuilder(cardToEdit).withAnswer(VALID_ANSWER_EARTH_FLAT).build();
         assertCommandSuccess(command, index, editedCard);
 
-        /* Case: filtered person list, edit index within bounds of address book but out of bounds of person list
+        /* Case: filtered card list, edit index within bounds of trivia bundle but out of bounds of card list
          * -> rejected
          */
         showCardsWithQuestion(KEYWORD_MATCHING_WHAT);
@@ -107,16 +113,14 @@ public class EditCommandSystemTest extends AppSystemTest {
         /* Case: selects first card in the card list, edit a card -> edited, card selection remains unchanged but
          * browser url changes
          */
-        // TODO when list command is done.
-        //        showAllPersons();
-        //        index = INDEX_FIRST_PERSON;
-        //        selectPerson(index);
-        //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY
-        // + EMAIL_DESC_AMY
-        //                + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
-        //        // this can be misleading: card selection actually remains unchanged but the
-        //        // browser's url is updated to reflect the new person's name
-        //        assertCommandSuccess(command, index, AMY, index);
+        showAllCards();
+        index = INDEX_FIRST_CARD;
+        selectCard(index);
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_PM_OF_SG
+                + ANSWER_DESC_PM_OF_SG + TAG_DESC_GEN_KNOWLEDGE;
+        // this can be misleading: card selection actually remains unchanged but the
+        // browser's url is updated to reflect the new card's question
+        assertCommandSuccess(command, index, Q_PM_OF_SG, index);
 
         /* --------------------------------- Performing invalid edit operation -------------------------------------- */
 
@@ -153,29 +157,28 @@ public class EditCommandSystemTest extends AppSystemTest {
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_CARD.getOneBased()
                 + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
 
-        /* Case: edit a person with new values same as another person's values -> rejected */
-        //        executeCommand(PersonUtil.getAddCommand(BOB));
-        //        assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
-        //        index = INDEX_FIRST_PERSON;
-        //        assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
-        //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
-        // + EMAIL_DESC_BOB
-        //                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        //        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
-
-        /* Case: edit a person with new values same as another person's values but with different tags -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_GIT_COMMIT
-                + ANSWER_DESC_GIT_COMMIT + TAG_DESC_PHYSICS;
+        /* Case: edit a card with new values same as another card's values -> rejected */
+        executeCommand(CardUtil.getAddCommand(Q_FLAT_EARTH));
+        assertTrue(getModel().getTriviaBundle().getCardList().contains(Q_FLAT_EARTH));
+        index = INDEX_FIRST_CARD;
+        assertFalse(getModel().getFilteredCardList().get(index.getZeroBased()).equals(Q_FLAT_EARTH));
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_EARTH_FLAT
+                + ANSWER_DESC_EARTH_FLAT + TAG_DESC_PHYSICS;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_CARD);
 
-        /* Case: edit a person with new values same as another person's values but with different answer -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_GIT_COMMIT
+        /* Case: edit a card with new values same as another card's values but with different tags -> rejected */
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_EARTH_FLAT
                 + ANSWER_DESC_EARTH_FLAT + TAG_DESC_GIT;
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_CARD);
+
+        /* Case: edit a card with new values same as another card's values but with different answer -> rejected */
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_EARTH_FLAT
+                + ANSWER_DESC_GIT_COMMIT + TAG_DESC_PHYSICS;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_CARD);
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Index, Person, Index)} except that
+     * Performs the same verification as {@code assertCommandSuccess(String, Index, Card, Index)} except that
      * the browser url and selected card remain unchanged.
      * @param toEdit the index of the current model's filtered list
      * @see EditCommandSystemTest#assertCommandSuccess(String, Index, Card, Index)
@@ -187,8 +190,8 @@ public class EditCommandSystemTest extends AppSystemTest {
     /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
      * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
-     * 2. Asserts that the model related components are updated to reflect the person at index {@code toEdit} being
-     * updated to values specified {@code editedPerson}.<br>
+     * 2. Asserts that the model related components are updated to reflect the card at index {@code toEdit} being
+     * updated to values specified {@code editedCard}.<br>
      * @param toEdit the index of the current model's filtered list.
      * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */

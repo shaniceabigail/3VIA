@@ -2,8 +2,11 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_GIT_COMMIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_PM_OF_SG;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_GIT_COMMIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_PM_OF_SG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_GEN_KNOWLEDGE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_GIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
 
@@ -58,6 +61,10 @@ public class TypicalCards {
     public static final Card Q_GIT_COMMIT = new CardBuilder().withQuestion(VALID_QUESTION_GIT_COMMIT)
             .withAnswer(VALID_ANSWER_GIT_COMMIT)
             .withTags(VALID_TAG_GIT)
+            .build();
+    public static final Card Q_PM_OF_SG = new CardBuilder().withQuestion(VALID_QUESTION_PM_OF_SG)
+            .withAnswer(VALID_ANSWER_PM_OF_SG)
+            .withTags(VALID_TAG_GEN_KNOWLEDGE)
             .build();
 
     public static final String KEYWORD_MATCHING_WHAT = "What"; // A keyword that matches MEIER
