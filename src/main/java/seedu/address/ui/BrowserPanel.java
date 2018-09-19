@@ -47,7 +47,7 @@ public class BrowserPanel extends UiPart<Region> {
         loadPage(SEARCH_PAGE_URL + person.getName().fullName);
     }
 
-    private void loadPersonPage(Card card) {
+    private void loadCardPage(Card card) {
         loadPage(SEARCH_PAGE_URL + card.getQuestion().value);
     }
 
@@ -79,6 +79,6 @@ public class BrowserPanel extends UiPart<Region> {
     @Subscribe
     private void handleCardPanelSelectionChangedEvent(CardPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadPersonPage(event.getNewSelection());
+        loadCardPage(event.getNewSelection());
     }
 }

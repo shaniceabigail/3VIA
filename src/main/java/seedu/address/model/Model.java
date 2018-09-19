@@ -89,7 +89,7 @@ public interface Model {
      */
     void addCard(Card card);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered card's list */
     ObservableList<Card> getFilteredCardList();
 
     /**

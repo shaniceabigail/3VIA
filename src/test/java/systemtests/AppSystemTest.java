@@ -202,9 +202,7 @@ public abstract class AppSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new AddressBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
         assertEquals(new TriviaBundle(expectedModel.getTriviaBundle()), testApp.readStorageTriviaBundle());
-        assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
         assertListMatching(getCardListPanel(), expectedModel.getFilteredCardList());
     }
 
