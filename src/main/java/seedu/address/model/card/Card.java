@@ -22,7 +22,11 @@ public class Card {
     public Card(Question question, Answer answer, Set<Tag> tags) {
         this.question = question;
         this.answer = answer;
-        this.tags.addAll(tags);
+        if (tags.isEmpty()) {
+            this.tags.add(new Tag("NoTag"));
+        } else {
+            this.tags.addAll(tags);
+        }
     }
 
     public Question getQuestion() {

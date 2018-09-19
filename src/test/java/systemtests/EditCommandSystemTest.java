@@ -17,6 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_GIT;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_GIT_COMMIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 import static seedu.address.testutil.TypicalCards.KEYWORD_MATCHING_WHAT;
 import static seedu.address.testutil.TypicalCards.Q_FLAT_EARTH;
@@ -81,13 +82,12 @@ public class EditCommandSystemTest extends AppSystemTest {
         editedCard = new CardBuilder(Q_FLAT_EARTH).withQuestion(VALID_QUESTION_GIT_COMMIT).build();
         assertCommandSuccess(command, index, editedCard);
 
-        // TODO To enable this after tag is made optional and notag will be automatically assigned.
-        //        /* Case: clear tags -> cleared */
-        //        index = INDEX_FIRST_PERSON;
-        //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
-        //        Person personToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
-        //        editedPerson = new PersonBuilder(personToEdit).withTags().build();
-        //        assertCommandSuccess(command, index, editedPerson);
+        /* Case: clear tags -> cleared */
+        index = INDEX_FIRST_CARD;
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
+        Card cardToEdit = getModel().getFilteredCardList().get(index.getZeroBased());
+        editedCard = new CardBuilder(cardToEdit).withTags("NoTag").build();
+        assertCommandSuccess(command, index, editedCard);
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
 
@@ -96,7 +96,7 @@ public class EditCommandSystemTest extends AppSystemTest {
         index = INDEX_FIRST_CARD;
         assertTrue(index.getZeroBased() < getModel().getFilteredCardList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + ANSWER_DESC_EARTH_FLAT;
-        Card cardToEdit = getModel().getFilteredCardList().get(index.getZeroBased());
+        cardToEdit = getModel().getFilteredCardList().get(index.getZeroBased());
         editedCard = new CardBuilder(cardToEdit).withAnswer(VALID_ANSWER_EARTH_FLAT).build();
         assertCommandSuccess(command, index, editedCard);
 

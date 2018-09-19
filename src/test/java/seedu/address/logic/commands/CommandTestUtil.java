@@ -46,6 +46,7 @@ public class CommandTestUtil {
     public static final String VALID_QUESTION_PM_OF_SG = "Who is the prime minister of Singapore?";
     public static final String VALID_ANSWER_PM_OF_SG = "Who is the prime minister of Singapore?";
     public static final String VALID_TAG_GEN_KNOWLEDGE = "GeneralKnowledge";
+    public static final String VALID_TAG_NO_TAG = "NoTag";
 
     public static final String QUESTION_DESC_EARTH_FLAT = " " + PREFIX_QUESTION + VALID_QUESTION_EARTH_FLAT;
     public static final String QUESTION_DESC_GIT_COMMIT = " " + PREFIX_QUESTION + VALID_QUESTION_GIT_COMMIT;
@@ -56,6 +57,7 @@ public class CommandTestUtil {
     public static final String QUESTION_DESC_PM_OF_SG = " " + PREFIX_QUESTION + VALID_QUESTION_PM_OF_SG;
     public static final String ANSWER_DESC_PM_OF_SG = " " + PREFIX_ANSWER + VALID_ANSWER_PM_OF_SG;
     public static final String TAG_DESC_GEN_KNOWLEDGE = " " + PREFIX_TAG + VALID_TAG_GEN_KNOWLEDGE;
+    public static final String TAG_DESC_NO_TAG = " " + PREFIX_TAG + VALID_TAG_NO_TAG;
 
     public static final String INVALID_QUESTION_DESC = " " + PREFIX_QUESTION + ""; // empty strings not allowed
     public static final String INVALID_ANSWER_DESC = " " + PREFIX_ANSWER + "  "; // empty strings not allowed

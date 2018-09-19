@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.QUESTION_DESC_EARTH_F
 import static seedu.address.logic.commands.CommandTestUtil.QUESTION_DESC_GIT_COMMIT;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_GIT;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NO_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -52,14 +53,13 @@ public class AddCommandParserTest {
                 + TAG_DESC_PHYSICS + TAG_DESC_GIT, new AddCommand(expectedPersonMultipleTags));
     }
 
-    // TODO Currently all the fields are compulsory for cad. May need to change tag to non compulsory field.
-    //    @Test
-    //    public void parse_optionalFieldsMissing_success() {
-    //        // zero tags
-    //        Person expectedCard = new PersonBuilder(AMY).withTags().build();
-    //        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-    //                new AddCommand(expectedCard));
-    //    }
+    @Test
+    public void parse_optionalFieldsMissing_success() {
+        // zero tags
+        Card expectedCard = new CardBuilder(Q_FLAT_EARTH).withTags().build();
+        assertParseSuccess(parser, QUESTION_DESC_EARTH_FLAT + ANSWER_DESC_EARTH_FLAT + VALID_TAG_NO_TAG,
+                new AddCommand(expectedCard));
+    }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
@@ -70,10 +70,6 @@ public class AddCommandParserTest {
 
         // missing answer prefix
         assertParseFailure(parser, QUESTION_DESC_EARTH_FLAT + TAG_DESC_PHYSICS, expectedMessage);
-
-        // missing tag prefix
-        assertParseFailure(parser, QUESTION_DESC_EARTH_FLAT + ANSWER_DESC_EARTH_FLAT, expectedMessage);
-
     }
 
     @Test

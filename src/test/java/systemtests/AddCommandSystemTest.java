@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalCards.KEYWORD_MATCHING_WHAT;
 import static seedu.address.testutil.TypicalCards.Q_APP_MADE;
 import static seedu.address.testutil.TypicalCards.Q_CS2103_PROF;
 import static seedu.address.testutil.TypicalCards.Q_FLAT_EARTH;
+import static seedu.address.testutil.TypicalCards.Q_RANDOM_QUESTION;
 
 import org.junit.Test;
 
@@ -63,9 +64,8 @@ public class AddCommandSystemTest extends AppSystemTest {
                 + TAG_DESC_PHYSICS;
         assertCommandSuccess(command, toAdd);
 
-        // TODO To enable this after tag is made optional and notag will be automatically assigned.
         /* Case: add a person, missing tags -> added */
-        //        assertCommandSuccess(HOON);
+        assertCommandSuccess(Q_RANDOM_QUESTION);
 
         // TODO To enable this after clear command is implemented on trivia.
         //        /* Case: add to empty address book -> added */

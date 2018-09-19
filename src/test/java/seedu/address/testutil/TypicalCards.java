@@ -45,6 +45,10 @@ public class TypicalCards {
             .withQuestion("Tallest building in the world?")
             .withAnswer("Burj Khalifa")
             .withTags("GeneralKnowledge").build();
+    public static final Card Q_RANDOM_QUESTION = new CardBuilder()
+            .withQuestion("When is my girlfriend's birthday?")
+            .withAnswer("7 September?")
+            .withTags().build(); // empty tag
 
     // Manually added
     public static final Card Q_CS2103_PROF = new CardBuilder().withQuestion("Who is the prof for CS2103?")
