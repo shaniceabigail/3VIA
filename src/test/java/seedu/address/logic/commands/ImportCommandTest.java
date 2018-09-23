@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.testutil.FileUtil.getDummyFile;
 import static seedu.address.testutil.TypicalCards.getTypicalTriviaBundle;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -15,6 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.FileUtil;
 
 
 public class ImportCommandTest {
@@ -31,11 +31,18 @@ public class ImportCommandTest {
     }
 
     @Test
-    public void execute_ifFileExist_throwsCommandException() throws Exception {
-        File noSuchFile = getDummyFile();
+    public void execute_isFileValid_throwsCommandException() throws Exception {
+        // no such file
+        File noSuchFile = FileUtil.getDummyFile();
         ImportCommand importCommand = new ImportCommand(noSuchFile);
         thrown.expect(CommandException.class);
         thrown.expectMessage(ImportCommand.MESSAGE_INVALID_FILE);
+        importCommand.execute(model, commandHistory);
+        // invalid file type
+        File invalidFile = FileUtil.getInvalidImportFile();
+        importCommand = new ImportCommand(invalidFile);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(ImportCommand.MESSAGE_INVALID_FILE_TYPE);
         importCommand.execute(model, commandHistory);
     }
 
