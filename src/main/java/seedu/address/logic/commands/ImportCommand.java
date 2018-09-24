@@ -26,7 +26,7 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Imported cards from: %1$s";
     public static final String MESSAGE_DUPLICATE_CARD = "Some cards already exists in the trivia bundle";
     public static final String MESSAGE_INVALID_FILE = "Invalid file name.";
-    public static final String MESSAGE_INVALID_FILE_TYPE = "Invalid file type.";
+    public static final String MESSAGE_INVALID_FILE_TYPE = "Invalid file type. Only .txt files are accepted";
     public static final String MESSAGE_UNABLE_TO_READ = "Unable to read file.";
     private final File file;
 
@@ -42,7 +42,9 @@ public class ImportCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         isFileValid();
-
+        // parse txt
+        // add card to model
+        // exception if file empty, file wrong format, file contains duplicated
         // model.addCard(toAdd);
         model.commitTriviaBundle();
         return new CommandResult(String.format(MESSAGE_SUCCESS, file.getName()));
@@ -55,15 +57,26 @@ public class ImportCommand extends Command {
     private void isFileValid() throws CommandException {
         if (!file.isFile()) {
             throw new CommandException(MESSAGE_INVALID_FILE);
+        } else if (!isValidFileType()) {
+            throw new CommandException(MESSAGE_INVALID_FILE_TYPE);
         }
+    }
+
+    /**
+     * Returns true if file is .txt format.
+     * @return true if file is of supported type.
+     * @throws CommandException the exception caught.
+     */
+    private boolean isValidFileType() throws CommandException {
         try {
             String fileType = Files.probeContentType(file.toPath());
             if (!fileType.equals("text/plain")) {
-                throw new CommandException(MESSAGE_INVALID_FILE_TYPE);
+                return false;
             }
         } catch (IOException ioe) {
             throw new CommandException(MESSAGE_UNABLE_TO_READ);
         }
+        return true;
     }
     @Override
     public boolean equals(Object other) {
