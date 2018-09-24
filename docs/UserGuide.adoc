@@ -178,7 +178,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the trivia application's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the trivia application's content (`add`, `delete`, `edit`, `clear` and `import`).
 ====
 
 Examples:
@@ -196,6 +196,10 @@ The `undo` command fails as there are no undoable commands executed previously.
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
+
+* `import C:\Users\username\Desktop\text.txt` +
+`list` +
+`undo` (reverses the `import` command)
 
 === Redoing the previously undone command : `redo`
 
@@ -289,7 +293,7 @@ Format: `stats TAG`
 
 === Mass Import: `import`
 
-Imports multiple cards from a text file into the trivia application.
+Imports multiple cards from a text file into the trivia application. +
 Format: `import FILEPATH`
 
 ****
@@ -302,9 +306,9 @@ Examples:
 ****
 * `import C:\Users\username\Desktop\text.txt`
 Imports the contents from the text.txt file on a Windows desktop.
-*`import C:\Users\username\Desktop\text.txt`
+* `import C:\Users\username\Desktop\text.txt`
 Imports the contents from the text.txt file on a Mac desktop.
-*`import home/username/text.txt`
+* `import home/username/text.txt`
 Imports the contents from the text.txt file on a Linux desktop.
 ****
 
