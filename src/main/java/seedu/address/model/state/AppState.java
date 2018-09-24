@@ -12,6 +12,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -26,7 +27,7 @@ public class AppState {
     private static Set<String> normalCommands = new HashSet<>(Arrays.asList(AddCommand.COMMAND_WORD,
             ClearCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD, EditCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD,
             FindCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD, HistoryCommand.COMMAND_WORD, ListCommand.COMMAND_WORD,
-            RedoCommand.COMMAND_WORD, SelectCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD));
+            RedoCommand.COMMAND_WORD, SelectCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD, ImportCommand.COMMAND_WORD));
 
     public static void setAppState(State state) {
         currentState = state;
