@@ -937,6 +937,42 @@ Use case ends.
 +
 Use case resumes at step 4.
 
+[discrete]
+=== Use case 4: Import
+
+*MSS*
+
+1. User: Input import command.
+2. System: Displays the number of cards, questions and answer to be imported.
+3. User: Selects the desired questions and answers to import.
+4. System: Stores the desired questions and answers in database.
+
+
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Invalid file.
+[none]
+** 2a1. System: Indicates file can't be found/read.
++
+Use case ends.
+
+[none]
+* 2a. Wrong text format.
+[none]
+** 2a1. System: Indicates the format of text is incorrect.
++
+Use case ends.
+
+[none]
+* 3a. Input index is invalid.
+[none]
+** 3a1. System: Indicates the index (range) entered is invalid.
++
+Use case resumes at step 3.
 
 
 [appendix]
