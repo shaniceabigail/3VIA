@@ -61,11 +61,4 @@ public class FileUtil {
         assertTrue(file.exists());
         return file;
     }
-
-    public static File getUnreadableImportFile() {
-        File file = UNREADABLE_FILE.toFile();
-        assertTrue(file.exists());
-        assertFalse(file.canRead());
-        return file;
-    }
 }

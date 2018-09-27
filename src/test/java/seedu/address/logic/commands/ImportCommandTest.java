@@ -47,12 +47,6 @@ public class ImportCommandTest {
         thrown.expect(CommandException.class);
         thrown.expectMessage(ImportCommand.MESSAGE_INVALID_FILE_TYPE);
         importCommand.execute(model, commandHistory);
-        // unable to read file
-        File cannotReadFile = FileUtil.getUnreadableImportFile();
-        importCommand = new ImportCommand(cannotReadFile);
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(ImportCommand.MESSAGE_INVALID_FILE_TYPE);
-        importCommand.execute(model, commandHistory);
     }
 
     // TODO: test import success
