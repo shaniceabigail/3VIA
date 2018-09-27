@@ -27,7 +27,6 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_DUPLICATE_CARD = "Some cards already exists in the trivia bundle";
     public static final String MESSAGE_INVALID_FILE = "Invalid file name.";
     public static final String MESSAGE_INVALID_FILE_TYPE = "Invalid file type. Only .txt files are accepted";
-    public static final String MESSAGE_UNABLE_TO_READ = "Unable to read file.";
     private final File file;
 
     /**
@@ -63,18 +62,17 @@ public class ImportCommand extends Command {
     }
 
     /**
-     * Returns true if file is .txt format.
-     * @return true if file is of supported type.
-     * @throws CommandException the exception caught.
+     * Checks if file is a readable .txt format.
+     * @return true if file is a readable text file.
      */
-    private boolean isValidFileType() throws CommandException {
+    private boolean isValidFileType() {
         try {
             String fileType = Files.probeContentType(file.toPath());
             if (!fileType.equals("text/plain")) {
                 return false;
             }
         } catch (IOException ioe) {
-            throw new CommandException(MESSAGE_UNABLE_TO_READ);
+            return false;
         }
         return true;
     }

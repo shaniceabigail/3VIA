@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
@@ -7,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import seedu.address.logic.commands.ImportCommand;
-
 
 /**
  * A utility class to generate files to be used in import tests.
@@ -21,17 +21,20 @@ public class FileUtil {
             "invalidTest.txt.JPG");
     public static final Path UNREADABLE_FILE = Paths.get("src", "test", "data", "TxtFileUtilTest",
             "unreadableTest.txt");
-    private static final String INVALID_FILE_NAME = "no such file here m8";
+    private static final String INVALID_FILE_NAME = "noSuchFile";
     /**
      * Returns an import command string for importing the {@code file}.
      */
     public static String getImportCommand(File file) {
         return ImportCommand.COMMAND_WORD + " " + file.getPath();
     }
-    public static File getDummyFile() {
+    public static File getDummyImportFile() {
         return new File(INVALID_FILE_NAME);
     }
-
+    /**
+     * Returns a typical import file.
+     * @return typical import txt file.
+     */
     public static File getTypicalImportFile() {
         File file = TYPICAL_FILE.toFile();
         assertTrue(file.isFile());
@@ -62,7 +65,7 @@ public class FileUtil {
     public static File getUnreadableImportFile() {
         File file = UNREADABLE_FILE.toFile();
         assertTrue(file.exists());
-        assertTrue(file.setReadable(false));
+        assertFalse(file.canRead());
         return file;
     }
 }

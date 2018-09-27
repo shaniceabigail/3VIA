@@ -16,7 +16,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.FileUtil;
 
-
 public class ImportCommandTest {
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
     @Rule
@@ -33,7 +32,7 @@ public class ImportCommandTest {
     @Test
     public void execute_isFile_throwsCommandException() throws Exception {
         // no such file
-        File noSuchFile = FileUtil.getDummyFile();
+        File noSuchFile = FileUtil.getDummyImportFile();
         ImportCommand importCommand = new ImportCommand(noSuchFile);
         thrown.expect(CommandException.class);
         thrown.expectMessage(ImportCommand.MESSAGE_INVALID_FILE);
@@ -41,7 +40,7 @@ public class ImportCommandTest {
     }
 
     @Test
-    public void execute_isFileValidType_throwsCommandException() throws Exception {
+    public void execute_isValidFileType_throwsCommandException() throws Exception {
         // invalid file type
         File invalidFile = FileUtil.getInvalidImportFile();
         ImportCommand importCommand = new ImportCommand(invalidFile);
@@ -52,7 +51,7 @@ public class ImportCommandTest {
         File cannotReadFile = FileUtil.getUnreadableImportFile();
         importCommand = new ImportCommand(cannotReadFile);
         thrown.expect(CommandException.class);
-        thrown.expectMessage(ImportCommand.MESSAGE_UNABLE_TO_READ);
+        thrown.expectMessage(ImportCommand.MESSAGE_INVALID_FILE_TYPE);
         importCommand.execute(model, commandHistory);
     }
 
