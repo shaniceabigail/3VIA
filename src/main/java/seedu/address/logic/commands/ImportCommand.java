@@ -19,9 +19,9 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Imports cards to the trivia. "
             + "Parameters: "
-            + "location\n"
+            + "File path\n"
             + "Example: " + COMMAND_WORD + " "
-            + "Path of file ";
+            + "C:\\Users\\username\\Desktop\\cards.txt";
 
     public static final String MESSAGE_SUCCESS = "Imported cards from: %1$s";
     public static final String MESSAGE_DUPLICATE_CARD = "Some cards already exists in the trivia bundle";
