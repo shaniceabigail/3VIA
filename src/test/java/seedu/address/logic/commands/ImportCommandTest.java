@@ -30,20 +30,16 @@ public class ImportCommandTest {
     }
 
     @Test
-    public void execute_isFile_throwsCommandException() throws Exception {
+    public void execute_isFileValid_throwsCommandException() throws Exception {
         // no such file
         File noSuchFile = FileUtil.getDummyImportFile();
         ImportCommand importCommand = new ImportCommand(noSuchFile);
         thrown.expect(CommandException.class);
         thrown.expectMessage(ImportCommand.MESSAGE_INVALID_FILE);
         importCommand.execute(model, commandHistory);
-    }
-
-    @Test
-    public void execute_isValidFileType_throwsCommandException() throws Exception {
         // invalid file type
         File invalidFile = FileUtil.getInvalidImportFile();
-        ImportCommand importCommand = new ImportCommand(invalidFile);
+        importCommand = new ImportCommand(invalidFile);
         thrown.expect(CommandException.class);
         thrown.expectMessage(ImportCommand.MESSAGE_INVALID_FILE_TYPE);
         importCommand.execute(model, commandHistory);

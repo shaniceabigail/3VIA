@@ -6,6 +6,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.junit.Test;
 import seedu.address.logic.commands.ImportCommand;
 
 /**
@@ -18,8 +19,6 @@ public class FileUtil {
             "emptyTest.txt");
     public static final Path INVALID_FILE = Paths.get("src", "test", "data", "TxtFileUtilTest",
             "invalidTest.txt.JPG");
-    public static final Path UNREADABLE_FILE = Paths.get("src", "test", "data", "TxtFileUtilTest",
-            "unreadableTest.txt");
     private static final String INVALID_FILE_NAME = "noSuchFile";
     /**
      * Returns an import command string for importing the {@code file}.
