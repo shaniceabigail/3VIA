@@ -257,17 +257,16 @@ Format: `c` (correct) OR `x` (wrong)
 ==== Quit the test:
 
 Will exit from the test.
-Format: `quit`
+Format: `exit`
 
 === Starting a matching test: `testM`
 
 Start a test of matching cards of a specified tag. In a test of matching cards, all the questions and answers in that tag
 will be displayed. The user will then have to match the correct question and answer together. +
-Format: `testM TAG TIMELIMIT_IN_SECONDS`
+Format: `testM TAG`
 
 ****
 * By incorporating different testing approach, it will allow the user to better internalize the content.
-* The user can also set the time limit (in seconds) for each question using the optional field TIMELIMIT_IN_SECONDS
 ****
 
 The following commands can only be used during a `testM`.
@@ -275,16 +274,12 @@ The following commands can only be used during a `testM`.
 ==== Enter the matching cards: match
 
 Will match the cards during `testM`. +
-Format: `match 1 2`
-
-****
-* The first and second number represents the index of question and answer respectively.
-****
+Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 
 ==== Quit the test:
 
 Will exit from the test.
-Format: `quit`
+Format: `exit`
 
 === View statistics for a certain test: `stats`
 
