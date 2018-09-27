@@ -27,7 +27,8 @@ public class AppState {
     private static Set<String> normalCommands = new HashSet<>(Arrays.asList(AddCommand.COMMAND_WORD,
             ClearCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD, EditCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD,
             FindCommand.COMMAND_WORD, HelpCommand.COMMAND_WORD, HistoryCommand.COMMAND_WORD, ListCommand.COMMAND_WORD,
-            RedoCommand.COMMAND_WORD, SelectCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD, ImportCommand.COMMAND_WORD));
+            RedoCommand.COMMAND_WORD, SelectCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD,
+            ImportCommand.COMMAND_WORD));
 
     public static void setAppState(State state) {
         currentState = state;
