@@ -31,18 +31,28 @@ public class ImportCommandTest {
     }
 
     @Test
-    public void execute_isFileValid_throwsCommandException() throws Exception {
+    public void execute_isFile_throwsCommandException() throws Exception {
         // no such file
         File noSuchFile = FileUtil.getDummyFile();
         ImportCommand importCommand = new ImportCommand(noSuchFile);
         thrown.expect(CommandException.class);
         thrown.expectMessage(ImportCommand.MESSAGE_INVALID_FILE);
         importCommand.execute(model, commandHistory);
+    }
+
+    @Test
+    public void execute_isFileValidType_throwsCommandException() throws Exception {
         // invalid file type
         File invalidFile = FileUtil.getInvalidImportFile();
-        importCommand = new ImportCommand(invalidFile);
+        ImportCommand importCommand = new ImportCommand(invalidFile);
         thrown.expect(CommandException.class);
         thrown.expectMessage(ImportCommand.MESSAGE_INVALID_FILE_TYPE);
+        importCommand.execute(model, commandHistory);
+        // unable to read file
+        File cannotReadFile = FileUtil.getUnreadableImportFile();
+        importCommand = new ImportCommand(cannotReadFile);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(ImportCommand.MESSAGE_UNABLE_TO_READ);
         importCommand.execute(model, commandHistory);
     }
 

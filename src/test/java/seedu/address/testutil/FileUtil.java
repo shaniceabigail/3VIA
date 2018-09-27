@@ -6,17 +6,36 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import seedu.address.logic.commands.ImportCommand;
+
 
 /**
  * A utility class to generate files to be used in import tests.
  */
 public class FileUtil {
-
-    public static final Path EMPTY_FILE = Paths.get("src", "test", "data", "TxtFileUtilTest", "emptyTest.txt");
-    public static final Path INVALID_FILE = Paths.get("src", "test", "data", "TxtFileUtilTest", "invalidTest.txt.JPG");
+    public static final Path TYPICAL_FILE = Paths.get("src", "test", "data", "TxtFileUtilTest",
+            "typicalTest.txt");
+    public static final Path EMPTY_FILE = Paths.get("src", "test", "data", "TxtFileUtilTest",
+            "emptyTest.txt");
+    public static final Path INVALID_FILE = Paths.get("src", "test", "data", "TxtFileUtilTest",
+            "invalidTest.txt.JPG");
+    public static final Path UNREADABLE_FILE = Paths.get("src", "test", "data", "TxtFileUtilTest",
+            "unreadableTest.txt");
     private static final String INVALID_FILE_NAME = "no such file here m8";
+    /**
+     * Returns an import command string for importing the {@code file}.
+     */
+    public static String getImportCommand(File file) {
+        return ImportCommand.COMMAND_WORD + " " + file.getPath();
+    }
     public static File getDummyFile() {
         return new File(INVALID_FILE_NAME);
+    }
+
+    public static File getTypicalImportFile() {
+        File file = TYPICAL_FILE.toFile();
+        assertTrue(file.isFile());
+        return file;
     }
 
     /**
@@ -37,6 +56,13 @@ public class FileUtil {
     public static File getInvalidImportFile() {
         File file = INVALID_FILE.toFile();
         assertTrue(file.exists());
+        return file;
+    }
+
+    public static File getUnreadableImportFile() {
+        File file = UNREADABLE_FILE.toFile();
+        assertTrue(file.exists());
+        assertTrue(file.setReadable(false));
         return file;
     }
 }
