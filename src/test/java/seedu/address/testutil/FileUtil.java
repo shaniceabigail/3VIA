@@ -17,7 +17,7 @@ public class FileUtil {
     public static final Path EMPTY_FILE = Paths.get("src", "test", "data", "TxtFileUtilTest",
             "emptyTest.txt");
     public static final Path INVALID_FILE = Paths.get("src", "test", "data", "TxtFileUtilTest",
-            "invalidTest.txt.JPG");
+            "invalidTest.txt.jpg");
     private static final String INVALID_FILE_NAME = "noSuchFile";
     /**
      * Returns an import command string for importing the {@code file}.
