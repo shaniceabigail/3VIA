@@ -829,7 +829,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |curious learner |be able to test my knowledge |be sure that I have memorised my content
+|`* * *` |curious learner |be able to test my knowledge |be sure that I have memorised the content
+
+|`* * *` |hardworking learner |have different testing mechanisms |reinforce my knowledge and clear any misconceptions.
 
 |`* * *` |user |list all the contents in a deck of cards |review all the contents in one glance
 
@@ -918,7 +920,6 @@ Use case ends.
 7. User: User determine the correctness of the question.
 8. Repeat step 4 until all cards have been viewed and answered.
 
-
 +
 Use case ends.
 
@@ -938,7 +939,37 @@ Use case ends.
 Use case resumes at step 4.
 
 [discrete]
-=== Use case 4: Import
+=== Use case 4: Matching test
+
+*MSS*
+
+1. User: Start matching test.
+2. System: Shows a list of question and answer.
+3. User: Select the matching question and answer.
+4. Repeat step 3 until user matched all the questions and answers correctly.
+5. System: Record down the statistics of the test.
+
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. Question and answer matched wrongly.
+[none]
+** 3a1. System: Indicates that question and answer matched are wrong.
++
+Use case ends.
+
+[none]
+* 4a. User exit from the test without completing it.
+[none]
+** 4a1. System: Step 5 will not be carried out.
++
+Use case ends.
+
+[discrete]
+=== Use case 5: Import
 
 *MSS*
 
