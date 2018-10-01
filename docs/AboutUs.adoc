@@ -14,7 +14,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Koh Jun Wei
-image::junwei96.jpg[width="150", align="left"]
+image::junwei96.png.jpg[width="150", align="left"]
 {empty}[https://github.com/JunWei96[github]] [<<kohjunwei#, portfolio>>]
 
 Role: Developer
@@ -22,7 +22,7 @@ Role: Developer
 '''
 
 === Ziheng Xiu
-image::cary-xx.jpg[width="150", align="left"]
+image::cary-xx.png.jpg[width="150", align="left"]
 {empty}[https://github.com/Cary-Xx[github]] [<<zihengxiu#, portfolio>>]
 
 Role: Developer
@@ -30,15 +30,15 @@ Role: Developer
 '''
 
 === Chua Jun Hui
-image::junhui2778.jpg[width="150", align="left"]
-{empty}[https://github.com/junhui2778[github]] [<<chuajunwei#, portfolio>>]
+image::junhui2778.png.jpg[width="150", align="left"]
+{empty}[https://github.com/junhui2778[github]] [<<chuajunhui#, portfolio>>]
 
 Role: Developer
 
 '''
 
 === Shanice Abigal
-image::shaniceabigail.jpg[width="150", align="left"]
+image::shaniceabigail.png.jpg[width="150", align="left"]
 {empty}[https://github.com/shaniceabigail[github]] [<<shaniceabigal#, portfolio>>]
 
 Role: Developer
@@ -46,7 +46,7 @@ Role: Developer
 '''
 
 === Ho Zong Sien
-image::hozongsien.JPG[width="150", align="left"]
+image::hozongsien.png.JPG[width="150", align="left"]
 {empty}[https://github.com/hozongsien[github]] [<<hozongsien#, portfolio>>]
 
 Role: Developer

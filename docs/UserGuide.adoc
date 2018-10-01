@@ -178,7 +178,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the trivia application's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the trivia application's content (`add`, `delete`, `edit`, `clear` and `import`).
 ====
 
 Examples:
@@ -196,6 +196,10 @@ The `undo` command fails as there are no undoable commands executed previously.
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
+
+* `import C:\Users\username\Desktop\text.txt` +
+`list` +
+`undo` (reverses the `import` command)
 
 === Redoing the previously undone command : `redo`
 
@@ -253,17 +257,16 @@ Format: `c` (correct) OR `x` (wrong)
 ==== Quit the test:
 
 Will exit from the test.
-Format: `quit`
+Format: `exit`
 
 === Starting a matching test: `testM`
 
 Start a test of matching cards of a specified tag. In a test of matching cards, all the questions and answers in that tag
 will be displayed. The user will then have to match the correct question and answer together. +
-Format: `testM TAG TIMELIMIT_IN_SECONDS`
+Format: `testM TAG`
 
 ****
 * By incorporating different testing approach, it will allow the user to better internalize the content.
-* The user can also set the time limit (in seconds) for each question using the optional field TIMELIMIT_IN_SECONDS
 ****
 
 The following commands can only be used during a `testM`.
@@ -271,26 +274,38 @@ The following commands can only be used during a `testM`.
 ==== Enter the matching cards: match
 
 Will match the cards during `testM`. +
-Format: `match 1 2`
-
-****
-* The first and second number represents the index of question and answer respectively.
-****
+Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 
 ==== Quit the test:
 
 Will exit from the test.
-Format: `quit`
+Format: `exit`
 
 === View statistics for a certain test: `stats`
 
 Will list out all the previous tests, with their respective questions, answers and the user’s answers.
 Format: `stats TAG`
 
-=== Mass Import: 'import`
+=== Mass Import: `import`
 
-Will import multiple cards into the trivia application.
-Format: import FILEPATH
+Imports multiple cards from a text file into the trivia application. +
+Format: `import FILEPATH`
+
+****
+* Ignores duplicated cards already in trivia.
+* The `FILEPATH` refers to the absolute path of the file to be imported.
+* The file *must be a non empty text file*.
+****
+
+Examples:
+****
+* `import C:\Users\username\Desktop\text.txt`
+Imports the contents from the text.txt file on a Windows desktop.
+* `import C:\Users\username\Desktop\text.txt`
+Imports the contents from the text.txt file on a Mac desktop.
+* `import home/username/text.txt`
+Imports the contents from the text.txt file on a Linux desktop.
+****
 
 === Exiting the program : `exit`
 
