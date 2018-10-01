@@ -53,26 +53,7 @@ public interface Model {
     /**
      * Returns true if the model has previous address book states to restore.
      */
-    boolean canUndoAddressBook();
 
-    /**
-     * Returns true if the model has undone address book states to restore.
-     */
-    boolean canRedoAddressBook();
-
-    /**
-     * Restores the model's address book to its previous state.
-     */
-    void undoAddressBook();
-
-    /**
-     * Restores the model's address book to its previously undone state.
-     */
-    void redoAddressBook();
-
-    /**
-     * Saves the current address book state for undo/redo.
-     */
     void commitAddressBook();
 
     /** Returns the TriviaBundle */
@@ -109,4 +90,26 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitTriviaBundle();
+
+    boolean canUndoTriviaBundle();
+
+    /**
+     * Returns true if the model has undone trivial bundle states to restore.
+     */
+    boolean canRedoTriviaBundle();
+
+    /**
+     * Restores the model's trivial bundle to its previous state.
+     */
+    void undoTriviaBundle();
+
+    /**
+     * Restores the model's trivial bundle to its previously undone state.
+     */
+    void redoTriviaBundle();
+
+    /**
+     * Saves the current trivial bundle state for undo/redo.
+     */
+
 }
