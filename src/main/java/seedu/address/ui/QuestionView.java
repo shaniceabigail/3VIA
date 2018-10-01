@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.address.model.card.Question;
 
 /**
@@ -26,6 +27,19 @@ public class QuestionView extends UiPart<Region> {
         this.question = question;
         id.setText(displayedIndex + ". ");
         questionText.setText(question.value);
+    }
+
+    public QuestionView(Question question, int displayedIndex, boolean isCorrect) {
+        super(FXML);
+        this.question = question;
+        id.setText(displayedIndex + ". ");
+        questionText.setText(question.value);
+        if (isCorrect) {
+            this.flashBackgroundColor(questionViewPane, new Color(0, 1, 0, 1));
+        } else {
+            this.flashBackgroundColor(questionViewPane, new Color(1, 0, 0, 1));
+
+        }
     }
 
     @Override

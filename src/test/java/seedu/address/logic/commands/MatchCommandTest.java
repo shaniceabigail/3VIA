@@ -61,7 +61,7 @@ public class MatchCommandTest {
 
         Index[] correctIndexesDensity = getIndexes(model.getCurrentRunningTest(), Q_DENISTY_FORMULA);
         assertCommandSuccess(new MatchCommand(correctIndexesDensity[0], correctIndexesDensity[1]), model,
-                commandHistory, MatchCommand.MESSAGE_TEST_COMPLETED, expectedModel);
+                commandHistory, MatchCommand.MESSAGE_MATCH_SUCCESS, expectedModel);
     }
 
     @Test

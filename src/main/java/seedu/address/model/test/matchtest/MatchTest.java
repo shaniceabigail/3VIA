@@ -13,6 +13,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.StartTestEvent;
 import seedu.address.commons.events.model.StopTestEvent;
+import seedu.address.commons.events.ui.FlashMatchOutcomeEvent;
 import seedu.address.model.Model;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
@@ -88,6 +89,17 @@ public class MatchTest extends TriviaTest {
         MatchAttempt newAttempt = new MatchAttempt(cardWithQuestion, cardWithAnswer);
         attempts.add(newAttempt);
         return newAttempt;
+    }
+
+    /**
+     * Will create an UI event to indicate on the UI on whether the match is successful or not.
+     * @param attempt The attempt of that match command.
+     */
+    public void postOutcomeOfMatch(MatchAttempt attempt) {
+        int indexOfQuestion = getQuestions().indexOf(attempt.getCardWithQuestion().getQuestion());
+        int indexOfAnswer = getAnswers().indexOf(attempt.getCardWithAnswer().getAnswer());
+        EventsCenter.getInstance().post(new FlashMatchOutcomeEvent(indexOfQuestion, indexOfAnswer,
+                attempt.isCorrect()));
     }
 
     private boolean isValidMatchTest() {

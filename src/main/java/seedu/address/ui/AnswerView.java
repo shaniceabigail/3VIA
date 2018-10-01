@@ -1,9 +1,14 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
+
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.card.Answer;
 
 /**
@@ -13,6 +18,7 @@ public class AnswerView extends UiPart<Region> {
     private static final String FXML = "AnswerView.fxml";
 
     public final Answer answer;
+    private final Logger logger = LogsCenter.getLogger(AnswerView.class);
 
     @FXML
     private HBox answerViewPane;
@@ -26,6 +32,19 @@ public class AnswerView extends UiPart<Region> {
         this.answer = answer;
         id.setText(displayedIndex + ". ");
         answerText.setText(answer.value);
+    }
+
+    public AnswerView(Answer answer, int displayedIndex, boolean isCorrect) {
+        super(FXML);
+        this.answer = answer;
+        id.setText(displayedIndex + ". ");
+        answerText.setText(answer.value);
+        if (isCorrect) {
+            this.flashBackgroundColor(answerViewPane, new Color(0, 1, 0, 1));
+        } else {
+            this.flashBackgroundColor(answerViewPane, new Color(1, 0, 0, 1));
+
+        }
     }
 
     @Override
