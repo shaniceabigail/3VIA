@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +24,21 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_NO_FILE_NAME = "No path name specified.";
 
+    /**
+     * Parses {@code pathName} into an {@code file} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if no path name is specified.
+     */
+    public static File parsePath(String pathName) throws ParseException {
+        String trimmedPathName = pathName.trim();
+        requireNonNull(trimmedPathName);
+        if (trimmedPathName.isEmpty()) {
+            throw new ParseException(MESSAGE_NO_FILE_NAME);
+        }
+        return new File(trimmedPathName);
+    }
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.

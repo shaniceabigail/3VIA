@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ImportCommand;
 
 public class AppStateTest {
 
@@ -16,6 +17,7 @@ public class AppStateTest {
 
         assertTrue(AppState.isCommandPermitted(AddCommand.COMMAND_WORD));
         assertTrue(AppState.isCommandPermitted(ExitCommand.COMMAND_WORD));
+        assertTrue(AppState.isCommandPermitted(ImportCommand.COMMAND_WORD));
 
         assertFalse(AppState.isCommandPermitted("NotACommand"));
     }
