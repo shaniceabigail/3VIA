@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import com.google.common.eventbus.Subscribe;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
@@ -22,13 +23,13 @@ public class ImportHelpDisplay extends UiPart<Region> {
     public ImportHelpDisplay() {
         super(FXML);
         importHelp.setText("Bye World.");
-        // registerAsAnEventHandler(this);
+        registerAsAnEventHandler(this);
     }
 
-    //    @Subscribe
-    //    private void handleNewResultAvailableEvent(NewResultAvailableEvent event) {
-    //        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-    //        Platform.runLater(() -> displayed.setValue(event.message));
-    //    }
+//        @Subscribe
+//        private void handleNewResultAvailableEvent(NewResultAvailableEvent event) {
+//            logger.info(LogsCenter.getEventHandlingLogMessage(event));
+//            Platform.runLater(() -> displayed.setValue(event.message));
+//        }
 
 }

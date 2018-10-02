@@ -43,7 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private ImportHelpDisplay importHelpDisplay;
 
     @FXML
-    private StackPane browserPlaceholder;
+    private StackPane extraInfomationPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -62,9 +62,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
-
-    @FXML
-    private StackPane importHelpDisplayPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -127,8 +124,10 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        ImportHelpDisplay importHelpDisplay = new ImportHelpDisplay();
+        extraInfomationPlaceholder.getChildren().add(importHelpDisplay.getRoot());
         browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        extraInfomationPlaceholder.getChildren().add(browserPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         cardListPanel = new CardListPanel(logic.getFilteredCardList());
@@ -142,9 +141,6 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-
-        ImportHelpDisplay importHelpDisplay = new ImportHelpDisplay();
-        importHelpDisplayPlaceholder.getChildren().add(importHelpDisplay.getRoot());
     }
 
     void hide() {
