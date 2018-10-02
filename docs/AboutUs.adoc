@@ -27,7 +27,7 @@ image::cary-xx.png.jpg[width="150", align="left"]
 {empty}[https://github.com/Cary-Xx[github]] [<<zihengxiu#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Model
+Responsibilities: Logic
 
 '''
 
