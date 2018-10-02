@@ -3,7 +3,8 @@ package seedu.address.logic.commands;
 //import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 //import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 //import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
-import static seedu.address.testutil.TypicalCards.*;
+
+import static seedu.address.testutil.TypicalCards.getTypicalTriviaBundle;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Before;
@@ -24,7 +25,7 @@ import seedu.address.model.UserPrefs;
 public class UndoCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new UserPrefs());
-    private final Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new UserPrefs());
+    //private final Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Before
@@ -35,11 +36,12 @@ public class UndoCommandTest {
         model.addCard(new Card(new Question("how are you2"), new Answer("I am fine2"), new HashSet<Tag>()));
         expectedModel.addCard(new Card(new Question("how are you"), new Answer("I am fine"), new HashSet<Tag>()));
         expectedModel.addCard(new Card(new Question("how are you2"), new Answer("I am fine2"), new HashSet<Tag>()));
-        */
+
         model.addCard(Q_FLAT_EARTH);
         model.addCard(Q_GIT_COMMIT);
         expectedModel.addCard(Q_FLAT_EARTH);
         expectedModel.addCard(Q_GIT_COMMIT);
+        */
     }
 
     @Test
