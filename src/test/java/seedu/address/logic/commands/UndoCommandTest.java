@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
+//import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+//import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+//import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
 import static seedu.address.testutil.TypicalCards.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -13,13 +13,13 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.card.Answer;
-import seedu.address.model.card.Card;
-import seedu.address.model.card.Question;
-import seedu.address.model.tag.Tag;
+//import seedu.address.model.card.Answer;
+//import seedu.address.model.card.Card;
+//import seedu.address.model.card.Question;
+//import seedu.address.model.tag.Tag;
 
-import java.util.HashSet;
-import java.util.Set;
+//import java.util.HashSet;
+//import java.util.Set;
 
 public class UndoCommandTest {
 
