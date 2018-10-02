@@ -20,7 +20,7 @@ public class RedoCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(),
-            gnew UserPrefs());
+            new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
 
     /*
