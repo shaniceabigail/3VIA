@@ -36,7 +36,7 @@ image::junhui2778.png.jpg[width="150", align="left"]
 {empty}[https://github.com/junhui2778[github]] [<<chuajunhui#, portfolio>>]
 
 Role: Developer +
-Responsibilities Logic 
+Responsibilities Logic
 
 '''
 
