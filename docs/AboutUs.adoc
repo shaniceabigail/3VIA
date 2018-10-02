@@ -17,7 +17,8 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::junwei96.png.jpg[width="150", align="left"]
 {empty}[https://github.com/JunWei96[github]] [<<kohjunwei#, portfolio>>]
 
-Role: Developer
+Role: Developer +
+Responsibilities: Model
 
 '''
 
@@ -25,7 +26,8 @@ Role: Developer
 image::cary-xx.png.jpg[width="150", align="left"]
 {empty}[https://github.com/Cary-Xx[github]] [<<zihengxiu#, portfolio>>]
 
-Role: Developer
+Role: Developer +
+Responsibilities: Model
 
 '''
 
@@ -33,7 +35,8 @@ Role: Developer
 image::junhui2778.png.jpg[width="150", align="left"]
 {empty}[https://github.com/junhui2778[github]] [<<chuajunhui#, portfolio>>]
 
-Role: Developer
+Role: Developer +
+Responsibilities Logic 
 
 '''
 
@@ -41,7 +44,8 @@ Role: Developer
 image::shaniceabigail.png.jpg[width="150", align="left"]
 {empty}[https://github.com/shaniceabigail[github]] [<<shaniceabigal#, portfolio>>]
 
-Role: Developer
+Role: Developer +
+Responsibilities: UI
 
 '''
 
@@ -49,6 +53,7 @@ Role: Developer
 image::hozongsien.png.JPG[width="150", align="left"]
 {empty}[https://github.com/hozongsien[github]] [<<hozongsien#, portfolio>>]
 
-Role: Developer
+Role: Developer +
+Responsibilities: Storage
 
 '''
