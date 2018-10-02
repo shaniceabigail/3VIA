@@ -165,4 +165,7 @@ public class CommandTestUtil {
         model.commitAddressBook();
     }
 
+    public static void addCard(Model model) {
+    }
+
 }
