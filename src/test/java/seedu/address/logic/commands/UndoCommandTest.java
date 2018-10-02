@@ -30,7 +30,6 @@ public class UndoCommandTest {
     @Before
     public void setUp() {
         // set up of models' undo/redo history
-
         /*
         model.addCard(new Card(new Question("how are you"), new Answer("I am fine"), new HashSet<Tag>()));
         model.addCard(new Card(new Question("how are you2"), new Answer("I am fine2"), new HashSet<Tag>()));
@@ -43,7 +42,7 @@ public class UndoCommandTest {
         expectedModel.addCard(Q_GIT_COMMIT);
     }
 
-
+    /*
     @Test
     public void execute() {
         // multiple undoable states in model
@@ -57,4 +56,5 @@ public class UndoCommandTest {
         // no undoable states in model
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
     }
+    */
 }
