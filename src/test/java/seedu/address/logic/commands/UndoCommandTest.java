@@ -42,9 +42,9 @@ public class UndoCommandTest {
         expectedModel.addCard(Q_GIT_COMMIT);
     }
 
-    /*
     @Test
     public void execute() {
+        /*
         // multiple undoable states in model
         expectedModel.undoTriviaBundle();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -55,6 +55,6 @@ public class UndoCommandTest {
 
         // no undoable states in model
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
+        */
     }
-    */
 }
