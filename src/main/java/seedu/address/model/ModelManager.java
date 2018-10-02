@@ -189,25 +189,25 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean canUndoTriviaBundle() {
+        return versionedTriviaBundle.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+    public boolean canRedoTriviaBundle() {
+        return versionedTriviaBundle.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
+    public void undoTriviaBundle() {
+        versionedTriviaBundle.undo();
+        indicateTriviaBundleChanged();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
+    public void redoTriviaBundle() {
+        versionedTriviaBundle.redo();
+        indicateTriviaBundleChanged();
     }
 
     @Override

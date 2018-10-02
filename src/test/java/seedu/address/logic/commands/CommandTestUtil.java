@@ -171,13 +171,4 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredCardList().size());
     }
 
-    /**
-     * Deletes the first person in {@code model}'s filtered list from {@code model}'s address book.
-     */
-    public static void deleteFirstPerson(Model model) {
-        Person firstPerson = model.getFilteredPersonList().get(0);
-        model.deletePerson(firstPerson);
-        model.commitAddressBook();
-    }
-
 }
