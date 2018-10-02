@@ -1,10 +1,16 @@
 package seedu.address.model;
 
+import java.util.List;
 import java.util.function.Predicate;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.ObservableList;
+import seedu.address.commons.events.model.StartTestEvent;
+import seedu.address.commons.events.model.StopTestEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
+import seedu.address.model.test.TriviaTest;
 
 /**
  * The API of the Model component.
@@ -73,6 +79,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered card's list */
     ObservableList<Card> getFilteredCardList();
 
+    /** Returns an unmodifiable view of the filtered card's list given the predicate */
+    List<Card> getListOfCardFilteredByTag(Predicate<Card> predicate);
+
     /**
      * Updates the filter of the filtered card list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -87,10 +96,13 @@ public interface Model {
     void updateCard(Card target, Card editedCard);
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Saves the current trivia bundle state for undo/redo.
      */
     void commitTriviaBundle();
 
+    /**
+     * Returns true if the model has previous trivia bundle states to restore.
+     */
     boolean canUndoTriviaBundle();
 
     /**
@@ -109,7 +121,19 @@ public interface Model {
     void redoTriviaBundle();
 
     /**
-     * Saves the current trivial bundle state for undo/redo.
+     * Set a test to the trivia application model.
      */
+    @Subscribe
+    void handleStartTestEvent(StartTestEvent event);
 
+    /**
+     * Stop a test in the trivia application model.
+     */
+    @Subscribe
+    void handleStopTestEvent(StopTestEvent event);
+
+    /**
+     * Obtain the trivia test that is running.
+     */
+    TriviaTest getCurrentRunningTest();
 }

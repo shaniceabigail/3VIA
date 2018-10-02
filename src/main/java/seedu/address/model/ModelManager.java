@@ -3,8 +3,11 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,9 +15,12 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.StartTestEvent;
+import seedu.address.commons.events.model.StopTestEvent;
 import seedu.address.commons.events.model.TriviaBundleChangedEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
+import seedu.address.model.test.TriviaTest;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -27,6 +33,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedTriviaBundle versionedTriviaBundle;
     private final FilteredList<Card> filteredCards;
+
+    private TriviaTest currentRunningTest;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +50,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedTriviaBundle = null;
         filteredCards = null;
+        currentRunningTest = null;
     }
 
 
@@ -57,6 +66,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+
+        currentRunningTest = null;
     }
 
     public ModelManager() {
@@ -167,6 +178,14 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCards.setPredicate(predicate);
     }
 
+    @Override
+    public List<Card> getListOfCardFilteredByTag(Predicate<Card> predicate) {
+        List<Card> cards = Arrays.asList(filteredCards.toArray(new Card[filteredCards.size()]));
+        return cards.stream()
+                .filter(predicate)
+                .collect(Collectors.toList());
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -201,6 +220,23 @@ public class ModelManager extends ComponentManager implements Model {
         versionedTriviaBundle.commit();
     }
 
+    //=========== Trivia Tests =============================================================
+
+    @Override
+    public void handleStartTestEvent(StartTestEvent event) {
+        currentRunningTest = event.getTest();
+    }
+
+    @Override
+    public void handleStopTestEvent(StopTestEvent event) {
+        currentRunningTest = null;
+    }
+
+    @Override
+    public TriviaTest getCurrentRunningTest() {
+        return currentRunningTest;
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -218,8 +254,10 @@ public class ModelManager extends ComponentManager implements Model {
         return (versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons))
                 && (versionedTriviaBundle == null // short circuit for regression compatibility with addressbook
-                        || (versionedTriviaBundle.equals(other.versionedTriviaBundle)
-                        && filteredCards.equals(other.filteredCards)));
+                    || (versionedTriviaBundle.equals(other.versionedTriviaBundle)
+                    && filteredCards.equals(other.filteredCards)))
+                && ((currentRunningTest == null && other.currentRunningTest == null)
+                    || currentRunningTest.equals(other.currentRunningTest));
     }
 
 }
