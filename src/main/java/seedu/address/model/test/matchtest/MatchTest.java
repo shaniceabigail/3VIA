@@ -4,23 +4,17 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.model.StartTestEvent;
-import seedu.address.commons.events.model.StopTestEvent;
 import seedu.address.commons.events.ui.FlashMatchOutcomeEvent;
-import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
-import seedu.address.model.card.TagIsKeywordPredicate;
-import seedu.address.model.state.AppState;
-import seedu.address.model.state.State;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.test.TriviaTest;
 
@@ -32,17 +26,15 @@ public class MatchTest extends TriviaTest {
     public static final String MESSAGE_MATCH_TEST_CONSTRAINS = "Matching test needs more than 1 card with the"
             + " corresponding tag to proceed.";
 
-    private final Date testDate;
     private final List<MatchAttempt> attempts;
 
     private double duration;
     private Timer timer;
 
-    public MatchTest(Tag tag, Model model) {
-        super(tag, model.getListOfCardFilteredByTag(new TagIsKeywordPredicate(tag.tagName)));
-        checkArgument(isValidMatchTest(), MESSAGE_MATCH_TEST_CONSTRAINS);
+    public MatchTest(Tag tag, ReadOnlyTriviaBundle triviaBundle) {
+        super(tag, triviaBundle);
 
-        testDate = new Date();
+        checkArgument(isValidMatchTest(), MESSAGE_MATCH_TEST_CONSTRAINS);
         attempts = new ArrayList<>();
     }
 
@@ -108,8 +100,6 @@ public class MatchTest extends TriviaTest {
 
     @Override
     public void startTest() {
-        EventsCenter.getInstance().post(new StartTestEvent(this));
-        AppState.setAppState(State.TESTM);
         duration = 0;
         timer = new Timer();
         DecimalFormat timerFormat = new DecimalFormat("#.#");
@@ -130,8 +120,6 @@ public class MatchTest extends TriviaTest {
         // TODO: Show the result screen.
         // TODO: Record results if test did not end prematurely.
         timer.cancel();
-        AppState.setAppState(State.NORMAL);
-        EventsCenter.getInstance().post(new StopTestEvent());
     }
 
     @Override
@@ -148,6 +136,6 @@ public class MatchTest extends TriviaTest {
 
         // state check
         MatchTest other = (MatchTest) obj;
-        return cards.equals(other.cards);
+        return cards.equals(other.cards) && attempts.equals(other.attempts);
     }
 }

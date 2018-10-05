@@ -3,11 +3,8 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,11 +12,13 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.commons.events.model.StartTestEvent;
-import seedu.address.commons.events.model.StopTestEvent;
 import seedu.address.commons.events.model.TriviaBundleChangedEvent;
+import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
+import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.AppState;
+import seedu.address.model.state.State;
 import seedu.address.model.test.TriviaTest;
 
 /**
@@ -35,6 +34,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Card> filteredCards;
 
     private TriviaTest currentRunningTest;
+    private AppState appState;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -50,7 +50,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedTriviaBundle = null;
         filteredCards = null;
+
         currentRunningTest = null;
+        appState = new AppState();
     }
 
 
@@ -68,6 +70,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
 
         currentRunningTest = null;
+        appState = new AppState();
     }
 
     public ModelManager() {
@@ -178,14 +181,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCards.setPredicate(predicate);
     }
 
-    @Override
-    public List<Card> getListOfCardFilteredByTag(Predicate<Card> predicate) {
-        List<Card> cards = Arrays.asList(filteredCards.toArray(new Card[filteredCards.size()]));
-        return cards.stream()
-                .filter(predicate)
-                .collect(Collectors.toList());
-    }
-
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -220,15 +215,33 @@ public class ModelManager extends ComponentManager implements Model {
         versionedTriviaBundle.commit();
     }
 
-    //=========== Trivia Tests =============================================================
+    //=========== App State =============================================================
 
     @Override
-    public void handleStartTestEvent(StartTestEvent event) {
-        currentRunningTest = event.getTest();
+    public State getAppState() {
+        return appState.getState();
     }
 
     @Override
-    public void handleStopTestEvent(StopTestEvent event) {
+    public boolean isInTestingState() {
+        return appState.getState() == State.TEST || appState.getState() == State.TESTM;
+    }
+
+    //=========== Trivia Tests =============================================================
+
+    @Override
+    public void startTriviaTest(TriviaTest test) {
+        currentRunningTest = test;
+        appState.setAppState(State.TESTM);
+        test.startTest();
+        raise(new ShowTriviaTestViewEvent(test));
+    }
+
+    @Override
+    public void stopTriviaTest() {
+        currentRunningTest.stopTest();
+        appState.setAppState(State.NORMAL);
+        raise(new CloseTriviaTestViewEvent(currentRunningTest));
         currentRunningTest = null;
     }
 
@@ -257,7 +270,7 @@ public class ModelManager extends ComponentManager implements Model {
                     || (versionedTriviaBundle.equals(other.versionedTriviaBundle)
                     && filteredCards.equals(other.filteredCards)))
                 && ((currentRunningTest == null && other.currentRunningTest == null)
-                    || currentRunningTest.equals(other.currentRunningTest));
+                    || (currentRunningTest != null && currentRunningTest.equals(other.currentRunningTest)));
     }
 
 }

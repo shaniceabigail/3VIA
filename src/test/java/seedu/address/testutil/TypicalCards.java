@@ -38,7 +38,7 @@ public class TypicalCards {
             .withQuestion("Which git command will get a copy of an online repository to your computer?")
             .withAnswer("git clone")
             .withTags("Git").build();
-    public static final Card Q_DENISTY_FORMULA = new CardBuilder().withQuestion("Formula of density")
+    public static final Card Q_DENSITY_FORMULA = new CardBuilder().withQuestion("Formula of density")
             .withAnswer("desnity = mass / volume")
             .withTags("Physics").build();
     public static final Card Q_TALLEST_BUILDING = new CardBuilder()
@@ -88,6 +88,6 @@ public class TypicalCards {
 
     public static List<Card> getTypicalCards() {
         return new ArrayList<>(Arrays.asList(Q_EARTH_ROUND, Q_GIT_MERGE, Q_FORCE_FORMULA, Q_CAPITAL_SG, Q_GIT_CLONE,
-                Q_DENISTY_FORMULA, Q_TALLEST_BUILDING));
+                Q_DENSITY_FORMULA, Q_TALLEST_BUILDING));
     }
 }

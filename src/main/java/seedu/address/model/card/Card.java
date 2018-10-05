@@ -58,8 +58,8 @@ public class Card {
             return false;
         }
 
-        Card otherPerson = (Card) other;
-        return otherPerson.getQuestion().equals(getQuestion());
+        Card otherCard = (Card) other;
+        return otherCard.getQuestion().equals(getQuestion());
     }
 
     @Override

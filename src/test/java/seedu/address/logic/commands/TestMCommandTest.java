@@ -30,14 +30,18 @@ public class TestMCommandTest {
     }
 
     @After
-    public void setToNormalState() {
-        if (model.getCurrentRunningTest() != null) {
-            model.getCurrentRunningTest().stopTest();
+    public void cleanUp() {
+        if (model.isInTestingState()) {
+            model.stopTriviaTest();
+        }
+        if (expectedModel.isInTestingState()) {
+            expectedModel.stopTriviaTest();
         }
     }
 
     @Test
     public void execute_testStartedSuccessfully() {
+        expectedModel.startTriviaTest(new MatchTest(new Tag(VALID_TAG_PHYSICS), expectedModel.getTriviaBundle()));
         assertCommandSuccess(new TestMCommand(new Tag(VALID_TAG_PHYSICS)), model, commandHistory,
                 TestMCommand.MESSAGE_SUCCESS, expectedModel);
     }

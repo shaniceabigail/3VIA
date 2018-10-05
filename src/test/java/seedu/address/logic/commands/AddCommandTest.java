@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -15,8 +14,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.events.model.StartTestEvent;
-import seedu.address.commons.events.model.StopTestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -25,6 +22,7 @@ import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.TriviaBundle;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
 import seedu.address.model.test.TriviaTest;
 import seedu.address.testutil.CardBuilder;
 
@@ -155,11 +153,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public List<Card> getListOfCardFilteredByTag(Predicate<Card> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -200,17 +193,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public void handleStartTestEvent(StartTestEvent event) {
+        public void startTriviaTest(TriviaTest test) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void handleStopTestEvent(StopTestEvent event) {
+        public void stopTriviaTest() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public TriviaTest getCurrentRunningTest() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public State getAppState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isInTestingState() {
             throw new AssertionError("This method should not be called.");
         }
     }

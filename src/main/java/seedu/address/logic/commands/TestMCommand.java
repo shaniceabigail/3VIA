@@ -34,8 +34,8 @@ public class TestMCommand extends Command {
         requireNonNull(model);
 
         try {
-            MatchTest test = new MatchTest(tag, model);
-            test.startTest();
+            MatchTest test = new MatchTest(tag, model.getTriviaBundle());
+            model.startTriviaTest(test);
             return new CommandResult(String.format(MESSAGE_SUCCESS));
         } catch (IllegalArgumentException e) {
             throw new CommandException(e.getMessage());

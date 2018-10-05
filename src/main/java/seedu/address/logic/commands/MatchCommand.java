@@ -63,7 +63,7 @@ public class MatchCommand extends Command {
                         Platform.runLater(() -> {
                             testM.removeCardFromUi(attempt);
                             if (testM.isEndOfTest()) {
-                                testM.stopTest();
+                                model.stopTriviaTest();
                             }
                         });
                     }

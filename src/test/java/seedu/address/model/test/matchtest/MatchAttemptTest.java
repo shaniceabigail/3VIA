@@ -34,4 +34,25 @@ public class MatchAttemptTest {
         assertTrue(new MatchAttempt(Q_FLAT_EARTH, editedCard).isCorrect());
     }
 
+    @Test
+    public void equals() {
+        MatchAttempt matchAttempt = new MatchAttempt(Q_FLAT_EARTH, Q_FLAT_EARTH);
+        // same values -> returns true
+        MatchAttempt matchAttemptCopy = new MatchAttempt(Q_FLAT_EARTH, Q_FLAT_EARTH);
+        assertTrue(matchAttempt.equals(matchAttemptCopy));
+
+        // same object -> returns true
+        assertTrue(matchAttempt.equals(matchAttempt));
+
+        // null -> returns false
+        assertFalse(matchAttempt.equals(null));
+
+        // different type -> returns false
+        assertFalse(matchAttempt.equals(5));
+
+        // different cards matched being tested -> returns false
+        assertFalse(matchAttempt.equals(new MatchAttempt(Q_GIT_COMMIT, Q_GIT_COMMIT)));
+
+    }
+
 }

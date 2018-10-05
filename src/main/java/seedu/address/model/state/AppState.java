@@ -4,17 +4,17 @@ package seedu.address.model.state;
  * Defines the state of the application with their respective constraints on the type of command it can run.
  */
 public class AppState {
-    private static State currentState = State.NORMAL;
+    private State currentState;
 
-    public static void setAppState(State state) {
+    public AppState() {
+        currentState = State.NORMAL;
+    }
+
+    public void setAppState(State state) {
         currentState = state;
     }
 
-    public static State getState() {
+    public State getState() {
         return currentState;
-    }
-
-    public static boolean isInTestingState() {
-        return currentState == State.TEST || currentState == State.TESTM;
     }
 }
