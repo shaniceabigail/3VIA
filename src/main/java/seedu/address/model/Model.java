@@ -1,15 +1,11 @@
 package seedu.address.model;
 
-import java.util.List;
 import java.util.function.Predicate;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.collections.ObservableList;
-import seedu.address.commons.events.model.StartTestEvent;
-import seedu.address.commons.events.model.StopTestEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
 import seedu.address.model.test.TriviaTest;
 
 /**
@@ -79,9 +75,6 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered card's list */
     ObservableList<Card> getFilteredCardList();
 
-    /** Returns an unmodifiable view of the filtered card's list given the predicate */
-    List<Card> getListOfCardFilteredByTag(Predicate<Card> predicate);
-
     /**
      * Updates the filter of the filtered card list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -123,17 +116,25 @@ public interface Model {
     /**
      * Set a test to the trivia application model.
      */
-    @Subscribe
-    void handleStartTestEvent(StartTestEvent event);
+    void startTriviaTest(TriviaTest test);
 
     /**
      * Stop a test in the trivia application model.
      */
-    @Subscribe
-    void handleStopTestEvent(StopTestEvent event);
+    void stopTriviaTest();
 
     /**
      * Obtain the trivia test that is running.
      */
     TriviaTest getCurrentRunningTest();
+
+    /**
+     * Get the app state that the application is currently in.
+     */
+    State getAppState();
+
+    /**
+     * Return boolean on whether the model in in a testing state.
+     */
+    boolean isInTestingState();
 }

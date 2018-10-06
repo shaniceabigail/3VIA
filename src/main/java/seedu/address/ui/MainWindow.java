@@ -15,10 +15,10 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.StartTestEvent;
-import seedu.address.commons.events.model.StopTestEvent;
+import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 
@@ -221,7 +221,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @Subscribe
-    private void handleStartTestEvent(StartTestEvent event) {
+    private void handleShowTriviaTestiewEvent(ShowTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
 
         questionListPanel = new QuestionListPanel(event.getTest().getQuestions());
@@ -232,7 +232,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @Subscribe
-    private void handleStopTestEvent(StopTestEvent event) {
+    private void handleCloseTriviaTestViewEvent(CloseTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
 
         testMQuestionListPanelPlaceholder.getChildren().clear();

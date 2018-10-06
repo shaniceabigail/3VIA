@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -104,6 +105,11 @@ public class TriviaBundleTest {
 
         @Override
         public ObservableList<Card> getCardList() {
+            return cards;
+        }
+
+        @Override
+        public ObservableList<Card> getListOfCardFilteredByTag(Predicate<Card> predicate) {
             return cards;
         }
     }

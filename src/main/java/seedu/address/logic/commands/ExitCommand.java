@@ -4,8 +4,6 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.state.AppState;
-import seedu.address.model.test.TriviaTest;
 
 /**
  * Terminates the program.
@@ -20,9 +18,8 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        if (AppState.isInTestingState()) {
-            TriviaTest currentTest = model.getCurrentRunningTest();
-            currentTest.stopTest();
+        if (model.isInTestingState()) {
+            model.stopTriviaTest();
             return new CommandResult(MESSAGE_EXIT_FROM_TEST);
         } else {
             EventsCenter.getInstance().post(new ExitAppRequestEvent());

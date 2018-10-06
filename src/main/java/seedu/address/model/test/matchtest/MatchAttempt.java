@@ -22,4 +22,21 @@ public class MatchAttempt extends Attempt {
         return cardWithAnswer;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof MatchAttempt)) {
+            return false;
+        }
+
+        // state check
+        MatchAttempt other = (MatchAttempt) obj;
+        return getCardWithQuestion().equals(other.getCardWithQuestion())
+            && getCardWithAnswer().equals(getCardWithAnswer()) && correctness == other.correctness;
+    }
 }

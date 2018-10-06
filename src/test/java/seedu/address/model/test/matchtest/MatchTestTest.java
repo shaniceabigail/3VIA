@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_GIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NO_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
-import static seedu.address.testutil.TypicalCards.Q_DENISTY_FORMULA;
+import static seedu.address.testutil.TypicalCards.Q_DENSITY_FORMULA;
 import static seedu.address.testutil.TypicalCards.Q_EARTH_ROUND;
 import static seedu.address.testutil.TypicalCards.Q_FORCE_FORMULA;
 
@@ -34,7 +34,7 @@ public class MatchTestTest {
                 TypicalCards.getTypicalTriviaBundle(), new UserPrefs());
 
         // There will be 3 cards in this matchTest
-        matchTest = new MatchTest(new Tag(VALID_TAG_PHYSICS), model);
+        matchTest = new MatchTest(new Tag(VALID_TAG_PHYSICS), model.getTriviaBundle());
     }
 
     @Test
@@ -49,7 +49,7 @@ public class MatchTestTest {
         assertFalse(matchTest.getQuestions().contains(Q_EARTH_ROUND.getQuestion()));
 
         // Remove the remaining cards from the trivia bundle.
-        matchTest.removeCardFromUi(new MatchAttempt(Q_DENISTY_FORMULA, Q_DENISTY_FORMULA));
+        matchTest.removeCardFromUi(new MatchAttempt(Q_DENSITY_FORMULA, Q_DENSITY_FORMULA));
         matchTest.removeCardFromUi(new MatchAttempt(Q_FORCE_FORMULA, Q_FORCE_FORMULA));
 
         assertTrue(matchTest.isEndOfTest());
@@ -58,13 +58,13 @@ public class MatchTestTest {
     @Test
     public void invalid_matchTest() {
         thrown.expect(IllegalArgumentException.class);
-        matchTest = new MatchTest(new Tag(VALID_TAG_NO_TAG), model);
+        matchTest = new MatchTest(new Tag(VALID_TAG_NO_TAG), model.getTriviaBundle());
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        MatchTest matchTestCopy = new MatchTest(matchTest.getTag(), model);
+        MatchTest matchTestCopy = new MatchTest(matchTest.getTag(), model.getTriviaBundle());
         assertTrue(matchTest.equals(matchTestCopy));
 
         // same object -> returns true
@@ -77,7 +77,7 @@ public class MatchTestTest {
         assertFalse(matchTest.equals(5));
 
         // different cards being tested -> returns false
-        assertFalse(matchTest.equals(new MatchTest(new Tag(VALID_TAG_GIT), model)));
+        assertFalse(matchTest.equals(new MatchTest(new Tag(VALID_TAG_GIT), model.getTriviaBundle())));
 
     }
 }
