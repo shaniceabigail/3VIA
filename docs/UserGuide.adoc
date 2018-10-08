@@ -233,7 +233,7 @@ Format: `clear`
 
 Start an open-ended test of a specified tag. In an open-ended test, the user will get the choose whether he/she has answered
 correctly by comparing their answers with the expected answer. +
-Format: `test TAG TIMELIMIT_IN_SECONDS`
+Format: `test t/TAG TIMELIMIT_IN_SECONDS`
 
 ****
 * The test aims to test the knowledge of the user with the existing questions of a specified tag that are in the trivia application.
@@ -263,11 +263,7 @@ Format: `exit`
 
 Start a test of matching cards of a specified tag. In a test of matching cards, all the questions and answers in that tag
 will be displayed. The user will then have to match the correct question and answer together. +
-Format: `testM TAG`
-
-****
-* By incorporating different testing approach, it will allow the user to better internalize the content.
-****
+Format: `testM t/TAG`
 
 The following commands can only be used during a `testM`.
 
