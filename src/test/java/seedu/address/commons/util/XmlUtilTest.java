@@ -17,7 +17,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.AddressBook;
 import seedu.address.storage.XmlAdaptedPerson;
-import seedu.address.storage.XmlAdaptedTag;
+import seedu.address.storage.XmlAdaptedTopic;
 import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -40,7 +40,7 @@ public class XmlUtilTest {
     private static final String VALID_PHONE = "9482424";
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_ADDRESS = "4th street";
-    private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
+    private static final List<XmlAdaptedTopic> VALID_TAGS = Collections.singletonList(new XmlAdaptedTopic("friends"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

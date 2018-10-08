@@ -19,7 +19,7 @@ public class MatchAttemptTest {
         // two obviously different cards
         assertFalse(new MatchAttempt(Q_FLAT_EARTH, Q_GIT_COMMIT).isCorrect());
 
-        // different question but same answer and tag
+        // different question but same answer and topic
         Card editedCard = new CardBuilder(Q_FLAT_EARTH).withQuestion(VALID_QUESTION_GIT_COMMIT).build();
         assertFalse(new MatchAttempt(Q_FLAT_EARTH, editedCard).isCorrect());
     }
@@ -29,7 +29,7 @@ public class MatchAttemptTest {
         // two obviously same cards
         assertTrue(new MatchAttempt(Q_FLAT_EARTH, Q_FLAT_EARTH).isCorrect());
 
-        // different answer and tag but same question
+        // different answer and topic but same question
         Card editedCard = new CardBuilder(Q_GIT_COMMIT).withQuestion(VALID_QUESTION_EARTH_FLAT).build();
         assertTrue(new MatchAttempt(Q_FLAT_EARTH, editedCard).isCorrect());
     }

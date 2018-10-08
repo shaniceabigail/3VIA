@@ -33,7 +33,7 @@ public class CardView extends UiPart<Region> {
     @FXML
     private Label answer;
     @FXML
-    private FlowPane tags;
+    private FlowPane topics;
 
     public CardView(Card card, int displayedIndex) {
         super(FXML);
@@ -41,7 +41,7 @@ public class CardView extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         question.setText(card.getQuestion().value);
         answer.setText(card.getAnswer().value);
-        card.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        card.getTopics().forEach(topic -> topics.getChildren().add(new Label(topic.topicName)));
     }
 
     @Override

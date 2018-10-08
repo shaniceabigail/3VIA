@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalCards.Q_EARTH_ROUND;
@@ -18,9 +18,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.test.TriviaTest;
 import seedu.address.model.test.matchtest.MatchTest;
+import seedu.address.model.topic.Topic;
 
 public class MatchCommandTest {
     private MatchTest matchTest;
@@ -35,10 +35,10 @@ public class MatchCommandTest {
         model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), getTypicalTriviaBundle(), new UserPrefs());
 
-        matchTest = new MatchTest(new Tag(VALID_TAG_PHYSICS), model.getTriviaBundle());
+        matchTest = new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle());
         model.startTriviaTest(matchTest);
 
-        expectedMatchTest = new MatchTest(new Tag(VALID_TAG_PHYSICS), model.getTriviaBundle());
+        expectedMatchTest = new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle());
         expectedModel.startTriviaTest(expectedMatchTest);
     }
 

@@ -8,16 +8,17 @@ import static seedu.address.logic.commands.CommandTestUtil.ANSWER_DESC_GIT_COMMI
 import static seedu.address.logic.commands.CommandTestUtil.ANSWER_DESC_PM_OF_SG;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ANSWER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUESTION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TOPIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.QUESTION_DESC_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.QUESTION_DESC_GIT_COMMIT;
 import static seedu.address.logic.commands.CommandTestUtil.QUESTION_DESC_PM_OF_SG;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_GEN_KNOWLEDGE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_GIT;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_GEN_KNOWLEDGE;
+import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_GIT;
+import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_GIT_COMMIT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_NO_TOPIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 import static seedu.address.testutil.TypicalCards.KEYWORD_MATCHING_WHAT;
 import static seedu.address.testutil.TypicalCards.Q_FLAT_EARTH;
@@ -34,7 +35,7 @@ import seedu.address.model.Model;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.topic.Topic;
 import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.CardUtil;
 
@@ -51,7 +52,7 @@ public class EditCommandSystemTest extends AppSystemTest {
          */
         Index index = INDEX_FIRST_CARD;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + QUESTION_DESC_EARTH_FLAT
-                + "  " + ANSWER_DESC_EARTH_FLAT + " " + TAG_DESC_PHYSICS + " ";
+                + "  " + ANSWER_DESC_EARTH_FLAT + " " + TOPIC_DESC_PHYSICS + " ";
         Card editedCard = new CardBuilder(Q_FLAT_EARTH).build();
         assertCommandSuccess(command, index, editedCard);
 
@@ -70,7 +71,7 @@ public class EditCommandSystemTest extends AppSystemTest {
 
         /* Case: edit a card with new values same as existing values -> edited */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_EARTH_FLAT
-                + ANSWER_DESC_EARTH_FLAT + TAG_DESC_PHYSICS;
+                + ANSWER_DESC_EARTH_FLAT + TOPIC_DESC_PHYSICS;
         assertCommandSuccess(command, index, Q_FLAT_EARTH);
 
         /* Case: edit a card with new values same as another card's values but with different question -> edited */
@@ -78,15 +79,15 @@ public class EditCommandSystemTest extends AppSystemTest {
         index = INDEX_SECOND_CARD;
         assertNotEquals(getModel().getFilteredCardList().get(index.getZeroBased()), Q_FLAT_EARTH);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_GIT_COMMIT
-                + ANSWER_DESC_EARTH_FLAT + TAG_DESC_PHYSICS;
+                + ANSWER_DESC_EARTH_FLAT + TOPIC_DESC_PHYSICS;
         editedCard = new CardBuilder(Q_FLAT_EARTH).withQuestion(VALID_QUESTION_GIT_COMMIT).build();
         assertCommandSuccess(command, index, editedCard);
 
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST_CARD;
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TOPIC.getPrefix();
         Card cardToEdit = getModel().getFilteredCardList().get(index.getZeroBased());
-        editedCard = new CardBuilder(cardToEdit).withTags("NoTag").build();
+        editedCard = new CardBuilder(cardToEdit).withTopics(VALID_TOPIC_NO_TOPIC).build();
         assertCommandSuccess(command, index, editedCard);
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
@@ -117,7 +118,7 @@ public class EditCommandSystemTest extends AppSystemTest {
         index = INDEX_FIRST_CARD;
         selectCard(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_PM_OF_SG
-                + ANSWER_DESC_PM_OF_SG + TAG_DESC_GEN_KNOWLEDGE;
+                + ANSWER_DESC_PM_OF_SG + TOPIC_DESC_GEN_KNOWLEDGE;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new card's question
         assertCommandSuccess(command, index, Q_PM_OF_SG, index);
@@ -153,9 +154,9 @@ public class EditCommandSystemTest extends AppSystemTest {
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_CARD.getOneBased()
                 + INVALID_ANSWER_DESC, Answer.MESSAGE_ANSWER_CONSTRAINTS);
 
-        /* Case: invalid tag -> rejected */
+        /* Case: invalid topic -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_CARD.getOneBased()
-                + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
+                + INVALID_TOPIC_DESC, Topic.MESSAGE_TOPIC_CONSTRAINTS);
 
         /* Case: edit a card with new values same as another card's values -> rejected */
         executeCommand(CardUtil.getAddCommand(Q_FLAT_EARTH));
@@ -163,17 +164,17 @@ public class EditCommandSystemTest extends AppSystemTest {
         index = INDEX_FIRST_CARD;
         assertFalse(getModel().getFilteredCardList().get(index.getZeroBased()).equals(Q_FLAT_EARTH));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_EARTH_FLAT
-                + ANSWER_DESC_EARTH_FLAT + TAG_DESC_PHYSICS;
+                + ANSWER_DESC_EARTH_FLAT + TOPIC_DESC_PHYSICS;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_CARD);
 
         /* Case: edit a card with new values same as another card's values but with different tags -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_EARTH_FLAT
-                + ANSWER_DESC_EARTH_FLAT + TAG_DESC_GIT;
+                + ANSWER_DESC_EARTH_FLAT + TOPIC_DESC_GIT;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_CARD);
 
         /* Case: edit a card with new values same as another card's values but with different answer -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_EARTH_FLAT
-                + ANSWER_DESC_GIT_COMMIT + TAG_DESC_PHYSICS;
+                + ANSWER_DESC_GIT_COMMIT + TOPIC_DESC_PHYSICS;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_CARD);
     }
 

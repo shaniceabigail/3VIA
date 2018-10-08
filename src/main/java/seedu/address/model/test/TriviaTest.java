@@ -11,25 +11,25 @@ import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
-import seedu.address.model.card.TagIsKeywordPredicate;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.card.TopicIsKeywordPredicate;
+import seedu.address.model.topic.Topic;
 
 /**
  * A base model for the different kinds tests. Require a Tag and Trivia Bundle to start a test.
  */
 public abstract class TriviaTest {
-    protected final Tag tag;
+    protected final Topic tag;
     protected final Date testDate;
 
     protected final ObservableList<Card> cards;
     protected final ObservableList<Question> questions;
     protected final ObservableList<Answer> answers;
 
-    public TriviaTest(Tag tag, ReadOnlyTriviaBundle triviaBundle) {
+    public TriviaTest(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
         this.tag = tag;
         this.testDate = new Date();
 
-        cards = triviaBundle.getListOfCardFilteredByTag(new TagIsKeywordPredicate(tag.tagName));
+        cards = triviaBundle.getListOfCardFilteredByTag(new TopicIsKeywordPredicate(tag.topicName));
         questions = getQuestions(cards);
         answers = getAnswers(cards);
     }
@@ -72,7 +72,7 @@ public abstract class TriviaTest {
         return FXCollections.observableList(answers);
     }
 
-    public Tag getTag() {
+    public Topic getTag() {
         return tag;
     }
 

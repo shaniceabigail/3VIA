@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NO_TAG;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_NO_TOPIC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalCards.getTypicalTriviaBundle;
@@ -15,8 +15,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.test.matchtest.MatchTest;
+import seedu.address.model.topic.Topic;
 
 public class TestMCommandTest {
     private Model model;
@@ -41,14 +41,14 @@ public class TestMCommandTest {
 
     @Test
     public void execute_testStartedSuccessfully() {
-        expectedModel.startTriviaTest(new MatchTest(new Tag(VALID_TAG_PHYSICS), expectedModel.getTriviaBundle()));
-        assertCommandSuccess(new TestMCommand(new Tag(VALID_TAG_PHYSICS)), model, commandHistory,
+        expectedModel.startTriviaTest(new MatchTest(new Topic(VALID_TOPIC_PHYSICS), expectedModel.getTriviaBundle()));
+        assertCommandSuccess(new TestMCommand(new Topic(VALID_TOPIC_PHYSICS)), model, commandHistory,
                 TestMCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_testDidNotStart() {
-        assertCommandFailure(new TestMCommand(new Tag(VALID_TAG_NO_TAG)), model, commandHistory,
+        assertCommandFailure(new TestMCommand(new Topic(VALID_TOPIC_NO_TOPIC)), model, commandHistory,
                 MatchTest.MESSAGE_MATCH_TEST_CONSTRAINS);
     }
 }

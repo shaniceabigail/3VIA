@@ -17,7 +17,7 @@ import org.junit.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.topic.Topic;
 
 public class FindCommandSystemTest extends AppSystemTest {
 
@@ -119,8 +119,8 @@ public class FindCommandSystemTest extends AppSystemTest {
         assertSelectedCardViewUnchanged();
 
         /* Case: find tags of card in trivia bundle -> 0 cards found */
-        List<Tag> tags = new ArrayList<>(Q_EARTH_ROUND.getTags());
-        command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
+        List<Topic> tags = new ArrayList<>(Q_EARTH_ROUND.getTopics());
+        command = FindCommand.COMMAND_WORD + " " + tags.get(0).topicName;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardViewUnchanged();
 

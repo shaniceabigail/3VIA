@@ -15,23 +15,23 @@ import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.test.TriviaTest;
+import seedu.address.model.topic.Topic;
 
 /**
  * Represents a trivia test that is started by the user.
- * For a {@code MatchTest} to start, there must be more than 1 cards related to the tag that is specified in the test.
+ * For a {@code MatchTest} to start, there must be more than 1 cards related to the topic that is specified in the test.
  */
 public class MatchTest extends TriviaTest {
     public static final String MESSAGE_MATCH_TEST_CONSTRAINS = "Matching test needs more than 1 card with the"
-            + " corresponding tag to proceed.";
+            + " corresponding topic to proceed.";
 
     private final List<MatchAttempt> attempts;
 
     private double duration;
     private Timer timer;
 
-    public MatchTest(Tag tag, ReadOnlyTriviaBundle triviaBundle) {
+    public MatchTest(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
         super(tag, triviaBundle);
 
         checkArgument(isValidMatchTest(), MESSAGE_MATCH_TEST_CONSTRAINS);

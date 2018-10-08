@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_GIT_COMMIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_GIT_COMMIT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showCardAtIndex;
@@ -61,10 +61,10 @@ public class EditCommandTest {
 
         CardBuilder cardInList = new CardBuilder(lastCard);
         Card editedCard = cardInList.withQuestion(VALID_QUESTION_GIT_COMMIT)
-                .withTags(VALID_TAG_PHYSICS).build();
+                .withTopics(VALID_TOPIC_PHYSICS).build();
 
         EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_GIT_COMMIT)
-                .withTags(VALID_TAG_PHYSICS).build();
+                .withTopics(VALID_TOPIC_PHYSICS).build();
         EditCommand editCommand = new EditCommand(indexLastCard, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CARD_SUCCESS, editedCard);

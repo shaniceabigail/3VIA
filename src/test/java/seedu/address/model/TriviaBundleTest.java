@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_GIT_COMMIT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_GIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_GIT;
 import static seedu.address.testutil.TypicalCards.Q_CAPITAL_SG;
 import static seedu.address.testutil.TypicalCards.Q_EARTH_ROUND;
 import static seedu.address.testutil.TypicalCards.getTypicalTriviaBundle;
@@ -54,7 +54,7 @@ public class TriviaBundleTest {
     public void resetData_withDuplicateCards_throwsDuplicateCardException() {
         // Two cards with the same identity fields
         Card editedEarthRoundQ = new CardBuilder(Q_EARTH_ROUND).withAnswer(VALID_ANSWER_GIT_COMMIT)
-                .withTags(VALID_TAG_GIT).build();
+                .withTopics(VALID_TOPIC_GIT).build();
         List<Card> newCards = Arrays.asList(Q_EARTH_ROUND, editedEarthRoundQ);
         TriviaBundleStub newData = new TriviaBundleStub(newCards);
 
@@ -83,7 +83,7 @@ public class TriviaBundleTest {
     public void hasCard_cardWithSameIdentityFieldsInTriviaBundle_returnsTrue() {
         triviaBundle.addCard(Q_EARTH_ROUND);
         Card editedEarthRoundQ = new CardBuilder(Q_EARTH_ROUND).withAnswer(VALID_ANSWER_GIT_COMMIT)
-                .withTags(VALID_TAG_GIT).build();
+                .withTopics(VALID_TOPIC_GIT).build();
         assertTrue(triviaBundle.hasCard(editedEarthRoundQ));
     }
 

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.topic.Topic;
 
 /**
  * Represent a card in a deck.
@@ -17,15 +17,15 @@ public class Card {
 
     // data fields
     private final Answer answer;
-    private final Set<Tag> tags = new HashSet<>();
+    private final Set<Topic> topics = new HashSet<>();
 
-    public Card(Question question, Answer answer, Set<Tag> tags) {
+    public Card(Question question, Answer answer, Set<Topic> topics) {
         this.question = question;
         this.answer = answer;
-        if (tags.isEmpty()) {
-            this.tags.add(new Tag("NoTag"));
+        if (topics.isEmpty()) {
+            this.topics.add(new Topic("NoTopic"));
         } else {
-            this.tags.addAll(tags);
+            this.topics.addAll(topics);
         }
     }
 
@@ -38,11 +38,11 @@ public class Card {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable topic set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<Topic> getTopics() {
+        return Collections.unmodifiableSet(topics);
     }
 
     /**
@@ -65,7 +65,7 @@ public class Card {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(question, answer, tags);
+        return Objects.hash(question, answer, topics);
     }
 
     @Override
@@ -75,8 +75,8 @@ public class Card {
                 .append(getQuestion())
                 .append(" Answer: ")
                 .append(getAnswer())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+                .append(" Topics: ");
+        getTopics().forEach(builder::append);
         return builder.toString();
     }
 }
