@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,12 +21,12 @@ public class AddCommand extends Command {
             + "Parameters: "
             + PREFIX_QUESTION + "QUESTION "
             + PREFIX_ANSWER + "ANSWER "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TOPIC + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_QUESTION + "Why is the earth round? "
             + PREFIX_ANSWER + "Because of gravity! "
-            + PREFIX_TAG + "Physics "
-            + PREFIX_TAG + "Science";
+            + PREFIX_TOPIC + "Physics "
+            + PREFIX_TOPIC + "Science";
 
     public static final String MESSAGE_SUCCESS = "New card added: %1$s";
     public static final String MESSAGE_DUPLICATE_CARD = "This card already exists in the trivia bundle";

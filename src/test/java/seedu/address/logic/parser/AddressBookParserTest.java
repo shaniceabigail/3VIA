@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_GIT;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PHYSICS;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_GIT;
+import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_PHYSICS;
 import static seedu.address.testutil.FileUtil.getImportCommand;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -47,8 +47,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.QuestionContainsKeywordsPredicate;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.test.matchtest.MatchTest;
+import seedu.address.model.topic.Topic;
 import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.CardUtil;
 import seedu.address.testutil.EditCardDescriptorBuilder;
@@ -111,7 +111,7 @@ public class AddressBookParserTest {
         assertTrue(parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
 
         // In Matching test state
-        model.startTriviaTest(new MatchTest(new Tag(VALID_TAG_PHYSICS), model.getTriviaBundle()));
+        model.startTriviaTest(new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle()));
         assertTrue(parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
@@ -177,15 +177,15 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_testM() throws Exception {
-        assertTrue(parseCommand(TestMCommand.COMMAND_WORD + " " + TAG_DESC_PHYSICS)
+        assertTrue(parseCommand(TestMCommand.COMMAND_WORD + " " + TOPIC_DESC_PHYSICS)
                 instanceof TestMCommand);
-        assertTrue(parseCommand(TestMCommand.COMMAND_WORD + " " + TAG_DESC_GIT)
+        assertTrue(parseCommand(TestMCommand.COMMAND_WORD + " " + TOPIC_DESC_GIT)
                 instanceof TestMCommand);
     }
 
     @Test
     public void parseCommand_match() throws Exception {
-        model.startTriviaTest(new MatchTest(new Tag(VALID_TAG_PHYSICS),
+        model.startTriviaTest(new MatchTest(new Topic(VALID_TOPIC_PHYSICS),
                 model.getTriviaBundle()));
         assertTrue(parseCommand("1 2") instanceof MatchCommand);
         // Will only take the first 2

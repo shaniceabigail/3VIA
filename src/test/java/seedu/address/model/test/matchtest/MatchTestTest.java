@@ -3,9 +3,9 @@ package seedu.address.model.test.matchtest;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_GIT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NO_TAG;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_GIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_NO_TOPIC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_PHYSICS;
 import static seedu.address.testutil.TypicalCards.Q_DENSITY_FORMULA;
 import static seedu.address.testutil.TypicalCards.Q_EARTH_ROUND;
 import static seedu.address.testutil.TypicalCards.Q_FORCE_FORMULA;
@@ -17,7 +17,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.topic.Topic;
 import seedu.address.testutil.TypicalCards;
 import seedu.address.testutil.TypicalPersons;
 
@@ -34,7 +34,7 @@ public class MatchTestTest {
                 TypicalCards.getTypicalTriviaBundle(), new UserPrefs());
 
         // There will be 3 cards in this matchTest
-        matchTest = new MatchTest(new Tag(VALID_TAG_PHYSICS), model.getTriviaBundle());
+        matchTest = new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle());
     }
 
     @Test
@@ -58,7 +58,7 @@ public class MatchTestTest {
     @Test
     public void invalid_matchTest() {
         thrown.expect(IllegalArgumentException.class);
-        matchTest = new MatchTest(new Tag(VALID_TAG_NO_TAG), model.getTriviaBundle());
+        matchTest = new MatchTest(new Topic(VALID_TOPIC_NO_TOPIC), model.getTriviaBundle());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class MatchTestTest {
         assertFalse(matchTest.equals(5));
 
         // different cards being tested -> returns false
-        assertFalse(matchTest.equals(new MatchTest(new Tag(VALID_TAG_GIT), model.getTriviaBundle())));
+        assertFalse(matchTest.equals(new MatchTest(new Topic(VALID_TOPIC_GIT), model.getTriviaBundle())));
 
     }
 }

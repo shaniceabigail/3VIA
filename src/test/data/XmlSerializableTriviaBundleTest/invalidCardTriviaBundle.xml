@@ -4,6 +4,6 @@
     <cards>
         <question>Why is the sky blue?</question>
         <answer></answer>
-        <tagged>Physics</tagged>
+        <topic>Physics</topic>
     </cards>
 </triviabundle>

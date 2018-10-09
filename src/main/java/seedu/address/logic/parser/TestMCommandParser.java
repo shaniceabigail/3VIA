@@ -1,13 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.TestMCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.topic.Topic;
 
 /**
  * Parses input arguments and creates a new TestMCommand object
@@ -20,14 +20,14 @@ public class TestMCommandParser implements Parser<TestMCommand> {
      */
     public TestMCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_TOPIC);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TAG)
+        if (!arePrefixesPresent(argMultimap, PREFIX_TOPIC)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TestMCommand.MESSAGE_USAGE));
         }
 
-        Tag tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get());
+        Topic tag = ParserUtil.parseTopic(argMultimap.getValue(PREFIX_TOPIC).get());
 
         return new TestMCommand(tag);
     }

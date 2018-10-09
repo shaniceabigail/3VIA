@@ -17,12 +17,12 @@ public class CardViewHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String QUESTION_FIELD_ID = "#question";
     private static final String ANSWER_FIELD_ID = "#answer";
-    private static final String TAGS_FIELD_ID = "#tags";
+    private static final String TOPICS_FIELD_ID = "#topics";
 
     private final Label idLabel;
     private final Label questionLabel;
     private final Label answerLabel;
-    private final List<Label> tagLabels;
+    private final List<Label> topicLabels;
 
     public CardViewHandle(Node cardNode) {
         super(cardNode);
@@ -31,8 +31,8 @@ public class CardViewHandle extends NodeHandle<Node> {
         questionLabel = getChildNode(QUESTION_FIELD_ID);
         answerLabel = getChildNode(ANSWER_FIELD_ID);
 
-        Region tagsContainer = getChildNode(TAGS_FIELD_ID);
-        tagLabels = tagsContainer
+        Region topicsContainer = getChildNode(TOPICS_FIELD_ID);
+        topicLabels = topicsContainer
                 .getChildrenUnmodifiable()
                 .stream()
                 .map(Label.class::cast)
@@ -51,8 +51,8 @@ public class CardViewHandle extends NodeHandle<Node> {
         return answerLabel.getText();
     }
 
-    public List<String> getTags() {
-        return tagLabels
+    public List<String> getTopics() {
+        return topicLabels
                 .stream()
                 .map(Label::getText)
                 .collect(Collectors.toList());
@@ -64,8 +64,8 @@ public class CardViewHandle extends NodeHandle<Node> {
     public boolean equals(Card card) {
         return getQuestion().equals(card.getQuestion().value)
                 && getAnswer().equals(card.getAnswer().value)
-                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(card.getTags().stream()
-                .map(tag -> tag.tagName)
+                && ImmutableMultiset.copyOf(getTopics()).equals(ImmutableMultiset.copyOf(card.getTopics().stream()
+                .map(topic -> topic.topicName)
                 .collect(Collectors.toList())));
     }
 }

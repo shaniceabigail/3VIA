@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_PHYSICS;
 import static seedu.address.logic.commands.ExitCommand.MESSAGE_EXIT_FROM_APP;
 import static seedu.address.logic.commands.ExitCommand.MESSAGE_EXIT_FROM_TEST;
 
@@ -16,8 +16,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.test.matchtest.MatchTest;
+import seedu.address.model.topic.Topic;
 import seedu.address.testutil.TypicalCards;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.testutil.EventsCollectorRule;
@@ -52,7 +52,7 @@ public class ExitCommandTest {
         assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
 
         // during TEST/TESTM AppState
-        MatchTest matchTest = new MatchTest(new Tag(VALID_TAG_PHYSICS), model.getTriviaBundle());
+        MatchTest matchTest = new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle());
         model.startTriviaTest(matchTest);
 
         assertTrue(model.isInTestingState());

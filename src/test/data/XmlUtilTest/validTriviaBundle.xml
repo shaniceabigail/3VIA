@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- TriviaBundle save file which contains the same Card values as in TypicalCards#getTypicalTriviaBundle() -->
 <triviabundle>
     <cards>
         <question>Why is the earth round?</question>

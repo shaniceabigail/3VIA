@@ -36,7 +36,7 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all cards according to their tags
+* *`list`* : lists all cards according to their topics
 * **`add`**`add q/What is the formula for force? a/force = mass * acceleration a/Physics` : adds a card with question
 `What is the formula for force?` to the the trivia application.
 * **`delete`**`3` : deletes the 3rd card in the current list
@@ -68,7 +68,7 @@ Adds a card to the trivia application +
 Format: `add n/NAME q/QUESTION a/ANSWER [t/TAG]...`
 
 [TIP]
-A card can have any number of tags. If no tags are specified, a tag of `notag` will be tagged to the card.
+A card can have any number of topics. If no topics are specified, a tag of `NoTopic` will be assigned to the card.
 
 Examples:
 
@@ -89,8 +89,8 @@ Format: `edit INDEX [q/QUESTION] [a/ANSWER] [t/TAG]...`
 * Edits the card at the specified `INDEX`. The index refers to the index number shown in the displayed card list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the card will be removed i.e adding of tags is not cumulative.
-* You can set a tag of `notag` to the card by typing `t/` without specifying any tags after it.
+* When editing topics, the existing topics of the card will be removed i.e adding of topics is not cumulative.
+* You can set a tag of `NoTopic` to the card by typing `t/` without specifying any topics after it.
 ****
 
 Examples:
@@ -98,7 +98,7 @@ Examples:
 * `edit 1 q/Why will the apple fall from the tree? a/Because of gravity!` +
 Edits the answer of the 1st card to be `Because of gravity!`.
 * `edit 2 n/Why will the apple fall from the tree? t/` +
-Edits the question of the 2nd card to be `Why will the apple fall from the tree?` and the card will have a tag of `notag`.
+Edits the question of the 2nd card to be `Why will the apple fall from the tree?` and the card will have a tag of `NoTopic`.
 
 === Locating cards by question: `find`
 

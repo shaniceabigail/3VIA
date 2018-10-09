@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 
 import java.util.Collections;
@@ -21,7 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.topic.Topic;
 
 /**
  * Edits the details of an existing card in the trivia bundle.
@@ -35,7 +35,7 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_QUESTION + "QUESTION] "
             + "[" + PREFIX_ANSWER + "ANSWER] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TOPIC + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_QUESTION + "91234567 "
             + PREFIX_ANSWER + "johndoe@example.com";
@@ -90,7 +90,7 @@ public class EditCommand extends Command {
 
         Question updatedQuestion = editCardDescriptor.getQuestion().orElse(cardToEdit.getQuestion());
         Answer updatedAnswer = editCardDescriptor.getAnswer().orElse(cardToEdit.getAnswer());
-        Set<Tag> updatedTags = editCardDescriptor.getTags().orElse(cardToEdit.getTags());
+        Set<Topic> updatedTags = editCardDescriptor.getTopics().orElse(cardToEdit.getTopics());
 
         return new Card(updatedQuestion, updatedAnswer, updatedTags);
     }
@@ -120,25 +120,25 @@ public class EditCommand extends Command {
     public static class EditCardDescriptor {
         private Question question;
         private Answer answer;
-        private Set<Tag> tags;
+        private Set<Topic> topics;
 
         public EditCardDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
+         * A defensive copy of {@code topics} is used internally.
          */
         public EditCardDescriptor(EditCardDescriptor toCopy) {
             setQuestion(toCopy.question);
             setAnswer(toCopy.answer);
-            setTags(toCopy.tags);
+            setTopics(toCopy.topics);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(question, answer, tags);
+            return CollectionUtil.isAnyNonNull(question, answer, topics);
         }
 
         public void setQuestion(Question question) {
@@ -158,20 +158,20 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
+         * Sets {@code topics} to this object's {@code topics}.
+         * A defensive copy of {@code topics} is used internally.
          */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        public void setTopics(Set<Topic> topics) {
+            this.topics = (topics != null) ? new HashSet<>(topics) : null;
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * Returns an unmodifiable topic set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
+         * Returns {@code Optional#empty()} if {@code topics} is null.
          */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        public Optional<Set<Topic>> getTopics() {
+            return (topics != null) ? Optional.of(Collections.unmodifiableSet(topics)) : Optional.empty();
         }
 
         @Override
@@ -191,7 +191,7 @@ public class EditCommand extends Command {
 
             return getQuestion().equals(e.getQuestion())
                     && getAnswer().equals(e.getAnswer())
-                    && getTags().equals(e.getTags());
+                    && getTopics().equals(e.getTopics());
         }
     }
 }

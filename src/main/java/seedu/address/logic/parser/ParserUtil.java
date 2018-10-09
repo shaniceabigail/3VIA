@@ -16,8 +16,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.test.TimeLimit;
+import seedu.address.model.topic.Topic;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -144,30 +144,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String topic} into a {@code Topic}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code topic} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_TAG_CONSTRAINTS);
+    public static Topic parseTopic(String topic) throws ParseException {
+        requireNonNull(topic);
+        String trimmedTopic = topic.trim();
+        if (!Topic.isValidTopicName(trimmedTopic)) {
+            throw new ParseException(Topic.MESSAGE_TOPIC_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Topic(trimmedTopic);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> topics} into a {@code Set<Topic>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<Topic> parseTopics(Collection<String> topics) throws ParseException {
+        requireNonNull(topics);
+        final Set<Topic> topicSet = new HashSet<>();
+        for (String topicName : topics) {
+            topicSet.add(parseTopic(topicName));
         }
-        return tagSet;
+        return topicSet;
     }
 
     /**
