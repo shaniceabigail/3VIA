@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ui.ExtraInformationDisplay;
+import seedu.address.commons.events.ExtraInformationDisplay;
 import seedu.address.commons.events.ui.ExtraInformationDisplayChangeEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
