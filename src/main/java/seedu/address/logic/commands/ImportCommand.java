@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.ExtraInformationDisplayChangeEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -55,6 +57,7 @@ public class ImportCommand extends Command {
      */
     private void isFileValid() throws CommandException {
         if (!file.isFile()) {
+            EventsCenter.getInstance().post(new ExtraInformationDisplayChangeEvent("ImportHelpDisplay"));
             throw new CommandException(MESSAGE_INVALID_FILE);
         } else if (!isValidFileType()) {
             throw new CommandException(MESSAGE_INVALID_FILE_TYPE);

@@ -4,8 +4,10 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -13,10 +15,14 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
+import seedu.address.commons.events.ui.DisplayBrowserEventChangedEvent;
+import seedu.address.commons.events.ui.DisplayImportHelpChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.ExtraInformationDisplayChangeEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.logic.Logic;
@@ -135,9 +141,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         ImportHelpDisplay importHelpDisplay = new ImportHelpDisplay();
-        extraInfomationPlaceholder.getChildren().add(importHelpDisplay.getRoot());
+        extraInfomationPlaceholder.getChildren().add(importHelpDisplay.getRoot()); // index 0
         browserPanel = new BrowserPanel();
-        extraInfomationPlaceholder.getChildren().add(browserPanel.getRoot());
+        extraInfomationPlaceholder.getChildren().add(browserPanel.getRoot()); // index 1
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         cardListPanel = new CardListPanel(logic.getFilteredCardList());
@@ -241,4 +247,34 @@ public class MainWindow extends UiPart<Stage> {
         testMQuestionListPanelPlaceholder.getChildren().clear();
         testMAnswerListPanelPlaceholder.getChildren().clear();
     }
+
+    @Subscribe
+    private void handleExtraInfomationDisplayChangeEvent(ExtraInformationDisplayChangeEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (event.getToDisplay().equals("ImportHelpDisplay")) {
+            // display import help
+            EventsCenter.getInstance().post(new DisplayImportHelpChangedEvent(true));
+            // hide browser
+            EventsCenter.getInstance().post(new DisplayBrowserEventChangedEvent(false));
+        } else if (event.getToDisplay().equals("Browser")) {
+            // hide import help
+            EventsCenter.getInstance().post(new DisplayImportHelpChangedEvent(false));
+            // display browser
+            EventsCenter.getInstance().post(new DisplayBrowserEventChangedEvent(true));
+        }
+    }
+
+//    private void displayImportHelp() {
+//        ObservableList<Node> children = extraInfomationPlaceholder.getChildren();
+//        assert(children.size() > 1);
+//        Node topNode = children.get(children.size()-1);
+//        if (topNode.getId().equals("ImportHelpDisplay")) {
+//            return;
+//        }
+//
+//        topNode.setVisible(false);
+//        topNode.toBack();
+//        Node toDisplay = children.get(children.size()-2);
+//        toDisplay.setVisible(true);
+//    }
 }
