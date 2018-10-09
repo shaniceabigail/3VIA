@@ -578,7 +578,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 (For all use cases below, the *System* is the `3VIA` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case 1: Find more info on topic
+=== Use case 1: Find more info on a topic
 
 *MSS*
 

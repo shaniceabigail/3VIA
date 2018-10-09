@@ -68,7 +68,7 @@ Adds a card to the trivia application +
 Format: `add n/NAME q/QUESTION a/ANSWER [t/TAG]...`
 
 [TIP]
-A card can have any number of topics. If no topics are specified, a tag of `NoTopic` will be topic to the card.
+A card can have any number of topics. If no topics are specified, a tag of `NoTopic` will be assigned to the card.
 
 Examples:
 
