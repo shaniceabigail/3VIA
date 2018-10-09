@@ -36,7 +36,7 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all cards according to their tags
+* *`list`* : lists all cards according to their topics
 * **`add`**`add q/What is the formula for force? a/force = mass * acceleration a/Physics` : adds a card with question
 `What is the formula for force?` to the the trivia application.
 * **`delete`**`3` : deletes the 3rd card in the current list
@@ -68,7 +68,7 @@ Adds a card to the trivia application +
 Format: `add n/NAME q/QUESTION a/ANSWER [t/TAG]...`
 
 [TIP]
-A card can have any number of tags. If no tags are specified, a tag of `notag` will be tagged to the card.
+A card can have any number of topics. If no topics are specified, a tag of `NoTopic` will be assigned to the card.
 
 Examples:
 
@@ -89,8 +89,8 @@ Format: `edit INDEX [q/QUESTION] [a/ANSWER] [t/TAG]...`
 * Edits the card at the specified `INDEX`. The index refers to the index number shown in the displayed card list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the card will be removed i.e adding of tags is not cumulative.
-* You can set a tag of `notag` to the card by typing `t/` without specifying any tags after it.
+* When editing topics, the existing topics of the card will be removed i.e adding of topics is not cumulative.
+* You can set a tag of `NoTopic` to the card by typing `t/` without specifying any topics after it.
 ****
 
 Examples:
@@ -98,7 +98,7 @@ Examples:
 * `edit 1 q/Why will the apple fall from the tree? a/Because of gravity!` +
 Edits the answer of the 1st card to be `Because of gravity!`.
 * `edit 2 n/Why will the apple fall from the tree? t/` +
-Edits the question of the 2nd card to be `Why will the apple fall from the tree?` and the card will have a tag of `notag`.
+Edits the question of the 2nd card to be `Why will the apple fall from the tree?` and the card will have a tag of `NoTopic`.
 
 === Locating cards by question: `find`
 
@@ -178,7 +178,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the trivia application's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the trivia application's content (`add`, `delete`, `edit`, `clear` and `import`).
 ====
 
 Examples:
@@ -196,6 +196,10 @@ The `undo` command fails as there are no undoable commands executed previously.
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
+
+* `import C:\Users\username\Desktop\text.txt` +
+`list` +
+`undo` (reverses the `import` command)
 
 === Redoing the previously undone command : `redo`
 
@@ -229,7 +233,7 @@ Format: `clear`
 
 Start an open-ended test of a specified tag. In an open-ended test, the user will get the choose whether he/she has answered
 correctly by comparing their answers with the expected answer. +
-Format: `test TAG TIMELIMIT_IN_SECONDS`
+Format: `test t/TAG TIMELIMIT_IN_SECONDS`
 
 ****
 * The test aims to test the knowledge of the user with the existing questions of a specified tag that are in the trivia application.
@@ -253,44 +257,51 @@ Format: `c` (correct) OR `x` (wrong)
 ==== Quit the test:
 
 Will exit from the test.
-Format: `quit`
+Format: `exit`
 
 === Starting a matching test: `testM`
 
 Start a test of matching cards of a specified tag. In a test of matching cards, all the questions and answers in that tag
 will be displayed. The user will then have to match the correct question and answer together. +
-Format: `testM TAG TIMELIMIT_IN_SECONDS`
-
-****
-* By incorporating different testing approach, it will allow the user to better internalize the content.
-* The user can also set the time limit (in seconds) for each question using the optional field TIMELIMIT_IN_SECONDS
-****
+Format: `testM t/TAG`
 
 The following commands can only be used during a `testM`.
 
 ==== Enter the matching cards: match
 
 Will match the cards during `testM`. +
-Format: `match 1 2`
-
-****
-* The first and second number represents the index of question and answer respectively.
-****
+Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 
 ==== Quit the test:
 
 Will exit from the test.
-Format: `quit`
+Format: `exit`
 
 === View statistics for a certain test: `stats`
 
 Will list out all the previous tests, with their respective questions, answers and the user’s answers.
 Format: `stats TAG`
 
-=== Mass Import: 'import`
+=== Mass Import: `import`
 
-Will import multiple cards into the trivia application.
-Format: import FILEPATH
+Imports multiple cards from a text file into the trivia application. +
+Format: `import FILEPATH`
+
+****
+* Ignores duplicated cards already in trivia.
+* The `FILEPATH` refers to the absolute path of the file to be imported.
+* The file *must be a non empty text file*.
+****
+
+Examples:
+****
+* `import C:\Users\username\Desktop\text.txt`
+Imports the contents from the text.txt file on a Windows desktop.
+* `import C:\Users\username\Desktop\text.txt`
+Imports the contents from the text.txt file on a Mac desktop.
+* `import home/username/text.txt`
+Imports the contents from the text.txt file on a Linux desktop.
+****
 
 === Exiting the program : `exit`
 

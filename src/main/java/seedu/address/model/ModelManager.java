@@ -13,8 +13,13 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TriviaBundleChangedEvent;
+import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
+import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.AppState;
+import seedu.address.model.state.State;
+import seedu.address.model.test.TriviaTest;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -27,6 +32,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedTriviaBundle versionedTriviaBundle;
     private final FilteredList<Card> filteredCards;
+
+    private TriviaTest currentRunningTest;
+    private AppState appState;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +50,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedTriviaBundle = null;
         filteredCards = null;
+
+        currentRunningTest = null;
+        appState = new AppState();
     }
 
 
@@ -57,6 +68,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+
+        currentRunningTest = null;
+        appState = new AppState();
     }
 
     public ModelManager() {
@@ -170,25 +184,25 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean canUndoTriviaBundle() {
+        return versionedTriviaBundle.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+    public boolean canRedoTriviaBundle() {
+        return versionedTriviaBundle.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
+    public void undoTriviaBundle() {
+        versionedTriviaBundle.undo();
+        indicateTriviaBundleChanged();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
+    public void redoTriviaBundle() {
+        versionedTriviaBundle.redo();
+        indicateTriviaBundleChanged();
     }
 
     @Override
@@ -199,6 +213,41 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void commitTriviaBundle() {
         versionedTriviaBundle.commit();
+    }
+
+    //=========== App State =============================================================
+
+    @Override
+    public State getAppState() {
+        return appState.getState();
+    }
+
+    @Override
+    public boolean isInTestingState() {
+        return appState.getState() == State.TEST || appState.getState() == State.TESTM;
+    }
+
+    //=========== Trivia Tests =============================================================
+
+    @Override
+    public void startTriviaTest(TriviaTest test) {
+        currentRunningTest = test;
+        appState.setAppState(State.TESTM);
+        test.startTest();
+        raise(new ShowTriviaTestViewEvent(test));
+    }
+
+    @Override
+    public void stopTriviaTest() {
+        currentRunningTest.stopTest();
+        appState.setAppState(State.NORMAL);
+        raise(new CloseTriviaTestViewEvent(currentRunningTest));
+        currentRunningTest = null;
+    }
+
+    @Override
+    public TriviaTest getCurrentRunningTest() {
+        return currentRunningTest;
     }
 
     @Override
@@ -218,8 +267,10 @@ public class ModelManager extends ComponentManager implements Model {
         return (versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons))
                 && (versionedTriviaBundle == null // short circuit for regression compatibility with addressbook
-                        || (versionedTriviaBundle.equals(other.versionedTriviaBundle)
-                        && filteredCards.equals(other.filteredCards)));
+                    || (versionedTriviaBundle.equals(other.versionedTriviaBundle)
+                    && filteredCards.equals(other.filteredCards)))
+                && ((currentRunningTest == null && other.currentRunningTest == null)
+                    || (currentRunningTest != null && currentRunningTest.equals(other.currentRunningTest)));
     }
 
 }

@@ -28,7 +28,7 @@
             </Label>
             <Label fx:id="question" text="\$question" styleClass="cell_big_label" />
         </HBox>
-        <FlowPane fx:id="tags" />
+        <FlowPane fx:id="topics" />
         <Label fx:id="answer" styleClass="cell_small_label" text="\$answer" />
     </VBox>
 </GridPane>

@@ -13,7 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.topic.Topic;
 
 /**
  * JAXB-friendly version of the Card.
@@ -28,7 +28,7 @@ public class XmlAdaptedCard {
     private String answer;
 
     @XmlElement(required = true)
-    private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    private List<XmlAdaptedTopic> topic = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedCard.
@@ -39,11 +39,11 @@ public class XmlAdaptedCard {
     /**
      * Constructs an {@code XmlAdaptedCard} with the given card details.
      */
-    public XmlAdaptedCard(String question, String answer, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedCard(String question, String answer, List<XmlAdaptedTopic> topic) {
         this.question = question;
         this.answer = answer;
-        if (tagged != null) {
-            this.tagged = new ArrayList<>(tagged);
+        if (topic != null) {
+            this.topic = new ArrayList<>(topic);
         }
     }
 
@@ -55,8 +55,8 @@ public class XmlAdaptedCard {
     public XmlAdaptedCard(Card source) {
         question = source.getQuestion().value;
         answer = source.getAnswer().value;
-        tagged = source.getTags().stream()
-                .map(XmlAdaptedTag::new)
+        topic = source.getTopics().stream()
+                .map(XmlAdaptedTopic::new)
                 .collect(Collectors.toList());
     }
 
@@ -66,9 +66,9 @@ public class XmlAdaptedCard {
      * @throws IllegalValueException if there were any data constraints violated in the adapted card
      */
     public Card toModelType() throws IllegalValueException {
-        final List<Tag> cardTags = new ArrayList<>();
-        for (XmlAdaptedTag tag : tagged) {
-            cardTags.add(tag.toModelType());
+        final List<Topic> cardTopics = new ArrayList<>();
+        for (XmlAdaptedTopic topic : topic) {
+            cardTopics.add(topic.toModelType());
         }
 
         if (question == null) {
@@ -88,8 +88,8 @@ public class XmlAdaptedCard {
         }
         final Answer modelAnswer = new Answer(answer);
 
-        final Set<Tag> modelTags = new HashSet<>(cardTags);
-        return new Card(modelQuestion, modelAnswer, modelTags);
+        final Set<Topic> modelTopics = new HashSet<>(cardTopics);
+        return new Card(modelQuestion, modelAnswer, modelTopics);
     }
 
     @Override
@@ -105,6 +105,6 @@ public class XmlAdaptedCard {
         XmlAdaptedCard otherCard = (XmlAdaptedCard) other;
         return Objects.equals(question, otherCard.question)
                 && Objects.equals(answer, otherCard.answer)
-                && tagged.equals(otherCard.tagged);
+                && topic.equals(otherCard.topic);
     }
 }

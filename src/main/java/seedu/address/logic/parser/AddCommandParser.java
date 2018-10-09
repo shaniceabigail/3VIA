@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -13,7 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.topic.Topic;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -27,7 +27,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_ANSWER, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_QUESTION, PREFIX_ANSWER, PREFIX_TOPIC);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_QUESTION, PREFIX_ANSWER)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -36,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Question question = ParserUtil.parseQuestion(argMultimap.getValue(PREFIX_QUESTION).get());
         Answer answer = ParserUtil.parseAnswer(argMultimap.getValue(PREFIX_ANSWER).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Topic> tagList = ParserUtil.parseTopics(argMultimap.getAllValues(PREFIX_TOPIC));
 
         Card card = new Card(question, answer, tagList);
 
