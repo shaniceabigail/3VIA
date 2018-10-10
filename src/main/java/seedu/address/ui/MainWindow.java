@@ -15,10 +15,8 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
-import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 
@@ -36,17 +34,10 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
-    private CardListPanel cardListPanel;
-    private QuestionListPanel questionListPanel;
-    private AnswerListPanel answerListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
-
-    @FXML
-    private StackPane browserPlaceholder;
+    private Homepage homePage;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -55,22 +46,13 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
-
-    @FXML
-    private StackPane cardListPanelPlaceholder;
-
-    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
 
     @FXML
-    private StackPane testMQuestionListPanelPlaceholder;
-
-    @FXML
-    private StackPane testMAnswerListPanelPlaceholder;
+    private StackPane displayPagePlaceHolder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -133,13 +115,9 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        homePage = new Homepage(logic);
+        displayPagePlaceHolder.getChildren().add(homePage.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        cardListPanel = new CardListPanel(logic.getFilteredCardList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-        cardListPanelPlaceholder.getChildren().add(cardListPanel.getRoot());
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -190,6 +168,10 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    void releaseResources() {
+        homePage.releaseResources();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -202,40 +184,9 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
-    public CardListPanel getCardListPanel() {
-        return cardListPanel;
-    }
-
-    void releaseResources() {
-        browserPanel.freeResources();
-    }
-
     @Subscribe
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
-    }
-
-    @Subscribe
-    private void handleShowTriviaTestiewEvent(ShowTriviaTestViewEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-
-        questionListPanel = new QuestionListPanel(event.getTest().getQuestions());
-        testMQuestionListPanelPlaceholder.getChildren().add(questionListPanel.getRoot());
-
-        answerListPanel = new AnswerListPanel(event.getTest().getAnswers());
-        testMAnswerListPanelPlaceholder.getChildren().add(answerListPanel.getRoot());
-    }
-
-    @Subscribe
-    private void handleCloseTriviaTestViewEvent(CloseTriviaTestViewEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-
-        testMQuestionListPanelPlaceholder.getChildren().clear();
-        testMAnswerListPanelPlaceholder.getChildren().clear();
     }
 }
