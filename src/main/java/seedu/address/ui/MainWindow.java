@@ -10,15 +10,19 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.test.matchtest.MatchTest;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -38,6 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     private UserPrefs prefs;
     private HelpWindow helpWindow;
     private Homepage homePage;
+    private MatchTestPage matchTestPage;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -115,17 +120,17 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        homePage = new Homepage(logic);
-        displayPagePlaceHolder.getChildren().add(homePage.getRoot());
+        CommandBox commandBox = new CommandBox(logic);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        homePage = new Homepage(logic);
+        displayPagePlaceHolder.getChildren().add(homePage.getRoot());
+
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(logic);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
     void hide() {
@@ -177,6 +182,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Will change the scene displayed in {@code displayPagePlaceHolder} according to the given parameter.
+     */
+    private void changeToScene(UiPart<Region> region) {
+        displayPagePlaceHolder.getChildren().clear();
+        displayPagePlaceHolder.getChildren().add(region.getRoot());
+    }
+
+    /**
      * Closes the application.
      */
     @FXML
@@ -188,5 +201,22 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    @Subscribe
+    private void handleShowTriviaTestViewEvent(ShowTriviaTestViewEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (event.getTest() instanceof MatchTest) {
+            matchTestPage = new MatchTestPage((MatchTest) event.getTest());
+            changeToScene(matchTestPage);
+        }
+    }
+
+    @Subscribe
+    private void handleCloseTriviaTestViewEvent(CloseTriviaTestViewEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        matchTestPage.clearCards();
+        displayPagePlaceHolder.getChildren().clear();
+        displayPagePlaceHolder.getChildren().add(homePage.getRoot());
     }
 }
