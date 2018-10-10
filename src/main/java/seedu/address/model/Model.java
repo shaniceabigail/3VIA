@@ -7,6 +7,7 @@ import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.model.test.TriviaTest;
+import seedu.address.model.test.matchtest.MatchTest;
 
 /**
  * The API of the Model component.
@@ -137,4 +138,9 @@ public interface Model {
      * Return boolean on whether the model in in a testing state.
      */
     boolean isInTestingState();
+
+    /**
+     * Add a new completed matching test to the list of results.
+     */
+    void addMatchTestResult(MatchTest matchTest);
 }

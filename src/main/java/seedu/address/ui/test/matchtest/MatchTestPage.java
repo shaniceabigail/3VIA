@@ -21,19 +21,19 @@ public class MatchTestPage extends UiPart<Region> {
     private AnswerListPanel answerListPanel;
 
     @FXML
-    private StackPane testMQuestionListPanelPlaceholder;
+    private StackPane matchTestQuestionListPanelPlaceholder;
 
     @FXML
-    private StackPane testMAnswerListPanelPlaceholder;
+    private StackPane matchTestAnswerListPanelPlaceholder;
 
     public MatchTestPage(MatchTest matchTest) {
         super(FXML);
 
         questionListPanel = new QuestionListPanel(matchTest.getQuestions());
-        testMQuestionListPanelPlaceholder.getChildren().add(questionListPanel.getRoot());
+        matchTestQuestionListPanelPlaceholder.getChildren().add(questionListPanel.getRoot());
 
         answerListPanel = new AnswerListPanel(matchTest.getAnswers());
-        testMAnswerListPanelPlaceholder.getChildren().add(answerListPanel.getRoot());
+        matchTestAnswerListPanelPlaceholder.getChildren().add(answerListPanel.getRoot());
         registerAsAnEventHandler(this);
     }
 
@@ -41,7 +41,7 @@ public class MatchTestPage extends UiPart<Region> {
      * Will remove all existing questions and answers.
      */
     public void clearCards() {
-        testMQuestionListPanelPlaceholder.getChildren().clear();
-        testMAnswerListPanelPlaceholder.getChildren().clear();
+        matchTestQuestionListPanelPlaceholder.getChildren().clear();
+        matchTestAnswerListPanelPlaceholder.getChildren().clear();
     }
 }

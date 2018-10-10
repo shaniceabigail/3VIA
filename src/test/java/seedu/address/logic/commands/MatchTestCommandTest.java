@@ -18,7 +18,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.model.topic.Topic;
 
-public class TestMCommandTest {
+public class MatchTestCommandTest {
     private Model model;
     private Model expectedModel;
     private CommandHistory commandHistory = new CommandHistory();
@@ -42,13 +42,13 @@ public class TestMCommandTest {
     @Test
     public void execute_testStartedSuccessfully() {
         expectedModel.startTriviaTest(new MatchTest(new Topic(VALID_TOPIC_PHYSICS), expectedModel.getTriviaBundle()));
-        assertCommandSuccess(new TestMCommand(new Topic(VALID_TOPIC_PHYSICS)), model, commandHistory,
-                TestMCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new MatchTestCommand(new Topic(VALID_TOPIC_PHYSICS)), model, commandHistory,
+                MatchTestCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_testDidNotStart() {
-        assertCommandFailure(new TestMCommand(new Topic(VALID_TOPIC_NO_TOPIC)), model, commandHistory,
+        assertCommandFailure(new MatchTestCommand(new Topic(VALID_TOPIC_NO_TOPIC)), model, commandHistory,
                 MatchTest.MESSAGE_MATCH_TEST_CONSTRAINS);
     }
 }

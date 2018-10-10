@@ -64,7 +64,7 @@ public class MatchTestTest {
     @Test
     public void equals() {
         // same values -> returns true
-        MatchTest matchTestCopy = new MatchTest(matchTest.getTag(), model.getTriviaBundle());
+        MatchTest matchTestCopy = new MatchTest(matchTest.getTopic(), model.getTriviaBundle());
         assertTrue(matchTest.equals(matchTestCopy));
 
         // same object -> returns true

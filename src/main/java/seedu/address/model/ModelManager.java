@@ -20,6 +20,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.state.AppState;
 import seedu.address.model.state.State;
 import seedu.address.model.test.TriviaTest;
+import seedu.address.model.test.matchtest.MatchTest;
+import seedu.address.model.test.matchtest.MatchTestResults;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -32,6 +34,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedTriviaBundle versionedTriviaBundle;
     private final FilteredList<Card> filteredCards;
+    private final MatchTestResults matchTestResults;
 
     private TriviaTest currentRunningTest;
     private AppState appState;
@@ -51,6 +54,9 @@ public class ModelManager extends ComponentManager implements Model {
         versionedTriviaBundle = null;
         filteredCards = null;
 
+        // TODO Read data from file.
+        matchTestResults = new MatchTestResults();
+
         currentRunningTest = null;
         appState = new AppState();
     }
@@ -68,6 +74,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+
+        // TODO Read data from file.
+        matchTestResults = new MatchTestResults();
 
         currentRunningTest = null;
         appState = new AppState();
@@ -215,7 +224,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedTriviaBundle.commit();
     }
 
-    //=========== App State =============================================================
+    //=========== App State =================================================================================
 
     @Override
     public State getAppState() {
@@ -224,15 +233,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean isInTestingState() {
-        return appState.getState() == State.TEST || appState.getState() == State.TESTM;
+        return appState.getState() == State.TEST || appState.getState() == State.MATCH_TEST;
     }
 
-    //=========== Trivia Tests =============================================================
+    //=========== Trivia Tests ==============================================================================
 
     @Override
     public void startTriviaTest(TriviaTest test) {
         currentRunningTest = test;
-        appState.setAppState(State.TESTM);
+        appState.setAppState(State.MATCH_TEST);
         test.startTest();
         raise(new ShowTriviaTestViewEvent(test));
     }
@@ -248,6 +257,13 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public TriviaTest getCurrentRunningTest() {
         return currentRunningTest;
+    }
+
+    //=========== Matching Test Results =====================================================================
+
+    @Override
+    public void addMatchTestResult(MatchTest matchTest) {
+        matchTestResults.addMatchTestResult(matchTest);
     }
 
     @Override

@@ -3,6 +3,7 @@ package seedu.address.model.test;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -15,21 +16,28 @@ import seedu.address.model.card.TopicIsKeywordPredicate;
 import seedu.address.model.topic.Topic;
 
 /**
- * A base model for the different kinds tests. Require a Tag and Trivia Bundle to start a test.
+ * A base model for the different kinds tests. Require a Topic and Trivia Bundle to start a test.
  */
 public abstract class TriviaTest {
-    protected final Topic tag;
+    protected final Topic topic;
     protected final Date testDate;
 
     protected final ObservableList<Card> cards;
     protected final ObservableList<Question> questions;
     protected final ObservableList<Answer> answers;
 
-    public TriviaTest(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
-        this.tag = tag;
-        this.testDate = new Date();
+    protected boolean isCompleted;
+    protected double duration;
+    protected Timer timer;
 
-        cards = triviaBundle.getListOfCardFilteredByTag(new TopicIsKeywordPredicate(tag.topicName));
+
+    public TriviaTest(Topic topic, ReadOnlyTriviaBundle triviaBundle) {
+        this.topic = topic;
+
+        testDate = new Date();
+        isCompleted = false;
+
+        cards = triviaBundle.getListOfCardFilteredByTopic(new TopicIsKeywordPredicate(topic.topicName));
         questions = getQuestions(cards);
         answers = getAnswers(cards);
     }
@@ -72,8 +80,8 @@ public abstract class TriviaTest {
         return FXCollections.observableList(answers);
     }
 
-    public Topic getTag() {
-        return tag;
+    public Topic getTopic() {
+        return topic;
     }
 
 }

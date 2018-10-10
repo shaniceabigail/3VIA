@@ -28,9 +28,6 @@ public class MatchTest extends TriviaTest {
 
     private final List<MatchAttempt> attempts;
 
-    private double duration;
-    private Timer timer;
-
     public MatchTest(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
         super(tag, triviaBundle);
 
@@ -38,12 +35,12 @@ public class MatchTest extends TriviaTest {
         attempts = new ArrayList<>();
     }
 
-    /**
-     *
-     * @return a boolean to indicate whether the test has come to an end
-     */
     public boolean isEndOfTest() {
         return questions.isEmpty() && answers.isEmpty();
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
     }
 
     /**
@@ -118,7 +115,9 @@ public class MatchTest extends TriviaTest {
     @Override
     public void stopTest() {
         // TODO: Show the result screen.
-        // TODO: Record results if test did not end prematurely.
+        if (isEndOfTest()) {
+            isCompleted = true;
+        }
         timer.cancel();
     }
 

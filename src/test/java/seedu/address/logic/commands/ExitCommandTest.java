@@ -51,7 +51,7 @@ public class ExitCommandTest {
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ExitAppRequestEvent);
         assertTrue(eventsCollectorRule.eventsCollector.getSize() == 1);
 
-        // during TEST/TESTM AppState
+        // during TEST/MATCH_TEST AppState
         MatchTest matchTest = new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle());
         model.startTriviaTest(matchTest);
 

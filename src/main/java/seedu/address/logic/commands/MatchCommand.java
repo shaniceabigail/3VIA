@@ -50,26 +50,27 @@ public class MatchCommand extends Command {
             throw new CommandException(MESSAGE_NOT_IN_MATCHING_TEST);
         }
 
-        MatchTest testM = (MatchTest) test;
+        MatchTest matchTest = (MatchTest) test;
         try {
-            MatchAttempt attempt = testM.addAttempt(questionIndex, answerIndex);
+            MatchAttempt attempt = matchTest.addAttempt(questionIndex, answerIndex);
             if (attempt.isCorrect()) {
-                testM.postOutcomeOfMatch(attempt);
+                matchTest.postOutcomeOfMatch(attempt);
 
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
                         Platform.runLater(() -> {
-                            testM.removeCardFromUi(attempt);
-                            if (testM.isEndOfTest()) {
+                            matchTest.removeCardFromUi(attempt);
+                            if (matchTest.isEndOfTest()) {
                                 model.stopTriviaTest();
+                                model.addMatchTestResult(matchTest);
                             }
                         });
                     }
                 }, UiPart.FLASH_TIME);
             } else {
-                testM.postOutcomeOfMatch(attempt);
+                matchTest.postOutcomeOfMatch(attempt);
                 throw new CommandException(MESSAGE_MATCH_FAILURE);
             }
         } catch (IndexOutOfBoundsException e) {

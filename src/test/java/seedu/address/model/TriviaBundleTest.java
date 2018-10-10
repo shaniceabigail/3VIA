@@ -109,7 +109,7 @@ public class TriviaBundleTest {
         }
 
         @Override
-        public ObservableList<Card> getListOfCardFilteredByTag(Predicate<Card> predicate) {
+        public ObservableList<Card> getListOfCardFilteredByTopic(Predicate<Card> predicate) {
             return cards;
         }
     }
