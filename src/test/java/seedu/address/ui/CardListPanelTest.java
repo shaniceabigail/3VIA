@@ -103,7 +103,7 @@ public class CardListPanelTest extends GuiUnitTest {
             builder.append("<cards>\n");
             builder.append("<question>").append(i).append("a</question>\n");
             builder.append("<answer>21</answer>\n");
-            builder.append("<tagged>Physics</tagged>");
+            builder.append("<topic>Physics</topic>");
             builder.append("</cards>\n");
         }
         builder.append("</triviabundle>\n");

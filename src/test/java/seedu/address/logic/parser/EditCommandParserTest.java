@@ -5,18 +5,18 @@ import static seedu.address.logic.commands.CommandTestUtil.ANSWER_DESC_EARTH_FLA
 import static seedu.address.logic.commands.CommandTestUtil.ANSWER_DESC_GIT_COMMIT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ANSWER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUESTION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TOPIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.QUESTION_DESC_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.QUESTION_DESC_GIT_COMMIT;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_GIT;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_GIT;
+import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_GIT_COMMIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_GIT_COMMIT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_GIT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_PHYSICS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_GIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_PHYSICS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
@@ -30,11 +30,11 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditCardDescriptor;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Question;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.topic.Topic;
 import seedu.address.testutil.EditCardDescriptorBuilder;
 
 public class EditCommandParserTest {
-    private static final String TAG_EMPTY = " " + PREFIX_TAG;
+    private static final String TAG_EMPTY = " " + PREFIX_TOPIC;
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -74,7 +74,7 @@ public class EditCommandParserTest {
                 Question.MESSAGE_QUESTION_CONSTRAINTS); // invalid question
         assertParseFailure(parser, "1" + INVALID_ANSWER_DESC,
                 Answer.MESSAGE_ANSWER_CONSTRAINTS); // invalid answer
-        assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_TOPIC_DESC, Topic.MESSAGE_TOPIC_CONSTRAINTS); // invalid topic
 
         // invalid question followed by valid answer
         assertParseFailure(parser, "1" + INVALID_QUESTION_DESC + ANSWER_DESC_GIT_COMMIT,
@@ -85,27 +85,28 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + QUESTION_DESC_EARTH_FLAT + INVALID_QUESTION_DESC,
                 Question.MESSAGE_QUESTION_CONSTRAINTS);
 
-        // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Card} being edited,
-        // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_PHYSICS + TAG_DESC_GIT + TAG_EMPTY,
-                Tag.MESSAGE_TAG_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_PHYSICS + TAG_EMPTY + TAG_DESC_GIT,
-                Tag.MESSAGE_TAG_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_PHYSICS + TAG_DESC_GIT,
-                Tag.MESSAGE_TAG_CONSTRAINTS);
+        // while parsing {@code PREFIX_TOPIC} alone will reset the tags of the {@code Card} being edited,
+        // parsing it together with a valid topic results in error
+        assertParseFailure(parser, "1" + TOPIC_DESC_PHYSICS + TOPIC_DESC_GIT + TAG_EMPTY,
+                Topic.MESSAGE_TOPIC_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TOPIC_DESC_PHYSICS + TAG_EMPTY + TOPIC_DESC_GIT,
+                Topic.MESSAGE_TOPIC_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TOPIC_DESC_PHYSICS + TOPIC_DESC_GIT,
+                Topic.MESSAGE_TOPIC_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_QUESTION_DESC + INVALID_ANSWER_DESC + VALID_TAG_PHYSICS,
+        assertParseFailure(parser, "1" + INVALID_QUESTION_DESC + INVALID_ANSWER_DESC + VALID_TOPIC_PHYSICS,
                 Question.MESSAGE_QUESTION_CONSTRAINTS);
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_CARD;
-        String userInput = targetIndex.getOneBased() + ANSWER_DESC_EARTH_FLAT + QUESTION_DESC_EARTH_FLAT + TAG_DESC_GIT;
+        String userInput = targetIndex.getOneBased() + ANSWER_DESC_EARTH_FLAT + QUESTION_DESC_EARTH_FLAT
+                + TOPIC_DESC_GIT;
 
         EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_EARTH_FLAT)
-                .withAnswer(VALID_ANSWER_EARTH_FLAT).withTags(VALID_TAG_GIT).build();
+                .withAnswer(VALID_ANSWER_EARTH_FLAT).withTopics(VALID_TOPIC_GIT).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -114,10 +115,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_CARD;
-        String userInput = targetIndex.getOneBased() + ANSWER_DESC_EARTH_FLAT + TAG_DESC_PHYSICS;
+        String userInput = targetIndex.getOneBased() + ANSWER_DESC_EARTH_FLAT + TOPIC_DESC_PHYSICS;
 
         EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withAnswer(VALID_ANSWER_EARTH_FLAT)
-                .withTags(VALID_TAG_PHYSICS).build();
+                .withTopics(VALID_TOPIC_PHYSICS).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -139,8 +140,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
-        userInput = targetIndex.getOneBased() + TAG_DESC_PHYSICS;
-        descriptor = new EditCardDescriptorBuilder().withTags(VALID_TAG_PHYSICS).build();
+        userInput = targetIndex.getOneBased() + TOPIC_DESC_PHYSICS;
+        descriptor = new EditCardDescriptorBuilder().withTopics(VALID_TOPIC_PHYSICS).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -149,10 +150,10 @@ public class EditCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_CARD;
         String userInput = targetIndex.getOneBased() + QUESTION_DESC_EARTH_FLAT + ANSWER_DESC_EARTH_FLAT
-                + QUESTION_DESC_GIT_COMMIT + ANSWER_DESC_GIT_COMMIT + TAG_DESC_PHYSICS + TAG_DESC_GIT;
+                + QUESTION_DESC_GIT_COMMIT + ANSWER_DESC_GIT_COMMIT + TOPIC_DESC_PHYSICS + TOPIC_DESC_GIT;
 
         EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_GIT_COMMIT)
-                .withAnswer(VALID_ANSWER_GIT_COMMIT).withTags(VALID_TAG_PHYSICS, VALID_TAG_GIT)
+                .withAnswer(VALID_ANSWER_GIT_COMMIT).withTopics(VALID_TOPIC_PHYSICS, VALID_TOPIC_GIT)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -170,9 +171,9 @@ public class EditCommandParserTest {
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + ANSWER_DESC_GIT_COMMIT + INVALID_QUESTION_DESC
-                + VALID_QUESTION_EARTH_FLAT + TAG_DESC_GIT;
+                + VALID_QUESTION_EARTH_FLAT + TOPIC_DESC_GIT;
         descriptor = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_EARTH_FLAT)
-                .withAnswer(VALID_ANSWER_GIT_COMMIT).withTags(VALID_TAG_GIT).build();
+                .withAnswer(VALID_ANSWER_GIT_COMMIT).withTopics(VALID_TOPIC_GIT).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -182,7 +183,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_CARD;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withTags().build();
+        EditCardDescriptor descriptor = new EditCardDescriptorBuilder().withTopics().build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

@@ -8,7 +8,7 @@ import java.util.Set;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.topic.Topic;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -18,16 +18,16 @@ public class CardBuilder {
 
     public static final String DEFAULT_QUESTION = "Why is the world round?";
     public static final String DEFAULT_ANSWER = "Because of gravity!";
-    public static final List<Tag> DEFAULT_TAGS = Arrays.asList(new Tag[]{new Tag("Physics")});
+    public static final List<Topic> DEFAULT_TOPIC = Arrays.asList(new Topic[]{new Topic("Physics")});
 
     private Question question;
     private Answer answer;
-    private Set<Tag> tags;
+    private Set<Topic> topics;
 
     public CardBuilder() {
         question = new Question(DEFAULT_QUESTION);
         answer = new Answer(DEFAULT_ANSWER);
-        tags = new HashSet<>(DEFAULT_TAGS);
+        topics = new HashSet<>(DEFAULT_TOPIC);
     }
 
     /**
@@ -36,7 +36,7 @@ public class CardBuilder {
     public CardBuilder(Card cardToCopy) {
         question = cardToCopy.getQuestion();
         answer = cardToCopy.getAnswer();
-        tags = new HashSet<>(cardToCopy.getTags());
+        topics = new HashSet<>(cardToCopy.getTopics());
     }
 
     /**
@@ -48,10 +48,10 @@ public class CardBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Card} that we are building.
+     * Parses the {@code topics} into a {@code Set<Topic>} and set it to the {@code Card} that we are building.
      */
-    public CardBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
+    public CardBuilder withTopics(String ... topics) {
+        this.topics = SampleDataUtil.getTopicSet(topics);
         return this;
     }
 
@@ -64,6 +64,6 @@ public class CardBuilder {
     }
 
     public Card build() {
-        return new Card(question, answer, tags);
+        return new Card(question, answer, topics);
     }
 }

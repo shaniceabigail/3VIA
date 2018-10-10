@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_GIT_COMMIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_GIT_COMMIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_GIT_COMMIT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_GIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_GIT;
 
 import org.junit.Test;
 
@@ -45,7 +45,7 @@ public class EditCardDescriptorTest {
 
         // different tags -> returns false
         editedEarthFlatQ = new EditCardDescriptorBuilder(DESC_EARTH_FLAT)
-                .withTags(VALID_TAG_GIT).build();
+                .withTopics(VALID_TOPIC_GIT).build();
         assertFalse(DESC_EARTH_FLAT.equals(editedEarthFlatQ));
     }
 }

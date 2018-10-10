@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_GIT_COMMIT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_GIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_GIT;
 import static seedu.address.testutil.TypicalCards.Q_EARTH_ROUND;
 import static seedu.address.testutil.TypicalCards.Q_GIT_CLONE;
 
@@ -47,7 +47,7 @@ public class UniqueCardListTest {
     @Test
     public void contains_cardWithSameIdentityFieldsInList_returnsTrue() {
         uniqueCardList.add(Q_EARTH_ROUND);
-        Card editedEarthRoundQ = new CardBuilder(Q_EARTH_ROUND).withTags(VALID_TAG_GIT).build();
+        Card editedEarthRoundQ = new CardBuilder(Q_EARTH_ROUND).withTopics(VALID_TOPIC_GIT).build();
         assertTrue(uniqueCardList.contains(editedEarthRoundQ));
     }
 
@@ -95,7 +95,7 @@ public class UniqueCardListTest {
     public void setCard_editedCardHasSameIdentity_success() {
         uniqueCardList.add(Q_EARTH_ROUND);
         Card editedEarthRoundQ = new CardBuilder(Q_EARTH_ROUND).withAnswer(VALID_ANSWER_GIT_COMMIT)
-                .withTags(VALID_TAG_GIT).build();
+                .withTopics(VALID_TOPIC_GIT).build();
         uniqueCardList.setCard(Q_EARTH_ROUND, editedEarthRoundQ);
         UniqueCardList expectedUniqueCardList = new UniqueCardList();
         expectedUniqueCardList.add(editedEarthRoundQ);

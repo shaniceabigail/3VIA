@@ -4,13 +4,13 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.ANSWER_DESC_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ANSWER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUESTION_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TOPIC_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.QUESTION_DESC_EARTH_FLAT;
 import static seedu.address.logic.commands.CommandTestUtil.QUESTION_DESC_GIT_COMMIT;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ANSWER_GIT_COMMIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_GIT_COMMIT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 import static seedu.address.testutil.TypicalCards.KEYWORD_MATCHING_WHAT;
 import static seedu.address.testutil.TypicalCards.Q_APP_MADE;
 import static seedu.address.testutil.TypicalCards.Q_CS2103_PROF;
@@ -26,7 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.topic.Topic;
 import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.CardUtil;
 
@@ -43,7 +43,7 @@ public class AddCommandSystemTest extends AppSystemTest {
          */
         Card toAdd = Q_FLAT_EARTH;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + QUESTION_DESC_EARTH_FLAT + "  "
-                + ANSWER_DESC_EARTH_FLAT + " " + TAG_DESC_PHYSICS + " ";
+                + ANSWER_DESC_EARTH_FLAT + " " + TOPIC_DESC_PHYSICS + " ";
         assertCommandSuccess(command, toAdd);
 
         // TODO To enable this after undo/redo command is implemented on trivia.
@@ -61,7 +61,7 @@ public class AddCommandSystemTest extends AppSystemTest {
         /* Case: add a card with all fields same as another card in the trivia bundle except question -> added */
         toAdd = new CardBuilder(Q_FLAT_EARTH).withQuestion(VALID_QUESTION_GIT_COMMIT).build();
         command = AddCommand.COMMAND_WORD + QUESTION_DESC_GIT_COMMIT + ANSWER_DESC_EARTH_FLAT
-                + TAG_DESC_PHYSICS;
+                + TOPIC_DESC_PHYSICS;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a person, missing tags -> added */
@@ -75,8 +75,8 @@ public class AddCommandSystemTest extends AppSystemTest {
         // TODO To enable this after clear command is implemented on trivia.
         /* Case: add a card with tags, command with parameters in random order -> added */
         //        toAdd = Q_GIT_COMMIT;
-        //        command = AddCommand.COMMAND_WORD + TAG_DESC_GIT + QUESTION_DESC_GIT_COMMIT + ANSWER_DESC_GIT_COMMIT
-        //                + TAG_DESC_PHYSICS;
+        //        command = AddCommand.COMMAND_WORD + TOPIC_DESC_GIT + QUESTION_DESC_GIT_COMMIT + ANSWER_DESC_GIT_COMMIT
+        //                + TOPIC_DESC_PHYSICS;
         //        assertCommandSuccess(command, toAdd);
 
         /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
@@ -108,15 +108,15 @@ public class AddCommandSystemTest extends AppSystemTest {
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_CARD);
 
         /* Case: add a duplicate cards except with different tags -> rejected */
-        command = CardUtil.getAddCommand(Q_FLAT_EARTH) + " " + PREFIX_TAG.getPrefix() + "Time";
+        command = CardUtil.getAddCommand(Q_FLAT_EARTH) + " " + PREFIX_TOPIC.getPrefix() + "Time";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_CARD);
 
         /* Case: missing question -> rejected */
-        command = AddCommand.COMMAND_WORD + ANSWER_DESC_EARTH_FLAT + TAG_DESC_PHYSICS;
+        command = AddCommand.COMMAND_WORD + ANSWER_DESC_EARTH_FLAT + TOPIC_DESC_PHYSICS;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing answer -> rejected */
-        command = AddCommand.COMMAND_WORD + QUESTION_DESC_EARTH_FLAT + TAG_DESC_PHYSICS;
+        command = AddCommand.COMMAND_WORD + QUESTION_DESC_EARTH_FLAT + TOPIC_DESC_PHYSICS;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
@@ -124,17 +124,17 @@ public class AddCommandSystemTest extends AppSystemTest {
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid question -> rejected */
-        command = AddCommand.COMMAND_WORD + INVALID_QUESTION_DESC + ANSWER_DESC_EARTH_FLAT + TAG_DESC_PHYSICS;
+        command = AddCommand.COMMAND_WORD + INVALID_QUESTION_DESC + ANSWER_DESC_EARTH_FLAT + TOPIC_DESC_PHYSICS;
         assertCommandFailure(command, Question.MESSAGE_QUESTION_CONSTRAINTS);
 
         /* Case: invalid answer -> rejected */
-        command = AddCommand.COMMAND_WORD + QUESTION_DESC_EARTH_FLAT + INVALID_ANSWER_DESC + TAG_DESC_PHYSICS;
+        command = AddCommand.COMMAND_WORD + QUESTION_DESC_EARTH_FLAT + INVALID_ANSWER_DESC + TOPIC_DESC_PHYSICS;
         assertCommandFailure(command, Answer.MESSAGE_ANSWER_CONSTRAINTS);
 
-        /* Case: invalid tag -> rejected */
+        /* Case: invalid topic -> rejected */
         command = AddCommand.COMMAND_WORD + QUESTION_DESC_EARTH_FLAT + ANSWER_DESC_EARTH_FLAT
-                + INVALID_TAG_DESC;
-        assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
+                + INVALID_TOPIC_DESC;
+        assertCommandFailure(command, Topic.MESSAGE_TOPIC_CONSTRAINTS);
     }
 
     /**

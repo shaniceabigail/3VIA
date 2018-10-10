@@ -22,6 +22,8 @@ import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.TriviaBundle;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
+import seedu.address.model.state.State;
+import seedu.address.model.test.TriviaTest;
 import seedu.address.testutil.CardBuilder;
 
 public class AddCommandTest {
@@ -161,22 +163,22 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoTriviaBundle() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoTriviaBundle() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoTriviaBundle() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoTriviaBundle() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -187,6 +189,31 @@ public class AddCommandTest {
 
         @Override
         public void commitTriviaBundle() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void startTriviaTest(TriviaTest test) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void stopTriviaTest() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public TriviaTest getCurrentRunningTest() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public State getAppState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isInTestingState() {
             throw new AssertionError("This method should not be called.");
         }
     }
