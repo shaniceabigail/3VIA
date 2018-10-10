@@ -58,7 +58,9 @@ public class ImportCommand extends Command {
      */
     private void isFileValid() throws CommandException {
         if (!file.isFile()) {
-            EventsCenter.getInstance().post(new ExtraInformationDisplayChangeEvent(ExtraInformationDisplay.IMPORT_HELP_DISPLAY));
+            EventsCenter
+                    .getInstance()
+                    .post(new ExtraInformationDisplayChangeEvent(ExtraInformationDisplay.IMPORT_HELP_DISPLAY));
             throw new CommandException(MESSAGE_INVALID_FILE);
         } else if (!isValidFileType()) {
             throw new CommandException(MESSAGE_INVALID_FILE_TYPE);
