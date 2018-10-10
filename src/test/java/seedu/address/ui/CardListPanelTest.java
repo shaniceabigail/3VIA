@@ -26,8 +26,7 @@ import seedu.address.commons.util.XmlUtil;
 
 import seedu.address.model.card.Card;
 import seedu.address.storage.XmlSerializableTriviaBundle;
-
-
+import seedu.address.ui.home.CardListPanel;
 
 
 public class CardListPanelTest extends GuiUnitTest {

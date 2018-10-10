@@ -23,6 +23,8 @@ import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.test.matchtest.MatchTest;
+import seedu.address.ui.home.Homepage;
+import seedu.address.ui.test.matchtest.MatchTestPage;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -119,7 +121,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Fills up all the placeholders of this window.
      */
-    void fillInnerParts() {
+    public void fillInnerParts() {
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
@@ -133,7 +135,7 @@ public class MainWindow extends UiPart<Stage> {
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
     }
 
-    void hide() {
+    public void hide() {
         primaryStage.hide();
     }
 
@@ -156,7 +158,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Returns the current size and the position of the main Window.
      */
-    GuiSettings getCurrentGuiSetting() {
+    public GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
     }
@@ -173,11 +175,11 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    void releaseResources() {
+    public void releaseResources() {
         homePage.releaseResources();
     }
 
-    void show() {
+    public void show() {
         primaryStage.show();
     }
 

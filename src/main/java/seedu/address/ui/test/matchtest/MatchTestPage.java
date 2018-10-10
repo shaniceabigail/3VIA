@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.test.matchtest;
 
 import java.util.logging.Logger;
 
@@ -7,12 +7,13 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.test.matchtest.MatchTest;
+import seedu.address.ui.UiPart;
 
 /**
  * The page that shows up when the user is in a matching test.
  */
 public class MatchTestPage extends UiPart<Region> {
-    private static final String FXML = "MatchTestPage.fxml";
+    private static final String FXML = "/test/matchtest/MatchTestPage.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 

@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.home;
 
 import java.util.logging.Logger;
 
@@ -7,12 +7,13 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.ui.UiPart;
 
 /**
  * The default landing page of the application.
  */
 public class Homepage extends UiPart<Region> {
-    private static final String FXML = "Homepage.fxml";
+    private static final String FXML = "/home/Homepage.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -50,7 +51,7 @@ public class Homepage extends UiPart<Region> {
         return cardListPanel;
     }
 
-    void releaseResources() {
+    public void releaseResources() {
         browserPanel.freeResources();
     }
 }
