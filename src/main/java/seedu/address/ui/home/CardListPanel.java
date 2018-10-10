@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.home;
 
 import java.util.logging.Logger;
 
@@ -15,12 +15,13 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.CardPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.card.Card;
+import seedu.address.ui.UiPart;
 
 /**
  * Panel containing the list of cards.
  */
 public class CardListPanel extends UiPart<Region> {
-    private static final String FXML = "CardListPanel.fxml";
+    private static final String FXML = "/home/CardListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(CardListPanel.class);
 
     @FXML

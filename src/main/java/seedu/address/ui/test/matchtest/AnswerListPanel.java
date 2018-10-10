@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.test.matchtest;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,12 +15,13 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.FlashMatchOutcomeEvent;
 import seedu.address.model.card.Answer;
+import seedu.address.ui.UiPart;
 
 /**
  * The panel which contains all the answers in a particular test.
  */
 public class AnswerListPanel extends UiPart<Region> {
-    private static final String FXML = "AnswerListPanel.fxml";
+    private static final String FXML = "/test/matchtest/AnswerListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(AnswerListPanel.class);
 
     @FXML

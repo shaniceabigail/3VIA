@@ -10,6 +10,7 @@ import org.junit.Test;
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.ui.home.PersonCard;
 
 public class PersonCardTest extends GuiUnitTest {
 
