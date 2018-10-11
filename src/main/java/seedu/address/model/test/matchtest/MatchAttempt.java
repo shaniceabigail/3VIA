@@ -14,10 +14,6 @@ public class MatchAttempt extends Attempt {
         this.cardWithAnswer = cardWithAnswer;
     }
 
-    public Card getCardWithQuestion() {
-        return card;
-    }
-
     public Card getCardWithAnswer() {
         return cardWithAnswer;
     }
@@ -36,7 +32,7 @@ public class MatchAttempt extends Attempt {
 
         // state check
         MatchAttempt other = (MatchAttempt) obj;
-        return getCardWithQuestion().equals(other.getCardWithQuestion())
+        return getAttemptedCard().equals(other.getAttemptedCard())
             && getCardWithAnswer().equals(getCardWithAnswer()) && correctness == other.correctness;
     }
 }

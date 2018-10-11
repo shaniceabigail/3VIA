@@ -17,4 +17,8 @@ public class Attempt {
     public boolean isCorrect() {
         return correctness;
     }
+
+    public Card getAttemptedCard() {
+        return card;
+    }
 }

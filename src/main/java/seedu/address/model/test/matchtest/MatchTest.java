@@ -50,7 +50,7 @@ public class MatchTest extends TriviaTest {
     public void removeCardFromUi(MatchAttempt attempt) {
         assert attempt.isCorrect(); // Ensure that attempt is correct before removing.
 
-        questions.remove(attempt.getCardWithQuestion().getQuestion());
+        questions.remove(attempt.getAttemptedCard().getQuestion());
         answers.remove(attempt.getCardWithAnswer().getAnswer());
     }
 
@@ -85,7 +85,7 @@ public class MatchTest extends TriviaTest {
      * @param attempt The attempt of that match command.
      */
     public void postOutcomeOfMatch(MatchAttempt attempt) {
-        int indexOfQuestion = getQuestions().indexOf(attempt.getCardWithQuestion().getQuestion());
+        int indexOfQuestion = getQuestions().indexOf(attempt.getAttemptedCard().getQuestion());
         int indexOfAnswer = getAnswers().indexOf(attempt.getCardWithAnswer().getAnswer());
         EventsCenter.getInstance().post(new FlashMatchOutcomeEvent(indexOfQuestion, indexOfAnswer,
                 attempt.isCorrect()));
@@ -93,6 +93,10 @@ public class MatchTest extends TriviaTest {
 
     private boolean isValidMatchTest() {
         return super.getQuestions().size() > 1;
+    }
+
+    public List<MatchAttempt> getAttempts() {
+        return attempts;
     }
 
     @Override

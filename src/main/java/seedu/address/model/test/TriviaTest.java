@@ -89,4 +89,16 @@ public abstract class TriviaTest {
     public Topic getTopic() {
         return topic;
     }
+
+    public Date getTestDate() {
+        return testDate;
+    }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    public List<Card> getCardsTested() {
+        return cards;
+    }
 }

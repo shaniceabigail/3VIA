@@ -9,7 +9,7 @@ import seedu.address.ui.UiPart;
 /**
  * The page that shows up after the user has completed a trivia test.
  */
-public abstract class TriviaTestResultPage extends UiPart<Region> {
+public class TriviaTestResultPage extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     public TriviaTestResultPage(String filePath) {
