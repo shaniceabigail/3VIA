@@ -1,9 +1,6 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
 import com.google.common.eventbus.Subscribe;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -25,6 +22,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.ui.home.Homepage;
 import seedu.address.ui.test.matchtest.MatchTestPage;
+
+import java.util.logging.Logger;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -60,6 +59,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane displayPagePlaceHolder;
+
+    @FXML
+    private StackPane navigationTabPanePlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
