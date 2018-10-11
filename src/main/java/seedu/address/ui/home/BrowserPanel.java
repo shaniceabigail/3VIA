@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.home;
 
 import java.net.URL;
 import java.util.logging.Logger;
@@ -17,6 +17,7 @@ import seedu.address.commons.events.ui.DisplayBrowserEventChangedEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
+import seedu.address.ui.UiPart;
 
 /**
  * The Browser Panel of the App.
@@ -27,7 +28,7 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String SEARCH_PAGE_URL =
             "https://www.google.com.sg/search?q=";
 
-    private static final String FXML = "BrowserPanel.fxml";
+    private static final String FXML = "/home/BrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 

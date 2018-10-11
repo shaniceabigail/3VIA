@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.home;
 
 import java.util.logging.Logger;
 
@@ -9,6 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.DisplayImportHelpChangedEvent;
+import seedu.address.ui.UiPart;
 
 /**
  * A ui for the status bar that is displayed at the header of the application.

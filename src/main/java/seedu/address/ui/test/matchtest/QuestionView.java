@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.test.matchtest;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -6,12 +6,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import seedu.address.model.card.Question;
+import seedu.address.ui.UiPart;
 
 /**
  * An UI component to display information of {@code Question}
  */
 public class QuestionView extends UiPart<Region> {
-    private static final String FXML = "QuestionView.fxml";
+    private static final String FXML = "/test/matchtest/QuestionView.fxml";
 
     public final Question question;
 

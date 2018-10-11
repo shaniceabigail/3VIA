@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.address.ui.test.matchtest;
 
 import java.util.logging.Logger;
 
@@ -10,12 +10,13 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.card.Answer;
+import seedu.address.ui.UiPart;
 
 /**
  * An UI component to display information of {@code Answer}
  */
 public class AnswerView extends UiPart<Region> {
-    private static final String FXML = "AnswerView.fxml";
+    private static final String FXML = "/test/matchtest/AnswerView.fxml";
 
     public final Answer answer;
     private final Logger logger = LogsCenter.getLogger(AnswerView.class);
