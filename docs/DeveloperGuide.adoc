@@ -720,7 +720,7 @@ Use case resumes at step 2.
 
 *MSS*
 
-1. User: Adds question, answer and tag(s).
+1. User: Adds question, answer and topic(s).
 2. System: Displays the question and answer added.
 +
 Use case ends.
@@ -740,7 +740,7 @@ Use case ends.
 *MSS*
 
 1. User: User start open-ended test.
-2. System: Displays list of questions with tag.
+2. System: Displays list of questions with topic.
 3. User: Confirms questions to be tested.
 4. System: Displays question and starts the timer (if specified) for the question.
 5. User: Key in the user’s answer.
@@ -754,9 +754,9 @@ Use case ends.
 *Extensions*
 
 [none]
-* 2a. Tag not found
+* 2a. Topic not found
 [none]
-** 2a1. System: Indicates tag not found.
+** 2a1. System: Indicates topic not found.
 +
 Use case ends.
 

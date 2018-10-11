@@ -68,10 +68,10 @@ Format: `[green]#help#`
 === Adding a card: `card`
 
 Adds a card to the trivia application +
-Format: `[green]#add n/NAME q/QUESTION a/ANSWER [t/TOPIC]...#`
+Format: `[green]#add q/QUESTION a/ANSWER [t/TOPIC]...#`
 
 [TIP]
-A card can have any number of topics. If no topics are specified, a tag of `NoTopic` will be assigned to the card.
+A card can have any number of topics. If no topics are specified, a TOPIC of `NoTopic` will be assigned to the card.
 
 Examples:
 
@@ -86,14 +86,14 @@ Format: `[green]#list#`
 === Editing a card : `edit`
 
 Edits an existing card in the trivia application. +
-Format: `[green]#edit INDEX [q/QUESTION] [a/ANSWER] [t/TAG]...#`
+Format: `[green]#edit INDEX [q/QUESTION] [a/ANSWER] [t/TOPIC]...#`
 
 ****
 * Edits the card at the specified `INDEX`. The index refers to the index number shown in the displayed card list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing topics, the existing topics of the card will be removed i.e adding of topics is not cumulative.
-* You can set a tag of `NoTopic` to the card by typing `t/` without specifying any topics after it.
+* You can set a topic of `NoTopic` to the card by typing `t/` without specifying any topics after it.
 ****
 
 Examples:
@@ -101,7 +101,7 @@ Examples:
 * `edit 1 q/Why will the apple fall from the tree? a/Because of gravity!` +
 Edits the answer of the 1st card to be `Because of gravity!`.
 * `edit 2 n/Why will the apple fall from the tree? t/` +
-Edits the question of the 2nd card to be `Why will the apple fall from the tree?` and the card will have a tag of `NoTopic`.
+Edits the question of the 2nd card to be `Why will the apple fall from the tree?` and the card will have a topic of `NoTopic`.
 
 === Locating cards by question: `find`
 
@@ -234,12 +234,12 @@ Format: `[green]#clear#`
 
 === Starting a test: `test`
 
-Start an open-ended test of a specified tag. In an open-ended test, the user will get the choose whether he/she has answered
+Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered
 correctly by comparing their answers with the expected answer. +
-Format: `[green]#test t/TAG TIMELIMIT_IN_SECONDS#`
+Format: `[green]#test t/TOPIC TIMELIMIT_IN_SECONDS#`
 
 ****
-* The test aims to test the knowledge of the user with the existing questions of a specified tag that are in the trivia application.
+* The test aims to test the knowledge of the user with the existing questions of a specified topic that are in the trivia application.
 * The user can also set the time limit (in seconds) for each question using the optional field TIMELIMIT_IN_SECONDS
 ****
 
@@ -264,9 +264,9 @@ Format: `exit`
 
 === Starting a matching test: `testM`
 
-Start a test of matching cards of a specified tag. In a test of matching cards, all the questions and answers in that tag
+Start a test of matching cards of a specified topic. In a test of matching cards, all the questions and answers in that topic
 will be displayed. The user will then have to match the correct question and answer together. +
-Format: `testM t/TAG`
+Format: `testM t/TOPIC`
 
 The following commands can only be used during a matching test.
 
@@ -283,7 +283,7 @@ Format: `exit`
 === View statistics for a certain test: `stats`
 
 Will list out all the previous tests, with their respective questions, answers and the user’s answers.
-Format: `stats TAG`
+Format: `stats [TOPIC]`
 
 === Mass Import: `import`
 
@@ -328,12 +328,12 @@ _{explain how the user can enable/disable Multi-Player}_
 
 == Command Summary
 
-* *Add* `add q/QUESTION a/ANSWER [t/TAG]...` +
+* *Add* `add q/QUESTION a/ANSWER [t/TOPIC]...` +
 e.g. `add q/What is the formula for force? a/force = mass * acceleration a/Physics`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [q/QUESTION] [a/ANSWER] [t/TAG]...` +
+* *Edit* : `edit INDEX [q/QUESTION] [a/ANSWER] [t/TOPIC]...` +
 e.g. `edit 1 q/Why will the apple fall from the tree? a/Because of gravity!`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Why`
@@ -344,7 +344,7 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Test* : `test TAG TIMELIMIT_IN_SECONDS`
+* *Test* : `test TOPIC TIMELIMIT_IN_SECONDS`
 * *Correctness of answer* : `c` (correct) OR `x` (wrong)
-* *View statistics of test* : `stats TAG`
+* *View statistics of test* : `stats [TOPIC]`
 * *Mass Import* : `import FILEPATH`
