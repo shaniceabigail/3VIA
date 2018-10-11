@@ -45,7 +45,7 @@ public class MatchAttemptList extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new MatchAttemptView(attempt).getRoot());
+                setGraphic(new MatchAttemptView(attempt, getIndex() + 1).getRoot());
             }
         }
     }

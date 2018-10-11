@@ -1,7 +1,10 @@
 package seedu.address.ui.test.matchtest;
 
+import static seedu.address.commons.util.AppUtil.getImage;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import seedu.address.model.test.Attempt;
 import seedu.address.model.test.matchtest.MatchAttempt;
@@ -15,11 +18,26 @@ public class MatchAttemptView extends UiPart<Region> {
     private final Attempt attempt;
 
     @FXML
+    private Label id;
+
+    @FXML
     private Label attemptText;
 
-    public MatchAttemptView(MatchAttempt attempt) {
+    @FXML
+    private ImageView correctnessIcon;
+
+    public MatchAttemptView(MatchAttempt attempt, int displayedIndex) {
         super(FXML);
         this.attempt = attempt;
-        attemptText.setText(attempt.getAttemptedCard().getQuestion() + "->" + attempt.getCardWithAnswer().getAnswer());
+
+        id.setText(displayedIndex + ". ");
+        attemptText.setText(attempt.getAttemptedCard().getQuestion() + " ---> "
+                + attempt.getCardWithAnswer().getAnswer());
+
+        if (attempt.isCorrect()) {
+            correctnessIcon.setImage(getImage("/images/tick_icon.png"));
+        } else {
+            correctnessIcon.setImage(getImage("/images/cross_icon.png"));
+        }
     }
 }
