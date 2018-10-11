@@ -17,6 +17,10 @@ import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
 import seedu.address.model.test.TriviaTest;
 import seedu.address.model.topic.Topic;
+import seedu.address.ui.test.TriviaTestPage;
+import seedu.address.ui.test.TriviaTestResultPage;
+import seedu.address.ui.test.matchtest.MatchTestPage;
+import seedu.address.ui.test.matchtest.MatchTestResultPage;
 
 /**
  * Represents a trivia test that is started by the user.
@@ -37,10 +41,6 @@ public class MatchTest extends TriviaTest {
 
     public boolean isEndOfTest() {
         return questions.isEmpty() && answers.isEmpty();
-    }
-
-    public boolean isCompleted() {
-        return isCompleted;
     }
 
     /**
@@ -119,6 +119,16 @@ public class MatchTest extends TriviaTest {
             isCompleted = true;
         }
         timer.cancel();
+    }
+
+    @Override
+    public TriviaTestPage getTestingPage() {
+        return new MatchTestPage(this);
+    }
+
+    @Override
+    public TriviaTestResultPage getResultPage() {
+        return new MatchTestResultPage(this);
     }
 
     @Override

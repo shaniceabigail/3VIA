@@ -14,6 +14,8 @@ import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
 import seedu.address.model.card.TopicIsKeywordPredicate;
 import seedu.address.model.topic.Topic;
+import seedu.address.ui.test.TriviaTestPage;
+import seedu.address.ui.test.TriviaTestResultPage;
 
 /**
  * A base model for the different kinds tests. Require a Topic and Trivia Bundle to start a test.
@@ -45,6 +47,10 @@ public abstract class TriviaTest {
     public abstract void startTest();
 
     public abstract void stopTest();
+
+    public abstract TriviaTestPage getTestingPage();
+
+    public abstract TriviaTestResultPage getResultPage();
 
     public ObservableList<Question> getQuestions() {
         return this.questions;
@@ -83,5 +89,4 @@ public abstract class TriviaTest {
     public Topic getTopic() {
         return topic;
     }
-
 }

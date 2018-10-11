@@ -3,16 +3,15 @@ package seedu.address.ui.test.matchtest;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.test.matchtest.MatchTest;
-import seedu.address.ui.UiPart;
+import seedu.address.ui.test.TriviaTestPage;
 
 /**
  * The page that shows up when the user is in a matching test.
  */
-public class MatchTestPage extends UiPart<Region> {
+public class MatchTestPage extends TriviaTestPage {
     private static final String FXML = "/test/matchtest/MatchTestPage.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -35,13 +34,5 @@ public class MatchTestPage extends UiPart<Region> {
         answerListPanel = new AnswerListPanel(matchTest.getAnswers());
         matchTestAnswerListPanelPlaceholder.getChildren().add(answerListPanel.getRoot());
         registerAsAnEventHandler(this);
-    }
-
-    /**
-     * Will remove all existing questions and answers.
-     */
-    public void clearCards() {
-        matchTestQuestionListPanelPlaceholder.getChildren().clear();
-        matchTestAnswerListPanelPlaceholder.getChildren().clear();
     }
 }

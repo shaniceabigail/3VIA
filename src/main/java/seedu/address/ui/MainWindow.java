@@ -26,12 +26,13 @@ import seedu.address.commons.events.ui.DisplayImportHelpChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ExtraInformationDisplayChangeEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.ShowTriviaTestResultEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.ui.home.Homepage;
-import seedu.address.ui.test.matchtest.MatchTestPage;
+import seedu.address.ui.test.TriviaTestPage;
+import seedu.address.ui.test.TriviaTestResultPage;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -52,7 +53,8 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     private Homepage homePage;
-    private MatchTestPage matchTestPage;
+    private TriviaTestPage triviaTestPage;
+    private TriviaTestResultPage triviaTestResultPage;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -216,18 +218,21 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleShowTriviaTestViewEvent(ShowTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if (event.getTest() instanceof MatchTest) {
-            matchTestPage = new MatchTestPage((MatchTest) event.getTest());
-            changeToScene(matchTestPage);
-        }
+        triviaTestPage = event.getTest().getTestingPage();
+        changeToScene(triviaTestPage);
+    }
+
+    @Subscribe
+    private void handleShowTriviaTestResultPage(ShowTriviaTestResultEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        triviaTestResultPage = event.getTriviaTest().getResultPage();
+        changeToScene(triviaTestResultPage);
     }
 
     @Subscribe
     private void handleCloseTriviaTestViewEvent(CloseTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        matchTestPage.clearCards();
-        displayPagePlaceHolder.getChildren().clear();
-        displayPagePlaceHolder.getChildren().add(homePage.getRoot());
+        changeToScene(homePage);
     }
     @Subscribe
     private void handleExtraInfomationDisplayChangeEvent(ExtraInformationDisplayChangeEvent event) {
