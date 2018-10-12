@@ -2,12 +2,14 @@ package seedu.address.model;
 
 import java.util.function.Predicate;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.ObservableList;
+import seedu.address.commons.events.model.AddMatchTestResultEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.model.test.TriviaTest;
-import seedu.address.model.test.matchtest.MatchTest;
 
 /**
  * The API of the Model component.
@@ -142,5 +144,6 @@ public interface Model {
     /**
      * Add a new completed matching test to the list of results.
      */
-    void addMatchTestResult(MatchTest matchTest);
+    @Subscribe
+    void handleAddMatchTestResultEvent(AddMatchTestResultEvent event);
 }

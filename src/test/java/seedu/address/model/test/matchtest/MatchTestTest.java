@@ -1,8 +1,8 @@
 package seedu.address.model.test.matchtest;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_GIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_NO_TOPIC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_PHYSICS;
@@ -10,14 +10,17 @@ import static seedu.address.testutil.TypicalCards.Q_DENSITY_FORMULA;
 import static seedu.address.testutil.TypicalCards.Q_EARTH_ROUND;
 import static seedu.address.testutil.TypicalCards.Q_FORCE_FORMULA;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.topic.Topic;
+import seedu.address.testutil.MatchTestUtil;
 import seedu.address.testutil.TypicalCards;
 import seedu.address.testutil.TypicalPersons;
 
@@ -28,6 +31,11 @@ public class MatchTestTest {
     private ModelManager model;
     private MatchTest matchTest;
 
+    /** The indexes of matching question and answer from the test. */
+    private Index[] earthRoundIndexes;
+    private Index[] forceFormulaIndexes;
+    private Index[] densityFormulaIndexes;
+
     @Before
     public void setUp() {
         model = new ModelManager(TypicalPersons.getTypicalAddressBook(),
@@ -35,30 +43,83 @@ public class MatchTestTest {
 
         // There will be 3 cards in this matchTest
         matchTest = new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle());
+
+        earthRoundIndexes = MatchTestUtil.getIndexes(matchTest, Q_EARTH_ROUND);
+        forceFormulaIndexes = MatchTestUtil.getIndexes(matchTest, Q_FORCE_FORMULA);
+        densityFormulaIndexes = MatchTestUtil.getIndexes(matchTest, Q_DENSITY_FORMULA);
+
+        model.startTriviaTest(matchTest);
     }
 
-    @Test
-    public void test_matchTest() {
-        assertEquals(matchTest.getAnswers().size(), matchTest.getQuestions().size());
-        assertEquals(matchTest.getAnswers().size(), 3);
-
-        assertTrue(matchTest.getAnswers().contains(Q_EARTH_ROUND.getAnswer()));
-        assertTrue(matchTest.getQuestions().contains(Q_EARTH_ROUND.getQuestion()));
-        matchTest.removeCardFromUi(new MatchAttempt(Q_EARTH_ROUND, Q_EARTH_ROUND));
-        assertFalse(matchTest.getAnswers().contains(Q_EARTH_ROUND.getAnswer()));
-        assertFalse(matchTest.getQuestions().contains(Q_EARTH_ROUND.getQuestion()));
-
-        // Remove the remaining cards from the trivia bundle.
-        matchTest.removeCardFromUi(new MatchAttempt(Q_DENSITY_FORMULA, Q_DENSITY_FORMULA));
-        matchTest.removeCardFromUi(new MatchAttempt(Q_FORCE_FORMULA, Q_FORCE_FORMULA));
-
-        assertTrue(matchTest.isEndOfTest());
+    @After
+    public void cleanUp() {
+        if (model.isInTestingState()) {
+            model.stopTriviaTest();
+        }
     }
 
     @Test
     public void invalid_matchTest() {
         thrown.expect(IllegalArgumentException.class);
         matchTest = new MatchTest(new Topic(VALID_TOPIC_NO_TOPIC), model.getTriviaBundle());
+    }
+
+    @Test
+    public void test_matchPass() {
+        assertTrue(matchTest.match(earthRoundIndexes[0], earthRoundIndexes[1]));
+
+        assertTrue(matchTest.match(forceFormulaIndexes[0], forceFormulaIndexes[1]));
+
+        assertTrue(matchTest.match(densityFormulaIndexes[0], densityFormulaIndexes[1]));
+
+        assertEquals(matchTest.getAttempts().size(), 3);
+    }
+
+    @Test
+    public void test_matchFail() {
+        assertFalse(matchTest.match(earthRoundIndexes[0], forceFormulaIndexes[1]));
+        assertFalse(matchTest.match(forceFormulaIndexes[0], densityFormulaIndexes[1]));
+        assertFalse(matchTest.match(densityFormulaIndexes[0], earthRoundIndexes[1]));
+
+    }
+
+    @Test
+    public void test_matchOutOfBoundsIndexes() {
+        thrown.expect(IndexOutOfBoundsException.class);
+        matchTest.match(Index.fromOneBased(100), Index.fromOneBased(100));
+    }
+
+    @Test
+    public void test_responseToCorrectMatchAttempt() {
+        matchTest.respondToCorrectAttempt(new MatchAttempt(Q_EARTH_ROUND, Q_EARTH_ROUND));
+        assertEquals(matchTest.getQuestions().size(), 2);
+        assertEquals(matchTest.getAnswers().size(), 2);
+        assertFalse(matchTest.isCompleted());
+
+        matchTest.respondToCorrectAttempt(new MatchAttempt(Q_DENSITY_FORMULA, Q_DENSITY_FORMULA));
+        matchTest.respondToCorrectAttempt(new MatchAttempt(Q_FORCE_FORMULA, Q_FORCE_FORMULA));
+        assertTrue(matchTest.isCompleted());
+    }
+
+    @Test
+    public void test_isCompletedFlagFalse() {
+        // if the ongoing test isn't stopped, isCompleted will be false
+        assertFalse(matchTest.isCompleted());
+
+        // If there are existing unanswered questions, isCompleted flag should be false.
+        matchTest.getQuestions().remove(0);
+        matchTest.getAnswers().remove(0);
+        model.stopTriviaTest();
+        assertFalse(matchTest.isCompleted());
+    }
+
+    @Test
+    public void test_isCompletedFlagTrue() {
+        // If there are no more existing unanswered questions, isCompleted flag should be true.
+        matchTest.getQuestions().clear();
+        matchTest.getAnswers().clear();
+        model.stopTriviaTest();
+        assertTrue(matchTest.isCompleted());
     }
 
     @Test

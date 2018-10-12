@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.events.model.AddMatchTestResultEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -24,7 +25,6 @@ import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.model.test.TriviaTest;
-import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.testutil.CardBuilder;
 
 public class AddCommandTest {
@@ -219,8 +219,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addMatchTestResult(MatchTest matchTest) {
-            throw new AssertionError("This method should not be called");
+        public void handleAddMatchTestResultEvent(AddMatchTestResultEvent event) {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

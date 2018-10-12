@@ -101,4 +101,8 @@ public abstract class TriviaTest {
     public List<Card> getCardsTested() {
         return cards;
     }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
 }

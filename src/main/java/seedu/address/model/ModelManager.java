@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.AddMatchTestResultEvent;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TriviaBundleChangedEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
@@ -20,7 +21,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.state.AppState;
 import seedu.address.model.state.State;
 import seedu.address.model.test.TriviaTest;
-import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.model.test.matchtest.MatchTestResults;
 
 /**
@@ -262,8 +262,8 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Matching Test Results =====================================================================
 
     @Override
-    public void addMatchTestResult(MatchTest matchTest) {
-        matchTestResults.addMatchTestResult(matchTest);
+    public void handleAddMatchTestResultEvent(AddMatchTestResultEvent event) {
+        matchTestResults.addMatchTestResult(event.getMatchTest());
     }
 
     @Override

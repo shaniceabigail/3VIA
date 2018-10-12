@@ -1,5 +1,6 @@
 package seedu.address.model.test.matchtest;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Arrays;
@@ -13,6 +14,8 @@ import seedu.address.model.topic.Topic;
  */
 public class MatchTestResults {
     public static final int MAX_RESULTS = 10;
+    public static final String INCOMPLETE_MATCH_TEST_MESSAGE =
+            "Matching test have to completed before it can be recorded.";
     private final HashMap<Topic, LinkedList<MatchTest>> matchTestResults;
 
     public MatchTestResults() {
@@ -24,6 +27,7 @@ public class MatchTestResults {
      */
     public void addMatchTestResult(MatchTest matchTest) {
         requireAllNonNull(matchTest);
+        checkArgument(matchTest.isCompleted(), INCOMPLETE_MATCH_TEST_MESSAGE);
 
         LinkedList<MatchTest> resultsFromTopic = getMatchTestResultsByTopic(matchTest.getTopic());
         if (resultsFromTopic == null) {

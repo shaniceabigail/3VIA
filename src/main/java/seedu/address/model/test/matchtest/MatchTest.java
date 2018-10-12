@@ -8,15 +8,19 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.application.Platform;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.model.AddMatchTestResultEvent;
 import seedu.address.commons.events.ui.FlashMatchOutcomeEvent;
+import seedu.address.commons.events.ui.ShowTriviaTestResultEvent;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
 import seedu.address.model.test.TriviaTest;
 import seedu.address.model.topic.Topic;
+import seedu.address.ui.UiPart;
 import seedu.address.ui.test.TriviaTestPage;
 import seedu.address.ui.test.TriviaTestResultPage;
 import seedu.address.ui.test.matchtest.MatchTestPage;
@@ -39,19 +43,51 @@ public class MatchTest extends TriviaTest {
         attempts = new ArrayList<>();
     }
 
-    public boolean isEndOfTest() {
-        return questions.isEmpty() && answers.isEmpty();
+    /**
+     * The logic associated to matching a question and a answer.
+     *
+     * @param questionIndex The display index of the question to match.
+     * @param answerIndex The display index of the answer to match.
+     * @return a boolean which signify whether the match is success or failure.
+     * @throws IndexOutOfBoundsException when the given question and answer index is not within the range of
+     * existing questions' and answers' indexes.
+     */
+    public boolean match(Index questionIndex, Index answerIndex) throws IndexOutOfBoundsException {
+        MatchAttempt attempt = addAttempt(questionIndex, answerIndex);
+        postOutcomeOfMatch(attempt);
+
+        if (attempt.isCorrect()) {
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(() -> {
+                        respondToCorrectAttempt(attempt);
+                    });
+                }
+            }, UiPart.FLASH_TIME);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public List<MatchAttempt> getAttempts() {
+        return attempts;
     }
 
     /**
-     * Remove the involved card that is answered correctly from the UI.
-     * @param attempt The attempt that was made by the user in the matching test.
+     * Responds to an correct attempt accordingly.
      */
-    public void removeCardFromUi(MatchAttempt attempt) {
-        assert attempt.isCorrect(); // Ensure that attempt is correct before removing.
+    public void respondToCorrectAttempt(MatchAttempt attempt) {
+        assert attempt.isCorrect();
 
-        questions.remove(attempt.getAttemptedCard().getQuestion());
-        answers.remove(attempt.getCardWithAnswer().getAnswer());
+        removeCardFromUi(attempt);
+        if (isEndOfTest()) {
+            stopTest();
+            EventsCenter.getInstance().post(new ShowTriviaTestResultEvent(this));
+            EventsCenter.getInstance().post(new AddMatchTestResultEvent(this));
+        }
     }
 
     /**
@@ -62,7 +98,7 @@ public class MatchTest extends TriviaTest {
      * @return the new Matching attempt.
      * @throws IndexOutOfBoundsException when the given index is out of range of the given answers or questions.
      */
-    public MatchAttempt addAttempt(Index questionIndex, Index answerIndex) throws IndexOutOfBoundsException {
+    private MatchAttempt addAttempt(Index questionIndex, Index answerIndex) throws IndexOutOfBoundsException {
         Question question = questions.get(questionIndex.getZeroBased());
         Answer answer = answers.get(answerIndex.getZeroBased());
 
@@ -81,10 +117,21 @@ public class MatchTest extends TriviaTest {
     }
 
     /**
+     * Remove the involved card that is answered correctly from the UI.
+     * @param attempt The attempt that was made by the user in the matching test.
+     */
+    private void removeCardFromUi(MatchAttempt attempt) {
+        assert attempt.isCorrect(); // Ensure that attempt is correct before removing.
+
+        questions.remove(attempt.getAttemptedCard().getQuestion());
+        answers.remove(attempt.getCardWithAnswer().getAnswer());
+    }
+
+    /**
      * Will create an UI event to indicate on the UI on whether the match is successful or not.
      * @param attempt The attempt of that match command.
      */
-    public void postOutcomeOfMatch(MatchAttempt attempt) {
+    private void postOutcomeOfMatch(MatchAttempt attempt) {
         int indexOfQuestion = getQuestions().indexOf(attempt.getAttemptedCard().getQuestion());
         int indexOfAnswer = getAnswers().indexOf(attempt.getCardWithAnswer().getAnswer());
         EventsCenter.getInstance().post(new FlashMatchOutcomeEvent(indexOfQuestion, indexOfAnswer,
@@ -95,8 +142,8 @@ public class MatchTest extends TriviaTest {
         return super.getQuestions().size() > 1;
     }
 
-    public List<MatchAttempt> getAttempts() {
-        return attempts;
+    private boolean isEndOfTest() {
+        return questions.isEmpty() && answers.isEmpty();
     }
 
     @Override
@@ -118,7 +165,6 @@ public class MatchTest extends TriviaTest {
 
     @Override
     public void stopTest() {
-        // TODO: Show the result screen.
         if (isEndOfTest()) {
             isCompleted = true;
         }
