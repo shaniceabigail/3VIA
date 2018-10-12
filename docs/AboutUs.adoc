@@ -18,7 +18,7 @@ image::junwei96.png[width="150", align="left"]
 {empty}[https://github.com/JunWei96[github]] [<<kohjunwei#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Model
+Responsibilities: Model, Scheduling and Deliverables and Deadline Management
 
 '''
 
@@ -27,7 +27,7 @@ image::cary-xx.png[width="150", align="left"]
 {empty}[https://github.com/Cary-Xx[github]] [<<zihengxiu#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Logic
+Responsibilities: Logic, Integration
 
 '''
 
@@ -36,7 +36,7 @@ image::junhui2778.png[width="150", align="left"]
 {empty}[https://github.com/junhui2778[github]] [<<chuajunhui#, portfolio>>]
 
 Role: Developer +
-Responsibilities Logic
+Responsibilities Logic, Testing
 
 '''
 
@@ -45,7 +45,7 @@ image::shaniceabigail.png[width="150", align="left"]
 {empty}[https://github.com/shaniceabigail[github]] [<<shaniceabigal#, portfolio>>]
 
 Role: Developer +
-Responsibilities: UI
+Responsibilities: UI, Documentation
 
 '''
 
@@ -54,6 +54,6 @@ image::hozongsien.png[width="150", align="left"]
 {empty}[https://github.com/hozongsien[github]] [<<hozongsien#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Storage
+Responsibilities: Storage, Code Quality
 
 '''
