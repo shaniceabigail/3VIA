@@ -17,14 +17,18 @@ import seedu.address.ui.UiPart;
 public class ImportHelpDisplay extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(ImportHelpDisplay.class);
-    private static final String FXML = "ImportHelpDisplay.fxml";
+    private static final String FXML = "/home/ImportHelpDisplay.fxml";
+    private static final String IMPORT_FORMAT = "<Tag>\n"
+            + "Question1 Answer1\n"
+            + "Question2 Answer2\n"
+            + "Question3 Answer3\n";
 
     @FXML
     private TextArea importHelp;
 
     public ImportHelpDisplay() {
         super(FXML);
-        importHelp.setText("Bye World.");
+        importHelp.setText(IMPORT_FORMAT);
         registerAsAnEventHandler(this);
     }
 
