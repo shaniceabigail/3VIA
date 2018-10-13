@@ -229,7 +229,11 @@ public class MainWindow extends UiPart<Stage> {
         displayPagePlaceHolder.getChildren().clear();
         displayPagePlaceHolder.getChildren().add(homePage.getRoot());
     }
-
+    @Subscribe
+    private void handleExtraInfomationDisplayChangeEvent(ExtraInformationDisplayChangeEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        raiseExtraInformationToDisplayEventsFor(event.toDisplay());
+    }
     /**
      * Raises appropriate events to display desired extra information.
      * @param extraInfo The extra information to display.
@@ -241,16 +245,6 @@ public class MainWindow extends UiPart<Stage> {
         } else if (extraInfo == BROWSER) {
             raise(new DisplayImportHelpChangedEvent(false));
             raise(new DisplayBrowserEventChangedEvent(true));
-        }
-    }
-    @Subscribe
-    private void handleExtraInfomationDisplayChangeEvent(ExtraInformationDisplayChangeEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        ExtraInformationDisplay extraInfo = event.toDisplay();
-        if (extraInfo == IMPORT_HELP_DISPLAY) {
-            raiseExtraInformationToDisplayEventsFor(IMPORT_HELP_DISPLAY);
-        } else if (extraInfo == BROWSER) {
-            raiseExtraInformationToDisplayEventsFor(BROWSER);
         }
     }
 }
