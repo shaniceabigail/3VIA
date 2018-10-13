@@ -3,10 +3,11 @@ package seedu.address.ui;
 import com.jfoenix.controls.JFXTabPane;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 
-import javax.swing.text.html.ImageView;
 import java.awt.*;
 import java.util.logging.Logger;
 
@@ -48,10 +49,6 @@ public class NavigationTabController extends UiPart<Region> {
         //this.logic = logic;
     }
 
-    /*
-     *  Handle the
-     */
-
 
     private void configureTabPane() {
         tabContainer.setTabMinWidth(tabWidth);
@@ -59,32 +56,27 @@ public class NavigationTabController extends UiPart<Region> {
         tabContainer.setTabMinHeight(tabWidth);
         tabContainer.setTabMaxHeight(tabWidth);
         tabContainer.setRotateGraphic(true);
-        
-        configureTab(userProfileTab, "User\nProfile", "/co/synappse/project01/resources/images/user-profile.png");
-        configureTab(settingsTab, "Settings", "/co/synappse/project01/resources/images/settings.png");
-        configureTab(logoutTab, "Logout", "/co/synappse/project01/resources/images/logout.png");
+
+        //list of tabs created
+        configureTab(userProfileTab, "Home", "/src/main/resources/images/tabIcons/home.png");
+        configureTab(settingsTab, "Settings", "/src/main/resources/images/tabIcons/settings.png");
+        configureTab(customTab, "Custom", "/src/main/resources/images/tabIcons/test.png");
     }
 
     private void configureTab(Tab tab, String title, String iconPath) {
         double imageWidth = 40.0;
 
-        /// 5.
-        ImageView imageView = new ImageView(new Image(iconPath));
+        ImageView imageView = new ImageView(iconPath);
         imageView.setFitHeight(imageWidth);
         imageView.setFitWidth(imageWidth);
 
-        Label label = new Label(title);
-        label.setMaxWidth(tabWidth - 20);
-        label.setPadding(new Insets(5, 0, 0, 0));
-        label.setStyle("-fx-text-fill: black; -fx-font-size: 8pt; -fx-font-weight: normal;");
-        label.setTextAlignment(TextAlignment.CENTER);
-
+        Label label = new Label(title, Label.CENTER);
 
         BorderPane tabPane = new BorderPane();
         tabPane.setRotate(90.0);
         tabPane.setMaxWidth(tabWidth);
         tabPane.setCenter(imageView);
-        tabPane.setBottom(label);
+        //tabPane.setBottom(label);
 
         /// 6.
         tab.setText("");

@@ -8,10 +8,10 @@ import java.lang.String;
 
 public abstract class Tab {
 
-    private String TabName;
+    private String Title;
 
 
     public String getTabName() {
-        return TabName;
+        return Title;
     }
 }
