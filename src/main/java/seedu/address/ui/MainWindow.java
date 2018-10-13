@@ -44,6 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private Homepage homePage;
     private MatchTestPage matchTestPage;
+    private NavigationTabController navigationTab;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -135,6 +136,10 @@ public class MainWindow extends UiPart<Stage> {
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+        navigationTab = new NavigationTabController();
+        navigationTabPanePlaceholder.getChildren().add(navigationTab.getRoot());
+
     }
 
     public void hide() {
