@@ -1,20 +1,20 @@
 package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.test.TriviaTest;
+import seedu.address.ui.test.TriviaTestResultPage;
 
 /**
  * An event requesting to show the result of trivia test page.
  */
 public class ShowTriviaTestResultEvent extends BaseEvent {
-    private final TriviaTest triviaTest;
+    private final TriviaTestResultPage page;
 
-    public ShowTriviaTestResultEvent(TriviaTest triviaTest) {
-        this.triviaTest = triviaTest;
+    public ShowTriviaTestResultEvent(TriviaTestResultPage page) {
+        this.page = page;
     }
 
-    public TriviaTest getTriviaTest() {
-        return triviaTest;
+    public TriviaTestResultPage getTriviaTestResultPage() {
+        return page;
     }
 
     @Override

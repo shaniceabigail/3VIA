@@ -218,14 +218,14 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleShowTriviaTestViewEvent(ShowTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        triviaTestPage = event.getTest().getTestingPage();
+        triviaTestPage = event.getTriviaTestPage();
         changeToScene(triviaTestPage);
     }
 
     @Subscribe
     private void handleShowTriviaTestResultPage(ShowTriviaTestResultEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        triviaTestResultPage = event.getTriviaTest().getResultPage();
+        triviaTestResultPage = event.getTriviaTestResultPage();
         changeToScene(triviaTestResultPage);
     }
 

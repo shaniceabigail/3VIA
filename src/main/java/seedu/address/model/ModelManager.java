@@ -243,7 +243,7 @@ public class ModelManager extends ComponentManager implements Model {
         currentRunningTest = test;
         appState.setAppState(State.MATCH_TEST);
         test.startTest();
-        raise(new ShowTriviaTestViewEvent(test));
+        raise(new ShowTriviaTestViewEvent(test.getTestingPage()));
     }
 
     @Override

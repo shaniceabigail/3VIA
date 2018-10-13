@@ -56,20 +56,20 @@ public class MatchTest extends TriviaTest {
         MatchAttempt attempt = addAttempt(questionIndex, answerIndex);
         postOutcomeOfMatch(attempt);
 
-        if (attempt.isCorrect()) {
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    Platform.runLater(() -> {
-                        respondToCorrectAttempt(attempt);
-                    });
-                }
-            }, UiPart.FLASH_TIME);
-            return true;
-        } else {
+        if (!attempt.isCorrect()) {
             return false;
         }
+
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    respondToCorrectAttempt(attempt);
+                });
+            }
+        }, UiPart.FLASH_TIME);
+        return true;
     }
 
     public List<MatchAttempt> getAttempts() {
@@ -85,7 +85,7 @@ public class MatchTest extends TriviaTest {
         removeCardFromUi(attempt);
         if (isEndOfTest()) {
             stopTest();
-            EventsCenter.getInstance().post(new ShowTriviaTestResultEvent(this));
+            EventsCenter.getInstance().post(new ShowTriviaTestResultEvent(getResultPage()));
             EventsCenter.getInstance().post(new AddMatchTestResultEvent(this));
         }
     }
