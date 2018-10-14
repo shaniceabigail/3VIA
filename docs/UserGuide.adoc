@@ -33,17 +33,21 @@ You can read the user guide from start to finish by jumping right in to <<Quick 
 +
 image::Ui.png[width="790"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
+
+====
+*Some things to try:* +
+Type commands in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+
+Here are some example commands you can try:
 
 * *`list`* : lists all cards according to their topics
 * **`add`**`add q/What is the formula for force? a/force = mass * acceleration a/Physics` : adds a card with question
 `What is the formula for force?` to the the trivia application.
 * **`delete`**`3` : deletes the 3rd card in the current list
 * *`exit`* : exits the app
-
-.  Refer to <<Features>> for more details of each command.
+====
+Refer to <<Features>> for more details of each command.
 
 [[Features]]
 == Features
@@ -52,8 +56,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 *Command Format*
 [qanda]
 UPPER_CASE _are parameters you should include in use the command_:: `[green]#add q/QUESTION#` means `[maroon]#QUESTION#`.
-Items in square brackets are optional:: `[green]#q/QUESTION [t/TAG]#` means `[maroon]#q/Why is the earth round t/physics#`
-Items with `...` after them can be used optionally or multiple times:: `[green]#[t/TAG] ...#` can be `[maroon]#t/physics t/math t/literature#`
+Items in square brackets are optional:: `[green]#q/QUESTION [t/TOPIC]#` means `[maroon]#q/Why is the earth round t/physics#`
+Items with `...` after them can be used optionally or multiple times:: `[green]#[t/TOPIC] ...#` can be `[maroon]#t/physics t/math t/literature#`
 Parameters written can be in any order:: `[green]#q/QUESTION a/ANSWER#` can be `[green]#a/ANSWER q/QUESTION#`
 ====
 
@@ -64,7 +68,7 @@ Format: `[green]#help#`
 === Adding a card: `card`
 
 Adds a card to the trivia application +
-Format: `[green]#add n/NAME q/QUESTION a/ANSWER [t/TAG]...#`
+Format: `[green]#add n/NAME q/QUESTION a/ANSWER [t/TOPIC]...#`
 
 [TIP]
 A card can have any number of topics. If no topics are specified, a tag of `NoTopic` will be assigned to the card.
