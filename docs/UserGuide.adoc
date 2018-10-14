@@ -18,17 +18,18 @@ By: `CS2103T W12-3 Team`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
 
-3VIA is for learners who wants to *reinforce their knowledge*. More importantly, 3VIA is *optimized for those
-who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, 3VIA will better boost your memory compared to traditional GUI Trivia apps. Interested?
-Jump to the <<Quick Start>> to get started. Enjoy!
+3VIA is a great way for learners to *reinforce and test out their knowledge*. Tired of using a mouse or trackpad to navigate? Don't worry, 3VIA is *optimized for a veteran Command Line Interface (CLI) user*, while still having the benefits of a beautiful Graphical User Interface (GUI).
+
+3VIA will spur and energise your desire to be that A* student, without ever leaving the keyboard. We believe that it should only take [red]#3 steps to get that Very Important A# (3VIA, get it?). 
+
+You can read the user guide from start to finish by jumping right in to <<Quick Start>> to get started or just use it as a reference. Enjoy!
 
 == Quick Start
 
-.  Ensure you have Java version `9` or later installed in your Computer.
+.  Ensure you have Java version _9_ or later installed in your Computer.
 .  Download the latest `3VIA.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your 3VIA.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Copy the file to the folder you want to use as the home folder for your 3VIA app.
+.  Double-click the icon to start the app. The GUI should appear in a few seconds and you're ready to go!
 +
 image::Ui.png[width="790"]
 +
@@ -42,30 +43,28 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * **`delete`**`3` : deletes the 3rd card in the current list
 * *`exit`* : exits the app
 
-.  Refer to <<Features>> for details of each command.
+.  Refer to <<Features>> for more details of each command.
 
 [[Features]]
 == Features
 
 ====
 *Command Format*
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add q/QUESTION`, `QUESTION` is a parameter
-which can be used as `add q/What is the formula for force?`.
-* Items in square brackets are optional e.g `q/QUESTION [t/TAG]` can be used as `q/why? t/Physics` or as `q/why?`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}`
-(i.e. 0 times), `t/Physics`, `t/Physics t/MustKnow` etc.
-* Parameters can be in any order e.g. if the command specifies `q/QUESTION p/ANSWER`, `p/ANSWER n/QUESTION` is also acceptable.
+[qanda]
+UPPER_CASE _are parameters you should include in use the command_:: `[green]#add q/QUESTION#` means `[maroon]#QUESTION#`.
+Items in square brackets are optional:: `[green]#q/QUESTION [t/TAG]#` means `[maroon]#q/Why is the earth round t/physics#`
+Items with `...` after them can be used optionally or multiple times:: `[green]#[t/TAG] ...#` can be `[maroon]#t/physics t/math t/literature#`
+Parameters written can be in any order:: `[green]#q/QUESTION a/ANSWER#` can be `[green]#a/ANSWER q/QUESTION#`
 ====
 
 === Viewing help : `help`
 
-Format: `help`
+Format: `[green]#help#`
 
 === Adding a card: `card`
 
 Adds a card to the trivia application +
-Format: `add n/NAME q/QUESTION a/ANSWER [t/TAG]...`
+Format: `[green]#add n/NAME q/QUESTION a/ANSWER [t/TAG]...#`
 
 [TIP]
 A card can have any number of topics. If no topics are specified, a tag of `NoTopic` will be assigned to the card.
@@ -78,12 +77,12 @@ Examples:
 === Listing all cards : `list`
 
 Shows a list of all cards in the trivia application. +
-Format: `list`
+Format: `[green]#list#`
 
 === Editing a card : `edit`
 
 Edits an existing card in the trivia application. +
-Format: `edit INDEX [q/QUESTION] [a/ANSWER] [t/TAG]...`
+Format: `[green]#edit INDEX [q/QUESTION] [a/ANSWER] [t/TAG]...#`
 
 ****
 * Edits the card at the specified `INDEX`. The index refers to the index number shown in the displayed card list. The index *must be a positive integer* 1, 2, 3, ...
@@ -103,7 +102,7 @@ Edits the question of the 2nd card to be `Why will the apple fall from the tree?
 === Locating cards by question: `find`
 
 Finds cards whose question contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `[green]#find KEYWORD [MORE_KEYWORDS]#`
 
 ****
 * The search is case insensitive. e.g `why` will match `Why`
@@ -123,7 +122,7 @@ Returns any cards having question `why`, `what`, or `where`
 === Deleting a card : `delete`
 
 Deletes the specified card from the trivia application. +
-Format: `delete INDEX`
+Format: `[green]#delete INDEX#`
 
 ****
 * Deletes the card at the specified `INDEX`.
@@ -143,7 +142,7 @@ Deletes the 1st card in the results of the `find` command.
 === Selecting a card : `select`
 
 Selects the card identified by the index number used in the displayed card list. +
-Format: `select INDEX`
+Format: `[green]#select INDEX#`
 
 ****
 * Selects the card and loads the Google search page the card at the specified `INDEX`.
@@ -163,7 +162,7 @@ Selects the 1st card in the results of the `find` command.
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
+Format: `[green]#history#`
 
 [NOTE]
 ====
@@ -174,7 +173,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 === Undoing previous command : `undo`
 
 Restores the trivia application to the state before the previous _undoable_ command was executed. +
-Format: `undo`
+Format: `[green]#undo#`
 
 [NOTE]
 ====
@@ -204,7 +203,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 === Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
-Format: `redo`
+Format: `[green]#redo#`
 
 Examples:
 
@@ -226,14 +225,14 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Use with caution! Clears all entries from the trivia application. +
-Format: `clear`
+WARNING: Use with caution! Clears all entries from the trivia application. +
+Format: `[green]#clear#`
 
 === Starting a test: `test`
 
 Start an open-ended test of a specified tag. In an open-ended test, the user will get the choose whether he/she has answered
 correctly by comparing their answers with the expected answer. +
-Format: `test t/TAG TIMELIMIT_IN_SECONDS`
+Format: `[green]#test t/TAG TIMELIMIT_IN_SECONDS#`
 
 ****
 * The test aims to test the knowledge of the user with the existing questions of a specified tag that are in the trivia application.
@@ -306,11 +305,10 @@ Imports the contents from the text.txt file on a Linux desktop.
 === Exiting the program : `exit`
 
 Exits the program. +
-Format: `exit`
+Format: `[green]#exit#`
 
 === Saving the data
-
-Trivia application's data are saved in the hard disk automatically after any command that changes the data. +
+3VIA saves data in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::multiplayer[]
@@ -322,7 +320,7 @@ _{explain how the user can enable/disable Multi-Player}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Trivia application folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous 3VIA application folder.
 
 == Command Summary
 
