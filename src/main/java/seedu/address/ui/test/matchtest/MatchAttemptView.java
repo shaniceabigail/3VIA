@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
-import seedu.address.model.test.Attempt;
 import seedu.address.model.test.matchtest.MatchAttempt;
 import seedu.address.ui.UiPart;
 
@@ -15,7 +14,7 @@ import seedu.address.ui.UiPart;
  */
 public class MatchAttemptView extends UiPart<Region> {
     private static final String FXML = "/test/matchtest/MatchAttemptView.fxml";
-    private final Attempt attempt;
+    private final MatchAttempt attempt;
 
     @FXML
     private Label id;
@@ -31,8 +30,7 @@ public class MatchAttemptView extends UiPart<Region> {
         this.attempt = attempt;
 
         id.setText(displayedIndex + ". ");
-        attemptText.setText(attempt.getAttemptedCard().getQuestion() + " ---> "
-                + attempt.getCardWithAnswer().getAnswer());
+        attemptText.setText(attempt.getQuestion() + " ---> " + attempt.getRawAnswer());
 
         if (attempt.isCorrect()) {
             correctnessIcon.setImage(getImage("/images/tick_icon.png"));

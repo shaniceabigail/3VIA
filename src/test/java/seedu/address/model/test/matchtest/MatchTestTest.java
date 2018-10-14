@@ -66,27 +66,27 @@ public class MatchTestTest {
 
     @Test
     public void test_matchPass() {
-        assertTrue(matchTest.match(earthRoundIndexes[0], earthRoundIndexes[1]));
+        assertTrue(model.matchQuestionAndAnswer(earthRoundIndexes[0], earthRoundIndexes[1]));
 
-        assertTrue(matchTest.match(forceFormulaIndexes[0], forceFormulaIndexes[1]));
+        assertTrue(model.matchQuestionAndAnswer(forceFormulaIndexes[0], forceFormulaIndexes[1]));
 
-        assertTrue(matchTest.match(densityFormulaIndexes[0], densityFormulaIndexes[1]));
+        assertTrue(model.matchQuestionAndAnswer(densityFormulaIndexes[0], densityFormulaIndexes[1]));
 
         assertEquals(matchTest.getAttempts().size(), 3);
     }
 
     @Test
     public void test_matchFail() {
-        assertFalse(matchTest.match(earthRoundIndexes[0], forceFormulaIndexes[1]));
-        assertFalse(matchTest.match(forceFormulaIndexes[0], densityFormulaIndexes[1]));
-        assertFalse(matchTest.match(densityFormulaIndexes[0], earthRoundIndexes[1]));
+        assertFalse(model.matchQuestionAndAnswer(earthRoundIndexes[0], forceFormulaIndexes[1]));
+        assertFalse(model.matchQuestionAndAnswer(forceFormulaIndexes[0], densityFormulaIndexes[1]));
+        assertFalse(model.matchQuestionAndAnswer(densityFormulaIndexes[0], earthRoundIndexes[1]));
 
     }
 
     @Test
     public void test_matchOutOfBoundsIndexes() {
         thrown.expect(IndexOutOfBoundsException.class);
-        matchTest.match(Index.fromOneBased(100), Index.fromOneBased(100));
+        model.matchQuestionAndAnswer(Index.fromOneBased(100), Index.fromOneBased(100));
     }
 
     @Test

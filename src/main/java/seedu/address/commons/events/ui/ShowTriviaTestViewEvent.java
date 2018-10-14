@@ -1,5 +1,7 @@
 package seedu.address.commons.events.ui;
 
+import java.util.function.Supplier;
+
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.ui.test.TriviaTestPage;
 
@@ -7,13 +9,13 @@ import seedu.address.ui.test.TriviaTestPage;
  * An event requesting to show the trivia test page.
  */
 public class ShowTriviaTestViewEvent extends BaseEvent {
-    private TriviaTestPage page;
+    private Supplier<? extends TriviaTestPage> page;
 
-    public ShowTriviaTestViewEvent(TriviaTestPage page) {
+    public ShowTriviaTestViewEvent(Supplier<? extends TriviaTestPage> page) {
         this.page = page;
     }
 
-    public TriviaTestPage getTriviaTestPage() {
+    public Supplier<? extends TriviaTestPage> getTriviaTestPage() {
         return page;
     }
 

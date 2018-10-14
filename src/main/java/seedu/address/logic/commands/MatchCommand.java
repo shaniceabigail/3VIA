@@ -6,7 +6,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.test.TriviaTest;
 import seedu.address.model.test.matchtest.MatchTest;
 
 /**
@@ -21,7 +20,6 @@ public class MatchCommand extends Command {
 
     public static final String MESSAGE_MATCH_SUCCESS = "Perfect Match!";
     public static final String MESSAGE_MATCH_FAILURE = "Wrong Match!";
-    public static final String MESSAGE_NOT_IN_MATCHING_TEST = "The undergoing test is not a matching test";
     public static final String MESSAGE_INDEX_OUT_OF_BOUND = "The index specified is out of bound.";
 
     private final Index questionIndex;
@@ -36,15 +34,10 @@ public class MatchCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        assert model.getCurrentRunningTest() instanceof MatchTest;
 
-        TriviaTest test = model.getCurrentRunningTest();
-        if (!(test instanceof MatchTest)) {
-            throw new CommandException(MESSAGE_NOT_IN_MATCHING_TEST);
-        }
-
-        MatchTest matchTest = (MatchTest) test;
         try {
-            if (matchTest.match(questionIndex, answerIndex)) {
+            if (model.matchQuestionAndAnswer(questionIndex, answerIndex)) {
                 return new CommandResult(String.format(MESSAGE_MATCH_SUCCESS));
             } else {
                 throw new CommandException(MESSAGE_MATCH_FAILURE);

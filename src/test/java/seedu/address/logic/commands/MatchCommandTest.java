@@ -74,11 +74,6 @@ public class MatchCommandTest {
         // Index out of bound
         assertCommandFailure(new MatchCommand(Index.fromZeroBased(100), Index.fromZeroBased(105)), model,
                 commandHistory, MatchCommand.MESSAGE_INDEX_OUT_OF_BOUND);
-
-        // Unable to execute matching command because not in matching test state.
-        model.stopTriviaTest();
-        assertCommandFailure(new MatchCommand(Index.fromZeroBased(1), Index.fromZeroBased(2)), model,
-                commandHistory, MatchCommand.MESSAGE_NOT_IN_MATCHING_TEST);
     }
 
     /**
@@ -86,7 +81,7 @@ public class MatchCommandTest {
      */
     private void assertMatchCommandSuccess(Card cardToMatch) {
         Index[] expectedCorrectIndexes = MatchTestUtil.getIndexes(expectedMatchTest, cardToMatch);
-        expectedMatchTest.match(expectedCorrectIndexes[0], expectedCorrectIndexes[1]);
+        expectedModel.matchQuestionAndAnswer(expectedCorrectIndexes[0], expectedCorrectIndexes[1]);
 
         Index[] correctIndexes = MatchTestUtil.getIndexes(matchTest, cardToMatch);
         assertCommandSuccess(new MatchCommand(correctIndexes[0], correctIndexes[1]), model, commandHistory,

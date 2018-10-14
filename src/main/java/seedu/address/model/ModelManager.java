@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddMatchTestResultEvent;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TriviaBundleChangedEvent;
@@ -21,6 +22,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.state.AppState;
 import seedu.address.model.state.State;
 import seedu.address.model.test.TriviaTest;
+import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.model.test.matchtest.MatchTestResults;
 
 /**
@@ -35,9 +37,9 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedTriviaBundle versionedTriviaBundle;
     private final FilteredList<Card> filteredCards;
     private final MatchTestResults matchTestResults;
+    private final AppState appState;
 
     private TriviaTest currentRunningTest;
-    private AppState appState;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -250,13 +252,23 @@ public class ModelManager extends ComponentManager implements Model {
     public void stopTriviaTest() {
         currentRunningTest.stopTest();
         appState.setAppState(State.NORMAL);
-        raise(new CloseTriviaTestViewEvent(currentRunningTest));
+        raise(new CloseTriviaTestViewEvent());
         currentRunningTest = null;
     }
 
     @Override
     public TriviaTest getCurrentRunningTest() {
         return currentRunningTest;
+    }
+
+    //=========== Matching Tests ============================================================================
+
+    @Override
+    public boolean matchQuestionAndAnswer(Index questionIndex, Index answerIndex) throws IndexOutOfBoundsException {
+        assert currentRunningTest instanceof MatchTest;
+
+        MatchTest matchTest = (MatchTest) currentRunningTest;
+        return matchTest.match(questionIndex, answerIndex);
     }
 
     //=========== Matching Test Results =====================================================================

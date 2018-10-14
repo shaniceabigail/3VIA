@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddMatchTestResultEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
@@ -125,6 +126,11 @@ public interface Model {
      * Stop a test in the trivia application model.
      */
     void stopTriviaTest();
+
+    /**
+     * Match a question to another answer. To be used in a matching test.
+     */
+    boolean matchQuestionAndAnswer(Index questionIndex, Index answerIndex);
 
     /**
      * Obtain the trivia test that is running.

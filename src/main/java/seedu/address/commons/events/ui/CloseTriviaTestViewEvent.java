@@ -1,7 +1,6 @@
 package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.test.TriviaTest;
 
 /**
  * An event requesting to close the trivia test page.
@@ -9,7 +8,7 @@ import seedu.address.model.test.TriviaTest;
 public class CloseTriviaTestViewEvent extends BaseEvent {
 
     /** For navigation to the matching test page. */
-    public CloseTriviaTestViewEvent(TriviaTest test) {}
+    public CloseTriviaTestViewEvent() {}
 
     @Override
     public String toString() {

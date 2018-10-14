@@ -1,5 +1,6 @@
 package seedu.address.model.test.matchtest;
 
+import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.test.Attempt;
 
@@ -9,13 +10,22 @@ import seedu.address.model.test.Attempt;
 public class MatchAttempt extends Attempt {
     private final Card cardWithAnswer;
 
+    /**
+     * @param cardWithQuestion Represents the card that is associated to the question.
+     * @param cardWithAnswer Represents the card that is associated to the answer.
+     */
     public MatchAttempt(Card cardWithQuestion, Card cardWithAnswer) {
-        super(cardWithQuestion, cardWithQuestion.equals(cardWithAnswer));
+        super(cardWithQuestion, cardWithAnswer.getAnswer().toString());
         this.cardWithAnswer = cardWithAnswer;
     }
 
-    public Card getCardWithAnswer() {
-        return cardWithAnswer;
+    public Answer getAnswer() {
+        return cardWithAnswer.getAnswer();
+    }
+
+    @Override
+    public boolean isCorrect() {
+        return attemptedCard.equals(cardWithAnswer);
     }
 
     @Override
@@ -32,7 +42,7 @@ public class MatchAttempt extends Attempt {
 
         // state check
         MatchAttempt other = (MatchAttempt) obj;
-        return getAttemptedCard().equals(other.getAttemptedCard())
-            && getCardWithAnswer().equals(getCardWithAnswer()) && correctness == other.correctness;
+        return attemptedCard.equals(other.attemptedCard)
+            && cardWithAnswer.equals(other.cardWithAnswer);
     }
 }
