@@ -331,8 +331,9 @@ The import mechanism works with the `StorageManager` to add and save multiple ca
 
 The following activity diagram summarizes what happens when a user executes the import command.
 
+image::ImportCommandActivityDiagram.png[ImportCommandActivityDiagram]
+
 Given below is an example usage scenario and how the import mechanism behaves.
-image::ImportCommandActivityDiagram.png[width="800"]
 
 Step 1: The user enters the import command to import a file from the hard disk. An `ImportCommand` object is initialised.
 
