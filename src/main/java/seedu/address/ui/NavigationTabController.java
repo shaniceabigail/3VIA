@@ -45,6 +45,10 @@ public class NavigationTabController extends UiPart<Region> {
 
     public NavigationTabController () {
         super(FXML);
+        tabContainer = new JFXTabPane();
+        userProfileTab = new Tab();
+        settingsTab = new Tab();
+        customTab = new Tab();
         this.configureView();
         //this.logic = logic;
     }
