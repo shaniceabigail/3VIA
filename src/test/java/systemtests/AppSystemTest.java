@@ -123,10 +123,6 @@ public abstract class AppSystemTest {
         return mainWindowHandle.getCommandBox();
     }
 
-    public PersonListPanelHandle getPersonListPanel() {
-        return mainWindowHandle.getPersonListPanel();
-    }
-
     public CardListPanelHandle getCardListPanel() {
         return mainWindowHandle.getCardListPanel();
     }
@@ -217,7 +213,6 @@ public abstract class AppSystemTest {
         getBrowserPanel().rememberUrl();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
-        getPersonListPanel().rememberSelectedPersonCard();
         getCardListPanel().rememberSelectedCardView();
     }
 
@@ -259,7 +254,6 @@ public abstract class AppSystemTest {
      */
     protected void assertSelectedCardUnchanged() {
         assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getPersonListPanel().isSelectedPersonCardChanged());
         assertFalse(getCardListPanel().isSelectedCardViewChanged());
     }
 
@@ -314,7 +308,6 @@ public abstract class AppSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
-        assertListMatching(getPersonListPanel(), getModel().getFilteredPersonList());
         assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getAddressBookFilePath()).toString(),
                 getStatusBarFooter().getSaveLocation());
