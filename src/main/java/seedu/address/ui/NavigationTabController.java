@@ -3,6 +3,7 @@ package seedu.address.ui;
 import com.google.common.eventbus.Subscribe;
 import com.jfoenix.controls.JFXTabPane;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -10,8 +11,6 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ToggleTabEvent;
 
-import javafx.scene.control.Label;
-import java.beans.EventHandler;
 import java.util.logging.Logger;
 
 /*
@@ -91,7 +90,7 @@ public class NavigationTabController extends UiPart<Region> {
 
 
     }
-
+    /*
     private void  {
         /// 7.
 
@@ -119,5 +118,6 @@ public class NavigationTabController extends UiPart<Region> {
             }
         };
 
-    }
+
+    } */
 }
