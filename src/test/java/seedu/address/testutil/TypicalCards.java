@@ -39,7 +39,7 @@ public class TypicalCards {
             .withAnswer("git clone")
             .withTopics("Git").build();
     public static final Card Q_DENSITY_FORMULA = new CardBuilder().withQuestion("Formula of density")
-            .withAnswer("desnity = mass / volume")
+            .withAnswer("density = mass / volume")
             .withTopics("Physics").build();
     public static final Card Q_TALLEST_BUILDING = new CardBuilder()
             .withQuestion("Tallest building in the world?")

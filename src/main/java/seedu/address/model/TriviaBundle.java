@@ -102,7 +102,7 @@ public class TriviaBundle implements ReadOnlyTriviaBundle {
     }
 
     @Override
-    public ObservableList<Card> getListOfCardFilteredByTag(Predicate<Card> predicate) {
+    public ObservableList<Card> getListOfCardFilteredByTopic(Predicate<Card> predicate) {
         ObservableList<Card> filteredCards = FXCollections.observableList(getCardList().stream()
                 .filter(predicate)
                 .collect(Collectors.toList()));

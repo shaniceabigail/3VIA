@@ -12,7 +12,7 @@ import seedu.address.model.topic.Topic;
 /**
  * The command which will executing the matching test of trivia.
  */
-public class TestMCommand extends Command {
+public class MatchTestCommand extends Command {
     public static final String COMMAND_WORD = "testM";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Starts a matching test. "
@@ -25,7 +25,7 @@ public class TestMCommand extends Command {
 
     private final Topic tag;
 
-    public TestMCommand(Topic tag) {
+    public MatchTestCommand(Topic tag) {
         this.tag = tag;
     }
 
@@ -45,8 +45,8 @@ public class TestMCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TestMCommand // instanceof handles nulls
-                && tag.equals(((TestMCommand) other).tag)); // state check
+                || (other instanceof MatchTestCommand // instanceof handles nulls
+                && tag.equals(((MatchTestCommand) other).tag)); // state check
     }
 
 }

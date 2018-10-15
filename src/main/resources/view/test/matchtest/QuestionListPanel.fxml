@@ -27,5 +27,5 @@
          </Label>
       </children>
    </GridPane>
-   <ListView fx:id="testMQuestionListView" VBox.vgrow="ALWAYS" />
+   <ListView fx:id="matchTestQuestionListView" VBox.vgrow="ALWAYS" />
 </VBox>

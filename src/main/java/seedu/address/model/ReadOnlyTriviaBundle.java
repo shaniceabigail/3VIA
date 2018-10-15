@@ -18,6 +18,6 @@ public interface ReadOnlyTriviaBundle {
     /**
      * Returns a new unmodifiable list of cards that is filtered by the given topic.
      */
-    ObservableList<Card> getListOfCardFilteredByTag(Predicate<Card> predicate);
+    ObservableList<Card> getListOfCardFilteredByTopic(Predicate<Card> predicate);
 
 }

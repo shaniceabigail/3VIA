@@ -17,6 +17,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import seedu.address.MainApp;
+import seedu.address.commons.core.AsyncEventsCenter;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.BaseEvent;
 
@@ -28,7 +29,7 @@ public abstract class UiPart<T> {
 
     /** Resource folder where FXML files are stored. */
     public static final String FXML_FILE_FOLDER = "/view/";
-    public static final int FLASH_TIME = 1000; // 1second
+    public static final int FLASH_TIME = 500; // 0.5 second
 
     private final FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -85,6 +86,7 @@ public abstract class UiPart<T> {
      */
     protected void registerAsAnEventHandler(Object handler) {
         EventsCenter.getInstance().registerHandler(handler);
+        AsyncEventsCenter.getInstance().registerHandler(handler);
     }
 
     /**

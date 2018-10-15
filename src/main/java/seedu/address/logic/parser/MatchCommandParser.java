@@ -11,8 +11,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MatchCommandParser implements Parser<MatchCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the TestMCommand
-     * and returns an TestMCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the {@code MatchTestCommand}
+     * and returns an MatchTest object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public MatchCommand parse(String args) throws ParseException {
