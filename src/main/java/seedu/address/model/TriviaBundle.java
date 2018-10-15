@@ -76,6 +76,13 @@ public class TriviaBundle implements ReadOnlyTriviaBundle {
         cards.add(c);
     }
 
+    /**
+     * Removes {@code key} from this {@code TriviaBundle}.
+     * {@code key} must exist in the trivia bundle.
+     */
+    public void removeCard(Card key) {
+        cards.remove(key);
+    }
 
     /**
      * Replaces the given card {@code target} in the list with {@code editedCard}.

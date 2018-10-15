@@ -76,6 +76,12 @@ public interface Model {
      */
     void addCard(Card card);
 
+    /**
+     * Deletes the given card.
+     * The card must exist in the trivia bundle.
+     */
+    void deleteCard(Card target);
+
     /** Returns an unmodifiable view of the filtered card's list */
     ObservableList<Card> getFilteredCardList();
 

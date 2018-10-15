@@ -15,7 +15,10 @@ import java.util.List;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.topic.Topic;
 
@@ -29,7 +32,7 @@ public class FindCommandSystemTest extends AppSystemTest {
         String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_WHAT + "   ";
         Model expectedModel = getModel();
         // questions has a what in it
-        ModelHelper.setFilteredList(expectedModel, true, Q_GIT_MERGE, Q_FORCE_FORMULA);
+        ModelHelper.setFilteredList(expectedModel, Q_GIT_MERGE, Q_FORCE_FORMULA);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardViewUnchanged();
 
@@ -42,13 +45,13 @@ public class FindCommandSystemTest extends AppSystemTest {
 
         /* Case: find card where card list is not displaying the card we are finding -> 1 card found */
         command = FindCommand.COMMAND_WORD + " Why";
-        ModelHelper.setFilteredList(expectedModel, true, Q_EARTH_ROUND);
+        ModelHelper.setFilteredList(expectedModel, Q_EARTH_ROUND);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardViewUnchanged();
 
         /* Case: find multiple cards in trivia bundle, 2 keywords -> 2 cards found */
         command = FindCommand.COMMAND_WORD + " earth merge";
-        ModelHelper.setFilteredList(expectedModel, true, Q_EARTH_ROUND, Q_GIT_MERGE);
+        ModelHelper.setFilteredList(expectedModel, Q_EARTH_ROUND, Q_GIT_MERGE);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardViewUnchanged();
 
@@ -69,42 +72,40 @@ public class FindCommandSystemTest extends AppSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardViewUnchanged();
 
-        // TODO To enable this after undo/redo command is implemented on trivia.
-        //        /* Case: undo previous find command -> rejected */
-        //        command = UndoCommand.COMMAND_WORD;
-        //        String expectedResultMessage = UndoCommand.MESSAGE_FAILURE;
-        //        assertCommandFailure(command, expectedResultMessage);
-        //
-        //        /* Case: redo previous find command -> rejected */
-        //        command = RedoCommand.COMMAND_WORD;
-        //        expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
-        //        assertCommandFailure(command, expectedResultMessage);
+        /* Case: undo previous find command -> rejected */
+        command = UndoCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCommand.MESSAGE_FAILURE;
+        assertCommandFailure(command, expectedResultMessage);
 
-        // TODO To enable this after delete command is implemented on trivia.
+        /* Case: redo previous find command -> rejected */
+        command = RedoCommand.COMMAND_WORD;
+        expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
+        assertCommandFailure(command, expectedResultMessage);
+
         /* Case: find same cards in trivia bundle after deleting 1 of them -> 1 card found */
-        //        executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        //        assertFalse(getModel().getAddressBook().getPersonList().contains(BENSON));
-        //        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
-        //        expectedModel = getModel();
-        //        ModelHelper.setFilteredList(expectedModel, DANIEL);
-        //        assertCommandSuccess(command, expectedModel);
-        //        assertSelectedCardUnchanged();
+        executeCommand(DeleteCommand.COMMAND_WORD + " 1");
+        assertFalse(getModel().getTriviaBundle().getCardList().contains(Q_EARTH_ROUND));
+        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_WHAT;
+        expectedModel = getModel();
+        ModelHelper.setFilteredList(expectedModel, Q_GIT_MERGE, Q_FORCE_FORMULA);
+        assertCommandSuccess(command, expectedModel);
+        assertSelectedCardUnchanged();
 
         /* Case: find card in trivia bundle, keyword is same as name but of different case -> 1 card found */
         command = FindCommand.COMMAND_WORD + " wHaT";
-        ModelHelper.setFilteredList(expectedModel, true, Q_GIT_MERGE, Q_FORCE_FORMULA);
+        ModelHelper.setFilteredList(expectedModel, Q_GIT_MERGE, Q_FORCE_FORMULA);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardViewUnchanged();
 
         /* Case: find card in trivia bundle, keyword is substring of question -> 0 cards found */
         command = FindCommand.COMMAND_WORD + " wha";
-        ModelHelper.setFilteredList(expectedModel, true);
+        ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardViewUnchanged();
 
         /* Case: find card in trivia bundle, question is substring of keyword -> 0 cards found */
         command = FindCommand.COMMAND_WORD + " whatssup";
-        ModelHelper.setFilteredList(expectedModel, true);
+        ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardViewUnchanged();
 
@@ -126,11 +127,11 @@ public class FindCommandSystemTest extends AppSystemTest {
 
         /* Case: find while a card is selected -> selected card deselected */
         showAllCards();
-        selectCard(Index.fromOneBased(1));
+        selectCard(Index.fromOneBased(2));
         assertFalse(getCardListPanel().getHandleToSelectedCard().getQuestion()
                 .equals(Q_GIT_MERGE.getQuestion().value));
         command = FindCommand.COMMAND_WORD + " merge";
-        ModelHelper.setFilteredList(expectedModel, true, Q_GIT_MERGE);
+        ModelHelper.setFilteredList(expectedModel, Q_GIT_MERGE);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();
 

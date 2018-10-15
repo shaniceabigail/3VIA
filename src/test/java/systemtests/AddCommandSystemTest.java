@@ -22,6 +22,8 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
@@ -46,17 +48,16 @@ public class AddCommandSystemTest extends AppSystemTest {
                 + ANSWER_DESC_EARTH_FLAT + " " + TOPIC_DESC_PHYSICS + " ";
         assertCommandSuccess(command, toAdd);
 
-        // TODO To enable this after undo/redo command is implemented on trivia.
-        //        /* Case: undo adding Amy to the list -> Amy deleted */
-        //        command = UndoCommand.COMMAND_WORD;
-        //        String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
-        //        assertCommandSuccess(command, model, expectedResultMessage);
-        //
-        //        /* Case: redo adding Amy to the list -> Amy added again */
-        //        command = RedoCommand.COMMAND_WORD;
-        //        model.addPerson(toAdd);
-        //        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        //        assertCommandSuccess(command, model, expectedResultMessage);
+        /* Case: undo adding Q_FLAT_EARTH to the list -> Q_FLAT_EARTH deleted */
+        command = UndoCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
+        assertCommandSuccess(command, model, expectedResultMessage);
+
+        /* Case: redo adding Q_FLAT_EARTH to the list -> Q_FLAT_EARTH added again */
+        command = RedoCommand.COMMAND_WORD;
+        model.addCard(toAdd);
+        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
+        assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: add a card with all fields same as another card in the trivia bundle except question -> added */
         toAdd = new CardBuilder(Q_FLAT_EARTH).withQuestion(VALID_QUESTION_GIT_COMMIT).build();

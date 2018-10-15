@@ -139,6 +139,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void deleteCard(Card target) {
+        versionedTriviaBundle.removeCard(target);
+        indicateTriviaBundleChanged();
+    }
+
+    @Override
     public void addPerson(Person person) {
         versionedAddressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
