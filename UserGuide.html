@@ -42,10 +42,13 @@
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>3VIA is for learners who wants to <strong>reinforce their knowledge</strong>. More importantly, 3VIA is <strong>optimized for those
-who prefer to work with a Command Line Interface</strong> (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, 3VIA will better boost your memory compared to traditional GUI Trivia apps. Interested?
-Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. Enjoy!</p>
+<p>3VIA is a great way for learners to <strong>reinforce and test out their knowledge</strong>. Tired of using a mouse or trackpad to navigate? Don&#8217;t worry, 3VIA is <strong>optimized for a veteran Command Line Interface (CLI) user</strong>, while still having the benefits of a beautiful Graphical User Interface (GUI).</p>
+</div>
+<div class="paragraph">
+<p>3VIA will spur and energise your desire to be that A* student, without ever leaving the keyboard. We believe that it should only take <span class="red">3 steps to get that Very Important A</span> (3VIA, get it?).</p>
+</div>
+<div class="paragraph">
+<p>You can read the user guide from start to finish by jumping right in to <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started or just use it as a reference. Enjoy!</p>
 </div>
 </div>
 </div>
@@ -55,28 +58,31 @@ Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to g
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Ensure you have Java version <code>9</code> or later installed in your Computer.</p>
+<p>Ensure you have Java version <em>9</em> or later installed in your Computer.</p>
 </li>
 <li>
 <p>Download the latest <code>3VIA.jar</code> <a href="https://github.com/CS2103-AY1819S1-W12-3/main/releases">here</a>.</p>
 </li>
 <li>
-<p>Copy the file to the folder you want to use as the home folder for your 3VIA.</p>
+<p>Copy the file to the folder you want to use as the home folder for your 3VIA app.</p>
 </li>
 <li>
-<p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
+<p>Double-click the icon to start the app. The GUI should appear in a few seconds and you&#8217;re ready to go!</p>
 <div class="imageblock">
 <div class="content">
 <img src="images/Ui.png" alt="Ui" width="790">
 </div>
 </div>
-</li>
-<li>
-<p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p><strong>Some things to try:</strong><br>
+Type commands in the command box and press <kbd>Enter</kbd> to execute it.<br>
 e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
-</li>
-<li>
-<p>Some example commands you can try:</p>
+</div>
+<div class="paragraph">
+<p>Here are some example commands you can try:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -94,9 +100,11 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </li>
 </ul>
 </div>
-</li>
-<li>
-<p>Refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> for details of each command.</p>
+</div>
+</div>
+<div class="paragraph">
+<p>Refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> for more details of each command.</p>
+</div>
 </li>
 </ol>
 </div>
@@ -110,37 +118,39 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="paragraph">
 <p><strong>Command Format</strong></p>
 </div>
-<div class="ulist">
-<ul>
+<div class="qlist qanda">
+<ol>
 <li>
-<p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add q/QUESTION</code>, <code>QUESTION</code> is a parameter
-which can be used as <code>add q/What is the formula for force?</code>.</p>
+<p><em>UPPER_CASE <em>are parameters you should include in use the command</em></em></p>
+<p><code><span class="green">add q/QUESTION</span></code> means <code><span class="maroon">QUESTION</span></code>.</p>
 </li>
 <li>
-<p>Items in square brackets are optional e.g <code>q/QUESTION [t/TAG]</code> can be used as <code>q/why? t/Physics</code> or as <code>q/why?</code>.</p>
+<p><em>Items in square brackets are optional</em></p>
+<p><code><span class="green">q/QUESTION [t/TOPIC]</span></code> means <code><span class="maroon">q/Why is the earth round t/physics</span></code></p>
 </li>
 <li>
-<p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code>
-(i.e. 0 times), <code>t/Physics</code>, <code>t/Physics t/MustKnow</code> etc.</p>
+<p><em>Items with <code>&#8230;&#8203;</code> after them can be used optionally or multiple times</em></p>
+<p><code><span class="green">[t/TOPIC] &#8230;&#8203;</span></code> can be <code><span class="maroon">t/physics t/math t/literature</span></code></p>
 </li>
 <li>
-<p>Parameters can be in any order e.g. if the command specifies <code>q/QUESTION p/ANSWER</code>, <code>p/ANSWER n/QUESTION</code> is also acceptable.</p>
+<p><em>Parameters written can be in any order</em></p>
+<p><code><span class="green">q/QUESTION a/ANSWER</span></code> can be <code><span class="green">a/ANSWER q/QUESTION</span></code></p>
 </li>
-</ul>
+</ol>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
-<p>Format: <code>help</code></p>
+<p>Format: <code><span class="green">help</span></code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="adding-a-card-code-card-code"><a class="link" href="#adding-a-card-code-card-code">3.2. Adding a card: <code>card</code></a></h3>
 <div class="paragraph">
 <p>Adds a card to the trivia application<br>
-Format: <code>add n/NAME q/QUESTION a/ANSWER [t/TAG]&#8230;&#8203;</code></p>
+Format: <code><span class="green">add n/NAME q/QUESTION a/ANSWER [t/TOPIC]&#8230;&#8203;</span></code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -172,14 +182,14 @@ A card can have any number of topics. If no topics are specified, a tag of <code
 <h3 id="listing-all-cards-code-list-code"><a class="link" href="#listing-all-cards-code-list-code">3.3. Listing all cards : <code>list</code></a></h3>
 <div class="paragraph">
 <p>Shows a list of all cards in the trivia application.<br>
-Format: <code>list</code></p>
+Format: <code><span class="green">list</span></code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="editing-a-card-code-edit-code"><a class="link" href="#editing-a-card-code-edit-code">3.4. Editing a card : <code>edit</code></a></h3>
 <div class="paragraph">
 <p>Edits an existing card in the trivia application.<br>
-Format: <code>edit INDEX [q/QUESTION] [a/ANSWER] [t/TAG]&#8230;&#8203;</code></p>
+Format: <code><span class="green">edit INDEX [q/QUESTION] [a/ANSWER] [t/TAG]&#8230;&#8203;</span></code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -224,7 +234,7 @@ Edits the question of the 2nd card to be <code>Why will the apple fall from the 
 <h3 id="locating-cards-by-question-code-find-code"><a class="link" href="#locating-cards-by-question-code-find-code">3.5. Locating cards by question: <code>find</code></a></h3>
 <div class="paragraph">
 <p>Finds cards whose question contain any of the given keywords.<br>
-Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
+Format: <code><span class="green">find KEYWORD [MORE_KEYWORDS]</span></code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -269,7 +279,7 @@ Returns any cards having question <code>why</code>, <code>what</code>, or <code>
 <h3 id="deleting-a-card-code-delete-code"><a class="link" href="#deleting-a-card-code-delete-code">3.6. Deleting a card : <code>delete</code></a></h3>
 <div class="paragraph">
 <p>Deletes the specified card from the trivia application.<br>
-Format: <code>delete INDEX</code></p>
+Format: <code><span class="green">delete INDEX</span></code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -310,7 +320,7 @@ Deletes the 1st card in the results of the <code>find</code> command.</p>
 <h3 id="selecting-a-card-code-select-code"><a class="link" href="#selecting-a-card-code-select-code">3.7. Selecting a card : <code>select</code></a></h3>
 <div class="paragraph">
 <p>Selects the card identified by the index number used in the displayed card list.<br>
-Format: <code>select INDEX</code></p>
+Format: <code><span class="green">select INDEX</span></code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -351,7 +361,7 @@ Selects the 1st card in the results of the <code>find</code> command.</p>
 <h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
-Format: <code>history</code></p>
+Format: <code><span class="green">history</span></code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -372,7 +382,7 @@ Format: <code>history</code></p>
 <h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.9. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the trivia application to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code>undo</code></p>
+Format: <code><span class="green">undo</span></code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -422,7 +432,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 <h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.10. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code>redo</code></p>
+Format: <code><span class="green">redo</span></code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -452,9 +462,18 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 <div class="sect2">
 <h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.11. Clearing all entries : <code>clear</code></a></h3>
-<div class="paragraph">
-<p>Use with caution! Clears all entries from the trivia application.<br>
-Format: <code>clear</code></p>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Use with caution! Clears all entries from the trivia application.<br>
+Format: <code><span class="green">clear</span></code>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -462,7 +481,7 @@ Format: <code>clear</code></p>
 <div class="paragraph">
 <p>Start an open-ended test of a specified tag. In an open-ended test, the user will get the choose whether he/she has answered
 correctly by comparing their answers with the expected answer.<br>
-Format: <code>test t/TAG TIMELIMIT_IN_SECONDS</code></p>
+Format: <code><span class="green">test t/TAG TIMELIMIT_IN_SECONDS</span></code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -588,13 +607,13 @@ Imports the contents from the text.txt file on a Linux desktop.</p>
 <h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.16. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
-Format: <code>exit</code></p>
+Format: <code><span class="green">exit</span></code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.17. Saving the data</a></h3>
 <div class="paragraph">
-<p>Trivia application&#8217;s data are saved in the hard disk automatically after any command that changes the data.<br>
+<p>3VIA saves data in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
@@ -611,7 +630,7 @@ There is no need to save manually.</p>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
-<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Trivia application folder.</p>
+<strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous 3VIA application folder.</p>
 </div>
 </div>
 </div>
@@ -673,4 +692,4 @@ e.g.<code>select 2</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-15 02:09:56 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-15 05:05:51 UTC</div></div></div></body></html>
