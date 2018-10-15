@@ -31,6 +31,8 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
@@ -56,18 +58,17 @@ public class EditCommandSystemTest extends AppSystemTest {
         Card editedCard = new CardBuilder(Q_FLAT_EARTH).build();
         assertCommandSuccess(command, index, editedCard);
 
-        // TODO To enable this after undo/redo command is implemented on trivia.
-        //        /* Case: undo editing the last person in the list -> last person restored */
-        //        command = UndoCommand.COMMAND_WORD;
-        //        String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
-        //        assertCommandSuccess(command, model, expectedResultMessage);
-        //
-        //        /* Case: redo editing the last person in the list -> last person edited again */
-        //        command = RedoCommand.COMMAND_WORD;
-        //        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        //        model.updatePerson(
-        //                getModel().getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedPerson);
-        //        assertCommandSuccess(command, model, expectedResultMessage);
+        /* Case: undo editing the last card in the list -> last card restored */
+        command = UndoCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
+        assertCommandSuccess(command, model, expectedResultMessage);
+
+        /* Case: redo editing the last card in the list -> last card edited again */
+        command = RedoCommand.COMMAND_WORD;
+        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
+        model.updateCard(
+               getModel().getFilteredCardList().get(INDEX_FIRST_CARD.getZeroBased()), editedCard);
+        assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a card with new values same as existing values -> edited */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_EARTH_FLAT

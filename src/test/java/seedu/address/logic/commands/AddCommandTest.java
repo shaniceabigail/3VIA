@@ -140,6 +140,12 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteCard(Card target) {
+            throw new AssertionError(
+                    "This method should not be called.");
+        }
+
+        @Override
         public void updateCard(Card target, Card editedCard) {
             throw new AssertionError("This method should not be called.");
         }
