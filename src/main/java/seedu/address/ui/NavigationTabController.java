@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ToggleTabEvent;
 
-import java.awt.*;
+import javafx.scene.control.Label;
 import java.beans.EventHandler;
 import java.util.logging.Logger;
 
@@ -71,13 +71,13 @@ public class NavigationTabController extends UiPart<Region> {
         imageView.setFitHeight(imageWidth);
         imageView.setFitWidth(imageWidth);
 
-        Label label = new Label(title, Label.CENTER);
+        Label label = new Label(title);
 
         BorderPane tabPane = new BorderPane();
         tabPane.setRotate(90.0);
         tabPane.setMaxWidth(tabWidth);
         tabPane.setCenter(imageView);
-        //tabPane.setBottom(label);
+        tabPane.setBottom(label);
 
         /// 6.
         tab.setText("");
