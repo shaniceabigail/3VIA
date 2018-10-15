@@ -396,7 +396,9 @@ Step 3. After the matching test has been started, the user can only input the fo
 * `QUESTION_INDEX ANSWER_INDEX` Will be used to define which question will be matched to the answer.
 * `exit` If the user input `exit`, the matching test will end and the information related to that matching test will not be recorded.
 
-Step 4. Suppose the user chose to match a question to an answer, the system will then determine whether it is a correct match.
+Step 4. Suppose the user chose to match a question to an answer, the sequence will execute a list of steps, as shown in the sequence diagram below, to determine whether the match is correct.
+
+image::MatchCommandSequenceDiagram.png[width="800"]
 
 Step 5. Suppose it is correct, the System will remove the matched question and answer from the Ui.
 
