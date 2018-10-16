@@ -1,4 +1,4 @@
-package seedu.address.model.test.OpenEndedTest;
+package seedu.address.model.test.openendedtest;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -17,7 +17,8 @@ import seedu.address.model.topic.Topic;
 
 /**
  * Represents a trivia test that is started by the user.
- * For a {@code OpenEndedTest} to start, there must be more than 1 cards related to the topic that is specified in the test.
+ * For a {@code OpenEndedTest} to start, there must be more than 1 cards related to the topic
+ * that is specified in the test.
  */
 public abstract class OpenEndedTest extends TriviaTest {
     public static final String MESSAGE_MATCH_TEST_CONSTRAINS = "OpenEndedTest needs more than 1 card with the"
@@ -38,17 +39,6 @@ public abstract class OpenEndedTest extends TriviaTest {
     public ObservableList<Question> getQuestions() {
         return this.shuffledQuestions;
     }
-
-    @Override
-    public void startTest() {
-
-    }
-
-    @Override
-    public void stopTest() {
-
-    }
-
 
     /**
      * Retrieve a randomized modifiable observable list of questions to allow changes in the UI.
@@ -78,6 +68,16 @@ public abstract class OpenEndedTest extends TriviaTest {
                 .collect(Collectors.toList());
         Collections.shuffle(answers);
         return FXCollections.observableList(answers);
+    }
+
+    @Override
+    public void startTest() {
+
+    }
+
+    @Override
+    public void stopTest() {
+
     }
 
     private boolean isValidTest() {
