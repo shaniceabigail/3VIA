@@ -227,23 +227,23 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear`
+=== Clearing all entries : `clear` `[coming in v2.0]`
 
 WARNING: Use with caution! Clears all entries from the trivia application. +
 Format: `[green]#clear#`
 
-=== Starting a test: `test`
+=== Starting an Open Ended Test: `testO` `[coming in v2.0]`
 
 Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered
 correctly by comparing their answers with the expected answer. +
-Format: `[green]#test t/TOPIC TIMELIMIT_IN_SECONDS#`
+Format: `[green]#testO t/TOPIC TIMELIMIT_IN_SECONDS#`
 
 ****
 * The test aims to test the knowledge of the user with the existing questions of a specified topic that are in the trivia application.
 * The user can also set the time limit (in seconds) for each question using the optional field TIMELIMIT_IN_SECONDS
 ****
 
-The following commands can only be used during a `test`.
+The following commands can only be used during a an open ended test.
 
 ==== Enter the answer of a question:
 
@@ -262,7 +262,7 @@ Format: `c` (correct) OR `x` (wrong)
 Will exit from the test.
 Format: `exit`
 
-=== Starting a matching test: `testM`
+=== Starting a Matching Test: `testM`
 
 Start a test of matching cards of a specified topic. In a test of matching cards, all the questions and answers in that topic
 will be displayed. The user will then have to match the correct question and answer together. +
@@ -280,12 +280,12 @@ Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 Will exit from the test.
 Format: `exit`
 
-=== View statistics for a certain test: `stats`
+=== View statistics for a certain test: `stats` `[coming in v2.0]`
 
 Will list out all the previous tests, with their respective questions, answers and the user’s answers.
 Format: `stats [TOPIC]`
 
-=== Mass Import: `import`
+=== Mass Import: `import` `[coming in v2.0]`
 
 Imports multiple cards from a text file into the trivia application. +
 Format: `import FILEPATH`
