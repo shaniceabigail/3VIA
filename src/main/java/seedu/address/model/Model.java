@@ -2,7 +2,11 @@ package seedu.address.model;
 
 import java.util.function.Predicate;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.model.AddMatchTestResultEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
@@ -72,6 +76,12 @@ public interface Model {
      */
     void addCard(Card card);
 
+    /**
+     * Deletes the given card.
+     * The card must exist in the trivia bundle.
+     */
+    void deleteCard(Card target);
+
     /** Returns an unmodifiable view of the filtered card's list */
     ObservableList<Card> getFilteredCardList();
 
@@ -124,6 +134,11 @@ public interface Model {
     void stopTriviaTest();
 
     /**
+     * Match a question to another answer. To be used in a matching test.
+     */
+    boolean matchQuestionAndAnswer(Index questionIndex, Index answerIndex);
+
+    /**
      * Obtain the trivia test that is running.
      */
     TriviaTest getCurrentRunningTest();
@@ -137,4 +152,10 @@ public interface Model {
      * Return boolean on whether the model in in a testing state.
      */
     boolean isInTestingState();
+
+    /**
+     * Add a new completed matching test to the list of results.
+     */
+    @Subscribe
+    void handleAddMatchTestResultEvent(AddMatchTestResultEvent event);
 }

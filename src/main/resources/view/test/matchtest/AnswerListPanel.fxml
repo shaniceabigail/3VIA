@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <VBox xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <GridPane>
@@ -20,12 +19,8 @@
          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
      </rowConstraints>
       <children>
-         <Label text="Answers" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" styleClass="label-bright">
-            <font>
-               <Font name="System Bold Italic" size="17.0" />
-            </font>
-         </Label>
+         <Label text="Answers" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" styleClass="label-bright" />
       </children>
    </GridPane>
-   <ListView fx:id="testMAnswerListView" VBox.vgrow="ALWAYS" />
+   <ListView fx:id="matchTestAnswerListView" VBox.vgrow="ALWAYS" />
 </VBox>

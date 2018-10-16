@@ -18,9 +18,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
-import seedu.address.model.test.TriviaTest;
 import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.model.topic.Topic;
+import seedu.address.testutil.MatchTestUtil;
 
 public class MatchCommandTest {
     private MatchTest matchTest;
@@ -63,8 +63,8 @@ public class MatchCommandTest {
 
     @Test
     public void execute_matchFailure() {
-        Index wrongCardCombiQ = getIndexes(matchTest, Q_EARTH_ROUND)[0];
-        Index wrongCardCombiA = getIndexes(matchTest, Q_FORCE_FORMULA)[1];
+        Index wrongCardCombiQ = MatchTestUtil.getIndexes(matchTest, Q_EARTH_ROUND)[0];
+        Index wrongCardCombiA = MatchTestUtil.getIndexes(matchTest, Q_FORCE_FORMULA)[1];
         assertCommandFailure(new MatchCommand(wrongCardCombiQ, wrongCardCombiA), model, commandHistory,
                 MatchCommand.MESSAGE_MATCH_FAILURE);
     }
@@ -74,35 +74,16 @@ public class MatchCommandTest {
         // Index out of bound
         assertCommandFailure(new MatchCommand(Index.fromZeroBased(100), Index.fromZeroBased(105)), model,
                 commandHistory, MatchCommand.MESSAGE_INDEX_OUT_OF_BOUND);
-
-        // Unable to execute matching command because not in matching test state.
-        model.stopTriviaTest();
-        assertCommandFailure(new MatchCommand(Index.fromZeroBased(1), Index.fromZeroBased(2)), model,
-                commandHistory, MatchCommand.MESSAGE_NOT_IN_MATCHING_TEST);
-    }
-
-    /**
-     * Used to obtain the base0 indexes of matching question and answer in the test.
-     * @param test The matchTest that is ongoing.
-     * @param card The card that is you want to match.
-     * @return the an array of indexes of size 2. With the first and second indexes representing the question and
-     * answer respectively.
-     */
-    private Index[] getIndexes(TriviaTest test, Card card) {
-        return new Index[] {
-                Index.fromZeroBased(test.getQuestions().indexOf(card.getQuestion())),
-                Index.fromZeroBased(test.getAnswers().indexOf(card.getAnswer()))
-        };
     }
 
     /**
      * Execute the match command using the card's question and answer to simulate a matching success.
      */
     private void assertMatchCommandSuccess(Card cardToMatch) {
-        Index[] expectedCorrectIndexes = getIndexes(expectedMatchTest, cardToMatch);
-        expectedMatchTest.addAttempt(expectedCorrectIndexes[0], expectedCorrectIndexes[1]);
+        Index[] expectedCorrectIndexes = MatchTestUtil.getIndexes(expectedMatchTest, cardToMatch);
+        expectedModel.matchQuestionAndAnswer(expectedCorrectIndexes[0], expectedCorrectIndexes[1]);
 
-        Index[] correctIndexes = getIndexes(matchTest, cardToMatch);
+        Index[] correctIndexes = MatchTestUtil.getIndexes(matchTest, cardToMatch);
         assertCommandSuccess(new MatchCommand(correctIndexes[0], correctIndexes[1]), model, commandHistory,
                 MatchCommand.MESSAGE_MATCH_SUCCESS, expectedModel);
     }

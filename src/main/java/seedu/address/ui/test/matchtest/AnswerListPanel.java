@@ -25,7 +25,7 @@ public class AnswerListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(AnswerListPanel.class);
 
     @FXML
-    private ListView<Answer> testMAnswerListView;
+    private ListView<Answer> matchTestAnswerListView;
 
     public AnswerListPanel(ObservableList<Answer> answerList) {
         super(FXML);
@@ -34,20 +34,21 @@ public class AnswerListPanel extends UiPart<Region> {
     }
 
     private void setConnections(ObservableList<Answer> answerList) {
-        this.testMAnswerListView.setItems(answerList);
-        testMAnswerListView.setCellFactory(listView -> new AnswerListViewCell());
+        this.matchTestAnswerListView.setItems(answerList);
+        matchTestAnswerListView.setCellFactory(listView -> new AnswerListViewCell());
     }
 
     @Subscribe
     private void handleFlashMatchOutcomeEvent(FlashMatchOutcomeEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        testMAnswerListView.setCellFactory(listView -> new AnswerListViewCell(event.indexOfAnswer, event.isCorrect));
+        matchTestAnswerListView.setCellFactory(listView ->
+                new AnswerListViewCell(event.indexOfAnswer, event.isCorrect));
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Platform.runLater(() -> testMAnswerListView.setCellFactory(listView -> new AnswerListViewCell()));
+                Platform.runLater(() -> matchTestAnswerListView.setCellFactory(listView -> new AnswerListViewCell()));
             };
         }, UiPart.FLASH_TIME);
     }

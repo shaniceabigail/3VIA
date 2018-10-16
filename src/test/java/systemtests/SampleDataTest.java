@@ -11,7 +11,6 @@ import org.junit.Test;
 import seedu.address.model.AddressBook;
 import seedu.address.model.TriviaBundle;
 import seedu.address.model.card.Card;
-import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
@@ -61,12 +60,6 @@ public class SampleDataTest extends AppSystemTest {
         } catch (IOException ioe) {
             throw new AssertionError(ioe);
         }
-    }
-
-    @Test
-    public void addressBook_dataFileDoesNotExist_loadSampleData() {
-        Person[] expectedList = SampleDataUtil.getSamplePersons();
-        assertListMatching(getPersonListPanel(), expectedList);
     }
 
     @Test
