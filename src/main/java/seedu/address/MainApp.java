@@ -27,15 +27,18 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.TriviaBundle;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.test.TriviaTestResultList;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.TriviaBundleStorage;
+import seedu.address.storage.TriviaTestResultsStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
 import seedu.address.storage.XmlTriviaBundleStorage;
+import seedu.address.storage.XmlTriviaTestResultsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -68,7 +71,10 @@ public class MainApp extends Application {
         userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         TriviaBundleStorage triviaBundleStorage = new XmlTriviaBundleStorage(userPrefs.getTriviaBundleFilePath());
-        storage = new StorageManager(addressBookStorage, triviaBundleStorage, userPrefsStorage);
+        TriviaTestResultsStorage triviaTestResultsStorage = new XmlTriviaTestResultsStorage(userPrefs
+                .getTriviaTestResultsFilePath());
+        storage = new StorageManager(addressBookStorage, triviaBundleStorage, triviaTestResultsStorage,
+                userPrefsStorage);
 
         initLogging(config);
 
@@ -89,31 +95,42 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlyTriviaBundle> triviaBundleOptional;
+        Optional<TriviaTestResultList> triviaTestResultsOptional;
 
         ReadOnlyAddressBook initialData;
         ReadOnlyTriviaBundle initialTriviaBundleData;
+        TriviaTestResultList initialTriviaTestResults;
+
         try {
             addressBookOptional = storage.readAddressBook();
             triviaBundleOptional = storage.readTriviaBundle();
+            triviaTestResultsOptional = storage.readTriviaTestResults();
+
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
             if (!triviaBundleOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample TriviaBundle");
             }
+            if (!triviaBundleOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with empty result list.");
+            }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
             initialTriviaBundleData = triviaBundleOptional.orElseGet(SampleDataUtil::getSampleTriviaBundle);
+            initialTriviaTestResults = triviaTestResultsOptional.orElseGet(TriviaTestResultList::new);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
             initialTriviaBundleData = new TriviaBundle();
+            initialTriviaTestResults = new TriviaTestResultList();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
             initialTriviaBundleData = new TriviaBundle();
+            initialTriviaTestResults = new TriviaTestResultList();
         }
 
-        return new ModelManager(initialData, initialTriviaBundleData, userPrefs);
+        return new ModelManager(initialData, initialTriviaBundleData, initialTriviaTestResults, userPrefs);
     }
 
     private void initLogging(Config config) {

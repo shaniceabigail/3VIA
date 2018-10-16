@@ -106,7 +106,7 @@ public class MatchTestTest {
         // if the ongoing test isn't stopped, isCompleted will be false
         assertFalse(matchTest.isCompleted());
 
-        // If there are existing unanswered questions, isCompleted flag should be false.
+        // If there are existing unanswered questions, even if test is stopped, isCompleted flag should be false.
         matchTest.getQuestions().remove(0);
         matchTest.getAnswers().remove(0);
         model.stopTriviaTest();

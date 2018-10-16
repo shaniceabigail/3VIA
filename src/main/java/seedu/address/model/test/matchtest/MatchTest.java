@@ -16,13 +16,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.model.AddMatchTestResultEvent;
 import seedu.address.commons.events.ui.FlashMatchOutcomeEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestResultEvent;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
+import seedu.address.model.test.TestType;
 import seedu.address.model.test.TriviaTest;
 import seedu.address.model.topic.Topic;
 import seedu.address.ui.UiPart;
@@ -39,6 +39,7 @@ public class MatchTest extends TriviaTest {
     public static final String MESSAGE_MATCH_TEST_CONSTRAINS = "Matching test needs more than 1 card with the"
             + " corresponding topic to proceed.";
 
+    public final TestType testType = TestType.MATCH_TEST;
     private final ObservableList<Question> shuffledQuestions;
     private final ObservableList<Answer> shuffledAnswers;
     private List<MatchAttempt> attempts;
@@ -69,6 +70,9 @@ public class MatchTest extends TriviaTest {
         if (!attempt.isCorrect()) {
             return false;
         }
+        if (isAtLastMatch()) {
+            isCompleted = true;
+        }
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -82,6 +86,12 @@ public class MatchTest extends TriviaTest {
         return true;
     }
 
+    @Override
+    public TestType getTestType() {
+        return testType;
+    }
+
+    @Override
     public List<MatchAttempt> getAttempts() {
         return attempts;
     }
@@ -96,7 +106,6 @@ public class MatchTest extends TriviaTest {
         if (isEndOfTest()) {
             stopTest();
             EventsCenter.getInstance().post(new ShowTriviaTestResultEvent(getResultPage()));
-            EventsCenter.getInstance().post(new AddMatchTestResultEvent(this));
         }
     }
 
@@ -152,10 +161,6 @@ public class MatchTest extends TriviaTest {
         return getQuestions().size() > 1;
     }
 
-    private boolean isEndOfTest() {
-        return shuffledQuestions.isEmpty() && shuffledAnswers.isEmpty();
-    }
-
     /**
      * Starts the timer of the matching test.
      */
@@ -205,6 +210,14 @@ public class MatchTest extends TriviaTest {
                 .collect(Collectors.toList());
         Collections.shuffle(answers);
         return FXCollections.observableList(answers);
+    }
+
+    private boolean isEndOfTest() {
+        return shuffledQuestions.isEmpty() && shuffledAnswers.isEmpty();
+    }
+
+    private boolean isAtLastMatch() {
+        return shuffledQuestions.size() == 1 && shuffledAnswers.size() == 1;
     }
 
     @Override

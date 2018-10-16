@@ -37,9 +37,12 @@ public class StorageManagerTest {
     @Before
     public void setUp() {
         XmlAddressBookStorage addressBookStorage = new XmlAddressBookStorage(getTempFilePath("ab"));
+        XmlTriviaTestResultsStorage triviaTestResultStorage = new
+                XmlTriviaTestResultsStorage(getTempFilePath("tr"));
         XmlTriviaBundleStorage triviaBundleStorage = new XmlTriviaBundleStorage(getTempFilePath("tb"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, triviaBundleStorage, userPrefsStorage);
+        storageManager = new StorageManager(addressBookStorage, triviaBundleStorage,
+                triviaTestResultStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {

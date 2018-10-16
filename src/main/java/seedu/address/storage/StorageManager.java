@@ -11,11 +11,13 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TriviaBundleChangedEvent;
+import seedu.address.commons.events.model.TriviaTestResultsChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.test.TriviaTestResultList;
 
 /**
  * Manages storage of AddressBook and TriviaBundle data in local storage.
@@ -26,6 +28,7 @@ public class StorageManager extends ComponentManager implements Storage {
     private AddressBookStorage addressBookStorage;
     private TriviaBundleStorage triviaBundleStorage;
     private UserPrefsStorage userPrefsStorage;
+    private TriviaTestResultsStorage triviaTestResultsStorage;
 
 
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
@@ -34,16 +37,17 @@ public class StorageManager extends ComponentManager implements Storage {
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    public StorageManager(AddressBookStorage addressBookStorage, TriviaBundleStorage triviaBundleStorage,
-                          UserPrefsStorage userPrefsStorage) {
+    public StorageManager(TriviaBundleStorage triviaBundleStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
         this.triviaBundleStorage = triviaBundleStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
-    public StorageManager(TriviaBundleStorage triviaBundleStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, TriviaBundleStorage triviaBundleStorage,
+                          TriviaTestResultsStorage triviaTestResultsStorage, UserPrefsStorage userPrefsStorage) {
         super();
+        this.triviaTestResultsStorage = triviaTestResultsStorage;
+        this.addressBookStorage = addressBookStorage;
         this.triviaBundleStorage = triviaBundleStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
@@ -108,6 +112,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     // ================ TriviaBundle methods ==============================
+
     @Override
     public Path getTriviaBundleFilePath() {
         return triviaBundleStorage.getTriviaBundleFilePath();
@@ -135,13 +140,53 @@ public class StorageManager extends ComponentManager implements Storage {
         triviaBundleStorage.saveTriviaBundle(triviaBundle, filePath);
     }
 
-
     @Override
     @Subscribe
     public void handleTriviaBundleChangedEvent(TriviaBundleChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveTriviaBundle(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    // ================ TriviaTest Results methods ==============================
+
+    @Override
+    public Path getTriviaTestResultsFilePath() {
+        return triviaTestResultsStorage.getTriviaTestResultsFilePath();
+    }
+
+    @Override
+    public Optional<TriviaTestResultList> readTriviaTestResults() throws DataConversionException, IOException {
+        return readTriviaTestResults(triviaTestResultsStorage.getTriviaTestResultsFilePath());
+    }
+
+    @Override
+    public Optional<TriviaTestResultList> readTriviaTestResults(Path filePath) throws DataConversionException,
+            IOException {
+        logger.fine("Attempting to read data from results file: " + filePath);
+        return triviaTestResultsStorage.readTriviaTestResults(filePath);
+    }
+
+    @Override
+    public void saveTriviaTestResults(TriviaTestResultList triviaTestResultList) throws IOException {
+        saveTriviaTestResults(triviaTestResultList, triviaTestResultsStorage.getTriviaTestResultsFilePath());
+    }
+
+    @Override
+    public void saveTriviaTestResults(TriviaTestResultList triviaTestResultList, Path filePath) throws IOException {
+        logger.fine("Attempting to write to trivia test results file " + filePath);
+        triviaTestResultsStorage.saveTriviaTestResults(triviaTestResultList, filePath);
+    }
+
+    @Override
+    @Subscribe
+    public void handleTriviaTestResultsChangedEvent(TriviaTestResultsChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveTriviaTestResults(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
