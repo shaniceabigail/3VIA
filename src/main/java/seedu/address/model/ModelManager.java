@@ -277,7 +277,7 @@ public class ModelManager extends ComponentManager implements Model {
         return matchTest.match(questionIndex, answerIndex);
     }
 
-    //=========== Matching Test Results =====================================================================
+    //=========== Matching OpenEndedTest Results =====================================================================
 
     @Override
     public void handleAddMatchTestResultEvent(AddMatchTestResultEvent event) {

@@ -5,31 +5,31 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.TestCommand;
+import seedu.address.logic.commands.OpenEndedTestCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.topic.Topic;
 
 /**
- * Parses input arguments and creates a new TestCommand object
+ * Parses input arguments and creates a new OpenEndedTestCommand object
  */
-public class TestCommandParser implements Parser<TestCommand> {
+public class OpenEndedTestCommandParser implements Parser<OpenEndedTestCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the TestCommand
+     * Parses the given {@code String} of arguments in the context of the OpenEndedTestCommand
      * and returns an estCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public TestCommand parse(String args) throws ParseException {
+    public OpenEndedTestCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TOPIC);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TOPIC)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TestCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OpenEndedTestCommand.MESSAGE_USAGE));
         }
 
         Topic tag = ParserUtil.parseTopic(argMultimap.getValue(PREFIX_TOPIC).get());
 
-        return new TestCommand(tag);
+        return new OpenEndedTestCommand(tag);
     }
 
     /**

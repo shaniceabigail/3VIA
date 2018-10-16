@@ -245,14 +245,14 @@ public class XmlUtilTest {
     }
 
     /**
-     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedPerson}
+     * OpenEndedTest class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedPerson}
      * objects.
      */
     @XmlRootElement(name = "person")
     private static class XmlAdaptedPersonWithRootElement extends XmlAdaptedPerson {}
 
     /**
-     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedCard}
+     * OpenEndedTest class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedCard}
      * objects.
      */
     @XmlRootElement(name = "cards")

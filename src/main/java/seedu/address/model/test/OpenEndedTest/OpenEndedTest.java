@@ -1,4 +1,4 @@
-package seedu.address.model.test.normalTest;
+package seedu.address.model.test.OpenEndedTest;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -17,16 +17,16 @@ import seedu.address.model.topic.Topic;
 
 /**
  * Represents a trivia test that is started by the user.
- * For a {@code Test} to start, there must be more than 1 cards related to the topic that is specified in the test.
+ * For a {@code OpenEndedTest} to start, there must be more than 1 cards related to the topic that is specified in the test.
  */
-public abstract class Test extends TriviaTest {
-    public static final String MESSAGE_MATCH_TEST_CONSTRAINS = "Test needs more than 1 card with the"
+public abstract class OpenEndedTest extends TriviaTest {
+    public static final String MESSAGE_MATCH_TEST_CONSTRAINS = "OpenEndedTest needs more than 1 card with the"
             + " corresponding topic to proceed.";
 
     private final ObservableList<Question> shuffledQuestions;
     private final ObservableList<Answer> shuffledAnswers;
 
-    public Test(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
+    public OpenEndedTest(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
         super(tag, triviaBundle);
 
         shuffledQuestions = getQuestions(cards);

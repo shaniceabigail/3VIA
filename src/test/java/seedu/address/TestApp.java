@@ -32,7 +32,7 @@ public class TestApp extends MainApp {
 
     public static final Path ADDRESS_BOOK_SAVE_LOCATION = TestUtil.getFilePathInSandboxFolder("sampleData.xml");
     public static final Path TRIVIA_BUNDLE_SAVE_LOCATION = TestUtil.getFilePathInSandboxFolder("sampleTriviaData.xml");
-    public static final String APP_TITLE = "Test App";
+    public static final String APP_TITLE = "OpenEndedTest App";
 
     protected static final Path DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");

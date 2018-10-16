@@ -154,7 +154,7 @@ public class EditCommandTest {
     }
 
     // TODO To enable this after undo/redo command is implemented on trivia.
-    //    @Test
+    //    @OpenEndedTest
     //    public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
     //        Person editedPerson = new PersonBuilder().build();
     //        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -178,7 +178,7 @@ public class EditCommandTest {
     // expectedModel);
     //    }
     //
-    //    @Test
+    //    @OpenEndedTest
     //    public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
     //        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
     //        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
@@ -199,7 +199,7 @@ public class EditCommandTest {
     //     * unfiltered list is different from the index at the filtered list.
     //     * 4. Redo the edit. This ensures {@code RedoCommand} edits the person object regardless of indexing.
     //     */
-    //    @Test
+    //    @OpenEndedTest
     //    public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
     //        Person editedPerson = new PersonBuilder().build();
     //        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();

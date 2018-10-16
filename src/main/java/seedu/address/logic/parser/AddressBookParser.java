@@ -76,8 +76,8 @@ public class AddressBookParser {
             case RedoCommand.COMMAND_WORD:
                 return new RedoCommand();
 
-            case TestCommand.COMMAND_WORD:
-                return new TestCommandParser().parse(arguments);
+            case OpenEndedTestCommand.COMMAND_WORD:
+                return new OpenEndedTestCommandParser().parse(arguments);
 
             case MatchTestCommand.COMMAND_WORD:
                 return new MatchTestCommandParser().parse(arguments);
