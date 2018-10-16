@@ -314,7 +314,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-=== Mass import feature
+=== Mass Import Feature
 
 ==== Current implementation
 The import mechanism works with the `StorageManager` to add and save multiple cards at once. The imported cards are stored internally as an xml file on the hard disk. Additionally, the import mechanism implements the following operations:
