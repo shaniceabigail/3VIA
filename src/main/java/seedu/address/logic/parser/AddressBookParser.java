@@ -17,9 +17,9 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MatchTestCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.TestMCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.state.State;
@@ -90,8 +90,8 @@ public class AddressBookParser {
             case RedoCommand.COMMAND_WORD:
                 return new RedoCommand();
 
-            case TestMCommand.COMMAND_WORD:
-                return new TestMCommandParser().parse(arguments);
+            case MatchTestCommand.COMMAND_WORD:
+                return new MatchTestCommandParser().parse(arguments);
 
             case ImportCommand.COMMAND_WORD:
                 return new ImportCommandParser().parse(arguments);
@@ -100,7 +100,7 @@ public class AddressBookParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
 
-        case TESTM:
+        case MATCH_TEST:
             switch (commandWord) {
 
             case ExitCommand.COMMAND_WORD:

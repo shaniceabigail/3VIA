@@ -19,14 +19,10 @@ public class Homepage extends UiPart<Region> {
 
     private BrowserPanel browserPanel;
     private ImportHelpDisplay importHelpDisplay;
-    private PersonListPanel personListPanel;
     private CardListPanel cardListPanel;
 
     @FXML
     private StackPane extraInformationPlaceholder;
-
-    @FXML
-    private StackPane personListPanelPlaceholder;
 
     @FXML
     private StackPane cardListPanelPlaceholder;
@@ -38,16 +34,10 @@ public class Homepage extends UiPart<Region> {
         browserPanel = new BrowserPanel();
         extraInformationPlaceholder.getChildren().add(browserPanel.getRoot()); // overlays importHelpDisplay
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         cardListPanel = new CardListPanel(logic.getFilteredCardList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
         cardListPanelPlaceholder.getChildren().add(cardListPanel.getRoot());
 
         registerAsAnEventHandler(this);
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
     }
 
     public CardListPanel getCardListPanel() {

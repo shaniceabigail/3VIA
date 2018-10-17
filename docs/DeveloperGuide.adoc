@@ -208,14 +208,9 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the Trivia Bundle data.
+* exposes an unmodifiable `ObservableList<Card>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
-
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelClassBetterOopDiagram.png[width="800"]
 
 [[Design-Storage]]
 === Storage component
@@ -367,6 +362,72 @@ image::AddMutipleCardsSequenceDiagram.png[width="800"]
 * **Alternative 2 (current choice):** Tokenize string based on AddCommand input format
 ** Pros: Easy to implement as it allows reuse of add command
 ** Cons: Unable to undo/ redo import of all cards as the import command is essentially multiple add commands.
+
+// tag::matchingtest[]
+=== Matching Test Feature
+==== Current Implementation
+The life cycle of a matching test is facilitated by the `AppState` and `MatchTest` model.
+
+The `AppState` model defines the state of which the application is in. And the `MatchTest` model extends
+from `TriviaTest` which has the functionality of storing the necessary information that are needed in any kinds of test.
+
+Additionally, `MatchTest` also implements the following operations:
+
+* `MatchTest#startTest()` -- Does the necessary initialisations to start a matching test.
+* `MatchTest#stopTest()` -- Does the necessary clean up to stop a matching test.
+* `MatchTest#match(questionIndex, answerIndex)` -- Matches the question to the answer.
+
+These operations are exposed in the `Model` interface as `Model#startTriviaTest()`, `Model#stopTriviaTest()` and `Model#MatchCards` respectively.
+
+The following activity diagram shows the complete lifecycle of a matching test.
+
+image::MatchTestActivityDiagram.png[width="800"]
+
+Given below is an example usage scenario and how the matching test behaves at each step.
+
+Step 1. The user enter the `testM` command and a new `MatchingTestCommand` will be created.
+
+Step 2. The `MatchingTestCommand` will be executed and a new MatchTest will be created as shown in the below Sequence diagram.
+
+image::StartingMatchTestSequenceDiagram.png[width="800"]
+
+Step 3. After the matching test has been started, the user can only input the following commands:
+
+* `QUESTION_INDEX ANSWER_INDEX` Will be used to define which question will be matched to the answer.
+* `exit` If the user input `exit`, the matching test will end and the information related to that matching test will not be recorded.
+
+Step 4. Suppose the user chose to match a question to an answer, the sequence will execute a list of steps, as shown in the sequence diagram below, to determine whether the match is correct.
+
+image::MatchCommandSequenceDiagram.png[width="800"]
+
+Step 5. Suppose it is correct, the System will remove the matched question and answer from the Ui.
+
+Step 6. If there are still existing unmatched question and answers, the System will go back to step 3.
+
+Step 7. After all the question and answers are matched, the System will display the results.
+
+Step 8. At this stage, the System will await `exit` command from the user so that user can be taken back to the home page.
+
+==== Design Considerations
+
+===== The polymorphism of TriviaTest
+* **Alternative 1 (current choice):** Uses `TriviaTest`, `CloseTriviaTestViewEvent` and `ShowTriviaTestViewEvent` that accepts all kinds of TriviaTest, not just matching test.
+** Pros: Follows Open-Close Principle which increases the extensibility of the testing feature in 3VIA.
+** Pros: Increases the re-usability of similar codes, and promotes cleaner code.
+** Cons: The implementation of different tests have to follow the structure of TriviaTest very strictly.
+* **Alternative 1 (current choice):** Implement each kinds of test as a standalone test with its own standalone class and event handler.
+** Pros: Easy to implement and each developer will have their freedom of how to implement their own test.
+** Cons: Will lead to code that is increasingly not manageable.
+
+===== How UI feedback is being received when a `MatchCommand` is executed
+* **Alternative 1 (current choice):** Uses `AsyncEventCenter` to dispatch its events.
+** Pros: The feedback received by the user is synchronised between question and answer.
+** Cons: More CPU intensive as it uses multi-threading.
+* **Alternative 2:** Uses `EventCenter` to dispatch its events.
+** Pros: Easier to debug code that does not use multi-threading and less CPU intensive.
+** Cons: The events will be dispatched and handle in a sequential order, as a result the UI feedback for question may not be in sync with feedback for answer.
+
+// end::matchingtest[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -661,7 +722,7 @@ Use case resumes at step 2.
 
 *MSS*
 
-1. User: Adds question, answer and tag(s).
+1. User: Adds question, answer and topic(s).
 2. System: Displays the question and answer added.
 +
 Use case ends.
@@ -681,7 +742,7 @@ Use case ends.
 *MSS*
 
 1. User: User start open-ended test.
-2. System: Displays list of questions with tag.
+2. System: Displays list of questions with topic.
 3. User: Confirms questions to be tested.
 4. System: Displays question and starts the timer (if specified) for the question.
 5. User: Key in the user’s answer.
@@ -695,9 +756,9 @@ Use case ends.
 *Extensions*
 
 [none]
-* 2a. Tag not found
+* 2a. Topic not found
 [none]
-** 2a1. System: Indicates tag not found.
+** 2a1. System: Indicates topic not found.
 +
 Use case ends.
 
