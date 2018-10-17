@@ -27,6 +27,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.TriviaBundle;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
+import seedu.address.model.test.TriviaResultList;
 import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.EditCardDescriptorBuilder;
 
@@ -35,7 +36,8 @@ import seedu.address.testutil.EditCardDescriptorBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new TriviaResultList(),
+            new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -47,7 +49,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CARD_SUCCESS, editedCard);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new TriviaBundle(model.getTriviaBundle()), new UserPrefs());
+                new TriviaBundle(model.getTriviaBundle()), new TriviaResultList(), new UserPrefs());
         expectedModel.updateCard(model.getFilteredCardList().get(0), editedCard);
         expectedModel.commitTriviaBundle();
 
@@ -70,7 +72,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CARD_SUCCESS, editedCard);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new TriviaBundle(model.getTriviaBundle()), new UserPrefs());
+                new TriviaBundle(model.getTriviaBundle()), new TriviaResultList(), new UserPrefs());
         expectedModel.updateCard(lastCard, editedCard);
         expectedModel.commitTriviaBundle();
 
@@ -85,7 +87,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CARD_SUCCESS, editedCard);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new TriviaBundle(model.getTriviaBundle()), new UserPrefs());
+                new TriviaBundle(model.getTriviaBundle()), new TriviaResultList(), new UserPrefs());
         expectedModel.commitTriviaBundle();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -103,7 +105,7 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_CARD_SUCCESS, editedCard);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new TriviaBundle(model.getTriviaBundle()), new UserPrefs());
+                new TriviaBundle(model.getTriviaBundle()), new TriviaResultList(), new UserPrefs());
         expectedModel.updateCard(model.getFilteredCardList().get(0), editedCard);
         expectedModel.commitTriviaBundle();
 

@@ -18,6 +18,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.TriviaBundle;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.test.TriviaResultList;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.storage.XmlSerializableTriviaBundle;
@@ -32,6 +33,9 @@ public class TestApp extends MainApp {
 
     public static final Path ADDRESS_BOOK_SAVE_LOCATION = TestUtil.getFilePathInSandboxFolder("sampleData.xml");
     public static final Path TRIVIA_BUNDLE_SAVE_LOCATION = TestUtil.getFilePathInSandboxFolder("sampleTriviaData.xml");
+    public static final Path TEST_RESULTS_SAVE_LOCATION = TestUtil
+            .getFilePathInSandboxFolder("sampleTestResultsData.xml");
+
     public static final String APP_TITLE = "Test App";
 
     protected static final Path DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
@@ -40,6 +44,7 @@ public class TestApp extends MainApp {
     protected Supplier<ReadOnlyTriviaBundle> initialTriviaBundle = () -> null;
     protected Path addressBookFile = ADDRESS_BOOK_SAVE_LOCATION;
     protected Path triviaBundleFile = TRIVIA_BUNDLE_SAVE_LOCATION;
+    protected Path triviaResultsFile = TEST_RESULTS_SAVE_LOCATION;
 
     public TestApp() {
     }
@@ -80,6 +85,7 @@ public class TestApp extends MainApp {
         userPrefs.updateLastUsedGuiSetting(new GuiSettings(1000.0, 1000.0, (int) x, (int) y));
         userPrefs.setAddressBookFilePath(addressBookFile);
         userPrefs.setTriviaBundleFilePath(triviaBundleFile);
+        userPrefs.setTriviaResultsFilePath(triviaResultsFile);
         return userPrefs;
     }
 
@@ -127,7 +133,8 @@ public class TestApp extends MainApp {
      * Returns a defensive copy of the model.
      */
     public Model getModel() {
-        Model copy = new ModelManager((model.getAddressBook()), model.getTriviaBundle(), new UserPrefs());
+        Model copy = new ModelManager((model.getAddressBook()), model.getTriviaBundle(), new TriviaResultList(),
+                new UserPrefs());
         // ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
         ModelHelper.setFilteredList(copy, model.getFilteredCardList());
         return copy;

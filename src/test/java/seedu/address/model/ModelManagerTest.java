@@ -18,6 +18,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.card.QuestionContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.test.TriviaResultList;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.TriviaBundleBuilder;
 
@@ -82,8 +83,8 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, triviaBundle, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, triviaBundle, userPrefs);
+        modelManager = new ModelManager(addressBook, triviaBundle, new TriviaResultList(), userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, triviaBundle, new TriviaResultList(), userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -96,12 +97,14 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, differentTriviaBundle, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, differentTriviaBundle,
+                new TriviaResultList(), userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = Q_EARTH_ROUND.getQuestion().value.split("\\s+");
         modelManager.updateFilteredCardList(new QuestionContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, triviaBundle, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, triviaBundle, new TriviaResultList(),
+                userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
@@ -109,7 +112,8 @@ public class ModelManagerTest {
         // different filteredList -> returns false
         keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, triviaBundle, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, triviaBundle, new TriviaResultList(),
+                userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -117,6 +121,7 @@ public class ModelManagerTest {
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertTrue(modelManager.equals(new ModelManager(addressBook, triviaBundle, differentUserPrefs)));
+        assertTrue(modelManager.equals(new ModelManager(addressBook, triviaBundle, new TriviaResultList(),
+                differentUserPrefs)));
     }
 }

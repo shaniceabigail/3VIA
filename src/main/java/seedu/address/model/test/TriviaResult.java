@@ -10,7 +10,7 @@ import seedu.address.model.topic.Topic;
 /**
  * A class that is being used to store the data of the trivia test.
  */
-public class TriviaTestResult {
+public class TriviaResult {
     public static final String INCOMPLETE_TRIVIA_TEST_MESSAGE =
             "Trivia test have to completed before it can be recorded.";
 
@@ -21,7 +21,7 @@ public class TriviaTestResult {
     public final double duration;
 
 
-    public TriviaTestResult(TriviaTest triviaTest) {
+    public TriviaResult(TriviaTest triviaTest) {
         checkArgument(triviaTest.isCompleted(), INCOMPLETE_TRIVIA_TEST_MESSAGE);
 
         testType = triviaTest.getTestType();
@@ -31,8 +31,8 @@ public class TriviaTestResult {
         duration = triviaTest.getDuration();
     }
 
-    public TriviaTestResult(TestType testType, Topic topic, Date testDate, double duration,
-                            List<? extends Attempt> attempts) {
+    public TriviaResult(TestType testType, Topic topic, Date testDate, double duration,
+                        List<? extends Attempt> attempts) {
         this.testType = testType;
         this.topic = topic;
         this.attempts = attempts;

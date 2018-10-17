@@ -227,9 +227,6 @@ public class MatchTest extends TriviaTest {
 
     @Override
     public void stopTest() {
-        if (isEndOfTest()) {
-            isCompleted = true;
-        }
         timer.cancel();
     }
 

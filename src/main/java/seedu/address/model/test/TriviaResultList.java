@@ -12,27 +12,27 @@ import seedu.address.model.card.Card;
 /**
  * Contains the mapping of all the test.
  */
-public class TriviaTestResultList {
-    private final List<TriviaTestResult> triviaTestResults;
+public class TriviaResultList {
+    private final List<TriviaResult> triviaResults;
     private final HashMap<Card, List<Attempt>> attemptsOfCards;
 
-    public TriviaTestResultList() {
-        triviaTestResults = new ArrayList<>();
+    public TriviaResultList() {
+        triviaResults = new ArrayList<>();
         attemptsOfCards = new HashMap<>();
     }
 
     /**
-     * Adds a triviaTestResult into the list of triviaTestResults
+     * Adds a triviaResult into the list of triviaResults
      */
-    public void addTriviaTestResult(TriviaTestResult triviaTestResult) {
-        requireAllNonNull(triviaTestResult);
+    public void addTriviaResult(TriviaResult triviaResult) {
+        requireAllNonNull(triviaResult);
 
-        triviaTestResults.add(triviaTestResult);
-        mapCardsToAttempts(triviaTestResult.attempts);
+        triviaResults.add(triviaResult);
+        mapCardsToAttempts(triviaResult.attempts);
     }
 
-    public List<TriviaTestResult> getResultList() {
-        return triviaTestResults;
+    public List<TriviaResult> getResultList() {
+        return triviaResults;
     }
 
     /**

@@ -11,13 +11,13 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.model.test.Attempt;
 import seedu.address.model.test.TestType;
-import seedu.address.model.test.TriviaTestResult;
+import seedu.address.model.test.TriviaResult;
 import seedu.address.model.topic.Topic;
 
 /**
- * JAXB-friendly version of the TriviaTestResult.
+ * JAXB-friendly version of the TriviaResult.
  */
-public class XmlAdaptedTriviaTestResult {
+public class XmlAdaptedTriviaResult {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Trivia Test's %s field is missing!";
 
 
@@ -34,16 +34,16 @@ public class XmlAdaptedTriviaTestResult {
     private List<XmlAdaptedAttempt> attempt;
 
     /**
-     * Constructs an XmlAdaptedTriviaTestResult.
+     * Constructs an XmlAdaptedTriviaResult.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedTriviaTestResult() {}
+    public XmlAdaptedTriviaResult() {}
 
     /**
-     * Constructs an {@code XmlAdaptedTriviaTestResult} with the given card details.
+     * Constructs an {@code XmlAdaptedTriviaResult} with the given card details.
      */
-    public XmlAdaptedTriviaTestResult(String testType, String topic, String date,
-                                      String duration, List<XmlAdaptedAttempt> attempt) {
+    public XmlAdaptedTriviaResult(String testType, String topic, String date,
+                                  String duration, List<XmlAdaptedAttempt> attempt) {
         this.testType = testType;
         this.topic = topic;
         this.date = date;
@@ -56,7 +56,7 @@ public class XmlAdaptedTriviaTestResult {
      *
      * @param source future changes to this will not affect the created XmlAdaptedCard
      */
-    public XmlAdaptedTriviaTestResult(TriviaTestResult source) {
+    public XmlAdaptedTriviaResult(TriviaResult source) {
         testType = source.testType.toString();
         topic = source.topic.topicName;
         date = DateUtil.formatDate(source.testDate);
@@ -67,11 +67,11 @@ public class XmlAdaptedTriviaTestResult {
     }
 
     /**
-     * Converts this jaxb-friendly adapted card object into the model's TriviaTestResult object.
+     * Converts this jaxb-friendly adapted card object into the model's TriviaResult object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted card
      */
-    public TriviaTestResult toModelType() throws IllegalValueException {
+    public TriviaResult toModelType() throws IllegalValueException {
         final List<Attempt> attempts = new ArrayList<>();
         for (XmlAdaptedAttempt attempt : attempt) {
             attempts.add(attempt.toModelType());
@@ -119,6 +119,6 @@ public class XmlAdaptedTriviaTestResult {
             throw new IllegalValueException(NumberFormatException.class.getSimpleName());
         }
 
-        return new TriviaTestResult(testTypeEnum, modelTopic, modelDate, modelDuration, attempts);
+        return new TriviaResult(testTypeEnum, modelTopic, modelDate, modelDuration, attempts);
     }
 }

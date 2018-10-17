@@ -36,17 +36,4 @@ public class XmlFileStorage {
         }
     }
 
-    /**
-     * Returns trivia bundle in the file or an empty trivia bundle
-     * TODO remove isTrivia boolean
-     */
-    public static XmlSerializableTriviaBundle loadDataFromSaveFile(Path file)
-            throws DataConversionException, FileNotFoundException {
-        try {
-            return XmlUtil.getDataFromFile(file, XmlSerializableTriviaBundle.class);
-        } catch (JAXBException e) {
-            throw new DataConversionException(e);
-        }
-    }
-
 }

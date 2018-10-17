@@ -7,32 +7,32 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.test.TriviaTestResult;
-import seedu.address.model.test.TriviaTestResultList;
+import seedu.address.model.test.TriviaResult;
+import seedu.address.model.test.TriviaResultList;
 
 /**
- * An Immutable TriviaTestResultList that is serializable to XML format
+ * An Immutable TriviaResultList that is serializable to XML format
  */
 @XmlRootElement(name = "testresult")
-public class XmlSerializableTriviaTestResult {
+public class XmlSerializableTriviaResult {
     @XmlElement
-    private List<XmlAdaptedTriviaTestResult> results;
+    private List<XmlAdaptedTriviaResult> results;
 
     /**
      * Creates an empty XmlSerializableTriviaBundle.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableTriviaTestResult() {
+    public XmlSerializableTriviaResult() {
         results = new ArrayList<>();
     }
 
     /**
      * Conversion
      */
-    public XmlSerializableTriviaTestResult(TriviaTestResultList src) {
+    public XmlSerializableTriviaResult(TriviaResultList src) {
         this();
         results.addAll(src.getResultList().stream()
-                .map(XmlAdaptedTriviaTestResult::new)
+                .map(XmlAdaptedTriviaResult::new)
                 .collect(Collectors.toList()));
     }
 
@@ -42,13 +42,13 @@ public class XmlSerializableTriviaTestResult {
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedCard}.
      */
-    public TriviaTestResultList toModelType() throws IllegalValueException {
-        TriviaTestResultList triviaTestResults = new TriviaTestResultList();
-        for (XmlAdaptedTriviaTestResult r : results) {
-            TriviaTestResult result = r.toModelType();
-            triviaTestResults.addTriviaTestResult(result);
+    public TriviaResultList toModelType() throws IllegalValueException {
+        TriviaResultList triviaResults = new TriviaResultList();
+        for (XmlAdaptedTriviaResult r : results) {
+            TriviaResult result = r.toModelType();
+            triviaResults.addTriviaResult(result);
         }
-        return triviaTestResults;
+        return triviaResults;
     }
 
     @Override
@@ -57,9 +57,9 @@ public class XmlSerializableTriviaTestResult {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableTriviaTestResult)) {
+        if (!(other instanceof XmlSerializableTriviaResult)) {
             return false;
         }
-        return results.equals(((XmlSerializableTriviaTestResult) other).results);
+        return results.equals(((XmlSerializableTriviaResult) other).results);
     }
 }

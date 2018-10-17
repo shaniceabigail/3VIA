@@ -13,35 +13,35 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
-import seedu.address.model.test.TriviaTestResultList;
+import seedu.address.model.test.TriviaResultList;
 
 /**
- *
+ * A class to access TriviaResults data stored as an xml file on the hard disk.
  */
-public class XmlTriviaTestResultsStorage implements TriviaTestResultsStorage {
-    private static final Logger logger = LogsCenter.getLogger(XmlTriviaTestResultsStorage.class);
+public class XmlTriviaResultsStorage implements TriviaResultsStorage {
+    private static final Logger logger = LogsCenter.getLogger(XmlTriviaResultsStorage.class);
 
     private Path filePath;
 
-    public XmlTriviaTestResultsStorage(Path filePath) {
+    public XmlTriviaResultsStorage(Path filePath) {
         this.filePath = filePath;
     }
 
-    public Path getTriviaTestResultsFilePath() {
+    public Path getTriviaResultsFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<TriviaTestResultList> readTriviaTestResults() throws DataConversionException, IOException {
-        return readTriviaTestResults(filePath);
+    public Optional<TriviaResultList> readTriviaResults() throws DataConversionException, IOException {
+        return readTriviaResults(filePath);
     }
 
     /**
-     * Similar to {@link #readTriviaTestResults()} ()}
+     * Similar to {@link #readTriviaResults()} ()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<TriviaTestResultList> readTriviaTestResults(Path filePath) throws DataConversionException,
+    public Optional<TriviaResultList> readTriviaResults(Path filePath) throws DataConversionException,
             FileNotFoundException {
         requireNonNull(filePath);
 
@@ -50,10 +50,10 @@ public class XmlTriviaTestResultsStorage implements TriviaTestResultsStorage {
             return Optional.empty();
         }
 
-        XmlSerializableTriviaTestResult xmlTriviaTestResult = XmlFileStorage.loadDataFromSaveFile(filePath,
-                XmlSerializableTriviaTestResult.class);
+        XmlSerializableTriviaResult xmlTriviaResult = XmlFileStorage.loadDataFromSaveFile(filePath,
+                XmlSerializableTriviaResult.class);
         try {
-            return Optional.of(xmlTriviaTestResult.toModelType());
+            return Optional.of(xmlTriviaResult.toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -61,19 +61,19 @@ public class XmlTriviaTestResultsStorage implements TriviaTestResultsStorage {
     }
 
     @Override
-    public void saveTriviaTestResults(TriviaTestResultList triviaTestResultList) throws IOException {
-        saveTriviaTestResults(triviaTestResultList, filePath);
+    public void saveTriviaResults(TriviaResultList triviaResultList) throws IOException {
+        saveTriviaResults(triviaResultList, filePath);
     }
 
     /**
-     * Similar to {@link #saveTriviaTestResults(TriviaTestResultList)}
+     * Similar to {@link #saveTriviaResults(TriviaResultList)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveTriviaTestResults(TriviaTestResultList triviaTestResultList, Path filePath) throws IOException {
-        requireNonNull(triviaTestResultList);
+    public void saveTriviaResults(TriviaResultList triviaResultList, Path filePath) throws IOException {
+        requireNonNull(triviaResultList);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableTriviaTestResult(triviaTestResultList));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableTriviaResult(triviaResultList));
     }
 }

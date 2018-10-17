@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
+import seedu.address.model.test.TriviaResultList;
 import seedu.address.testutil.CardBuilder;
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -24,13 +25,15 @@ public class AddCommandIntegrationTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new TriviaResultList(),
+                new UserPrefs());
     }
 
     @Test
     public void execute_newCard_success() {
         Card validCard = new CardBuilder().build();
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTriviaBundle(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTriviaBundle(),
+                new TriviaResultList(), new UserPrefs());
         expectedModel.addCard(validCard);
         expectedModel.commitTriviaBundle();
         assertCommandSuccess(new AddCommand(validCard), model, commandHistory,

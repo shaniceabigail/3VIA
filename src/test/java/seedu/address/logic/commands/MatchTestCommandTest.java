@@ -15,6 +15,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.test.TriviaResultList;
 import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.model.topic.Topic;
 
@@ -25,8 +26,10 @@ public class MatchTestCommandTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), model.getTriviaBundle(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new TriviaResultList(),
+                new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), model.getTriviaBundle(), new TriviaResultList(),
+                new UserPrefs());
     }
 
     @After

@@ -14,16 +14,16 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TriviaBundleChangedEvent;
-import seedu.address.commons.events.model.TriviaTestResultsChangedEvent;
+import seedu.address.commons.events.model.TriviaResultsChangedEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.AppState;
 import seedu.address.model.state.State;
+import seedu.address.model.test.TriviaResult;
+import seedu.address.model.test.TriviaResultList;
 import seedu.address.model.test.TriviaTest;
-import seedu.address.model.test.TriviaTestResult;
-import seedu.address.model.test.TriviaTestResultList;
 import seedu.address.model.test.matchtest.MatchTest;
 
 /**
@@ -37,54 +37,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedTriviaBundle versionedTriviaBundle;
     private final FilteredList<Card> filteredCards;
-    private final TriviaTestResultList triviaTestResults;
+    private final TriviaResultList triviaResults;
     private final AppState appState;
 
     private TriviaTest currentRunningTest;
 
-    /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
-     */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
-        super();
-        requireAllNonNull(addressBook, userPrefs);
-
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-        versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
-
-        versionedTriviaBundle = null;
-        filteredCards = null;
-
-        triviaTestResults = new TriviaTestResultList();
-
-        currentRunningTest = null;
-        appState = new AppState();
-    }
-
-
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTriviaBundle triviaBundle, UserPrefs userPrefs) {
-        super();
-        requireAllNonNull(addressBook, triviaBundle, userPrefs);
-
-        logger.fine("Initializing with addressbook and trivia bundle: " + triviaBundle
-                + " and user prefs " + userPrefs);
-
-        versionedTriviaBundle = new VersionedTriviaBundle(triviaBundle);
-        filteredCards = new FilteredList<>(versionedTriviaBundle.getCardList());
-
-        versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
-
-        triviaTestResults = new TriviaTestResultList();
-
-        currentRunningTest = null;
-        appState = new AppState();
-    }
-
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTriviaBundle triviaBundle,
-                        TriviaTestResultList triviaTestResultList, UserPrefs userPrefs) {
+                        TriviaResultList triviaResultList, UserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, triviaBundle, userPrefs);
 
@@ -93,7 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedTriviaBundle = new VersionedTriviaBundle(triviaBundle);
         filteredCards = new FilteredList<>(versionedTriviaBundle.getCardList());
-        triviaTestResults = triviaTestResultList;
+        triviaResults = triviaResultList;
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
@@ -103,7 +62,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new TriviaBundle(), new UserPrefs());
+        this(new AddressBook(), new TriviaBundle(), new TriviaResultList(), new UserPrefs());
     }
 
     @Override
@@ -294,8 +253,8 @@ public class ModelManager extends ComponentManager implements Model {
         MatchTest matchTest = (MatchTest) currentRunningTest;
         boolean isCorrectMatch = matchTest.match(questionIndex, answerIndex);
         if (matchTest.isCompleted()) {
-            triviaTestResults.addTriviaTestResult(new TriviaTestResult(currentRunningTest));
-            raise(new TriviaTestResultsChangedEvent(triviaTestResults));
+            triviaResults.addTriviaResult(new TriviaResult(currentRunningTest));
+            raise(new TriviaResultsChangedEvent(triviaResults));
         }
 
         return isCorrectMatch;
