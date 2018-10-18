@@ -6,7 +6,7 @@ import java.lang.String;
  * An abstract Tab class to be inherited by other tabs created
  */
 
-public abstract class Tab {
+public interface Tab {
 
     private String Title;
 
