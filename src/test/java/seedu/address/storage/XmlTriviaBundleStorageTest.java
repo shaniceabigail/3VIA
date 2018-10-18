@@ -86,7 +86,7 @@ public class XmlTriviaBundleStorageTest {
         // TODO To enable this after delete command is implemented on trivia.
         // Modify data, overwrite exiting file, and read back
         //        original.addCard(Q_TALLEST_BUILDING);
-        //        original.removeCard(Q_DENISTY_FORMULA);
+        //        original.removeCard(Q_DENSITY_FORMULA);
         //        xmlTriviaBundleStorage.saveTriviaBundle(original, filePath);
         //        readBack = xmlTriviaBundleStorage.readTriviaBundle(filePath).get();
         //        assertEquals(original, new TriviaBundle(readBack));

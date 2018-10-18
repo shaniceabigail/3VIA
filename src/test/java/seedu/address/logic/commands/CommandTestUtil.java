@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ANSWER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUESTION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +15,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.TriviaBundle;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.QuestionContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -39,29 +40,29 @@ public class CommandTestUtil {
 
     public static final String VALID_QUESTION_EARTH_FLAT = "Is earth flat?";
     public static final String VALID_ANSWER_EARTH_FLAT = "No.";
-    public static final String VALID_TAG_PHYSICS = "Physics";
+    public static final String VALID_TOPIC_PHYSICS = "Physics";
     public static final String VALID_QUESTION_GIT_COMMIT = "How to commit in git?";
     public static final String VALID_ANSWER_GIT_COMMIT = "git commit -m 'whatever you wanna say'";
-    public static final String VALID_TAG_GIT = "Git";
+    public static final String VALID_TOPIC_GIT = "Git";
     public static final String VALID_QUESTION_PM_OF_SG = "Who is the prime minister of Singapore?";
     public static final String VALID_ANSWER_PM_OF_SG = "Who is the prime minister of Singapore?";
-    public static final String VALID_TAG_GEN_KNOWLEDGE = "GeneralKnowledge";
-    public static final String VALID_TAG_NO_TAG = "NoTag";
+    public static final String VALID_TOPIC_GEN_KNOWLEDGE = "GeneralKnowledge";
+    public static final String VALID_TOPIC_NO_TOPIC = "NoTopic";
 
     public static final String QUESTION_DESC_EARTH_FLAT = " " + PREFIX_QUESTION + VALID_QUESTION_EARTH_FLAT;
     public static final String QUESTION_DESC_GIT_COMMIT = " " + PREFIX_QUESTION + VALID_QUESTION_GIT_COMMIT;
     public static final String ANSWER_DESC_EARTH_FLAT = " " + PREFIX_ANSWER + VALID_ANSWER_EARTH_FLAT;
     public static final String ANSWER_DESC_GIT_COMMIT = " " + PREFIX_ANSWER + VALID_ANSWER_GIT_COMMIT;
-    public static final String TAG_DESC_PHYSICS = " " + PREFIX_TAG + VALID_TAG_PHYSICS;
-    public static final String TAG_DESC_GIT = " " + PREFIX_TAG + VALID_TAG_GIT;
+    public static final String TOPIC_DESC_PHYSICS = " " + PREFIX_TOPIC + VALID_TOPIC_PHYSICS;
+    public static final String TOPIC_DESC_GIT = " " + PREFIX_TOPIC + VALID_TOPIC_GIT;
     public static final String QUESTION_DESC_PM_OF_SG = " " + PREFIX_QUESTION + VALID_QUESTION_PM_OF_SG;
     public static final String ANSWER_DESC_PM_OF_SG = " " + PREFIX_ANSWER + VALID_ANSWER_PM_OF_SG;
-    public static final String TAG_DESC_GEN_KNOWLEDGE = " " + PREFIX_TAG + VALID_TAG_GEN_KNOWLEDGE;
-    public static final String TAG_DESC_NO_TAG = " " + PREFIX_TAG + VALID_TAG_NO_TAG;
+    public static final String TOPIC_DESC_GEN_KNOWLEDGE = " " + PREFIX_TOPIC + VALID_TOPIC_GEN_KNOWLEDGE;
+    public static final String TOPIC_DESC_NO_TOPIC = " " + PREFIX_TOPIC + VALID_TOPIC_NO_TOPIC;
 
     public static final String INVALID_QUESTION_DESC = " " + PREFIX_QUESTION + ""; // empty strings not allowed
     public static final String INVALID_ANSWER_DESC = " " + PREFIX_ANSWER + "  "; // empty strings not allowed
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "tags*"; // '*' not allowed in tags
+    public static final String INVALID_TOPIC_DESC = " " + PREFIX_TOPIC + "topics*"; // '*' not allowed in topics
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -73,13 +74,13 @@ public class CommandTestUtil {
     static {
         DESC_EARTH_FLAT = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_EARTH_FLAT)
                 .withAnswer(VALID_ANSWER_EARTH_FLAT)
-                .withTags(VALID_TAG_PHYSICS).build();
+                .withTopics(VALID_TOPIC_PHYSICS).build();
         DESC_GIT_COMMIT = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_GIT_COMMIT)
                 .withAnswer(VALID_ANSWER_GIT_COMMIT)
-                .withTags(VALID_TAG_GIT).build();
+                .withTopics(VALID_TOPIC_GIT).build();
         DESC_PM_OF_SG = new EditCardDescriptorBuilder().withQuestion(VALID_QUESTION_PM_OF_SG)
                 .withAnswer(VALID_ANSWER_PM_OF_SG)
-                .withTags(VALID_TAG_GEN_KNOWLEDGE).build();
+                .withTopics(VALID_TOPIC_GEN_KNOWLEDGE).build();
     }
 
     /**
@@ -113,7 +114,16 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Person> expectedPersonFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+
+        TriviaBundle expectedTriviaBundle = null;
+        List<Card> expectedCardFilteredList = null;
+
+        // For addressbook tests that doesn't account for trivia bundle.
+        if (actualModel.getTriviaBundle() != null) {
+            expectedTriviaBundle = new TriviaBundle(actualModel.getTriviaBundle());
+            expectedCardFilteredList = new ArrayList<>(actualModel.getFilteredCardList());
+        }
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
 
@@ -123,7 +133,12 @@ public class CommandTestUtil {
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedAddressBook, actualModel.getAddressBook());
-            assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+            assertEquals(expectedPersonFilteredList, actualModel.getFilteredPersonList());
+            // For addressbook tests that doesn't account for trivia bundle.
+            if (expectedTriviaBundle != null) {
+                assertEquals(expectedTriviaBundle, actualModel.getTriviaBundle());
+                assertEquals(expectedCardFilteredList, actualModel.getFilteredCardList());
+            }
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
     }
@@ -154,15 +169,6 @@ public class CommandTestUtil {
         model.updateFilteredCardList(new QuestionContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredCardList().size());
-    }
-
-    /**
-     * Deletes the first person in {@code model}'s filtered list from {@code model}'s address book.
-     */
-    public static void deleteFirstPerson(Model model) {
-        Person firstPerson = model.getFilteredPersonList().get(0);
-        model.deletePerson(firstPerson);
-        model.commitAddressBook();
     }
 
 }

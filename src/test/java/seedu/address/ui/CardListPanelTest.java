@@ -26,8 +26,7 @@ import seedu.address.commons.util.XmlUtil;
 
 import seedu.address.model.card.Card;
 import seedu.address.storage.XmlSerializableTriviaBundle;
-
-
+import seedu.address.ui.home.CardListPanel;
 
 
 public class CardListPanelTest extends GuiUnitTest {
@@ -103,7 +102,7 @@ public class CardListPanelTest extends GuiUnitTest {
             builder.append("<cards>\n");
             builder.append("<question>").append(i).append("a</question>\n");
             builder.append("<answer>21</answer>\n");
-            builder.append("<tagged>Physics</tagged>");
+            builder.append("<topic>Physics</topic>");
             builder.append("</cards>\n");
         }
         builder.append("</triviabundle>\n");

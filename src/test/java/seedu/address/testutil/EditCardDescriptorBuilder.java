@@ -8,7 +8,7 @@ import seedu.address.logic.commands.EditCommand.EditCardDescriptor;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.topic.Topic;
 
 /**
  * A utility class to help with building EditCardDescriptor objects.
@@ -32,7 +32,7 @@ public class EditCardDescriptorBuilder {
         descriptor = new EditCardDescriptor();
         descriptor.setQuestion(card.getQuestion());
         descriptor.setAnswer(card.getAnswer());
-        descriptor.setTags(card.getTags());
+        descriptor.setTopics(card.getTopics());
     }
 
     /**
@@ -52,12 +52,12 @@ public class EditCardDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code topics} into a {@code Set<Topic>} and set it to the {@code EditPersonDescriptor}
      * that we are building.
      */
-    public EditCardDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+    public EditCardDescriptorBuilder withTopics(String... topics) {
+        Set<Topic> topicSet = Stream.of(topics).map(Topic::new).collect(Collectors.toSet());
+        descriptor.setTopics(topicSet);
         return this;
     }
 

@@ -3,7 +3,7 @@ package seedu.address.model.card;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUESTION_GIT_COMMIT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_GIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_GIT;
 import static seedu.address.testutil.TypicalCards.Q_EARTH_ROUND;
 import static seedu.address.testutil.TypicalCards.Q_GIT_CLONE;
 
@@ -21,7 +21,7 @@ public class CardTest {
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Card card = new CardBuilder().build();
         thrown.expect(UnsupportedOperationException.class);
-        card.getTags().remove(0);
+        card.getTopics().remove(0);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class CardTest {
         assertFalse(editedEarthRoundQ.equals(Q_EARTH_ROUND));
 
         // different tags -> returns true
-        editedEarthRoundQ = new CardBuilder(Q_EARTH_ROUND).withTags(VALID_TAG_GIT).build();
+        editedEarthRoundQ = new CardBuilder(Q_EARTH_ROUND).withTopics(VALID_TOPIC_GIT).build();
         assertTrue(editedEarthRoundQ.equals(Q_EARTH_ROUND));
     }
 }

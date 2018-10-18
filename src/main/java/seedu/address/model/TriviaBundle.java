@@ -3,7 +3,10 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
@@ -73,6 +76,13 @@ public class TriviaBundle implements ReadOnlyTriviaBundle {
         cards.add(c);
     }
 
+    /**
+     * Removes {@code key} from this {@code TriviaBundle}.
+     * {@code key} must exist in the trivia bundle.
+     */
+    public void removeCard(Card key) {
+        cards.remove(key);
+    }
 
     /**
      * Replaces the given card {@code target} in the list with {@code editedCard}.
@@ -96,6 +106,14 @@ public class TriviaBundle implements ReadOnlyTriviaBundle {
     @Override
     public ObservableList<Card> getCardList() {
         return cards.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Card> getListOfCardFilteredByTopic(Predicate<Card> predicate) {
+        ObservableList<Card> filteredCards = FXCollections.observableList(getCardList().stream()
+                .filter(predicate)
+                .collect(Collectors.toList()));
+        return FXCollections.unmodifiableObservableList(filteredCards);
     }
 
     @Override

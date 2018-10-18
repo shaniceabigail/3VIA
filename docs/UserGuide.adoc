@@ -18,57 +18,60 @@ By: `CS2103T W12-3 Team`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
 
-3VIA is for learners who wants to *reinforce their knowledge*. More importantly, 3VIA is *optimized for those
-who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, 3VIA will better boost your memory compared to traditional GUI Trivia apps. Interested?
-Jump to the <<Quick Start>> to get started. Enjoy!
+3VIA is a great way for learners to *reinforce and test out their knowledge*. Tired of using a mouse or trackpad to navigate? Don't worry, 3VIA is *optimized for a veteran Command Line Interface (CLI) user*, while still having the benefits of a beautiful Graphical User Interface (GUI).
+
+3VIA will spur and energise your desire to be that A* student, without ever leaving the keyboard. We believe that it should only take [red]#3 steps to get that Very Important A# (3VIA, get it?).
+
+You can read the user guide from start to finish by jumping right in to <<Quick Start>> to get started or just use it as a reference. Enjoy!
 
 == Quick Start
 
-.  Ensure you have Java version `9` or later installed in your Computer.
+.  Ensure you have Java version _9_ or later installed in your Computer.
 .  Download the latest `3VIA.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your 3VIA.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Copy the file to the folder you want to use as the home folder for your 3VIA app.
+.  Double-click the icon to start the app. The GUI should appear in a few seconds and you're ready to go!
 +
 image::Ui.png[width="790"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
 
-* *`list`* : lists all cards according to their tags
+====
+*Some things to try:* +
+Type commands in the command box and press kbd:[Enter] to execute it. +
+e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+
+Here are some example commands you can try:
+
+* *`list`* : lists all cards according to their topics
 * **`add`**`add q/What is the formula for force? a/force = mass * acceleration a/Physics` : adds a card with question
 `What is the formula for force?` to the the trivia application.
 * **`delete`**`3` : deletes the 3rd card in the current list
 * *`exit`* : exits the app
-
-.  Refer to <<Features>> for details of each command.
+====
+Refer to <<Features>> for more details of each command.
 
 [[Features]]
 == Features
 
 ====
 *Command Format*
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add q/QUESTION`, `QUESTION` is a parameter
-which can be used as `add q/What is the formula for force?`.
-* Items in square brackets are optional e.g `q/QUESTION [t/TAG]` can be used as `q/why? t/Physics` or as `q/why?`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}`
-(i.e. 0 times), `t/Physics`, `t/Physics t/MustKnow` etc.
-* Parameters can be in any order e.g. if the command specifies `q/QUESTION p/ANSWER`, `p/ANSWER n/QUESTION` is also acceptable.
+[qanda]
+UPPER_CASE _are parameters you should include in use the command_:: `[green]#add q/QUESTION#` means `[maroon]#QUESTION#`.
+Items in square brackets are optional:: `[green]#q/QUESTION [t/TOPIC]#` means `[maroon]#q/Why is the earth round t/physics#`
+Items with `...` after them can be used optionally or multiple times:: `[green]#[t/TOPIC] ...#` can be `[maroon]#t/physics t/math t/literature#`
+Parameters written can be in any order:: `[green]#q/QUESTION a/ANSWER#` can be `[green]#a/ANSWER q/QUESTION#`
 ====
 
 === Viewing help : `help`
 
-Format: `help`
+Format: `[green]#help#`
 
 === Adding a card: `card`
 
 Adds a card to the trivia application +
-Format: `add n/NAME q/QUESTION a/ANSWER [t/TAG]...`
+Format: `[green]#add q/QUESTION a/ANSWER [t/TOPIC]...#`
 
 [TIP]
-A card can have any number of tags. If no tags are specified, a tag of `notag` will be tagged to the card.
+A card can have any number of topics. If no topics are specified, a TOPIC of `NoTopic` will be assigned to the card.
 
 Examples:
 
@@ -78,19 +81,19 @@ Examples:
 === Listing all cards : `list`
 
 Shows a list of all cards in the trivia application. +
-Format: `list`
+Format: `[green]#list#`
 
 === Editing a card : `edit`
 
 Edits an existing card in the trivia application. +
-Format: `edit INDEX [q/QUESTION] [a/ANSWER] [t/TAG]...`
+Format: `[green]#edit INDEX [q/QUESTION] [a/ANSWER] [t/TOPIC]...#`
 
 ****
 * Edits the card at the specified `INDEX`. The index refers to the index number shown in the displayed card list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the card will be removed i.e adding of tags is not cumulative.
-* You can set a tag of `notag` to the card by typing `t/` without specifying any tags after it.
+* When editing topics, the existing topics of the card will be removed i.e adding of topics is not cumulative.
+* You can set a topic of `NoTopic` to the card by typing `t/` without specifying any topics after it.
 ****
 
 Examples:
@@ -98,12 +101,12 @@ Examples:
 * `edit 1 q/Why will the apple fall from the tree? a/Because of gravity!` +
 Edits the answer of the 1st card to be `Because of gravity!`.
 * `edit 2 n/Why will the apple fall from the tree? t/` +
-Edits the question of the 2nd card to be `Why will the apple fall from the tree?` and the card will have a tag of `notag`.
+Edits the question of the 2nd card to be `Why will the apple fall from the tree?` and the card will have a topic of `NoTopic`.
 
 === Locating cards by question: `find`
 
 Finds cards whose question contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `[green]#find KEYWORD [MORE_KEYWORDS]#`
 
 ****
 * The search is case insensitive. e.g `why` will match `Why`
@@ -123,7 +126,7 @@ Returns any cards having question `why`, `what`, or `where`
 === Deleting a card : `delete`
 
 Deletes the specified card from the trivia application. +
-Format: `delete INDEX`
+Format: `[green]#delete INDEX#`
 
 ****
 * Deletes the card at the specified `INDEX`.
@@ -143,7 +146,7 @@ Deletes the 1st card in the results of the `find` command.
 === Selecting a card : `select`
 
 Selects the card identified by the index number used in the displayed card list. +
-Format: `select INDEX`
+Format: `[green]#select INDEX#`
 
 ****
 * Selects the card and loads the Google search page the card at the specified `INDEX`.
@@ -163,7 +166,7 @@ Selects the 1st card in the results of the `find` command.
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
+Format: `[green]#history#`
 
 [NOTE]
 ====
@@ -174,7 +177,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 === Undoing previous command : `undo`
 
 Restores the trivia application to the state before the previous _undoable_ command was executed. +
-Format: `undo`
+Format: `[green]#undo#`
 
 [NOTE]
 ====
@@ -204,7 +207,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 === Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
-Format: `redo`
+Format: `[green]#redo#`
 
 Examples:
 
@@ -224,23 +227,23 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear`
+=== Clearing all entries : `clear` `[coming in v2.0]`
 
-Use with caution! Clears all entries from the trivia application. +
-Format: `clear`
+WARNING: Use with caution! Clears all entries from the trivia application. +
+Format: `[green]#clear#`
 
-=== Starting a test: `test`
+=== Starting an Open Ended Test: `testO` `[coming in v2.0]`
 
-Start an open-ended test of a specified tag. In an open-ended test, the user will get the choose whether he/she has answered
+Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered
 correctly by comparing their answers with the expected answer. +
-Format: `test TAG TIMELIMIT_IN_SECONDS`
+Format: `[green]#testO t/TOPIC TIMELIMIT_IN_SECONDS#`
 
 ****
-* The test aims to test the knowledge of the user with the existing questions of a specified tag that are in the trivia application.
+* The test aims to test the knowledge of the user with the existing questions of a specified topic that are in the trivia application.
 * The user can also set the time limit (in seconds) for each question using the optional field TIMELIMIT_IN_SECONDS
 ****
 
-The following commands can only be used during a `test`.
+The following commands can only be used during a an open ended test.
 
 ==== Enter the answer of a question:
 
@@ -259,21 +262,17 @@ Format: `c` (correct) OR `x` (wrong)
 Will exit from the test.
 Format: `exit`
 
-=== Starting a matching test: `testM`
+=== Starting a Matching Test: `testM`
 
-Start a test of matching cards of a specified tag. In a test of matching cards, all the questions and answers in that tag
+Start a test of matching cards of a specified topic. In a test of matching cards, all the questions and answers in that topic
 will be displayed. The user will then have to match the correct question and answer together. +
-Format: `testM TAG`
+Format: `testM t/TOPIC`
 
-****
-* By incorporating different testing approach, it will allow the user to better internalize the content.
-****
-
-The following commands can only be used during a `testM`.
+The following commands can only be used during a matching test.
 
 ==== Enter the matching cards: match
 
-Will match the cards during `testM`. +
+Will match the cards during matching test. +
 Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 
 ==== Quit the test:
@@ -281,12 +280,12 @@ Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 Will exit from the test.
 Format: `exit`
 
-=== View statistics for a certain test: `stats`
+=== View statistics for a certain test: `stats` `[coming in v2.0]`
 
 Will list out all the previous tests, with their respective questions, answers and the user’s answers.
-Format: `stats TAG`
+Format: `stats [TOPIC]`
 
-=== Mass Import: `import`
+=== Mass Import: `import` `[coming in v2.0]`
 
 Imports multiple cards from a text file into the trivia application. +
 Format: `import FILEPATH`
@@ -310,11 +309,10 @@ Imports the contents from the text.txt file on a Linux desktop.
 === Exiting the program : `exit`
 
 Exits the program. +
-Format: `exit`
+Format: `[green]#exit#`
 
 === Saving the data
-
-Trivia application's data are saved in the hard disk automatically after any command that changes the data. +
+3VIA saves data in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::multiplayer[]
@@ -326,16 +324,16 @@ _{explain how the user can enable/disable Multi-Player}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Trivia application folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous 3VIA application folder.
 
 == Command Summary
 
-* *Add* `add q/QUESTION a/ANSWER [t/TAG]...` +
+* *Add* `add q/QUESTION a/ANSWER [t/TOPIC]...` +
 e.g. `add q/What is the formula for force? a/force = mass * acceleration a/Physics`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [q/QUESTION] [a/ANSWER] [t/TAG]...` +
+* *Edit* : `edit INDEX [q/QUESTION] [a/ANSWER] [t/TOPIC]...` +
 e.g. `edit 1 q/Why will the apple fall from the tree? a/Because of gravity!`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Why`
@@ -346,7 +344,7 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Test* : `test TAG TIMELIMIT_IN_SECONDS`
+* *Test* : `test TOPIC TIMELIMIT_IN_SECONDS`
 * *Correctness of answer* : `c` (correct) OR `x` (wrong)
-* *View statistics of test* : `stats TAG`
+* *View statistics of test* : `stats [TOPIC]`
 * *Mass Import* : `import FILEPATH`

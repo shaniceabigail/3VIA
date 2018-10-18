@@ -4,7 +4,7 @@
     <cards>
         <question>Why apple drop from apple tree?</question>
         <answer>Because of gravity</answer>
-        <tagged>Physics</tagged>
+        <topic>Physics</topic>
     </cards>
 
     <!-- Card with same identity as the above card -->
