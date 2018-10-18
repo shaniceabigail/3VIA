@@ -11,6 +11,7 @@
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
+:warning-caption: :warning:
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S1-W12-3/main
 
@@ -228,7 +229,8 @@ _`clear` command is reapplied_ +
 
 === Clearing all entries : `clear`
 
-WARNING: Use with caution! Clears all entries in 3VIA and reboots. +
+[WARNING]
+Use with caution! Clears all entries in 3VIA and reboots. +
 Format: `clear`
 
 === Starting a test: `test`
