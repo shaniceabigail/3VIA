@@ -60,6 +60,18 @@ public class TriviaResultBuilder {
     }
 
     /**
+     * Sets the {@code testType} of the {@code TriviaResult} that we are building.
+     */
+    public TriviaResultBuilder withTestType(String testType) {
+        try {
+            this.testType = TestType.valueOf(testType);
+        } catch (IllegalArgumentException e) {
+            System.out.println(TestType.MESSAGE_TEST_TYPE_CONSTRAINTS);
+        }
+        return this;
+    }
+
+    /**
      * Sets the {@code topic} of the {@code TriviaResult} that we are building.
      */
     public TriviaResultBuilder withTopic(String topic) {

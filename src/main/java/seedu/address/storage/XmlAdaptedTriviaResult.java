@@ -82,10 +82,12 @@ public class XmlAdaptedTriviaResult {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     TestType.class.getSimpleName()));
         }
-        if (!TestType.consistOf(testType)) {
+        final TestType testTypeEnum;
+        try {
+            testTypeEnum = TestType.valueOf(testType);
+        } catch (IllegalArgumentException e) {
             throw new IllegalValueException(TestType.MESSAGE_TEST_TYPE_CONSTRAINTS);
         }
-        final TestType testTypeEnum = TestType.valueOf(testType);
 
         /** Parse topic */
         if (topic == null) {
@@ -116,7 +118,7 @@ public class XmlAdaptedTriviaResult {
         try {
             modelDuration = Double.parseDouble(duration);
         } catch (NumberFormatException e) {
-            throw new IllegalValueException(NumberFormatException.class.getSimpleName());
+            throw new IllegalValueException("Duration: " + NumberFormatException.class.getSimpleName());
         }
 
         return new TriviaResult(testTypeEnum, modelTopic, modelDate, modelDuration, attempts);

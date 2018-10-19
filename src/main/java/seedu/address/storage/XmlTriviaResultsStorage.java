@@ -50,8 +50,8 @@ public class XmlTriviaResultsStorage implements TriviaResultsStorage {
             return Optional.empty();
         }
 
-        XmlSerializableTriviaResult xmlTriviaResult = XmlFileStorage.loadDataFromSaveFile(filePath,
-                XmlSerializableTriviaResult.class);
+        XmlSerializableTriviaResults xmlTriviaResult = XmlFileStorage.loadDataFromSaveFile(filePath,
+                XmlSerializableTriviaResults.class);
         try {
             return Optional.of(xmlTriviaResult.toModelType());
         } catch (IllegalValueException ive) {
@@ -74,6 +74,6 @@ public class XmlTriviaResultsStorage implements TriviaResultsStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableTriviaResult(triviaResults));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableTriviaResults(triviaResults));
     }
 }

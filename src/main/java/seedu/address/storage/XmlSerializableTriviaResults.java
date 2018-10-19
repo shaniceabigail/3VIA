@@ -15,7 +15,7 @@ import seedu.address.model.test.TriviaResults;
  * An Immutable TriviaResults that is serializable to XML format
  */
 @XmlRootElement(name = "testresult")
-public class XmlSerializableTriviaResult {
+public class XmlSerializableTriviaResults {
     @XmlElement
     private List<XmlAdaptedTriviaResult> results;
 
@@ -23,14 +23,14 @@ public class XmlSerializableTriviaResult {
      * Creates an empty XmlSerializableTriviaBundle.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableTriviaResult() {
+    public XmlSerializableTriviaResults() {
         results = new ArrayList<>();
     }
 
     /**
      * Conversion
      */
-    public XmlSerializableTriviaResult(ReadOnlyTriviaResults src) {
+    public XmlSerializableTriviaResults(ReadOnlyTriviaResults src) {
         this();
         results.addAll(src.getResultList().stream()
                 .map(XmlAdaptedTriviaResult::new)
@@ -58,9 +58,9 @@ public class XmlSerializableTriviaResult {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableTriviaResult)) {
+        if (!(other instanceof XmlSerializableTriviaResults)) {
             return false;
         }
-        return results.equals(((XmlSerializableTriviaResult) other).results);
+        return results.equals(((XmlSerializableTriviaResults) other).results);
     }
 }

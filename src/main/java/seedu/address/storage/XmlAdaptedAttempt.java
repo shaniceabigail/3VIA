@@ -30,10 +30,10 @@ public class XmlAdaptedAttempt {
     /**
      * Constructs a {@code XmlAdaptedAttempt} with the given parameters.
      */
-    public XmlAdaptedAttempt(XmlAdaptedCard attemptedCard, String answer, boolean isCorrect) {
+    public XmlAdaptedAttempt(XmlAdaptedCard attemptedCard, String answer, String isCorrect) {
         this.attemptedCard = attemptedCard;
         this.answer = answer;
-        this.isCorrect = String.valueOf(isCorrect);
+        this.isCorrect = isCorrect;
     }
 
     /**
@@ -63,6 +63,10 @@ public class XmlAdaptedAttempt {
 
         if (isCorrect == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "isCorrect"));
+        }
+
+        if (!isCorrect.equals("true") && !isCorrect.equals("false")) {
+            throw new IllegalValueException("Invalid boolean values for isCorrect field.");
         }
 
         return new Attempt(attemptedCard.toModelType(), answer, Boolean.valueOf(isCorrect));

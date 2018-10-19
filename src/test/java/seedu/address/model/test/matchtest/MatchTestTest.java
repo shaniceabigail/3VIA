@@ -121,9 +121,10 @@ public class MatchTestTest {
         matchTest.respondToCorrectAttempt(new MatchAttempt(Q_FORCE_FORMULA, Q_FORCE_FORMULA));
 
         densityFormulaIndexes = MatchTestUtil.getIndexes(matchTest, Q_DENSITY_FORMULA);
-        matchTest.match(densityFormulaIndexes[0], densityFormulaIndexes[1]);
+        model.matchQuestionAndAnswer(densityFormulaIndexes[0], densityFormulaIndexes[1]);
         model.stopTriviaTest();
         assertTrue(matchTest.isCompleted());
+        assert(model.getTriviaResultList().size() == 1);
     }
 
     @Test

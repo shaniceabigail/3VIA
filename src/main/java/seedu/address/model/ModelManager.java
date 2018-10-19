@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -21,6 +22,7 @@ import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.AppState;
 import seedu.address.model.state.State;
+import seedu.address.model.test.Attempt;
 import seedu.address.model.test.ReadOnlyTriviaResults;
 import seedu.address.model.test.TriviaResult;
 import seedu.address.model.test.TriviaResults;
@@ -260,6 +262,20 @@ public class ModelManager extends ComponentManager implements Model {
 
         return isCorrectMatch;
     }
+
+    //=========== Trivia Test Results ==========================================================================
+
+    @Override
+    public List<TriviaResult> getTriviaResultList() {
+        return triviaResults.getResultList();
+    }
+
+    @Override
+    public List<Attempt> getAttemptsByCard(Card card) {
+        return triviaResults.getAttemptsByCard(card);
+    }
+
+
 
     @Override
     public boolean equals(Object obj) {

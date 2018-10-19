@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -7,6 +8,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
+import seedu.address.model.test.Attempt;
+import seedu.address.model.test.TriviaResult;
 import seedu.address.model.test.TriviaTest;
 
 /**
@@ -149,4 +152,14 @@ public interface Model {
      * Return boolean on whether the model in in a testing state.
      */
     boolean isInTestingState();
+
+    /**
+     * Returns the result list for trivia test.
+     */
+    List<TriviaResult> getTriviaResultList();
+
+    /**
+     * Return the Attempts in trivia test made by the given card.
+     */
+    List<Attempt> getAttemptsByCard(Card card);
 }

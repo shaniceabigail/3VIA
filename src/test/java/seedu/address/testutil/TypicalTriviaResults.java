@@ -17,17 +17,25 @@ import seedu.address.model.test.TriviaResults;
  */
 public class TypicalTriviaResults {
 
-    public static final TriviaResult RESULT_ATTEMPT_ALL_CORRECT = new TriviaResultBuilder().withTopic("Physics")
-            .withTestDate("18 Oct 2018, 11:30 PM").withDuration("20.0")
+    public static final TriviaResult RESULT_ATTEMPT_ALL_CORRECT = new TriviaResultBuilder().withTestType("MATCH_TEST")
+            .withTopic("Physics").withTestDate("18 Oct 2018, 11:30 PM").withDuration("20.0")
             .withAttempts(Arrays.asList(FLAT_EARTH_CORRECT_ATTEMPT, FORCE_CORRECT_ATTEMPT)).build();
 
-    public static final TriviaResult RESULT_ATTEMPT_ALL_WRONG = new TriviaResultBuilder().withTopic("Physics")
-            .withTestDate("18 Oct 2018, 11:30 PM").withDuration("20.0")
+    public static final TriviaResult RESULT_ATTEMPT_ALL_WRONG = new TriviaResultBuilder().withTestType("MATCH_TEST")
+            .withTopic("Physics").withTestDate("18 Oct 2018, 11:30 PM").withDuration("20.0")
             .withAttempts(Arrays.asList(FLAT_EARTH_WRONG_ATTEMPT, FORCE_WRONG_ATTEMPT)).build();
 
-    public static final TriviaResult RESULT_ATTEMPT_MIX = new TriviaResultBuilder().withTopic("Physics")
-            .withTestDate("18 Oct 2018, 11:30 PM").withDuration("20.0")
+    public static final TriviaResult RESULT_ATTEMPT_MIX = new TriviaResultBuilder().withTestType("MATCH_TEST")
+            .withTopic("Physics").withTestDate("18 Oct 2018, 11:30 PM").withDuration("20.0")
             .withAttempts(Arrays.asList(FLAT_EARTH_WRONG_ATTEMPT, FORCE_CORRECT_ATTEMPT)).build();
+
+    public static final TriviaResult RESULT_FORCES_WRONG = new TriviaResultBuilder().withTestType("MATCH_TEST")
+            .withTopic("Physics").withTestDate("18 Oct 2018, 11:30 PM").withDuration("20.0")
+            .withAttempts(Arrays.asList(FORCE_WRONG_ATTEMPT, FORCE_WRONG_ATTEMPT)).build();
+
+    public static final TriviaResult RESULT_FLAT_EARTH_WRONG = new TriviaResultBuilder().withTestType("MATCH_TEST")
+            .withTopic("Physics").withTestDate("18 Oct 2018, 11:30 PM").withDuration("20.0")
+            .withAttempts(Arrays.asList(FLAT_EARTH_WRONG_ATTEMPT, FLAT_EARTH_WRONG_ATTEMPT)).build();
 
     private TypicalTriviaResults() {} // prevents instantiation
 
