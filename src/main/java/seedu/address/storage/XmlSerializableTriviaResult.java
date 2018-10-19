@@ -7,11 +7,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.test.ReadOnlyTriviaResults;
 import seedu.address.model.test.TriviaResult;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.TriviaResults;
 
 /**
- * An Immutable TriviaResultList that is serializable to XML format
+ * An Immutable TriviaResults that is serializable to XML format
  */
 @XmlRootElement(name = "testresult")
 public class XmlSerializableTriviaResult {
@@ -29,7 +30,7 @@ public class XmlSerializableTriviaResult {
     /**
      * Conversion
      */
-    public XmlSerializableTriviaResult(TriviaResultList src) {
+    public XmlSerializableTriviaResult(ReadOnlyTriviaResults src) {
         this();
         results.addAll(src.getResultList().stream()
                 .map(XmlAdaptedTriviaResult::new)
@@ -42,8 +43,8 @@ public class XmlSerializableTriviaResult {
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedCard}.
      */
-    public TriviaResultList toModelType() throws IllegalValueException {
-        TriviaResultList triviaResults = new TriviaResultList();
+    public TriviaResults toModelType() throws IllegalValueException {
+        TriviaResults triviaResults = new TriviaResults();
         for (XmlAdaptedTriviaResult r : results) {
             TriviaResult result = r.toModelType();
             triviaResults.addTriviaResult(result);

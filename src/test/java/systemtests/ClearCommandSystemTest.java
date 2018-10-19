@@ -7,12 +7,12 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.testutil.TypicalCards;
 
 public class ClearCommandSystemTest extends AppSystemTest {
     private ModelManager modelManagerWithClearedAddressBook = new ModelManager(new AddressBook(),
-            TypicalCards.getTypicalTriviaBundle(), new TriviaResultList(), new UserPrefs());
+            TypicalCards.getTypicalTriviaBundle(), new TriviaResults(), new UserPrefs());
 
     @Test
     public void clear() {

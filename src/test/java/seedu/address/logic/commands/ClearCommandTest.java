@@ -11,7 +11,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.TriviaResults;
 
 public class ClearCommandTest {
 
@@ -29,9 +29,9 @@ public class ClearCommandTest {
     @Test
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(),
-                new TriviaResultList(), new UserPrefs());
+                new TriviaResults(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(),
-                new TriviaResultList(), new UserPrefs());
+                new TriviaResults(), new UserPrefs());
         expectedModel.resetData(new AddressBook());
         expectedModel.commitAddressBook();
 

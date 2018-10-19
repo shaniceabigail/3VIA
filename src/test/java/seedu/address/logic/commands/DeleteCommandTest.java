@@ -21,7 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.TriviaResults;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
@@ -30,7 +30,7 @@ import seedu.address.model.test.TriviaResultList;
 public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(),
-            new TriviaResultList(), new UserPrefs());
+            new TriviaResults(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -41,7 +41,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CARD_SUCCESS, cardToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), model.getTriviaBundle(),
-                new TriviaResultList(), new UserPrefs());
+                new TriviaResults(), new UserPrefs());
         expectedModel.deleteCard(cardToDelete);
         expectedModel.commitTriviaBundle();
 
@@ -66,7 +66,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_CARD_SUCCESS, cardToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getTriviaBundle(),
-                new TriviaResultList(), new UserPrefs());
+                new TriviaResults(), new UserPrefs());
         expectedModel.deleteCard(cardToDelete);
         expectedModel.commitTriviaBundle();
         showNoCard(expectedModel);
@@ -92,7 +92,7 @@ public class DeleteCommandTest {
         Card cardToDelete = model.getFilteredCardList().get(INDEX_FIRST_CARD.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CARD);
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getTriviaBundle(),
-                new TriviaResultList(), new UserPrefs());
+                new TriviaResults(), new UserPrefs());
         expectedModel.deleteCard(cardToDelete);
         expectedModel.commitTriviaBundle();
 
@@ -132,7 +132,7 @@ public class DeleteCommandTest {
     public void executeUndoRedo_validIndexFilteredList_sameCardDeleted() throws Exception {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_CARD);
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getTriviaBundle(),
-                new TriviaResultList(), new UserPrefs());
+                new TriviaResults(), new UserPrefs());
 
         showCardAtIndex(model, INDEX_FOURTH_CARD);
         Card cardToDelete = model.getFilteredCardList().get(INDEX_FIRST_CARD.getZeroBased());

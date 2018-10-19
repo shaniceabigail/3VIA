@@ -21,16 +21,16 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.card.QuestionContainsKeywordsPredicate;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.TriviaResults;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(),
-            new TriviaResultList(), new UserPrefs());
+            new TriviaResults(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(),
-            new TriviaResultList(), new UserPrefs());
+            new TriviaResults(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

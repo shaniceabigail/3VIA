@@ -27,7 +27,8 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.TriviaBundle;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.ReadOnlyTriviaResults;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -95,11 +96,11 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlyTriviaBundle> triviaBundleOptional;
-        Optional<TriviaResultList> triviaResultsOptional;
+        Optional<ReadOnlyTriviaResults> triviaResultsOptional;
 
         ReadOnlyAddressBook initialData;
         ReadOnlyTriviaBundle initialTriviaBundleData;
-        TriviaResultList initialTriviaResults;
+        ReadOnlyTriviaResults initialTriviaResults;
 
         try {
             addressBookOptional = storage.readAddressBook();
@@ -136,13 +137,13 @@ public class MainApp extends Application {
             if (!triviaResultsOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with empty result list.");
             }
-            initialTriviaResults = triviaResultsOptional.orElseGet(TriviaResultList::new);
+            initialTriviaResults = triviaResultsOptional.orElseGet(TriviaResults::new);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty trivia results");
-            initialTriviaResults = new TriviaResultList();
+            initialTriviaResults = new TriviaResults();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty trivia results");
-            initialTriviaResults = new TriviaResultList();
+            initialTriviaResults = new TriviaResults();
         }
 
         return new ModelManager(initialData, initialTriviaBundleData, initialTriviaResults, userPrefs);

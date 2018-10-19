@@ -10,14 +10,14 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.TriviaResults;
 
 public class UndoCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(),
-            new TriviaResultList(), new UserPrefs());
+            new TriviaResults(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(),
-            new TriviaResultList(), new UserPrefs());
+            new TriviaResults(), new UserPrefs());
     private final CommandHistory commandHistory = new CommandHistory();
 
     @Before

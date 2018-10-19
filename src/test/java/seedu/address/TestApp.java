@@ -18,7 +18,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.TriviaBundle;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.storage.XmlSerializableTriviaBundle;
@@ -133,7 +133,7 @@ public class TestApp extends MainApp {
      * Returns a defensive copy of the model.
      */
     public Model getModel() {
-        Model copy = new ModelManager((model.getAddressBook()), model.getTriviaBundle(), new TriviaResultList(),
+        Model copy = new ModelManager((model.getAddressBook()), model.getTriviaBundle(), new TriviaResults(),
                 new UserPrefs());
         // ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
         ModelHelper.setFilteredList(copy, model.getFilteredCardList());

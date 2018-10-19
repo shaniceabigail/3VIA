@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.test.TriviaResult;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.TriviaResults;
 
 /**
  * A utility class containing a list of {@code TriviaResult} objects to be used in tests.
@@ -32,17 +32,17 @@ public class TypicalTriviaResults {
     private TypicalTriviaResults() {} // prevents instantiation
 
     /**
-     * Returns an {@code TriviaResultList} with all the typical TriviaResults.
+     * Returns an {@code TriviaResults} with all the typical TriviaResultList.
      */
-    public static TriviaResultList getTypicalTriviaResultList() {
-        TriviaResultList resultList = new TriviaResultList();
-        for (TriviaResult result : getTypicalTriviaResults()) {
+    public static TriviaResults getTypicalTriviaResults() {
+        TriviaResults resultList = new TriviaResults();
+        for (TriviaResult result : getTypicalTriviaResultList()) {
             resultList.addTriviaResult(result);
         }
         return resultList;
     }
 
-    public static List<TriviaResult> getTypicalTriviaResults() {
+    public static List<TriviaResult> getTypicalTriviaResultList() {
         return new ArrayList<>(Arrays.asList(RESULT_ATTEMPT_ALL_CORRECT, RESULT_ATTEMPT_ALL_WRONG, RESULT_ATTEMPT_MIX));
     }
 }

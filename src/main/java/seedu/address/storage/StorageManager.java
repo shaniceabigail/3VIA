@@ -17,7 +17,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.ReadOnlyTriviaResults;
 
 /**
  * Manages storage of AddressBook and TriviaBundle data in local storage.
@@ -29,19 +29,6 @@ public class StorageManager extends ComponentManager implements Storage {
     private TriviaBundleStorage triviaBundleStorage;
     private UserPrefsStorage userPrefsStorage;
     private TriviaResultsStorage triviaResultsStorage;
-
-
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
-        super();
-        this.addressBookStorage = addressBookStorage;
-        this.userPrefsStorage = userPrefsStorage;
-    }
-
-    public StorageManager(TriviaBundleStorage triviaBundleStorage, UserPrefsStorage userPrefsStorage) {
-        super();
-        this.triviaBundleStorage = triviaBundleStorage;
-        this.userPrefsStorage = userPrefsStorage;
-    }
 
     public StorageManager(AddressBookStorage addressBookStorage, TriviaBundleStorage triviaBundleStorage,
                           TriviaResultsStorage triviaResultsStorage, UserPrefsStorage userPrefsStorage) {
@@ -159,26 +146,26 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<TriviaResultList> readTriviaResults() throws DataConversionException, IOException {
+    public Optional<ReadOnlyTriviaResults> readTriviaResults() throws DataConversionException, IOException {
         return readTriviaResults(triviaResultsStorage.getTriviaResultsFilePath());
     }
 
     @Override
-    public Optional<TriviaResultList> readTriviaResults(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlyTriviaResults> readTriviaResults(Path filePath) throws DataConversionException,
             IOException {
         logger.fine("Attempting to read data from results file: " + filePath);
         return triviaResultsStorage.readTriviaResults(filePath);
     }
 
     @Override
-    public void saveTriviaResults(TriviaResultList triviaResultList) throws IOException {
-        saveTriviaResults(triviaResultList, triviaResultsStorage.getTriviaResultsFilePath());
+    public void saveTriviaResults(ReadOnlyTriviaResults triviaResults) throws IOException {
+        saveTriviaResults(triviaResults, triviaResultsStorage.getTriviaResultsFilePath());
     }
 
     @Override
-    public void saveTriviaResults(TriviaResultList triviaResultList, Path filePath) throws IOException {
+    public void saveTriviaResults(ReadOnlyTriviaResults triviaResults, Path filePath) throws IOException {
         logger.fine("Attempting to write to trivia test results file " + filePath);
-        triviaResultsStorage.saveTriviaResults(triviaResultList, filePath);
+        triviaResultsStorage.saveTriviaResults(triviaResults, filePath);
     }
 
     @Override

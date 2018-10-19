@@ -13,7 +13,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.TriviaResults;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -26,10 +26,10 @@ public class ListCommandTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new TriviaResultList(),
+        model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new TriviaResults(),
                 new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(), model.getTriviaBundle(),
-                new TriviaResultList(), new UserPrefs());
+                new TriviaResults(), new UserPrefs());
     }
 
     @Test

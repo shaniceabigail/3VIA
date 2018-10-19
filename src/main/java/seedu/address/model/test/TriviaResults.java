@@ -8,24 +8,26 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.card.Card;
 
 /**
  * Contains the mapping of all the test.
  */
-public class TriviaResultList {
+public class TriviaResults implements ReadOnlyTriviaResults {
     private final List<TriviaResult> triviaResults;
     private final HashMap<Card, List<Attempt>> attemptsOfCards;
 
-    public TriviaResultList() {
+    public TriviaResults() {
         triviaResults = new ArrayList<>();
         attemptsOfCards = new HashMap<>();
     }
 
     /**
-     * Creates a TriviaResultList using the TriviaResultList in the {@code toBeCopied}
+     * Creates a TriviaResult using the ReadOnlyTriviaResults in the {@code toBeCopied}
      */
-    public TriviaResultList(TriviaResultList toBeCopied) {
+    public TriviaResults(ReadOnlyTriviaResults toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -47,7 +49,7 @@ public class TriviaResultList {
     /**
      * Resets the existing data of this {@code TriviaBundleList} with {@code newData}.
      */
-    public void resetData(TriviaResultList newData) {
+    public void resetData(ReadOnlyTriviaResults newData) {
         requireNonNull(newData);
 
         setTriviaResults(newData.getResultList());
@@ -61,10 +63,6 @@ public class TriviaResultList {
 
         triviaResults.add(triviaResult);
         mapCardsToAttempts(triviaResult.getAttempts());
-    }
-
-    public List<TriviaResult> getResultList() {
-        return triviaResults;
     }
 
     /**
@@ -82,10 +80,22 @@ public class TriviaResultList {
     }
 
     @Override
+    public ObservableList<TriviaResult> getResultList() {
+        return FXCollections.unmodifiableObservableList(
+                FXCollections.observableArrayList(triviaResults));
+    }
+
+    @Override
+    public ObservableList<Attempt> getAttemptsByCard(Card card) {
+        return FXCollections.unmodifiableObservableList(
+                FXCollections.observableList(attemptsOfCards.get(card)));
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TriviaResultList // instanceof handles nulls
-                && triviaResults.equals(((TriviaResultList) other).triviaResults));
+                || (other instanceof TriviaResults // instanceof handles nulls
+                && triviaResults.equals(((TriviaResults) other).triviaResults));
     }
 
 }

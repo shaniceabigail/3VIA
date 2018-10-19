@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalCards.getTypicalTriviaBundle;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalTriviaResults.getTypicalTriviaResultList;
+import static seedu.address.testutil.TypicalTriviaResults.getTypicalTriviaResults;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -18,13 +18,15 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TriviaBundleChangedEvent;
+import seedu.address.commons.events.model.TriviaResultsChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.TriviaBundle;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.ReadOnlyTriviaResults;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 public class StorageManagerTest {
@@ -99,10 +101,10 @@ public class StorageManagerTest {
          * {@link XmlTriviaResultsStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlTriviaResultsStorageTest} class.
          */
-        TriviaResultList original = getTypicalTriviaResultList();
+        ReadOnlyTriviaResults original = getTypicalTriviaResults();
         storageManager.saveTriviaResults(original);
-        TriviaResultList retrieved = storageManager.readTriviaResults().get();
-        assertEquals(original, new TriviaResultList(retrieved));
+        ReadOnlyTriviaResults retrieved = storageManager.readTriviaResults().get();
+        assertEquals(original, new TriviaResults(retrieved));
     }
 
     @Test
@@ -124,7 +126,9 @@ public class StorageManagerTest {
     public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
-                                             new JsonUserPrefsStorage(Paths.get("dummy")));
+                new XmlTriviaStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlTriviaResultsStorageExceptionThrowingStub(Paths.get("dummy")),
+                new JsonUserPrefsStorage(Paths.get("dummy")));
         storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
@@ -132,9 +136,22 @@ public class StorageManagerTest {
     @Test
     public void handleTriviaBundleChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlTriviaStorageExceptionThrowingStub(Paths.get("dummy")),
+        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlTriviaStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlTriviaResultsStorageExceptionThrowingStub(Paths.get("dummy")),
                 new JsonUserPrefsStorage(Paths.get("dummy")));
         storage.handleTriviaBundleChangedEvent(new TriviaBundleChangedEvent(new TriviaBundle()));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
+    }
+
+    @Test
+    public void handleTriviaResultsChangedEvent_exceptionThrown_eventRaised() {
+        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlTriviaStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlTriviaResultsStorageExceptionThrowingStub(Paths.get("dummy")),
+                new JsonUserPrefsStorage(Paths.get("dummy")));
+        storage.handleTriviaResultsChangedEvent(new TriviaResultsChangedEvent(new TriviaResults()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
@@ -165,6 +182,21 @@ public class StorageManagerTest {
 
         @Override
         public void saveTriviaBundle(ReadOnlyTriviaBundle triviaBundle, Path filePath) throws IOException {
+            throw new IOException("dummy exception");
+        }
+    }
+
+    /**
+     * A Stub class to throw an exception when the save method is called
+     */
+    class XmlTriviaResultsStorageExceptionThrowingStub extends XmlTriviaResultsStorage {
+
+        public XmlTriviaResultsStorageExceptionThrowingStub(Path filePath) {
+            super(filePath);
+        }
+
+        @Override
+        public void saveTriviaResults(ReadOnlyTriviaResults triviaResults, Path filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

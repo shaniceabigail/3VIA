@@ -13,7 +13,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.ReadOnlyTriviaResults;
 
 /**
  * A class to access TriviaResults data stored as an xml file on the hard disk.
@@ -32,7 +32,7 @@ public class XmlTriviaResultsStorage implements TriviaResultsStorage {
     }
 
     @Override
-    public Optional<TriviaResultList> readTriviaResults() throws DataConversionException, IOException {
+    public Optional<ReadOnlyTriviaResults> readTriviaResults() throws DataConversionException, IOException {
         return readTriviaResults(filePath);
     }
 
@@ -41,7 +41,7 @@ public class XmlTriviaResultsStorage implements TriviaResultsStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<TriviaResultList> readTriviaResults(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlyTriviaResults> readTriviaResults(Path filePath) throws DataConversionException,
             FileNotFoundException {
         requireNonNull(filePath);
 
@@ -61,19 +61,19 @@ public class XmlTriviaResultsStorage implements TriviaResultsStorage {
     }
 
     @Override
-    public void saveTriviaResults(TriviaResultList triviaResultList) throws IOException {
-        saveTriviaResults(triviaResultList, filePath);
+    public void saveTriviaResults(ReadOnlyTriviaResults triviaResults) throws IOException {
+        saveTriviaResults(triviaResults, filePath);
     }
 
     /**
-     * Similar to {@link #saveTriviaResults(TriviaResultList)}
+     * Similar to {@link #saveTriviaResults(ReadOnlyTriviaResults)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveTriviaResults(TriviaResultList triviaResultList, Path filePath) throws IOException {
-        requireNonNull(triviaResultList);
+    public void saveTriviaResults(ReadOnlyTriviaResults triviaResults, Path filePath) throws IOException {
+        requireNonNull(triviaResults);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableTriviaResult(triviaResultList));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableTriviaResult(triviaResults));
     }
 }

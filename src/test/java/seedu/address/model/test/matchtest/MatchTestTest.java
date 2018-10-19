@@ -20,7 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.test.TestType;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.model.topic.Topic;
 import seedu.address.testutil.MatchTestUtil;
 import seedu.address.testutil.TypicalCards;
@@ -41,7 +41,7 @@ public class MatchTestTest {
     @Before
     public void setUp() {
         model = new ModelManager(TypicalPersons.getTypicalAddressBook(), TypicalCards.getTypicalTriviaBundle(),
-                new TriviaResultList(), new UserPrefs());
+                new TriviaResults(), new UserPrefs());
 
         // There will be 3 cards in this matchTest
         matchTest = new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle());

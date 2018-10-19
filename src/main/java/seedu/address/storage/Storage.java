@@ -12,7 +12,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.ReadOnlyTriviaResults;
 
 /**
  * API of the Storage component
@@ -41,7 +41,7 @@ public interface Storage extends AddressBookStorage, TriviaBundleStorage, Trivia
     Optional<ReadOnlyTriviaBundle> readTriviaBundle() throws DataConversionException, IOException;
 
     @Override
-    Optional<TriviaResultList> readTriviaResults() throws DataConversionException, IOException;
+    Optional<ReadOnlyTriviaResults> readTriviaResults() throws DataConversionException, IOException;
 
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
@@ -50,7 +50,7 @@ public interface Storage extends AddressBookStorage, TriviaBundleStorage, Trivia
     void saveTriviaBundle(ReadOnlyTriviaBundle triviaBundle) throws IOException;
 
     @Override
-    void saveTriviaResults(TriviaResultList triviaResultList) throws IOException;
+    void saveTriviaResults(ReadOnlyTriviaResults triviaResults) throws IOException;
 
     /**
      * Saves the current version of the Address Book to the hard disk.
@@ -67,7 +67,7 @@ public interface Storage extends AddressBookStorage, TriviaBundleStorage, Trivia
     void handleTriviaBundleChangedEvent(TriviaBundleChangedEvent event);
 
     /**
-     * Saves the latest version of the TriviaResultList to the hard disk.
+     * Saves the latest version of the TriviaResults to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */

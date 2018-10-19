@@ -21,8 +21,9 @@ import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.AppState;
 import seedu.address.model.state.State;
+import seedu.address.model.test.ReadOnlyTriviaResults;
 import seedu.address.model.test.TriviaResult;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.model.test.TriviaTest;
 import seedu.address.model.test.matchtest.MatchTest;
 
@@ -37,13 +38,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedTriviaBundle versionedTriviaBundle;
     private final FilteredList<Card> filteredCards;
-    private final TriviaResultList triviaResults;
+    private final TriviaResults triviaResults;
     private final AppState appState;
 
     private TriviaTest currentRunningTest;
 
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTriviaBundle triviaBundle,
-                        TriviaResultList triviaResultList, UserPrefs userPrefs) {
+                        ReadOnlyTriviaResults triviaResults, UserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, triviaBundle, userPrefs);
 
@@ -52,7 +53,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedTriviaBundle = new VersionedTriviaBundle(triviaBundle);
         filteredCards = new FilteredList<>(versionedTriviaBundle.getCardList());
-        triviaResults = triviaResultList;
+        this.triviaResults = new TriviaResults(triviaResults);
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
@@ -62,7 +63,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new TriviaBundle(), new TriviaResultList(), new UserPrefs());
+        this(new AddressBook(), new TriviaBundle(), new TriviaResults(), new UserPrefs());
     }
 
     @Override

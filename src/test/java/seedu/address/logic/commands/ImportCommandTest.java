@@ -15,7 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.testutil.FileUtil;
 
 public class ImportCommandTest {
@@ -23,7 +23,7 @@ public class ImportCommandTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(),
-            new TriviaResultList(), new UserPrefs());
+            new TriviaResults(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
     @Test
     public void execute_cardsAcceptedByModel_importSuccessful() throws Exception {

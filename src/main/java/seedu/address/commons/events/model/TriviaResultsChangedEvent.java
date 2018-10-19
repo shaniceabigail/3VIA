@@ -1,15 +1,15 @@
 package seedu.address.commons.events.model;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.test.TriviaResultList;
+import seedu.address.model.test.TriviaResults;
 
 /**
- * Indicates the TriviaResultList has changed
+ * Indicates the TriviaResults has changed
  */
 public class TriviaResultsChangedEvent extends BaseEvent {
-    public final TriviaResultList data;
+    public final TriviaResults data;
 
-    public TriviaResultsChangedEvent(TriviaResultList data) {
+    public TriviaResultsChangedEvent(TriviaResults data) {
         this.data = data;
     }
 
