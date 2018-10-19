@@ -103,30 +103,45 @@ public class MainApp extends Application {
 
         try {
             addressBookOptional = storage.readAddressBook();
-            triviaBundleOptional = storage.readTriviaBundle();
-            triviaResultsOptional = storage.readTriviaResults();
-
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            if (!triviaBundleOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample TriviaBundle");
-            }
-            if (!triviaBundleOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with empty result list.");
-            }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            initialTriviaBundleData = triviaBundleOptional.orElseGet(SampleDataUtil::getSampleTriviaBundle);
-            initialTriviaResults = triviaResultsOptional.orElseGet(TriviaResultList::new);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
-            initialTriviaBundleData = new TriviaBundle();
-            initialTriviaResults = new TriviaResultList();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
+        }
+
+        try {
+            triviaBundleOptional = storage.readTriviaBundle();
+            if (!triviaBundleOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TriviaBundle");
+            }
+            initialTriviaBundleData = triviaBundleOptional.orElseGet(SampleDataUtil::getSampleTriviaBundle);
+        } catch (DataConversionException e) {
+            logger.warning("TriviaBundle data file not in correct format. Will be starting with empty "
+                    + "TriviaBundle");
             initialTriviaBundleData = new TriviaBundle();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from TrivaBundle file. Will be starting with an "
+                    + "empty TriviaBundle");
+            initialTriviaBundleData = new TriviaBundle();
+        }
+
+        try {
+            triviaResultsOptional = storage.readTriviaResults();
+            if (!triviaResultsOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with empty result list.");
+            }
+            initialTriviaResults = triviaResultsOptional.orElseGet(TriviaResultList::new);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty trivia results");
+            initialTriviaResults = new TriviaResultList();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty trivia results");
             initialTriviaResults = new TriviaResultList();
         }
 

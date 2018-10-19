@@ -14,11 +14,11 @@ public class TriviaResult {
     public static final String INCOMPLETE_TRIVIA_TEST_MESSAGE =
             "Trivia test have to completed before it can be recorded.";
 
-    public final TestType testType;
-    public final Topic topic;
-    public final List<? extends Attempt> attempts;
-    public final Date testDate;
-    public final double duration;
+    private final TestType testType;
+    private final Topic topic;
+    private final List<? extends Attempt> attempts;
+    private final Date testDate;
+    private final double duration;
 
 
     public TriviaResult(TriviaTest triviaTest) {
@@ -39,4 +39,43 @@ public class TriviaResult {
         this.testDate = testDate;
         this.duration = duration;
     }
+
+    public TestType getTestType() {
+        return testType;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public List<? extends Attempt> getAttempts() {
+        return attempts;
+    }
+
+    public Date getTestDate() {
+        return testDate;
+    }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof TriviaResult)) {
+            return false;
+        }
+
+        // state check
+        TriviaResult o = (TriviaResult) other;
+        return testType.equals(o.testType) && topic.equals(o.topic) && testDate.equals(o.testDate)
+                && (duration == o.duration) && attempts.equals(o.attempts);
+    }
+
 }

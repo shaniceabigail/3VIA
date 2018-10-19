@@ -1,5 +1,6 @@
 package seedu.address.model.test;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -22,13 +23,44 @@ public class TriviaResultList {
     }
 
     /**
+     * Creates a TriviaResultList using the TriviaResultList in the {@code toBeCopied}
+     */
+    public TriviaResultList(TriviaResultList toBeCopied) {
+        this();
+        resetData(toBeCopied);
+    }
+
+    /**
+     * Replaces the contents of the ResultList with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setTriviaResults(List<TriviaResult> results) {
+        triviaResults.clear();
+        triviaResults.addAll(results);
+
+        attemptsOfCards.clear();
+        for (TriviaResult result : results) {
+            mapCardsToAttempts(result.getAttempts());
+        }
+    }
+
+    /**
+     * Resets the existing data of this {@code TriviaBundleList} with {@code newData}.
+     */
+    public void resetData(TriviaResultList newData) {
+        requireNonNull(newData);
+
+        setTriviaResults(newData.getResultList());
+    }
+
+    /**
      * Adds a triviaResult into the list of triviaResults
      */
     public void addTriviaResult(TriviaResult triviaResult) {
         requireAllNonNull(triviaResult);
 
         triviaResults.add(triviaResult);
-        mapCardsToAttempts(triviaResult.attempts);
+        mapCardsToAttempts(triviaResult.getAttempts());
     }
 
     public List<TriviaResult> getResultList() {
@@ -47,6 +79,13 @@ public class TriviaResultList {
                 existingAttemptsByCard.add(attempt);
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TriviaResultList // instanceof handles nulls
+                && triviaResults.equals(((TriviaResultList) other).triviaResults));
     }
 
 }

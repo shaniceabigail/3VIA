@@ -17,7 +17,7 @@ public class DateUtil {
     /**
      * Formats the given date according to this format: 01 Jun 2016, 04:13 PM
      */
-    public static String formatDate(Date date) {
+    public static String format(Date date) {
         return DATE_FORMAT.format(date);
     }
 
@@ -25,7 +25,7 @@ public class DateUtil {
      * Formats the given string into a java {@code Date} object.
      * @throws ParseException When the given date in String does not conform to the above format.
      */
-    public static Date formatStringToDate(String date) throws ParseException {
+    public static Date parse(String date) throws ParseException {
         return DATE_FORMAT.parse(date);
     }
 }

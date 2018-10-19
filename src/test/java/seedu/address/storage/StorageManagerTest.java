@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalCards.getTypicalTriviaBundle;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTriviaResults.getTypicalTriviaResultList;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -23,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.TriviaBundle;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.test.TriviaResultList;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 public class StorageManagerTest {
@@ -88,6 +90,19 @@ public class StorageManagerTest {
         storageManager.saveTriviaBundle(original);
         ReadOnlyTriviaBundle retrieved = storageManager.readTriviaBundle().get();
         assertEquals(original, new TriviaBundle(retrieved));
+    }
+
+    @Test
+    public void triviaResultSave() throws Exception {
+        /*
+         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * {@link XmlTriviaResultsStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlTriviaResultsStorageTest} class.
+         */
+        TriviaResultList original = getTypicalTriviaResultList();
+        storageManager.saveTriviaResults(original);
+        TriviaResultList retrieved = storageManager.readTriviaResults().get();
+        assertEquals(original, new TriviaResultList(retrieved));
     }
 
     @Test

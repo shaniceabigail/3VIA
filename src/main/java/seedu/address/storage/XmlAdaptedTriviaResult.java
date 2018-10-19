@@ -57,11 +57,11 @@ public class XmlAdaptedTriviaResult {
      * @param source future changes to this will not affect the created XmlAdaptedCard
      */
     public XmlAdaptedTriviaResult(TriviaResult source) {
-        testType = source.testType.toString();
-        topic = source.topic.topicName;
-        date = DateUtil.formatDate(source.testDate);
-        duration = String.valueOf(source.duration);
-        attempt = source.attempts.stream()
+        testType = source.getTestType().toString();
+        topic = source.getTopic().topicName;
+        date = DateUtil.format(source.getTestDate());
+        duration = String.valueOf(source.getDuration());
+        attempt = source.getAttempts().stream()
                 .map(XmlAdaptedAttempt::new)
                 .collect(Collectors.toList());
     }
@@ -103,7 +103,7 @@ public class XmlAdaptedTriviaResult {
         }
         final Date modelDate;
         try {
-            modelDate = DateUtil.formatStringToDate(date);
+            modelDate = DateUtil.parse(date);
         } catch (ParseException e) {
             throw new IllegalValueException(DateUtil.MESSAGE_DATE_CONSTRAINTS);
         }

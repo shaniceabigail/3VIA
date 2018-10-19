@@ -42,7 +42,7 @@ public class MatchTestResultPage extends TriviaTestResultPage {
         super(FXML);
 
         this.matchTest = matchTest;
-        testDateText.setText(DateUtil.formatDate(matchTest.getTestDate()));
+        testDateText.setText(DateUtil.format(matchTest.getTestDate()));
         durationText.setText(String.valueOf(matchTest.getDuration()) + "s");
         topicText.setText(matchTest.getTopic().topicName);
         numOfCardsText.setText(String.valueOf(matchTest.getCardsTested().size()));
