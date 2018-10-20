@@ -1,15 +1,8 @@
 package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
-import java.io.File;
+import java.util.Set;
 
-import java.io.IOException;
-import java.nio.file.Files;
-
-import java.util.List;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ExtraInformationDisplay;
-import seedu.address.commons.events.ui.ExtraInformationDisplayChangeEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -31,12 +24,12 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_INVALID_FILE = "File is invalid!";
     public static final String MESSAGE_DUPLICATE_CARD = "Some cards already exists in the trivia bundle";
     private final String fileName;
-    private final List<Card> cardsToImport;
+    private final Set<Card> cardsToImport;
 
     /**
      * Creates an ImportCommand with the file name {@code fileName} to import the cards {@code cards}
      */
-    public ImportCommand(String fileName, List<Card> cards) { // TODO: take in a list of cards
+    public ImportCommand(String fileName, Set<Card> cards) {
         requireNonNull(fileName);
         requireNonNull(cards);
         this.fileName = fileName;
@@ -46,9 +39,14 @@ public class ImportCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        // add multiple cards to model
-        // exception if file empty, file wrong format, file contains duplicated
-        // model.addCard(toAdd);
+
+        for (Card toAdd : cardsToImport) {
+            if (model.hasCard(toAdd)) {
+                throw new CommandException(MESSAGE_DUPLICATE_CARD);
+            }
+        }
+
+        model.addMultipleCards(cardsToImport);
         model.commitTriviaBundle();
         return new CommandResult(String.format(MESSAGE_SUCCESS, fileName));
     }

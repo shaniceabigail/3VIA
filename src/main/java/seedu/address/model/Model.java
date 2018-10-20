@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Set;
 import java.util.function.Predicate;
 
 import com.google.common.eventbus.Subscribe;
@@ -75,6 +76,13 @@ public interface Model {
      * {@code card} must not already exist in the list of trivia bundle.
      */
     void addCard(Card card);
+
+    /**
+     * Adds a list of given cards.
+     * {@code cards} must not already exist in the list of trivia bundle.
+     * @param cards
+     */
+    void addMultipleCards(Set<Card> cards);
 
     /**
      * Deletes the given card.

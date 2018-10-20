@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -158,12 +159,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTriviaBundleChanged();
     }
 
-    // TODO: importCards
-    // add multiple cards to versionedTriviaBundle
-    // update a filtered list of cards imported
-    // raise an event to show in extra info pane
-    // indicate that trivia bundle changed too
-
     @Override
     public void updateCard(Card target, Card editedCard) {
         requireAllNonNull(target, editedCard);
@@ -313,4 +308,13 @@ public class ModelManager extends ComponentManager implements Model {
                     || (currentRunningTest != null && currentRunningTest.equals(other.currentRunningTest)));
     }
 
+    //=========== Import =====================================================================
+
+    @Override
+    public void addMultipleCards(Set<Card> cards) {
+        versionedTriviaBundle.addMultipleCards(cards);
+        updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
+        // TODO: raise an event to show in extra info pane
+        indicateTriviaBundleChanged();
+    }
 }

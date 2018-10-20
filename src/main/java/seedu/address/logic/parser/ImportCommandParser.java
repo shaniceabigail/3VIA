@@ -4,7 +4,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import java.io.File;
 
-import java.util.List;
+import java.util.Set;
+
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.parser.exceptions.FileParseException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -24,7 +25,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
     public ImportCommand parse(String args) throws ParseException {
         try {
             File importFile = ParserUtil.parsePath(args);
-            List<Card> cards = FileParserUtil.parseFileToCards(importFile);
+            Set<Card> cards = FileParserUtil.parseFileToCards(importFile);
             return new ImportCommand(importFile.getName(), cards);
         } catch (FileParseException fpe) {
             throw new FileParseException(ImportCommand.MESSAGE_INVALID_FILE, fpe);

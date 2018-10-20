@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -75,9 +76,15 @@ public class TriviaBundle implements ReadOnlyTriviaBundle {
     public void addCard(Card c) {
         cards.add(c);
     }
-
-    // TODO: importCards
-    // for each of the cards, add into unique card list
+    /**
+     * Adds a list of cards to the trivia bundle.
+     * The cards must not already exist in the bundle.
+     */
+    public void addMultipleCards(Set<Card> cardSet) {
+        for (Card c : cardSet) {
+            cards.add(c);
+        }
+    }
 
     /**
      * Removes {@code key} from this {@code TriviaBundle}.
