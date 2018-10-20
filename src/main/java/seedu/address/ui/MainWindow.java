@@ -16,6 +16,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -33,6 +34,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.ui.home.Homepage;
 import seedu.address.ui.test.TriviaTestPage;
 import seedu.address.ui.test.TriviaTestResultPage;
+
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -55,6 +57,7 @@ public class MainWindow extends UiPart<Stage> {
     private Homepage homePage;
     private TriviaTestPage triviaTestPage;
     private TriviaTestResultPage triviaTestResultPage;
+    private NavigationTab navigationTab;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -70,6 +73,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane displayPagePlaceHolder;
+
+    @FXML
+    private StackPane navigationTabPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -143,6 +149,9 @@ public class MainWindow extends UiPart<Stage> {
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+        navigationTab = new NavigationTab();
+        navigationTabPlaceholder.getChildren().add(navigationTab.getRoot());
     }
 
     public void hide() {
