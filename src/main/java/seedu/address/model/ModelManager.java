@@ -158,6 +158,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTriviaBundleChanged();
     }
 
+    // TODO: importCards
+    // add multiple cards to versionedTriviaBundle
+    // update a filtered list of cards imported
+    // raise an event to show in extra info pane
+    // indicate that trivia bundle changed too
+
     @Override
     public void updateCard(Card target, Card editedCard) {
         requireAllNonNull(target, editedCard);

@@ -76,6 +76,9 @@ public class TriviaBundle implements ReadOnlyTriviaBundle {
         cards.add(c);
     }
 
+    // TODO: importCards
+    // for each of the cards, add into unique card list
+
     /**
      * Removes {@code key} from this {@code TriviaBundle}.
      * {@code key} must exist in the trivia bundle.
