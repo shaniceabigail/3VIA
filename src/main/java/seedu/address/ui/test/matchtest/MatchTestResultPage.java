@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.DateUtil;
 import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.ui.test.TriviaTestResultPage;
 
@@ -42,7 +42,7 @@ public class MatchTestResultPage extends TriviaTestResultPage {
         super(FXML);
 
         this.matchTest = matchTest;
-        testDateText.setText(StringUtil.formatDate(matchTest.getTestDate()));
+        testDateText.setText(DateUtil.format(matchTest.getTestDate()));
         durationText.setText(String.valueOf(matchTest.getDuration()) + "s");
         topicText.setText(matchTest.getTopic().topicName);
         numOfCardsText.setText(String.valueOf(matchTest.getCardsTested().size()));

@@ -30,7 +30,7 @@ public class MatchAttemptView extends UiPart<Region> {
         this.attempt = attempt;
 
         id.setText(displayedIndex + ". ");
-        attemptText.setText(attempt.getQuestion() + " ---> " + attempt.getRawAnswer());
+        attemptText.setText(attempt.getQuestion() + " ---> " + attempt.getAnswer());
 
         if (attempt.isCorrect()) {
             correctnessIcon.setImage(getImage("/images/tick_icon.png"));

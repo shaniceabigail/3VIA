@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalCards.getTypicalTriviaBundle;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTriviaResults.getTypicalTriviaResults;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.testutil.CardBuilder;
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -24,13 +26,15 @@ public class AddCommandIntegrationTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), getTypicalTriviaResults(),
+                new UserPrefs());
     }
 
     @Test
     public void execute_newCard_success() {
         Card validCard = new CardBuilder().build();
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTriviaBundle(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTriviaBundle(),
+                new TriviaResults(), new UserPrefs());
         expectedModel.addCard(validCard);
         expectedModel.commitTriviaBundle();
         assertCommandSuccess(new AddCommand(validCard), model, commandHistory,
