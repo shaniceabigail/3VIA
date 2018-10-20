@@ -47,6 +47,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.QuestionContainsKeywordsPredicate;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.model.topic.Topic;
 import seedu.address.testutil.CardBuilder;
@@ -64,7 +65,8 @@ public class AddressBookParserTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(new AddressBook(), TypicalCards.getTypicalTriviaBundle(), new UserPrefs());
+        model = new ModelManager(new AddressBook(), TypicalCards.getTypicalTriviaBundle(), new TriviaResults(),
+                new UserPrefs());
         parser = new AddressBookParser();
     }
 

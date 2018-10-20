@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -15,7 +16,6 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.model.AddMatchTestResultEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -25,6 +25,8 @@ import seedu.address.model.TriviaBundle;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
+import seedu.address.model.test.Attempt;
+import seedu.address.model.test.TriviaResult;
 import seedu.address.model.test.TriviaTest;
 import seedu.address.testutil.CardBuilder;
 
@@ -226,12 +228,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void handleAddMatchTestResultEvent(AddMatchTestResultEvent event) {
+        public boolean matchQuestionAndAnswer(Index questionIndex, Index answerIndex) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean matchQuestionAndAnswer(Index questionIndex, Index answerIndex) {
+        public List<TriviaResult> getTriviaResultList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Attempt> getAttemptsByCard(Card card) {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -19,6 +19,8 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.test.TestType;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.model.topic.Topic;
 import seedu.address.testutil.MatchTestUtil;
 import seedu.address.testutil.TypicalCards;
@@ -38,8 +40,8 @@ public class MatchTestTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(TypicalPersons.getTypicalAddressBook(),
-                TypicalCards.getTypicalTriviaBundle(), new UserPrefs());
+        model = new ModelManager(TypicalPersons.getTypicalAddressBook(), TypicalCards.getTypicalTriviaBundle(),
+                new TriviaResults(), new UserPrefs());
 
         // There will be 3 cards in this matchTest
         matchTest = new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle());
@@ -80,7 +82,6 @@ public class MatchTestTest {
         assertFalse(model.matchQuestionAndAnswer(earthRoundIndexes[0], forceFormulaIndexes[1]));
         assertFalse(model.matchQuestionAndAnswer(forceFormulaIndexes[0], densityFormulaIndexes[1]));
         assertFalse(model.matchQuestionAndAnswer(densityFormulaIndexes[0], earthRoundIndexes[1]));
-
     }
 
     @Test
@@ -91,14 +92,15 @@ public class MatchTestTest {
 
     @Test
     public void test_responseToCorrectMatchAttempt() {
+        // makes sure the cards that are involved in the correct attempts are removed.
         matchTest.respondToCorrectAttempt(new MatchAttempt(Q_EARTH_ROUND, Q_EARTH_ROUND));
         assertEquals(matchTest.getQuestions().size(), 2);
         assertEquals(matchTest.getAnswers().size(), 2);
-        assertFalse(matchTest.isCompleted());
 
         matchTest.respondToCorrectAttempt(new MatchAttempt(Q_DENSITY_FORMULA, Q_DENSITY_FORMULA));
         matchTest.respondToCorrectAttempt(new MatchAttempt(Q_FORCE_FORMULA, Q_FORCE_FORMULA));
-        assertTrue(matchTest.isCompleted());
+        assertEquals(matchTest.getAnswers().size(), 0);
+        assertEquals(matchTest.getQuestions().size(), 0);
     }
 
     @Test
@@ -106,9 +108,8 @@ public class MatchTestTest {
         // if the ongoing test isn't stopped, isCompleted will be false
         assertFalse(matchTest.isCompleted());
 
-        // If there are existing unanswered questions, isCompleted flag should be false.
-        matchTest.getQuestions().remove(0);
-        matchTest.getAnswers().remove(0);
+        // If there are existing unanswered questions, even if test is stopped, isCompleted flag should be false.
+        matchTest.match(earthRoundIndexes[0], earthRoundIndexes[1]);
         model.stopTriviaTest();
         assertFalse(matchTest.isCompleted());
     }
@@ -116,10 +117,19 @@ public class MatchTestTest {
     @Test
     public void test_isCompletedFlagTrue() {
         // If there are no more existing unanswered questions, isCompleted flag should be true.
-        matchTest.getQuestions().clear();
-        matchTest.getAnswers().clear();
+        matchTest.respondToCorrectAttempt(new MatchAttempt(Q_EARTH_ROUND, Q_EARTH_ROUND));
+        matchTest.respondToCorrectAttempt(new MatchAttempt(Q_FORCE_FORMULA, Q_FORCE_FORMULA));
+
+        densityFormulaIndexes = MatchTestUtil.getIndexes(matchTest, Q_DENSITY_FORMULA);
+        model.matchQuestionAndAnswer(densityFormulaIndexes[0], densityFormulaIndexes[1]);
         model.stopTriviaTest();
         assertTrue(matchTest.isCompleted());
+        assert(model.getTriviaResultList().size() == 1);
+    }
+
+    @Test
+    public void test_assertTestType() {
+        assertEquals(matchTest.getTestType(), TestType.MATCH_TEST);
     }
 
     @Test
