@@ -227,13 +227,13 @@ _`delete 1` command is reapplied_ +
 _`clear` command is reapplied_ +
 // end::undoredo[]
 
-=== Clearing all entries : `clear`
+=== Clearing all entries : `clear` `[coming in v2.0]`
 
 [WARNING]
 Use with caution! Clears all entries in 3VIA and reboots. +
 Format: `clear`
 
-=== Starting a test: `test`
+=== Starting an Open Ended Test: `testO` `[coming in v2.0]`
 
 Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer. +
 Format: `test t/TOPIC [TIMELIMIT_IN_SECONDS]`
@@ -243,7 +243,7 @@ Format: `test t/TOPIC [TIMELIMIT_IN_SECONDS]`
 * The user can also set the time limit (in seconds) for each question using the optional field `TIMELIMIT_IN_SECONDS`
 ****
 
-The following commands can only be used during a `test`.
+The following commands can only be used during an `Open Ended Test`.
 
 ==== Answering a question:
 
@@ -260,13 +260,13 @@ Format: `c` (correct) OR `x` (wrong)
 Test is exited. +
 Format: `exit`
 
-=== Starting a matching test: `testM`
+=== Starting a Matching Test: `testM`
 
 Start a test of matching cards of a specified topic. In a test of matching cards, all the questions and answers in that topic
 will be displayed. The user will then have to match the correct question and answer together. +
 Format: `testM t/TOPIC`
 
-The following commands can only be used during a matching test.
+The following commands can only be used during a `Matching Test`.
 
 ==== Enter the matching cards: match
 
@@ -278,12 +278,12 @@ Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 Test is exited. +
 Format: `exit`
 
-=== View statistics for a certain test: `stats`
+=== View statistics for a certain test: `stats` `[coming in v2.0]`
 
 Results of previous tests, questions, expected answers and the user’s answers for that particular topic will be displayed. +
 Format: `stats [TOPIC]`
 
-=== Mass Import: `import`
+=== Mass Import: `import` `[coming in v2.0]`
 
 Imports multiple cards from a text file into 3VIA. +
 Format: `import FILEPATH`
@@ -308,6 +308,9 @@ _Imports the contents from the text.txt file on a Linux desktop._
 
 Exits the program. +
 Format: `exit`
+
+[IMPORTANT]
+command `exit` used in any of the test page will bring you to the home page, whereas using the command `exit` in the homepage will exit the programme.
 
 === Saving data
 3VIA saves data in the hard disk automatically after any command that changes the data. +
