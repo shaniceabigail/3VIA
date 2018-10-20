@@ -1,7 +1,10 @@
 package seedu.address.storage;
 
+import static seedu.address.commons.util.CollectionUtil.ifNullThrows;
+
 import javax.xml.bind.annotation.XmlElement;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
@@ -53,20 +56,15 @@ public class XmlAdaptedAttempt {
      * @throws IllegalValueException if there were any data constraints violated in the adapted attempt
      */
     public Attempt toModelType() throws IllegalValueException {
-        if (attemptedCard == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Card.class.getSimpleName()));
-        }
-
-        if (answer == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Answer.class.getSimpleName()));
-        }
-
-        if (isCorrect == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "isCorrect"));
-        }
+        ifNullThrows(attemptedCard,
+                new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Card.class.getSimpleName())));
+        ifNullThrows(answer,
+                new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Answer.class.getSimpleName())));
+        ifNullThrows(isCorrect,
+                new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "isCorrect")));
 
         if (!isCorrect.equals("true") && !isCorrect.equals("false")) {
-            throw new IllegalValueException("Invalid boolean values for isCorrect field.");
+            throw new IllegalValueException(Messages.MESSAGE_INVALID_BOOLEAN_FOR_ISCORRECT);
         }
 
         return new Attempt(attemptedCard.toModelType(), answer, Boolean.valueOf(isCorrect));

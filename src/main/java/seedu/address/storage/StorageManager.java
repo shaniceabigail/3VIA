@@ -24,6 +24,12 @@ import seedu.address.model.test.ReadOnlyTriviaResults;
  */
 public class StorageManager extends ComponentManager implements Storage {
 
+    public static final String MESSAGE_DATA_FILE_NOT_FOUND = "Data file not found. Will be starting with a sample %s";
+    public static final String MESSAGE_PROBLEM_READING_FILE = "Problem while reading from the file. "
+                + "Will be starting with an empty %s";
+    public static final String MESSAGE_INCORRECT_DATA_FILE = "Data file not in the correct format. "
+            + "Will be starting with an empty %s";
+
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private TriviaBundleStorage triviaBundleStorage;

@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.commons.util.CollectionUtil.ifNullThrows;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,16 +74,21 @@ public class XmlAdaptedTriviaResult {
      * @throws IllegalValueException if there were any data constraints violated in the adapted card
      */
     public TriviaResult toModelType() throws IllegalValueException {
+        ifNullThrows(testType, new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                TestType.class.getSimpleName())));
+        ifNullThrows(topic, new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                Topic.class.getSimpleName())));
+        ifNullThrows(date, new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                Date.class.getSimpleName())));
+        ifNullThrows(duration, new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Duration")));
+
+        /** Parse attempts */
         final List<Attempt> attempts = new ArrayList<>();
         for (XmlAdaptedAttempt attempt : attempt) {
             attempts.add(attempt.toModelType());
         }
 
         /** Parse testType */
-        if (testType == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    TestType.class.getSimpleName()));
-        }
         final TestType testTypeEnum;
         try {
             testTypeEnum = TestType.valueOf(testType);
@@ -90,19 +97,12 @@ public class XmlAdaptedTriviaResult {
         }
 
         /** Parse topic */
-        if (topic == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Topic.class.getSimpleName()));
-        }
         if (!Topic.isValidTopicName(topic)) {
             throw new IllegalValueException(Topic.MESSAGE_TOPIC_CONSTRAINTS);
         }
         final Topic modelTopic = new Topic(topic);
 
         /** Parse date */
-        if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
-        }
         final Date modelDate;
         try {
             modelDate = DateUtil.parse(date);
@@ -111,9 +111,6 @@ public class XmlAdaptedTriviaResult {
         }
 
         /** Parse duration */
-        if (duration == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Duration"));
-        }
         final double modelDuration;
         try {
             modelDuration = Double.parseDouble(duration);

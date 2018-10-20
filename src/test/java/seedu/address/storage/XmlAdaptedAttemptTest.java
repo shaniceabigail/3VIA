@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalCards.Q_FLAT_EARTH;
 
 import org.junit.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
@@ -31,7 +32,7 @@ public class XmlAdaptedAttemptTest {
     public void toModelType_invalidCorrectness_throwsIllegalValueException() {
         XmlAdaptedAttempt attempt =
                 new XmlAdaptedAttempt(VALID_XML_CARD, VALID_ANSWER, INVALID_CORRECTNESS);
-        String expectedMessage = "Invalid boolean values for isCorrect field.";
+        String expectedMessage = Messages.MESSAGE_INVALID_BOOLEAN_FOR_ISCORRECT;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, attempt::toModelType);
     }
 

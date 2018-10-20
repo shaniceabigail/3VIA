@@ -3,6 +3,7 @@ package seedu.address;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -94,59 +95,47 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        Optional<ReadOnlyTriviaBundle> triviaBundleOptional;
-        Optional<ReadOnlyTriviaResults> triviaResultsOptional;
-
         ReadOnlyAddressBook initialData;
         ReadOnlyTriviaBundle initialTriviaBundleData;
         ReadOnlyTriviaResults initialTriviaResults;
 
-        try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
-            }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
-        }
+        initialData = readData(storage::readAddressBook, SampleDataUtil::getSampleAddressBook, AddressBook::new,
+                AddressBook.class);
+        initialTriviaBundleData = readData(storage::readTriviaBundle, SampleDataUtil::getSampleTriviaBundle,
+                TriviaBundle::new, TriviaBundle.class);
+        initialTriviaResults = readData(storage::readTriviaResults, SampleDataUtil::getSampleTriviaResults,
+                TriviaResults::new, TriviaResults.class);
 
-        try {
-            triviaBundleOptional = storage.readTriviaBundle();
-            if (!triviaBundleOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample TriviaBundle");
-            }
-            initialTriviaBundleData = triviaBundleOptional.orElseGet(SampleDataUtil::getSampleTriviaBundle);
-        } catch (DataConversionException e) {
-            logger.warning("TriviaBundle data file not in correct format. Will be starting with empty "
-                    + "TriviaBundle");
-            initialTriviaBundleData = new TriviaBundle();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from TrivaBundle file. Will be starting with an "
-                    + "empty TriviaBundle");
-            initialTriviaBundleData = new TriviaBundle();
-        }
-
-        try {
-            triviaResultsOptional = storage.readTriviaResults();
-            if (!triviaResultsOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with empty result list.");
-            }
-            initialTriviaResults = triviaResultsOptional.orElseGet(TriviaResults::new);
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty trivia results");
-            initialTriviaResults = new TriviaResults();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty trivia results");
-            initialTriviaResults = new TriviaResults();
-        }
 
         return new ModelManager(initialData, initialTriviaBundleData, initialTriviaResults, userPrefs);
+    }
+
+    /**
+     * A function that is used to read the different kinds of data from the hard disk.
+     */
+    private <E, T extends E> E readData(SupplierToReadData<Optional<E>> readAction, Supplier<E> sampleDataAction,
+                                        Supplier<E> emptyDataAction, Class<T> dataClass) {
+        try {
+            Optional<E> dataOptional = readAction.get();
+            if (!dataOptional.isPresent()) {
+                logger.info(String.format(StorageManager.MESSAGE_DATA_FILE_NOT_FOUND, dataClass.getSimpleName()));
+            }
+            return dataOptional.orElseGet(sampleDataAction);
+        } catch (IOException e) {
+            logger.warning(String.format(StorageManager.MESSAGE_PROBLEM_READING_FILE, dataClass.getSimpleName()));
+            return emptyDataAction.get();
+        } catch (DataConversionException e) {
+            logger.warning(String.format(StorageManager.MESSAGE_INCORRECT_DATA_FILE, dataClass.getSimpleName()));
+            return emptyDataAction.get();
+        }
+    }
+
+    /**
+     * A Supplier that is used to read data from hard disk. Will throw IOException and DataConversionException.
+     */
+    @FunctionalInterface
+    private interface SupplierToReadData<T> {
+        T get() throws IOException, DataConversionException;
     }
 
     private void initLogging(Config config) {
