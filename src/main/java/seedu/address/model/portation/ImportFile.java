@@ -1,15 +1,23 @@
 package seedu.address.model.portation;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ExtraInformationDisplay;
+import seedu.address.commons.events.ui.ExtraInformationDisplayChangeEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.portation.exceptions.FileParseException;
+import seedu.address.model.topic.Topic;
 
 public class ImportFile {
     public static final String MESSAGE_INVALID_FILE = "Invalid file.";
+    public static final String MESSAGE_INVALID_FILE_FORMAT = "Invalid file format.";
     public static final String MESSAGE_INVALID_FILE_NAME = "Invalid file name.";
     public static final String MESSAGE_INVALID_FILE_TYPE = "Invalid file type. Only .txt files are accepted";
     public static final String MESSAGE_EMPTY_FILE = "Empty file.";
@@ -53,7 +61,31 @@ public class ImportFile {
     }
 
     public Set<Card> parseFileToCards() throws FileParseException {
-        return FileParser.parseFileToCards(importFile);
+        Set<Card> cards = new HashSet<>();
+        Set<Topic> topicSet = new HashSet<>();
+
+        // TODO: add support for quotes
+        try (BufferedReader br = new BufferedReader(new FileReader(importFile))) {
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                if (FileParser.isTopic(line)) {
+                    topicSet = FileParser.parseLineToTopicSet(line);
+                } else {
+                    String[] cardString = FileParser.parseLineToQuestionAnswerPair(line);
+                    Card cardToAdd = FileParser.stringToCard(cardString, topicSet);
+                    cards.add(cardToAdd);
+                }
+            }
+        } catch (IOException ioe) {
+            throw new FileParseException(MESSAGE_INVALID_FILE_TYPE);
+        } catch (FileParseException fpe) {
+            EventsCenter
+                    .getInstance()
+                    .post(new ExtraInformationDisplayChangeEvent(ExtraInformationDisplay.IMPORT_HELP_DISPLAY));
+            throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
+        }
+        return cards;
     }
 
     public String getFileName() {
