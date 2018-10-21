@@ -10,6 +10,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -40,15 +41,26 @@ public class MatchTest extends TriviaTest {
             + " corresponding topic to proceed.";
 
     public final TestType testType = TestType.MATCH_TEST;
-    private final ObservableList<Question> shuffledQuestions;
-    private final ObservableList<Answer> shuffledAnswers;
     private List<MatchAttempt> attempts;
+
+    private final ObservableList<Question> shuffledQuestions;
+    private final List<Index> displayQuestionIndexes;
+
+    private final ObservableList<Answer> shuffledAnswers;
+    private final List<Index> displayAnswerIndexes;
 
     public MatchTest(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
         super(tag, triviaBundle);
 
         shuffledQuestions = getQuestions(cards);
         shuffledAnswers = getAnswers(cards);
+
+        List<Index> initialIndexes = IntStream.rangeClosed(1, cards.size())
+                .mapToObj(Index::fromOneBased)
+                .collect(Collectors.toList());
+        displayQuestionIndexes = new ArrayList<>(initialIndexes);
+        displayAnswerIndexes = new ArrayList<>(initialIndexes);
+
         attempts = new ArrayList<>();
 
         checkArgument(isValidMatchTest(), MESSAGE_MATCH_TEST_CONSTRAINS);
@@ -57,14 +69,17 @@ public class MatchTest extends TriviaTest {
     /**
      * The logic associated to matching a question and a answer.
      *
-     * @param questionIndex The display index of the question to match.
-     * @param answerIndex The display index of the answer to match.
+     * @param displayQuestionIndex The display index of the question to match.
+     * @param displayAnswerIndex The display index of the answer to match.
      * @return a boolean which signify whether the match is success or failure.
      * @throws IndexOutOfBoundsException when the given question and answer index is not within the range of
      * existing questions' and answers' indexes.
      */
-    public boolean match(Index questionIndex, Index answerIndex) throws IndexOutOfBoundsException {
-        MatchAttempt attempt = addAttempt(questionIndex, answerIndex);
+    public boolean match(Index displayQuestionIndex, Index displayAnswerIndex) throws IndexOutOfBoundsException {
+        Index actualQuestionIndex = Index.fromZeroBased(displayQuestionIndexes.indexOf(displayQuestionIndex));
+        Index actualAnswerIndex = Index.fromZeroBased(displayAnswerIndexes.indexOf(displayAnswerIndex));
+
+        MatchAttempt attempt = addAttempt(actualQuestionIndex, actualAnswerIndex);
         postOutcomeOfMatch(attempt);
 
         if (!attempt.isCorrect()) {
@@ -79,6 +94,8 @@ public class MatchTest extends TriviaTest {
             @Override
             public void run() {
                 Platform.runLater(() -> {
+                    displayQuestionIndexes.remove(displayQuestionIndex);
+                    displayAnswerIndexes.remove(displayAnswerIndex);
                     respondToCorrectAttempt(attempt);
                 });
             }
@@ -107,6 +124,14 @@ public class MatchTest extends TriviaTest {
             stopTest();
             EventsCenter.getInstance().post(new ShowTriviaTestResultEvent(getResultPage()));
         }
+    }
+
+    public List<Index> getDisplayQuestionIndexes() {
+        return displayQuestionIndexes;
+    }
+
+    public List<Index> getDisplayAnswerIndexes() {
+        return displayAnswerIndexes;
     }
 
     /**
@@ -151,8 +176,8 @@ public class MatchTest extends TriviaTest {
      * @param attempt The attempt of that match command.
      */
     private void postOutcomeOfMatch(MatchAttempt attempt) {
-        int indexOfQuestion = getQuestions().indexOf(attempt.getQuestion());
-        int indexOfAnswer = getAnswers().indexOf(attempt.getAnswer());
+        int indexOfQuestion = shuffledQuestions.indexOf(attempt.getQuestion());
+        int indexOfAnswer = shuffledAnswers.indexOf(attempt.getAnswer());
         EventsCenter.getInstance().post(new FlashMatchOutcomeEvent(indexOfQuestion, indexOfAnswer,
                 attempt.isCorrect()));
     }
@@ -170,8 +195,9 @@ public class MatchTest extends TriviaTest {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                duration = Double.parseDouble(timerFormat.format(duration + 0.1));
-                System.out.println("Seconds passed: " + duration);
+                Platform.runLater(() -> {
+                    duration.setValue(Double.parseDouble(timerFormat.format(duration.getValue() + 0.1)));
+                });
             }
         };
 

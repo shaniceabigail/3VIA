@@ -1,5 +1,6 @@
 package seedu.address.ui.test.matchtest;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
@@ -13,6 +14,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.FlashMatchOutcomeEvent;
 import seedu.address.model.card.Answer;
 import seedu.address.ui.UiPart;
@@ -24,31 +26,36 @@ public class AnswerListPanel extends UiPart<Region> {
     private static final String FXML = "/test/matchtest/AnswerListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(AnswerListPanel.class);
 
+    private final List<Index> displayIndexes;
+
     @FXML
     private ListView<Answer> matchTestAnswerListView;
 
-    public AnswerListPanel(ObservableList<Answer> answerList) {
+    public AnswerListPanel(ObservableList<Answer> answerList, List<Index> displayIndexes) {
         super(FXML);
+
+        this.displayIndexes = displayIndexes;
         setConnections(answerList);
         registerAsAnEventHandler(this);
     }
 
     private void setConnections(ObservableList<Answer> answerList) {
-        this.matchTestAnswerListView.setItems(answerList);
-        matchTestAnswerListView.setCellFactory(listView -> new AnswerListViewCell());
+        matchTestAnswerListView.setItems(answerList);
+        matchTestAnswerListView.setCellFactory(listView -> new AnswerListViewCell(displayIndexes));
     }
 
     @Subscribe
     private void handleFlashMatchOutcomeEvent(FlashMatchOutcomeEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         matchTestAnswerListView.setCellFactory(listView ->
-                new AnswerListViewCell(event.indexOfAnswer, event.isCorrect));
+                new AnswerListViewCell(displayIndexes, event.indexOfAnswer, event.isCorrect));
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Platform.runLater(() -> matchTestAnswerListView.setCellFactory(listView -> new AnswerListViewCell()));
+                Platform.runLater(() -> matchTestAnswerListView.setCellFactory(listView ->
+                        new AnswerListViewCell(displayIndexes)));
             };
         }, UiPart.FLASH_TIME);
     }
@@ -57,20 +64,23 @@ public class AnswerListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Card} using a {@code AnswerView}.
      */
     class AnswerListViewCell extends ListCell<Answer> {
-        private Integer indexOfAnswer;
+        private List<Index> displayIndexes;
+        private Integer actualIndexOfAnswer;
         private boolean isCorrect;
 
-        public AnswerListViewCell() {
-            indexOfAnswer = null;
+        public AnswerListViewCell(List<Index> displayIndexes) {
+            this.displayIndexes = displayIndexes;
+            actualIndexOfAnswer = null;
         }
 
         /**
          * Used for defining which cell to flash, with the boolean whether it is correct.
-         * @param indexOfAnswer The targetIndex that is needed to be flashed.
+         * @param actualIndexOfAnswer The targetIndex that is needed to be flashed.
          * @param isCorrect Whether the matching card is correct.
          */
-        public AnswerListViewCell(int indexOfAnswer, boolean isCorrect) {
-            this.indexOfAnswer = indexOfAnswer;
+        public AnswerListViewCell(List<Index> displayIndexes, int actualIndexOfAnswer, boolean isCorrect) {
+            this.displayIndexes = displayIndexes;
+            this.actualIndexOfAnswer = actualIndexOfAnswer;
             this.isCorrect = isCorrect;
         }
 
@@ -82,10 +92,11 @@ public class AnswerListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                if (indexOfAnswer == null || indexOfAnswer != getIndex()) {
-                    setGraphic(new AnswerView(answer, getIndex() + 1).getRoot());
+                if (actualIndexOfAnswer == null || actualIndexOfAnswer != getIndex()) {
+                    setGraphic(new AnswerView(answer, displayIndexes.get(getIndex()).getOneBased()).getRoot());
                 } else {
-                    setGraphic(new AnswerView(answer, getIndex() + 1, isCorrect).getRoot());
+                    setGraphic(new AnswerView(answer, displayIndexes.get(getIndex()).getOneBased(),
+                            isCorrect).getRoot());
                 }
             }
         }

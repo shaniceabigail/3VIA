@@ -3,6 +3,7 @@ package seedu.address.ui.test.matchtest;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.test.matchtest.MatchTest;
@@ -25,14 +26,24 @@ public class MatchTestPage extends TriviaTestPage {
     @FXML
     private StackPane matchTestAnswerListPanelPlaceholder;
 
+    @FXML
+    private Label matchTestTopicText;
+
+    @FXML
+    private Label matchTestDurationText;
+
     public MatchTestPage(MatchTest matchTest) {
         super(FXML);
 
-        questionListPanel = new QuestionListPanel(matchTest.getQuestions());
+        questionListPanel = new QuestionListPanel(matchTest.getQuestions(), matchTest.getDisplayQuestionIndexes());
         matchTestQuestionListPanelPlaceholder.getChildren().add(questionListPanel.getRoot());
 
-        answerListPanel = new AnswerListPanel(matchTest.getAnswers());
+        answerListPanel = new AnswerListPanel(matchTest.getAnswers(), matchTest.getDisplayAnswerIndexes());
         matchTestAnswerListPanelPlaceholder.getChildren().add(answerListPanel.getRoot());
+
+        matchTestTopicText.setText(matchTest.getTopic().topicName);
+        matchTestDurationText.textProperty().bind(matchTest.getDuration().asString());
+
         registerAsAnEventHandler(this);
     }
 }
