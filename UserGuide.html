@@ -14,10 +14,10 @@
 <li><a href="#Features">3. Features</a>
 <ul class="sectlevel2">
 <li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-a-card-code-card-code">3.2. Adding a card: <code>card</code></a></li>
+<li><a href="#adding-a-card-code-add-code">3.2. Adding a card: <code>add</code></a></li>
 <li><a href="#listing-all-cards-code-list-code">3.3. Listing all cards : <code>list</code></a></li>
 <li><a href="#editing-a-card-code-edit-code">3.4. Editing a card : <code>edit</code></a></li>
-<li><a href="#locating-cards-by-question-code-find-code">3.5. Locating cards by question: <code>find</code></a></li>
+<li><a href="#search-for-cards-by-question-code-find-code">3.5. Search for cards by question: <code>find</code></a></li>
 <li><a href="#deleting-a-card-code-delete-code">3.6. Deleting a card : <code>delete</code></a></li>
 <li><a href="#selecting-a-card-code-select-code">3.7. Selecting a card : <code>select</code></a></li>
 <li><a href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></li>
@@ -29,7 +29,7 @@
 <li><a href="#view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code">3.14. View statistics for a certain test: <code>stats</code> <code>[coming in v2.0]</code></a></li>
 <li><a href="#mass-import-code-import-code-code-coming-in-v2-0-code">3.15. Mass Import: <code>import</code> <code>[coming in v2.0]</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">3.16. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.17. Saving the data</a></li>
+<li><a href="#saving-data">3.17. Saving data</a></li>
 <li><a href="#multi-player-code-coming-in-v2-0-code">3.18. Multi-Player <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
@@ -42,10 +42,10 @@
 <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>3VIA is a great way for learners to <strong>reinforce and test out their knowledge</strong>. Tired of using a mouse or trackpad to navigate? Don&#8217;t worry, 3VIA is <strong>optimized for a veteran Command Line Interface (CLI) user</strong>, while still having the benefits of a beautiful Graphical User Interface (GUI).</p>
+<p>3VIA is a great way for <em>learners</em> to <strong>reinforce and test out their knowledge</strong>. Tired of using a mouse or trackpad to navigate? Don&#8217;t worry, 3VIA is <strong>optimised for a veteran Command Line Interface (CLI) user</strong>, while still having the benefits of a beautiful Graphical User Interface (GUI).</p>
 </div>
 <div class="paragraph">
-<p>3VIA will spur and energise your desire to be that A* student, without ever leaving the keyboard. We believe that it should only take <span class="red">3 steps to get that Very Important A</span> (3VIA, get it?).</p>
+<p>3VIA will spur and energise your desire to be that A* student, without ever leaving the keyboard. We believe that it should only take 3 steps to get that Very Important A (3VIA, get it?).</p>
 </div>
 <div class="paragraph">
 <p>You can read the user guide from start to finish by jumping right in to <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started or just use it as a reference. Enjoy!</p>
@@ -58,13 +58,10 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Ensure you have Java version <em>9</em> or later installed in your Computer.</p>
+<p>Ensure you have Java version <em>9</em> or later installed in your computer.</p>
 </li>
 <li>
-<p>Download the latest <code>3VIA.jar</code> <a href="https://github.com/CS2103-AY1819S1-W12-3/main/releases">here</a>.</p>
-</li>
-<li>
-<p>Copy the file to the folder you want to use as the home folder for your 3VIA app.</p>
+<p>Download the latest <code>3VIA.jar</code> <a href="https://github.com/CS2103-AY1819S1-W12-3/main/releases">here</a> and copy the file into the folder you want to use as the home folder for your 3VIA app.</p>
 </li>
 <li>
 <p>Double-click the icon to start the app. The GUI should appear in a few seconds and you&#8217;re ready to go!</p>
@@ -122,19 +119,23 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <ol>
 <li>
 <p><em>UPPER_CASE <em>are parameters you should include in use the command</em></em></p>
-<p><code><span class="green">add q/QUESTION</span></code> means <code><span class="maroon">QUESTION</span></code>.</p>
+<p><code>add q/QUESTION</code> means <code>add q/Why is the earth round</code>.</p>
 </li>
 <li>
 <p><em>Items in square brackets are optional</em></p>
-<p><code><span class="green">q/QUESTION [t/TOPIC]</span></code> means <code><span class="maroon">q/Why is the earth round t/physics</span></code></p>
+<p><code>q/QUESTION [t/TOPIC]</code> means <code>q/Why is the earth round t/Physics</code></p>
 </li>
 <li>
 <p><em>Items with <code>&#8230;&#8203;</code> after them can be used optionally or multiple times</em></p>
-<p><code><span class="green">[t/TOPIC] &#8230;&#8203;</span></code> can be <code><span class="maroon">t/physics t/math t/literature</span></code></p>
+<p><code>[t/TOPIC] &#8230;&#8203;</code> can be <code>t/Physics t/Math t/Literature</code></p>
 </li>
 <li>
 <p><em>Parameters written can be in any order</em></p>
-<p><code><span class="green">q/QUESTION a/ANSWER</span></code> can be <code><span class="green">a/ANSWER q/QUESTION</span></code></p>
+<p><code>q/QUESTION a/ANSWER</code> can be <code>a/ANSWER q/QUESTION</code></p>
+</li>
+<li>
+<p><em><code>INDEX</code> refers to the index number of the card in the most recently displayed card list</em></p>
+<p><code>INDEX</code> must be a <strong>positive integer</strong>, i.e. 1, 2, 3 &#8230;&#8203;</p>
 </li>
 </ol>
 </div>
@@ -143,14 +144,15 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <div class="sect2">
 <h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></h3>
 <div class="paragraph">
-<p>Format: <code><span class="green">help</span></code></p>
+<p>Opens a window to our 3VIA User Guide.
+Format: <code>help</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-card-code-card-code"><a class="link" href="#adding-a-card-code-card-code">3.2. Adding a card: <code>card</code></a></h3>
+<h3 id="adding-a-card-code-add-code"><a class="link" href="#adding-a-card-code-add-code">3.2. Adding a card: <code>add</code></a></h3>
 <div class="paragraph">
-<p>Adds a card to the trivia application<br>
-Format: <code><span class="green">add q/QUESTION a/ANSWER [t/TOPIC]&#8230;&#8203;</span></code></p>
+<p>Adds a card to <strong>3VIA</strong><br>
+Format: <code>add q/QUESTION a/ANSWER [t/TOPIC]&#8230;&#8203;</code></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -159,7 +161,7 @@ Format: <code><span class="green">add q/QUESTION a/ANSWER [t/TOPIC]&#8230;&#8203
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-A card can have any number of topics. If no topics are specified, a TOPIC of <code>NoTopic</code> will be assigned to the card.
+A card can have any number of topics. If there are no topics specified, <code>NoTopic</code> will be assigned to the card.
 </td>
 </tr>
 </table>
@@ -170,10 +172,10 @@ A card can have any number of topics. If no topics are specified, a TOPIC of <co
 <div class="ulist">
 <ul>
 <li>
-<p><code>add q/What is the formula for force? a/force = mass * acceleration a/Physics</code></p>
+<p><code>add q/What is the formula for force? a/force = mass * acceleration t/Physics</code></p>
 </li>
 <li>
-<p><code>add q/What is the captial of Singapore? a/Singapore a/GeneralKnowledge</code></p>
+<p><code>add q/What is the capital of Singapore? a/Singapore t/GeneralKnowledge t/Geography</code></p>
 </li>
 </ul>
 </div>
@@ -181,34 +183,28 @@ A card can have any number of topics. If no topics are specified, a TOPIC of <co
 <div class="sect2">
 <h3 id="listing-all-cards-code-list-code"><a class="link" href="#listing-all-cards-code-list-code">3.3. Listing all cards : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all cards in the trivia application.<br>
-Format: <code><span class="green">list</span></code></p>
+<p>Shows a list of all the cards.<br>
+Format: <code>list</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="editing-a-card-code-edit-code"><a class="link" href="#editing-a-card-code-edit-code">3.4. Editing a card : <code>edit</code></a></h3>
 <div class="paragraph">
-<p>Edits an existing card in the trivia application.<br>
-Format: <code><span class="green">edit INDEX [q/QUESTION] [a/ANSWER] [t/TOPIC]&#8230;&#8203;</span></code></p>
+<p>Edits an existing card at specified <code>INDEX</code> with updated input values.<br>
+Format: <code>edit INDEX [q/QUESTION] [a/ANSWER] [t/TOPIC]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Edits the card at the specified <code>INDEX</code>. The index refers to the index number shown in the displayed card list. The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-<li>
 <p>At least one of the optional fields must be provided.</p>
-</li>
-<li>
-<p>Existing values will be updated to the input values.</p>
 </li>
 <li>
 <p>When editing topics, the existing topics of the card will be removed i.e adding of topics is not cumulative.</p>
 </li>
 <li>
-<p>You can set a topic of <code>NoTopic</code> to the card by typing <code>t/</code> without specifying any topics after it.</p>
+<p>You can set a topic of <code>NoTopic</code> to the card just by typing <code>t/</code> without specifying any topics after it.</p>
 </li>
 </ul>
 </div>
@@ -220,31 +216,33 @@ Format: <code><span class="green">edit INDEX [q/QUESTION] [a/ANSWER] [t/TOPIC]&#
 <div class="ulist">
 <ul>
 <li>
-<p><code>edit 1 q/Why will the apple fall from the tree? a/Because of gravity!</code><br>
-Edits the answer of the 1st card to be <code>Because of gravity!</code>.</p>
+<p><code>add q/Why will the apple fall from the tree? a/Because it was ripe!</code><br>
+<code>edit 1 q/Why will the apple fall from the tree? a/Because of gravity!</code><br>
+<em>Edits the answer of the 1st card to be <code>Because of gravity!</code>.</em></p>
 </li>
 <li>
-<p><code>edit 2 n/Why will the apple fall from the tree? t/</code><br>
-Edits the question of the 2nd card to be <code>Why will the apple fall from the tree?</code> and the card will have a topic of <code>NoTopic</code>.</p>
+<p><code>add q/Why can&#8217;t a bicycle stand on its own? a/Two tired. t/Funny</code>
+<code>edit 2 q/Why did the young mother fall asleep when put her child in bed t/</code><br>
+<em>Edits the question of the 2nd card to be <code>Why did the young mother fall asleep when put her child in bed?</code> and the card will have a topic of <code>NoTopic</code>.</em></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="locating-cards-by-question-code-find-code"><a class="link" href="#locating-cards-by-question-code-find-code">3.5. Locating cards by question: <code>find</code></a></h3>
+<h3 id="search-for-cards-by-question-code-find-code"><a class="link" href="#search-for-cards-by-question-code-find-code">3.5. Search for cards by question: <code>find</code></a></h3>
 <div class="paragraph">
-<p>Finds cards whose question contain any of the given keywords.<br>
-Format: <code><span class="green">find KEYWORD [MORE_KEYWORDS]</span></code></p>
+<p>Finds a list of card(s) whose question contain at least one of the given keywords.<br>
+Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>The search is case insensitive. e.g <code>why</code> will match <code>Why</code></p>
+<p>The search is <strong>not case sensitive</strong>. e.g <code>why</code> will match <code>Why</code></p>
 </li>
 <li>
-<p>The order of the keywords does not matter. e.g. <code>Why drop</code> will match <code>drop Why</code></p>
+<p>The order of the keywords does not matter. e.g. <code>Why drop</code> will match <code>drop why</code></p>
 </li>
 <li>
 <p>Only the question is searched.</p>
@@ -253,7 +251,7 @@ Format: <code><span class="green">find KEYWORD [MORE_KEYWORDS]</span></code></p>
 <p>Only full words will be matched e.g. <code>drop</code> will not match <code>droppings</code></p>
 </li>
 <li>
-<p>Cards matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Why drop</code> will return <code>Why will apple drop?</code>, <code>Why will rain drop?</code></p>
+<p>Cards matching at least one keyword will be returned. e.g. <code>Why drop</code> will return <code>Why will apple drop?</code>, <code>Why will rain drop?</code></p>
 </li>
 </ul>
 </div>
@@ -266,11 +264,11 @@ Format: <code><span class="green">find KEYWORD [MORE_KEYWORDS]</span></code></p>
 <ul>
 <li>
 <p><code>find Why</code><br>
-Returns <code>Why will apple drop?</code> and <code>Why is the sky blue?</code></p>
+<em>Returns <code>Why will the apple fall from the tree?</code> and `Why can&#8217;t a bicycle stand on its own?`</em></p>
 </li>
 <li>
 <p><code>find why what where</code><br>
-Returns any cards having question <code>why</code>, <code>what</code>, or <code>where</code></p>
+<em>Returns all cards having question <code>why</code>, <code>what</code>, or `where`</em></p>
 </li>
 </ul>
 </div>
@@ -278,25 +276,8 @@ Returns any cards having question <code>why</code>, <code>what</code>, or <code>
 <div class="sect2">
 <h3 id="deleting-a-card-code-delete-code"><a class="link" href="#deleting-a-card-code-delete-code">3.6. Deleting a card : <code>delete</code></a></h3>
 <div class="paragraph">
-<p>Deletes the specified card from the trivia application.<br>
-Format: <code><span class="green">delete INDEX</span></code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Deletes the card at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the displayed card list.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> 1, 2, 3, &#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
+<p>Deletes the card from the specified <code>INDEX</code>.<br>
+Format: <code>delete INDEX</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -306,12 +287,12 @@ Format: <code><span class="green">delete INDEX</span></code></p>
 <li>
 <p><code>list</code><br>
 <code>delete 2</code><br>
-Deletes the 2nd displayed card in the trivia application.</p>
+<em>Deletes the 2nd displayed card.</em></p>
 </li>
 <li>
 <p><code>find Why</code><br>
 <code>delete 1</code><br>
-Deletes the 1st card in the results of the <code>find</code> command.</p>
+_Deletes the 1st card in the results of the <code>find</code> command._xs</p>
 </li>
 </ul>
 </div>
@@ -319,25 +300,8 @@ Deletes the 1st card in the results of the <code>find</code> command.</p>
 <div class="sect2">
 <h3 id="selecting-a-card-code-select-code"><a class="link" href="#selecting-a-card-code-select-code">3.7. Selecting a card : <code>select</code></a></h3>
 <div class="paragraph">
-<p>Selects the card identified by the index number used in the displayed card list.<br>
-Format: <code><span class="green">select INDEX</span></code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Selects the card and loads the Google search page the card at the specified <code>INDEX</code>.</p>
-</li>
-<li>
-<p>The index refers to the index number shown in the displayed card list.</p>
-</li>
-<li>
-<p>The index <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
-</li>
-</ul>
-</div>
-</div>
+<p>Selects the card identified by the index number used in the displayed card list. Loads the Google search page for the card question.<br>
+Format: <code>select INDEX</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -347,12 +311,12 @@ Format: <code><span class="green">select INDEX</span></code></p>
 <li>
 <p><code>list</code><br>
 <code>select 2</code><br>
-Selects the 2nd card in the trivia application.</p>
+<em>Selects and opens a Google search page for the 2nd displayed card.</em></p>
 </li>
 <li>
 <p><code>find Why</code><br>
 <code>select 1</code><br>
-Selects the 1st card in the results of the <code>find</code> command.</p>
+<em>Selects and opens a Google search page for the 1st card in the results of the <code>find</code> command.</em></p>
 </li>
 </ul>
 </div>
@@ -360,8 +324,8 @@ Selects the 1st card in the results of the <code>find</code> command.</p>
 <div class="sect2">
 <h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
-<p>Lists all the commands that you have entered in reverse chronological order.<br>
-Format: <code><span class="green">history</span></code></p>
+<p>Lists all the commands that you have entered from your most recent command.<br>
+Format: <code>history</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -381,8 +345,8 @@ Format: <code><span class="green">history</span></code></p>
 <div class="sect2">
 <h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.9. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
-<p>Restores the trivia application to the state before the previous <em>undoable</em> command was executed.<br>
-Format: <code><span class="green">undo</span></code></p>
+<p>Restores the app to the state before the previous <em>undoable</em> command was executed.<br>
+Format: <code>undo</code></p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -392,7 +356,7 @@ Format: <code><span class="green">undo</span></code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify the trivia application&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code>, <code>clear</code> and <code>import</code>).</p>
+<p>Undoable commands: those commands that modify the app&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code>, <code>clear</code> and <code>import</code>).</p>
 </div>
 </td>
 </tr>
@@ -406,24 +370,28 @@ Format: <code><span class="green">undo</span></code></p>
 <li>
 <p><code>delete 1</code><br>
 <code>list</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<code>undo</code><br>
+<em>`delete 1` command is reversed</em></p>
 </li>
 <li>
 <p><code>select 1</code><br>
 <code>list</code><br>
 <code>undo</code><br>
-The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
+<em>The <code>undo</code> command not executed as there are no undoable commands previously executed.</em></p>
 </li>
 <li>
 <p><code>delete 1</code><br>
 <code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+<code>undo</code><br>
+<em>`clear` command is reversed<br>
+<code>undo</code><br>
+_`delete 1` command is reversed</em></p>
 </li>
 <li>
 <p><code>import C:\Users\username\Desktop\text.txt</code><br>
 <code>list</code><br>
-<code>undo</code> (reverses the <code>import</code> command)</p>
+<code>undo</code><br>
+<em>`import` command is reversed</em></p>
 </li>
 </ul>
 </div>
@@ -432,7 +400,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 <h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.10. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
-Format: <code><span class="green">redo</span></code></p>
+Format: <code>redo</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -441,21 +409,27 @@ Format: <code><span class="green">redo</span></code></p>
 <ul>
 <li>
 <p><code>delete 1</code><br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+<code>undo</code><br>
+<em>`delete 1` command is reversed</em><br>
+<code>redo</code><br>
+<em>`delete 1` command is reapplied</em></p>
 </li>
 <li>
 <p><code>delete 1</code><br>
 <code>redo</code><br>
-The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
+The <code>redo</code> command was not executed as there are no <code>undo</code> commands previously executed.</p>
 </li>
 <li>
 <p><code>delete 1</code><br>
 <code>clear</code><br>
-<code>undo</code> (reverses the <code>clear</code> command)<br>
-<code>undo</code> (reverses the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>delete 1</code> command)<br>
-<code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+<code>undo</code><br>
+<em>`clear` command is reversed</em><br>
+<code>undo</code><br>
+<em>`delete 1` command is reversed</em><br>
+<code>redo</code><br>
+<em>`delete 1` command is reapplied</em><br>
+<code>redo</code><br>
+<em>`clear` command is reapplied</em><br></p>
 </li>
 </ul>
 </div>
@@ -469,8 +443,8 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Use with caution! Clears all entries from the trivia application.<br>
-Format: <code><span class="green">clear</span></code>
+Use with caution! Clears all entries in 3VIA and reboots.<br>
+Format: <code>clear</code>
 </td>
 </tr>
 </table>
@@ -479,9 +453,8 @@ Format: <code><span class="green">clear</span></code>
 <div class="sect2">
 <h3 id="starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code"><a class="link" href="#starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code">3.12. Starting an Open Ended Test: <code>testO</code> <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
-<p>Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered
-correctly by comparing their answers with the expected answer.<br>
-Format: <code><span class="green">testO t/TOPIC TIMELIMIT_IN_SECONDS</span></code></p>
+<p>Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer.<br>
+Format: <code>test t/TOPIC [TIMELIMIT_IN_SECONDS]</code></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -491,35 +464,33 @@ Format: <code><span class="green">testO t/TOPIC TIMELIMIT_IN_SECONDS</span></cod
 <p>The test aims to test the knowledge of the user with the existing questions of a specified topic that are in the trivia application.</p>
 </li>
 <li>
-<p>The user can also set the time limit (in seconds) for each question using the optional field TIMELIMIT_IN_SECONDS</p>
+<p>The user can also set the time limit (in seconds) for each question using the optional field <code>TIMELIMIT_IN_SECONDS</code></p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>The following commands can only be used during a an open ended test.</p>
+<p>The following commands can only be used during an <code>Open Ended Test</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="enter-the-answer-of-a-question"><a class="link" href="#enter-the-answer-of-a-question">3.12.1. Enter the answer of a question:</a></h4>
+<h4 id="answering-a-question"><a class="link" href="#answering-a-question">3.12.1. Answering a question:</a></h4>
 <div class="paragraph">
-<p>After typing your desired answer in the command field, press <code>enter</code>. If you don&#8217;t have an answer in mind,
-you can just press <code>enter</code> with nothing in the command field.<br>
+<p>Type your answer in the command field and press <code>enter</code> to submit your answer. If you don&#8217;t have an answer in mind, you can just press <code>enter</code> with nothing in the command field. We accept your silence as an answer.<br>
 Format: <code>ANSWER_FROM_USER</code></p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="determining-the-correctness-of-your-answer"><a class="link" href="#determining-the-correctness-of-your-answer">3.12.2. Determining the correctness of your answer:</a></h4>
 <div class="paragraph">
-<p>After submitting your answer, you would be given a comparison between the expected and actual answer you entered.
-You would be required to determine the correctness of your answer since the questions are open ended.<br>
+<p>After answering the question, you would be given a comparison between the expected and actual answer you entered. You would be required to determine the correctness of your answer since the questions are open ended. The app will keep track of your score.<br>
 Format: <code>c</code> (correct) OR <code>x</code> (wrong)</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="quit-the-test"><a class="link" href="#quit-the-test">3.12.3. Quit the test:</a></h4>
 <div class="paragraph">
-<p>Will exit from the test.
+<p>Test is exited.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
@@ -532,19 +503,19 @@ will be displayed. The user will then have to match the correct question and ans
 Format: <code>testM t/TOPIC</code></p>
 </div>
 <div class="paragraph">
-<p>The following commands can only be used during a matching test.</p>
+<p>The following commands can only be used during a <code>Matching Test</code>.</p>
 </div>
 <div class="sect3">
 <h4 id="enter-the-matching-cards-match"><a class="link" href="#enter-the-matching-cards-match">3.13.1. Enter the matching cards: match</a></h4>
 <div class="paragraph">
-<p>Will match the cards during matching test.<br>
+<p>Will match and pair the cards during a matching test.<br>
 Format: <code>INDEX_OF_QUESTION INDEX_OF_ANSWER</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="quit-the-test-2"><a class="link" href="#quit-the-test-2">3.13.2. Quit the test:</a></h4>
+<h4 id="quit-matching-cards-test"><a class="link" href="#quit-matching-cards-test">3.13.2. Quit matching cards test:</a></h4>
 <div class="paragraph">
-<p>Will exit from the test.
+<p>Test is exited.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
@@ -552,14 +523,14 @@ Format: <code>exit</code></p>
 <div class="sect2">
 <h3 id="view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code"><a class="link" href="#view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code">3.14. View statistics for a certain test: <code>stats</code> <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
-<p>Will list out all the previous tests, with their respective questions, answers and the user’s answers.
+<p>Results of previous tests, questions, expected answers and the user’s answers for that particular topic will be displayed.<br>
 Format: <code>stats [TOPIC]</code></p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="mass-import-code-import-code-code-coming-in-v2-0-code"><a class="link" href="#mass-import-code-import-code-code-coming-in-v2-0-code">3.15. Mass Import: <code>import</code> <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
-<p>Imports multiple cards from a text file into the trivia application.<br>
+<p>Imports multiple cards from a text file into 3VIA.<br>
 Format: <code>import FILEPATH</code></p>
 </div>
 <div class="sidebarblock">
@@ -567,7 +538,7 @@ Format: <code>import FILEPATH</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Ignores duplicated cards already in trivia.</p>
+<p>Ignores duplicated cards already in the app.</p>
 </li>
 <li>
 <p>The <code>FILEPATH</code> refers to the absolute path of the file to be imported.</p>
@@ -588,15 +559,15 @@ Format: <code>import FILEPATH</code></p>
 <ul>
 <li>
 <p><code>import C:\Users\username\Desktop\text.txt</code>
-Imports the contents from the text.txt file on a Windows desktop.</p>
+<em>Imports the contents from the text.txt file on a Windows desktop.</em></p>
 </li>
 <li>
 <p><code>import C:\Users\username\Desktop\text.txt</code>
-Imports the contents from the text.txt file on a Mac desktop.</p>
+<em>Imports the contents from the text.txt file on a Mac desktop.</em></p>
 </li>
 <li>
 <p><code>import home/username/text.txt</code>
-Imports the contents from the text.txt file on a Linux desktop.</p>
+<em>Imports the contents from the text.txt file on a Linux desktop.</em></p>
 </li>
 </ul>
 </div>
@@ -607,11 +578,23 @@ Imports the contents from the text.txt file on a Linux desktop.</p>
 <h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.16. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
-Format: <code><span class="green">exit</span></code></p>
+Format: <code>exit</code></p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+command <code>exit</code> used in any of the test page will bring you to the home page, whereas using the command <code>exit</code> in the homepage will exit the programme.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.17. Saving the data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">3.17. Saving data</a></h3>
 <div class="paragraph">
 <p>3VIA saves data in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
@@ -629,7 +612,7 @@ There is no need to save manually.</p>
 <h2 id="faq"><a class="link" href="#faq">4. FAQ</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
+<p><strong>Q</strong>: How do I transfer my data to another computer?<br>
 <strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous 3VIA application folder.</p>
 </div>
 </div>
@@ -641,7 +624,7 @@ There is no need to save manually.</p>
 <ul>
 <li>
 <p><strong>Add</strong> <code>add q/QUESTION a/ANSWER [t/TOPIC]&#8230;&#8203;</code><br>
-e.g. <code>add q/What is the formula for force? a/force = mass * acceleration a/Physics</code></p>
+e.g. <code>add q/What is the formula for force? a/force = mass * acceleration t/Physics</code></p>
 </li>
 <li>
 <p><strong>Clear</strong> : <code>clear</code></p>
@@ -692,4 +675,4 @@ e.g.<code>select 2</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-20 09:36:40 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-21 03:13:46 UTC</div></div></div></body></html>
