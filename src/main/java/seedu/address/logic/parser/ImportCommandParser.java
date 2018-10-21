@@ -9,7 +9,7 @@ import java.util.Set;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.parser.exceptions.FileParseException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.fileParser.FileParserUtil;
+import seedu.address.logic.parser.fileParser.FileParser;
 import seedu.address.model.card.Card;
 
 /**
@@ -25,7 +25,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
     public ImportCommand parse(String args) throws ParseException {
         try {
             File importFile = ParserUtil.parsePath(args);
-            Set<Card> cards = FileParserUtil.parseFileToCards(importFile);
+            Set<Card> cards = FileParser.parseFileToCards(importFile);
             return new ImportCommand(importFile.getName(), cards);
         } catch (FileParseException fpe) {
             throw new FileParseException(ImportCommand.MESSAGE_INVALID_FILE, fpe);
