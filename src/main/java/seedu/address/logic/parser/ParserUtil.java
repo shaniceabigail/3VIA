@@ -2,15 +2,12 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import com.sun.xml.bind.v2.schemagen.xmlschema.Import;
-import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Question;
@@ -25,7 +22,7 @@ import seedu.address.model.topic.Topic;
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
-public class  ParserUtil {
+public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 

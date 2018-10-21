@@ -22,9 +22,9 @@ public class ImportCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + "C:\\Users\\username\\Desktop\\cards.txt";
 
-    public static final String MESSAGE_SUCCESS = "Imported cards from: %1$s";
-    public static final String MESSAGE_INVALID_FILE = "File is invalid!";
-    public static final String MESSAGE_DUPLICATE_CARD = "Some cards already exists in the trivia bundle";
+    public static final String MESSAGE_SUCCESS = "Imported cards from: %1$s.";
+    public static final String MESSAGE_IMPORT_FAIL = "Unable to import cards.";
+    public static final String MESSAGE_DUPLICATE_CARD = "Some cards already exists in the trivia bundle.";
     private final ImportFile importFile;
 
     /**
@@ -38,12 +38,12 @@ public class ImportCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        Set<Card> cardsToImport;
 
+        Set<Card> cardsToImport;
         try {
             cardsToImport = importFile.parseFileToCards();
         } catch (FileParseException fpe) {
-            throw new CommandException("cannot parse file");
+            throw new CommandException(MESSAGE_IMPORT_FAIL);
         }
 
         for (Card toAdd : cardsToImport) {

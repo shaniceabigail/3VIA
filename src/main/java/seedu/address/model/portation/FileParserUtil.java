@@ -1,13 +1,11 @@
 package seedu.address.model.portation;
-
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
 import java.util.Set;
-
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.Messages;
-
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
@@ -23,7 +21,7 @@ import seedu.address.model.topic.Topic;
 /**
  * Contains methods used for parsing a file to cards and vice-versa.
  */
-public class FileParser {
+public class FileParserUtil {
     public static final String MESSAGE_INVALID_FILE_FORMAT = "Invalid file format.";
     public static final String MESSAGE_INVALID_TOPIC_FORMAT = "Topic format.";
     private static final String QUESTION_ANSWER_SEPARATOR = "\t";
@@ -36,6 +34,9 @@ public class FileParser {
         return Stream.of(topic).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Returns True if the line contains topics (i.e. t/topic).
+     */
     public static boolean isTopic(String line) {
         if (!line.contains(PREFIX_TOPIC.toString())) {
             return false;
@@ -50,6 +51,7 @@ public class FileParser {
      * @throws FileParseException if the format of the topic is different from expected.
      */
     public static Set<Topic> parseLineToTopicSet(String line) throws FileParseException {
+        requireNonNull(line);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(line, PREFIX_TOPIC);
         try {
             if (!isPrefixPresent(argMultimap, PREFIX_TOPIC) || !argMultimap.getPreamble().isEmpty()) {
@@ -63,13 +65,14 @@ public class FileParser {
     }
 
     /**
-     * Splits string into a question and answer pair string. Using ";" as
+     * Splits string into a question and answer pair string. Using "\t" as
      * a line separator.
      * @param line Line read from text file.
      * @return An array containing a pair of question and answer in that order.
      * @throws FileParseException If the format of the line read is different from the expected.
      */
     public static String[] parseLineToQuestionAnswerPair(String line) throws FileParseException {
+        requireNonNull(line);
         String[] cardString = line.split(QUESTION_ANSWER_SEPARATOR);
         if (cardString.length != 2) {
             throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
@@ -86,7 +89,7 @@ public class FileParser {
     public static Card stringToCard (String[] tokenizeCardString, Set<Topic> topicList) throws FileParseException {
         try {
             Question question = ParserUtil.parseQuestion(tokenizeCardString[0]);
-            Answer answer = ParserUtil.parseAnswer(tokenizeCardString[0]);
+            Answer answer = ParserUtil.parseAnswer(tokenizeCardString[1]);
             return new Card(question, answer, topicList);
         } catch (ParseException pe) {
             throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);

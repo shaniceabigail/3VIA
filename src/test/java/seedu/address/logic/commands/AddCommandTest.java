@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -103,6 +104,9 @@ public class AddCommandTest {
         public void addCard(Card card) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addMultipleCards(Set<Card> cards) { throw new AssertionError("This method should not be called."); }
 
         @Override
         public void resetData(ReadOnlyAddressBook newData) {

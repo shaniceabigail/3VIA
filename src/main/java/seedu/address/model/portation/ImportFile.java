@@ -15,6 +15,9 @@ import seedu.address.model.card.Card;
 import seedu.address.model.portation.exceptions.FileParseException;
 import seedu.address.model.topic.Topic;
 
+/**
+ * Represents a file to be imported.
+ */
 public class ImportFile {
     public static final String MESSAGE_INVALID_FILE = "Invalid file.";
     public static final String MESSAGE_INVALID_FILE_FORMAT = "Invalid file format.";
@@ -60,20 +63,24 @@ public class ImportFile {
         return true;
     }
 
+    /**
+     * Parses a file in a specific format into a set of cards.
+     * @return The set of cards to be imported.
+     * @throws FileParseException If the format of the file is different from expected.
+     */
     public Set<Card> parseFileToCards() throws FileParseException {
         Set<Card> cards = new HashSet<>();
         Set<Topic> topicSet = new HashSet<>();
 
-        // TODO: add support for quotes
         try (BufferedReader br = new BufferedReader(new FileReader(importFile))) {
             String line;
 
             while ((line = br.readLine()) != null) {
-                if (FileParser.isTopic(line)) {
-                    topicSet = FileParser.parseLineToTopicSet(line);
+                if (FileParserUtil.isTopic(line)) {
+                    topicSet = FileParserUtil.parseLineToTopicSet(line);
                 } else {
-                    String[] cardString = FileParser.parseLineToQuestionAnswerPair(line);
-                    Card cardToAdd = FileParser.stringToCard(cardString, topicSet);
+                    String[] cardString = FileParserUtil.parseLineToQuestionAnswerPair(line);
+                    Card cardToAdd = FileParserUtil.stringToCard(cardString, topicSet);
                     cards.add(cardToAdd);
                 }
             }
@@ -85,6 +92,10 @@ public class ImportFile {
                     .post(new ExtraInformationDisplayChangeEvent(ExtraInformationDisplay.IMPORT_HELP_DISPLAY));
             throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
         }
+
+        if (cards.isEmpty()) {
+            throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
+        }
         return cards;
     }
 
@@ -92,5 +103,15 @@ public class ImportFile {
         return importFile.getName();
     }
 
-    // TODO: equals method
+    @Override
+    public String toString() {
+        return importFile.toString();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ImportFile
+                && importFile.equals(((ImportFile) other).importFile));
+    }
 }

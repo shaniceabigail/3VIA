@@ -4,26 +4,28 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.FileUtil.EMPTY_FILE;
-
-import java.io.File;
+import static seedu.address.testutil.ImportFileUtil.TYPICAL_FILE;
 
 import org.junit.Test;
 
 import seedu.address.logic.commands.ImportCommand;
-import seedu.address.testutil.FileUtil;
+import seedu.address.model.portation.ImportFile;
+import seedu.address.testutil.ImportFileUtil;
+
 
 public class ImportCommandParserTest {
+
     private ImportCommandParser parser = new ImportCommandParser();
-    // TODO: to implement after setting up FileUtil class
+
     @Test
     public void parse_allFieldsPresent_success() {
-        File testFile = FileUtil.getEmptyImportFile();
+        ImportFile typicalFile = ImportFileUtil.getTypicalImportFile();
+
         // normal
-        assertParseSuccess(parser, EMPTY_FILE.toString(), new ImportCommand(testFile));
+        assertParseSuccess(parser, TYPICAL_FILE.toString(), new ImportCommand(typicalFile));
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + EMPTY_FILE.toString(), new ImportCommand(testFile));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + TYPICAL_FILE.toString(), new ImportCommand(typicalFile));
     }
 
     @Test
