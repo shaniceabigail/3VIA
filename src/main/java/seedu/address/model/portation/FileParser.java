@@ -1,6 +1,7 @@
-package seedu.address.logic.parser.fileParser;
+package seedu.address.model.portation;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
+import static seedu.address.model.portation.ImportFile.MESSAGE_INVALID_FILE_TYPE;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,7 +20,7 @@ import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
-import seedu.address.logic.parser.exceptions.FileParseException;
+import seedu.address.model.portation.exceptions.FileParseException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
@@ -30,11 +31,8 @@ import seedu.address.model.topic.Topic;
  * Contains methods used for parsing a file to cards and vice-versa.
  */
 public class FileParser {
-    public static final String MESSAGE_INVALID_FILE_NAME = "Invalid file name.";
-    public static final String MESSAGE_INVALID_FILE_TYPE = "Invalid file type. Only .txt files are accepted";
     public static final String MESSAGE_INVALID_FILE_FORMAT = "Invalid file format.";
     public static final String MESSAGE_INVALID_TOPIC_FORMAT = "Topic format.";
-    public static final String MESSAGE_EMPTY_FILE = "Empty file.";
 
     /**
      * Parses the file into a list of cards to be imported.
@@ -42,7 +40,6 @@ public class FileParser {
      * @throws FileParseException If the format of the file does not conform to the expected format.
      */
     public static Set<Card> parseFileToCards(File importFile) throws FileParseException {
-        isFileValid(importFile);
         Set<Card> cards = new HashSet<>();
 
         // TODO: add support for quotes
@@ -77,36 +74,6 @@ public class FileParser {
     }
 
     /**
-     * Ensures the file to be imported is valid, readable and non empty.
-     * @throws FileParseException If the file is not suitable for import.
-     */
-    private static void isFileValid(File file) throws FileParseException {
-        if (!file.isFile()) {
-            throw new FileParseException(MESSAGE_INVALID_FILE_NAME);
-        } else if (!isValidFileType(file)) {
-            throw new FileParseException(MESSAGE_INVALID_FILE_TYPE);
-        } else if (file.length() == 0) {
-            throw new FileParseException(MESSAGE_EMPTY_FILE);
-        }
-    }
-
-    /**
-     * Checks if file is a readable .txt format.
-     * @return true if file is a readable text file.
-     */
-    private static boolean isValidFileType(File file) {
-        try {
-            String fileType = Files.probeContentType(file.toPath());
-            if (!fileType.equals("text/plain")) {
-                return false;
-            }
-        } catch (IOException ioe) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
      * Returns true if the prefixes does not contain empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
@@ -127,7 +94,7 @@ public class FileParser {
         if (cardString.length != 2) {
             throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
         }
-        return  cardString;
+        return cardString;
     }
 
     /**

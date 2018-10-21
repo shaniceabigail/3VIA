@@ -1,4 +1,6 @@
-package seedu.address.logic.parser.exceptions;
+package seedu.address.model.portation.exceptions;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a parse error encountered by a file parser.

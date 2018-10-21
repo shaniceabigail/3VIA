@@ -7,6 +7,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
+import seedu.address.model.portation.ImportFile;
+import seedu.address.model.portation.exceptions.FileParseException;
 
 /**
  * Import cards from specified location to the trivia bundle.
@@ -23,38 +25,41 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Imported cards from: %1$s";
     public static final String MESSAGE_INVALID_FILE = "File is invalid!";
     public static final String MESSAGE_DUPLICATE_CARD = "Some cards already exists in the trivia bundle";
-    private final String fileName;
-    private final Set<Card> cardsToImport;
+    private final ImportFile importFile;
 
     /**
      * Creates an ImportCommand with the file name {@code fileName} to import the cards {@code cards}
      */
-    public ImportCommand(String fileName, Set<Card> cards) {
-        requireNonNull(fileName);
-        requireNonNull(cards);
-        this.fileName = fileName;
-        cardsToImport = cards;
+    public ImportCommand(ImportFile file) {
+        requireNonNull(file);
+        importFile = file;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        Set<Card> cardsToImport;
+
+        try {
+            cardsToImport = importFile.parseFileToCards();
+        } catch (FileParseException fpe) {
+            throw new CommandException("cannot parse file");
+        }
 
         for (Card toAdd : cardsToImport) {
             if (model.hasCard(toAdd)) {
                 throw new CommandException(MESSAGE_DUPLICATE_CARD);
             }
         }
-
         model.addMultipleCards(cardsToImport);
         model.commitTriviaBundle();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, fileName));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, importFile.getFileName()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ImportCommand // instanceof handles nulls
-                && cardsToImport.equals(((ImportCommand) other).cardsToImport));
+                && importFile.equals(((ImportCommand) other).importFile));
     }
 }

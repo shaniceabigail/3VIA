@@ -76,6 +76,7 @@ public class TriviaBundle implements ReadOnlyTriviaBundle {
     public void addCard(Card c) {
         cards.add(c);
     }
+
     /**
      * Adds a list of cards to the trivia bundle.
      * The cards must not already exist in the bundle.
