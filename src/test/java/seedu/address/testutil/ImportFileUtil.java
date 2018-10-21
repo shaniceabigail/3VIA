@@ -1,7 +1,5 @@
 package seedu.address.testutil;
 
-import com.sun.xml.bind.v2.schemagen.xmlschema.Import;
-import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 

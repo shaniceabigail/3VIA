@@ -106,7 +106,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addMultipleCards(Set<Card> cards) { throw new AssertionError("This method should not be called."); }
+        public void addMultipleCards(Set<Card> cards) {
+            throw new AssertionError("This method should not be called."); }
 
         @Override
         public void resetData(ReadOnlyAddressBook newData) {

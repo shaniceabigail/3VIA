@@ -11,7 +11,6 @@ import static seedu.address.testutil.ImportFileUtil.getImportCommand;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
