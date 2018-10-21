@@ -28,6 +28,7 @@ public class QuestionView extends UiPart<Region> {
         this.question = question;
         id.setText(displayedIndex + ". ");
         questionText.setText(question.value);
+        questionText.setWrapText(true);
     }
 
     public QuestionView(Question question, int displayedIndex, boolean isCorrect) {
@@ -35,6 +36,7 @@ public class QuestionView extends UiPart<Region> {
         this.question = question;
         id.setText(displayedIndex + ". ");
         questionText.setText(question.value);
+        questionText.setWrapText(true);
         if (isCorrect) {
             this.flashBackgroundColor(questionViewPane, new Color(0, 1, 0, 1));
         } else {

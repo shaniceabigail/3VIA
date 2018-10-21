@@ -20,7 +20,7 @@
                 </HBox>
             </children>
          </StackPane>
-         <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+         <Region prefHeight="200.0" prefWidth="82.25" HBox.hgrow="ALWAYS" />
          <StackPane alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="185.0">
             <children>
                 <HBox alignment="CENTER_LEFT">
