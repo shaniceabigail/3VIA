@@ -33,6 +33,7 @@ import seedu.address.model.topic.Topic;
 public class FileParser {
     public static final String MESSAGE_INVALID_FILE_FORMAT = "Invalid file format.";
     public static final String MESSAGE_INVALID_TOPIC_FORMAT = "Topic format.";
+    private static final String QUESTION_ANSWER_SEPARATOR = "\t";
 
     /**
      * Parses the file into a list of cards to be imported.
@@ -89,7 +90,7 @@ public class FileParser {
      * @throws FileParseException If the format of the line read is different from the expected.
      */
     private static String[] parseLine(String line) throws FileParseException {
-        String[] cardString = line.split(";");
+        String[] cardString = line.split(QUESTION_ANSWER_SEPARATOR);
 
         if (cardString.length != 2) {
             throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
