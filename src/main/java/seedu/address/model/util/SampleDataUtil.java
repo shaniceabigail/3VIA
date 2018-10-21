@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -16,12 +17,36 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.test.Attempt;
+import seedu.address.model.test.ReadOnlyTriviaResults;
+import seedu.address.model.test.TestType;
+import seedu.address.model.test.TriviaResult;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.model.topic.Topic;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
+    private static final Card Q_EARTH_ROUND = new Card(new Question("Why is the earth round?"),
+            new Answer("Because of gravity!"), getTopicSet("Physics"));
+    private static final Card Q_GIT_CLONE = new Card(
+            new Question("Which git command will get a copy of an online repository to your computer?"),
+            new Answer("git clone"), getTopicSet("Git"));
+    private static final Card Q_FORCE_FORMULA = new Card(new Question("What is the formula for calculating force?"),
+            new Answer("mass * acceleration"), getTopicSet("Physics"));
+    private static final Card Q_GIT_MERGE = new Card(new Question("What are the ways to merge 2 branches?"),
+            new Answer("rebase and merge"), getTopicSet("Git"));
+    private static final Card Q_CAPITAL_OF_SG = new Card(new Question("What is the capital of Singapore?"),
+            new Answer("Singapore"), getTopicSet("GeneralKnowledge"));
+
+
+    private static final Attempt ATTEMPT_ON_EARTH = new Attempt(Q_EARTH_ROUND, "mass * acceleration", false);
+    private static final Attempt ATTEMPT_ON_GIT_CLONE = new Attempt(Q_GIT_CLONE, "git clone", false);
+    private static final Attempt ATTEMPT_ON_FORCE_FORMULA = new Attempt(Q_FORCE_FORMULA, "mass * acceleration", true);
+    private static final Attempt ATTEMPT_ON_GIT_MERGE = new Attempt(Q_GIT_MERGE, "rebase and master", true);
+
     public static Person[] getSamplePersons() {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -46,17 +71,20 @@ public class SampleDataUtil {
     }
 
     public static Card[] getSampleCards() {
-        return new Card[] {
-            new Card(new Question("Why is the earth round?"), new Answer("Because of gravity!"),
-                    getTopicSet("Physics")),
-            new Card(new Question("Which git command will get a copy of an online repository to your computer?"),
-                    new Answer("git clone"), getTopicSet("Git")),
-            new Card(new Question("What is the formula for calculating force?"),
-                    new Answer("force = mass * acceleration"), getTopicSet("Physics")),
-            new Card(new Question("What are the ways to merge 2 branches?"),
-                    new Answer("rebase and merge"), getTopicSet("Git")),
-            new Card(new Question("What is the capital of Singapore?"), new Answer("Singapore"),
-                    getTopicSet("GeneralKnowledge")),
+        return new Card[] { Q_EARTH_ROUND, Q_GIT_CLONE, Q_FORCE_FORMULA, Q_GIT_MERGE, Q_CAPITAL_OF_SG };
+    }
+
+    public static TriviaResult[] getSampleResults() {
+        return new TriviaResult[] {
+            new TriviaResult(TestType.MATCH_TEST, new Topic("Physics"),
+                    new Date(2018 - 1990, 0, 31, 8, 30), 9,
+                    Arrays.asList(ATTEMPT_ON_EARTH)),
+            new TriviaResult(TestType.MATCH_TEST, new Topic("Git"),
+                    new Date(2018 - 1990, 0, 31, 8, 0), 10,
+                    Arrays.asList(ATTEMPT_ON_GIT_CLONE, ATTEMPT_ON_GIT_MERGE)),
+            new TriviaResult(TestType.MATCH_TEST, new Topic("Physics"),
+                    new Date(2018 - 1990, 0, 30, 14, 20), 11.5,
+                    Arrays.asList(ATTEMPT_ON_FORCE_FORMULA, ATTEMPT_ON_EARTH))
         };
     }
 
@@ -74,6 +102,14 @@ public class SampleDataUtil {
             sampleTriviaBundle.addCard(sampleCard);
         }
         return sampleTriviaBundle;
+    }
+
+    public static ReadOnlyTriviaResults getSampleTriviaResults() {
+        TriviaResults sampleTriviaResults = new TriviaResults();
+        for (TriviaResult result : getSampleResults()) {
+            sampleTriviaResults.addTriviaResult(result);
+        }
+        return sampleTriviaResults;
     }
 
     /**

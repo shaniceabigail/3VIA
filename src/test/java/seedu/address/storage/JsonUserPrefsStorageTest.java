@@ -84,6 +84,7 @@ public class JsonUserPrefsStorageTest {
         userPrefs.setGuiSettings(1000, 500, 300, 100);
         userPrefs.setAddressBookFilePath(Paths.get("addressbook.xml"));
         userPrefs.setTriviaBundleFilePath(Paths.get("triviabundle.xml"));
+        userPrefs.setTriviaResultsFilePath(Paths.get("testresult.xml"));
         return userPrefs;
     }
 

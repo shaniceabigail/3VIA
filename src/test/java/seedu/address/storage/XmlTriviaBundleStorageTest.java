@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static seedu.address.testutil.TypicalCards.Q_DENSITY_FORMULA;
 import static seedu.address.testutil.TypicalCards.Q_FLAT_EARTH;
 import static seedu.address.testutil.TypicalCards.getTypicalTriviaBundle;
 
@@ -83,16 +84,15 @@ public class XmlTriviaBundleStorageTest {
         ReadOnlyTriviaBundle readBack = xmlTriviaBundleStorage.readTriviaBundle(filePath).get();
         assertEquals(original, new TriviaBundle(readBack));
 
-        // TODO To enable this after delete command is implemented on trivia.
         // Modify data, overwrite exiting file, and read back
-        //        original.addCard(Q_TALLEST_BUILDING);
-        //        original.removeCard(Q_DENSITY_FORMULA);
-        //        xmlTriviaBundleStorage.saveTriviaBundle(original, filePath);
-        //        readBack = xmlTriviaBundleStorage.readTriviaBundle(filePath).get();
-        //        assertEquals(original, new TriviaBundle(readBack));
+        original.addCard(Q_FLAT_EARTH);
+        original.removeCard(Q_DENSITY_FORMULA);
+        xmlTriviaBundleStorage.saveTriviaBundle(original, filePath);
+        readBack = xmlTriviaBundleStorage.readTriviaBundle(filePath).get();
+        assertEquals(original, new TriviaBundle(readBack));
 
         // Save and read without specifying file path
-        original.addCard(Q_FLAT_EARTH);
+        original.addCard(Q_DENSITY_FORMULA);
         xmlTriviaBundleStorage.saveTriviaBundle(original); //file path not specified
         readBack = xmlTriviaBundleStorage.readTriviaBundle().get(); //file path not specified
         assertEquals(original, new TriviaBundle(readBack));

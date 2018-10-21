@@ -18,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.model.topic.Topic;
 import seedu.address.testutil.MatchTestUtil;
@@ -32,8 +33,10 @@ public class MatchCommandTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), getTypicalTriviaBundle(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new TriviaResults(),
+                new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), getTypicalTriviaBundle(),
+                new TriviaResults(), new UserPrefs());
 
         matchTest = new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle());
         model.startTriviaTest(matchTest);

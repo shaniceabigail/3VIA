@@ -11,7 +11,7 @@ import seedu.address.model.card.Card;
 public interface ReadOnlyTriviaBundle {
     /**
      * Returns an unmodifiable view of the cards list.
-     * This list will not contain any duplicate persons.
+     * This list will not contain any duplicate cards.
      */
     ObservableList<Card> getCardList();
 
