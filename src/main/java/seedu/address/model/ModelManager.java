@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -19,6 +18,7 @@ import seedu.address.commons.events.model.TriviaBundleChangedEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.AppState;
 import seedu.address.model.state.State;
@@ -311,13 +311,13 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Import =====================================================================
 
     @Override
-    public boolean haveAnyCard(Set<Card> cards) {
+    public boolean haveAnyCard(UniqueCardList cards) {
         requireNonNull(cards);
         return versionedTriviaBundle.haveAnyCard(cards);
     }
 
     @Override
-    public void addMultipleCards(Set<Card> cards) {
+    public void addMultipleCards(UniqueCardList cards) {
         versionedTriviaBundle.addMultipleCards(cards);
         updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
         // TODO: raise an event to show in extra info pane

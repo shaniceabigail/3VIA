@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-import java.util.Set;
 import java.util.function.Predicate;
 
 import com.google.common.eventbus.Subscribe;
@@ -9,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddMatchTestResultEvent;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.model.test.TriviaTest;
@@ -74,7 +74,7 @@ public interface Model {
     /**
      * Returns true if any cards with the same identity as {@code card} exists in the list of trivia bundle.
      */
-    boolean haveAnyCard(Set<Card> cards);
+    boolean haveAnyCard(UniqueCardList cards);
 
     /**
      * Adds the given card.
@@ -87,7 +87,7 @@ public interface Model {
      * {@code cards} must not already exist in the list of trivia bundle.
      * @param cards
      */
-    void addMultipleCards(Set<Card> cards);
+    void addMultipleCards(UniqueCardList cards);
 
     /**
      * Deletes the given card.

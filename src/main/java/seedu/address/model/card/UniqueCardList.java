@@ -6,6 +6,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Iterator;
 import java.util.List;
 
+import java.util.stream.Stream;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.card.exceptions.CardNotFoundException;
@@ -26,7 +28,6 @@ import seedu.address.model.card.exceptions.DuplicateCardException;
  */
 public class UniqueCardList implements Iterable<Card> {
     private final ObservableList<Card> internalList = FXCollections.observableArrayList();
-
 
     /**
      * Returns true if the list contains an card person as the given argument.
@@ -102,6 +103,20 @@ public class UniqueCardList implements Iterable<Card> {
      */
     public ObservableList<Card> asUnmodifiableObservableList() {
         return FXCollections.unmodifiableObservableList(internalList);
+    }
+
+    /**
+     * Returns true if UniqueCardList is empty.
+     */
+    public boolean isEmpty() {
+        return internalList.isEmpty();
+    }
+
+    /**
+     * Returns a stream representation of the UniqueCardList.
+     */
+    public Stream<Card> toStream() {
+        return internalList.stream();
     }
 
     @Override

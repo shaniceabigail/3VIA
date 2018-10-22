@@ -14,6 +14,8 @@ import seedu.address.commons.events.ui.ExtraInformationDisplayChangeEvent;
 import seedu.address.logic.parser.fileparser.FileParserUtil;
 import seedu.address.model.card.Card;
 import seedu.address.logic.parser.fileparser.exceptions.FileParseException;
+import seedu.address.model.card.UniqueCardList;
+import seedu.address.model.card.exceptions.DuplicateCardException;
 import seedu.address.model.topic.Topic;
 
 /**
@@ -76,8 +78,8 @@ public class ImportFile {
      * @return The set of cards to be imported.
      * @throws FileParseException If the format of the file is different from expected.
      */
-    public Set<Card> parseFileToCards() throws FileParseException {
-        Set<Card> cards = new HashSet<>();
+    public UniqueCardList parseFileToCards() throws FileParseException {
+        UniqueCardList cards = new UniqueCardList();
         Set<Topic> topicSet = new HashSet<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(importFile))) {
@@ -97,12 +99,14 @@ public class ImportFile {
                 }
             }
         } catch (IOException ioe) {
-            throw new FileParseException(MESSAGE_INVALID_FILE_TYPE);
+            throw new FileParseException(MESSAGE_INVALID_FILE_TYPE, ioe);
         } catch (FileParseException fpe) {
             EventsCenter
                     .getInstance()
                     .post(new ExtraInformationDisplayChangeEvent(ExtraInformationDisplay.IMPORT_HELP_DISPLAY));
             throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
+        } catch (DuplicateCardException dce) {
+            throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT,dce);
         }
 
         if (cards.isEmpty()) {

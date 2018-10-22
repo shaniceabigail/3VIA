@@ -7,6 +7,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.portation.ImportFile;
 import seedu.address.logic.parser.fileparser.exceptions.FileParseException;
 
@@ -44,7 +45,7 @@ public class ImportCommand extends Command {
             throw new CommandException(MESSAGE_IMPORT_FILE_INVALID);
         }
 
-        Set<Card> cardsToImport;
+        UniqueCardList cardsToImport;
         try {
             cardsToImport = importFile.parseFileToCards();
         } catch (FileParseException fpe) {
