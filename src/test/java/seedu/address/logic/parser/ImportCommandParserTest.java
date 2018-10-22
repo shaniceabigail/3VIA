@@ -14,6 +14,7 @@ import seedu.address.testutil.ImportFileUtil;
 
 
 public class ImportCommandParserTest {
+    private static final String INVALID_PATH = "\\A://MY_COMPUTER/123/file.txt"; // illegal character "\"
 
     private ImportCommandParser parser = new ImportCommandParser();
 
@@ -32,6 +33,10 @@ public class ImportCommandParserTest {
     public void parse_invalidValue_failure() {
         // empty string
         assertParseFailure(parser, PREAMBLE_WHITESPACE,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
+
+        // illegal character
+        assertParseFailure(parser, INVALID_PATH,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
     }
 }

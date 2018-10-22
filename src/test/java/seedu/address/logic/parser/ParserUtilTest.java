@@ -239,8 +239,8 @@ public class ParserUtilTest {
 
     @Test
     public void parsePath_validValueWithWhitespace_returnsTrimmedPath() throws Exception {
-        String PathWithWhitespace = WHITESPACE + VALID_PATH + WHITESPACE;
+        String pathWithWhitespace = WHITESPACE + VALID_PATH + WHITESPACE;
         ImportFile expectedImportFile = new ImportFile(VALID_PATH);
-        assertEquals(expectedImportFile, ParserUtil.parsePath(PathWithWhitespace));
+        assertEquals(expectedImportFile, ParserUtil.parsePath(pathWithWhitespace));
     }
 }
