@@ -1,11 +1,9 @@
 package seedu.address.model.portation.exceptions;
 
-import seedu.address.logic.parser.exceptions.ParseException;
-
 /**
  * Represents a parse error encountered by a file parser.
  */
-public class FileParseException extends ParseException {
+public class FileParseException extends IllegalArgumentException {
 
     public FileParseException(String message) {
         super(message);

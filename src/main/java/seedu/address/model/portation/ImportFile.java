@@ -33,16 +33,24 @@ public class ImportFile {
 
     /**
      * Ensures the file to be imported is valid, readable and non empty.
-     * @throws FileParseException If the file is not suitable for import.
      */
-    public static boolean isFileValid(String filePath) throws FileParseException {
-        File file = new File(filePath);
-        if (!file.isFile()) {
-            throw new FileParseException(MESSAGE_INVALID_FILE_NAME);
-        } else if (!isValidFileType(file)) {
-            throw new FileParseException(MESSAGE_INVALID_FILE_TYPE);
-        } else if (file.length() == 0) {
-            throw new FileParseException(MESSAGE_EMPTY_FILE);
+    public boolean isFileValid() {
+        if (!isValidImportFile()) {
+            return false;
+        } else if (!isValidImportFileType()) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if the import file is a file and is not empty.
+     */
+    private boolean isValidImportFile() {
+        if (!importFile.isFile()) {
+            return false;
+        } else if (importFile.length() == 0) {
+            return false;
         }
         return true;
     }
@@ -51,9 +59,9 @@ public class ImportFile {
      * Checks if file is a readable .txt format.
      * @return true if file is a readable text file.
      */
-    private static boolean isValidFileType(File file) {
+    private boolean isValidImportFileType() {
         try {
-            String fileType = Files.probeContentType(file.toPath());
+            String fileType = Files.probeContentType(importFile.toPath());
             if (!fileType.equals("text/plain")) {
                 return false;
             }

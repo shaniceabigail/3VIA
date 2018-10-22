@@ -2,11 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.card.Answer;
@@ -27,14 +30,14 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses {@code pathName} into an {@code file} and returns it. Leading and trailing whitespaces will be
+     * Parses {@code pathName} into an {@code ImportFile} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if no path name is specified.
      */
     public static ImportFile parsePath(String pathName) throws ParseException {
         String trimmedPathName = pathName.trim();
         requireNonNull(trimmedPathName);
-        if (!ImportFile.isFileValid(trimmedPathName)) {
+        if (!FileUtil.isValidPath(trimmedPathName)) {
             throw new ParseException(ImportFile.MESSAGE_INVALID_FILE);
         }
         return new ImportFile(trimmedPathName);
