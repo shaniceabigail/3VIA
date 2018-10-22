@@ -11,8 +11,9 @@ import java.util.Set;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ExtraInformationDisplay;
 import seedu.address.commons.events.ui.ExtraInformationDisplayChangeEvent;
+import seedu.address.logic.parser.fileparser.FileParserUtil;
 import seedu.address.model.card.Card;
-import seedu.address.model.portation.exceptions.FileParseException;
+import seedu.address.logic.parser.fileparser.exceptions.FileParseException;
 import seedu.address.model.topic.Topic;
 
 /**
@@ -21,9 +22,7 @@ import seedu.address.model.topic.Topic;
 public class ImportFile {
     public static final String MESSAGE_INVALID_FILE = "Invalid file.";
     public static final String MESSAGE_INVALID_FILE_FORMAT = "Invalid file format.";
-    public static final String MESSAGE_INVALID_FILE_NAME = "Invalid file name.";
     public static final String MESSAGE_INVALID_FILE_TYPE = "Invalid file type. Only .txt files are accepted";
-    public static final String MESSAGE_EMPTY_FILE = "Empty file.";
 
     private final File importFile;
 
@@ -71,6 +70,7 @@ public class ImportFile {
         return true;
     }
 
+    // TODO: write the format here
     /**
      * Parses a file in a specific format into a set of cards.
      * @return The set of cards to be imported.

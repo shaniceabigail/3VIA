@@ -1,4 +1,4 @@
-package seedu.address.model.portation;
+package seedu.address.logic.parser.fileparser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
@@ -11,11 +11,10 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.fileparser.exceptions.FileParseException;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
-import seedu.address.model.portation.exceptions.FileParseException;
-
 import seedu.address.model.topic.Topic;
 
 /**
@@ -27,33 +26,19 @@ public class FileParserUtil {
     private static final String QUESTION_ANSWER_SEPARATOR = "\t";
 
     /**
-     * Returns true if the prefixes does not contain empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean isPrefixPresent(ArgumentMultimap argumentMultimap, Prefix topic) {
-        return Stream.of(topic).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
-    /**
      * Returns true if the line does not contain any text.
      */
     public static boolean isEmpty(String line) {
         line = line.trim();
-        if (!line.isEmpty()) {
-            return false;
-        }
-        return true;
+        return line.isEmpty();
     }
 
     /**
-     * Returns True if the line contains topics (i.e. t/topic).
+     * Returns true if the line contains topics (i.e. t/topic).
      */
     public static boolean isTopic(String line) {
         requireNonNull(line);
-        if (!line.contains(PREFIX_TOPIC.toString())) {
-            return false;
-        }
-        return true;
+        return line.contains(PREFIX_TOPIC.toString());
     }
 
     /**
@@ -74,6 +59,14 @@ public class FileParserUtil {
         } catch (ParseException pe) {
             throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
         }
+    }
+
+    /**
+     * Returns true if the prefixes does not contain empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean isPrefixPresent(ArgumentMultimap argumentMultimap, Prefix topic) {
+        return Stream.of(topic).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
     /**

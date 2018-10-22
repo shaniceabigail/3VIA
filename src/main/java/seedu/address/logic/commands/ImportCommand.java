@@ -8,7 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 import seedu.address.model.portation.ImportFile;
-import seedu.address.model.portation.exceptions.FileParseException;
+import seedu.address.logic.parser.fileparser.exceptions.FileParseException;
 
 /**
  * Import cards from specified location to the trivia bundle.
@@ -40,11 +40,11 @@ public class ImportCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        Set<Card> cardsToImport;
         if (!importFile.isFileValid()) {
             throw new CommandException(MESSAGE_IMPORT_FILE_INVALID);
         }
 
+        Set<Card> cardsToImport;
         try {
             cardsToImport = importFile.parseFileToCards();
         } catch (FileParseException fpe) {
@@ -54,6 +54,7 @@ public class ImportCommand extends Command {
         if (model.haveAnyCard(cardsToImport)) {
             throw new CommandException(MESSAGE_DUPLICATE_CARD);
         }
+
         model.addMultipleCards(cardsToImport);
         model.commitTriviaBundle();
         return new CommandResult(String.format(MESSAGE_SUCCESS, importFile.getFileName()));
