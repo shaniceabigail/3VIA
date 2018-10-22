@@ -28,19 +28,6 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
     /**
-     * Parses {@code pathName} into an {@code ImportFile} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     * @throws ParseException if no path name is specified.
-     */
-    public static ImportFile parsePath(String pathName) throws ParseException {
-        String trimmedPathName = pathName.trim();
-        requireNonNull(trimmedPathName);
-        if (!FileUtil.isValidPath(trimmedPathName)) {
-            throw new ParseException(ImportFile.MESSAGE_INVALID_FILE);
-        }
-        return new ImportFile(trimmedPathName);
-    }
-    /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
@@ -182,5 +169,19 @@ public class ParserUtil {
             throw new ParseException(TimeLimit.MESSAGE_TIME_LIMIT_CONSTRAINTS);
         }
         return new TimeLimit(trimmedTimeLimit);
+    }
+
+    /**
+     * Parses {@code pathName} into an {@code ImportFile} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if no path name is specified.
+     */
+    public static ImportFile parsePath(String pathName) throws ParseException {
+        String trimmedPathName = pathName.trim();
+        requireNonNull(trimmedPathName);
+        if (!FileUtil.isValidPath(trimmedPathName)) {
+            throw new ParseException(ImportFile.MESSAGE_INVALID_FILE);
+        }
+        return new ImportFile(trimmedPathName);
     }
 }

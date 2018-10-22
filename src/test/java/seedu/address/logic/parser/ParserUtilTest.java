@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.testutil.ImportFileUtil.Valid_FILE_NO_TOPIC;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -20,6 +21,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.portation.ImportFile;
 import seedu.address.model.test.TimeLimit;
 import seedu.address.model.topic.Topic;
 import seedu.address.testutil.Assert;
@@ -30,6 +32,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TOPIC = "#topic";
+    private static final String INVALID_PATH = "\\A://MY_COMPUTER/123/file.txt";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -37,6 +40,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TOPIC_1 = "physics";
     private static final String VALID_TOPIC_2 = "english";
+    private static final String VALID_PATH = Valid_FILE_NO_TOPIC.toString();
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -215,5 +219,28 @@ public class ParserUtilTest {
         thrown.expect(ParseException.class);
         ParserUtil.parseTimeLimit("notTimeLimit");
         ParserUtil.parseTimeLimit("-5");
+    }
+
+    @Test
+    public void parsePath_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parsePath((String) null));
+    }
+
+    @Test
+    public void parsePath_invalidPath_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parsePath(INVALID_PATH));
+    }
+
+    @Test
+    public void parsePath_validValueWithoutWhitespace_returnsPath() throws Exception {
+        ImportFile expectedImportFile = new ImportFile(VALID_PATH);
+        assertEquals(expectedImportFile, ParserUtil.parsePath(VALID_PATH));
+    }
+
+    @Test
+    public void parsePath_validValueWithWhitespace_returnsTrimmedPath() throws Exception {
+        String PathWithWhitespace = WHITESPACE + VALID_PATH + WHITESPACE;
+        ImportFile expectedImportFile = new ImportFile(VALID_PATH);
+        assertEquals(expectedImportFile, ParserUtil.parsePath(PathWithWhitespace));
     }
 }
