@@ -70,6 +70,14 @@ public class TriviaBundle implements ReadOnlyTriviaBundle {
     }
 
     /**
+     * Returns true if a card with the same identity as {@code card} exists in the address book.
+     */
+    public boolean haveAnyCard(Set<Card> cardSet) {
+        requireNonNull(cardSet);
+        return cardSet.stream().anyMatch(card -> cards.contains(card));
+    }
+
+    /**
      * Adds a card to the trivia bundle.
      * The card must not already exist in the bundle.
      */

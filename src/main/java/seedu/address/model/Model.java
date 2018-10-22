@@ -72,6 +72,11 @@ public interface Model {
     boolean hasCard(Card card);
 
     /**
+     * Returns true if any cards with the same identity as {@code card} exists in the list of trivia bundle.
+     */
+    boolean haveAnyCard(Set<Card> cards);
+
+    /**
      * Adds the given card.
      * {@code card} must not already exist in the list of trivia bundle.
      */

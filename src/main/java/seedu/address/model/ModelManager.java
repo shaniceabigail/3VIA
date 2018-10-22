@@ -311,6 +311,12 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Import =====================================================================
 
     @Override
+    public boolean haveAnyCard(Set<Card> cards) {
+        requireNonNull(cards);
+        return versionedTriviaBundle.haveAnyCard(cards);
+    }
+
+    @Override
     public void addMultipleCards(Set<Card> cards) {
         versionedTriviaBundle.addMultipleCards(cards);
         updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);

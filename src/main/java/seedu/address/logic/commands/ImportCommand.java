@@ -51,10 +51,8 @@ public class ImportCommand extends Command {
             throw new CommandException(MESSAGE_IMPORT_FILE_FORMAT_INVALID);
         }
 
-        for (Card toAdd : cardsToImport) {
-            if (model.hasCard(toAdd)) {
-                throw new CommandException(MESSAGE_DUPLICATE_CARD);
-            }
+        if (model.haveAnyCard(cardsToImport)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CARD);
         }
         model.addMultipleCards(cardsToImport);
         model.commitTriviaBundle();
