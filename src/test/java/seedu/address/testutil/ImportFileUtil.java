@@ -12,6 +12,8 @@ import seedu.address.model.portation.ImportFile;
 public class ImportFileUtil {
     public static final Path TYPICAL_FILE = Paths.get("src", "test", "data", "TxtFileUtilTest",
             "typicalTest.txt");
+    public static final Path Valid_FILE_NO_TOPIC = Paths.get("src", "test", "data", "TxtFileUtilTest",
+            "validTest.txt");
     public static final Path EMPTY_FILE = Paths.get("src", "test", "data", "TxtFileUtilTest",
             "emptyTest.txt");
     public static final Path INVALID_FILE = Paths.get("src", "test", "data", "TxtFileUtilTest",
@@ -34,6 +36,13 @@ public class ImportFileUtil {
      */
     public static ImportFile getTypicalImportFile() {
         return new ImportFile(TYPICAL_FILE.toString());
+    }
+
+    /**
+     * Returns a valid file to be imported with one question and answer pair without a topic.
+     */
+    public static ImportFile getValidNoTopicImportFile() {
+        return new ImportFile(Valid_FILE_NO_TOPIC.toString());
     }
 
     /**

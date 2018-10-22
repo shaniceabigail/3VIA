@@ -89,8 +89,8 @@ public class TriviaBundle implements ReadOnlyTriviaBundle {
      * Adds a list of cards to the trivia bundle.
      * The cards must not already exist in the bundle.
      */
-    public void addMultipleCards(UniqueCardList cardSet) {
-        for (Card c : cardSet) {
+    public void addMultipleCards(UniqueCardList cardList) {
+        for (Card c : cardList) {
             cards.add(c);
         }
     }
