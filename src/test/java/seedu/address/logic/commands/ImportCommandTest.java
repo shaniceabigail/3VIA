@@ -4,17 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalCards.getTypicalTriviaBundle;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
-import javafx.collections.ObservableList;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddMatchTestResultEvent;
 import seedu.address.logic.CommandHistory;
@@ -31,6 +30,7 @@ import seedu.address.model.state.State;
 import seedu.address.model.test.TriviaTest;
 import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.ImportFileUtil;
+
 
 public class ImportCommandTest {
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
@@ -165,7 +165,7 @@ public class ImportCommandTest {
         }
 
         @Override
-        public boolean haveAnyCard(UniqueCardList cards)  {
+        public boolean haveAnyCard(UniqueCardList cards) {
             throw new AssertionError("This method should not be called.");
         }
 

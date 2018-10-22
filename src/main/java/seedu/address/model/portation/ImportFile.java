@@ -12,8 +12,8 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ExtraInformationDisplay;
 import seedu.address.commons.events.ui.ExtraInformationDisplayChangeEvent;
 import seedu.address.logic.parser.fileparser.FileParserUtil;
-import seedu.address.model.card.Card;
 import seedu.address.logic.parser.fileparser.exceptions.FileParseException;
+import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.card.exceptions.DuplicateCardException;
 import seedu.address.model.topic.Topic;
@@ -106,7 +106,7 @@ public class ImportFile {
                     .post(new ExtraInformationDisplayChangeEvent(ExtraInformationDisplay.IMPORT_HELP_DISPLAY));
             throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
         } catch (DuplicateCardException dce) {
-            throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT,dce);
+            throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT, dce);
         }
 
         if (cards.isEmpty()) {

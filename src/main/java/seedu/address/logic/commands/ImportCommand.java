@@ -1,15 +1,13 @@
 package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
-import java.util.Set;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.fileparser.exceptions.FileParseException;
 import seedu.address.model.Model;
-import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.portation.ImportFile;
-import seedu.address.logic.parser.fileparser.exceptions.FileParseException;
+
 
 /**
  * Import cards from specified location to the trivia bundle.
