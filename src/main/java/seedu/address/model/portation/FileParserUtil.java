@@ -35,9 +35,21 @@ public class FileParserUtil {
     }
 
     /**
+     * Returns true if the line does not contain any text.
+     */
+    public static boolean isEmpty(String line) {
+        line = line.trim();
+        if (!line.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Returns True if the line contains topics (i.e. t/topic).
      */
     public static boolean isTopic(String line) {
+        requireNonNull(line);
         if (!line.contains(PREFIX_TOPIC.toString())) {
             return false;
         }

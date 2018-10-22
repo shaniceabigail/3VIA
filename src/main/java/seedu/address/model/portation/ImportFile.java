@@ -76,6 +76,10 @@ public class ImportFile {
             String line;
 
             while ((line = br.readLine()) != null) {
+                if (FileParserUtil.isEmpty(line)) {
+                    continue;
+                }
+
                 if (FileParserUtil.isTopic(line)) {
                     topicSet = FileParserUtil.parseLineToTopicSet(line);
                 } else {
