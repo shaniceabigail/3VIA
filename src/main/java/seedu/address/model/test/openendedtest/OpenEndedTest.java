@@ -21,7 +21,7 @@ import seedu.address.model.topic.Topic;
  * that is specified in the test.
  */
 public abstract class OpenEndedTest extends TriviaTest {
-    public static final String MESSAGE_MATCH_TEST_CONSTRAINS = "OpenEndedTest needs more than 1 card with the"
+    public static final String MESSAGE_TEST_CONSTRAINS = "OpenEndedTest needs more than 1 card with the"
             + " corresponding topic to proceed.";
 
     private final ObservableList<Question> shuffledQuestions;
@@ -33,7 +33,7 @@ public abstract class OpenEndedTest extends TriviaTest {
         shuffledQuestions = getQuestions(cards);
         shuffledAnswers = getAnswers(cards);
 
-        checkArgument(isValidTest(), MESSAGE_MATCH_TEST_CONSTRAINS);
+        checkArgument(isValidTest(), MESSAGE_TEST_CONSTRAINS);
     }
 
     public ObservableList<Question> getQuestions() {

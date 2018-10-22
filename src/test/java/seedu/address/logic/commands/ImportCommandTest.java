@@ -65,10 +65,10 @@ public class ImportCommandTest {
         thrown.expectMessage(ImportCommand.MESSAGE_INVALID_FILE_TYPE);
         importCommand.execute(model, commandHistory);
     }
-    // @OpenEndedTest
+    // @Test
     // TODO: ignore duplicates found in import file
 
-    // @OpenEndedTest
+    // @Test
     // TODO: compare imported questions and answers to expected
     // public void equals() {
     // }

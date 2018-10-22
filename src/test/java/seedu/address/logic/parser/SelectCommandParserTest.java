@@ -10,7 +10,7 @@ import org.junit.Test;
 import seedu.address.logic.commands.SelectCommand;
 
 /**
- * OpenEndedTest scope: similar to {@code DeleteCommandParserTest}.
+ * Test scope: similar to {@code DeleteCommandParserTest}.
  * @see DeleteCommandParserTest
  */
 public class SelectCommandParserTest {

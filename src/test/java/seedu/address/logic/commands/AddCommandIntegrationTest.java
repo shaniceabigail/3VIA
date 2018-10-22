@@ -17,7 +17,7 @@ import seedu.address.testutil.CardBuilder;
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
  */
-public class AddCommandIntegrationOpenEndedTest {
+public class AddCommandIntegrationTest {
 
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();

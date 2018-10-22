@@ -27,7 +27,7 @@ import seedu.address.model.card.Question;
 import seedu.address.model.topic.Topic;
 import seedu.address.testutil.CardBuilder;
 
-public class AddCommandParserOpenEndedTest {
+public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
