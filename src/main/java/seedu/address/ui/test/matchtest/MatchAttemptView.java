@@ -13,7 +13,7 @@ import seedu.address.ui.UiPart;
  * An UI component that displays information of a {@code MatchAttempt}.
  */
 public class MatchAttemptView extends UiPart<Region> {
-    private static final String FXML = "/test/matchtest/MatchAttemptView.fxml";
+    private static final String FXML = "test/matchtest/MatchAttemptView.fxml";
     private final MatchAttempt attempt;
 
     @FXML

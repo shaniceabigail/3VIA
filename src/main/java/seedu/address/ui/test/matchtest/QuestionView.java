@@ -12,7 +12,7 @@ import seedu.address.ui.UiPart;
  * An UI component to display information of {@code Question}
  */
 public class QuestionView extends UiPart<Region> {
-    private static final String FXML = "/test/matchtest/QuestionView.fxml";
+    private static final String FXML = "test/matchtest/QuestionView.fxml";
 
     public final Question question;
 
