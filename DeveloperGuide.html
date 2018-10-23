@@ -927,7 +927,7 @@ from <code>TriviaTest</code> which has the functionality of storing the necessar
 </ul>
 </div>
 <div class="paragraph">
-<p>These operations are exposed in the <code>Model</code> interface as <code>Model#startTriviaTest()</code>, <code>Model#stopTriviaTest()</code> and <code>Model#MatchCards</code> respectively.</p>
+<p>These operations are exposed in the <code>Model</code> interface as <code>Model#startTriviaTest()</code>, <code>Model#stopTriviaTest()</code> and <code>Model#MatchQuestionAndAnswer</code> respectively.</p>
 </div>
 <div class="paragraph">
 <p>The following activity diagram shows the complete lifecycle of a matching test.</p>
@@ -944,7 +944,7 @@ from <code>TriviaTest</code> which has the functionality of storing the necessar
 <p>Step 1. The user enter the <code>testM</code> command and a new <code>MatchingTestCommand</code> will be created.</p>
 </div>
 <div class="paragraph">
-<p>Step 2. The <code>MatchingTestCommand</code> will be executed and a new MatchTest will be created as shown in the below Sequence diagram.</p>
+<p>Step 2. The <code>MatchingTestCommand</code> will be executed and a new MatchTest Object will be created as shown in the below Sequence diagram.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -973,26 +973,56 @@ from <code>TriviaTest</code> which has the functionality of storing the necessar
 </div>
 </div>
 <div class="paragraph">
-<p>Step 5. Suppose it is correct, the System will remove the matched question and answer from the Ui.</p>
+<p>Step 5. If there are still existing unmatched question and answers, the System will go back to step 3.</p>
 </div>
 <div class="paragraph">
-<p>Step 6. If there are still existing unmatched question and answers, the System will go back to step 3.</p>
+<p>Step 6. After all the question and answers are matched, the System will store the results on the hard disk and display the test&#8217;s result.</p>
 </div>
 <div class="paragraph">
-<p>Step 7. After all the question and answers are matched, the System will display the results.</p>
-</div>
-<div class="paragraph">
-<p>Step 8. At this stage, the System will await <code>exit</code> command from the user so that user can be taken back to the home page.</p>
+<p>Step 7. At this stage, the System will await <code>exit</code> command from the user so that user can be taken back to the home page.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
+<h5 id="the-static-display-indexes-of-the-code-listview-code-for-question-and-answer"><a class="link" href="#the-static-display-indexes-of-the-code-listview-code-for-question-and-answer">The static display indexes of the <code>ListView</code> for question and answer</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Created new classes namely, <code>IndexedQuestion</code> and <code>IndexedAnswer</code> to uniquely identify the cells in <code>ListView</code>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Finding the exact question and answer is easy as what the user see is a representative of the id that identifies the question/answer.</p>
+</li>
+<li>
+<p>Cons: Currently, the classes created are for the sole of having static display indexes during <code>MatchTest</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Create a <code>List</code> of mapping that maps the actual index to the display index of the question and answer.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: The implementation details will be contained within <code>MatchTest</code>.</p>
+</li>
+<li>
+<p>Cons: Additional work is require to maintain the <code>List</code> data structure, to ensure that it is updated every time a question or answer is removed.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
 <h5 id="the-polymorphism-of-triviatest"><a class="link" href="#the-polymorphism-of-triviatest">The polymorphism of TriviaTest</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Uses <code>TriviaTest</code>, <code>CloseTriviaTestViewEvent</code> and <code>ShowTriviaTestViewEvent</code> that accepts all kinds of TriviaTest, not just matching test.</p>
+<p><strong>Alternative 1 (current choice):</strong> Uses <code>TriviaTest</code>, <code>TriviaResultStorage</code> to accommodate the different testing feature in 3VIA.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1008,7 +1038,7 @@ from <code>TriviaTest</code> which has the functionality of storing the necessar
 </div>
 </li>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Implement each kinds of test as a standalone test with its own standalone class and event handler.</p>
+<p><strong>Alternative 2:</strong> Implement each kinds of test as a standalone test with its own standalone class and event handler.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2115,4 +2145,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-23 14:57:01 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-23 15:14:35 UTC</div></div></div></body></html>
