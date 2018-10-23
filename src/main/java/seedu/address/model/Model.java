@@ -1,16 +1,16 @@
 package seedu.address.model;
 
+import java.util.List;
 import java.util.function.Predicate;
-
-import com.google.common.eventbus.Subscribe;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.model.AddMatchTestResultEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
+import seedu.address.model.test.Attempt;
+import seedu.address.model.test.TriviaResult;
 import seedu.address.model.test.TriviaTest;
 
 /**
@@ -167,8 +167,12 @@ public interface Model {
     boolean isInTestingState();
 
     /**
-     * Add a new completed matching test to the list of results.
+     * Returns the result list for trivia test.
      */
-    @Subscribe
-    void handleAddMatchTestResultEvent(AddMatchTestResultEvent event);
+    List<TriviaResult> getTriviaResultList();
+
+    /**
+     * Return the Attempts in trivia test made by the given card.
+     */
+    List<Attempt> getAttemptsByCard(Card card);
 }

@@ -15,7 +15,8 @@ public class MatchAttempt extends Attempt {
      * @param cardWithAnswer Represents the card that is associated to the answer.
      */
     public MatchAttempt(Card cardWithQuestion, Card cardWithAnswer) {
-        super(cardWithQuestion, cardWithAnswer.getAnswer().toString());
+        super(cardWithQuestion, cardWithAnswer.getAnswer().toString(),
+                checkCorrectness(cardWithQuestion, cardWithAnswer));
         this.cardWithAnswer = cardWithAnswer;
     }
 
@@ -23,9 +24,8 @@ public class MatchAttempt extends Attempt {
         return cardWithAnswer.getAnswer();
     }
 
-    @Override
-    public boolean isCorrect() {
-        return attemptedCard.equals(cardWithAnswer);
+    private static boolean checkCorrectness(Card cardWithQuestion, Card cardWithAnswer) {
+        return cardWithQuestion.equals(cardWithAnswer);
     }
 
     @Override

@@ -23,6 +23,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 /**
@@ -32,8 +33,10 @@ public class SelectCommandTest {
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(),
+            new TriviaResults(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTriviaBundle(),
+            new TriviaResults(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

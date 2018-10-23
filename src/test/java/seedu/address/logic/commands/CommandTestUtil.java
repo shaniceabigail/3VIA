@@ -45,7 +45,7 @@ public class CommandTestUtil {
     public static final String VALID_ANSWER_GIT_COMMIT = "git commit -m 'whatever you wanna say'";
     public static final String VALID_TOPIC_GIT = "Git";
     public static final String VALID_QUESTION_PM_OF_SG = "Who is the prime minister of Singapore?";
-    public static final String VALID_ANSWER_PM_OF_SG = "Who is the prime minister of Singapore?";
+    public static final String VALID_ANSWER_PM_OF_SG = "LHL";
     public static final String VALID_TOPIC_GEN_KNOWLEDGE = "GeneralKnowledge";
     public static final String VALID_TOPIC_NO_TOPIC = "NoTopic";
 

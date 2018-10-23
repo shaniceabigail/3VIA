@@ -52,11 +52,13 @@ public class XmlUtilTest {
     private static final String VALID_PHONE = "9482424";
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_ADDRESS = "4th street";
-    private static final List<XmlAdaptedTopic> VALID_TAGS = Collections.singletonList(new XmlAdaptedTopic("friends"));
+    private static final List<XmlAdaptedTopic> VALID_TAGS =
+            Collections.singletonList(new XmlAdaptedTopic("friends"));
 
     private static final String VALID_QUESTION = "Why is the earth round?";
     private static final String VALID_ANSWER = "Because of gravity!";
-    private static final List<XmlAdaptedTopic> VALID_TOPIC = Collections.singletonList(new XmlAdaptedTopic("Physics"));
+    private static final List<XmlAdaptedTopic> VALID_TOPIC =
+            Collections.singletonList(new XmlAdaptedTopic("Physics"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

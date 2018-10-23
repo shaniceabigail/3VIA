@@ -50,7 +50,8 @@ public class XmlTriviaBundleStorage implements TriviaBundleStorage {
             return Optional.empty();
         }
 
-        XmlSerializableTriviaBundle xmlTriviaBundle = XmlFileStorage.loadDataFromSaveFile(filePath, true);
+        XmlSerializableTriviaBundle xmlTriviaBundle = XmlFileStorage.loadDataFromSaveFile(filePath,
+                XmlSerializableTriviaBundle.class);
         try {
             return Optional.of(xmlTriviaBundle.toModelType());
         } catch (IllegalValueException ive) {

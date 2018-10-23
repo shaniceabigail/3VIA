@@ -10,5 +10,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_CARD_DISPLAYED_INDEX = "The card index provided is invalid";
     public static final String MESSAGE_CARDS_LISTED_OVERVIEW = "%1$d cards listed!";
     public static final String MESSAGE_INVALID_FILE_FORMAT = "Invalid file format: %1$s";
+    public static final String MESSAGE_INVALID_BOOLEAN_FOR_ISCORRECT = "Invalid boolean values for isCorrect field.";
 
 }

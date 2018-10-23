@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,9 +13,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.model.AddMatchTestResultEvent;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TriviaBundleChangedEvent;
+import seedu.address.commons.events.model.TriviaResultsChangedEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.model.card.Card;
@@ -22,9 +23,12 @@ import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.AppState;
 import seedu.address.model.state.State;
+import seedu.address.model.test.Attempt;
+import seedu.address.model.test.ReadOnlyTriviaResults;
+import seedu.address.model.test.TriviaResult;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.model.test.TriviaTest;
 import seedu.address.model.test.matchtest.MatchTest;
-import seedu.address.model.test.matchtest.MatchTestResults;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -37,35 +41,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedTriviaBundle versionedTriviaBundle;
     private final FilteredList<Card> filteredCards;
-    private final MatchTestResults matchTestResults;
+    private final TriviaResults triviaResults;
     private final AppState appState;
 
     private TriviaTest currentRunningTest;
 
-    /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
-     */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
-        super();
-        requireAllNonNull(addressBook, userPrefs);
-
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-        versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
-
-        versionedTriviaBundle = null;
-        filteredCards = null;
-
-        // TODO Read data from file.
-        matchTestResults = new MatchTestResults();
-
-        currentRunningTest = null;
-        appState = new AppState();
-    }
-
-
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTriviaBundle triviaBundle, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTriviaBundle triviaBundle,
+                        ReadOnlyTriviaResults triviaResults, UserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, triviaBundle, userPrefs);
 
@@ -74,19 +56,17 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedTriviaBundle = new VersionedTriviaBundle(triviaBundle);
         filteredCards = new FilteredList<>(versionedTriviaBundle.getCardList());
+        this.triviaResults = new TriviaResults(triviaResults);
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
-
-        // TODO Read data from file.
-        matchTestResults = new MatchTestResults();
 
         currentRunningTest = null;
         appState = new AppState();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new TriviaBundle(), new UserPrefs());
+        this(new AddressBook(), new TriviaBundle(), new TriviaResults(), new UserPrefs());
     }
 
     @Override
@@ -275,15 +255,28 @@ public class ModelManager extends ComponentManager implements Model {
         assert currentRunningTest instanceof MatchTest;
 
         MatchTest matchTest = (MatchTest) currentRunningTest;
-        return matchTest.match(questionIndex, answerIndex);
+        boolean isCorrectMatch = matchTest.match(questionIndex, answerIndex);
+        if (matchTest.isCompleted()) {
+            triviaResults.addTriviaResult(new TriviaResult(currentRunningTest));
+            raise(new TriviaResultsChangedEvent(triviaResults));
+        }
+
+        return isCorrectMatch;
     }
 
-    //=========== Matching Test Results =====================================================================
+    //=========== Trivia Test Results ==========================================================================
 
     @Override
-    public void handleAddMatchTestResultEvent(AddMatchTestResultEvent event) {
-        matchTestResults.addMatchTestResult(event.getMatchTest());
+    public List<TriviaResult> getTriviaResultList() {
+        return triviaResults.getResultList();
     }
+
+    @Override
+    public List<Attempt> getAttemptsByCard(Card card) {
+        return triviaResults.getAttemptsByCard(card);
+    }
+
+
 
     @Override
     public boolean equals(Object obj) {
