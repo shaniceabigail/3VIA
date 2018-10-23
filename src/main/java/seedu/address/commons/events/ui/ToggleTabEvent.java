@@ -4,7 +4,7 @@ import javafx.scene.control.Tab;
 import seedu.address.commons.events.BaseEvent;
 
 /**
- * Represents a change in current app state
+ * Represents toggles in the current app state
  */
 public class ToggleTabEvent extends BaseEvent {
     private Tab currentTab;

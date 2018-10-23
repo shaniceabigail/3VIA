@@ -28,6 +28,7 @@ import seedu.address.commons.events.ui.ExtraInformationDisplayChangeEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestResultEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
+import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.home.Homepage;
@@ -70,6 +71,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane displayPagePlaceHolder;
+
+    @FXML
+    private StackPane navigationTabPlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -143,9 +147,12 @@ public class MainWindow extends UiPart<Stage> {
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+        NavigationTabController navigationTabController = new NavigationTabController();
+        navigationTabPlaceholder.getChildren().add(navigationTabController.getRoot());
     }
 
-    public void hide() {
+    protected void hide() {
         primaryStage.hide();
     }
 
@@ -238,6 +245,12 @@ public class MainWindow extends UiPart<Stage> {
     private void handleExtraInfomationDisplayChangeEvent(ExtraInformationDisplayChangeEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         raiseExtraInformationToDisplayEventsFor(event.toDisplay());
+    }
+
+    @Subscribe
+    private void handleToggleTab(ToggleTabEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        
     }
     /**
      * Raises appropriate events to display desired extra information.
