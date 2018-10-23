@@ -2,9 +2,9 @@ package seedu.address.model.test;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Timer;
 import java.util.function.Supplier;
 
+import javafx.animation.Timeline;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
 import seedu.address.model.ReadOnlyTriviaBundle;
@@ -25,7 +25,7 @@ public abstract class TriviaTest {
 
     protected boolean isCompleted;
     protected SimpleDoubleProperty duration;
-    protected Timer timer;
+    protected Timeline timer;
 
     public TriviaTest(Topic topic, ReadOnlyTriviaBundle triviaBundle) {
         this.topic = topic;

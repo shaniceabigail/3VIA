@@ -12,9 +12,13 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.util.Duration;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.FlashMatchOutcomeEvent;
@@ -22,6 +26,8 @@ import seedu.address.commons.events.ui.ShowTriviaTestResultEvent;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.IndexedAnswer;
+import seedu.address.model.card.IndexedQuestion;
 import seedu.address.model.card.Question;
 import seedu.address.model.test.TestType;
 import seedu.address.model.test.TriviaTest;
@@ -43,23 +49,14 @@ public class MatchTest extends TriviaTest {
     public final TestType testType = TestType.MATCH_TEST;
     private List<MatchAttempt> attempts;
 
-    private final ObservableList<Question> shuffledQuestions;
-    private final List<Index> displayQuestionIndexes;
-
-    private final ObservableList<Answer> shuffledAnswers;
-    private final List<Index> displayAnswerIndexes;
+    private final ObservableList<IndexedQuestion> shuffledQuestions;
+    private final ObservableList<IndexedAnswer> shuffledAnswers;
 
     public MatchTest(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
         super(tag, triviaBundle);
 
         shuffledQuestions = getQuestions(cards);
         shuffledAnswers = getAnswers(cards);
-
-        List<Index> initialIndexes = IntStream.rangeClosed(1, cards.size())
-                .mapToObj(Index::fromOneBased)
-                .collect(Collectors.toList());
-        displayQuestionIndexes = new ArrayList<>(initialIndexes);
-        displayAnswerIndexes = new ArrayList<>(initialIndexes);
 
         attempts = new ArrayList<>();
 
@@ -69,17 +66,14 @@ public class MatchTest extends TriviaTest {
     /**
      * The logic associated to matching a question and a answer.
      *
-     * @param displayQuestionIndex The display index of the question to match.
-     * @param displayAnswerIndex The display index of the answer to match.
+     * @param questionIndex The index of the question to match.
+     * @param answerIndex The index of the answer to match.
      * @return a boolean which signify whether the match is success or failure.
      * @throws IndexOutOfBoundsException when the given question and answer index is not within the range of
      * existing questions' and answers' indexes.
      */
-    public boolean match(Index displayQuestionIndex, Index displayAnswerIndex) throws IndexOutOfBoundsException {
-        Index actualQuestionIndex = Index.fromZeroBased(displayQuestionIndexes.indexOf(displayQuestionIndex));
-        Index actualAnswerIndex = Index.fromZeroBased(displayAnswerIndexes.indexOf(displayAnswerIndex));
-
-        MatchAttempt attempt = addAttempt(actualQuestionIndex, actualAnswerIndex);
+    public boolean match(Index questionIndex, Index answerIndex) throws IndexOutOfBoundsException {
+        MatchAttempt attempt = addAttempt(questionIndex, answerIndex);
         postOutcomeOfMatch(attempt);
 
         if (!attempt.isCorrect()) {
@@ -89,13 +83,11 @@ public class MatchTest extends TriviaTest {
             isCompleted = true;
         }
 
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
+        Timer delayForUi = new Timer();
+        delayForUi.schedule(new TimerTask() {
             @Override
             public void run() {
                 Platform.runLater(() -> {
-                    displayQuestionIndexes.remove(displayQuestionIndex);
-                    displayAnswerIndexes.remove(displayAnswerIndex);
                     respondToCorrectAttempt(attempt);
                 });
             }
@@ -126,14 +118,6 @@ public class MatchTest extends TriviaTest {
         }
     }
 
-    public List<Index> getDisplayQuestionIndexes() {
-        return displayQuestionIndexes;
-    }
-
-    public List<Index> getDisplayAnswerIndexes() {
-        return displayAnswerIndexes;
-    }
-
     /**
      * Add an attempt to the matching test.
      *
@@ -143,19 +127,22 @@ public class MatchTest extends TriviaTest {
      * @throws IndexOutOfBoundsException when the given index is out of range of the given answers or questions.
      */
     private MatchAttempt addAttempt(Index questionIndex, Index answerIndex) throws IndexOutOfBoundsException {
-        Question question = shuffledQuestions.get(questionIndex.getZeroBased());
-        Answer answer = shuffledAnswers.get(answerIndex.getZeroBased());
+        IndexedQuestion question = shuffledQuestions.stream()
+                .filter(q -> q.getId() == questionIndex.getOneBased())
+                .findFirst()
+                .orElseThrow(IndexOutOfBoundsException::new);
+
+        IndexedAnswer answer = shuffledAnswers.stream()
+                .filter(q -> q.getId() == answerIndex.getOneBased())
+                .findFirst()
+                .orElseThrow(IndexOutOfBoundsException::new);
 
         Card cardWithQuestion = cards.stream()
                 .filter(card -> card.getQuestion().equals(question))
                 .findFirst()
                 .orElseThrow(IndexOutOfBoundsException::new);
-        Card cardWithAnswer = cards.stream()
-                .filter(card -> card.getAnswer().equals(answer))
-                .findFirst()
-                .orElseThrow(IndexOutOfBoundsException::new);
 
-        MatchAttempt newAttempt = new MatchAttempt(cardWithQuestion, cardWithAnswer);
+        MatchAttempt newAttempt = new MatchAttempt(cardWithQuestion, question, answer);
         attempts.add(newAttempt);
         return newAttempt;
     }
@@ -165,10 +152,10 @@ public class MatchTest extends TriviaTest {
      * @param attempt The attempt that was made by the user in the matching test.
      */
     private void removeCardFromUi(MatchAttempt attempt) {
-        assert attempt.isCorrect(); // Ensure that attempt is correct before removing.
+        assert attempt.isCorrect();
 
-        shuffledQuestions.remove(attempt.getQuestion());
-        shuffledAnswers.remove(attempt.getAnswer());
+        shuffledQuestions.remove(attempt.getIndexedQuestion());
+        shuffledAnswers.remove(attempt.getIndexedAnswer());
     }
 
     /**
@@ -176,10 +163,9 @@ public class MatchTest extends TriviaTest {
      * @param attempt The attempt of that match command.
      */
     private void postOutcomeOfMatch(MatchAttempt attempt) {
-        int indexOfQuestion = shuffledQuestions.indexOf(attempt.getQuestion());
-        int indexOfAnswer = shuffledAnswers.indexOf(attempt.getAnswer());
-        EventsCenter.getInstance().post(new FlashMatchOutcomeEvent(indexOfQuestion, indexOfAnswer,
-                attempt.isCorrect()));
+        EventsCenter.getInstance().post(new FlashMatchOutcomeEvent(
+                shuffledQuestions.indexOf(attempt.getIndexedQuestion()),
+                shuffledAnswers.indexOf(attempt.getIndexedAnswer()), attempt.isCorrect()));
     }
 
     private boolean isValidMatchTest() {
@@ -190,21 +176,15 @@ public class MatchTest extends TriviaTest {
      * Starts the timer of the matching test.
      */
     private void startTimer() {
-        timer = new Timer();
         DecimalFormat timerFormat = new DecimalFormat("#.#");
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> {
-                    duration.setValue(Double.parseDouble(timerFormat.format(duration.getValue() + 0.1)));
-                });
-            }
-        };
-
-        timer.scheduleAtFixedRate(task, 0, 100);
+        timer = new Timeline(new KeyFrame(Duration.seconds(0.1), ev -> {
+            duration.setValue(Double.parseDouble(timerFormat.format(duration.getValue() + 0.1)));
+        }));
+        timer.setCycleCount(Animation.INDEFINITE);
+        timer.play();
     }
 
-    public ObservableList<Question> getQuestions() {
+    public ObservableList<IndexedQuestion> getQuestions() {
         return this.shuffledQuestions;
     }
 
@@ -213,15 +193,21 @@ public class MatchTest extends TriviaTest {
      * @param cards The cards to retrieve the questions from.
      * @return an observable list of questions
      */
-    private ObservableList<Question> getQuestions(List<Card> cards) {
+    private ObservableList<IndexedQuestion> getQuestions(List<Card> cards) {
         List<Question> questions = cards.stream()
                 .map(Card::getQuestion)
                 .collect(Collectors.toList());
+
         Collections.shuffle(questions);
-        return FXCollections.observableList(questions);
+
+        List<IndexedQuestion> indexedQuestions = IntStream.range(0, questions.size())
+                .mapToObj(index -> new IndexedQuestion(questions.get(index), index + 1))
+                .collect(Collectors.toList());
+
+        return FXCollections.observableList(indexedQuestions);
     }
 
-    public ObservableList<Answer> getAnswers() {
+    public ObservableList<IndexedAnswer> getAnswers() {
         return this.shuffledAnswers;
     }
 
@@ -230,12 +216,18 @@ public class MatchTest extends TriviaTest {
      * @param cards The cards to retrieve the answers from.
      * @return an observable list of answers
      */
-    private ObservableList<Answer> getAnswers(List<Card> cards) {
+    private ObservableList<IndexedAnswer> getAnswers(List<Card> cards) {
         List<Answer> answers = cards.stream()
                 .map(Card::getAnswer)
                 .collect(Collectors.toList());
+
         Collections.shuffle(answers);
-        return FXCollections.observableList(answers);
+
+        List<IndexedAnswer> indexedAnswers = IntStream.range(0, answers.size())
+                .mapToObj(index -> new IndexedAnswer(answers.get(index), index + 1))
+                .collect(Collectors.toList());
+
+        return FXCollections.observableList(indexedAnswers);
     }
 
     private boolean isEndOfTest() {
@@ -253,7 +245,7 @@ public class MatchTest extends TriviaTest {
 
     @Override
     public void stopTest() {
-        timer.cancel();
+        timer.stop();
     }
 
     @Override

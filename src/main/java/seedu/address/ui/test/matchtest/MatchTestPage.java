@@ -35,10 +35,10 @@ public class MatchTestPage extends TriviaTestPage {
     public MatchTestPage(MatchTest matchTest) {
         super(FXML);
 
-        questionListPanel = new QuestionListPanel(matchTest.getQuestions(), matchTest.getDisplayQuestionIndexes());
+        questionListPanel = new QuestionListPanel(matchTest.getQuestions());
         matchTestQuestionListPanelPlaceholder.getChildren().add(questionListPanel.getRoot());
 
-        answerListPanel = new AnswerListPanel(matchTest.getAnswers(), matchTest.getDisplayAnswerIndexes());
+        answerListPanel = new AnswerListPanel(matchTest.getAnswers());
         matchTestAnswerListPanelPlaceholder.getChildren().add(answerListPanel.getRoot());
 
         matchTestTopicText.setText(matchTest.getTopic().topicName);
