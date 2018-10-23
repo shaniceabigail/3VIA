@@ -16,6 +16,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.test.TriviaResults;
 import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.model.topic.Topic;
 import seedu.address.testutil.TypicalCards;
@@ -32,7 +33,7 @@ public class ExitCommandTest {
     @Before
     public void setUp() {
         model = new ModelManager(TypicalPersons.getTypicalAddressBook(), TypicalCards.getTypicalTriviaBundle(),
-                new UserPrefs());
+                new TriviaResults(), new UserPrefs());
         commandHistory = new CommandHistory();
     }
 

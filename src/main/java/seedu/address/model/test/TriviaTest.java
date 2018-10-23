@@ -38,6 +38,10 @@ public abstract class TriviaTest {
 
     public abstract void stopTest();
 
+    public abstract List<? extends Attempt> getAttempts();
+
+    public abstract TestType getTestType();
+
     public abstract Supplier<? extends TriviaTestPage> getTestingPage();
 
     public abstract Supplier<? extends TriviaTestResultPage> getResultPage();

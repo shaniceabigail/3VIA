@@ -27,7 +27,7 @@ public class XmlAdaptedCard {
     @XmlElement(required = true)
     private String answer;
 
-    @XmlElement(required = true)
+    @XmlElement
     private List<XmlAdaptedTopic> topic = new ArrayList<>();
 
     /**
