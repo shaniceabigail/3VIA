@@ -408,6 +408,14 @@ Step 7. At this stage, the System will await `exit` command from the user so tha
 
 ==== Design Considerations
 
+===== The static display indexes of the `ListView` for question and answer
+* **Alternative 1 (current choice):** Created new classes namely, `IndexedQuestion` and `IndexedAnswer` to uniquely identify the cells in `ListView`.
+** Pros: Finding the exact question and answer is easy as what the user see is a representative of the id that identifies the question/answer.
+** Cons: Currently, the classes created are for the sole of having static display indexes during `MatchTest`.
+* **Alternative 2:** Create a `List` of mapping that maps the actual index to the display index of the question and answer.
+** Pros: The implementation details will be contained within `MatchTest`.
+** Cons: Additional work is require to maintain the `List` data structure, to ensure that it is updated every time a question or answer is removed.
+
 ===== The polymorphism of TriviaTest
 * **Alternative 1 (current choice):** Uses `TriviaTest`, `TriviaResultStorage` to accommodate the different testing feature in 3VIA.
 ** Pros: Follows Open-Close Principle which increases the extensibility of the testing feature in 3VIA.
