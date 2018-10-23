@@ -27,13 +27,12 @@ public class NavigationTabController extends UiPart<Region> {
 
     private double tabWidth = 90.0;
     public static int lastSelectedTabIndex = 0;
-    //private final Logic logic;
 
     @FXML
     private JFXTabPane tabContainer;
 
     @FXML
-    private Tab userProfileTab;
+    private Tab HomeTab;
 
     @FXML
     private Tab settingsTab;
@@ -46,11 +45,10 @@ public class NavigationTabController extends UiPart<Region> {
     public NavigationTabController () {
         super(FXML);
         tabContainer = new JFXTabPane();
-        userProfileTab = new Tab();
+        HomeTab = new Tab();
         settingsTab = new Tab();
         customTab = new Tab();
         this.configureView();
-        //this.logic = logic;
     }
 
 
@@ -62,12 +60,24 @@ public class NavigationTabController extends UiPart<Region> {
         tabContainer.setRotateGraphic(true);
 
         //list of tabs configured
-        configureTab(userProfileTab, "Home", "/src/main/resources/images/tabIcons/home.png");
-        configureTab(settingsTab, "Settings", "/src/main/resources/images/tabIcons/settings.png");
-        configureTab(customTab, "Custom", "/src/main/resources/images/tabIcons/test.png");
+        createTab(HomeTab, "Home", "/src/main/resources/images/tabIcons/home.png");
+        createTab(settingsTab, "Settings", "/src/main/resources/images/tabIcons/settings.png");
+        createTab(customTab, "Custom", "/src/main/resources/images/tabIcons/test.png");
     }
 
-    private void configureTab(Tab tab, String title, String iconPath) {
+    /**
+     * Configures a new tab
+     */
+
+    private void createTab() {
+        createTab(, , );
+    }
+
+    /**
+     * Configures a new tab
+     */
+
+    private void createTab(Tab tab, String title, String iconPath) {
         double imageWidth = 40.0;
 
         ImageView imageView = new ImageView(iconPath);
@@ -82,7 +92,6 @@ public class NavigationTabController extends UiPart<Region> {
         tabPane.setCenter(imageView);
         tabPane.setBottom(label);
 
-        /// 6.
         tab.setText("");
         tab.setGraphic(tabPane);
     }
@@ -91,37 +100,13 @@ public class NavigationTabController extends UiPart<Region> {
     private void handleToggleTab(ToggleTabEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         lastSelectedTabIndex = tabContainer.getSelectionModel().getSelectedIndex();
+        Tab currentTab = (Tab) event.getTarget();
+        if (currentTab.isSelected()) {
+            currentTab.setStyle("-fx-background-color: -fx-focus-color;");
+        } else {
+            currentTab.setStyle("-fx-background-color: -fx-accent;");
+        }
 
-
+        }
     }
-    /*
-    private void  {
-        /// 7.
-
-
-        EventHandler replaceBackgroundColorHandler = event -> {
-            lastSelectedTabIndex = tabContainer.getSelectionModel().getSelectedIndex();
-
-            Tab currentTab = (Tab) event.getTarget();
-            if (currentTab.isSelected()) {
-                currentTab.setStyle("-fx-background-color: -fx-focus-color;");
-            } else {
-                currentTab.setStyle("-fx-background-color: -fx-accent;");
-            }
-        };
-
-/// 8.
-        EventHandler<Event> logoutHandler = event -> {
-            Tab currentTab = (Tab) event.getTarget();
-            if (currentTab.isSelected()) {
-                tabContainer.getSelectionModel().select(lastSelectedTabIndex);
-
-                // TODO: logout action
-                // good place to show Dialog window with Yes / No question
-                System.out.println("Logging out!");
-            }
-        };
-
-
-    } */
 }
