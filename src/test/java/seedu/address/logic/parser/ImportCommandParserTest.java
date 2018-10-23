@@ -15,7 +15,7 @@ import seedu.address.testutil.ImportFileUtil;
 
 public class ImportCommandParserTest {
     private static final String INVALID_PATH =
-            ":A://MY_COMPUTER/123/file.txt"; // illegal character ":" at start of path
+            "A://MY COMPUTER/123\0/file.txt"; // illegal character "\0"
     private ImportCommandParser parser = new ImportCommandParser();
 
     @Test
