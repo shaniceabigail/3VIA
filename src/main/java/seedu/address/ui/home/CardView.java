@@ -13,7 +13,7 @@ import seedu.address.ui.UiPart;
  */
 public class CardView extends UiPart<Region> {
 
-    private static final String FXML = "/home/CardView.fxml";
+    private static final String FXML = "home/CardView.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

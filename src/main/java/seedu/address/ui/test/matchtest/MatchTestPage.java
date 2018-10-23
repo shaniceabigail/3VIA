@@ -13,7 +13,7 @@ import seedu.address.ui.test.TriviaTestPage;
  * The page that shows up when the user is in a matching test.
  */
 public class MatchTestPage extends TriviaTestPage {
-    private static final String FXML = "/test/matchtest/MatchTestPage.fxml";
+    private static final String FXML = "test/matchtest/MatchTestPage.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 

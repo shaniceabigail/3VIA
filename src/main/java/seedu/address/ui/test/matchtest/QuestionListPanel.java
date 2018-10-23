@@ -21,7 +21,7 @@ import seedu.address.ui.UiPart;
  * The panel which contains all the questions in a particular test.
  */
 public class QuestionListPanel extends UiPart<Region> {
-    private static final String FXML = "/test/matchtest/QuestionListPanel.fxml";
+    private static final String FXML = "test/matchtest/QuestionListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(QuestionListPanel.class);
 
     @FXML

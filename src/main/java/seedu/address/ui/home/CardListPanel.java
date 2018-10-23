@@ -23,7 +23,7 @@ import seedu.address.ui.UiPart;
  * Panel containing the list of cards.
  */
 public class CardListPanel extends UiPart<Region> {
-    private static final String FXML = "/home/CardListPanel.fxml";
+    private static final String FXML = "home/CardListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(CardListPanel.class);
 
     @FXML

@@ -14,7 +14,7 @@ import seedu.address.ui.test.TriviaTestResultPage;
  * The page that shows up after the user has completed a matching test.
  */
 public class MatchTestResultPage extends TriviaTestResultPage {
-    private static final String FXML = "/test/matchtest/MatchTestResultPage.fxml";
+    private static final String FXML = "test/matchtest/MatchTestResultPage.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
     private final MatchTest matchTest;

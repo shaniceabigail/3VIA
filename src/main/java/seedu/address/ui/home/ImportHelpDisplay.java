@@ -17,7 +17,7 @@ import seedu.address.ui.UiPart;
 public class ImportHelpDisplay extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(ImportHelpDisplay.class);
-    private static final String FXML = "/home/ImportHelpDisplay.fxml";
+    private static final String FXML = "home/ImportHelpDisplay.fxml";
     private static final String IMPORT_FORMAT = "Each question and answer is separated by a tab space.\n"
             + "Include a whitespace before every topic.\n"
             + " t/topic t/topic...\n"
