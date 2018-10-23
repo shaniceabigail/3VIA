@@ -69,14 +69,6 @@ public class NavigationTabController extends UiPart<Region> {
      * Configures a new tab
      */
 
-    private void createTab() {
-        createTab(, , );
-    }
-
-    /**
-     * Configures a new tab
-     */
-
     private void createTab(Tab tab, String title, String iconPath) {
         double imageWidth = 40.0;
 
