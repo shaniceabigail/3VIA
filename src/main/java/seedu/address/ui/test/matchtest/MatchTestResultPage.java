@@ -43,7 +43,7 @@ public class MatchTestResultPage extends TriviaTestResultPage {
 
         this.matchTest = matchTest;
         testDateText.setText(DateUtil.format(matchTest.getTestDate()));
-        durationText.setText(String.valueOf(matchTest.getDuration()) + "s");
+        durationText.setText(String.valueOf(matchTest.getDuration().getValue()) + "s");
         topicText.setText(matchTest.getTopic().topicName);
         numOfCardsText.setText(String.valueOf(matchTest.getCardsTested().size()));
         numOfAttemptsText.setText(String.valueOf(matchTest.getAttempts().size()) + " Attempts");
