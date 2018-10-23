@@ -2,9 +2,10 @@ package seedu.address.model.test;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Timer;
 import java.util.function.Supplier;
 
+import javafx.animation.Timeline;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.card.Card;
@@ -23,13 +24,13 @@ public abstract class TriviaTest {
     protected final ObservableList<Card> cards;
 
     protected boolean isCompleted;
-    protected double duration;
-    protected Timer timer;
+    protected SimpleDoubleProperty duration;
+    protected Timeline timer;
 
     public TriviaTest(Topic topic, ReadOnlyTriviaBundle triviaBundle) {
         this.topic = topic;
         testDate = new Date();
-        duration = 0;
+        duration = new SimpleDoubleProperty(0);
         isCompleted = false;
         cards = triviaBundle.getListOfCardFilteredByTopic(new TopicIsKeywordPredicate(topic.topicName));
     }
@@ -54,7 +55,7 @@ public abstract class TriviaTest {
         return testDate;
     }
 
-    public double getDuration() {
+    public SimpleDoubleProperty getDuration() {
         return duration;
     }
 

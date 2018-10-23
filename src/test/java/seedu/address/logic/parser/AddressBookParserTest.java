@@ -4,8 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_GIT;
-import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_GIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_PHYSICS;
 import static seedu.address.testutil.ImportFileUtil.getImportCommand;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
@@ -179,9 +178,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_matchTest() throws Exception {
-        assertTrue(parseCommand(MatchTestCommand.COMMAND_WORD + " " + TOPIC_DESC_PHYSICS)
+        assertTrue(parseCommand(MatchTestCommand.COMMAND_WORD + " " + VALID_TOPIC_PHYSICS)
                 instanceof MatchTestCommand);
-        assertTrue(parseCommand(MatchTestCommand.COMMAND_WORD + " " + TOPIC_DESC_GIT)
+        assertTrue(parseCommand(MatchTestCommand.COMMAND_WORD + " " + VALID_TOPIC_GIT)
                 instanceof MatchTestCommand);
     }
 
