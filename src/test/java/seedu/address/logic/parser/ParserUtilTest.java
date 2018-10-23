@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.address.testutil.ImportFileUtil.Valid_FILE_NO_TOPIC;
+import static seedu.address.testutil.ImportFileUtil.VALID_FILE_NO_TOPIC;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -32,7 +32,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TOPIC = "#topic";
-    private static final String INVALID_PATH = "\\A://MY_COMPUTER/123/file.txt";
+    private static final String INVALID_PATH = ":A://MY_COMPUTER/123/file.txt";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -40,7 +40,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TOPIC_1 = "physics";
     private static final String VALID_TOPIC_2 = "english";
-    private static final String VALID_PATH = Valid_FILE_NO_TOPIC.toString();
+    private static final String VALID_PATH = VALID_FILE_NO_TOPIC.toString();
 
     private static final String WHITESPACE = " \t\r\n";
 
