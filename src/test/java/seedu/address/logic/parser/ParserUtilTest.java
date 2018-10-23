@@ -32,7 +32,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TOPIC = "#topic";
-    private static final String INVALID_PATH = ":A://MY_COMPUTER/123/file.txt";
+    private static final String INVALID_PATH = "A://MY COMPUTER/123\0/file.txt";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
