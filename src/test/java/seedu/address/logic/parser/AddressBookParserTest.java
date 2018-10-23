@@ -7,11 +7,10 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_GIT;
 import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_PHYSICS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_PHYSICS;
-import static seedu.address.testutil.FileUtil.getImportCommand;
+import static seedu.address.testutil.ImportFileUtil.getImportCommand;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,13 +46,14 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.QuestionContainsKeywordsPredicate;
+import seedu.address.model.portation.ImportFile;
 import seedu.address.model.test.TriviaResults;
 import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.model.topic.Topic;
 import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.CardUtil;
 import seedu.address.testutil.EditCardDescriptorBuilder;
-import seedu.address.testutil.FileUtil;
+import seedu.address.testutil.ImportFileUtil;
 import seedu.address.testutil.TypicalCards;
 
 public class AddressBookParserTest {
@@ -172,8 +172,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_import() throws Exception {
-        File typicalFile = FileUtil.getTypicalImportFile();
-        ImportCommand command = (ImportCommand) parseCommand(getImportCommand(typicalFile));
+        ImportFile typicalFile = ImportFileUtil.getTypicalImportFile();
+        ImportCommand command = (ImportCommand) parseCommand(getImportCommand(typicalFile.toString()));
         assertEquals(new ImportCommand(typicalFile), command);
     }
 
