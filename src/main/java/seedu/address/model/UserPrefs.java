@@ -18,7 +18,7 @@ public class UserPrefs {
 
 
     public UserPrefs() {
-        setGuiSettings(500, 500, 0, 0);
+        setGuiSettings(770, 780, 0, 0);
     }
 
     public GuiSettings getGuiSettings() {
