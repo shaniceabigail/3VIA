@@ -38,7 +38,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ImportCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LearnCommand;
 import seedu.address.logic.commands.MatchCommand;
 import seedu.address.logic.commands.MatchTestCommand;
 import seedu.address.logic.commands.RedoCommand;
@@ -153,8 +153,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parseCommand(LearnCommand.COMMAND_WORD) instanceof LearnCommand);
+        assertTrue(parseCommand(LearnCommand.COMMAND_WORD + " Physics") instanceof LearnCommand);
     }
 
     @Test
