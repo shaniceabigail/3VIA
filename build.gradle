@@ -83,7 +83,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = '3VIA.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }

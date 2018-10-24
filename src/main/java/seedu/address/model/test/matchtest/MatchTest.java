@@ -31,6 +31,8 @@ import seedu.address.model.card.IndexedQuestion;
 import seedu.address.model.card.Question;
 import seedu.address.model.test.TestType;
 import seedu.address.model.test.TriviaTest;
+import seedu.address.model.test.matchtest.exceptions.AnswerNotFoundException;
+import seedu.address.model.test.matchtest.exceptions.QuestionNotFoundException;
 import seedu.address.model.topic.Topic;
 import seedu.address.ui.UiPart;
 import seedu.address.ui.test.TriviaTestPage;
@@ -69,10 +71,9 @@ public class MatchTest extends TriviaTest {
      * @param questionIndex The index of the question to match.
      * @param answerIndex The index of the answer to match.
      * @return a boolean which signify whether the match is success or failure.
-     * @throws IndexOutOfBoundsException when the given question and answer index is not within the range of
-     * existing questions' and answers' indexes.
      */
-    public boolean match(Index questionIndex, Index answerIndex) throws IndexOutOfBoundsException {
+    public boolean match(Index questionIndex, Index answerIndex) throws QuestionNotFoundException,
+            AnswerNotFoundException {
         MatchAttempt attempt = addAttempt(questionIndex, answerIndex);
         postOutcomeOfMatch(attempt);
 
@@ -126,21 +127,22 @@ public class MatchTest extends TriviaTest {
      * @return the new Matching attempt.
      * @throws IndexOutOfBoundsException when the given index is out of range of the given answers or questions.
      */
-    private MatchAttempt addAttempt(Index questionIndex, Index answerIndex) throws IndexOutOfBoundsException {
+    private MatchAttempt addAttempt(Index questionIndex, Index answerIndex) throws QuestionNotFoundException,
+            AnswerNotFoundException {
         IndexedQuestion question = shuffledQuestions.stream()
                 .filter(q -> q.getId() == questionIndex.getOneBased())
                 .findFirst()
-                .orElseThrow(IndexOutOfBoundsException::new);
+                .orElseThrow(QuestionNotFoundException::new);
 
         IndexedAnswer answer = shuffledAnswers.stream()
                 .filter(q -> q.getId() == answerIndex.getOneBased())
                 .findFirst()
-                .orElseThrow(IndexOutOfBoundsException::new);
+                .orElseThrow(AnswerNotFoundException::new);
 
         Card cardWithQuestion = cards.stream()
                 .filter(card -> card.getQuestion().equals(question))
                 .findFirst()
-                .orElseThrow(IndexOutOfBoundsException::new);
+                .orElseThrow(QuestionNotFoundException::new);
 
         MatchAttempt newAttempt = new MatchAttempt(cardWithQuestion, question, answer);
         attempts.add(newAttempt);
