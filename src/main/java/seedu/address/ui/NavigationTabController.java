@@ -3,7 +3,7 @@ package seedu.address.ui;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
+//import com.google.common.eventbus.Subscribe;
 import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.ToggleTabEvent;
+//import seedu.address.commons.events.ui.ToggleTabEvent;
 
 /*
  * The UI component that is responsible for navigation
@@ -28,7 +28,7 @@ public class NavigationTabController extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(NavigationTabController.class);
 
     private double tabWidth = 90.0;
-    public static int lastSelectedTabIndex = 0;
+    //public static int lastSelectedTabIndex = 0;
 
     private ArrayList<String> listOfTabs;
     private Tab currentTab;
@@ -95,7 +95,7 @@ public class NavigationTabController extends UiPart<Region> {
 
         listOfTabs.add(title);
     }
-
+    /**
     @Subscribe
     private void handleToggleTab(ToggleTabEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
@@ -109,4 +109,5 @@ public class NavigationTabController extends UiPart<Region> {
 
         }
     }
+    */
 }

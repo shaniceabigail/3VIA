@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.HBox?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -44,6 +45,14 @@
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
+
+        <StackPane VBox.vgrow="NEVER" fx:id="navigationTabPlaceholder" styleClass="pane-with-border"
+                   minHeight="100" prefHeight="100" maxHeight="100">
+          <padding>
+            <Insets top="5" right="10" bottom="5" left="10" />
+          </padding>
+        </StackPane>
+
         <StackPane fx:id="displayPagePlaceHolder" VBox.vgrow="ALWAYS"/>
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
