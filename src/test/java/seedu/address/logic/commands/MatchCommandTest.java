@@ -17,7 +17,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.card.Card;
 import seedu.address.model.test.TriviaResults;
 import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.model.topic.Topic;
@@ -57,11 +56,16 @@ public class MatchCommandTest {
 
     @Test
     public void execute_matchSuccess() {
+        Index[] expectedEarthIndexes = MatchTestUtil.getIndexes(expectedMatchTest, Q_EARTH_ROUND);
+        Index[] actualEarthIndexes = MatchTestUtil.getIndexes(matchTest, Q_EARTH_ROUND);
+        Index[] expectedForceIndexes = MatchTestUtil.getIndexes(expectedMatchTest, Q_FORCE_FORMULA);
+        Index[] actualForceIndexes = MatchTestUtil.getIndexes(matchTest, Q_FORCE_FORMULA);
+
         // Matching for the first time
-        assertMatchCommandSuccess(Q_EARTH_ROUND);
+        assertMatchCommandSuccess(actualEarthIndexes, expectedEarthIndexes);
 
         // Matching for the second time
-        assertMatchCommandSuccess(Q_FORCE_FORMULA);
+        assertMatchCommandSuccess(actualForceIndexes, expectedForceIndexes);
     }
 
     @Test
@@ -82,12 +86,10 @@ public class MatchCommandTest {
     /**
      * Execute the match command using the card's question and answer to simulate a matching success.
      */
-    private void assertMatchCommandSuccess(Card cardToMatch) {
-        Index[] expectedCorrectIndexes = MatchTestUtil.getIndexes(expectedMatchTest, cardToMatch);
-        expectedModel.matchQuestionAndAnswer(expectedCorrectIndexes[0], expectedCorrectIndexes[1]);
+    private void assertMatchCommandSuccess(Index[] actualIndexes, Index[] expectedIndexes) {
+        expectedModel.matchQuestionAndAnswer(expectedIndexes[0], expectedIndexes[1]);
 
-        Index[] correctIndexes = MatchTestUtil.getIndexes(matchTest, cardToMatch);
-        assertCommandSuccess(new MatchCommand(correctIndexes[0], correctIndexes[1]), model, commandHistory,
+        assertCommandSuccess(new MatchCommand(actualIndexes[0], actualIndexes[1]), model, commandHistory,
                 MatchCommand.MESSAGE_MATCH_SUCCESS, expectedModel);
     }
 }

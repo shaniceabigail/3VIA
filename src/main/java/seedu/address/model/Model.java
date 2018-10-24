@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.model.test.Attempt;
@@ -71,10 +72,22 @@ public interface Model {
     boolean hasCard(Card card);
 
     /**
+     * Returns true if any cards with the same identity as {@code card} exists in the list of trivia bundle.
+     */
+    boolean haveAnyCard(UniqueCardList cards);
+
+    /**
      * Adds the given card.
      * {@code card} must not already exist in the list of trivia bundle.
      */
     void addCard(Card card);
+
+    /**
+     * Adds a list of given cards.
+     * {@code cards} must not already exist in the list of trivia bundle.
+     * @param cards
+     */
+    void addMultipleCards(UniqueCardList cards);
 
     /**
      * Deletes the given card.

@@ -2,6 +2,9 @@ package seedu.address.testutil;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.IndexedAnswer;
+import seedu.address.model.card.IndexedQuestion;
+import seedu.address.model.test.matchtest.MatchAttempt;
 import seedu.address.model.test.matchtest.MatchTest;
 
 /**
@@ -20,5 +23,14 @@ public class MatchTestUtil {
                 Index.fromZeroBased(test.getQuestions().indexOf(card.getQuestion())),
                 Index.fromZeroBased(test.getAnswers().indexOf(card.getAnswer()))
         };
+    }
+
+    /**
+     * Will generate a correct MatchAttempt.
+     */
+    public static MatchAttempt generateCorrectMatchAttempt(Card cardToMatch, Index[] correctIndexes) {
+        return new MatchAttempt(cardToMatch,
+                new IndexedQuestion(cardToMatch.getQuestion(), correctIndexes[0].getOneBased()),
+                new IndexedAnswer(cardToMatch.getAnswer(), correctIndexes[1].getOneBased()));
     }
 }

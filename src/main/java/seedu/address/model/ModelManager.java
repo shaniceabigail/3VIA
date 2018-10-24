@@ -19,6 +19,7 @@ import seedu.address.commons.events.model.TriviaResultsChangedEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.AppState;
 import seedu.address.model.state.State;
@@ -300,4 +301,19 @@ public class ModelManager extends ComponentManager implements Model {
                     || (currentRunningTest != null && currentRunningTest.equals(other.currentRunningTest)));
     }
 
+    //=========== Import =====================================================================
+
+    @Override
+    public boolean haveAnyCard(UniqueCardList cards) {
+        requireNonNull(cards);
+        return versionedTriviaBundle.haveAnyCard(cards);
+    }
+
+    @Override
+    public void addMultipleCards(UniqueCardList cards) {
+        versionedTriviaBundle.addMultipleCards(cards);
+        updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
+        // TODO: raise an event to show in extra info pane
+        indicateTriviaBundleChanged();
+    }
 }

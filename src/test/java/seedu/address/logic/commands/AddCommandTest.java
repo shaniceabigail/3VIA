@@ -23,6 +23,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.TriviaBundle;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.State;
 import seedu.address.model.test.Attempt;
@@ -107,6 +108,10 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addMultipleCards(UniqueCardList cards) {
+            throw new AssertionError("This method should not be called."); }
+
+        @Override
         public void resetData(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -133,6 +138,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasCard(Card card) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean haveAnyCard(UniqueCardList cards) {
             throw new AssertionError("This method should not be called.");
         }
 
