@@ -7,7 +7,6 @@ import seedu.address.commons.events.BaseEvent;
  * Represents toggles in the current app state
  */
 public class ToggleTabEvent extends BaseEvent {
-    private Tab currentTab;
 
     @Override
     public String toString() {

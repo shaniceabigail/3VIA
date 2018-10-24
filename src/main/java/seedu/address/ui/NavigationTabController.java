@@ -1,7 +1,11 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.logging.Logger;
+
 import com.google.common.eventbus.Subscribe;
 import com.jfoenix.controls.JFXTabPane;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -10,8 +14,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ToggleTabEvent;
-
-import java.util.logging.Logger;
 
 /*
  * The UI component that is responsible for navigation
@@ -27,6 +29,9 @@ public class NavigationTabController extends UiPart<Region> {
 
     private double tabWidth = 90.0;
     public static int lastSelectedTabIndex = 0;
+
+    private ArrayList<String> listOfTabs;
+    private Tab currentTab;
 
     @FXML
     private JFXTabPane tabContainer;
@@ -44,10 +49,12 @@ public class NavigationTabController extends UiPart<Region> {
 
     public NavigationTabController () {
         super(FXML);
+        listOfTabs = new ArrayList<>();
         tabContainer = new JFXTabPane();
         HomeTab = new Tab();
         settingsTab = new Tab();
         customTab = new Tab();
+        currentTab = HomeTab;
         this.configureView();
     }
 
@@ -68,7 +75,6 @@ public class NavigationTabController extends UiPart<Region> {
     /**
      * Configures a new tab
      */
-
     private void createTab(Tab tab, String title, String iconPath) {
         double imageWidth = 40.0;
 
@@ -86,13 +92,15 @@ public class NavigationTabController extends UiPart<Region> {
 
         tab.setText("");
         tab.setGraphic(tabPane);
+
+        listOfTabs.add(title);
     }
 
     @Subscribe
     private void handleToggleTab(ToggleTabEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         lastSelectedTabIndex = tabContainer.getSelectionModel().getSelectedIndex();
-        Tab currentTab = (Tab) event.getTarget();
+        //Tab currentTab = (Tab) event.getTarget();
         if (currentTab.isSelected()) {
             currentTab.setStyle("-fx-background-color: -fx-focus-color;");
         } else {

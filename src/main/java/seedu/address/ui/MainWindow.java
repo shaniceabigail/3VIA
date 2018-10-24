@@ -250,7 +250,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleToggleTab(ToggleTabEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        
+
     }
     /**
      * Raises appropriate events to display desired extra information.
