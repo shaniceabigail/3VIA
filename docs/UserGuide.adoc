@@ -41,7 +41,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Here are some example commands you can try:
 
-* *`list`* : lists all cards according to their topics
+* *`learn`* : Will direct you to the homepage with all the avaiable cards displayed.
 * **`add`**`add q/What is the formula for force? a/force = mass * acceleration a/Physics` : adds a card with question
 `What is the formula for force?` to the the trivia application.
 * **`delete`**`3` : deletes the 3rd card in the current list
@@ -80,10 +80,12 @@ Examples:
 * `add q/What is the formula for force? a/force = mass * acceleration t/Physics`
 * `add q/What is the capital of Singapore? a/Singapore t/GeneralKnowledge t/Geography`
 
-=== Listing all cards : `list`
+=== Start learning: `learn`
 
-Shows a list of all the cards. +
-Format: `list`
+Will direct you to the homepage with the cards you want to learn. If you want to learn from everything that is
+available in the deck, simply execute `learn`. If you want to learn from the cards that are related to a certain topic,
+simply enter `learn TOPIC`.  +
+Format: `learn [TOPIC]`
 
 === Editing a card : `edit`
 
@@ -132,7 +134,7 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list` +
+* `learn` +
 `delete 2` +
 _Deletes the 2nd displayed card._
 * `find Why` +
@@ -146,7 +148,7 @@ Format: `select INDEX`
 
 Examples:
 
-* `list` +
+* `learn` +
 `select 2` +
 _Selects and opens a Google search page for the 2nd displayed card._
 * `find Why` +
@@ -177,12 +179,12 @@ Undoable commands: those commands that modify the app's content (`add`, `delete`
 Examples:
 
 * `delete 1` +
-`list` +
+`learn` +
 `undo` +
 _`delete 1` command is reversed_
 
 * `select 1` +
-`list` +
+`learn` +
 `undo` +
 _The `undo` command not executed as there are no undoable commands previously executed._
 
@@ -194,7 +196,7 @@ _`clear` command is reversed +
 _`delete 1` command is reversed_
 
 * `import C:\Users\username\Desktop\text.txt` +
-`list` +
+`learn` +
 `undo` +
 _`import` command is reversed_
 
@@ -352,7 +354,7 @@ e.g. `delete 3`
 e.g. `edit 1 q/Why will the apple fall from the tree? a/Because of gravity!`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Why`
-* *List* : `list`
+* *Learn* : `learn [TOPIC]`
 * *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
