@@ -1,11 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAVIGATION;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.NavigationCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -22,8 +20,8 @@ public class NavigationCommandParser implements Parser<NavigationCommand> {
 
     public NavigationCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAVIGATION);
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAVIGATION)
+                ArgumentTokenizer.tokenize(args);
+        if (!arePrefixesPresent(argMultimap)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NavigationCommand.MESSAGE_USAGE));
         }

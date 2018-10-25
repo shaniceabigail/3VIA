@@ -25,10 +25,6 @@ public class NavigationCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         EventsCenter.getInstance().post(new ToggleTabEvent());
-        try {
-
-        } catch(IllegalArgumentException) {
-
-        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 }
