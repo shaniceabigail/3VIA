@@ -14,6 +14,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ToggleTabEvent;
 //import seedu.address.commons.events.ui.ToggleTabEvent;
 
 /*
@@ -29,7 +30,6 @@ public class NavigationTabController extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(NavigationTabController.class);
 
     private double tabWidth = 90.0;
-    //public static int lastSelectedTabIndex = 0;
 
     private ArrayList<String> listOfTabs;
     private Tab currentTab;
@@ -104,8 +104,6 @@ public class NavigationTabController extends UiPart<Region> {
     @Subscribe
     private void handleToggleTab(ToggleTabEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        lastSelectedTabIndex = tabContainer.getSelectionModel().getSelectedIndex();
-        //Tab currentTab = (Tab) event.getTarget();
         if (currentTab.isSelected()) {
             currentTab.setStyle("-fx-background-color: -fx-focus-color;");
         } else {
@@ -113,6 +111,5 @@ public class NavigationTabController extends UiPart<Region> {
         }
 
         }
-    }
-    */
+
 }

@@ -1,8 +1,7 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
-
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -17,18 +16,15 @@ public class NavigationCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Successfully navigated to test";
-    public static final String MESSAGE_UNSUCCESSFUL = "Did not navigate to ";
+    public static final String MESSAGE_UNSUCCESSFUL = "Did not navigate to test";
 
-    private String pageName;
+    public NavigationCommand() {
 
-    public NavigationCommand(String pageName) {
-        this.pageName = pageName;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model);
-
+        EventsCenter.getInstance().post(new ToggleTabEvent());
         try {
 
         } catch(IllegalArgumentException) {
