@@ -22,6 +22,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.card.exceptions.DuplicateCardException;
 import seedu.address.testutil.CardBuilder;
 
@@ -69,8 +70,22 @@ public class TriviaBundleTest {
     }
 
     @Test
+    public void haveAnyCard_nullCard_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        triviaBundle.haveAnyCard((UniqueCardList) null);
+    }
+
+    @Test
     public void hasCard_cardNotInTriviaBundle_returnsFalse() {
         assertFalse(triviaBundle.hasCard(Q_CAPITAL_SG));
+    }
+
+    @Test
+    public void haveAnyCard_cardNotInTriviaBundle_returnsFalse() {
+        UniqueCardList uniqueCardList = new UniqueCardList();
+        uniqueCardList.add(Q_CAPITAL_SG);
+        uniqueCardList.add(Q_EARTH_ROUND);
+        assertFalse(triviaBundle.haveAnyCard(uniqueCardList));
     }
 
     @Test
@@ -80,11 +95,33 @@ public class TriviaBundleTest {
     }
 
     @Test
+    public void haveAnyCard_cardInTriviaBundle_returnsTrue() {
+        triviaBundle.addCard(Q_EARTH_ROUND);
+        UniqueCardList uniqueCardList = new UniqueCardList();
+        uniqueCardList.add(Q_EARTH_ROUND);
+        uniqueCardList.add(Q_CAPITAL_SG);
+        assertTrue(triviaBundle.haveAnyCard(uniqueCardList));
+    }
+
+    @Test
     public void hasCard_cardWithSameIdentityFieldsInTriviaBundle_returnsTrue() {
         triviaBundle.addCard(Q_EARTH_ROUND);
         Card editedEarthRoundQ = new CardBuilder(Q_EARTH_ROUND).withAnswer(VALID_ANSWER_GIT_COMMIT)
                 .withTopics(VALID_TOPIC_GIT).build();
         assertTrue(triviaBundle.hasCard(editedEarthRoundQ));
+    }
+
+    @Test
+    public void haveAnyCard_cardWithSameIdentityFieldsInTriviaBundle_returnsTrue() {
+        triviaBundle.addCard(Q_EARTH_ROUND);
+        Card editedEarthRoundQ = new CardBuilder(Q_EARTH_ROUND).withAnswer(VALID_ANSWER_GIT_COMMIT)
+                .withTopics(VALID_TOPIC_GIT).build();
+
+        UniqueCardList uniqueCardList = new UniqueCardList();
+        uniqueCardList.add(editedEarthRoundQ);
+        uniqueCardList.add(Q_CAPITAL_SG);
+
+        assertTrue(triviaBundle.haveAnyCard(uniqueCardList));
     }
 
     @Test

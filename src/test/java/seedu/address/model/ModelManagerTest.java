@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.card.QuestionContainsKeywordsPredicate;
+import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.test.TriviaResults;
 import seedu.address.testutil.AddressBookBuilder;
@@ -41,6 +42,12 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void haveAnyCard_nullCard_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        modelManager.haveAnyCard((UniqueCardList) null);
+    }
+
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
@@ -48,6 +55,13 @@ public class ModelManagerTest {
     @Test
     public void hasCard_cardNotInTriviaBundle_returnsFalse() {
         assertFalse(modelManager.hasCard(Q_EARTH_ROUND));
+    }
+
+    @Test
+    public void haveAnyCard_cardNotInTriviaBundle_returnsFalse() {
+        UniqueCardList uniqueCardList = new UniqueCardList();
+        uniqueCardList.add(Q_EARTH_ROUND);
+        assertFalse(modelManager.haveAnyCard(uniqueCardList));
     }
 
     @Test
@@ -60,6 +74,14 @@ public class ModelManagerTest {
     public void hasCard_cardInTriviaBundle_returnsTrue() {
         modelManager.addCard(Q_EARTH_ROUND);
         assertTrue(modelManager.hasCard(Q_EARTH_ROUND));
+    }
+
+    @Test
+    public void haveAnyCard_cardInTriviaBundle_returnsTrue() {
+        modelManager.addCard(Q_EARTH_ROUND);
+        UniqueCardList uniqueCardList = new UniqueCardList();
+        uniqueCardList.add(Q_EARTH_ROUND);
+        assertTrue(modelManager.haveAnyCard(uniqueCardList));
     }
 
     @Test
