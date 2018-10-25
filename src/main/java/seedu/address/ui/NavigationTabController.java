@@ -3,7 +3,7 @@ package seedu.address.ui;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-//import com.google.common.eventbus.Subscribe;
+import com.google.common.eventbus.Subscribe;
 import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
@@ -100,7 +100,7 @@ public class NavigationTabController extends UiPart<Region> {
 
         listOfTabs.add(title);
     }
-    /**
+
     @Subscribe
     private void handleToggleTab(ToggleTabEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
