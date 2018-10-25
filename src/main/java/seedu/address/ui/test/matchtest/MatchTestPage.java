@@ -3,6 +3,7 @@ package seedu.address.ui.test.matchtest;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.test.matchtest.MatchTest;
@@ -12,7 +13,7 @@ import seedu.address.ui.test.TriviaTestPage;
  * The page that shows up when the user is in a matching test.
  */
 public class MatchTestPage extends TriviaTestPage {
-    private static final String FXML = "/test/matchtest/MatchTestPage.fxml";
+    private static final String FXML = "test/matchtest/MatchTestPage.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -25,6 +26,12 @@ public class MatchTestPage extends TriviaTestPage {
     @FXML
     private StackPane matchTestAnswerListPanelPlaceholder;
 
+    @FXML
+    private Label matchTestTopicText;
+
+    @FXML
+    private Label matchTestDurationText;
+
     public MatchTestPage(MatchTest matchTest) {
         super(FXML);
 
@@ -33,6 +40,10 @@ public class MatchTestPage extends TriviaTestPage {
 
         answerListPanel = new AnswerListPanel(matchTest.getAnswers());
         matchTestAnswerListPanelPlaceholder.getChildren().add(answerListPanel.getRoot());
+
+        matchTestTopicText.setText(matchTest.getTopic().topicName);
+        matchTestDurationText.textProperty().bind(matchTest.getDuration().asString());
+
         registerAsAnEventHandler(this);
     }
 }

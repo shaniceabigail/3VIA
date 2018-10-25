@@ -12,7 +12,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/CS2103-AY1819S1-W12-3/main
+:repoURL: https://github.com/CS2103-AY1819S1-W12-3/main/blob/master
 
 By: `CS2103T W12-3 Team`      Since: `Sept 2018`      Licence: `MIT`
 
@@ -49,14 +49,14 @@ This will generate all resources required by the application and tests.
 
 === Verifying the setup
 
-. Run the `seedu.address.MainApp` and try a few commands
+. Run the `seedu.address.MainApp` and try a few commands from the user interface command box
 . <<Testing,Run the tests>> to ensure they all pass.
 
 === Configurations to do before writing code
 
 ==== Configuring the coding style
 
-This project follows https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc[oss-generic coding standards]. IntelliJ's default style is mostly compliant with ours but it uses a different import order from ours. To rectify,
+This project follows https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc[oss-generic coding standards]. IntelliJ's default style is mostly compliant with our coding standards but it uses a different import order from ours. To rectify,
 
 . Go to `File` > `Settings...` (Windows/Linux), or `IntelliJ IDEA` > `Preferences...` (macOS)
 . Select `Editor` > `Code Style` > `Java`
@@ -69,9 +69,9 @@ Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> docume
 
 ==== Updating documentation to match your fork
 
-After forking the repo, the documentation will still have the SE-EDU branding and refer to the `se-edu/addressbook-level4` repo.
+After forking the repo, the documentation will still have the `CS2103T W12-3 Team` branding and refer to the `CS2103-AY1819S1-W12-3/main` repo.
 
-If you plan to develop this fork as a separate product (i.e. instead of contributing to `se-edu/addressbook-level4`), you should do the following:
+If you plan to develop this fork as a separate product (i.e. instead of contributing to `CS2103-AY1819S1-W12-3/main`), you should do the following:
 
 . Configure the <<Docs-SiteWideDocSettings, site-wide documentation settings>> in link:{repoURL}/build.gradle[`build.gradle`], such as the `site-name`, to suit your own project.
 
@@ -96,7 +96,7 @@ Having both Travis and AppVeyor ensures your App works on both Unix-based platfo
 When you are ready to start coding,
 
 1. Get some sense of the overall design by reading <<Design-Architecture>>.
-2. Take a look at <<GetStartedProgramming>>.
+2. Take a look at <<Implementation>> for a more detailed description of the implementation of our features.
 
 == Design
 
@@ -377,7 +377,7 @@ Additionally, `MatchTest` also implements the following operations:
 * `MatchTest#stopTest()` -- Does the necessary clean up to stop a matching test.
 * `MatchTest#match(questionIndex, answerIndex)` -- Matches the question to the answer.
 
-These operations are exposed in the `Model` interface as `Model#startTriviaTest()`, `Model#stopTriviaTest()` and `Model#MatchCards` respectively.
+These operations are exposed in the `Model` interface as `Model#startTriviaTest()`, `Model#stopTriviaTest()` and `Model#MatchQuestionAndAnswer` respectively.
 
 The following activity diagram shows the complete lifecycle of a matching test.
 
@@ -387,7 +387,7 @@ Given below is an example usage scenario and how the matching test behaves at ea
 
 Step 1. The user enter the `testM` command and a new `MatchingTestCommand` will be created.
 
-Step 2. The `MatchingTestCommand` will be executed and a new MatchTest will be created as shown in the below Sequence diagram.
+Step 2. The `MatchingTestCommand` will be executed and a new MatchTest Object will be created as shown in the below Sequence diagram.
 
 image::StartingMatchTestSequenceDiagram.png[width="800"]
 
@@ -400,22 +400,28 @@ Step 4. Suppose the user chose to match a question to an answer, the sequence wi
 
 image::MatchCommandSequenceDiagram.png[width="800"]
 
-Step 5. Suppose it is correct, the System will remove the matched question and answer from the Ui.
+Step 5. If there are still existing unmatched question and answers, the System will go back to step 3.
 
-Step 6. If there are still existing unmatched question and answers, the System will go back to step 3.
+Step 6. After all the question and answers are matched, the System will store the results on the hard disk and display the test's result.
 
-Step 7. After all the question and answers are matched, the System will display the results.
-
-Step 8. At this stage, the System will await `exit` command from the user so that user can be taken back to the home page.
+Step 7. At this stage, the System will await `exit` command from the user so that user can be taken back to the home page.
 
 ==== Design Considerations
 
+===== The static display indexes of the `ListView` for question and answer
+* **Alternative 1 (current choice):** Created new classes namely, `IndexedQuestion` and `IndexedAnswer` to uniquely identify the cells in `ListView`.
+** Pros: Finding the exact question and answer is easy as what the user see is a representative of the id that identifies the question/answer.
+** Cons: Currently, the classes created are for the sole of having static display indexes during `MatchTest`.
+* **Alternative 2:** Create a `List` of mapping that maps the actual index to the display index of the question and answer.
+** Pros: The implementation details will be contained within `MatchTest`.
+** Cons: Additional work is require to maintain the `List` data structure, to ensure that it is updated every time a question or answer is removed.
+
 ===== The polymorphism of TriviaTest
-* **Alternative 1 (current choice):** Uses `TriviaTest`, `CloseTriviaTestViewEvent` and `ShowTriviaTestViewEvent` that accepts all kinds of TriviaTest, not just matching test.
+* **Alternative 1 (current choice):** Uses `TriviaTest`, `TriviaResultStorage` to accommodate the different testing feature in 3VIA.
 ** Pros: Follows Open-Close Principle which increases the extensibility of the testing feature in 3VIA.
 ** Pros: Increases the re-usability of similar codes, and promotes cleaner code.
 ** Cons: The implementation of different tests have to follow the structure of TriviaTest very strictly.
-* **Alternative 1 (current choice):** Implement each kinds of test as a standalone test with its own standalone class and event handler.
+* **Alternative 2:** Implement each kinds of test as a standalone test with its own standalone class and event handler.
 ** Pros: Easy to implement and each developer will have their freedom of how to implement their own test.
 ** Cons: Will lead to code that is increasingly not manageable.
 

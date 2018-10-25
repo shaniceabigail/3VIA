@@ -2,12 +2,12 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.card.Answer;
@@ -16,6 +16,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.portation.ImportFile;
 import seedu.address.model.test.TimeLimit;
 import seedu.address.model.topic.Topic;
 
@@ -25,21 +26,7 @@ import seedu.address.model.topic.Topic;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_NO_FILE_NAME = "No path name specified.";
 
-    /**
-     * Parses {@code pathName} into an {@code file} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     * @throws ParseException if no path name is specified.
-     */
-    public static File parsePath(String pathName) throws ParseException {
-        String trimmedPathName = pathName.trim();
-        requireNonNull(trimmedPathName);
-        if (trimmedPathName.isEmpty()) {
-            throw new ParseException(MESSAGE_NO_FILE_NAME);
-        }
-        return new File(trimmedPathName);
-    }
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -182,5 +169,19 @@ public class ParserUtil {
             throw new ParseException(TimeLimit.MESSAGE_TIME_LIMIT_CONSTRAINTS);
         }
         return new TimeLimit(trimmedTimeLimit);
+    }
+
+    /**
+     * Parses {@code pathName} into an {@code ImportFile} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if no path name is specified.
+     */
+    public static ImportFile parsePath(String pathName) throws ParseException {
+        String trimmedPathName = pathName.trim();
+        requireNonNull(trimmedPathName);
+        if (!FileUtil.isValidPath(trimmedPathName)) {
+            throw new ParseException(ImportFile.MESSAGE_INVALID_FILE);
+        }
+        return new ImportFile(trimmedPathName);
     }
 }
