@@ -274,6 +274,11 @@ public class ImportCommandTest {
         public boolean matchQuestionAndAnswer(Index questionIndex, Index answerIndex) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public UniqueCardList parseFileToCards(ImportFile importfile) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
