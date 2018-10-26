@@ -286,40 +286,37 @@ Format: `stats [TOPIC]`
 :imagesDir: images/user_guide/import
 === Mass Import: `import`
 
-Imports multiple cards from a text file into 3VIA. +
+Quickly imports multiple cards from a text file into 3VIA. +
 Format: `import FILEPATH`
+****
+* The file must be a *plain text file* (file.txt).
+* The files must be in *UTF-8 format*.
+* The file path refers to the *absolute file path* of the import file.
+****
 
 Example:
 ****
 * `import C:\Users\username\Desktop\file.txt` +
-_Imports the contents from the file.txt text file from the specified file location._
+_Imports the contents from the file.txt text file from the specified file location on Windows._
+* `import home/username/file.txt` +
+_Imports the contents from the file.txt text file from the specified file location on Linux._
 ****
 
-[NOTE]
-The file path refers to the absolute file path of the import text file.
+Import file format:
 
-.3 simple steps to kickstart your amazing learning experience with 3VIA!: +
-. Create an import file. +
-
-image::import-file-format.png[caption = "download link"]
-[IMPORTANT]
-Only .txt files are allowed.
+image::import-file-format.png[import file format]
 
 [options = "header", cols = "1,2", caption=""]
-.Import file format legend
+.Format legend
 |===
 |Keys| Purpose
-|kbd:[SPACE] + kbd:[t] + kbd:[/]| To be placed before each topic
+|kbd:[SPACE] + kbd:[t] + kbd:[/]| To indicate presence of a topic
 |kbd:[TAB]| To separate a question and an answer
 |kbd:[&#9166;]| To separate each card
 |===
-[start = 2]
-. Copy the absolute file path of the text file. +
-. Import to 3VIA! +
-insert 3VIA UI
 
 [WARNING]
-Duplicate questions will result in import failing.
+Duplicate questions will result in import failure.
 
 === Exiting the program : `exit`
 
