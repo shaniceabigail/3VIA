@@ -818,11 +818,8 @@ Use case ends.
 *MSS*
 
 1. User: Input import command.
-2. System: Displays the number of cards, questions and answer to be imported.
-3. User: Selects the desired questions and answers to import.
-4. System: Stores the desired questions and answers in database.
-
-
+2. System: Parses import file, displays the cards and the number of cards imported.
+3. User: Reviews cards imported.
 +
 Use case ends.
 
@@ -831,24 +828,16 @@ Use case ends.
 [none]
 * 2a. Invalid file.
 [none]
-** 2a1. System: Indicates file can't be found/read.
+** 2a1. System: Display invalid file path.
 +
 Use case ends.
 
 [none]
 * 2a. Wrong text format.
 [none]
-** 2a1. System: Indicates the format of text is incorrect.
+** 2a1. System: Displays error, import failure.
 +
 Use case ends.
-
-[none]
-* 3a. Input index is invalid.
-[none]
-** 3a1. System: Indicates the index (range) entered is invalid.
-+
-Use case resumes at step 3.
-
 
 [appendix]
 == Non Functional Requirements
