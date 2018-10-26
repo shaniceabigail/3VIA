@@ -8,7 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.EventsCenter;
@@ -28,7 +27,6 @@ public class ImportFile {
     public static final String MESSAGE_INVALID_FILE = "Invalid file.";
     public static final String MESSAGE_INVALID_FILE_FORMAT = "Invalid file format.";
     public static final String MESSAGE_INVALID_FILE_UNABLE_TO_READ = "Unable to read file.";
-    public static final String MESSAGE_NO_CARDS_FOUND = "No cards found.";
     public static final String MESSAGE_DUPLICATE_CARDS_FOUND = "Duplicate questions in file.";
 
     private final File importFile;
@@ -87,9 +85,11 @@ public class ImportFile {
         try (BufferedReader br = new BufferedReader(new FileReader(importFile))) {
             String line;
             while ((line = br.readLine()) != null) {
-                if (FileParserUtil.isEmpty(line) || FileParserUtil.isTopicValidFormat(line) || FileParserUtil.isQuestionAnswerValidFormat(line)) {
+                if (FileParserUtil.isEmpty(line) || FileParserUtil.isTopicValidFormat(line)
+                        || FileParserUtil.isQuestionAnswerValidFormat(line)) {
                     continue;
                 }
+
                 raiseExtraInformationDisplayEvent();
                 return false;
             }
@@ -112,7 +112,7 @@ public class ImportFile {
         try (BufferedReader br = new BufferedReader(new FileReader(importFile))) {
             String line;
             while ((line = br.readLine()) != null) {
-                if (FileParserUtil.isEmpty(line)) { // allows separation between cards and topics
+                if (FileParserUtil.isEmpty(line)) { // allows new line between cards and topics
                     continue;
                 }
 
@@ -128,7 +128,7 @@ public class ImportFile {
         } catch (IOException ioe) {
             throw new FileParseException(MESSAGE_INVALID_FILE_UNABLE_TO_READ, ioe);
         } catch (FileParseException fpe) {
-            throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
+            throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT, fpe);
         } catch (DuplicateCardException dce) {
             throw new FileParseException(MESSAGE_DUPLICATE_CARDS_FOUND, dce);
         }

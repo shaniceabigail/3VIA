@@ -2,7 +2,6 @@ package seedu.address.logic.parser.fileparser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
-import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
