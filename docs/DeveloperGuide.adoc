@@ -346,6 +346,7 @@ Step 3: Once verified, the import file is parsed to form a unique list of cards 
 Step 4: Every card in the unique card list is checked against the existing list of cards in `TriviaBundle` for duplicates.
 
 Step 5: The unique card list is then added into `TriviaBundle`. The number of cards, the cards imported are displayed to the user for verification. +
+
 The sequence diagram below shows the import of multiple cards.
 
 image::ImportMultipleCardsSequenceDiagram.png[width="800"]
