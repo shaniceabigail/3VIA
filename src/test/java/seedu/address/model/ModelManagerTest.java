@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
@@ -16,11 +17,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.logic.parser.fileparser.exceptions.FileParseException;
 import seedu.address.model.card.QuestionContainsKeywordsPredicate;
 import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.test.TriviaResults;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.ImportFileUtil;
 import seedu.address.testutil.TriviaBundleBuilder;
 
 public class ModelManagerTest {
@@ -94,6 +97,12 @@ public class ModelManagerTest {
     public void getFilteredCardList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredCardList().remove(0);
+    }
+
+    @Test
+    public void parseFileToCards_invalidImportFile_throwsFileParseException() {
+        thrown.expect(FileParseException.class);
+        modelManager.parseFileToCards(ImportFileUtil.getInvalidImportFileInvalidFormat());
     }
 
     @Test
