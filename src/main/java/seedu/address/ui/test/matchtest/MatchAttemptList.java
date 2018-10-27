@@ -17,7 +17,7 @@ import seedu.address.ui.UiPart;
  * A section of the matching result page which shows the list of attempts made the the user in the matching test.
  */
 public class MatchAttemptList extends UiPart<Region> {
-    private static final String FXML = "/test/matchtest/MatchAttemptList.fxml";
+    private static final String FXML = "test/matchtest/MatchAttemptList.fxml";
     private final Logger logger = LogsCenter.getLogger(MatchAttemptList.class);
 
     @FXML

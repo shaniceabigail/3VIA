@@ -7,6 +7,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.test.matchtest.MatchTest;
+import seedu.address.model.test.matchtest.exceptions.AnswerNotFoundException;
+import seedu.address.model.test.matchtest.exceptions.QuestionNotFoundException;
 
 /**
  * The MatchCommand can only be used in a Matching test.
@@ -20,7 +22,8 @@ public class MatchCommand extends Command {
 
     public static final String MESSAGE_MATCH_SUCCESS = "Perfect Match!";
     public static final String MESSAGE_MATCH_FAILURE = "Wrong Match!";
-    public static final String MESSAGE_INDEX_OUT_OF_BOUND = "The index specified is out of bound.";
+    public static final String MESSAGE_QUESTION_NOT_FOUND = "The specified question is not found.";
+    public static final String MESSAGE_ANSWER_NOT_FOUND = "The specified answer is not found.";
 
     private final Index questionIndex;
     private final Index answerIndex;
@@ -42,8 +45,10 @@ public class MatchCommand extends Command {
             } else {
                 throw new CommandException(MESSAGE_MATCH_FAILURE);
             }
-        } catch (IndexOutOfBoundsException e) {
-            throw new CommandException(MESSAGE_INDEX_OUT_OF_BOUND);
+        } catch (QuestionNotFoundException e) {
+            throw new CommandException(MESSAGE_QUESTION_NOT_FOUND);
+        } catch (AnswerNotFoundException e) {
+            throw new CommandException(MESSAGE_ANSWER_NOT_FOUND);
         }
     }
 
