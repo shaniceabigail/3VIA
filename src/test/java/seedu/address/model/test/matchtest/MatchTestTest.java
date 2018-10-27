@@ -85,12 +85,6 @@ public class MatchTestTest {
     }
 
     @Test
-    public void test_matchOutOfBoundsIndexes() {
-        thrown.expect(IndexOutOfBoundsException.class);
-        model.matchQuestionAndAnswer(Index.fromOneBased(100), Index.fromOneBased(100));
-    }
-
-    @Test
     public void test_responseToCorrectMatchAttempt() {
         // makes sure the cards that are involved in the correct attempts are removed.
         matchTest.respondToCorrectAttempt(MatchTestUtil.generateCorrectMatchAttempt(Q_EARTH_ROUND, earthRoundIndexes));

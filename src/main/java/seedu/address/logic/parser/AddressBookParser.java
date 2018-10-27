@@ -114,6 +114,16 @@ public class AddressBookParser {
                 return new MatchCommandParser().parse(userInput);
             }
 
+        case MATCH_TEST_RESULT:
+            switch(commandWord) {
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
