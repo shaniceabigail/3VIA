@@ -179,7 +179,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void handleTriviaResultsChangedEvent(TriviaResultsChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveTriviaResults(event.data);
+            saveTriviaResults(event.results);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

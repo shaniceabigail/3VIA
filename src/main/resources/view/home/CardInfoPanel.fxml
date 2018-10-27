@@ -1,12 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
-
-
 <?import javafx.scene.layout.VBox?>
+
 <StackPane fx:id="CardInfo" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
-  <VBox fx:id="cardinfo">
-    <Label fx:id="cardInfoQuestion" text="\$cardInfoQuestion" styleClass="cell_big_label" />
+  <VBox fx:id="cardinfo" prefHeight="0.0" prefWidth="200.0">
+      <children>
+         <HBox alignment="CENTER" maxHeight="-Infinity" prefWidth="200.0" VBox.vgrow="SOMETIMES">
+            <children>
+               <Label styleClass="label-bright-header" text="Q: ">
+                <minWidth>
+                  <!-- Ensures that the label text is never truncated -->
+                  <Region fx:constant="USE_PREF_SIZE" />
+                </minWidth>
+               </Label>
+             <Label fx:id="cardInfoQuestion" styleClass="label-bright-header" text="\$cardInfoQuestion" wrapText="true" />
+            </children>
+         </HBox>
+         <Separator prefWidth="200.0" VBox.vgrow="NEVER">
+            <VBox.margin>
+               <Insets />
+            </VBox.margin>
+            <padding>
+               <Insets bottom="5.0" top="5.0" />
+            </padding></Separator>
+        <FlowPane fx:id="cardInfoTopics" prefWidth="200.0" VBox.vgrow="NEVER" />
+         <HBox maxHeight="-Infinity" prefWidth="200.0">
+            <children>
+               <Label styleClass="label-bright" text="Answer: ">
+                  <minWidth>
+                     <Region fx:constant="USE_PREF_SIZE" />
+                  </minWidth>
+               </Label>
+               <TextArea fx:id="cardInfoAnswer" editable="false" prefHeight="100.0" styleClass="text-area" text="\$cardInfoAnswer" wrapText="true" />
+            </children>
+            <VBox.margin>
+               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </VBox.margin>
+         </HBox>
+          <StackPane fx:id="googleCommandTipPlaceholder" VBox.vgrow="NEVER" />
+          <StackPane fx:id="cardExperiencePlaceholder" VBox.vgrow="NEVER" />
+      </children>
   </VBox>
 </StackPane>

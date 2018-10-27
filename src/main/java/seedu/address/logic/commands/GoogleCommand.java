@@ -21,7 +21,7 @@ public class GoogleCommand extends Command {
     public static final String COMMAND_WORD = "google";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Google the card by providing the identified index number used in the displayed card list.\n"
+            + ": Google the card by providing the identified index number used in the displayed card list. \n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 

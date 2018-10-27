@@ -4,9 +4,13 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.card.Card;
+import seedu.address.ui.TipBox;
 import seedu.address.ui.UiPart;
 
 /**
@@ -18,13 +22,24 @@ public class CardInfoPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Card card;
+    private TipBox commandTipBox;
 
     @FXML
     private Label cardInfoQuestion;
+    @FXML
+    private FlowPane cardInfoTopics;
+    @FXML
+    private TextArea cardInfoAnswer;
+    @FXML
+    private StackPane googleCommandTipPlaceholder;
+    @FXML
+    private StackPane cardExperiencePlaceholder;
 
     public CardInfoPanel() {
         super(FXML);
 
+        commandTipBox = new TipBox("Research more on a question by entering 'google INDEX'!");
+        googleCommandTipPlaceholder.getChildren().add(commandTipBox.getRoot());
         registerAsAnEventHandler(this);
     }
 
@@ -34,6 +49,10 @@ public class CardInfoPanel extends UiPart<Region> {
     public void loadCardPage(Card card) {
         this.card = card;
         cardInfoQuestion.setText(card.getQuestion().value);
+        cardInfoAnswer.setText(card.getAnswer().value);
+
+        cardInfoTopics.getChildren().clear();
+        card.getTopics().forEach(topic -> cardInfoTopics.getChildren().add(new Label(topic.topicName)));
     }
 
 }

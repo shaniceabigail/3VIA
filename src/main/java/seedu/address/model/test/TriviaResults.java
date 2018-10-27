@@ -33,8 +33,8 @@ public class TriviaResults implements ReadOnlyTriviaResults {
     }
 
     /**
-     * Replaces the contents of the ResultList with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the ResultList with {@code results}.
+     * {@code results}.
      */
     public void setTriviaResults(List<TriviaResult> results) {
         triviaResults.clear();
