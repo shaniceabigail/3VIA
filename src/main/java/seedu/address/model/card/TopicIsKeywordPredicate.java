@@ -12,6 +12,10 @@ public class TopicIsKeywordPredicate implements Predicate<Card> {
         this.keyword = keyword;
     }
 
+    public String getTopicKeyword() {
+        return keyword;
+    }
+
     @Override
     public boolean test(Card card) {
         return card.getTopics().stream()
