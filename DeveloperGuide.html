@@ -774,20 +774,25 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current implementation</a></h4>
 <div class="paragraph">
-<p>The import mechanism works with the <code>StorageManager</code> to add and save multiple cards at once. The imported cards are stored internally as an xml file on the hard disk. Additionally, the import mechanism implements the following operations:</p>
+<p>The import mechanism is facilitated by <code>ImportFile</code> and <code>TriviaBundle</code>.
+Additionally, the import mechanism implements the following operations:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>ImportCommand#parseFile()</code>&#8201;&#8212;&#8201;Parse the question(s), answer(s) and topic(s) into a list of cards to add.</p>
+<p><code>ImportFile#parseFileToCards()</code>&#8201;&#8212;&#8201;Parse file in a specific format into a unique list of cards.</p>
 </li>
 <li>
-<p><code>ImportCommand#addMultipleCards()</code>&#8201;&#8212;&#8201;Adds a list of cards into the <code>TriviaBundle</code>.</p>
+<p><code>TriviaBundle#haveAnyCard()</code>&#8201;&#8212;&#8201;Checks if the cards to add contain any duplicated cards already in the <code>TriviaBundle</code>.</p>
+</li>
+<li>
+<p><code>TriviaBundle#addMultipleCards()</code>&#8201;&#8212;&#8201;Adds multiple cards into the <code>TriviaBundle</code> at once.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><code>addMultiple()</code> is exposed in the Model interface as Model#addMultipleCards().</p>
+<p>These operations are exposed in the Model interface as <code>Model#parseFileToCards()</code>,
+<code>Model#haveAnyCard()</code>, <code>Model#addMultipleCards()</code> respectively.</p>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarizes what happens when a user executes the import command.</p>
@@ -801,7 +806,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <p>Given below is an example usage scenario and how the import mechanism behaves.</p>
 </div>
 <div class="paragraph">
-<p>Step 1: The user enters the import command to import a file from the hard disk. An <code>ImportCommand</code> object is initialised.</p>
+<p>Step 1: The user enters the import command to import a file from an absolute file path. An <code>ImportCommand</code> object is initialised.</p>
 </div>
 <div class="paragraph">
 <p>Step 2: When the <code>ImportCommand</code> executes, the desired import file is first verified to be valid. The following checks are done:</p>
@@ -812,7 +817,7 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 <p>the import path points to a file</p>
 </li>
 <li>
-<p>the import file is of .txt type</p>
+<p>the import file is of plain text type (file.txt)</p>
 </li>
 <li>
 <p>the import file is readable</p>
@@ -820,12 +825,20 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </ul>
 </div>
 <div class="paragraph">
-<p>Step 3: Once verified, the import file is parsed to form a list of cards to be added into <code>TriviaBundle</code>. The number of cards, questions and answer to be imported is displayed to the user.
-The sequence diagram below shows how the adding of multiple cards works</p>
+<p>Step 3: Once verified, the import file is parsed to form a unique list of cards that is stored in <code>UniqueCardList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 4: Every card in the unique card list is checked against the existing list of cards in <code>TriviaBundle</code> for duplicates.</p>
+</div>
+<div class="paragraph">
+<p>Step 5: The unique card list is then added into <code>TriviaBundle</code>. The number of cards, the cards imported are displayed to the user for verification.<br></p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below shows the import of multiple cards.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/AddMutipleCardsSequenceDiagram.png" alt="AddMutipleCardsSequenceDiagram" width="800">
+<img src="images/ImportMultipleCardsSequenceDiagram.png" alt="ImportMultipleCardsSequenceDiagram" width="800">
 </div>
 </div>
 </div>
@@ -869,7 +882,7 @@ The sequence diagram below shows how the adding of multiple cards works</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Tokenize string according to user defined character between question and answer, and between cards.</p>
+<p><strong>Alternative 1 (current choice):</strong> Tokenize string according to defined characters between question and answer, and between cards.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -882,11 +895,11 @@ The sequence diagram below shows how the adding of multiple cards works</p>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2 (current choice):</strong> Tokenize string based on AddCommand input format</p>
+<p><strong>Alternative 2 (current choice):</strong> Tokenize string based on AddCommand input format.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement as it allows reuse of add command</p>
+<p>Pros: Easy to implement as it allows reuse of add command functions.</p>
 </li>
 <li>
 <p>Cons: Unable to undo/ redo import of all cards as the import command is essentially multiple add commands.</p>
@@ -1884,13 +1897,10 @@ b. Require developers to download those libraries manually (this creates extra w
 <p>User: Input import command.</p>
 </li>
 <li>
-<p>System: Displays the number of cards, questions and answer to be imported.</p>
+<p>System: Parses import file, displays the cards and the number of cards imported.</p>
 </li>
 <li>
-<p>User: Selects the desired questions and answers to import.</p>
-</li>
-<li>
-<p>System: Stores the desired questions and answers in database.</p>
+<p>User: Reviews cards imported.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -1907,7 +1917,7 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a1. System: Indicates file can&#8217;t be found/read.</p>
+<p>2a1. System: Display invalid file path.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -1924,26 +1934,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>2a1. System: Indicates the format of text is incorrect.</p>
+<p>2a1. System: Displays error, import failure.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>3a. Input index is invalid.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>3a1. System: Indicates the index (range) entered is invalid.</p>
-<div class="paragraph">
-<p>Use case resumes at step 3.</p>
 </div>
 </li>
 </ul>
@@ -2145,4 +2138,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-27 15:08:49 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-27 15:15:38 UTC</div></div></div></body></html>
