@@ -317,12 +317,15 @@ image::UndoRedoActivityDiagram.png[width="650"]
 === Mass Import Feature
 
 ==== Current implementation
-The import mechanism works with the `StorageManager` to add and save multiple cards at once. The imported cards are stored internally as an xml file on the hard disk. Additionally, the import mechanism implements the following operations:
+The import mechanism is facilitated by `ImportFile` and `TriviaBundle`.
+Additionally, the import mechanism implements the following operations:
 
-* `ImportCommand#parseFile()` -- Parse the question(s), answer(s) and topic(s) into a list of cards to add.
-* `ImportCommand#addMultipleCards()` -- Adds a list of cards into the `TriviaBundle`.
+* `ImportFile#parseFileToCards()` -- Parse file in a specific format into a unique list of cards.
+* `TriviaBundle#haveAnyCard()` -- Checks if the cards to add contain any duplicated cards already in the `TriviaBundle`.
+* `TriviaBundle#addMultipleCards()` -- Adds multiple cards into the `TriviaBundle` at once.
 
-`addMultiple()` is exposed in the Model interface as Model#addMultipleCards().
+These operations are exposed in the Model interface as `Model#parseFileToCards()`,
+`Model#haveAnyCard()`, `Model#addMultipleCards()` respectively.
 
 The following activity diagram summarizes what happens when a user executes the import command.
 
@@ -330,18 +333,23 @@ image::ImportCommandActivityDiagram.png[ImportCommandActivityDiagram]
 
 Given below is an example usage scenario and how the import mechanism behaves.
 
-Step 1: The user enters the import command to import a file from the hard disk. An `ImportCommand` object is initialised.
+Step 1: The user enters the import command to import a file from an absolute file path. An `ImportCommand` object is initialised.
 
 Step 2: When the `ImportCommand` executes, the desired import file is first verified to be valid. The following checks are done:
 
 * the import path points to a file
-* the import file is of .txt type
+* the import file is of plain text type (file.txt)
 * the import file is readable
 
-Step 3: Once verified, the import file is parsed to form a list of cards to be added into `TriviaBundle`. The number of cards, questions and answer to be imported is displayed to the user.
-The sequence diagram below shows how the adding of multiple cards works
+Step 3: Once verified, the import file is parsed to form a unique list of cards that is stored in `UniqueCardList`.
 
-image::AddMutipleCardsSequenceDiagram.png[width="800"]
+Step 4: Every card in the unique card list is checked against the existing list of cards in `TriviaBundle` for duplicates.
+
+Step 5: The unique card list is then added into `TriviaBundle`. The number of cards, the cards imported are displayed to the user for verification. +
+
+The sequence diagram below shows the import of multiple cards.
+
+image::ImportMultipleCardsSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
@@ -356,11 +364,11 @@ image::AddMutipleCardsSequenceDiagram.png[width="800"]
 
 ===== Aspect: How the import file is parsed
 
-* **Alternative 1 (current choice):** Tokenize string according to user defined character between question and answer, and between cards.
+* **Alternative 1 (current choice):** Tokenize string according to defined characters between question and answer, and between cards.
 ** Pros: Allows user to undo/ redo import as import is viewed by `VersionedAddressBook` as a single command.
 ** Cons: May have memory performance issue as multiple cards are stored temporarily in the `TriviaBundle`.
-* **Alternative 2 (current choice):** Tokenize string based on AddCommand input format
-** Pros: Easy to implement as it allows reuse of add command
+* **Alternative 2 (current choice):** Tokenize string based on AddCommand input format.
+** Pros: Easy to implement as it allows reuse of add command functions.
 ** Cons: Unable to undo/ redo import of all cards as the import command is essentially multiple add commands.
 
 // tag::matchingtest[]
@@ -810,11 +818,8 @@ Use case ends.
 *MSS*
 
 1. User: Input import command.
-2. System: Displays the number of cards, questions and answer to be imported.
-3. User: Selects the desired questions and answers to import.
-4. System: Stores the desired questions and answers in database.
-
-
+2. System: Parses import file, displays the cards and the number of cards imported.
+3. User: Reviews cards imported.
 +
 Use case ends.
 
@@ -823,24 +828,16 @@ Use case ends.
 [none]
 * 2a. Invalid file.
 [none]
-** 2a1. System: Indicates file can't be found/read.
+** 2a1. System: Display invalid file path.
 +
 Use case ends.
 
 [none]
 * 2a. Wrong text format.
 [none]
-** 2a1. System: Indicates the format of text is incorrect.
+** 2a1. System: Displays error, import failure.
 +
 Use case ends.
-
-[none]
-* 3a. Input index is invalid.
-[none]
-** 3a1. System: Indicates the index (range) entered is invalid.
-+
-Use case resumes at step 3.
-
 
 [appendix]
 == Non Functional Requirements
