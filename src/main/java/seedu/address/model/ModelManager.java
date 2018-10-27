@@ -19,6 +19,7 @@ import seedu.address.commons.events.model.TriviaResultsChangedEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.model.card.Card;
+import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.person.Person;
 import seedu.address.model.state.AppState;
 import seedu.address.model.state.State;
@@ -221,7 +222,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean isInTestingState() {
-        return appState.getState() == State.TEST || appState.getState() == State.MATCH_TEST;
+        return appState.getState() == State.TEST || appState.getState() == State.MATCH_TEST
+                || appState.getState() == State.MATCH_TEST_RESULT;
     }
 
     //=========== Trivia Tests ==============================================================================
@@ -258,6 +260,7 @@ public class ModelManager extends ComponentManager implements Model {
         if (matchTest.isCompleted()) {
             triviaResults.addTriviaResult(new TriviaResult(currentRunningTest));
             raise(new TriviaResultsChangedEvent(triviaResults));
+            appState.setAppState(State.MATCH_TEST_RESULT);
         }
 
         return isCorrectMatch;
@@ -300,4 +303,19 @@ public class ModelManager extends ComponentManager implements Model {
                     || (currentRunningTest != null && currentRunningTest.equals(other.currentRunningTest)));
     }
 
+    //=========== Import =====================================================================
+
+    @Override
+    public boolean haveAnyCard(UniqueCardList cards) {
+        requireNonNull(cards);
+        return versionedTriviaBundle.haveAnyCard(cards);
+    }
+
+    @Override
+    public void addMultipleCards(UniqueCardList cards) {
+        versionedTriviaBundle.addMultipleCards(cards);
+        updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
+        // TODO: raise an event to show in extra info pane
+        indicateTriviaBundleChanged();
+    }
 }

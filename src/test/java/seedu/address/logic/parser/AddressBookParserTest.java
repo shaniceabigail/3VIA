@@ -4,14 +4,18 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_GIT;
-import static seedu.address.logic.commands.CommandTestUtil.TOPIC_DESC_PHYSICS;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_GIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_PHYSICS;
-import static seedu.address.testutil.FileUtil.getImportCommand;
+import static seedu.address.testutil.ImportFileUtil.getImportCommand;
+import static seedu.address.testutil.MatchTestUtil.generateCorrectMatchAttempt;
+import static seedu.address.testutil.MatchTestUtil.getIndexes;
+import static seedu.address.testutil.TypicalCards.Q_DENSITY_FORMULA;
+import static seedu.address.testutil.TypicalCards.Q_EARTH_ROUND;
+import static seedu.address.testutil.TypicalCards.Q_FLAT_EARTH;
+import static seedu.address.testutil.TypicalCards.Q_FORCE_FORMULA;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,13 +51,15 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.QuestionContainsKeywordsPredicate;
+import seedu.address.model.portation.ImportFile;
+import seedu.address.model.state.State;
 import seedu.address.model.test.TriviaResults;
 import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.model.topic.Topic;
 import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.CardUtil;
 import seedu.address.testutil.EditCardDescriptorBuilder;
-import seedu.address.testutil.FileUtil;
+import seedu.address.testutil.ImportFileUtil;
 import seedu.address.testutil.TypicalCards;
 
 public class AddressBookParserTest {
@@ -172,16 +178,16 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_import() throws Exception {
-        File typicalFile = FileUtil.getTypicalImportFile();
-        ImportCommand command = (ImportCommand) parseCommand(getImportCommand(typicalFile));
+        ImportFile typicalFile = ImportFileUtil.getTypicalImportFile();
+        ImportCommand command = (ImportCommand) parseCommand(getImportCommand(typicalFile.toString()));
         assertEquals(new ImportCommand(typicalFile), command);
     }
 
     @Test
     public void parseCommand_matchTest() throws Exception {
-        assertTrue(parseCommand(MatchTestCommand.COMMAND_WORD + " " + TOPIC_DESC_PHYSICS)
+        assertTrue(parseCommand(MatchTestCommand.COMMAND_WORD + " " + VALID_TOPIC_PHYSICS)
                 instanceof MatchTestCommand);
-        assertTrue(parseCommand(MatchTestCommand.COMMAND_WORD + " " + TOPIC_DESC_GIT)
+        assertTrue(parseCommand(MatchTestCommand.COMMAND_WORD + " " + VALID_TOPIC_GIT)
                 instanceof MatchTestCommand);
     }
 
@@ -194,6 +200,46 @@ public class AddressBookParserTest {
         assertTrue(parseCommand("3 4 5 6") instanceof MatchCommand);
         assertTrue(parseCommand("3 4 5 6")
                 .equals(new MatchCommand(Index.fromOneBased(3), Index.fromOneBased(4))));
+    }
+
+    @Test
+    public void parseCommand_restrictCommandsDuringTestResult() throws Exception {
+        MatchTest matchTest = new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle());
+        model.startTriviaTest(matchTest);
+
+        Index[] earthIndexes = getIndexes(matchTest, Q_EARTH_ROUND);
+        Index[] forceIndexes = getIndexes(matchTest, Q_FORCE_FORMULA);
+        Index[] densityIndexes = getIndexes(matchTest, Q_DENSITY_FORMULA);
+
+        matchTest.respondToCorrectAttempt(generateCorrectMatchAttempt(Q_FLAT_EARTH, earthIndexes));
+        matchTest.respondToCorrectAttempt(generateCorrectMatchAttempt(Q_FORCE_FORMULA, forceIndexes));
+
+        // Complete the Match Test.
+        model.matchQuestionAndAnswer(densityIndexes[0], densityIndexes[1]);
+        assertEquals(model.getAppState(), State.MATCH_TEST_RESULT);
+
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
+        parseCommand("list");
+    }
+
+    @Test
+    public void parseCommand_exitFromTestResult() throws Exception {
+        MatchTest matchTest = new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle());
+        model.startTriviaTest(matchTest);
+
+        Index[] earthIndexes = getIndexes(matchTest, Q_EARTH_ROUND);
+        Index[] forceIndexes = getIndexes(matchTest, Q_FORCE_FORMULA);
+        Index[] densityIndexes = getIndexes(matchTest, Q_DENSITY_FORMULA);
+
+        matchTest.respondToCorrectAttempt(generateCorrectMatchAttempt(Q_FLAT_EARTH, earthIndexes));
+        matchTest.respondToCorrectAttempt(generateCorrectMatchAttempt(Q_FORCE_FORMULA, forceIndexes));
+
+        // Complete the Match Test.
+        model.matchQuestionAndAnswer(densityIndexes[0], densityIndexes[1]);
+        assertEquals(model.getAppState(), State.MATCH_TEST_RESULT);
+
+        assertTrue(parseCommand("exit") instanceof ExitCommand);
     }
 
     @Test

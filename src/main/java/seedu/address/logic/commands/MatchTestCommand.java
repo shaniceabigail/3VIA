@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -16,10 +15,8 @@ public class MatchTestCommand extends Command {
     public static final String COMMAND_WORD = "testM";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Starts a matching test. "
-            + "Parameters: "
-            + PREFIX_TOPIC + "TAG "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TOPIC + "Physics ";
+            + "Parameters: TAG"
+            + "Example: " + COMMAND_WORD + " Physics";
 
     public static final String MESSAGE_SUCCESS = "Matching test started.";
 

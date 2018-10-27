@@ -28,7 +28,7 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String SEARCH_PAGE_URL =
             "https://www.google.com.sg/search?q=";
 
-    private static final String FXML = "/home/BrowserPanel.fxml";
+    private static final String FXML = "home/BrowserPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 

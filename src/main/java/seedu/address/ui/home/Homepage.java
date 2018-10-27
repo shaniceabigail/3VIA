@@ -13,7 +13,7 @@ import seedu.address.ui.UiPart;
  * The default landing page of the application.
  */
 public class Homepage extends UiPart<Region> {
-    private static final String FXML = "/home/Homepage.fxml";
+    private static final String FXML = "home/Homepage.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 

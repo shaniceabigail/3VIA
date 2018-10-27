@@ -14,27 +14,27 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.FlashMatchOutcomeEvent;
-import seedu.address.model.card.Question;
+import seedu.address.model.card.IndexedQuestion;
 import seedu.address.ui.UiPart;
 
 /**
  * The panel which contains all the questions in a particular test.
  */
 public class QuestionListPanel extends UiPart<Region> {
-    private static final String FXML = "/test/matchtest/QuestionListPanel.fxml";
+    private static final String FXML = "test/matchtest/QuestionListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(QuestionListPanel.class);
 
     @FXML
-    private ListView<Question> matchTestQuestionListView;
+    private ListView<IndexedQuestion> matchTestQuestionListView;
 
-    public QuestionListPanel(ObservableList<Question> questionList) {
+    public QuestionListPanel(ObservableList<IndexedQuestion> questionList) {
         super(FXML);
         setConnections(questionList);
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<Question> questionList) {
-        this.matchTestQuestionListView.setItems(questionList);
+    private void setConnections(ObservableList<IndexedQuestion> questionList) {
+        matchTestQuestionListView.setItems(questionList);
         matchTestQuestionListView.setCellFactory(listView -> new QuestionListViewCell());
     }
 
@@ -49,7 +49,8 @@ public class QuestionListPanel extends UiPart<Region> {
             @Override
             public void run() {
                 Platform.runLater(() ->
-                        matchTestQuestionListView.setCellFactory(listView -> new QuestionListViewCell()));
+                            matchTestQuestionListView.setCellFactory(listView ->
+                                    new QuestionListViewCell()));
             };
         }, UiPart.FLASH_TIME);
     }
@@ -57,36 +58,36 @@ public class QuestionListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Card} using a {@code QuestionView}.
      */
-    class QuestionListViewCell extends ListCell<Question> {
-        private Integer indexOfQuestion;
+    class QuestionListViewCell extends ListCell<IndexedQuestion> {
+        private Integer actualIndexOfQuestion;
         private boolean isCorrect;
 
         public QuestionListViewCell() {
-            indexOfQuestion = null;
+            actualIndexOfQuestion = null;
         }
 
         /**
          * Used for defining which cell to flash, with the boolean whether it is correct.
-         * @param indexOfQuestion The targetIndex that is needed to be flashed.
+         * @param actualIndexOfQuestion The targetIndex that is needed to be flashed.
          * @param isCorrect Whether the matching card is correct.
          */
-        public QuestionListViewCell(int indexOfQuestion, boolean isCorrect) {
-            this.indexOfQuestion = indexOfQuestion;
+        public QuestionListViewCell(int actualIndexOfQuestion, boolean isCorrect) {
+            this.actualIndexOfQuestion = actualIndexOfQuestion;
             this.isCorrect = isCorrect;
         }
 
         @Override
-        protected void updateItem(Question question, boolean empty) {
+        protected void updateItem(IndexedQuestion question, boolean empty) {
             super.updateItem(question, empty);
 
             if (empty || question == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                if (indexOfQuestion == null || indexOfQuestion != getIndex()) {
-                    setGraphic(new QuestionView(question, getIndex() + 1).getRoot());
+                if (actualIndexOfQuestion == null || actualIndexOfQuestion != getIndex()) {
+                    setGraphic(new QuestionView(question, question.getId()).getRoot());
                 } else {
-                    setGraphic(new QuestionView(question, getIndex() + 1, isCorrect).getRoot());
+                    setGraphic(new QuestionView(question, question.getId(), isCorrect).getRoot());
                 }
             }
         }

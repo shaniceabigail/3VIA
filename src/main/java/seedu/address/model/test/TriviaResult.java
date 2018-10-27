@@ -28,7 +28,7 @@ public class TriviaResult {
         topic = triviaTest.getTopic();
         attempts = triviaTest.getAttempts();
         testDate = triviaTest.getTestDate();
-        duration = triviaTest.getDuration();
+        duration = triviaTest.getDuration().getValue();
     }
 
     public TriviaResult(TestType testType, Topic topic, Date testDate, double duration,

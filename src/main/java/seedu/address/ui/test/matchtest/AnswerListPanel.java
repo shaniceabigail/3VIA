@@ -14,27 +14,28 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.FlashMatchOutcomeEvent;
-import seedu.address.model.card.Answer;
+import seedu.address.model.card.IndexedAnswer;
 import seedu.address.ui.UiPart;
 
 /**
  * The panel which contains all the answers in a particular test.
  */
 public class AnswerListPanel extends UiPart<Region> {
-    private static final String FXML = "/test/matchtest/AnswerListPanel.fxml";
+    private static final String FXML = "test/matchtest/AnswerListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(AnswerListPanel.class);
 
     @FXML
-    private ListView<Answer> matchTestAnswerListView;
+    private ListView<IndexedAnswer> matchTestAnswerListView;
 
-    public AnswerListPanel(ObservableList<Answer> answerList) {
+    public AnswerListPanel(ObservableList<IndexedAnswer> answerList) {
         super(FXML);
+
         setConnections(answerList);
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<Answer> answerList) {
-        this.matchTestAnswerListView.setItems(answerList);
+    private void setConnections(ObservableList<IndexedAnswer> answerList) {
+        matchTestAnswerListView.setItems(answerList);
         matchTestAnswerListView.setCellFactory(listView -> new AnswerListViewCell());
     }
 
@@ -48,7 +49,8 @@ public class AnswerListPanel extends UiPart<Region> {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Platform.runLater(() -> matchTestAnswerListView.setCellFactory(listView -> new AnswerListViewCell()));
+                Platform.runLater(() -> matchTestAnswerListView.setCellFactory(listView ->
+                        new AnswerListViewCell()));
             };
         }, UiPart.FLASH_TIME);
     }
@@ -56,36 +58,36 @@ public class AnswerListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Card} using a {@code AnswerView}.
      */
-    class AnswerListViewCell extends ListCell<Answer> {
-        private Integer indexOfAnswer;
+    class AnswerListViewCell extends ListCell<IndexedAnswer> {
+        private Integer actualIndexOfAnswer;
         private boolean isCorrect;
 
         public AnswerListViewCell() {
-            indexOfAnswer = null;
+            actualIndexOfAnswer = null;
         }
 
         /**
          * Used for defining which cell to flash, with the boolean whether it is correct.
-         * @param indexOfAnswer The targetIndex that is needed to be flashed.
+         * @param actualIndexOfAnswer The targetIndex that is needed to be flashed.
          * @param isCorrect Whether the matching card is correct.
          */
-        public AnswerListViewCell(int indexOfAnswer, boolean isCorrect) {
-            this.indexOfAnswer = indexOfAnswer;
+        public AnswerListViewCell(int actualIndexOfAnswer, boolean isCorrect) {
+            this.actualIndexOfAnswer = actualIndexOfAnswer;
             this.isCorrect = isCorrect;
         }
 
         @Override
-        protected void updateItem(Answer answer, boolean empty) {
+        protected void updateItem(IndexedAnswer answer, boolean empty) {
             super.updateItem(answer, empty);
 
             if (empty || answer == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                if (indexOfAnswer == null || indexOfAnswer != getIndex()) {
-                    setGraphic(new AnswerView(answer, getIndex() + 1).getRoot());
+                if (actualIndexOfAnswer == null || actualIndexOfAnswer != getIndex()) {
+                    setGraphic(new AnswerView(answer, answer.getId()).getRoot());
                 } else {
-                    setGraphic(new AnswerView(answer, getIndex() + 1, isCorrect).getRoot());
+                    setGraphic(new AnswerView(answer, answer.getId(), isCorrect).getRoot());
                 }
             }
         }

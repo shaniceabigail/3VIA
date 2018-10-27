@@ -264,7 +264,7 @@ Format: `exit`
 
 Start a test of matching cards of a specified topic. In a test of matching cards, all the questions and answers in that topic
 will be displayed. The user will then have to match the correct question and answer together. +
-Format: `testM t/TOPIC`
+Format: `testM TOPIC`
 
 The following commands can only be used during a `Matching Test`.
 
@@ -360,6 +360,7 @@ e.g.`select 2`
 * *Undo* : `undo`
 * *Redo* : `redo`
 * *Test* : `test TOPIC TIMELIMIT_IN_SECONDS`
+* *Matching Test* : `testM TOPIC`
 * *Correctness of answer* : `c` (correct) OR `x` (wrong)
 * *View statistics of test* : `stats [TOPIC]`
 * *Mass Import* : `import FILEPATH`
