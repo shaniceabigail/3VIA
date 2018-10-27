@@ -2,13 +2,10 @@ package seedu.address.ui.home;
 
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.DisplayImportHelpChangedEvent;
 import seedu.address.ui.UiPart;
 
 /**
@@ -32,11 +29,5 @@ public class ImportHelpDisplay extends UiPart<Region> {
         super(FXML);
         importHelp.setText(IMPORT_FORMAT);
         registerAsAnEventHandler(this);
-    }
-
-    @Subscribe
-    private void handleDisplayImportHelpEvent(DisplayImportHelpChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        importHelp.setVisible(event.isImportHelpDisplayVisible());
     }
 }

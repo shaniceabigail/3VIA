@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<?import javafx.scene.layout.VBox?>
+<StackPane fx:id="CardInfo" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <VBox fx:id="cardinfo">
+    <Label fx:id="cardInfoQuestion" text="\$cardInfoQuestion" styleClass="cell_big_label" />
+  </VBox>
+</StackPane>

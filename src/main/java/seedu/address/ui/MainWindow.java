@@ -1,8 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.commons.events.ExtraInformationDisplay.BROWSER;
-import static seedu.address.commons.events.ExtraInformationDisplay.IMPORT_HELP_DISPLAY;
-
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -19,12 +16,8 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ExtraInformationDisplay;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
-import seedu.address.commons.events.ui.DisplayBrowserEventChangedEvent;
-import seedu.address.commons.events.ui.DisplayImportHelpChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.events.ui.ExtraInformationDisplayChangeEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestResultEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
@@ -233,23 +226,5 @@ public class MainWindow extends UiPart<Stage> {
     private void handleCloseTriviaTestViewEvent(CloseTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         changeToScene(homePage);
-    }
-    @Subscribe
-    private void handleExtraInfomationDisplayChangeEvent(ExtraInformationDisplayChangeEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        raiseExtraInformationToDisplayEventsFor(event.toDisplay());
-    }
-    /**
-     * Raises appropriate events to display desired extra information.
-     * @param extraInfo The extra information to display.
-     */
-    private void raiseExtraInformationToDisplayEventsFor(ExtraInformationDisplay extraInfo) {
-        if (extraInfo == IMPORT_HELP_DISPLAY) {
-            raise(new DisplayImportHelpChangedEvent(true));
-            raise(new DisplayBrowserEventChangedEvent(false));
-        } else if (extraInfo == BROWSER) {
-            raise(new DisplayImportHelpChangedEvent(false));
-            raise(new DisplayBrowserEventChangedEvent(true));
-        }
     }
 }

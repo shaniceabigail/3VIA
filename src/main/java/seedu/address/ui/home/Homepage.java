@@ -17,22 +17,19 @@ public class Homepage extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private BrowserPanel browserPanel;
-    private ImportHelpDisplay importHelpDisplay;
+    private InfoPanel infoPanel;
     private CardListPanel cardListPanel;
 
     @FXML
-    private StackPane extraInformationPlaceholder;
+    private StackPane infoPanelPlaceholder;
 
     @FXML
     private StackPane cardListPanelPlaceholder;
 
     public Homepage(Logic logic) {
         super(FXML);
-        importHelpDisplay = new ImportHelpDisplay();
-        extraInformationPlaceholder.getChildren().add(importHelpDisplay.getRoot());
-        browserPanel = new BrowserPanel();
-        extraInformationPlaceholder.getChildren().add(browserPanel.getRoot()); // overlays importHelpDisplay
+        infoPanel = new InfoPanel();
+        infoPanelPlaceholder.getChildren().add(infoPanel.getRoot());
 
         cardListPanel = new CardListPanel(logic.getFilteredCardList());
         cardListPanelPlaceholder.getChildren().add(cardListPanel.getRoot());
@@ -45,6 +42,6 @@ public class Homepage extends UiPart<Region> {
     }
 
     public void releaseResources() {
-        browserPanel.freeResources();
+        infoPanel.freeResources();
     }
 }

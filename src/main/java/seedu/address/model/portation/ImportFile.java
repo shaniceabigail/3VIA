@@ -11,8 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ExtraInformationDisplay;
-import seedu.address.commons.events.ui.ExtraInformationDisplayChangeEvent;
+import seedu.address.commons.events.ui.DisplayImportHelpEvent;
 import seedu.address.logic.parser.fileparser.FileParserUtil;
 import seedu.address.logic.parser.fileparser.exceptions.FileParseException;
 import seedu.address.model.card.Card;
@@ -141,7 +140,7 @@ public class ImportFile {
      */
     private void raiseExtraInformationDisplayEvent() {
         EventsCenter.getInstance()
-                    .post(new ExtraInformationDisplayChangeEvent(ExtraInformationDisplay.IMPORT_HELP_DISPLAY));
+                    .post(new DisplayImportHelpEvent());
     }
 
     /**
