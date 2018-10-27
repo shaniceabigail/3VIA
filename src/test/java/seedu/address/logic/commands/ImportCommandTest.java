@@ -46,7 +46,7 @@ public class ImportCommandTest {
         ModelStubAcceptingCardAdded modelStub = new ModelStubAcceptingCardAdded();
 
         ImportFile file = ImportFileUtil.getValidNoTopicImportFile();
-        Card validCard = new CardBuilder().withQuestion("question1").build();
+        Card validCard = new CardBuilder().withQuestion("question").withAnswer("answer").withTopics("NoTopic").build();
 
         CommandResult commandResult = new ImportCommand(file).execute(modelStub, commandHistory);
 
@@ -75,7 +75,7 @@ public class ImportCommandTest {
     public void execute_duplicateCardInTriviaBundle_throwsCommandException() throws Exception {
         ImportFile validImportFile = ImportFileUtil.getValidNoTopicImportFile();
         ImportCommand importCommand = new ImportCommand(validImportFile);
-        Card validCard = new CardBuilder().withQuestion("question1").build();
+        Card validCard = new CardBuilder().withQuestion("question").build();
 
         ModelStub modelStub = new ModelStubWithCard(validCard);
 
