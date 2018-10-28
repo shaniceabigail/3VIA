@@ -24,6 +24,13 @@
     -fx-opacity: 1;
 }
 
+.label-bright-sub-header {
+    -fx-font-size: 15pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
 .label-header {
     -fx-font-size: 32pt;
     -fx-font-family: "Segoe UI Light";
@@ -378,5 +385,19 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#cardProgress {
+    -fx-accent: green;
+}
+
+#cardProgress .bar {
+    -fx-background-insets: 0;
+}
+
+#cardProgress > .track {
+    -fx-control-inner-background: red;
+    -fx-background-insets: 0;
+}
+
 
 

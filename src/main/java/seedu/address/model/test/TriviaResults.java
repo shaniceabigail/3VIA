@@ -87,8 +87,14 @@ public class TriviaResults implements ReadOnlyTriviaResults {
 
     @Override
     public ObservableList<Attempt> getAttemptsByCard(Card card) {
-        return FXCollections.unmodifiableObservableList(
-                FXCollections.observableList(attemptsOfCards.get(card)));
+        List<Attempt> attempts = attemptsOfCards.get(card);
+        if (attempts == null) {
+            return FXCollections.unmodifiableObservableList(
+                    FXCollections.observableList(new ArrayList<>()));
+        } else {
+            return FXCollections.unmodifiableObservableList(
+                    FXCollections.observableList(attemptsOfCards.get(card)));
+        }
     }
 
     @Override

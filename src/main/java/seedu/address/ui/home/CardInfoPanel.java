@@ -1,5 +1,6 @@
 package seedu.address.ui.home;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.card.Card;
+import seedu.address.model.test.Attempt;
 import seedu.address.ui.TipBox;
 import seedu.address.ui.UiPart;
 
@@ -23,6 +25,7 @@ public class CardInfoPanel extends UiPart<Region> {
 
     private Card card;
     private TipBox commandTipBox;
+    private CardExperience cardExperience;
 
     @FXML
     private Label cardInfoQuestion;
@@ -46,13 +49,24 @@ public class CardInfoPanel extends UiPart<Region> {
     /**
      * Will be called when a card in {@code CardListPanel} is selected.
      */
-    public void loadCardPage(Card card) {
+    public void loadCardPage(Card card, List<Attempt> attemptsByCard) {
+        cleanUp();
         this.card = card;
+
         cardInfoQuestion.setText(card.getQuestion().value);
         cardInfoAnswer.setText(card.getAnswer().value);
 
-        cardInfoTopics.getChildren().clear();
         card.getTopics().forEach(topic -> cardInfoTopics.getChildren().add(new Label(topic.topicName)));
+
+        cardExperience = new CardExperience(attemptsByCard);
+        cardExperiencePlaceholder.getChildren().add(cardExperience.getRoot());
     }
 
+    /**
+     * Clear all the information that existed from the previous loaded card.
+     */
+    private void cleanUp() {
+        cardInfoTopics.getChildren().clear();
+        cardExperiencePlaceholder.getChildren().clear();
+    }
 }

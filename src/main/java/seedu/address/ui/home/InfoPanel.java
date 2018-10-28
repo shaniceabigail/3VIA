@@ -98,7 +98,7 @@ public class InfoPanel extends UiPart<Region> {
     @Subscribe
     private void handleDisplayCardInfoEvent(DisplayCardInfoEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        cardInfoPanel.loadCardPage(event.getCardToDisplay());
+        cardInfoPanel.loadCardPage(event.getCardToDisplay(), event.getAttemptsByCard());
         changeToPanel(cardInfoPanelPlaceholder);
     }
 }
