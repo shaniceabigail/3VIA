@@ -25,7 +25,6 @@ import seedu.address.model.TriviaBundle;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.person.Person;
-import seedu.address.model.portation.ImportFile;
 import seedu.address.model.state.State;
 import seedu.address.model.test.Attempt;
 import seedu.address.model.test.TriviaResult;
