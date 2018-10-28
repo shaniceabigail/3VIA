@@ -21,7 +21,6 @@ import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.person.Person;
-import seedu.address.model.portation.ImportFile;
 import seedu.address.model.state.AppState;
 import seedu.address.model.state.State;
 import seedu.address.model.test.Attempt;
@@ -313,13 +312,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addMultipleCards(UniqueCardList cards) {
         versionedTriviaBundle.addMultipleCards(cards);
-        updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
-        // TODO: raise an event to show in extra info pane
+        updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS); // TODO: show only imported cards
         indicateTriviaBundleChanged();
-    }
-
-    @Override
-    public UniqueCardList parseFileToCards(ImportFile importFile) {
-        return importFile.parseFileToCards();
     }
 }

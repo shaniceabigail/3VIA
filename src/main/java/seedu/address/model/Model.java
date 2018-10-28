@@ -176,9 +176,4 @@ public interface Model {
      * Return the Attempts in trivia test made by the given card.
      */
     List<Attempt> getAttemptsByCard(Card card);
-
-    /**
-     * Returns a unique list of cards parsed from an import file.
-     */
-    UniqueCardList parseFileToCards(ImportFile importFile);
 }

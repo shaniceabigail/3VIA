@@ -41,7 +41,7 @@ public class ImportCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_IMPORT_FILE_FORMAT);
         }
 
-        UniqueCardList cardsToImport = model.parseFileToCards(importFile);
+        UniqueCardList cardsToImport = importFile.parseFileToCards();
 
         if (cardsToImport.isEmpty()) {
             throw new CommandException(MESSAGE_INVALID_IMPORT_FILE_NO_CARDS_FOUND);
