@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Side;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
@@ -26,7 +27,7 @@ import seedu.address.commons.events.ui.ToggleTabEvent;
 
 public class NavigationTabController extends UiPart<Region> {
 
-    private static final String FXML = "NavigationTabPane.fxml";
+    private static final String FXML = "NavigationTab.fxml";
     private static final Logger logger = LogsCenter.getLogger(NavigationTabController.class);
 
     private double tabWidth = 90.0;
@@ -38,7 +39,7 @@ public class NavigationTabController extends UiPart<Region> {
     private JFXTabPane tabContainer;
 
     @FXML
-    private Tab HomeTab;
+    private Tab homeTab;
 
     @FXML
     private Tab settingsTab;
@@ -52,10 +53,10 @@ public class NavigationTabController extends UiPart<Region> {
         super(FXML);
         listOfTabs = new ArrayList<>();
         tabContainer = new JFXTabPane();
-        HomeTab = new Tab();
+        homeTab = new Tab();
         settingsTab = new Tab();
         customTab = new Tab();
-        currentTab = HomeTab;
+        currentTab = homeTab;
         this.configureView();
     }
 
@@ -72,9 +73,9 @@ public class NavigationTabController extends UiPart<Region> {
         tabContainer.setRotateGraphic(true);
 
         //list of tabs configured
-        createTab(HomeTab, "Home", "/src/main/resources/images/tabIcons/home.png");
-        createTab(settingsTab, "Settings", "/src/main/resources/images/tabIcons/settings.png");
-        createTab(customTab, "Custom", "/src/main/resources/images/tabIcons/test.png");
+        createTab(homeTab, "Home", "file:/src/main/resources/images/tabIcons/home.png");
+        createTab(settingsTab, "Settings", "file:/src/main/resources/images/tabIcons/settings.png");
+        createTab(customTab, "Custom", "file:/main/resources/images/tabIcons/test.png");
     }
 
     /**
@@ -83,7 +84,7 @@ public class NavigationTabController extends UiPart<Region> {
     private void createTab(Tab tab, String title, String iconPath) {
         double imageWidth = 40.0;
 
-        ImageView imageView = new ImageView(iconPath);
+        ImageView imageView = new ImageView(new Image(iconPath));
         imageView.setFitHeight(imageWidth);
         imageView.setFitWidth(imageWidth);
 

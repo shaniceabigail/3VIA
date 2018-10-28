@@ -2,12 +2,10 @@ package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
 
+/**
+ * An event requesting to toggle a tab
+ */
 public class ToggleTabEvent extends BaseEvent {
-    private boolean isTest = false;
-
-    public ToggleTabEvent() {
-
-    }
 
     @Override
     public String toString() {

@@ -18,9 +18,6 @@ public class NavigationCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Successfully navigated to test";
     public static final String MESSAGE_UNSUCCESSFUL = "Did not navigate to test";
 
-    public NavigationCommand() {
-
-    }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
