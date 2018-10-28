@@ -41,6 +41,10 @@ public class CardListPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    public void resetToOriginalState() {
+        cardListView.getSelectionModel().clearSelection();
+    }
+
     private void setConnections(ObservableList<Card> cardList) {
         cardListView.setItems(cardList);
         cardListView.setCellFactory(listView -> new CardListViewCell());

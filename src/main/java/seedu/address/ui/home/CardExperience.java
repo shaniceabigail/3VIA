@@ -52,7 +52,7 @@ public class CardExperience extends UiPart<Region> {
                 numCorrectAttempts / (float) attemptsByCard.size());
 
         cardProgress.progressProperty().bind(correctAttemptRatio);
-        numOfAttemptsText.setText(String.valueOf(attemptsByCard.size()) + " Attempts");
+        numOfAttemptsText.setText(String.valueOf(attemptsByCard.size()) + " Attempt(s)");
         numCorrectAttemptsText.setText(String.valueOf(numCorrectAttempts));
         numWrongAttemptsText.setText(String.valueOf(numWrongAttempts));
 

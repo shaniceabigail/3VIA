@@ -6,11 +6,11 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
@@ -189,9 +189,12 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Will change the scene displayed in {@code displayPagePlaceHolder} according to the given parameter.
      */
-    private void changeToScene(UiPart<Region> region) {
+    private void changeToScene(Node region) {
+        if (region.equals(homePage.getRoot())) {
+            homePage.resetToOriginalState();
+        }
         displayPagePlaceHolder.getChildren().clear();
-        displayPagePlaceHolder.getChildren().add(region.getRoot());
+        displayPagePlaceHolder.getChildren().add(region);
     }
 
     /**
@@ -212,19 +215,19 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowTriviaTestViewEvent(ShowTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         triviaTestPage = event.getTriviaTestPage().get();
-        changeToScene(triviaTestPage);
+        changeToScene(triviaTestPage.getRoot());
     }
 
     @Subscribe
     private void handleShowTriviaTestResultPage(ShowTriviaTestResultEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         triviaTestResultPage = event.getTriviaTestResultPage().get();
-        changeToScene(triviaTestResultPage);
+        changeToScene(triviaTestResultPage.getRoot());
     }
 
     @Subscribe
     private void handleCloseTriviaTestViewEvent(CloseTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        changeToScene(homePage);
+        changeToScene(homePage.getRoot());
     }
 }

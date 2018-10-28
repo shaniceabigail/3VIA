@@ -59,6 +59,15 @@ public class InfoPanel extends UiPart<Region> {
     }
 
     /**
+     * Hides all the information in the info panel.
+     */
+    public void resetToOriginalState() {
+        info.getChildren().forEach(node -> {
+            node.setVisible(false);
+        });
+    }
+
+    /**
      * Bind each node to the visible property, so that when node is hidden the layout of the hidden node will not be
      * accounted for.
      */

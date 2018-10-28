@@ -2,10 +2,14 @@ package seedu.address.ui.home;
 
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.DisplayGoogleSearchEvent;
+import seedu.address.commons.events.ui.DisplayImportHelpEvent;
 import seedu.address.logic.Logic;
 import seedu.address.ui.UiPart;
 
@@ -43,5 +47,25 @@ public class Homepage extends UiPart<Region> {
 
     public void releaseResources() {
         infoPanel.freeResources();
+    }
+
+    /**
+     * Resets the homepage to it's original state where no cards are selected and info panel is empty.
+     */
+    public void resetToOriginalState() {
+        cardListPanel.resetToOriginalState();
+        infoPanel.resetToOriginalState();
+    }
+
+    @Subscribe
+    private void handleDisplayGoogleSearchEvent(DisplayGoogleSearchEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        cardListPanel.resetToOriginalState();
+    }
+
+    @Subscribe
+    private void handleDisplayImportHelpEvent(DisplayImportHelpEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        cardListPanel.resetToOriginalState();
     }
 }
