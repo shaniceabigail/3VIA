@@ -1,5 +1,7 @@
 package seedu.address.model.portation;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -29,6 +31,7 @@ public class ImportFile {
     private final File importFile;
 
     public ImportFile(String filePath) {
+        requireNonNull(filePath);
         importFile = new File(filePath);
     }
 

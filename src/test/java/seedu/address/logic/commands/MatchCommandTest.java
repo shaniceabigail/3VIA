@@ -78,9 +78,18 @@ public class MatchCommandTest {
 
     @Test
     public void execute_matchError() {
-        // Index out of bound
+        // Both question and answer's index not found -> Will throw question index not found.
         assertCommandFailure(new MatchCommand(Index.fromZeroBased(100), Index.fromZeroBased(105)), model,
-                commandHistory, MatchCommand.MESSAGE_INDEX_OUT_OF_BOUND);
+                commandHistory, MatchCommand.MESSAGE_QUESTION_NOT_FOUND);
+
+        // Only question index not found.
+        assertCommandFailure(new MatchCommand(Index.fromZeroBased(100), Index.fromZeroBased(1)), model,
+                commandHistory, MatchCommand.MESSAGE_QUESTION_NOT_FOUND);
+
+        // Only answer index not found.
+        assertCommandFailure(new MatchCommand(Index.fromZeroBased(1), Index.fromZeroBased(100)), model,
+                commandHistory, MatchCommand.MESSAGE_ANSWER_NOT_FOUND);
+
     }
 
     /**

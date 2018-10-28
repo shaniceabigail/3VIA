@@ -147,6 +147,10 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+.hbox-light {
+    -fx-background-color: derive(#1d1d1d, 30%);
+}
+
 .pane-with-border {
      -fx-background-color: derive(#1d1d1d, 20%);
      -fx-border-color: derive(#1d1d1d, 10%);
