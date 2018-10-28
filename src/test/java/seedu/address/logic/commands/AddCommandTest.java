@@ -252,11 +252,6 @@ public class AddCommandTest {
         public List<Attempt> getAttemptsByCard(Card card) {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public UniqueCardList parseFileToCards(ImportFile importfile) {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**

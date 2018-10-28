@@ -41,7 +41,7 @@ public class ImportCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_IMPORT_FILE_FORMAT);
         }
 
-        UniqueCardList cardsToImport = model.parseFileToCards(importFile);
+        UniqueCardList cardsToImport = importFile.parseFileToCards();
 
         if (cardsToImport.isEmpty()) {
             throw new CommandException(MESSAGE_INVALID_IMPORT_FILE_NO_CARDS_FOUND);
@@ -53,6 +53,7 @@ public class ImportCommand extends Command {
 
         model.addMultipleCards(cardsToImport);
         model.commitTriviaBundle();
+        // TODO: include number of cards added
         return new CommandResult(String.format(MESSAGE_SUCCESS, importFile.getFileName()));
     }
 

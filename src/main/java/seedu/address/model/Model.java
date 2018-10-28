@@ -8,7 +8,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.person.Person;
-import seedu.address.model.portation.ImportFile;
 import seedu.address.model.state.State;
 import seedu.address.model.test.Attempt;
 import seedu.address.model.test.TriviaResult;
@@ -176,9 +175,4 @@ public interface Model {
      * Return the Attempts in trivia test made by the given card.
      */
     List<Attempt> getAttemptsByCard(Card card);
-
-    /**
-     * Returns a unique list of cards parsed from an import file.
-     */
-    UniqueCardList parseFileToCards(ImportFile importFile);
 }

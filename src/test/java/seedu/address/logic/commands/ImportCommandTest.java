@@ -274,11 +274,6 @@ public class ImportCommandTest {
         public boolean matchQuestionAndAnswer(Index questionIndex, Index answerIndex) {
             throw new AssertionError("This method should not be called.");
         }
-
-        @Override
-        public UniqueCardList parseFileToCards(ImportFile importfile) {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**
@@ -297,12 +292,6 @@ public class ImportCommandTest {
         public boolean haveAnyCard(UniqueCardList cardList) {
             requireNonNull(cardList);
             return cardList.toStream().anyMatch(card -> cards.contains(card));
-        }
-
-        @Override
-        public UniqueCardList parseFileToCards(ImportFile importFile) {
-            requireNonNull(importFile);
-            return importFile.parseFileToCards();
         }
     }
 
@@ -324,12 +313,6 @@ public class ImportCommandTest {
             for (Card c : cardList) {
                 cardsAdded.add(c);
             }
-        }
-
-        @Override
-        public UniqueCardList parseFileToCards(ImportFile importFile) {
-            requireNonNull(importFile);
-            return importFile.parseFileToCards();
         }
 
         @Override
