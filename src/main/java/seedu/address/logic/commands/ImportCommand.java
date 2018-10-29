@@ -19,7 +19,7 @@ public class ImportCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + "C:\\Users\\username\\Desktop\\cards.txt";
 
-    public static final String MESSAGE_SUCCESS = "Imported cards from: %1$s.";
+    public static final String MESSAGE_SUCCESS = "%1$s card(s) imported from: %2$s.";
     public static final String MESSAGE_INVALID_IMPORT_FILE_FORMAT = "Invalid import file format.";
     public static final String MESSAGE_INVALID_IMPORT_FILE_NO_CARDS_FOUND = "No cards found.";
     public static final String MESSAGE_DUPLICATE_CARD = "Some cards already exists in the trivia bundle.";
@@ -53,8 +53,8 @@ public class ImportCommand extends Command {
 
         model.addMultipleCards(cardsToImport);
         model.commitTriviaBundle();
-        // TODO: include number of cards added
-        return new CommandResult(String.format(MESSAGE_SUCCESS, importFile.getFileName()));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, cardsToImport.size(), importFile.getFileName()));
     }
 
     @Override
