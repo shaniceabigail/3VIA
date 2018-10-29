@@ -111,6 +111,6 @@ public class NavigationTabController extends UiPart<Region> {
             currentTab.setStyle("-fx-background-color: -fx-accent;");
         }
 
-        }
+    }
 
 }

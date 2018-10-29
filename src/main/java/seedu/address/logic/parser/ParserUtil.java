@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.scene.control.Tab;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
@@ -19,6 +20,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.portation.ImportFile;
 import seedu.address.model.test.TimeLimit;
 import seedu.address.model.topic.Topic;
+import seedu.address.ui.NavigationTabController;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -145,6 +147,21 @@ public class ParserUtil {
         return new Topic(trimmedTopic);
     }
 
+    /**
+     * Parses a {@code String tab} into a {@code Tab}.
+     * Leading and trailing white spaces will be trimmed.
+     * 
+     * @throws ParseException if the given {@code tab} is invalid.
+     */
+    public static Tab parseTab(String tab) throws ParseException {
+        requireNonNull(tab);
+        String trimmedTab = tab.trim();
+        if () {
+            throw new ParseException(Tab.MESSAGE_TAB_CONSTRAINTS);
+        }
+        return new Tab(trimmedTab);
+    }
+    
     /**
      * Parses {@code Collection<String> topics} into a {@code Set<Topic>}.
      */

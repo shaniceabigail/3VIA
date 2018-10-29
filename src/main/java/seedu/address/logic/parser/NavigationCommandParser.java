@@ -1,11 +1,15 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAVIGATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
 import java.util.stream.Stream;
 
+import javafx.scene.control.Tab;
 import seedu.address.logic.commands.NavigationCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.topic.Topic;
 
 /**
  * Parses input argument and creates a new NavigationCommand object
@@ -20,12 +24,13 @@ public class NavigationCommandParser implements Parser<NavigationCommand> {
 
     public NavigationCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAVIGATION);
+
         if (!arePrefixesPresent(argMultimap)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NavigationCommand.MESSAGE_USAGE));
         }
-
+        Tab tabToGo = ParserUtil.parseTab(argMultimap.getValue(PREFIX_NAVIGATION).get());
         return new NavigationCommand();
     }
 
