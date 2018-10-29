@@ -341,13 +341,12 @@ Now that your file is ready, head over to 3VIA and lets begin the import.
 1. Enter the `import` command followed by the *absolute file path* of the import file you previously created in the command
 box as seen below.
 
-image::import_step1.png[import step 1]
+image::import_step1.png[import step 1 pic, 500,500]
 
 [start = 2]
 2. Hit enter/ return to confirm. 3VIA will now display a list of cards that has been added to you.
-image::import_file_format.png[import file format]
 
-image::import_step2.png[import step 2]
+image::import_step2.png[import step 2 pic, 800, 800]
 
 TIP: You can `edit` or `delete` any of the recently imported cards and/or even `undo` the import if you are not satisfied
 with the cards imported.
