@@ -85,20 +85,18 @@ public class MatchTestTest {
     }
 
     @Test
-    public void test_matchOutOfBoundsIndexes() {
-        thrown.expect(IndexOutOfBoundsException.class);
-        model.matchQuestionAndAnswer(Index.fromOneBased(100), Index.fromOneBased(100));
-    }
-
-    @Test
     public void test_responseToCorrectMatchAttempt() {
         // makes sure the cards that are involved in the correct attempts are removed.
-        matchTest.respondToCorrectAttempt(new MatchAttempt(Q_EARTH_ROUND, Q_EARTH_ROUND));
+        matchTest.respondToCorrectAttempt(MatchTestUtil.generateCorrectMatchAttempt(Q_EARTH_ROUND, earthRoundIndexes));
+
         assertEquals(matchTest.getQuestions().size(), 2);
         assertEquals(matchTest.getAnswers().size(), 2);
 
-        matchTest.respondToCorrectAttempt(new MatchAttempt(Q_DENSITY_FORMULA, Q_DENSITY_FORMULA));
-        matchTest.respondToCorrectAttempt(new MatchAttempt(Q_FORCE_FORMULA, Q_FORCE_FORMULA));
+        matchTest.respondToCorrectAttempt(MatchTestUtil.generateCorrectMatchAttempt(Q_DENSITY_FORMULA,
+                densityFormulaIndexes));
+        matchTest.respondToCorrectAttempt(MatchTestUtil.generateCorrectMatchAttempt(Q_FORCE_FORMULA,
+                forceFormulaIndexes));
+
         assertEquals(matchTest.getAnswers().size(), 0);
         assertEquals(matchTest.getQuestions().size(), 0);
     }
@@ -117,10 +115,9 @@ public class MatchTestTest {
     @Test
     public void test_isCompletedFlagTrue() {
         // If there are no more existing unanswered questions, isCompleted flag should be true.
-        matchTest.respondToCorrectAttempt(new MatchAttempt(Q_EARTH_ROUND, Q_EARTH_ROUND));
-        matchTest.respondToCorrectAttempt(new MatchAttempt(Q_FORCE_FORMULA, Q_FORCE_FORMULA));
-
-        densityFormulaIndexes = MatchTestUtil.getIndexes(matchTest, Q_DENSITY_FORMULA);
+        matchTest.respondToCorrectAttempt(MatchTestUtil.generateCorrectMatchAttempt(Q_EARTH_ROUND, earthRoundIndexes));
+        matchTest.respondToCorrectAttempt(MatchTestUtil.generateCorrectMatchAttempt(Q_FORCE_FORMULA,
+                forceFormulaIndexes));
         model.matchQuestionAndAnswer(densityFormulaIndexes[0], densityFormulaIndexes[1]);
         model.stopTriviaTest();
         assertTrue(matchTest.isCompleted());

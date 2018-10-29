@@ -38,7 +38,7 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LearnCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -162,7 +162,7 @@ public abstract class AppSystemTest {
      * Displays all cards in the trivia bundle.
      */
     protected void showAllCards() {
-        executeCommand(ListCommand.COMMAND_WORD);
+        executeCommand(LearnCommand.COMMAND_WORD);
         assertEquals(getModel().getTriviaBundle().getCardList().size(), getModel().getFilteredCardList().size());
     }
 

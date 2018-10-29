@@ -18,7 +18,7 @@
 }
 
 .label-bright-header {
-    -fx-font-size: 22pt;
+    -fx-font-size: 20pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-opacity: 1;
@@ -141,6 +141,14 @@
 
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.hbox {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.hbox-light {
+    -fx-background-color: derive(#1d1d1d, 30%);
 }
 
 .pane-with-border {
