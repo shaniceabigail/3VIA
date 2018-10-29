@@ -251,9 +251,7 @@ public class MatchTest extends TriviaTest {
     }
 
     @Override
-    public Supplier<? extends TriviaTestPage> getTestingPage() {
-        return () -> new MatchTestPage(this);
-    }
+    public Supplier<? extends TriviaTestPage> getTestingPage() { return () -> new MatchTestPage(this); }
 
     @Override
     public Supplier<? extends TriviaTestResultPage> getResultPage() {

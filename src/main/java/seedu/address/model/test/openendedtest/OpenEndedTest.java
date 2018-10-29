@@ -30,52 +30,36 @@ public class OpenEndedTest extends TriviaTest {
     public final TestType testType = TestType.OPEN_ENDED_TEST;
     private List<Attempt> attempts;
 
-    private final ObservableList<Question> shuffledQuestions;
-    private final ObservableList<Answer> shuffledAnswers;
+    private ArrayList<Card> shuffledCards;
 
     public OpenEndedTest(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
         super(tag, triviaBundle);
 
-        shuffledQuestions = getQuestions(cards);
-        shuffledAnswers = getAnswers(cards);
+        shuffledCards= shuffleCards(cards);
 
         attempts = new ArrayList<>();
 
         checkArgument(isValidTest(), MESSAGE_TEST_CONSTRAINS);
     }
 
-    public ObservableList<Question> getQuestions() {
-        return this.shuffledQuestions;
-    }
-
     /**
-     * Retrieve a randomized modifiable observable list of questions to allow changes in the UI.
-     * @param cards The cards to retrieve the questions from.
-     * @return an observable list of questions
+     * Retrieve a randomized list of cards
+     * @param cards The cards to shuffle from.
+     * @return an list of cards
      */
-    private ObservableList<Question> getQuestions(List<Card> cards) {
-        List<Question> questions = cards.stream()
-                .map(Card::getQuestion)
-                .collect(Collectors.toList());
-        Collections.shuffle(questions);
-        return FXCollections.observableList(questions);
+    private ArrayList<Card> shuffleCards(List<Card> cards) {
+        ArrayList<Card> shuffledCards = new ArrayList<Card>(cards);
+        Collections.shuffle(shuffledCards);
+        return shuffledCards;
     }
 
-    public ObservableList<Answer> getAnswers() {
-        return this.shuffledAnswers;
-    }
-
-    /**
-     * Retrieve a randomized modifiable observable list of answers to allow changes in the UI.
-     * @param cards The cards to retrieve the answers from.
-     * @return an observable list of answers
-     */
-    private ObservableList<Answer> getAnswers(List<Card> cards) {
-        List<Answer> answers = cards.stream()
-                .map(Card::getAnswer)
-                .collect(Collectors.toList());
-        Collections.shuffle(answers);
-        return FXCollections.observableList(answers);
+    public Card getNextCard() {
+        if (shuffledCards.size() == 0) {
+            return NULL;
+        }
+        Card nextCard = shuffledCards.get(0);
+        shuffledCards.remove(0);
+        return nextCard;
     }
 
     @Override
@@ -100,7 +84,7 @@ public class OpenEndedTest extends TriviaTest {
 
 
     private boolean isValidTest() {
-        return getQuestions().size() > 1;
+        return shuffledCards.size() >= 1;
     }
 
 
