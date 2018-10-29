@@ -229,12 +229,6 @@ _`delete 1` command is reapplied_ +
 _`clear` command is reapplied_ +
 // end::undoredo[]
 
-=== Clearing all entries : `clear` `[coming in v2.0]`
-
-[WARNING]
-Use with caution! Clears all entries in 3VIA and reboots. +
-Format: `clear`
-
 === Starting an Open Ended Test: `testO` `[coming in v2.0]`
 
 Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer. +
@@ -262,23 +256,37 @@ Format: `c` (correct) OR `x` (wrong)
 Test is exited. +
 Format: `exit`
 
-=== Starting a Matching Test: `testM`
+:imagesDir: images/user_guide/match_test
+=== Starting a MatchTest: `testM`
 
-Start a test of matching cards of a specified topic. In a test of matching cards, all the questions and answers in that topic
-will be displayed. The user will then have to match the correct question and answer together. +
+Start a test of matching cards for a specified topic. In a MatchTest, all the questions and answers in that topic
+will be displayed. You will then have to match all the correct question and answer together. +
 Format: `testM TOPIC`
 
 The following commands can only be used during a `Matching Test`.
 
 ==== Enter the matching cards: match
 
-Will match and pair the cards during a matching test. +
+Will match and pair the cards during a MatchTest. +
 Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 
-==== Quit matching cards test:
+An example is given in the below screenshot, where the command of `1 2` will select the question and answer that is boxed
+in green.
 
-Test is exited. +
+image::match_command.png[match command format]
+
+==== Quit MatchTest:
+
+If you want to stop an ongoing MatchTest, you can enter the `exit` command at any time during the test. The command
+will bring you to the home page.
+
+After the MatchTest has ended, a result page will be shown. After reviewing your results, you can exit from the MatchTest by
+entering the `exit` command. The command will bring you to the home page. +
 Format: `exit`
+
+[NOTE]
+Your attempts from an incomplete MatchTest will be discarded. Only those attempts from a completed MatchTest will
+be saved into your hard disk.
 
 === View statistics for a certain test: `stats` `[coming in v2.0]`
 
