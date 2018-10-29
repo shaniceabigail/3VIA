@@ -26,10 +26,10 @@
                     <Region fx:constant="USE_PREF_SIZE" />
                 </minWidth>
             </Label>
-            <Label fx:id="question" text="\$question" styleClass="cell_big_label" />
+            <Label fx:id="question" wrapText="true" text="\$question" styleClass="cell_big_label" />
         </HBox>
         <FlowPane fx:id="topics" />
-        <Label fx:id="answer" styleClass="cell_small_label" text="\$answer" />
+        <Label fx:id="answer" wrapText="true" styleClass="cell_small_label" text="\$answer" />
     </VBox>
 </GridPane>
 </HBox>
