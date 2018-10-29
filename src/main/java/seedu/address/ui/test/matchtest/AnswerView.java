@@ -33,7 +33,6 @@ public class AnswerView extends UiPart<Region> {
         this.answer = answer;
         id.setText(displayedIndex + ". ");
         answerText.setText(answer.value);
-        answerText.setWrapText(true);
     }
 
     public AnswerView(Answer answer, int displayedIndex, boolean isCorrect) {
@@ -41,7 +40,6 @@ public class AnswerView extends UiPart<Region> {
         this.answer = answer;
         id.setText(displayedIndex + ". ");
         answerText.setText(answer.value);
-        answerText.setWrapText(true);
         if (isCorrect) {
             this.flashBackgroundColor(answerViewPane, new Color(0, 1, 0, 1));
         } else {
