@@ -18,6 +18,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.portation.ImportFile;
+import seedu.address.model.tab.ListOfTabs;
 import seedu.address.model.test.TimeLimit;
 import seedu.address.model.topic.Topic;
 import seedu.address.ui.NavigationTabController;
@@ -153,10 +154,10 @@ public class ParserUtil {
      * 
      * @throws ParseException if the given {@code tab} is invalid.
      */
-    public static Tab parseTab(String tab) throws ParseException {
+    public static ListOfTabs parseTab(String tab) throws ParseException {
         requireNonNull(tab);
         String trimmedTab = tab.trim();
-        if () {
+        if (!ListOfTabs.isValidTabListed(trimmedTab)) {
             throw new ParseException(Tab.MESSAGE_TAB_CONSTRAINTS);
         }
         return new Tab(trimmedTab);
