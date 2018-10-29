@@ -314,8 +314,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addMultipleCards(UniqueCardList cards) {
         versionedTriviaBundle.addMultipleCards(cards);
-        updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
-        // TODO: raise an event to show in extra info pane
+        updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS); // TODO: show only imported cards
         indicateTriviaBundleChanged();
     }
 }

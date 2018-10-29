@@ -2,6 +2,7 @@ package seedu.address.logic.parser.fileparser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -49,6 +50,43 @@ public class FileParserUtil {
         }
 
         return line.contains(PREFIX_TOPIC.toString());
+    }
+
+    /**
+     * Returns true if the line contains a topic that is in the specified format.
+     * i.e. " t/topic". Whitespace before prefix "t/" is required.
+     */
+    public static boolean isTopicValidFormat(String line) {
+        requireNonNull(line);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(line, PREFIX_TOPIC);
+        try {
+            if (!isPrefixPresent(argMultimap, PREFIX_TOPIC) || !argMultimap.getPreamble().isEmpty()) {
+                return false;
+            }
+            ParserUtil.parseTopics(argMultimap.getAllValues(PREFIX_TOPIC)); // test if topic format is correct
+        } catch (ParseException pe) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if the line contains a question answer pair that is in the specified format.
+     * i.e. "question" + "\t" + "answer".
+     */
+    public static boolean isQuestionAnswerValidFormat(String line) {
+        requireNonNull(line);
+        String[] cardString = line.split(QUESTION_ANSWER_SEPARATOR);
+        if (cardString.length != 2) {
+            return false;
+        }
+        try {
+            Set<Topic> topicSet = new HashSet<>();
+            stringToCard(cardString, topicSet);
+        } catch (FileParseException pe) {
+            return false;
+        }
+        return true;
     }
 
     /**

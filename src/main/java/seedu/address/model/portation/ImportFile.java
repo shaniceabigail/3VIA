@@ -26,7 +26,8 @@ import seedu.address.model.topic.Topic;
 public class ImportFile {
     public static final String MESSAGE_INVALID_FILE = "Invalid file.";
     public static final String MESSAGE_INVALID_FILE_FORMAT = "Invalid file format.";
-    public static final String MESSAGE_INVALID_FILE_TYPE = "Invalid file type. Only .txt files are accepted";
+    public static final String MESSAGE_INVALID_FILE_UNABLE_TO_READ = "Unable to read file.";
+    public static final String MESSAGE_DUPLICATE_CARDS_FOUND = "Duplicate questions in file.";
 
     private final File importFile;
 
@@ -39,9 +40,11 @@ public class ImportFile {
      * Ensures the file to be imported is valid, readable and non empty.
      */
     public boolean isFileValid() {
-        if (!isValidImportFile()) {
+        if (!isValidFile()) {
             return false;
-        } else if (!isValidImportFileType()) {
+        } else if (!isValidFileType()) {
+            return false;
+        } else if (!isValidFileFormat()) {
             return false;
         }
         return true;
@@ -50,7 +53,7 @@ public class ImportFile {
     /**
      * Returns true if the import file is a file and is not empty.
      */
-    private boolean isValidImportFile() {
+    private boolean isValidFile() {
         if (!importFile.isFile()) {
             return false;
         } else if (importFile.length() == 0) {
@@ -63,10 +66,31 @@ public class ImportFile {
      * Checks if file is a readable .txt format.
      * @return true if file is a readable text file.
      */
-    private boolean isValidImportFileType() {
+    private boolean isValidFileType() {
         try {
             String fileType = Files.probeContentType(importFile.toPath());
             if (!fileType.equals("text/plain")) {
+                return false;
+            }
+        } catch (IOException ioe) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if the file is in the correct import file format.
+     */
+    private boolean isValidFileFormat() {
+        try (BufferedReader br = new BufferedReader(new FileReader(importFile))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (FileParserUtil.isEmpty(line) || FileParserUtil.isTopicValidFormat(line)
+                        || FileParserUtil.isQuestionAnswerValidFormat(line)) {
+                    continue;
+                }
+
+                raiseExtraInformationDisplayEvent();
                 return false;
             }
         } catch (IOException ioe) {
@@ -87,9 +111,8 @@ public class ImportFile {
 
         try (BufferedReader br = new BufferedReader(new FileReader(importFile))) {
             String line;
-
             while ((line = br.readLine()) != null) {
-                if (FileParserUtil.isEmpty(line)) {
+                if (FileParserUtil.isEmpty(line)) { // allows new line between cards and topics
                     continue;
                 }
 
@@ -101,23 +124,29 @@ public class ImportFile {
                     cards.add(cardToAdd);
                 }
             }
+
         } catch (IOException ioe) {
-            throw new FileParseException(MESSAGE_INVALID_FILE_TYPE, ioe);
+            throw new FileParseException(MESSAGE_INVALID_FILE_UNABLE_TO_READ, ioe);
         } catch (FileParseException fpe) {
-            EventsCenter
-                    .getInstance()
-                    .post(new ExtraInformationDisplayChangeEvent(ExtraInformationDisplay.IMPORT_HELP_DISPLAY));
-            throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
+            throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT, fpe);
         } catch (DuplicateCardException dce) {
-            throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT, dce);
+            throw new FileParseException(MESSAGE_DUPLICATE_CARDS_FOUND, dce);
         }
 
-        if (cards.isEmpty()) {
-            throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
-        }
         return cards;
     }
 
+    /**
+     * Raises an new event to display the import help display UI.
+     */
+    private void raiseExtraInformationDisplayEvent() {
+        EventsCenter.getInstance()
+                    .post(new ExtraInformationDisplayChangeEvent(ExtraInformationDisplay.IMPORT_HELP_DISPLAY));
+    }
+
+    /**
+     * Returns name of import file.
+     */
     public String getFileName() {
         return importFile.getName();
     }

@@ -3,11 +3,9 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.fileparser.exceptions.FileParseException;
 import seedu.address.model.Model;
 import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.portation.ImportFile;
-
 
 /**
  * Import cards from specified location to the trivia bundle.
@@ -22,8 +20,8 @@ public class ImportCommand extends Command {
             + "C:\\Users\\username\\Desktop\\cards.txt";
 
     public static final String MESSAGE_SUCCESS = "Imported cards from: %1$s.";
-    public static final String MESSAGE_IMPORT_FILE_FORMAT_INVALID = "Invalid import file format.";
-    public static final String MESSAGE_IMPORT_FILE_INVALID = "Invalid import file.";
+    public static final String MESSAGE_INVALID_IMPORT_FILE_FORMAT = "Invalid import file format.";
+    public static final String MESSAGE_INVALID_IMPORT_FILE_NO_CARDS_FOUND = "No cards found.";
     public static final String MESSAGE_DUPLICATE_CARD = "Some cards already exists in the trivia bundle.";
     private final ImportFile importFile;
 
@@ -40,14 +38,13 @@ public class ImportCommand extends Command {
         requireNonNull(model);
 
         if (!importFile.isFileValid()) {
-            throw new CommandException(MESSAGE_IMPORT_FILE_INVALID);
+            throw new CommandException(MESSAGE_INVALID_IMPORT_FILE_FORMAT);
         }
 
-        UniqueCardList cardsToImport;
-        try {
-            cardsToImport = importFile.parseFileToCards();
-        } catch (FileParseException fpe) {
-            throw new CommandException(MESSAGE_IMPORT_FILE_FORMAT_INVALID);
+        UniqueCardList cardsToImport = importFile.parseFileToCards();
+
+        if (cardsToImport.isEmpty()) {
+            throw new CommandException(MESSAGE_INVALID_IMPORT_FILE_NO_CARDS_FOUND);
         }
 
         if (model.haveAnyCard(cardsToImport)) {
@@ -56,6 +53,7 @@ public class ImportCommand extends Command {
 
         model.addMultipleCards(cardsToImport);
         model.commitTriviaBundle();
+        // TODO: include number of cards added
         return new CommandResult(String.format(MESSAGE_SUCCESS, importFile.getFileName()));
     }
 
