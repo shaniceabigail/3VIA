@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,6 +19,8 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TriviaBundleChangedEvent;
 import seedu.address.commons.events.model.TriviaResultsChangedEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
+import seedu.address.commons.events.ui.DisplayCardInfoEvent;
+import seedu.address.commons.events.ui.SetUpDisplayCardInfoEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
@@ -222,7 +226,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean isInTestingState() {
-        return appState.getState() == State.TEST || appState.getState() == State.MATCH_TEST;
+        return appState.getState() == State.TEST || appState.getState() == State.MATCH_TEST
+                || appState.getState() == State.MATCH_TEST_RESULT;
     }
 
     //=========== Trivia Tests ==============================================================================
@@ -259,6 +264,7 @@ public class ModelManager extends ComponentManager implements Model {
         if (matchTest.isCompleted()) {
             triviaResults.addTriviaResult(new TriviaResult(currentRunningTest));
             raise(new TriviaResultsChangedEvent(triviaResults));
+            appState.setAppState(State.MATCH_TEST_RESULT);
         }
 
         return isCorrectMatch;
@@ -276,6 +282,12 @@ public class ModelManager extends ComponentManager implements Model {
         return triviaResults.getAttemptsByCard(card);
     }
 
+    @Override
+    @Subscribe
+    public void handleSetUpDisplayCardInfoEvent(SetUpDisplayCardInfoEvent event) {
+        Card selectedCard = event.selectedCard;
+        raise(new DisplayCardInfoEvent(selectedCard, triviaResults.getAttemptsByCard(selectedCard)));
+    }
 
 
     @Override

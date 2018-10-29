@@ -12,7 +12,7 @@ import seedu.address.ui.UiPart;
  * An UI component to display information of {@code Question}
  */
 public class QuestionView extends UiPart<Region> {
-    private static final String FXML = "/test/matchtest/QuestionView.fxml";
+    private static final String FXML = "test/matchtest/QuestionView.fxml";
 
     public final Question question;
 
@@ -28,6 +28,7 @@ public class QuestionView extends UiPart<Region> {
         this.question = question;
         id.setText(displayedIndex + ". ");
         questionText.setText(question.value);
+        questionText.setWrapText(true);
     }
 
     public QuestionView(Question question, int displayedIndex, boolean isCorrect) {
@@ -35,6 +36,7 @@ public class QuestionView extends UiPart<Region> {
         this.question = question;
         id.setText(displayedIndex + ". ");
         questionText.setText(question.value);
+        questionText.setWrapText(true);
         if (isCorrect) {
             this.flashBackgroundColor(questionViewPane, new Color(0, 1, 0, 1));
         } else {

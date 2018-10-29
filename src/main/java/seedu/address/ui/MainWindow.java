@@ -1,30 +1,23 @@
 package seedu.address.ui;
 
-import static seedu.address.commons.events.ExtraInformationDisplay.BROWSER;
-import static seedu.address.commons.events.ExtraInformationDisplay.IMPORT_HELP_DISPLAY;
-
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ExtraInformationDisplay;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
-import seedu.address.commons.events.ui.DisplayBrowserEventChangedEvent;
-import seedu.address.commons.events.ui.DisplayImportHelpChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.events.ui.ExtraInformationDisplayChangeEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestResultEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
@@ -196,9 +189,12 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Will change the scene displayed in {@code displayPagePlaceHolder} according to the given parameter.
      */
-    private void changeToScene(UiPart<Region> region) {
+    private void changeToScene(Node region) {
+        if (region.equals(homePage.getRoot())) {
+            homePage.resetToOriginalState();
+        }
         displayPagePlaceHolder.getChildren().clear();
-        displayPagePlaceHolder.getChildren().add(region.getRoot());
+        displayPagePlaceHolder.getChildren().add(region);
     }
 
     /**
@@ -219,37 +215,19 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowTriviaTestViewEvent(ShowTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         triviaTestPage = event.getTriviaTestPage().get();
-        changeToScene(triviaTestPage);
+        changeToScene(triviaTestPage.getRoot());
     }
 
     @Subscribe
     private void handleShowTriviaTestResultPage(ShowTriviaTestResultEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         triviaTestResultPage = event.getTriviaTestResultPage().get();
-        changeToScene(triviaTestResultPage);
+        changeToScene(triviaTestResultPage.getRoot());
     }
 
     @Subscribe
     private void handleCloseTriviaTestViewEvent(CloseTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        changeToScene(homePage);
-    }
-    @Subscribe
-    private void handleExtraInfomationDisplayChangeEvent(ExtraInformationDisplayChangeEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        raiseExtraInformationToDisplayEventsFor(event.toDisplay());
-    }
-    /**
-     * Raises appropriate events to display desired extra information.
-     * @param extraInfo The extra information to display.
-     */
-    private void raiseExtraInformationToDisplayEventsFor(ExtraInformationDisplay extraInfo) {
-        if (extraInfo == IMPORT_HELP_DISPLAY) {
-            raise(new DisplayImportHelpChangedEvent(true));
-            raise(new DisplayBrowserEventChangedEvent(false));
-        } else if (extraInfo == BROWSER) {
-            raise(new DisplayImportHelpChangedEvent(false));
-            raise(new DisplayBrowserEventChangedEvent(true));
-        }
+        changeToScene(homePage.getRoot());
     }
 }

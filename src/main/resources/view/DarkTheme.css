@@ -3,6 +3,18 @@
     background-color: #383838; /* Used in the default.html file */
 }
 
+.scroll-pane {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.anchor-pane {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -18,7 +30,14 @@
 }
 
 .label-bright-header {
-    -fx-font-size: 22pt;
+    -fx-font-size: 20pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
+.label-bright-sub-header {
+    -fx-font-size: 15pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
     -fx-opacity: 1;
@@ -94,6 +113,19 @@
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
+#cardInfoAnswer .content {
+    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-border-color: derive(#1d1d1d, 30%);
+}
+
+#cardInfoAnswer {
+    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-text-inner-color: white;
+    -fx-font-family: Segoe UI Semibold;
+    -fx-opacity: 1;
+    -fx-font-size: 11pt;
+}
+
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
@@ -141,6 +173,14 @@
 
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.hbox {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.hbox-light {
+    -fx-background-color: derive(#1d1d1d, 30%);
 }
 
 .pane-with-border {
@@ -344,12 +384,12 @@
     -fx-background-radius: 0;
 }
 
-#tags, #topics {
+#tags, #topics, #cardInfoTopics {
     -fx-hgap: 7;
     -fx-vgap: 3;
 }
 
-#tags .label, #topics .label {
+#tags .label, #topics .label, #cardInfoTopics .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
     -fx-padding: 1 3 1 3;
@@ -357,3 +397,19 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#cardProgress {
+    -fx-accent: green;
+}
+
+#cardProgress .bar {
+    -fx-background-insets: 0;
+}
+
+#cardProgress > .track {
+    -fx-control-inner-background: red;
+    -fx-background-insets: 0;
+}
+
+
+

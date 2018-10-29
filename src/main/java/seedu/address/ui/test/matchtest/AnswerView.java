@@ -16,7 +16,7 @@ import seedu.address.ui.UiPart;
  * An UI component to display information of {@code Answer}
  */
 public class AnswerView extends UiPart<Region> {
-    private static final String FXML = "/test/matchtest/AnswerView.fxml";
+    private static final String FXML = "test/matchtest/AnswerView.fxml";
 
     public final Answer answer;
     private final Logger logger = LogsCenter.getLogger(AnswerView.class);
@@ -33,6 +33,7 @@ public class AnswerView extends UiPart<Region> {
         this.answer = answer;
         id.setText(displayedIndex + ". ");
         answerText.setText(answer.value);
+        answerText.setWrapText(true);
     }
 
     public AnswerView(Answer answer, int displayedIndex, boolean isCorrect) {
@@ -40,6 +41,7 @@ public class AnswerView extends UiPart<Region> {
         this.answer = answer;
         id.setText(displayedIndex + ". ");
         answerText.setText(answer.value);
+        answerText.setWrapText(true);
         if (isCorrect) {
             this.flashBackgroundColor(answerViewPane, new Color(0, 1, 0, 1));
         } else {

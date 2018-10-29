@@ -33,8 +33,8 @@ public class TriviaResults implements ReadOnlyTriviaResults {
     }
 
     /**
-     * Replaces the contents of the ResultList with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the ResultList with {@code results}.
+     * {@code results}.
      */
     public void setTriviaResults(List<TriviaResult> results) {
         triviaResults.clear();
@@ -87,8 +87,14 @@ public class TriviaResults implements ReadOnlyTriviaResults {
 
     @Override
     public ObservableList<Attempt> getAttemptsByCard(Card card) {
-        return FXCollections.unmodifiableObservableList(
-                FXCollections.observableList(attemptsOfCards.get(card)));
+        List<Attempt> attempts = attemptsOfCards.get(card);
+        if (attempts == null) {
+            return FXCollections.unmodifiableObservableList(
+                    FXCollections.observableList(new ArrayList<>()));
+        } else {
+            return FXCollections.unmodifiableObservableList(
+                    FXCollections.observableList(attemptsOfCards.get(card)));
+        }
     }
 
     @Override

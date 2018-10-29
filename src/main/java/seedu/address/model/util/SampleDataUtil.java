@@ -41,11 +41,19 @@ public class SampleDataUtil {
     private static final Card Q_CAPITAL_OF_SG = new Card(new Question("What is the capital of Singapore?"),
             new Answer("Singapore"), getTopicSet("GeneralKnowledge"));
 
+    private static final Date ATTEMPT_ON_EARTH_TIMESTAMP = new Date(2018 - 1900, 6, 1, 16, 13);
+    private static final Date ATTEMPT_ON_GIT_CLONE_TIMESTAMP = new Date(2018 - 1900, 6, 1, 16, 14);
+    private static final Date ATTEMPT_ON_FORCE_FORMULA_TIMESTAMP = new Date(2018 - 1900, 6, 1, 16, 15);
+    private static final Date ATTEMPT_ON_GIT_MERGE_TIMESTAMP = new Date(2018 - 1900, 6, 2, 12, 30);
 
-    private static final Attempt ATTEMPT_ON_EARTH = new Attempt(Q_EARTH_ROUND, "mass * acceleration", false);
-    private static final Attempt ATTEMPT_ON_GIT_CLONE = new Attempt(Q_GIT_CLONE, "git clone", false);
-    private static final Attempt ATTEMPT_ON_FORCE_FORMULA = new Attempt(Q_FORCE_FORMULA, "mass * acceleration", true);
-    private static final Attempt ATTEMPT_ON_GIT_MERGE = new Attempt(Q_GIT_MERGE, "rebase and master", true);
+    private static final Attempt ATTEMPT_ON_EARTH = new Attempt(Q_EARTH_ROUND, "mass * acceleration", false,
+            ATTEMPT_ON_EARTH_TIMESTAMP);
+    private static final Attempt ATTEMPT_ON_GIT_CLONE = new Attempt(Q_GIT_CLONE, "git copy", false,
+            ATTEMPT_ON_GIT_CLONE_TIMESTAMP);
+    private static final Attempt ATTEMPT_ON_FORCE_FORMULA = new Attempt(Q_FORCE_FORMULA, "mass * acceleration", true,
+            ATTEMPT_ON_FORCE_FORMULA_TIMESTAMP);
+    private static final Attempt ATTEMPT_ON_GIT_MERGE = new Attempt(Q_GIT_MERGE, "rebase and master", true,
+            ATTEMPT_ON_GIT_MERGE_TIMESTAMP);
 
     public static Person[] getSamplePersons() {
         return new Person[] {

@@ -84,7 +84,7 @@ public class Card {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(question, answer, topics);
+        return Objects.hash(question);
     }
 
     @Override
