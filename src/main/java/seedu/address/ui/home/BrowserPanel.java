@@ -12,8 +12,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.CardPanelSelectionChangedEvent;
-import seedu.address.commons.events.ui.DisplayBrowserEventChangedEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.person.Person;
@@ -49,7 +47,7 @@ public class BrowserPanel extends UiPart<Region> {
         loadPage(SEARCH_PAGE_URL + person.getName().fullName);
     }
 
-    private void loadCardPage(Card card) {
+    public void loadCardPage(Card card) {
         loadPage(SEARCH_PAGE_URL + card.getQuestion().value);
     }
 
@@ -76,17 +74,5 @@ public class BrowserPanel extends UiPart<Region> {
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPersonPage(event.getNewSelection());
-    }
-
-    @Subscribe
-    private void handleCardPanelSelectionChangedEvent(CardPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadCardPage(event.getNewSelection());
-    }
-
-    @Subscribe
-    private void handleDisplayBrowserEventChangedEvent(DisplayBrowserEventChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        browser.setVisible(event.isBrowserVisible());
     }
 }
