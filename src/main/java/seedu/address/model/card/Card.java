@@ -19,6 +19,9 @@ public class Card {
     private final Answer answer;
     private final Set<Topic> topics = new HashSet<>();
 
+    // attribute fields
+    private boolean isRecentlyAdded = false;
+
     public Card(Question question, Answer answer, Set<Topic> topics) {
         this.question = question;
         this.answer = answer;
@@ -43,6 +46,22 @@ public class Card {
      */
     public Set<Topic> getTopics() {
         return Collections.unmodifiableSet(topics);
+    }
+
+    /**
+     * Returns a new card with an updated isRecentlyUpdated status.
+     */
+    public Card updateRecentlyImportedStatus(boolean status) {
+        Card updated = new Card(this.question, this.answer, this.topics);
+        updated.isRecentlyAdded = status;
+        return updated;
+    }
+
+    /**
+     * Returns true if the cards have just been imported.
+     */
+    public boolean isRecentlyAdded() {
+        return isRecentlyAdded;
     }
 
     /**

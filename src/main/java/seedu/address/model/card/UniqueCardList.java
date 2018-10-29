@@ -99,6 +99,13 @@ public class UniqueCardList implements Iterable<Card> {
     }
 
     /**
+     * Returns the number of cards in the {@code UniqueCardList}.
+     */
+    public int size() {
+        return internalList.size();
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Card> asUnmodifiableObservableList() {
