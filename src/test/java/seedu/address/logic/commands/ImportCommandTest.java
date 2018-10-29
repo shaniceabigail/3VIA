@@ -51,7 +51,7 @@ public class ImportCommandTest {
         List<Card> cardList = Arrays.asList(validCard);
 
         CommandResult commandResult = new ImportCommand(file).execute(modelStub, commandHistory);
-        
+
         assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, cardList.size(), file.getFileName()),
                 commandResult.feedbackToUser);
         assertEquals(cardList, modelStub.cardsAdded);
