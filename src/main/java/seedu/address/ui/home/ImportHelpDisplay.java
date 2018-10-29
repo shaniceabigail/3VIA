@@ -1,11 +1,8 @@
 package seedu.address.ui.home;
 
-import java.util.logging.Logger;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.ui.UiPart;
 
 /**
@@ -13,14 +10,11 @@ import seedu.address.ui.UiPart;
  */
 public class ImportHelpDisplay extends UiPart<Region> {
 
-    private static final Logger logger = LogsCenter.getLogger(ImportHelpDisplay.class);
     private static final String FXML = "home/ImportHelpDisplay.fxml";
-    private static final String IMPORT_FORMAT = "Each question and answer is separated by a tab space.\n"
-            + "Include a whitespace before every topic.\n"
-            + " t/topic t/topic...\n"
-            + "Question1    Answer1\n"
-            + "Question2    Answer2\n"
-            + "Question3    Answer3\n";
+    private static final String IMPORT_FORMAT = " t/topic1 t/topic2\n"
+            + "Question1 \tAnswer1\n"
+            + "Question2 \tAnswer2\n"
+            + "Question3 \tAnswer3\n";
 
     @FXML
     private TextArea importHelp;
