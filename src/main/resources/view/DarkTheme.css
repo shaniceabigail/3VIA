@@ -3,6 +3,18 @@
     background-color: #383838; /* Used in the default.html file */
 }
 
+.scroll-pane {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
+.anchor-pane {
+    -fx-background-color: derive(#1d1d1d, 20%);
+}
+
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";

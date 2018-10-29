@@ -1,5 +1,6 @@
 package seedu.address.ui.home;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -26,6 +27,7 @@ public class CardInfoPanel extends UiPart<Region> {
     private Card card;
     private TipBox commandTipBox;
     private CardExperience cardExperience;
+    private CardMostRecentMistake cardMostRecentMistake;
 
     @FXML
     private Label cardInfoQuestion;
@@ -37,6 +39,8 @@ public class CardInfoPanel extends UiPart<Region> {
     private StackPane googleCommandTipPlaceholder;
     @FXML
     private StackPane cardExperiencePlaceholder;
+    @FXML
+    private StackPane cardMostRecentMistakePlaceholder;
 
     public CardInfoPanel() {
         super(FXML);
@@ -60,6 +64,13 @@ public class CardInfoPanel extends UiPart<Region> {
 
         cardExperience = new CardExperience(attemptsByCard);
         cardExperiencePlaceholder.getChildren().add(cardExperience.getRoot());
+
+        cardMostRecentMistake = attemptsByCard.stream()
+                .filter(attempt -> !attempt.isCorrect())
+                .max(Comparator.comparing(Attempt::getTimestamp))
+                .map(CardMostRecentMistake::new)
+                .orElseGet(CardMostRecentMistake::new);
+        cardMostRecentMistakePlaceholder.getChildren().add(cardMostRecentMistake.getRoot());
     }
 
     /**
@@ -68,5 +79,6 @@ public class CardInfoPanel extends UiPart<Region> {
     private void cleanUp() {
         cardInfoTopics.getChildren().clear();
         cardExperiencePlaceholder.getChildren().clear();
+        cardMostRecentMistakePlaceholder.getChildren().clear();
     }
 }

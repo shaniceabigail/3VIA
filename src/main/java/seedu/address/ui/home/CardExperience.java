@@ -55,7 +55,5 @@ public class CardExperience extends UiPart<Region> {
         numOfAttemptsText.setText(String.valueOf(attemptsByCard.size()) + " Attempt(s)");
         numCorrectAttemptsText.setText(String.valueOf(numCorrectAttempts));
         numWrongAttemptsText.setText(String.valueOf(numWrongAttempts));
-
-
     }
 }
