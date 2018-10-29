@@ -23,14 +23,13 @@
 <li><a href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code">3.9. Undoing previous command : <code>undo</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">3.10. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code-code-coming-in-v2-0-code">3.11. Clearing all entries : <code>clear</code> <code>[coming in v2.0]</code></a></li>
-<li><a href="#starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code">3.12. Starting an Open Ended Test: <code>testO</code> <code>[coming in v2.0]</code></a></li>
-<li><a href="#starting-a-matching-test-code-testm-code">3.13. Starting a Matching Test: <code>testM</code></a></li>
-<li><a href="#view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code">3.14. View statistics for a certain test: <code>stats</code> <code>[coming in v2.0]</code></a></li>
-<li><a href="#mass-import-code-import-code">3.15. Mass Import: <code>import</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.16. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-data">3.17. Saving data</a></li>
-<li><a href="#multi-player-code-coming-in-v2-0-code">3.18. Multi-Player <code>[coming in v2.0]</code></a></li>
+<li><a href="#starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code">3.11. Starting an Open Ended Test: <code>testO</code> <code>[coming in v2.0]</code></a></li>
+<li><a href="#starting-a-matchtest-code-testm-code">3.12. Starting a MatchTest: <code>testM</code></a></li>
+<li><a href="#view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code">3.13. View statistics for a certain test: <code>stats</code> <code>[coming in v2.0]</code></a></li>
+<li><a href="#mass-import-code-import-code">3.14. Mass Import: <code>import</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.15. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-data">3.16. Saving data</a></li>
+<li><a href="#multi-player-code-coming-in-v2-0-code">3.17. Multi-Player <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -437,23 +436,7 @@ The <code>redo</code> command was not executed as there are no <code>undo</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code-code-coming-in-v2-0-code"><a class="link" href="#clearing-all-entries-code-clear-code-code-coming-in-v2-0-code">3.11. Clearing all entries : <code>clear</code> <code>[coming in v2.0]</code></a></h3>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-Use with caution! Clears all entries in 3VIA and reboots.<br>
-Format: <code>clear</code>
-</td>
-</tr>
-</table>
-</div>
-</div>
-<div class="sect2">
-<h3 id="starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code"><a class="link" href="#starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code">3.12. Starting an Open Ended Test: <code>testO</code> <code>[coming in v2.0]</code></a></h3>
+<h3 id="starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code"><a class="link" href="#starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code">3.11. Starting an Open Ended Test: <code>testO</code> <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p>Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer.<br>
 Format: <code>test t/TOPIC [TIMELIMIT_IN_SECONDS]</code></p>
@@ -476,21 +459,21 @@ Format: <code>test t/TOPIC [TIMELIMIT_IN_SECONDS]</code></p>
 <p>The following commands can only be used during an <code>Open Ended Test</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="answering-a-question"><a class="link" href="#answering-a-question">3.12.1. Answering a question:</a></h4>
+<h4 id="answering-a-question"><a class="link" href="#answering-a-question">3.11.1. Answering a question:</a></h4>
 <div class="paragraph">
 <p>Type your answer in the command field and press <code>enter</code> to submit your answer. If you don&#8217;t have an answer in mind, you can just press <code>enter</code> with nothing in the command field. We accept your silence as an answer.<br>
 Format: <code>ANSWER_FROM_USER</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="determining-the-correctness-of-your-answer"><a class="link" href="#determining-the-correctness-of-your-answer">3.12.2. Determining the correctness of your answer:</a></h4>
+<h4 id="determining-the-correctness-of-your-answer"><a class="link" href="#determining-the-correctness-of-your-answer">3.11.2. Determining the correctness of your answer:</a></h4>
 <div class="paragraph">
 <p>After answering the question, you would be given a comparison between the expected and actual answer you entered. You would be required to determine the correctness of your answer since the questions are open ended. The app will keep track of your score.<br>
 Format: <code>c</code> (correct) OR <code>x</code> (wrong)</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="quit-the-test"><a class="link" href="#quit-the-test">3.12.3. Quit the test:</a></h4>
+<h4 id="quit-the-test"><a class="link" href="#quit-the-test">3.11.3. Quit the test:</a></h4>
 <div class="paragraph">
 <p>Test is exited.<br>
 Format: <code>exit</code></p>
@@ -498,39 +481,66 @@ Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="starting-a-matching-test-code-testm-code"><a class="link" href="#starting-a-matching-test-code-testm-code">3.13. Starting a Matching Test: <code>testM</code></a></h3>
+<h3 id="starting-a-matchtest-code-testm-code"><a class="link" href="#starting-a-matchtest-code-testm-code">3.12. Starting a MatchTest: <code>testM</code></a></h3>
 <div class="paragraph">
-<p>Start a test of matching cards of a specified topic. In a test of matching cards, all the questions and answers in that topic
-will be displayed. The user will then have to match the correct question and answer together.<br>
+<p>Start a test of matching cards for a specified topic. In a MatchTest, all the questions and answers in that topic
+will be displayed. You will then have to match all the correct question and answer together.<br>
 Format: <code>testM TOPIC</code></p>
 </div>
 <div class="paragraph">
 <p>The following commands can only be used during a <code>Matching Test</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="enter-the-matching-cards-match"><a class="link" href="#enter-the-matching-cards-match">3.13.1. Enter the matching cards: match</a></h4>
+<h4 id="enter-the-matching-cards-match"><a class="link" href="#enter-the-matching-cards-match">3.12.1. Enter the matching cards: match</a></h4>
 <div class="paragraph">
-<p>Will match and pair the cards during a matching test.<br>
+<p>Will match and pair the cards during a MatchTest.<br>
 Format: <code>INDEX_OF_QUESTION INDEX_OF_ANSWER</code></p>
+</div>
+<div class="paragraph">
+<p>An example is given in the below screenshot, where the command of <code>1 2</code> will select the question and answer that is boxed
+in green.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/user_guide/match_test/match_command.png" alt="match command format">
+</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="quit-matching-cards-test"><a class="link" href="#quit-matching-cards-test">3.13.2. Quit matching cards test:</a></h4>
+<h4 id="quit-matchtest"><a class="link" href="#quit-matchtest">3.12.2. Quit MatchTest:</a></h4>
 <div class="paragraph">
-<p>Test is exited.<br>
+<p>If you want to stop an ongoing MatchTest, you can enter the <code>exit</code> command at any time during the test. The command
+will bring you to the home page.</p>
+</div>
+<div class="paragraph">
+<p>After the MatchTest has ended, a result page will be shown. After reviewing your results, you can exit from the MatchTest by
+entering the <code>exit</code> command. The command will bring you to the home page.<br>
 Format: <code>exit</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Your attempts from an incomplete MatchTest will be discarded. Only those attempts from a completed MatchTest will
+be saved into your hard disk.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code"><a class="link" href="#view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code">3.14. View statistics for a certain test: <code>stats</code> <code>[coming in v2.0]</code></a></h3>
+<h3 id="view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code"><a class="link" href="#view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code">3.13. View statistics for a certain test: <code>stats</code> <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p>Results of previous tests, questions, expected answers and the user’s answers for that particular topic will be displayed.<br>
 Format: <code>stats [TOPIC]</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="mass-import-code-import-code"><a class="link" href="#mass-import-code-import-code">3.15. Mass Import: <code>import</code></a></h3>
+<h3 id="mass-import-code-import-code"><a class="link" href="#mass-import-code-import-code">3.14. Mass Import: <code>import</code></a></h3>
 <div class="paragraph">
 <p>Quickly imports multiple cards from a text file into 3VIA.<br>
 Format: <code>import FILEPATH</code></p>
@@ -620,7 +630,7 @@ Duplicate questions in the import text fie will result in import failure.
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.16. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.15. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
@@ -639,14 +649,14 @@ command <code>exit</code> used in any of the test page will bring you to the hom
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">3.17. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">3.16. Saving data</a></h3>
 <div class="paragraph">
 <p>3VIA saves data in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="multi-player-code-coming-in-v2-0-code"><a class="link" href="#multi-player-code-coming-in-v2-0-code">3.18. Multi-Player <code>[coming in v2.0]</code></a></h3>
+<h3 id="multi-player-code-coming-in-v2-0-code"><a class="link" href="#multi-player-code-coming-in-v2-0-code">3.17. Multi-Player <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable Multi-Player}</em></p>
 </div>
@@ -723,4 +733,4 @@ e.g.<code>select 2</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-29 15:02:51 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-29 15:35:55 UTC</div></div></div></body></html>
