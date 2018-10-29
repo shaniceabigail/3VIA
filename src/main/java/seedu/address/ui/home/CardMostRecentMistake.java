@@ -26,6 +26,8 @@ public class CardMostRecentMistake extends UiPart<Region> {
     private Label timestampOfAttemptText;
     @FXML
     private Label answerOfTheMistakeText;
+    @FXML
+    private Label expectedAnswerText;
 
 
     public CardMostRecentMistake() {
@@ -47,9 +49,11 @@ public class CardMostRecentMistake extends UiPart<Region> {
         if (mostRecentMistake == null) {
             timestampOfAttemptText.setText("-");
             answerOfTheMistakeText.setText("-");
+            expectedAnswerText.setText("-");
         } else {
             timestampOfAttemptText.setText(DateUtil.format(mostRecentMistake.getTimestamp()));
             answerOfTheMistakeText.setText(mostRecentMistake.getRawAnswer());
+            expectedAnswerText.setText(mostRecentMistake.getAttemptedCard().getAnswer().value);
         }
     }
 }

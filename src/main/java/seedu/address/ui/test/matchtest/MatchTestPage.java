@@ -42,7 +42,7 @@ public class MatchTestPage extends TriviaTestPage {
         matchTestAnswerListPanelPlaceholder.getChildren().add(answerListPanel.getRoot());
 
         matchTestTopicText.setText(matchTest.getTopic().topicName);
-        matchTestDurationText.textProperty().bind(matchTest.getDuration().asString());
+        matchTestDurationText.textProperty().bind(matchTest.getDuration().asString().concat(" s"));
 
         registerAsAnEventHandler(this);
     }

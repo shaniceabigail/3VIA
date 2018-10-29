@@ -46,7 +46,7 @@ public class MatchTestResultPage extends TriviaTestResultPage {
         durationText.setText(String.valueOf(matchTest.getDuration().getValue()) + "s");
         topicText.setText(matchTest.getTopic().topicName);
         numOfCardsText.setText(String.valueOf(matchTest.getCardsTested().size()));
-        numOfAttemptsText.setText(String.valueOf(matchTest.getAttempts().size()) + " Attempts");
+        numOfAttemptsText.setText(String.valueOf(matchTest.getAttempts().size()) + " Attempt(s)");
 
         matchAttemptList = new MatchAttemptList(matchTest);
         attemptListPlaceholder.getChildren().add(matchAttemptList.getRoot());
