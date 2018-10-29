@@ -309,16 +309,14 @@ _Imports the contents from the file.txt text file from the specified file locati
 
 IMPORTANT: The file path refers to the *absolute file path* of the import file.
 
-Creating your import file:
+==== Creating your import file:
 
 Open your existing notes or create a new one. You may use any text editing programs such as Microsoft Word, Google Docs, etc.
 Below are 2 rules regarding the import file type and format that must be adhered too.
 
 . Import file type:
-****
 * The file must be in *UTF-8 format*.
 * The file must be a *plain text file* (i.e. file.txt).
-****
 
 [start = 2]
 . Import file format:
@@ -336,7 +334,7 @@ image::import_file_format.png[import file format]
 [WARNING]
 Duplicate questions in the import text file will result in import failure.
 
-Importing your file:
+==== Importing your file:
 
 Now that your file is ready, head over to 3VIA and lets begin the import.
 
@@ -344,6 +342,8 @@ Now that your file is ready, head over to 3VIA and lets begin the import.
 box as seen below.
 
 image::import_step1.png[import step 1]
+
+[start = 2]
 2. Hit enter/ return to confirm. 3VIA will now display a list of cards that has been added to you.
 image::import_file_format.png[import file format]
 
