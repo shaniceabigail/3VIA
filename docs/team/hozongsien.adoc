@@ -20,7 +20,7 @@ Additionally, my main task was to implement a mass import feature.
 
 * *Major enhancement*: added the ability to *import multiple cards*.
 ** What it does: allows the user to add multiple cards into 3VIA at one go.
-** Justification: This feature improves the product significantly for 2 main reasons. Firstly, it incentivises non-existing users to use 3VIA more as the users can import their existing digital notes quickly. Secondly, the time saved from adding new cards into 3VIA can be used for more revision.
+** Justification: This feature incentivises non-existing users to use 3VIA more as the users can import their existing digital notes quickly.
 ** Highlights: This enhancement allows grouping of multiple pairs of questions and answers under a set of topics. Thereby reducing the need to repeatedly tag each question and answer pair with the same set of topics.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
