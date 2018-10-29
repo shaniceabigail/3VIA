@@ -48,11 +48,12 @@ public class ImportCommandTest {
 
         ImportFile file = ImportFileUtil.getValidNoTopicImportFile();
         Card validCard = new CardBuilder().withQuestion("question").withAnswer("answer").withTopics("NoTopic").build();
+        List<Card> cardList = Arrays.asList(validCard);
 
         CommandResult commandResult = new ImportCommand(file).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, file.getFileName()), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validCard), modelStub.cardsAdded);
+        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, cardList.size(), file.getFileName()), commandResult.feedbackToUser);
+        assertEquals(cardList, modelStub.cardsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
@@ -64,11 +65,13 @@ public class ImportCommandTest {
         Card validCard1 = new CardBuilder().withQuestion("question1").withTopics("topic1").build();
         Card validCard2 = new CardBuilder().withQuestion("question2").withTopics("topic1").build();
         Card validCard3 = new CardBuilder().withQuestion("question3").withTopics("topic2", "topic3").build();
+        List<Card> cardList = Arrays.asList(validCard1, validCard2, validCard3);
+
 
         CommandResult commandResult = new ImportCommand(file).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, file.getFileName()), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validCard1, validCard2, validCard3), modelStub.cardsAdded);
+        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, cardList.size(), file.getFileName()), commandResult.feedbackToUser);
+        assertEquals(cardList, modelStub.cardsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
