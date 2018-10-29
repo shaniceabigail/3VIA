@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.HideCardInfoPanelEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -24,6 +26,8 @@ public class RedoCommand extends Command {
 
         model.redoTriviaBundle();
         model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
+
+        EventsCenter.getInstance().post(new HideCardInfoPanelEvent());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
