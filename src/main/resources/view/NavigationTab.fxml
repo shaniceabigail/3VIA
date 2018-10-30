@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane prefHeight="180.0" prefWidth="200.0" rotate="-90.0" snapToPixel="false" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane prefHeight="400.0" prefWidth="401.0" rotate="-90.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <JFXTabPane prefHeight="121.0" prefWidth="401.0" tabMinHeight="1.0" tabMinWidth="1.0">
+      <JFXTabPane prefHeight="400.0" prefWidth="401.0">
          <tabs>
             <Tab text="Home">
               <content>

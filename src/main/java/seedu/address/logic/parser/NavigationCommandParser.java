@@ -2,14 +2,13 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAVIGATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 
 import java.util.stream.Stream;
 
 import javafx.scene.control.Tab;
 import seedu.address.logic.commands.NavigationCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.topic.Topic;
+
 
 /**
  * Parses input argument and creates a new NavigationCommand object
