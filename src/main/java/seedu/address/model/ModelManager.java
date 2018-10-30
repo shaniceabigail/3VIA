@@ -143,16 +143,10 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTriviaBundleChanged();
     }
 
-
     @Override
     public boolean canClearCardList() {
         return versionedTriviaBundle.canClearCardList();
     }
-
-    //@Override
-    //public void clearCardList() {
-    //    versionedTriviaBundle.resetData();
-    //}
 
     @Override
     public void updateCard(Card target, Card editedCard) {
