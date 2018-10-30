@@ -6,9 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.test.matchtest.MatchTest;
+import seedu.address.model.test.openendedtest.OpenEndedTest;
 import seedu.address.ui.test.TriviaTestPage;
-import seedu.address.ui.test.matchtest.AnswerListPanel;
 import seedu.address.ui.test.matchtest.QuestionListPanel;
 
 /**
@@ -33,17 +32,14 @@ public class OpenEndedTestPage extends TriviaTestPage {
     @FXML
     private Label matchTestDurationText;
 
-    public OpenEndedTestPage(MatchTest matchTest) {
+    public OpenEndedTestPage(OpenEndedTest openEndedTest) {
         super(FXML);
 
-        questionListPanel = new QuestionListPanel(matchTest.getQuestions());
+        //questionListPanel = new QuestionListPanel(openEndedTest.getQuestions());
         matchTestQuestionListPanelPlaceholder.getChildren().add(questionListPanel.getRoot());
 
-        answerListPanel = new AnswerListPanel(matchTest.getAnswers());
-        matchTestAnswerListPanelPlaceholder.getChildren().add(answerListPanel.getRoot());
-
-        matchTestTopicText.setText(matchTest.getTopic().topicName);
-        matchTestDurationText.textProperty().bind(matchTest.getDuration().asString());
+        matchTestTopicText.setText(openEndedTest.getTopic().topicName);
+        matchTestDurationText.textProperty().bind(openEndedTest.getDuration().asString());
 
         registerAsAnEventHandler(this);
     }
