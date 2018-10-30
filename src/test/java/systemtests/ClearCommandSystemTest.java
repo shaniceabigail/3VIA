@@ -5,7 +5,7 @@ import org.junit.Test;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.TypicalCards.KEYWORD_MATCHING_WHAT;
 
-import seedu.address.commons.core.Index;
+import seedu.address.commons.core.index.Index;
 
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.RedoCommand;
