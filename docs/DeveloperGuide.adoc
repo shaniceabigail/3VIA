@@ -372,7 +372,7 @@ image::ImportMultipleCardsSequenceDiagram.png[width="800"]
 ** Cons: Unable to undo/ redo import of all cards as the import command is essentially multiple add commands.
 
 // tag::matchingtest[]
-=== Matching Test Feature
+=== MatchTest Feature
 ==== Current Implementation
 The life cycle of a matching test is facilitated by the `AppState` and `MatchTest` model.
 
@@ -416,7 +416,7 @@ Step 7. At this stage, the System will await `exit` command from the user so tha
 
 ==== Design Considerations
 
-===== The static display indexes of the `ListView` for question and answer
+===== The static display indexes of the ListView for question and answer
 * **Alternative 1 (current choice):** Created new classes namely, `IndexedQuestion` and `IndexedAnswer` to uniquely identify the cells in `ListView`.
 ** Pros: Finding the exact question and answer is easy as what the user see is a representative of the id that identifies the question/answer.
 ** Cons: Currently, the classes created are for the sole of having static display indexes during `MatchTest`.
@@ -433,7 +433,7 @@ Step 7. At this stage, the System will await `exit` command from the user so tha
 ** Pros: Easy to implement and each developer will have their freedom of how to implement their own test.
 ** Cons: Will lead to code that is increasingly not manageable.
 
-===== How UI feedback is being received when a `MatchCommand` is executed
+===== How UI feedback is being received when a MatchCommand is executed
 * **Alternative 1 (current choice):** Uses `AsyncEventCenter` to dispatch its events.
 ** Pros: The feedback received by the user is synchronised between question and answer.
 ** Cons: More CPU intensive as it uses multi-threading.

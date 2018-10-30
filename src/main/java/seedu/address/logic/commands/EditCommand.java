@@ -12,8 +12,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.HideCardInfoPanelEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -35,10 +37,10 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_QUESTION + "QUESTION] "
             + "[" + PREFIX_ANSWER + "ANSWER] "
-            + "[" + PREFIX_TOPIC + "TAG]...\n"
+            + "[" + PREFIX_TOPIC + "TOPIC]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_QUESTION + "91234567 "
-            + PREFIX_ANSWER + "johndoe@example.com";
+            + PREFIX_QUESTION + "What is the formula of the force? "
+            + PREFIX_ANSWER + "mass * acceleration";
 
     public static final String MESSAGE_EDIT_CARD_SUCCESS = "Edited Card: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -78,6 +80,8 @@ public class EditCommand extends Command {
         model.updateCard(cardToEdit, editedCard);
         model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
         model.commitTriviaBundle();
+
+        EventsCenter.getInstance().post(new HideCardInfoPanelEvent());
         return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, editedCard));
     }
 

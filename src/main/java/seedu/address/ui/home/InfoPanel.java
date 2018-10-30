@@ -12,6 +12,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.DisplayCardInfoEvent;
 import seedu.address.commons.events.ui.DisplayGoogleSearchEvent;
 import seedu.address.commons.events.ui.DisplayImportHelpEvent;
+import seedu.address.commons.events.ui.HideCardInfoPanelEvent;
 import seedu.address.ui.UiPart;
 
 /**
@@ -68,8 +69,8 @@ public class InfoPanel extends UiPart<Region> {
     }
 
     /**
-     * Bind each node to the visible property, so that when node is hidden the layout of the hidden node will not be
-     * accounted for.
+     * Bind each node to the visible property, so that when the node is hidden, the layout of the hidden node will not
+     * be accounted for.
      */
     private void bindNodesVisibilityProperty() {
         info.getChildren().forEach(node -> {
@@ -109,5 +110,11 @@ public class InfoPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         cardInfoPanel.loadCardPage(event.getCardToDisplay(), event.getAttemptsByCard());
         changeToPanel(cardInfoPanelPlaceholder);
+    }
+
+    @Subscribe
+    private void handleHideCardInfoPanelEvent(HideCardInfoPanelEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        cardInfoPanelPlaceholder.setVisible(false);
     }
 }
