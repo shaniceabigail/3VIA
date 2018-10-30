@@ -19,7 +19,7 @@ By: `CS2103T W12-3 Team`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
 
-3VIA is a great way for _learners_ to *reinforce and test out their knowledge*. Tired of using a mouse or trackpad to navigate? Don't worry, 3VIA is *optimised for a veteran Command Line Interface (CLI) user*, while still having the benefits of a beautiful Graphical User Interface (GUI).
+3VIA is a great way for _learners_ to *reinforce and test out their knowledge*. Tired of using a mouseu or trackpad to navigate? Don't worry, 3VIA is *optimised for a veteran Command Line Interface (CLI) user*, while still having the benefits of a beautiful Graphical User Interface (GUI).
 
 3VIA will spur and energise your desire to be that A* student, without ever leaving the keyboard. We believe that it should only take 3 steps to get that Very Important A (3VIA, get it?).
 
