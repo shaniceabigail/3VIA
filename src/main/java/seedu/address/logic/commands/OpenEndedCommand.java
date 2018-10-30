@@ -31,10 +31,10 @@ public class OpenEndedCommand extends Command {
         requireNonNull(model);
         assert model.getCurrentRunningTest() instanceof OpenEndedTest;
 
-        if (in == 'Y' || in == 'y') {
-            return new CommandResult(MESSAGE_ANSWER_SUCCESS);
-        } else if (in == 'A' || in == 'a') {
+        if (in == 'A' || in == 'a') {
             return new CommandResult(MESSAGE_SHOW_ANSWER);
+        } else if (in == 'Y' || in == 'y') {
+            return new CommandResult(MESSAGE_ANSWER_SUCCESS);
         } else {
             return new CommandResult(MESSAGE_ANSWER_FAILURE);
         }

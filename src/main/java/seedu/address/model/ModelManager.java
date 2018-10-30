@@ -266,6 +266,12 @@ public class ModelManager extends ComponentManager implements Model {
         return isCorrectMatch;
     }
 
+    //=========== Open Ended Tests ==========================================================================
+    public void showAnswer() { }
+
+    public void recordAnswer(char in) { }
+
+
     //=========== Trivia Test Results ==========================================================================
 
     @Override

@@ -43,11 +43,13 @@ public class OpenEndedTest extends TriviaTest {
 
     private ArrayList<Card> shuffledCards;
     private ArrayList<Card> referenceCards;
+    private int numCorrect = 0;
+    private int numWrong = 0;
 
     public OpenEndedTest(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
         super(tag, triviaBundle);
 
-        shuffledCards= shuffleCards(cards);
+        shuffledCards = shuffleCards(cards);
 
         attempts = new ArrayList<>();
 
@@ -60,9 +62,9 @@ public class OpenEndedTest extends TriviaTest {
      * @return an list of cards
      */
     private ArrayList<Card> shuffleCards(List<Card> cards) {
-        ArrayList<Card> shuffledCards = new ArrayList<Card>(cards);
+        ArrayList<Card> shuffledCards = new ArrayList<>(cards);
         Collections.shuffle(shuffledCards);
-        referenceCards = new ArrayList<Card>(shuffledCards);
+        referenceCards = new ArrayList<>(shuffledCards);
         return shuffledCards;
     }
 
@@ -83,6 +85,14 @@ public class OpenEndedTest extends TriviaTest {
         return shuffledCards.isEmpty();
     }
 
+    public void attemptCorrect() { numCorrect += 1; }
+
+    public void attemptWrong() { numWrong += 1; }
+
+    public int getNumCorrect() { return numCorrect; }
+
+    public int getNumWrong() { return numWrong; }
+
     @Override
     public void startTest() { startTimer(); }
 
@@ -101,7 +111,6 @@ public class OpenEndedTest extends TriviaTest {
     public List<Attempt> getAttempts() {
         return attempts;
     }
-
 
     private boolean isValidTest() {
         return shuffledCards.size() >= 1;
