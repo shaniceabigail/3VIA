@@ -314,18 +314,18 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::import[]
 === Mass Import Feature
 
 ==== Current implementation
 The import mechanism is facilitated by `ImportFile` and `TriviaBundle`.
 Additionally, the import mechanism implements the following operations:
-
-* `ImportFile#parseFileToCards()` -- Parse file in a specific format into a unique list of cards.
+* `ImportFile#parseFileToCard` -- Parses a plain text file into a unique list of cards.
 * `TriviaBundle#haveAnyCard()` -- Checks if the cards to add contain any duplicated cards already in the `TriviaBundle`.
 * `TriviaBundle#addMultipleCards()` -- Adds multiple cards into the `TriviaBundle` at once.
 
-These operations are exposed in the Model interface as `Model#parseFileToCards()`,
-`Model#haveAnyCard()`, `Model#addMultipleCards()` respectively.
+The 2 `TriviaBundle` operations are exposed in the Model interface as
+`Model#haveAnyCard()` and `Model#addMultipleCards()` respectively.
 
 The following activity diagram summarizes what happens when a user executes the import command.
 
@@ -340,6 +340,7 @@ Step 2: When the `ImportCommand` executes, the desired import file is first veri
 * the import path points to a file
 * the import file is of plain text type (file.txt)
 * the import file is readable
+* the import file text is in the correct format
 
 Step 3: Once verified, the import file is parsed to form a unique list of cards that is stored in `UniqueCardList`.
 
@@ -370,6 +371,7 @@ image::ImportMultipleCardsSequenceDiagram.png[width="800"]
 * **Alternative 2 (current choice):** Tokenize string based on AddCommand input format.
 ** Pros: Easy to implement as it allows reuse of add command functions.
 ** Cons: Unable to undo/ redo import of all cards as the import command is essentially multiple add commands.
+// end::import[]
 
 // tag::matchingtest[]
 === MatchTest Feature
