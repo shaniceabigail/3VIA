@@ -256,7 +256,6 @@ Format: `c` (correct) OR `x` (wrong)
 Test is exited. +
 Format: `exit`
 
-:imagesDir: images/user_guide/match_test
 === Starting a MatchTest: `testM`
 
 Start a test of matching cards for a specified topic. In a MatchTest, all the questions and answers in that topic
@@ -293,7 +292,6 @@ be saved into your hard disk.
 Results of previous tests, questions, expected answers and the user’s answers for that particular topic will be displayed. +
 Format: `stats [TOPIC]`
 
-:imagesDir: images/user_guide/import
 === Cram More Knowledge!: `import`
 Quickly import multiple flash cards from existing notes or documents into 3VIA.
 
