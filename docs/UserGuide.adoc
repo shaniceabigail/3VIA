@@ -344,7 +344,7 @@ image::import_step1.png[import step 1 pic, 500,500]
 [start = 2]
 2. Hit enter/ return to confirm. 3VIA will now display a list of cards that has been added to you.
 
-image::import_step2.png[import step 2 pic, 600, 800]
+image::import_step2.png[import step 2 pic, 800, 600]
 
 TIP: You can `edit` or `delete` any of the recently imported cards and/or even `undo` the import if you are not satisfied
 with the cards imported.
