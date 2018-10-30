@@ -19,8 +19,10 @@ public class OpenEndedCommand extends Command {
     public static final String MESSAGE_ANSWER_SUCCESS = "Correct!";
     public static final String MESSAGE_ANSWER_FAILURE = "Wrong!";
 
-    public OpenEndedCommand(char in) {
+    private final char in;
 
+    public OpenEndedCommand(char in) {
+        this.in = in;
     }
 
     @Override
@@ -28,8 +30,10 @@ public class OpenEndedCommand extends Command {
         requireNonNull(model);
         assert model.getCurrentRunningTest() instanceof OpenEndedTest;
 
-        try {
-
+        if (in == 'Y' || in == 'y') {
+            return new CommandResult(String.format(MESSAGE_ANSWER_SUCCESS));
+        } else {
+            return new CommandResult(String.format(MESSAGE_ANSWER_FAILURE));
         }
-
+    }
 }
