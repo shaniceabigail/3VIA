@@ -25,6 +25,8 @@ public class ClearCommand extends Command {
 
     public static final String MESSAGE_NO_CARDS = "No cards to be cleared";
 
+    public ClearCommand() {};
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException{
         requireNonNull(model);
@@ -33,7 +35,7 @@ public class ClearCommand extends Command {
             throw new CommandException(MESSAGE_NO_CARDS);
         }
         model.resetData(new TriviaBundle());
-        //model.commitAddressBook();
+        model.commitAddressBook();
         model.commitTriviaBundle();
         return new CommandResult(MESSAGE_SUCCESS);
     }
