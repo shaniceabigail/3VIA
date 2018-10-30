@@ -68,7 +68,7 @@ public class OpenEndedTest extends TriviaTest {
 
     public Card getNextCard() {
         if (shuffledCards.size() == 0) {
-            return NULL;
+            return null;
         }
         Card nextCard = shuffledCards.get(0);
         shuffledCards.remove(0);
@@ -120,11 +120,11 @@ public class OpenEndedTest extends TriviaTest {
     }
 
     @Override
-    public Supplier<? extends TriviaTestPage> getTestingPage() { return () -> new OpenEndedTestPage(this); }
+    public Supplier<? extends TriviaTestPage> getTestingPage() { return () -> new OpenEndedTestPage(null); }
 
     @Override
     public Supplier<? extends TriviaTestResultPage> getResultPage() {
-        return () -> new OpenEndedTestResultPage(this);
+        return () -> new OpenEndedTestResultPage(null);
     }
 
 }
