@@ -19,7 +19,7 @@ public class OpenEndedCommandParser {
         args = args.trim().replaceAll("\\s+", " ");
         String[] values = args.split(" ");
         char in = args.charAt(0);
-        if (in != 'Y' || in != 'y' || in != 'N' || in != 'n') {
+        if (!(in == 'Y' || in == 'y' || in == 'N' || in == 'n' || in =='A' || in == 'a')) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OpenEndedCommand.MESSAGE_USAGE));
         }
 

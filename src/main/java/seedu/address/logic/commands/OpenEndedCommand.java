@@ -18,6 +18,7 @@ public class OpenEndedCommand extends Command {
 
     public static final String MESSAGE_ANSWER_SUCCESS = "Correct!";
     public static final String MESSAGE_ANSWER_FAILURE = "Wrong!";
+    public static final String MESSAGE_SHOW_ANSWER= "Showing Answer!"
 
     private final char in;
 
@@ -32,6 +33,8 @@ public class OpenEndedCommand extends Command {
 
         if (in == 'Y' || in == 'y') {
             return new CommandResult(String.format(MESSAGE_ANSWER_SUCCESS));
+        } else if (in == 'A' || in == 'a') {
+            return new CommandResult(String.format(MESSAGE_SHOW_ANSWER);
         } else {
             return new CommandResult(String.format(MESSAGE_ANSWER_FAILURE));
         }
