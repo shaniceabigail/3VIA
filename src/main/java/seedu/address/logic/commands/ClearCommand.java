@@ -33,7 +33,6 @@ public class ClearCommand extends Command {
             throw new CommandException(MESSAGE_NO_CARDS);
         }
         model.resetData(new TriviaBundle());
-        model.commitAddressBook();
         model.commitTriviaBundle();
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }

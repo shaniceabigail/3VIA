@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalCards.getTypicalTriviaBundle;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -18,12 +19,12 @@ public class ClearCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_emptyTriviaBundle_success() {
+    public void execute_emptyTriviaBundle_failure() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
         expectedModel.commitTriviaBundle();
 
-        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandFailure(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_NO_CARDS);
     }
 
     @Test

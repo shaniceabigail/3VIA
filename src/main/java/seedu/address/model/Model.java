@@ -64,7 +64,6 @@ public interface Model {
      * Returns true if the model has previous address book states to restore.
      */
     void commitAddressBook();
-    //void commitTriviaCards();
 
     /** Returns the TriviaBundle */
     ReadOnlyTriviaBundle getTriviaBundle();
@@ -105,12 +104,6 @@ public interface Model {
      * Return true if the card list is not empty
      */
     boolean canClearCardList();
-
-    /**
-     * Clears the card list
-     * The card list must contain at least one card
-     */
-    //void clearCardList();
 
     /**
      * Updates the filter of the filtered card list to filter by the given {@code predicate}.
