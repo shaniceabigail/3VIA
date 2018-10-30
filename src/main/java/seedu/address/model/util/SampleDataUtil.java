@@ -51,7 +51,7 @@ public class SampleDataUtil {
             false, ATTEMPT_ON_MOMENTUM_WRONG_TIMESTAMP);
     private static final Attempt ATTEMPT_ON_MOMENTUM_CORRECT = new Attempt(Q_MOMENTUM_FORMULA, "mass * velocity",
             true, ATTEMPT_ON_MOMENTUM_CORRECT_TIMESTAMP);
-    private static final Attempt ATTEMPT_ON_GIT_CLONE = new Attempt(Q_MOMENTUM_FORMULA, "git copy",
+    private static final Attempt ATTEMPT_ON_GIT_CLONE = new Attempt(Q_GIT_CLONE, "git copy",
             false, ATTEMPT_ON_GIT_CLONE_TIMESTAMP);
     private static final Attempt ATTEMPT_ON_FORCE_FORMULA = new Attempt(Q_FORCE_FORMULA, "mass * acceleration", true,
             ATTEMPT_ON_FORCE_FORMULA_TIMESTAMP);
