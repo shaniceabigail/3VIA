@@ -272,7 +272,7 @@ Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 An example is given in the below screenshot, where the command of `1 2` will select the question and answer that is boxed
 in green.
 
-image::match_command.png[match command format]
+image::UserGuideMatchCommand.png[width="790"]
 
 ==== Quit MatchTest:
 
