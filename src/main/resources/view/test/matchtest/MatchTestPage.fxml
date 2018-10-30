@@ -15,7 +15,7 @@
          <StackPane prefHeight="100.0" prefWidth="391.0">
             <children>
                 <HBox alignment="CENTER">
-                    <Label styleClass="label-bright-header" text="Topic:" />
+                    <Label styleClass="label-bright-header" text="Topic: " />
                     <Label fx:id="matchTestTopicText" styleClass="label-bright-header" text="\$topicText" />
                 </HBox>
             </children>
