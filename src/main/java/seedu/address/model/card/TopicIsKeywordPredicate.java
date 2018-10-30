@@ -19,7 +19,7 @@ public class TopicIsKeywordPredicate implements Predicate<Card> {
     @Override
     public boolean test(Card card) {
         return card.getTopics().stream()
-                .anyMatch(topic -> topic.topicName.toLowerCase().equals(keyword.toLowerCase()));
+                .anyMatch(topic -> topic.topicName.equals(keyword));
     }
 
     @Override

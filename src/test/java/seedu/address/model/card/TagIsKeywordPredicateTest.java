@@ -13,9 +13,6 @@ public class TagIsKeywordPredicateTest {
         TopicIsKeywordPredicate predicate = new TopicIsKeywordPredicate("Physics");
         assertTrue(predicate.test(new CardBuilder().withTopics("Physics").build()));
 
-        // Caps insensitive
-        assertTrue(predicate.test(new CardBuilder().withTopics("pHySicS").build()));
-
         // Works for cards with multiple tags
         assertTrue(predicate.test(new CardBuilder().withTopics("GeneralKnowledge", "Physics").build()));
         assertTrue(predicate.test(new CardBuilder().withTopics("Physics", "GeneralKnowledge").build()));
@@ -26,6 +23,9 @@ public class TagIsKeywordPredicateTest {
     public void test_cardDoesNotContainTag_returnsFalse() {
         TopicIsKeywordPredicate predicate = new TopicIsKeywordPredicate("NotATag");
         assertFalse(predicate.test(new CardBuilder().withTopics("ATag").build()));
+
+        // Caps insensitive
+        assertFalse(predicate.test(new CardBuilder().withTopics("pHySicS").build()));
 
         // Works for cards with multiple tags
         assertFalse(predicate.test(new CardBuilder().withTopics("ATag", "BTag").build()));

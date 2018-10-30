@@ -23,7 +23,7 @@
             <Insets bottom="5.0" left="5.0" top="5.0" />
          </VBox.margin>
       </HBox>
-      <VBox prefWidth="100.0">
+      <VBox prefWidth="100.0" VBox.vgrow="ALWAYS">
          <VBox.margin>
             <Insets bottom="15.0" left="5.0" right="15.0" top="10.0" />
          </VBox.margin>
