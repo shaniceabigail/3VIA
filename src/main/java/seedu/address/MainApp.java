@@ -103,7 +103,7 @@ public class MainApp extends Application {
                 AddressBook.class);
         initialTriviaBundleData = readData(storage::readTriviaBundle, SampleDataUtil::getSampleTriviaBundle,
                 TriviaBundle::new, TriviaBundle.class);
-        initialTriviaResults = readData(storage::readTriviaResults, SampleDataUtil::getSampleTriviaResults,
+        initialTriviaResults = readData(storage::readTriviaResults, TriviaResults::new,
                 TriviaResults::new, TriviaResults.class);
 
         return new ModelManager(initialData, initialTriviaBundleData, initialTriviaResults, userPrefs);
