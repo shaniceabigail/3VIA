@@ -26,7 +26,7 @@
 <li><a href="#starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code">3.11. Starting an Open Ended Test: <code>testO</code> <code>[coming in v2.0]</code></a></li>
 <li><a href="#starting-a-matchtest-code-testm-code">3.12. Starting a MatchTest: <code>testM</code></a></li>
 <li><a href="#view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code">3.13. View statistics for a certain test: <code>stats</code> <code>[coming in v2.0]</code></a></li>
-<li><a href="#mass-import-code-import-code">3.14. Mass Import: <code>import</code></a></li>
+<li><a href="#cram-more-knowledge-code-import-code">3.14. Cram More Knowledge!: <code>import</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">3.15. Exiting the program : <code>exit</code></a></li>
 <li><a href="#saving-data">3.16. Saving data</a></li>
 <li><a href="#multi-player-code-coming-in-v2-0-code">3.17. Multi-Player <code>[coming in v2.0]</code></a></li>
@@ -502,7 +502,7 @@ in green.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/user_guide/match_test/match_command.png" alt="match command format">
+<img src="images/match_command.png" alt="match command format">
 </div>
 </div>
 </div>
@@ -540,27 +540,12 @@ Format: <code>stats [TOPIC]</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="mass-import-code-import-code"><a class="link" href="#mass-import-code-import-code">3.14. Mass Import: <code>import</code></a></h3>
+<h3 id="cram-more-knowledge-code-import-code"><a class="link" href="#cram-more-knowledge-code-import-code">3.14. Cram More Knowledge!: <code>import</code></a></h3>
 <div class="paragraph">
-<p>Quickly imports multiple cards from a text file into 3VIA.<br>
-Format: <code>import FILEPATH</code></p>
+<p>Quickly import multiple flash cards from existing notes or documents into 3VIA.</p>
 </div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>The file must be a <strong>plain text file</strong> (file.txt).</p>
-</li>
-<li>
-<p>The files must be in <strong>UTF-8 format</strong>.</p>
-</li>
-<li>
-<p>The file path refers to the <strong>absolute file path</strong> of the import file.</p>
-</li>
-</ul>
-</div>
-</div>
+<div class="paragraph">
+<p>Format: <code>import FILEPATH</code></p>
 </div>
 <div class="paragraph">
 <p>Example:</p>
@@ -581,16 +566,55 @@ Format: <code>import FILEPATH</code></p>
 </div>
 </div>
 </div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+The file path refers to the <strong>absolute file path</strong> of the import file.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="creating-your-import-file"><a class="link" href="#creating-your-import-file">3.14.1. Creating your import file:</a></h4>
 <div class="paragraph">
+<p>Open your existing notes or create a new one. You may use any text editing programs such as Microsoft Word, Google Docs, etc.
+Below are 2 rules regarding the import file type and format that must be adhered too.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Import file type:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The file must be in <strong>UTF-8 format</strong>.</p>
+</li>
+<li>
+<p>The file must be a <strong>plain text file</strong> (i.e. file.txt).</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
 <p>Import file format:</p>
+</li>
+</ol>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/user_guide/import/import-file-format.png" alt="import file format">
+<img src="images/import_file_format.png" alt="import file format">
 </div>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Format legend</caption>
+<caption class="title">Formating explaination</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 66.6667%;">
@@ -604,15 +628,15 @@ Format: <code>import FILEPATH</code></p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>SPACE</kbd> + <kbd>t</kbd> + <kbd>/</kbd></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">To indicate presence of a topic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A space and "t/" prefix separates each topic</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>TAB</kbd></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">To separate a question and an answer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A tab space separates a question and an answer</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><kbd>&#9166;</kbd></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">To separate each card</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A new line separates each card</p></td>
 </tr>
 </tbody>
 </table>
@@ -623,10 +647,55 @@ Format: <code>import FILEPATH</code></p>
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Duplicate questions in the import text fie will result in import failure.
+Duplicate questions in the import text file will result in import failure.
 </td>
 </tr>
 </table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="importing-your-file"><a class="link" href="#importing-your-file">3.14.2. Importing your file:</a></h4>
+<div class="paragraph">
+<p>Now that your file is ready, head over to 3VIA and lets begin the import.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Enter the <code>import</code> command followed by the <strong>absolute file path</strong> of the import file you previously created in the command
+box as seen below.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/import_step1.png" alt="import step 1 pic" width="500" height="500">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Hit enter/ return to confirm. 3VIA will now display a list of cards that has been added to you.</p>
+</li>
+</ol>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/import_step2.png" alt="import step 2 pic" width="800" height="600">
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+You can <code>edit</code> or <code>delete</code> any of the recently imported cards and/or even <code>undo</code> the import if you are not satisfied
+with the cards imported.
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -733,4 +802,4 @@ e.g.<code>select 2</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-29 16:05:07 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-30 07:44:54 UTC</div></div></div></body></html>
