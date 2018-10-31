@@ -112,17 +112,15 @@ public class EditCommandSystemTest extends AppSystemTest {
 
         /* --------------------- Performing edit operation while a card is selected -------------------------- */
 
-        /* Case: selects first card in the card list, edit a card -> edited, card selection remains unchanged but
-         * browser url changes
+        /* Case: selects first card in the card list, edit a card -> edited, card selection changes to the edited card,
+         * and CardInfoPanel changes to display the info of the selected card.
          */
         showAllCards();
         index = INDEX_FIRST_CARD;
         selectCard(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUESTION_DESC_PM_OF_SG
                 + ANSWER_DESC_PM_OF_SG + TOPIC_DESC_GEN_KNOWLEDGE;
-        // this can be misleading: card selection actually remains unchanged but the
-        // browser's url is updated to reflect the new card's question
-        assertCommandSuccess(command, index, Q_PM_OF_SG, index);
+        assertCommandSuccess(command, index, Q_PM_OF_SG);
 
         /* --------------------------------- Performing invalid edit operation -------------------------------------- */
 
@@ -180,28 +178,19 @@ public class EditCommandSystemTest extends AppSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Index, Card, Index)} except that
-     * the browser url and selected card remain unchanged.
-     * @param toEdit the index of the current model's filtered list
-     * @see EditCommandSystemTest#assertCommandSuccess(String, Index, Card, Index)
-     */
-    private void assertCommandSuccess(String command, Index toEdit, Card editedCard) {
-        assertCommandSuccess(command, toEdit, editedCard, null);
-    }
-
-    /**
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String, Index)} and in addition,<br>
      * 1. Asserts that result display box displays the success message of executing {@code EditCommand}.<br>
      * 2. Asserts that the model related components are updated to reflect the card at index {@code toEdit} being
      * updated to values specified {@code editedCard}.<br>
+     * 3. Asserts that the editCard is selected after the edit and CardInfoPanel is displayed.
      * @param toEdit the index of the current model's filtered list.
      * @see EditCommandSystemTest#assertCommandSuccess(String, Model, String, Index)
      */
-    private void assertCommandSuccess(String command, Index toEdit, Card editedCard,
-            Index expectedSelectedCardIndex) {
+    private void assertCommandSuccess(String command, Index toEdit, Card editedCard) {
         Model expectedModel = getModel();
         expectedModel.updateCard(expectedModel.getFilteredCardList().get(toEdit.getZeroBased()), editedCard);
         expectedModel.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
+        Index expectedSelectedCardIndex = Index.fromZeroBased(expectedModel.getFilteredCardList().indexOf(editedCard));
 
         assertCommandSuccess(command, expectedModel,
                 String.format(EditCommand.MESSAGE_EDIT_CARD_SUCCESS, editedCard), expectedSelectedCardIndex);
@@ -238,7 +227,7 @@ public class EditCommandSystemTest extends AppSystemTest {
         if (expectedSelectedCardIndex != null) {
             assertSelectedCardChanged(expectedSelectedCardIndex);
         } else {
-            assertSelectedCardViewUnchanged();
+            assertCardInfoPanelEmpty();
         }
         assertStatusBarUnchangedExceptSyncStatus();
     }
