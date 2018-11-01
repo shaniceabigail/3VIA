@@ -196,9 +196,7 @@ public class AddressBookParserTest {
         model.startTriviaTest(new MatchTest(new Topic(VALID_TOPIC_PHYSICS),
                 model.getTriviaBundle()));
         assertTrue(parseCommand("1 2") instanceof MatchCommand);
-        // Will only take the first 2
-        assertTrue(parseCommand("3 4 5 6") instanceof MatchCommand);
-        assertTrue(parseCommand("3 4 5 6")
+        assertTrue(parseCommand("3 4")
                 .equals(new MatchCommand(Index.fromOneBased(3), Index.fromOneBased(4))));
     }
 

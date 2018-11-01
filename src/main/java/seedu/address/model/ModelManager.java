@@ -263,6 +263,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean matchQuestionAndAnswer(Index questionIndex, Index answerIndex) throws IndexOutOfBoundsException {
         assert currentRunningTest instanceof MatchTest;
+        requireNonNull(answerIndex);
 
         MatchTest matchTest = (MatchTest) currentRunningTest;
         boolean isCorrectMatch = matchTest.match(questionIndex, answerIndex);

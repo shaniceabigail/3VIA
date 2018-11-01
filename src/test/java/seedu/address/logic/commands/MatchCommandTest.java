@@ -55,25 +55,30 @@ public class MatchCommandTest {
     }
 
     @Test
-    public void execute_matchSuccess() {
+    public void execute_correctMatch() {
         Index[] expectedEarthIndexes = MatchTestUtil.getIndexes(expectedMatchTest, Q_EARTH_ROUND);
         Index[] actualEarthIndexes = MatchTestUtil.getIndexes(matchTest, Q_EARTH_ROUND);
         Index[] expectedForceIndexes = MatchTestUtil.getIndexes(expectedMatchTest, Q_FORCE_FORMULA);
         Index[] actualForceIndexes = MatchTestUtil.getIndexes(matchTest, Q_FORCE_FORMULA);
 
         // Matching for the first time
-        assertMatchCommandSuccess(actualEarthIndexes, expectedEarthIndexes);
+        assertMatchCommandCorrectMatch(actualEarthIndexes, expectedEarthIndexes);
 
         // Matching for the second time
-        assertMatchCommandSuccess(actualForceIndexes, expectedForceIndexes);
+        assertMatchCommandCorrectMatch(actualForceIndexes, expectedForceIndexes);
     }
 
     @Test
-    public void execute_matchFailure() {
+    public void execute_wrongMatch() {
+        // WRONG MATCH
         Index wrongCardCombiQ = MatchTestUtil.getIndexes(matchTest, Q_EARTH_ROUND)[0];
         Index wrongCardCombiA = MatchTestUtil.getIndexes(matchTest, Q_FORCE_FORMULA)[1];
-        assertCommandFailure(new MatchCommand(wrongCardCombiQ, wrongCardCombiA), model, commandHistory,
-                MatchCommand.MESSAGE_MATCH_FAILURE);
+
+        Index expectedWrongCardCombiQ = MatchTestUtil.getIndexes(expectedMatchTest, Q_EARTH_ROUND)[0];
+        Index expectedWrongCardCombiA = MatchTestUtil.getIndexes(expectedMatchTest, Q_FORCE_FORMULA)[1];
+
+        assertMatchCommandWrongMatch(wrongCardCombiQ, wrongCardCombiA,
+                expectedWrongCardCombiQ, expectedWrongCardCombiA);
     }
 
     @Test
@@ -93,12 +98,23 @@ public class MatchCommandTest {
     }
 
     /**
-     * Execute the match command using the card's question and answer to simulate a matching success.
+     * Execute the match command using the card's question and answer to simulate a correct match.
      */
-    private void assertMatchCommandSuccess(Index[] actualIndexes, Index[] expectedIndexes) {
+    private void assertMatchCommandCorrectMatch(Index[] actualIndexes, Index[] expectedIndexes) {
         expectedModel.matchQuestionAndAnswer(expectedIndexes[0], expectedIndexes[1]);
 
         assertCommandSuccess(new MatchCommand(actualIndexes[0], actualIndexes[1]), model, commandHistory,
-                MatchCommand.MESSAGE_MATCH_SUCCESS, expectedModel);
+                MatchCommand.MESSAGE_CORRECT_MATCH, expectedModel);
+    }
+
+    /**
+     * Execute the match command using the card's question and answer to simulate a wrong match.
+     */
+    private void assertMatchCommandWrongMatch(Index actualIndexQ, Index actualIndexA,
+                                              Index expectedIndexQ, Index expectedIndexA) {
+        expectedModel.matchQuestionAndAnswer(expectedIndexQ, expectedIndexA);
+
+        assertCommandSuccess(new MatchCommand(actualIndexQ, actualIndexA), model, commandHistory,
+                MatchCommand.MESSAGE_WRONG_MATCH, expectedModel);
     }
 }
