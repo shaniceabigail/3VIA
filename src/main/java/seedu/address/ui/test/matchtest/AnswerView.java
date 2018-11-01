@@ -7,9 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.card.Answer;
+import seedu.address.model.card.IndexedAnswer;
 import seedu.address.ui.UiPart;
 
 /**
@@ -18,7 +17,7 @@ import seedu.address.ui.UiPart;
 public class AnswerView extends UiPart<Region> {
     private static final String FXML = "test/matchtest/AnswerView.fxml";
 
-    public final Answer answer;
+    public final IndexedAnswer answer;
     private final Logger logger = LogsCenter.getLogger(AnswerView.class);
 
     @FXML
@@ -28,24 +27,11 @@ public class AnswerView extends UiPart<Region> {
     @FXML
     private Label answerText;
 
-    public AnswerView(Answer answer, int displayedIndex) {
+    public AnswerView(IndexedAnswer answer) {
         super(FXML);
         this.answer = answer;
-        id.setText(displayedIndex + ". ");
+        id.setText(answer.getId() + ". ");
         answerText.setText(answer.value);
-    }
-
-    public AnswerView(Answer answer, int displayedIndex, boolean isCorrect) {
-        super(FXML);
-        this.answer = answer;
-        id.setText(displayedIndex + ". ");
-        answerText.setText(answer.value);
-        if (isCorrect) {
-            this.flashBackgroundColor(answerViewPane, new Color(0, 1, 0, 1));
-        } else {
-            this.flashBackgroundColor(answerViewPane, new Color(1, 0, 0, 1));
-
-        }
     }
 
     @Override
