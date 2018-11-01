@@ -49,7 +49,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 2, 1, true);
+    public static final Version VERSION = new Version(1, 3, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -103,7 +103,7 @@ public class MainApp extends Application {
                 AddressBook.class);
         initialTriviaBundleData = readData(storage::readTriviaBundle, SampleDataUtil::getSampleTriviaBundle,
                 TriviaBundle::new, TriviaBundle.class);
-        initialTriviaResults = readData(storage::readTriviaResults, SampleDataUtil::getSampleTriviaResults,
+        initialTriviaResults = readData(storage::readTriviaResults, TriviaResults::new,
                 TriviaResults::new, TriviaResults.class);
 
         return new ModelManager(initialData, initialTriviaBundleData, initialTriviaResults, userPrefs);

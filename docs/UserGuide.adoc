@@ -229,6 +229,11 @@ _`delete 1` command is reapplied_ +
 _`clear` command is reapplied_ +
 // end::undoredo[]
 
+=== Clearing all entries : `clear` `[coming in v2.0]`
+[WARNING]
+Use with caution! Clears all entries in 3VIA and reboots. +
+Format: `clear`
+
 === Starting an Open Ended Test: `testO` `[coming in v2.0]`
 
 Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer. +
@@ -256,7 +261,6 @@ Format: `c` (correct) OR `x` (wrong)
 Test is exited. +
 Format: `exit`
 
-:imagesDir: images/user_guide/match_test
 === Starting a MatchTest: `testM`
 
 Start a test of matching cards for a specified topic. In a MatchTest, all the questions and answers in that topic
@@ -273,7 +277,7 @@ Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 An example is given in the below screenshot, where the command of `1 2` will select the question and answer that is boxed
 in green.
 
-image::match_command.png[match command format]
+image::UserGuideMatchCommand.png[width="790"]
 
 ==== Quit MatchTest:
 
@@ -293,16 +297,10 @@ be saved into your hard disk.
 Results of previous tests, questions, expected answers and the user’s answers for that particular topic will be displayed. +
 Format: `stats [TOPIC]`
 
-:imagesDir: images/user_guide/import
-=== Mass Import: `import`
+=== Cram More Knowledge!: `import`
+Quickly import multiple flash cards from existing notes or documents into 3VIA.
 
-Quickly imports multiple cards from a text file into 3VIA. +
 Format: `import FILEPATH`
-****
-* The file must be a *plain text file* (file.txt).
-* The files must be in *UTF-8 format*.
-* The file path refers to the *absolute file path* of the import file.
-****
 
 Example:
 ****
@@ -312,21 +310,49 @@ _Imports the contents from the file.txt text file from the specified file locati
 _Imports the contents from the file.txt text file from the specified file location on Linux._
 ****
 
-Import file format:
+IMPORTANT: The file path refers to the *absolute file path* of the import file.
 
-image::import-file-format.png[import file format]
+==== Creating your import file:
 
+Open your existing notes or create a new one. You may use any text editing programs such as Microsoft Word, Google Docs, etc.
+Below are 2 rules regarding the import file type and format that must be adhered too.
+
+. Import file type:
+* The file must be in *UTF-8 format*.
+* The file must be a *plain text file* (i.e. file.txt).
+
+[start = 2]
+. Import file format:
+
+image::import_file_format.png[import file format]
 [options = "header", cols = "1,2", caption=""]
-.Format legend
+.Formating explaination
 |===
 |Keys| Purpose
-|kbd:[SPACE] + kbd:[t] + kbd:[/]| To indicate presence of a topic
-|kbd:[TAB]| To separate a question and an answer
-|kbd:[&#9166;]| To separate each card
+|kbd:[SPACE] + kbd:[t] + kbd:[/]| A space and "t/" prefix separates each topic
+|kbd:[TAB]| A tab space separates a question and an answer
+|kbd:[&#9166;]| A new line separates each card
 |===
 
 [WARNING]
-Duplicate questions in the import text fie will result in import failure.
+Duplicate questions in the import text file will result in import failure.
+
+==== Importing your file:
+
+Now that your file is ready, head over to 3VIA and lets begin the import.
+
+1. Enter the `import` command followed by the *absolute file path* of the import file you previously created in the command
+box as seen below.
+
+image::import_step1.png[import step 1 pic, 500,500]
+
+[start = 2]
+2. Hit enter/ return to confirm. 3VIA will now display a list of cards that has been added to you.
+
+image::import_step2.png[import step 2 pic, 800, 600]
+
+TIP: You can `edit` or `delete` any of the recently imported cards and/or even `undo` the import if you are not satisfied
+with the cards imported.
 
 === Exiting the program : `exit`
 
