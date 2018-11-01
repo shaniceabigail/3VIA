@@ -1151,10 +1151,24 @@ from <code>TriviaTest</code> which has the functionality of storing the necessar
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Finding the exact question and answer is easy as what the user see is a representative of the id that identifies the question/answer.</p>
+<p>Pro:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Finding the exact question and answer is easy as what the user see is a representative of the Id that identifies the question/answer.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Cons: Currently, the classes created are for the sole of having static display indexes during <code>MatchTest</code>.</p>
+<p>Con:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Currently, the classes created are for the sole purpose of having static display indexes during <code>MatchTest</code>.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -1164,10 +1178,19 @@ from <code>TriviaTest</code> which has the functionality of storing the necessar
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: The implementation details will be contained within <code>MatchTest</code>.</p>
+<p>Cons:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Additional work is required to maintain the <code>List</code> data structure, to ensure that it is updated every time a question or answer is removed from the UI.</p>
 </li>
 <li>
-<p>Cons: Additional work is require to maintain the <code>List</code> data structure, to ensure that it is updated every time a question or answer is removed.</p>
+<p>The questions and answers are displayed using <code>ListView</code>, and since the mapping of actual index to display index is not an attribute to the question/answer,
+the mapping will be needed to be passed into the UI component. This mapping will then be used by the constructor of <code>ListView</code> to
+create a static display index of question and answer. Hence, this design consideration was not implemented due to abstraction that is leaking into the UI.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -1184,13 +1207,27 @@ from <code>TriviaTest</code> which has the functionality of storing the necessar
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Follows Open-Close Principle which increases the extensibility of the testing feature in 3VIA.</p>
+<p>Pro:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Follows Open-Close Principle which increases the extensibility of the testing feature in 3VIA.</p>
 </li>
 <li>
-<p>Pros: Increases the re-usability of similar codes, and promotes cleaner code.</p>
+<p>Increases the re-usability of similar codes, and promotes cleaner code.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Cons: The implementation of different tests have to follow the structure of TriviaTest very strictly.</p>
+<p>Con:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The implementation of different tests have to follow the structure of TriviaTest very strictly.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -1200,10 +1237,24 @@ from <code>TriviaTest</code> which has the functionality of storing the necessar
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement and each developer will have their freedom of how to implement their own test.</p>
+<p>Pro:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Easy to implement and each developer will have their freedom of how to implement their own test.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Cons: Will lead to code that is increasingly not manageable.</p>
+<p>Con:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Will lead to code that is increasingly not manageable.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -1220,23 +1271,51 @@ from <code>TriviaTest</code> which has the functionality of storing the necessar
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: The feedback received by the user is synchronised between question and answer.</p>
-</li>
+<p>Pro:</p>
+<div class="ulist">
+<ul>
 <li>
-<p>Cons: More CPU intensive as it uses multi-threading.</p>
+<p>The feedback received by the user is more synchronised between question and answer.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Uses <code>EventCenter</code> to dispatch its events.</p>
+<p>Con:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easier to debug code that does not use multi-threading and less CPU intensive.</p>
+<p>More CPU intensive as it uses multi-threading.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Cons: The events will be dispatched and handle in a sequential order, as a result the UI feedback for question may not be in sync with feedback for answer.</p>
+<p><strong>Alternative 2:</strong> Uses <code>EventCenter</code> to dispatch its UI event.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pro:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Easier to debug code that does not use multi-threading and less CPU intensive.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Con:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The events will be dispatched and handle in a sequential order, as a result the UI feedback for question may not be in sync with feedback for answer.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -2283,4 +2362,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 13:55:49 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 15:55:56 UTC</div></div></div></body></html>
