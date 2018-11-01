@@ -346,7 +346,7 @@ Step 3: Once verified, the import file is parsed to form a unique list of cards 
 
 Step 4: `TriviaBundle#haveAnyCard()` checks every card in the unique card list against the existing list of cards in `TriviaBundle` for duplicates.
 
-Step 5: The unique card list is then added into `TriviaBundle` via `TriviaBundle#addMultipleCards()`. The number of cards, the cards imported are displayed to the user for verification. +
+Step 5: The unique card list is then added into `TriviaBundle` via `TriviaBundle#addMultipleCards()`. The number of cards and the cards imported are displayed to the user for verification. +
 
 The sequence diagram below describes the import of multiple cards.
 
@@ -367,7 +367,7 @@ image::ImportMultipleCardsSequenceDiagram.png[width="800"]
 +
 image::AlternativeImportClassDiagram.png[width="800"]
 
-*** The `Format` class verifies the formatting of the text file, mark and display the errors with the text file within the application for editing.
+*** The `Format` class verifies the formatting of the text file, marks and displays the errors of the text file within the application for editing.
 +
 Each time an edit is detected, the `Format` class will verify the text file and the `FileParser` will attempt to parse the file into a `UniqueCardList` for import.
 +
@@ -375,7 +375,7 @@ The `ObservableFile` interface allows the UI component to update the preview of 
 ** Pro:
 *** Allows the user to identify errors in formatting and correct them directly in the application.
 ** Con:
-*** An additional step (command)is required to successfully import the cards into the application.
+*** An additional step (command) is required to successfully import the cards into the application.
 
 ===== Aspect: How import executes
 
