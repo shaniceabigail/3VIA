@@ -45,8 +45,9 @@ import seedu.address.ui.test.matchtest.MatchTestResultPage;
  * For a {@code MatchTest} to start, there must be more than 1 cards related to the topic that is specified in the test.
  */
 public class MatchTest extends TriviaTest {
-    public static final String MESSAGE_MATCH_TEST_CONSTRAINS = "Matching test needs more than 1 card with the"
-            + " corresponding topic to proceed.";
+    public static final String MESSAGE_MATCH_TEST_CONSTRAINS = "Unable to start MatchTest with %d card"
+            + " associated to the topic of %s.\n"
+            + "Need more than 1 card to proceed.";
 
     public final TestType testType = TestType.MATCH_TEST;
     private List<MatchAttempt> attempts;
@@ -54,15 +55,15 @@ public class MatchTest extends TriviaTest {
     private final ObservableList<IndexedQuestion> shuffledQuestions;
     private final ObservableList<IndexedAnswer> shuffledAnswers;
 
-    public MatchTest(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
-        super(tag, triviaBundle);
+    public MatchTest(Topic topic, ReadOnlyTriviaBundle triviaBundle) {
+        super(topic, triviaBundle);
 
         shuffledQuestions = getQuestions(cards);
         shuffledAnswers = getAnswers(cards);
 
         attempts = new ArrayList<>();
 
-        checkArgument(isValidMatchTest(), MESSAGE_MATCH_TEST_CONSTRAINS);
+        checkArgument(isValidMatchTest(), String.format(MESSAGE_MATCH_TEST_CONSTRAINS, cards.size(), topic.topicName));
     }
 
     /**
@@ -171,7 +172,7 @@ public class MatchTest extends TriviaTest {
     }
 
     private boolean isValidMatchTest() {
-        return getQuestions().size() > 1;
+        return cards.size() > 1;
     }
 
     /**
