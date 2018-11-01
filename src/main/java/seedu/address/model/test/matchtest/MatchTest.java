@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Supplier;
@@ -121,7 +122,7 @@ public class MatchTest extends TriviaTest {
     }
 
     /**
-     * Add an attempt to the matching test.
+     * Add and return an attempt to the matching test.
      *
      * @param questionIndex The index of the question to match.
      * @param answerIndex The index of the answer to match.
@@ -130,24 +131,56 @@ public class MatchTest extends TriviaTest {
      */
     private MatchAttempt addAttempt(Index questionIndex, Index answerIndex) throws QuestionNotFoundException,
             AnswerNotFoundException {
-        IndexedQuestion question = shuffledQuestions.stream()
-                .filter(q -> q.getId() == questionIndex.getOneBased())
-                .findFirst()
-                .orElseThrow(QuestionNotFoundException::new);
 
-        IndexedAnswer answer = shuffledAnswers.stream()
+        IndexedQuestion question = getIndexedQuestion(questionIndex);
+        IndexedAnswer answer = getIndexedAnswer(answerIndex);
+        Card attemptedCard = getAttemptedCard(question);
+
+        MatchAttempt newAttempt = new MatchAttempt(attemptedCard, question, answer);
+        attempts.add(newAttempt);
+        return newAttempt;
+    }
+
+    /**
+     * Will return the IndexedQuestion that was attempted. Note that the parameter of {@code questionIndex} can be null.
+     * If {@code questionIndex} is null, the first the IndexedQuestion in the list of shuffledQuestions will be
+     * returned.
+     *
+     * Also note that it uses the Id that is associated to IndexedQuestion to identify the attempted IndexedQuestion.
+     */
+    private IndexedQuestion getIndexedQuestion(Index questionIndex) throws QuestionNotFoundException {
+        Optional<Index> optionalQuestionIndex = Optional.ofNullable(questionIndex);
+
+        return optionalQuestionIndex.map(selectedIndex ->
+                shuffledQuestions.stream()
+                        .filter(q -> q.getId() == selectedIndex.getOneBased())
+                        .findFirst()
+                        .orElseThrow(QuestionNotFoundException::new)
+        ).orElse(shuffledQuestions.stream()
+                .findFirst()
+                .orElseThrow(QuestionNotFoundException::new));
+    }
+
+    /**
+     * Will return the IndexedAnswer that was matched.
+     *
+     * Note that it uses the Id that is associated to IndexedAnswer to identify the selected IndexedAnswer.
+     */
+    private IndexedAnswer getIndexedAnswer(Index answerIndex) throws AnswerNotFoundException {
+        return shuffledAnswers.stream()
                 .filter(q -> q.getId() == answerIndex.getOneBased())
                 .findFirst()
                 .orElseThrow(AnswerNotFoundException::new);
+    }
 
-        Card cardWithQuestion = cards.stream()
+    /**
+     * Will return the attempted card which is based on which IndexedQuestion did the user match.
+     */
+    private Card getAttemptedCard(IndexedQuestion question) {
+        return cards.stream()
                 .filter(card -> card.getQuestion().equals(question))
                 .findFirst()
                 .orElseThrow(QuestionNotFoundException::new);
-
-        MatchAttempt newAttempt = new MatchAttempt(cardWithQuestion, question, answer);
-        attempts.add(newAttempt);
-        return newAttempt;
     }
 
     /**

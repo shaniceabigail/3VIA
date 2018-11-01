@@ -261,23 +261,31 @@ Format: `c` (correct) OR `x` (wrong)
 Test is exited. +
 Format: `exit`
 
-=== Starting a MatchTest: `testM`
+=== Start a MatchTest: `testM`
 
-Start a test of matching cards for a specified topic. In a MatchTest, all the questions and answers in that topic
-will be displayed. You will then have to match all the correct question and answer together. +
+Start a test of matching questions and answers for a specified topic. In a MatchTest, all the questions and answers in
+that topic will be displayed. You will then have to match all the correct question to their respective answer. +
 Format: `testM TOPIC`
 
-The following commands can only be used during a `Matching Test`.
+The following commands can only be used during a `MatchTest`.
 
-==== Enter the matching cards: match
+==== Enter the matching cards:
 
-Will match and pair the cards during a MatchTest. +
+Will match a pair of question and answer during a MatchTest. +
 Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 
 An example is given in the below screenshot, where the command of `1 2` will select the question and answer that is boxed
 in green.
 
 image::UserGuideMatchCommand.png[width="790"]
+
+Another way to match a pair of question and answer is to solely enter the index of the answer. By doing so, we will
+assume that you would be matching a question at the top to the answer that is specified. +
+Format: `INDEX_OF_ANSWER`
+
+An example of such a usage can be seen in the the below screenshot.
+
+image::UserGuideMatchCommandWithoutQuestion.png[width="790"]
 
 ==== Quit MatchTest:
 
@@ -395,8 +403,11 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Test* : `test TOPIC TIMELIMIT_IN_SECONDS`
-* *Matching Test* : `testM TOPIC`
-* *Correctness of answer* : `c` (correct) OR `x` (wrong)
+* *Open Ended Test* : `testO TOPIC TIMELIMIT_IN_SECONDS`
+** *Input the answer* : `YOUR_ANSWER`
+** *Correctness of answer* : `c` (correct) OR `x` (wrong)
+* *MatchTest* : `testM TOPIC`
+** *Match question to its answer* : `INDEX_OF_QUESTION INDEX_OF_ANSWER` or `INDEX_OF_ANSWER`
+** *Exit from MatchTest* : `exit`
 * *View statistics of test* : `stats [TOPIC]`
 * *Mass Import* : `import FILEPATH`

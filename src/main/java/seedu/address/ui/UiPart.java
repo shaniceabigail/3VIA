@@ -29,7 +29,7 @@ public abstract class UiPart<T> {
 
     /** Resource folder where FXML files are stored. */
     public static final String FXML_FILE_FOLDER = "/view/";
-    public static final int FLASH_TIME = 750; // 0.75 second
+    public static final int FLASH_TIME = 700; // 0.75 second
 
     private final FXMLLoader fxmlLoader = new FXMLLoader();
 
