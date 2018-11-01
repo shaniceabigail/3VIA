@@ -63,9 +63,9 @@ public class AnswerListPanel extends UiPart<Region> {
         private void handleFlashMatchOutcomeEvent(FlashMatchOutcomeEvent event) {
             if (getIndex() == event.indexOfAnswer) {
                 if (event.isCorrect) {
-                    flashBackgroundColor(this, new Color(0, 1, 0, 1));
+                    flashBackgroundColor(this, new Color(0, 1, 0, 1), this.getBackground());
                 } else {
-                    flashBackgroundColor(this, new Color(1, 0, 0, 1));
+                    flashBackgroundColor(this, new Color(1, 0, 0, 1), this.getBackground());
                 }
             }
         }
