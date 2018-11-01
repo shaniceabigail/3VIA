@@ -252,6 +252,10 @@ public abstract class AppSystemTest {
         assertEquals(expectedSelectedCardIndex.getZeroBased(), getCardListPanel().getSelectedCardIndex());
     }
 
+    protected void assertCardInfoPanelEmpty() {
+        assertFalse(getInfoPanel().getCardInfoPanel().isVisible());
+    }
+
     /**
      * Asserts that the browser's url and the selected card in the person list panel remain unchanged.
      * @see BrowserPanelHandle#isUrlChanged()
