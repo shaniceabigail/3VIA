@@ -320,10 +320,10 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ==== Current implementation
 The import mechanism is facilitated by `ImportFile` and `TriviaBundle`.
 Additionally, the import mechanism implements the following operations:
+
 * `ImportFile#parseFileToCard` -- Parses a plain text file into a unique list of cards.
 * `TriviaBundle#haveAnyCard()` -- Checks if the cards to add contain any duplicated cards already in the `TriviaBundle`.
 * `TriviaBundle#addMultipleCards()` -- Adds multiple cards into the `TriviaBundle` at once.
-
 The 2 `TriviaBundle` operations are exposed in the Model interface as
 `Model#haveAnyCard()` and `Model#addMultipleCards()` respectively.
 
@@ -344,11 +344,11 @@ Step 2: When the `ImportCommand` executes, the desired import file is first veri
 
 Step 3: Once verified, the import file is parsed to form a unique list of cards that is stored in `UniqueCardList`.
 
-Step 4: Every card in the unique card list is checked against the existing list of cards in `TriviaBundle` for duplicates.
+Step 4: `TriviaBundle#haveAnyCard()` checks every card in the unique card list against the existing list of cards in `TriviaBundle` for duplicates.
 
-Step 5: The unique card list is then added into `TriviaBundle`. The number of cards, the cards imported are displayed to the user for verification. +
+Step 5: The unique card list is then added into `TriviaBundle` via `TriviaBundle#addMultipleCards()`. The number of cards, the cards imported are displayed to the user for verification. +
 
-The sequence diagram below shows the import of multiple cards.
+The sequence diagram below describes the import of multiple cards.
 
 image::ImportMultipleCardsSequenceDiagram.png[width="800"]
 
@@ -364,10 +364,13 @@ image::ImportMultipleCardsSequenceDiagram.png[width="800"]
 * **Alternative 2:** 'Stages' the import file by first previewing the imported cards to the user. The actual import is done upon confirmation.
 ** Implementation details: +
 *** Given below is a class diagram describing the interactions for this import mechanism. +
-
++
 image::AlternativeImportClassDiagram.png[width="800"]
+
 *** The `Format` class verifies the formatting of the text file, mark and display the errors with the text file within the application for editing.
-Each time an edit is detected, the `Format` class will verify the text file and the `FIleParser` will attempt to parse the file into a `UniqueCardList` for import.
++
+Each time an edit is detected, the `Format` class will verify the text file and the `FileParser` will attempt to parse the file into a `UniqueCardList` for import.
++
 The `ObservableFile` interface allows the UI component to update the preview of the cards each time the file is edited without a direct dependency to it.
 ** Pro:
 *** Allows the user to identify errors in formatting and correct them directly in the application.
@@ -381,7 +384,7 @@ The `ObservableFile` interface allows the UI component to update the preview of 
 *** Less IO intensive as only one write to file is needed.
 ** Con:
 *** May have heap memory issue if large amounts of cards are stored temporarily.
-* **Alternative 2:** Writes a card to xml file after each card is added.
+* **Alternative 2:** Writes a card to a xml file after each card is added.
 ** Pro:
 *** Easy to implement.
 ** Con:
