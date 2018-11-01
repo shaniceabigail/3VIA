@@ -8,7 +8,7 @@ import seedu.address.ui.UiPart;
 /**
  * A ui for the status bar that is displayed at the header of the application.
  */
-public class  ImportHelpDisplay extends UiPart<Region> {
+public class ImportHelpDisplay extends UiPart<Region> {
     private static final String FXML = "home/ImportHelpDisplay.fxml";
     private static final String IMPORT_FORMAT = " t/topic1 t/topic2\n"
             + "Question1 \tAnswer1\n"
