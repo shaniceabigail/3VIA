@@ -780,19 +780,17 @@ Additionally, the import mechanism implements the following operations:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>ImportFile#parseFileToCards()</code>&#8201;&#8212;&#8201;Parse file in a specific format into a unique list of cards.</p>
+<p><code>ImportFile#parseFileToCard</code>&#8201;&#8212;&#8201;Parses a plain text file into a unique list of cards.</p>
 </li>
 <li>
 <p><code>TriviaBundle#haveAnyCard()</code>&#8201;&#8212;&#8201;Checks if the cards to add contain any duplicated cards already in the <code>TriviaBundle</code>.</p>
 </li>
 <li>
-<p><code>TriviaBundle#addMultipleCards()</code>&#8201;&#8212;&#8201;Adds multiple cards into the <code>TriviaBundle</code> at once.</p>
+<p><code>TriviaBundle#addMultipleCards()</code>&#8201;&#8212;&#8201;Adds multiple cards into the <code>TriviaBundle</code> at once.
+The 2 <code>TriviaBundle</code> operations are exposed in the Model interface as
+<code>Model#haveAnyCard()</code> and <code>Model#addMultipleCards()</code> respectively.</p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>These operations are exposed in the Model interface as <code>Model#parseFileToCards()</code>,
-<code>Model#haveAnyCard()</code>, <code>Model#addMultipleCards()</code> respectively.</p>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarizes what happens when a user executes the import command.</p>
@@ -822,19 +820,22 @@ Additionally, the import mechanism implements the following operations:</p>
 <li>
 <p>the import file is readable</p>
 </li>
+<li>
+<p>the import file text is in the correct format</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
 <p>Step 3: Once verified, the import file is parsed to form a unique list of cards that is stored in <code>UniqueCardList</code>.</p>
 </div>
 <div class="paragraph">
-<p>Step 4: Every card in the unique card list is checked against the existing list of cards in <code>TriviaBundle</code> for duplicates.</p>
+<p>Step 4: <code>TriviaBundle#haveAnyCard()</code> checks every card in the unique card list against the existing list of cards in <code>TriviaBundle</code> for duplicates.</p>
 </div>
 <div class="paragraph">
-<p>Step 5: The unique card list is then added into <code>TriviaBundle</code>. The number of cards, the cards imported are displayed to the user for verification.<br></p>
+<p>Step 5: The unique card list is then added into <code>TriviaBundle</code> via <code>TriviaBundle#addMultipleCards()</code>. The number of cards and the cards imported are displayed to the user for verification.<br></p>
 </div>
 <div class="paragraph">
-<p>The sequence diagram below shows the import of multiple cards.</p>
+<p>The sequence diagram below describes the import of multiple cards.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -845,6 +846,94 @@ Additionally, the import mechanism implements the following operations:</p>
 <div class="sect3">
 <h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
 <div class="sect4">
+<h5 id="aspect-need-for-pre-import-preview"><a class="link" href="#aspect-need-for-pre-import-preview">Aspect: Need for pre-import preview</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1: (current implementation)</strong> Single step to import cards from a text file.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A single command can be executed quickly for an import.</p>
+</li>
+<li>
+<p>Post import edits can be done using existing commands such as <code>edit</code>, <code>delete</code>, etc.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Con:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A single formatting error in the text file will result in an import failure.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> 'Stages' the import file by first previewing the imported cards to the user. The actual import is done upon confirmation.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Implementation details:<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Given below is a class diagram describing the interactions for this import mechanism.<br></p>
+<div class="imageblock">
+<div class="content">
+<img src="images/AlternativeImportClassDiagram.png" alt="AlternativeImportClassDiagram" width="800">
+</div>
+</div>
+</li>
+<li>
+<p>The <code>Format</code> class verifies the formatting of the text file, marks and displays the errors of the text file within the application for editing.</p>
+<div class="paragraph">
+<p>Each time an edit is detected, the <code>Format</code> class will verify the text file and the <code>FileParser</code> will attempt to parse the file into a <code>UniqueCardList</code> for import.</p>
+</div>
+<div class="paragraph">
+<p>The <code>ObservableFile</code> interface allows the UI component to update the preview of the cards each time the file is edited without a direct dependency to it.</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Pro:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Allows the user to identify errors in formatting and correct them directly in the application.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Con:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>An additional step (command) is required to successfully import the cards into the application.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
 <h5 id="aspect-how-import-executes"><a class="link" href="#aspect-how-import-executes">Aspect: How import executes</a></h5>
 <div class="ulist">
 <ul>
@@ -853,23 +942,51 @@ Additionally, the import mechanism implements the following operations:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Less IO intensive as only one write to file is needed.</p>
-</li>
+<p>Pro:</p>
+<div class="ulist">
+<ul>
 <li>
-<p>Cons: May have heap memory issue if large amounts of cards are stored temporarily.</p>
+<p>Less IO intensive as only one write to file is needed.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Writes a card to xml file after each card is added.</p>
+<p>Con:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement.</p>
+<p>May have heap memory issue if large amounts of cards are stored temporarily.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Cons: May have performance issue when large amount of cards are added.</p>
+<p><strong>Alternative 2:</strong> Writes a card to a xml file after each card is added.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pro:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Easy to implement.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Con:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>May have performance issue when large amount of cards are added.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -886,23 +1003,51 @@ Additionally, the import mechanism implements the following operations:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Allows user to undo/ redo import as import is viewed by <code>VersionedAddressBook</code> as a single command.</p>
-</li>
+<p>Pro:</p>
+<div class="ulist">
+<ul>
 <li>
-<p>Cons: May have memory performance issue as multiple cards are stored temporarily in the <code>TriviaBundle</code>.</p>
+<p>Allows user to undo/ redo import as import is viewed by <code>VersionedAddressBook</code> as a single command.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p><strong>Alternative 2 (current choice):</strong> Tokenize string based on AddCommand input format.</p>
+<p>Con:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: Easy to implement as it allows reuse of add command functions.</p>
+<p>May have memory performance issue as multiple cards are stored temporarily in the <code>TriviaBundle</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>Cons: Unable to undo/ redo import of all cards as the import command is essentially multiple add commands.</p>
+<p><strong>Alternative 2:</strong> Tokenize string based on AddCommand input format.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pro:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Easy to implement as it allows reuse of add command functions.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Con:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Unable to undo/ redo import of all cards as the import command is essentially multiple add commands.</p>
+</li>
+</ul>
+</div>
 </li>
 </ul>
 </div>
@@ -2138,4 +2283,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 07:55:52 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-01 11:10:29 UTC</div></div></div></body></html>
