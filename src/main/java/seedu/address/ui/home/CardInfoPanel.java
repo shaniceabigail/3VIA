@@ -68,8 +68,8 @@ public class CardInfoPanel extends UiPart<Region> {
         cardMostRecentMistake = attemptsByCard.stream()
                 .filter(attempt -> !attempt.isCorrect())
                 .max(Comparator.comparing(Attempt::getTimestamp))
-                .map(CardMostRecentMistake::new)
-                .orElseGet(CardMostRecentMistake::new);
+                .map(attempt -> new CardMostRecentMistake(card, attempt))
+                .orElseGet(() -> new CardMostRecentMistake(card));
         cardMostRecentMistakePlaceholder.getChildren().add(cardMostRecentMistake.getRoot());
     }
 

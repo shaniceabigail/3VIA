@@ -58,6 +58,14 @@ public class TriviaBundle implements ReadOnlyTriviaBundle {
         setCards(newData.getCardList());
     }
 
+    /**
+     *
+     * Return if the card list {@code cards} can be cleared
+     */
+    public boolean canClearCardList() {
+        return !cards.isEmpty();
+    }
+
     //// card-level operations
 
     /**

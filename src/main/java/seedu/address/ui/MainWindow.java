@@ -140,7 +140,7 @@ public class MainWindow extends UiPart<Stage> {
         homePage = new Homepage(logic);
         displayPagePlaceHolder.getChildren().add(homePage.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getTriviaBundleFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         navigationTab = new NavigationTabController();

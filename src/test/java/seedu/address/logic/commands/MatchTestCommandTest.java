@@ -52,6 +52,6 @@ public class MatchTestCommandTest {
     @Test
     public void execute_testDidNotStart() {
         assertCommandFailure(new MatchTestCommand(new Topic(VALID_TOPIC_NO_TOPIC)), model, commandHistory,
-                MatchTest.MESSAGE_MATCH_TEST_CONSTRAINS);
+                String.format(MatchTest.MESSAGE_MATCH_TEST_CONSTRAINS, 0, VALID_TOPIC_NO_TOPIC));
     }
 }

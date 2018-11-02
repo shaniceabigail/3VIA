@@ -29,7 +29,7 @@ public abstract class UiPart<T> {
 
     /** Resource folder where FXML files are stored. */
     public static final String FXML_FILE_FOLDER = "/view/";
-    public static final int FLASH_TIME = 750; // 0.75 second
+    public static final int FLASH_TIME = 500; // 0.5 second
 
     private final FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -122,7 +122,7 @@ public abstract class UiPart<T> {
      * @param color The color of the flash.
      *
      */
-    public void flashBackgroundColor(Region region, Color color) {
+    public void flashBackgroundColor(Region region, Color color, Background originalBackground) {
         final Animation animation = new Transition() {
             {
                 setCycleDuration(Duration.millis(FLASH_TIME));
@@ -135,6 +135,9 @@ public abstract class UiPart<T> {
                         color.getOpacity() - frac);
                 region.setBackground(new Background(new BackgroundFill(vColor,
                         CornerRadii.EMPTY, Insets.EMPTY)));
+                if (frac == 1.0) {
+                    region.setBackground(originalBackground);
+                }
             }
 
         };

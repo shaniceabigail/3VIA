@@ -61,7 +61,8 @@ public class CardListPanel extends UiPart<Region> {
     private void scrollTo(int index) {
         Platform.runLater(() -> {
             cardListView.scrollTo(index);
-            cardListView.getSelectionModel().clearAndSelect(index);
+            cardListView.getSelectionModel().clearSelection();
+            cardListView.getSelectionModel().select(index);
         });
     }
 
