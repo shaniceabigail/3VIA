@@ -19,18 +19,19 @@
 <li><a href="#editing-a-card-code-edit-code">3.4. Editing a card : <code>edit</code></a></li>
 <li><a href="#search-for-cards-by-question-code-find-code">3.5. Search for cards by question: <code>find</code></a></li>
 <li><a href="#deleting-a-card-code-delete-code">3.6. Deleting a card : <code>delete</code></a></li>
-<li><a href="#selecting-a-card-code-select-code">3.7. Selecting a card : <code>select</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.9. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.10. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.11. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code">3.12. Starting an Open Ended Test: <code>testO</code> <code>[coming in v2.0]</code></a></li>
-<li><a href="#start-a-matchtest-code-testm-code">3.13. Start a MatchTest: <code>testM</code></a></li>
-<li><a href="#view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code">3.14. View statistics for a certain test: <code>stats</code> <code>[coming in v2.0]</code></a></li>
-<li><a href="#cram-more-knowledge-code-import-code">3.15. Cram More Knowledge!: <code>import</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.16. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-data">3.17. Saving data</a></li>
-<li><a href="#multi-player-code-coming-in-v2-0-code">3.18. Multi-Player <code>[coming in v2.0]</code></a></li>
+<li><a href="#viewing-information-related-to-a-card-code-select-code">3.7. Viewing information related to a card : <code>select</code></a></li>
+<li><a href="#research-on-a-question-code-google-code">3.8. Research on a question : <code>google</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.9. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.10. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.11. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.12. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code">3.13. Starting an Open Ended Test: <code>testO</code> <code>[coming in v2.0]</code></a></li>
+<li><a href="#start-a-matchtest-code-testm-code">3.14. Start a MatchTest: <code>testM</code></a></li>
+<li><a href="#view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code">3.15. View statistics for a certain test: <code>stats</code> <code>[coming in v2.0]</code></a></li>
+<li><a href="#cram-more-knowledge-code-import-code">3.16. Cram More Knowledge!: <code>import</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.17. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-data">3.18. Saving data</a></li>
+<li><a href="#multi-player-code-coming-in-v2-0-code">3.19. Multi-Player <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -192,7 +193,8 @@ Format: <code>learn [TOPIC]</code></p>
 <div class="sect2">
 <h3 id="editing-a-card-code-edit-code"><a class="link" href="#editing-a-card-code-edit-code">3.4. Editing a card : <code>edit</code></a></h3>
 <div class="paragraph">
-<p>Edits an existing card at specified <code>INDEX</code> with updated input values.<br>
+<p>Edits an existing card at specified <code>INDEX</code> with updated input values. After the edits are made, the card that was edited
+will be selected so that you can review the changes made to the card.<br>
 Format: <code>edit INDEX [q/QUESTION] [a/ANSWER] [t/TOPIC]&#8230;&#8203;</code></p>
 </div>
 <div class="sidebarblock">
@@ -300,9 +302,10 @@ _Deletes the 1st card in the results of the <code>find</code> command._xs</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-card-code-select-code"><a class="link" href="#selecting-a-card-code-select-code">3.7. Selecting a card : <code>select</code></a></h3>
+<h3 id="viewing-information-related-to-a-card-code-select-code"><a class="link" href="#viewing-information-related-to-a-card-code-select-code">3.7. Viewing information related to a card : <code>select</code></a></h3>
 <div class="paragraph">
-<p>Selects the card identified by the index number used in the displayed card list. Loads the Google search page for the card question.<br>
+<p>Selects the card identified by the index number used in the displayed card list. Loads the Card Info Panel for the
+card.<br>
 Format: <code>select INDEX</code></p>
 </div>
 <div class="paragraph">
@@ -313,18 +316,25 @@ Format: <code>select INDEX</code></p>
 <li>
 <p><code>learn</code><br>
 <code>select 2</code><br>
-<em>Selects and opens a Google search page for the 2nd displayed card.</em></p>
+<em>Selects and opens a Card Info Panel for the 2nd displayed card.</em></p>
 </li>
 <li>
 <p><code>find Why</code><br>
 <code>select 1</code><br>
-<em>Selects and opens a Google search page for the 1st card in the results of the <code>find</code> command.</em></p>
+<em>Selects and opens a Card Info Panel for the 1st card in the results of the <code>find</code> command.</em></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.8. Listing entered commands : <code>history</code></a></h3>
+<h3 id="research-on-a-question-code-google-code"><a class="link" href="#research-on-a-question-code-google-code">3.8. Research on a question : <code>google</code></a></h3>
+<div class="paragraph">
+<p>Loads the Google search page for the question of the identified card.<br>
+Format: <code>google INDEX</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.9. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered from your most recent command.<br>
 Format: <code>history</code></p>
@@ -345,7 +355,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.9. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.10. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the app to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -399,7 +409,7 @@ _`delete 1` command is reversed</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.10. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.11. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -437,7 +447,7 @@ The <code>redo</code> command was not executed as there are no <code>undo</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.11. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.12. Clearing all entries : <code>clear</code></a></h3>
 <div class="admonitionblock warning">
 <table>
 <tr>
@@ -453,7 +463,7 @@ Format: <code>clear</code>
 </div>
 </div>
 <div class="sect2">
-<h3 id="starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code"><a class="link" href="#starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code">3.12. Starting an Open Ended Test: <code>testO</code> <code>[coming in v2.0]</code></a></h3>
+<h3 id="starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code"><a class="link" href="#starting-an-open-ended-test-code-testo-code-code-coming-in-v2-0-code">3.13. Starting an Open Ended Test: <code>testO</code> <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p>Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer.<br>
 Format: <code>test t/TOPIC [TIMELIMIT_IN_SECONDS]</code></p>
@@ -476,21 +486,21 @@ Format: <code>test t/TOPIC [TIMELIMIT_IN_SECONDS]</code></p>
 <p>The following commands can only be used during an <code>Open Ended Test</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="answering-a-question"><a class="link" href="#answering-a-question">3.12.1. Answering a question:</a></h4>
+<h4 id="answering-a-question"><a class="link" href="#answering-a-question">3.13.1. Answering a question:</a></h4>
 <div class="paragraph">
 <p>Type your answer in the command field and press <code>enter</code> to submit your answer. If you don&#8217;t have an answer in mind, you can just press <code>enter</code> with nothing in the command field. We accept your silence as an answer.<br>
 Format: <code>ANSWER_FROM_USER</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="determining-the-correctness-of-your-answer"><a class="link" href="#determining-the-correctness-of-your-answer">3.12.2. Determining the correctness of your answer:</a></h4>
+<h4 id="determining-the-correctness-of-your-answer"><a class="link" href="#determining-the-correctness-of-your-answer">3.13.2. Determining the correctness of your answer:</a></h4>
 <div class="paragraph">
 <p>After answering the question, you would be given a comparison between the expected and actual answer you entered. You would be required to determine the correctness of your answer since the questions are open ended. The app will keep track of your score.<br>
 Format: <code>c</code> (correct) OR <code>x</code> (wrong)</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="quit-the-test"><a class="link" href="#quit-the-test">3.12.3. Quit the test:</a></h4>
+<h4 id="quit-the-test"><a class="link" href="#quit-the-test">3.13.3. Quit the test:</a></h4>
 <div class="paragraph">
 <p>Test is exited.<br>
 Format: <code>exit</code></p>
@@ -498,7 +508,7 @@ Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="start-a-matchtest-code-testm-code"><a class="link" href="#start-a-matchtest-code-testm-code">3.13. Start a MatchTest: <code>testM</code></a></h3>
+<h3 id="start-a-matchtest-code-testm-code"><a class="link" href="#start-a-matchtest-code-testm-code">3.14. Start a MatchTest: <code>testM</code></a></h3>
 <div class="paragraph">
 <p>Start a test of matching questions and answers for a specified topic. In a MatchTest, all the questions and answers in
 that topic will be displayed. You will then have to match all the correct question to their respective answer.<br>
@@ -508,7 +518,7 @@ Format: <code>testM TOPIC</code></p>
 <p>The following commands can only be used during a <code>MatchTest</code>.</p>
 </div>
 <div class="sect3">
-<h4 id="enter-the-matching-cards"><a class="link" href="#enter-the-matching-cards">3.13.1. Enter the matching cards:</a></h4>
+<h4 id="enter-the-matching-cards"><a class="link" href="#enter-the-matching-cards">3.14.1. Enter the matching cards:</a></h4>
 <div class="paragraph">
 <p>Will match a pair of question and answer during a MatchTest.<br>
 Format: <code>INDEX_OF_QUESTION INDEX_OF_ANSWER</code></p>
@@ -537,7 +547,7 @@ Format: <code>INDEX_OF_ANSWER</code></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="quit-matchtest"><a class="link" href="#quit-matchtest">3.13.2. Quit MatchTest:</a></h4>
+<h4 id="quit-matchtest"><a class="link" href="#quit-matchtest">3.14.2. Quit MatchTest:</a></h4>
 <div class="paragraph">
 <p>If you want to stop an ongoing MatchTest, you can enter the <code>exit</code> command at any time during the test. The command
 will bring you to the home page.</p>
@@ -563,14 +573,14 @@ be saved into your hard disk.
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code"><a class="link" href="#view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code">3.14. View statistics for a certain test: <code>stats</code> <code>[coming in v2.0]</code></a></h3>
+<h3 id="view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code"><a class="link" href="#view-statistics-for-a-certain-test-code-stats-code-code-coming-in-v2-0-code">3.15. View statistics for a certain test: <code>stats</code> <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p>Results of previous tests, questions, expected answers and the user’s answers for that particular topic will be displayed.<br>
 Format: <code>stats [TOPIC]</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="cram-more-knowledge-code-import-code"><a class="link" href="#cram-more-knowledge-code-import-code">3.15. Cram More Knowledge!: <code>import</code></a></h3>
+<h3 id="cram-more-knowledge-code-import-code"><a class="link" href="#cram-more-knowledge-code-import-code">3.16. Cram More Knowledge!: <code>import</code></a></h3>
 <div class="paragraph">
 <p>Quickly import multiple flash cards from existing notes or documents into 3VIA.</p>
 </div>
@@ -609,7 +619,7 @@ The file path refers to the <strong>absolute file path</strong> of the import fi
 </table>
 </div>
 <div class="sect3">
-<h4 id="creating-your-import-file"><a class="link" href="#creating-your-import-file">3.15.1. Creating your import file:</a></h4>
+<h4 id="creating-your-import-file"><a class="link" href="#creating-your-import-file">3.16.1. Creating your import file:</a></h4>
 <div class="paragraph">
 <p>Open your existing notes or create a new one. You may use any text editing programs such as Microsoft Word, Google Docs, etc.
 Below are 2 rules regarding the import file type and format that must be adhered too.</p>
@@ -684,7 +694,7 @@ Duplicate questions in the import text file will result in import failure.
 </div>
 </div>
 <div class="sect3">
-<h4 id="importing-your-file"><a class="link" href="#importing-your-file">3.15.2. Importing your file:</a></h4>
+<h4 id="importing-your-file"><a class="link" href="#importing-your-file">3.16.2. Importing your file:</a></h4>
 <div class="paragraph">
 <p>Now that your file is ready, head over to 3VIA and lets begin the import.</p>
 </div>
@@ -729,7 +739,7 @@ with the cards imported.
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.16. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.17. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
@@ -748,14 +758,14 @@ command <code>exit</code> used in any of the test page will bring you to the hom
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">3.17. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">3.18. Saving data</a></h3>
 <div class="paragraph">
 <p>3VIA saves data in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="multi-player-code-coming-in-v2-0-code"><a class="link" href="#multi-player-code-coming-in-v2-0-code">3.18. Multi-Player <code>[coming in v2.0]</code></a></h3>
+<h3 id="multi-player-code-coming-in-v2-0-code"><a class="link" href="#multi-player-code-coming-in-v2-0-code">3.19. Multi-Player <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable Multi-Player}</em></p>
 </div>
@@ -849,4 +859,4 @@ e.g.<code>select 2</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-02 03:01:58 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-02 03:21:05 UTC</div></div></div></body></html>
