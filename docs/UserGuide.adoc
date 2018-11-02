@@ -89,7 +89,8 @@ Format: `learn [TOPIC]`
 
 === Editing a card : `edit`
 
-Edits an existing card at specified `INDEX` with updated input values. +
+Edits an existing card at specified `INDEX` with updated input values. After the edits are made, the card that was edited
+will be selected so that you can review the changes made to the card. +
 Format: `edit INDEX [q/QUESTION] [a/ANSWER] [t/TOPIC]...`
 
 ****
@@ -141,19 +142,25 @@ _Deletes the 2nd displayed card._
 `delete 1` +
 _Deletes the 1st card in the results of the `find` command._xs
 
-=== Selecting a card : `select`
+=== Viewing information related to a card : `select`
 
-Selects the card identified by the index number used in the displayed card list. Loads the Google search page for the card question. +
+Selects the card identified by the index number used in the displayed card list. Loads the Card Info Panel for the
+card. +
 Format: `select INDEX`
 
 Examples:
 
 * `learn` +
 `select 2` +
-_Selects and opens a Google search page for the 2nd displayed card._
+_Selects and opens a Card Info Panel for the 2nd displayed card._
 * `find Why` +
 `select 1` +
-_Selects and opens a Google search page for the 1st card in the results of the `find` command._
+_Selects and opens a Card Info Panel for the 1st card in the results of the `find` command._
+
+=== Research on a question : `google`
+
+Loads the Google search page for the question of the identified card. +
+Format: `google INDEX`
 
 === Listing entered commands : `history`
 
