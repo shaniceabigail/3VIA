@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -16,15 +18,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ToggleTabEvent;
-//import seedu.address.commons.events.ui.ToggleTabEvent;
+import seedu.address.commons.exceptions.IllegalValueException;
 
-/*
+/**
  * The UI component that is responsible for navigation
  *
  * Adapted from http://synappse.co/blog/vertical-stateful-jfxtabpane-with-icons-in-javafx/
  *
  */
-
 public class NavigationTabController extends UiPart<Region> {
 
     private static final String FXML = "NavigationTab.fxml";
@@ -32,7 +33,7 @@ public class NavigationTabController extends UiPart<Region> {
 
     private double tabWidth = 90.0;
 
-    private ArrayList<String> listOfTabs;
+    private ArrayList<Tab> listOfTabs;
     private Tab currentTab;
 
     @FXML
@@ -96,21 +97,36 @@ public class NavigationTabController extends UiPart<Region> {
         tabPane.setCenter(imageView);
         tabPane.setBottom(label);
 
-        tab.setText("");
+        tab.setText(title);
         tab.setGraphic(tabPane);
 
-        listOfTabs.add(title);
+        listOfTabs.add(tab);
+    }
+
+    /**
+     * Checks if tab called is a created tab
+     * @param newSelected
+     * @return
+     */
+    public boolean isValidTab(Tab newSelected) {
+        return listOfTabs.contains(newSelected);
     }
 
     @Subscribe
-    private void handleToggleTab(ToggleTabEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if (currentTab.isSelected()) {
-            currentTab.setStyle("-fx-background-color: -fx-focus-color;");
+    public void handleToggleTab(ToggleTabEvent event) throws IllegalValueException {
+        requireNonNull(event.toString());
+        Tab newSelected = new Tab(event.toString());
+
+        if (!isValidTab(newSelected)) {
+            throw new IllegalValueException("Navigated tab does not exist.");
         } else {
+            logger.info(LogsCenter.getEventHandlingLogMessage(event));
+
+            //reset colour of current tab
+            currentTab.setStyle("-fx-background-color: -fx-accent;");
+            currentTab = newSelected;
             currentTab.setStyle("-fx-background-color: -fx-accent;");
         }
-
     }
 
 }

@@ -12,16 +12,24 @@ import seedu.address.model.Model;
 public class NavigationCommand extends Command {
     public static final String COMMAND_WORD = "go/";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": navigates to test menu"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " : navigates to test menu\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Successfully navigated to test";
-    public static final String MESSAGE_UNSUCCESSFUL = "Did not navigate to test";
 
+    private String tabToGo;
+
+    public NavigationCommand(String tabName) {
+        tabToGo = tabName;
+    }
+
+    public String getTabToGo() {
+        return tabToGo;
+    }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        EventsCenter.getInstance().post(new ToggleTabEvent());
+        EventsCenter.getInstance().post(new ToggleTabEvent(this.getTabToGo()));
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 }

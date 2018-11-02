@@ -5,13 +5,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAVIGATION;
 
 import java.util.stream.Stream;
 
-import javafx.scene.control.Tab;
 import seedu.address.logic.commands.NavigationCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 
 /**
  * Parses input argument and creates a new NavigationCommand object
+ * unused
  */
 public class NavigationCommandParser implements Parser<NavigationCommand> {
 
@@ -29,8 +29,8 @@ public class NavigationCommandParser implements Parser<NavigationCommand> {
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NavigationCommand.MESSAGE_USAGE));
         }
-        Tab tabToGo = ParserUtil.parseTab(argMultimap.getValue(PREFIX_NAVIGATION).get());
-        return new NavigationCommand();
+        String tabToGo = argMultimap.getValue(PREFIX_NAVIGATION).get();
+        return new NavigationCommand(tabToGo.trim());
     }
 
     /**

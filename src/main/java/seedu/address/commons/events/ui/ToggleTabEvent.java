@@ -1,15 +1,14 @@
 package seedu.address.commons.events.ui;
 
-import javafx.scene.control.Tab;
 import seedu.address.commons.events.BaseEvent;
 
 /**
  * An event requesting to toggle a tab
  */
 public class ToggleTabEvent extends BaseEvent {
-    private Tab toToggleTo;
+    private String toToggleTo;
 
-    ToggleTabEvent(Tab tabToGo) {
+    public ToggleTabEvent(String tabToGo) {
         toToggleTo = tabToGo;
     }
 

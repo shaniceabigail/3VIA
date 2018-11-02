@@ -106,7 +106,7 @@ public class AddressBookParser {
                 return new ImportCommandParser().parse(arguments);
 
             case NavigationCommand.COMMAND_WORD:
-                return new NavigationCommandParser().parse(arguments);
+                return new NavigationCommand(arguments);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
