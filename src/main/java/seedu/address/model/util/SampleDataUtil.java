@@ -40,6 +40,33 @@ public class SampleDataUtil {
             new Answer("rebase and merge"), getTopicSet("Git"));
     private static final Card Q_CAPITAL_OF_SG = new Card(new Question("What is the capital of Singapore?"),
             new Answer("Singapore"), getTopicSet("GeneralKnowledge"));
+    private static final Card Q_GRAVITATIONAL_FORMULA = new Card(
+            new Question("What is the formula for gravitational potential energy?"),
+            new Answer("mass * gravity * height"), getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_WORK_DONE_FORMULA = new Card(
+            new Question("What is the formula for work done?"),
+            new Answer("force * distance"), getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_POWER_FORMULA = new Card(
+            new Question("What is the formula for Power?"),
+            new Answer("Current(I) * Voltage(V)"), getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_RESISTANCE_FORMULA = new Card(
+            new Question("What is the formula for voltage?"),
+            new Answer("Current(I) * Resistance(R)"), getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_ELASTIC_ENERGY_FORMULA = new Card(
+            new Question("What is the formula for elastic potential energy?"),
+            new Answer("1/2 * SpringConstant(K) * SpringDisplacement(x)^2"),
+            getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_GRAV_FORCE_FORMULA = new Card(
+            new Question("What is the formula for calculating the gravitational force between 2 objects?"),
+            new Answer("(G(m1)(m2))/(r^2), where G is the universal constant, m1 and m2 represent the mass of each "
+                    + "object, r represent the distance between the objects"),
+            getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_PRESSURE_FORMULA = new Card(new Question("What is the formula for pressure?"),
+            new Answer("Force(F) / Area(A)"), getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_PRESSURE_IN_LIQUID_FORMULA = new Card(
+            new Question("What is the formula for pressure in liquid?"),
+            new Answer("DepthOfWater(d) * densityOfWater(p) * GravitationalFieldStrength(g)"),
+            getTopicSet("Physics", "PhysicsFormula"));
 
     private static final Date ATTEMPT_ON_MOMENTUM_WRONG_TIMESTAMP = new Date(2018 - 1900, 6, 1, 16, 12);
     private static final Date ATTEMPT_ON_MOMENTUM_CORRECT_TIMESTAMP = new Date(2018 - 1900, 6, 1, 16, 13);
@@ -82,7 +109,9 @@ public class SampleDataUtil {
     }
 
     public static Card[] getSampleCards() {
-        return new Card[] {Q_MOMENTUM_FORMULA, Q_GIT_CLONE, Q_FORCE_FORMULA, Q_GIT_MERGE, Q_CAPITAL_OF_SG };
+        return new Card[] {Q_MOMENTUM_FORMULA, Q_GIT_CLONE, Q_FORCE_FORMULA, Q_GIT_MERGE, Q_CAPITAL_OF_SG,
+            Q_GRAVITATIONAL_FORMULA, Q_WORK_DONE_FORMULA, Q_POWER_FORMULA, Q_RESISTANCE_FORMULA,
+            Q_ELASTIC_ENERGY_FORMULA, Q_GRAV_FORCE_FORMULA, Q_PRESSURE_FORMULA, Q_PRESSURE_IN_LIQUID_FORMULA };
     }
 
     public static TriviaResult[] getSampleResults() {
