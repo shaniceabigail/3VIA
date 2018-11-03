@@ -18,6 +18,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MatchTestCommand;
+import seedu.address.logic.commands.OpenEndedCommand;
 import seedu.address.logic.commands.OpenEndedTestCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -122,6 +123,46 @@ public class AddressBookParser {
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+
+        case OPEN_ENDED_TEST:
+            switch(commandWord) {
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            default:
+                return new OpenEndedCommandParser().parse(userInput);
+            }
+
+        case OPEN_ENDED_TEST_QUESTION:
+            switch(commandWord) {
+
+                case ExitCommand.COMMAND_WORD:
+                    return new ExitCommand();
+
+                default:
+                    return new OpenEndedCommandParser().parse(userInput);
+            }
+
+        case OPEN_ENDED_TEST_ANSWER:
+            switch(commandWord) {
+
+                case ExitCommand.COMMAND_WORD:
+                    return new ExitCommand();
+
+                default:
+                    return new OpenEndedCommandParser().parse(userInput);
+            }
+
+        case OPEN_ENDED_TEST_RESULT:
+            switch(commandWord) {
+
+                case ExitCommand.COMMAND_WORD:
+                    return new ExitCommand();
+
+                default:
+                    return new OpenEndedCommandParser().parse(userInput);
             }
 
         default:

@@ -234,8 +234,7 @@ Use with caution! Clears all entries in 3VIA and reboots. +
 Format: `clear`
 
 === Starting an Open Ended Test: `testO` `[coming in v2.0]`
-
-Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer. +
+bStart an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer. +
 Format: `test t/TOPIC [TIMELIMIT_IN_SECONDS]`
 
 ****
