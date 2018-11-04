@@ -50,7 +50,8 @@ public class InfoPanel extends UiPart<Region> {
         cardInfoPanel = new CardInfoPanel();
         cardInfoPanelPlaceholder.getChildren().add(cardInfoPanel.getRoot());
 
-        bindNodesVisibilityProperty();
+        bindNodesVisibilityProperty(info);
+        resetToOriginalState();
 
         registerAsAnEventHandler(this);
     }
@@ -63,20 +64,7 @@ public class InfoPanel extends UiPart<Region> {
      * Hides all the information in the info panel.
      */
     public void resetToOriginalState() {
-        info.getChildren().forEach(node -> {
-            node.setVisible(false);
-        });
-    }
-
-    /**
-     * Bind each node to the visible property, so that when the node is hidden, the layout of the hidden node will not
-     * be accounted for.
-     */
-    private void bindNodesVisibilityProperty() {
-        info.getChildren().forEach(node -> {
-            node.managedProperty().bind(node.visibleProperty());
-            node.setVisible(false);
-        });
+        info.getChildren().forEach(node -> node.setVisible(false));
     }
 
     /**
