@@ -6,7 +6,6 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -17,16 +16,10 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
-import seedu.address.commons.events.ui.ShowTriviaTestResultEvent;
-import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.ui.home.Homepage;
-import seedu.address.ui.test.TriviaTestPage;
-import seedu.address.ui.test.TriviaTestResultPage;
 
 
 /**
@@ -47,10 +40,8 @@ public class MainWindow extends UiPart<Stage> {
     private UserPrefs prefs;
     private HelpWindow helpWindow;
 
-    private Homepage homePage;
-    private TriviaTestPage triviaTestPage;
-    private TriviaTestResultPage triviaTestResultPage;
     private NavigationTabController navigationTab;
+    private MainDisplay mainDisplay;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -137,8 +128,8 @@ public class MainWindow extends UiPart<Stage> {
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        homePage = new Homepage(logic);
-        displayPagePlaceHolder.getChildren().add(homePage.getRoot());
+        mainDisplay = new MainDisplay(logic);
+        displayPagePlaceHolder.getChildren().add(mainDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getTriviaBundleFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -188,22 +179,11 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     public void releaseResources() {
-        homePage.releaseResources();
+        mainDisplay.releaseResources();
     }
 
     public void show() {
         primaryStage.show();
-    }
-
-    /**
-     * Will change the scene displayed in {@code displayPagePlaceHolder} according to the given parameter.
-     */
-    private void changeToScene(Node region) {
-        if (region.equals(homePage.getRoot())) {
-            homePage.resetToOriginalState();
-        }
-        displayPagePlaceHolder.getChildren().clear();
-        displayPagePlaceHolder.getChildren().add(region);
     }
 
     /**
@@ -218,25 +198,5 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
-    }
-
-    @Subscribe
-    private void handleShowTriviaTestViewEvent(ShowTriviaTestViewEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        triviaTestPage = event.getTriviaTestPage().get();
-        changeToScene(triviaTestPage.getRoot());
-    }
-
-    @Subscribe
-    private void handleShowTriviaTestResultPage(ShowTriviaTestResultEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        triviaTestResultPage = event.getTriviaTestResultPage().get();
-        changeToScene(triviaTestResultPage.getRoot());
-    }
-
-    @Subscribe
-    private void handleCloseTriviaTestViewEvent(CloseTriviaTestViewEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        changeToScene(homePage.getRoot());
     }
 }
