@@ -25,7 +25,6 @@ of the more test features.
 `TriviaTest` and `TriviaResult` respectively. It allows standardized set of data spanning across different tests to be
 recorded down. This data collection would also allow for wide array of analysis allowing us to customize 3VIA for the user.
 
-* *Major enhancement*:
 ** Added *the ability to perform matching test in 3VIA*
 *** What it does: In this test, the user would be given a list of questions and answers. They have to match the correct
 questions to the correct answers.
