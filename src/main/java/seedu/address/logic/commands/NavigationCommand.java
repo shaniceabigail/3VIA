@@ -23,7 +23,7 @@ public class NavigationCommand extends Command {
         tabToGo = tabName;
     }
 
-    public String getTabToGo() {
+    private String getTabToGo() {
         return tabToGo;
     }
 

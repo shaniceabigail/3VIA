@@ -21,10 +21,11 @@
       <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
+        <URL value="@NavigationTabStyling.css"/>
       </stylesheets>
 
       <HBox>
-          <StackPane HBox.hgrow="NEVER" fx:id="navigationTabPlaceholder" styleClass="pane-with-border">
+          <StackPane HBox.hgrow="NEVER" fx:id="navigationTabPlaceholder" styleClass="jfx-tab-pane">
           </StackPane>
         <VBox>
           <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">

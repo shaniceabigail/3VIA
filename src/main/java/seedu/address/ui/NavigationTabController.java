@@ -9,7 +9,6 @@ import com.google.common.eventbus.Subscribe;
 import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Side;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
@@ -66,12 +65,13 @@ public class NavigationTabController extends UiPart<Region> {
      */
 
     private void configureView() {
-        tabContainer.setSide(Side.LEFT);
+        //tabContainer.setSide(Side.LEFT);
         tabContainer.setTabMinWidth(tabWidth);
         tabContainer.setTabMaxWidth(tabWidth);
         tabContainer.setTabMinHeight(tabWidth);
         tabContainer.setTabMaxHeight(tabWidth);
         tabContainer.setRotateGraphic(true);
+        tabContainer.getStyleClass().add("root");
 
         //list of tabs configured
         createTab(homeTab, "Home", "file:/src/main/resources/images/tabIcons/home.png");
