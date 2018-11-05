@@ -20,7 +20,7 @@
 <li><a href="#search-for-cards-by-question-code-find-code">3.5. Search for cards by question: <code>find</code></a></li>
 <li><a href="#deleting-a-card-code-delete-code">3.6. Deleting a card : <code>delete</code></a></li>
 <li><a href="#viewing-information-related-to-a-card-code-select-code">3.7. Viewing information related to a card : <code>select</code></a></li>
-<li><a href="#research-on-a-question-code-google-code">3.8. Research on a question : <code>google</code></a></li>
+<li><a href="#research-on-a-question-code-research-code">3.8. Research on a question : <code>research</code></a></li>
 <li><a href="#listing-entered-commands-code-history-code">3.9. Listing entered commands : <code>history</code></a></li>
 <li><a href="#undoing-previous-command-code-undo-code">3.10. Undoing previous command : <code>undo</code></a></li>
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">3.11. Redoing the previously undone command : <code>redo</code></a></li>
@@ -327,10 +327,24 @@ Format: <code>select INDEX</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="research-on-a-question-code-google-code"><a class="link" href="#research-on-a-question-code-google-code">3.8. Research on a question : <code>google</code></a></h3>
+<h3 id="research-on-a-question-code-research-code"><a class="link" href="#research-on-a-question-code-research-code">3.8. Research on a question : <code>research</code></a></h3>
 <div class="paragraph">
-<p>Loads the Google search page for the question of the identified card.<br>
-Format: <code>google INDEX</code></p>
+<p>Loads the Google search page for the question of the identified card. For any reason, if you are not able to load the
+Google search page, 3VIA will redirect you to DuckDuckGo search engine with the selected question as the search query.<br>
+Format: <code>research INDEX</code></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+You would need to have an internet connection to load the online search engine. If you are not able to load the
+Google&#8217;s and DuckDUckGo&#8217;s search engine, you will be shown a page with an error message.
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
@@ -816,6 +830,9 @@ e.g. <code>find Why</code></p>
 e.g.<code>select 2</code></p>
 </li>
 <li>
+<p><strong>Research</strong> : <code>research INDEX</code></p>
+</li>
+<li>
 <p><strong>History</strong> : <code>history</code></p>
 </li>
 <li>
@@ -859,4 +876,4 @@ e.g.<code>select 2</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 02:53:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 11:51:28 UTC</div></div></div></body></html>
