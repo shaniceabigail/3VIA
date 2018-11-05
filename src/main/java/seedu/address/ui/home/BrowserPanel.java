@@ -1,7 +1,7 @@
 package seedu.address.ui.home;
 
 import java.io.IOException;
-import java.net.InetAddress;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.logging.Logger;
@@ -44,7 +44,7 @@ public class BrowserPanel extends UiPart<Region> {
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
 
-        loadDefaultPage();
+        loadFilePage(DEFAULT_PAGE);
         registerAsAnEventHandler(this);
     }
 
@@ -61,8 +61,7 @@ public class BrowserPanel extends UiPart<Region> {
             String secondaryUrl = SECONDARY_SEARCH_PAGE_URL + card.getQuestion().value;
             loadPage(primaryUrl, secondaryUrl);
         } else {
-            URL noConnectionPage = MainApp.class.getResource(FXML_FILE_FOLDER + NO_CONNECTION_PAGE);
-            loadPage(noConnectionPage.toExternalForm());
+            loadFilePage(NO_CONNECTION_PAGE);
         }
     }
 
@@ -73,12 +72,21 @@ public class BrowserPanel extends UiPart<Region> {
         Platform.runLater(() -> {
             for (String url : urls) {
                 browser.getEngine().load(url);
-                if (browser.getEngine().getLocation().equals(url)) {
+                String currentLocation = browser.getEngine().getLocation();
+                if (currentLocation.contains(DEFAULT_SEARCH_PAGE_URL)
+                        || currentLocation.contains(SECONDARY_SEARCH_PAGE_URL)) {
                     break;
                 }
             }
-            if (!Arrays.asList(urls).contains(browser.getEngine().getLocation())) {
-                browser.getEngine().load(FXML_FILE_FOLDER + WEB_ERROR_PAGE);
+
+            String currentLocation = browser.getEngine().getLocation();
+            boolean isValidUrl = Arrays.stream(urls).anyMatch(url ->
+                    currentLocation.contains(DEFAULT_SEARCH_PAGE_URL)
+                            || currentLocation.contains(SECONDARY_SEARCH_PAGE_URL)
+                            || currentLocation.contains(FXML_FILE_FOLDER)
+            );
+            if (!isValidUrl) {
+                loadFilePage(WEB_ERROR_PAGE);
             }
         });
     }
@@ -86,9 +94,9 @@ public class BrowserPanel extends UiPart<Region> {
     /**
      * Loads a default HTML file with a background that matches the general theme.
      */
-    private void loadDefaultPage() {
-        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
-        loadPage(defaultPage.toExternalForm());
+    private void loadFilePage(String filepath) {
+        URL page = MainApp.class.getResource(FXML_FILE_FOLDER + filepath);
+        loadPage(page.toExternalForm());
     }
 
     /**
@@ -104,15 +112,16 @@ public class BrowserPanel extends UiPart<Region> {
      */
     private boolean isConnectedToInternet() {
         try {
-            if (InetAddress.getByName("www.google.com").isReachable(500)) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (IOException ioe) {
-            logger.warning("The checking of internet connectivity was interrupted.");
+            URL url = new URL("http://www.google.com");
+            HttpURLConnection urlConnect = (HttpURLConnection) url.openConnection();
+
+            // trying to retrieve data from the source. If there
+            // is no connection, this line will fail and throw an exception.
+            Object objData = urlConnect.getContent();
+        } catch (IOException e) {
             return false;
         }
+        return true;
     }
 
     @Subscribe
