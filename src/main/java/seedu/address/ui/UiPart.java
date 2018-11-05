@@ -13,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -87,6 +88,18 @@ public abstract class UiPart<T> {
     protected void registerAsAnEventHandler(Object handler) {
         EventsCenter.getInstance().registerHandler(handler);
         AsyncEventsCenter.getInstance().registerHandler(handler);
+    }
+
+    /**
+     * Bind each pane to the visible property, so that when the pane is hidden, the layout of the hidden pane will not
+     * be accounted for.
+     */
+    protected void bindNodesVisibilityProperty(Pane ...panes) {
+        for (Pane p : panes) {
+            p.getChildren().forEach(child -> {
+                child.managedProperty().bind(child.visibleProperty());
+            });
+        }
     }
 
     /**
