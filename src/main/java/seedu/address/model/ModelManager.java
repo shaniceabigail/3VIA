@@ -144,6 +144,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean canClearCardList() {
+        return versionedTriviaBundle.canClearCardList();
+    }
+
+    @Override
     public void updateCard(Card target, Card editedCard) {
         requireAllNonNull(target, editedCard);
 
@@ -258,6 +263,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean matchQuestionAndAnswer(Index questionIndex, Index answerIndex) throws IndexOutOfBoundsException {
         assert currentRunningTest instanceof MatchTest;
+        requireNonNull(answerIndex);
 
         MatchTest matchTest = (MatchTest) currentRunningTest;
         boolean isCorrectMatch = matchTest.match(questionIndex, answerIndex);

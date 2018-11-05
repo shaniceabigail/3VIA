@@ -18,19 +18,21 @@ public class MatchCommandParserTest {
                 new MatchCommand(Index.fromOneBased(1), Index.fromOneBased(2));
         assertParseSuccess(parser, "1 2", expectedCommand);
         assertParseSuccess(parser, "   1 2    ", expectedCommand);
-        assertParseSuccess(parser, "   1 2  3  ", expectedCommand);
-        assertParseSuccess(parser, "1 2 3 4 5   ", expectedCommand);
+
+        // with just answerIndex specified
+        expectedCommand = new MatchCommand(null, Index.fromOneBased(2));
+        assertParseSuccess(parser, "2", expectedCommand);
+        assertParseSuccess(parser, "   2    ", expectedCommand);
     }
 
     @Test
     public void test_parseFailure() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+        assertParseFailure(parser, "  ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 MatchCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "sd sa", String.format(ParserUtil.MESSAGE_INVALID_INDEX,
+        assertParseFailure(parser, "12 32 12", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 MatchCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "sd", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MatchCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "    sd    ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MatchCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "sd sa", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "sd", ParserUtil.MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "    sd    ", ParserUtil.MESSAGE_INVALID_INDEX);
     }
 }

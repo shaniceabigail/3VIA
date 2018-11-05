@@ -63,7 +63,6 @@ public interface Model {
     /**
      * Returns true if the model has previous address book states to restore.
      */
-
     void commitAddressBook();
 
     /** Returns the TriviaBundle */
@@ -100,6 +99,11 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered card's list */
     ObservableList<Card> getFilteredCardList();
+
+    /**
+     * Return true if the card list is not empty
+     */
+    boolean canClearCardList();
 
     /**
      * Updates the filter of the filtered card list to filter by the given {@code predicate}.

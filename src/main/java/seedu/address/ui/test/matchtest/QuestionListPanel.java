@@ -1,17 +1,15 @@
 package seedu.address.ui.test.matchtest;
 
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.FlashMatchOutcomeEvent;
 import seedu.address.model.card.IndexedQuestion;
@@ -38,42 +36,12 @@ public class QuestionListPanel extends UiPart<Region> {
         matchTestQuestionListView.setCellFactory(listView -> new QuestionListViewCell());
     }
 
-    @Subscribe
-    private void handleFlashMatchOutcomeEvent(FlashMatchOutcomeEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        matchTestQuestionListView.setCellFactory(listView -> new QuestionListViewCell(event.indexOfQuestion,
-                event.isCorrect));
-
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() ->
-                            matchTestQuestionListView.setCellFactory(listView ->
-                                    new QuestionListViewCell()));
-            };
-        }, UiPart.FLASH_TIME);
-    }
-
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Card} using a {@code QuestionView}.
      */
     class QuestionListViewCell extends ListCell<IndexedQuestion> {
-        private Integer actualIndexOfQuestion;
-        private boolean isCorrect;
-
         public QuestionListViewCell() {
-            actualIndexOfQuestion = null;
-        }
-
-        /**
-         * Used for defining which cell to flash, with the boolean whether it is correct.
-         * @param actualIndexOfQuestion The targetIndex that is needed to be flashed.
-         * @param isCorrect Whether the matching card is correct.
-         */
-        public QuestionListViewCell(int actualIndexOfQuestion, boolean isCorrect) {
-            this.actualIndexOfQuestion = actualIndexOfQuestion;
-            this.isCorrect = isCorrect;
+            registerAsAnEventHandler(this);
         }
 
         @Override
@@ -84,10 +52,17 @@ public class QuestionListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                if (actualIndexOfQuestion == null || actualIndexOfQuestion != getIndex()) {
-                    setGraphic(new QuestionView(question, question.getId()).getRoot());
+                setGraphic(new QuestionView(question).getRoot());
+            }
+        }
+
+        @Subscribe
+        private void handleFlashMatchOutcomeEvent(FlashMatchOutcomeEvent event) {
+            if (getIndex() == event.indexOfQuestion) {
+                if (event.isCorrect) {
+                    flashBackgroundColor(this, new Color(0, 1, 0, 1), this.getBackground());
                 } else {
-                    setGraphic(new QuestionView(question, question.getId(), isCorrect).getRoot());
+                    flashBackgroundColor(this, new Color(1, 0, 0, 1), this.getBackground());
                 }
             }
         }

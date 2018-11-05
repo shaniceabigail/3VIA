@@ -13,6 +13,7 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -29,7 +30,7 @@ public abstract class UiPart<T> {
 
     /** Resource folder where FXML files are stored. */
     public static final String FXML_FILE_FOLDER = "/view/";
-    public static final int FLASH_TIME = 750; // 0.75 second
+    public static final int FLASH_TIME = 500; // 0.5 second
 
     private final FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -90,6 +91,18 @@ public abstract class UiPart<T> {
     }
 
     /**
+     * Bind each pane to the visible property, so that when the pane is hidden, the layout of the hidden pane will not
+     * be accounted for.
+     */
+    protected void bindNodesVisibilityProperty(Pane ...panes) {
+        for (Pane p : panes) {
+            p.getChildren().forEach(child -> {
+                child.managedProperty().bind(child.visibleProperty());
+            });
+        }
+    }
+
+    /**
      * Loads the object hierarchy from a FXML document.
      * @param location Location of the FXML document.
      * @param root Specifies the root of the object hierarchy.
@@ -122,7 +135,7 @@ public abstract class UiPart<T> {
      * @param color The color of the flash.
      *
      */
-    public void flashBackgroundColor(Region region, Color color) {
+    public void flashBackgroundColor(Region region, Color color, Background originalBackground) {
         final Animation animation = new Transition() {
             {
                 setCycleDuration(Duration.millis(FLASH_TIME));
@@ -135,6 +148,9 @@ public abstract class UiPart<T> {
                         color.getOpacity() - frac);
                 region.setBackground(new Background(new BackgroundFill(vColor,
                         CornerRadii.EMPTY, Insets.EMPTY)));
+                if (frac == 1.0) {
+                    region.setBackground(originalBackground);
+                }
             }
 
         };

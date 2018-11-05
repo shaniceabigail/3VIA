@@ -15,7 +15,7 @@ import java.util.Set;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.HideCardInfoPanelEvent;
+import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -81,7 +81,8 @@ public class EditCommand extends Command {
         model.updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
         model.commitTriviaBundle();
 
-        EventsCenter.getInstance().post(new HideCardInfoPanelEvent());
+        Index indexOfEditedCard = Index.fromZeroBased(model.getFilteredCardList().indexOf(editedCard));
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(indexOfEditedCard));
         return new CommandResult(String.format(MESSAGE_EDIT_CARD_SUCCESS, editedCard));
     }
 

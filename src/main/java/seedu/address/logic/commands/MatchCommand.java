@@ -16,12 +16,13 @@ import seedu.address.model.test.matchtest.exceptions.QuestionNotFoundException;
 public class MatchCommand extends Command {
     public static final String COMMAND_WORD = "";
 
-    public static final String MESSAGE_USAGE = "Match a question to its answer. "
+    public static final String MESSAGE_USAGE = "Match a question to its answer.\n"
             + "Parameters: INDEX_OF_QUESTION INDEX_OF_ANSWER \n"
-            + "Example: 1 4";
+            + "Example: 2 4\n"
+            + "If the index of the question is not specified, the question at the top of its list will be matched.";
 
-    public static final String MESSAGE_MATCH_SUCCESS = "Perfect Match!";
-    public static final String MESSAGE_MATCH_FAILURE = "Wrong Match!";
+    public static final String MESSAGE_CORRECT_MATCH = "Perfect Match!";
+    public static final String MESSAGE_WRONG_MATCH = "Wrong Match!";
     public static final String MESSAGE_QUESTION_NOT_FOUND = "The specified question is not found.";
     public static final String MESSAGE_ANSWER_NOT_FOUND = "The specified answer is not found.";
 
@@ -31,7 +32,6 @@ public class MatchCommand extends Command {
     public MatchCommand(Index questionIndex, Index answerIndex) {
         this.questionIndex = questionIndex;
         this.answerIndex = answerIndex;
-
     }
 
     @Override
@@ -41,9 +41,9 @@ public class MatchCommand extends Command {
 
         try {
             if (model.matchQuestionAndAnswer(questionIndex, answerIndex)) {
-                return new CommandResult(String.format(MESSAGE_MATCH_SUCCESS));
+                return new CommandResult(MESSAGE_CORRECT_MATCH);
             } else {
-                throw new CommandException(MESSAGE_MATCH_FAILURE);
+                return new CommandResult(MESSAGE_WRONG_MATCH);
             }
         } catch (QuestionNotFoundException e) {
             throw new CommandException(MESSAGE_QUESTION_NOT_FOUND);
@@ -57,7 +57,8 @@ public class MatchCommand extends Command {
         // All the tests are different even if they have the same parameters.
         return other == this
                 || (other instanceof MatchCommand // instanceof handles nulls
-                && questionIndex.equals(((MatchCommand) other).questionIndex)
+                && (questionIndex == ((MatchCommand) other).questionIndex // handles null for questionIndex
+                || questionIndex.equals(((MatchCommand) other).questionIndex))
                 && answerIndex.equals(((MatchCommand) other).answerIndex));
     }
 }

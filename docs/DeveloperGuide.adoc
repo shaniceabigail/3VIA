@@ -321,11 +321,12 @@ image::UndoRedoActivityDiagram.png[width="650"]
 The import mechanism is facilitated by `ImportFile` and `TriviaBundle`.
 Additionally, the import mechanism implements the following operations:
 
-* `ImportFile#parseFileToCards()` -- Parses a file in a specific format into a unique list of cards.
+* `ImportFile#parseFileToCard` -- Parses a plain text file into a unique list of cards.
 * `TriviaBundle#haveAnyCard()` -- Checks if the cards to add contain any duplicated cards already in the `TriviaBundle`.
 * `TriviaBundle#addMultipleCards()` -- Adds multiple cards into the `TriviaBundle` at once.
 
-These operations are exposed in the Model interface as `Model#haveAnyCard()`, `Model#addMultipleCards()` respectively.
+The 2 `TriviaBundle` operations are exposed in the Model interface as
+`Model#haveAnyCard()` and `Model#addMultipleCards()` respectively.
 
 The following activity diagram summarizes what happens when a user executes the import command.
 
@@ -340,21 +341,44 @@ Step 2: When the `ImportCommand` executes, the desired import file is first veri
 * the import path points to a file
 * the import file is of plain text type (file.txt)
 * the import file is readable
+* the import file text is in the correct format
 
 Step 3: Once verified, the import file is parsed to form a unique list of cards that is stored in `UniqueCardList`.
 
-Step 4: Every card in the unique card list is checked against the existing list of cards in `TriviaBundle` for duplicates.
+Step 4: `TriviaBundle#haveAnyCard()` checks every card in the unique card list against the existing list of cards in `TriviaBundle` for duplicates.
 
-Step 5: The unique card list is then added into `TriviaBundle`. The number of cards and the cards imported are displayed to the user for verification. +
+Step 5: The unique card list is then added into `TriviaBundle` via `TriviaBundle#addMultipleCards()`. The number of cards and the cards imported are displayed to the user for verification. +
 
-The sequence diagram below shows the import of multiple cards.
+The sequence diagram below describes the import of multiple cards.
 
 image::ImportMultipleCardsSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
-===== Aspect: How import executes
+===== Aspect: Need for pre-import preview
+* **Alternative 1: (current implementation)** Single step to import cards from a text file.
+** Pros:
+*** A single command can be executed quickly for an import.
+*** Post import edits can be done using existing commands such as `edit`, `delete`, etc.
+** Con:
+*** A single formatting error in the text file will result in an import failure.
+* **Alternative 2:** 'Stages' the import file by first previewing the imported cards to the user. The actual import is done upon confirmation.
+** Implementation details: +
+*** Given below is a class diagram describing the interactions for this import mechanism. +
++
+image::AlternativeImportClassDiagram.png[width="800"]
 
+*** The `Format` class verifies the formatting of the text file, marks and displays the errors of the text file within the application for editing.
++
+Each time an edit is detected, the `Format` class will verify the text file and the `FileParser` will attempt to parse the file into a `UniqueCardList` for import.
++
+The `ObservableFile` interface allows the UI component to update the preview of the cards each time the file is edited without a direct dependency to it.
+** Pro:
+*** Allows the user to identify errors in formatting and correct them directly in the application.
+** Con:
+*** An additional step (command) is required to successfully import the cards into the application.
+
+===== Aspect: How import executes
 * **Alternative 1 (current choice):** Store all cards to be added in `TriviaBundle` before writing to file on the hard disk.
 ** Pros: Less IO intensive as only one write to file is needed.
 ** Cons: May have heap memory issue if large amount of cards are stored temporarily.
@@ -363,7 +387,6 @@ image::ImportMultipleCardsSequenceDiagram.png[width="800"]
 ** Cons: May have performance issue when large amount of cards are added.
 
 ===== Aspect: How the import file is parsed
-
 * **Alternative 1 (current choice):** Tokenize strings according to defined characters between question and answer, and between cards.
 ** Pros: Allows user to undo/ redo import as import is viewed by `VersionedAddressBook` as a single command.
 ** Cons: May have memory performance issue as multiple cards are stored temporarily in the `TriviaBundle`.
@@ -419,29 +442,41 @@ Step 7. At this stage, the System will await `exit` command from the user so tha
 
 ===== The static display indexes of the ListView for question and answer
 * **Alternative 1 (current choice):** Created new classes namely, `IndexedQuestion` and `IndexedAnswer` to uniquely identify the cells in `ListView`.
-** Pros: Finding the exact question and answer is easy as what the user see is a representative of the id that identifies the question/answer.
-** Cons: Currently, the classes created are for the sole of having static display indexes during `MatchTest`.
+** Pro:
+*** Finding the exact question and answer is easy as what the user see is a representative of the Id that identifies the question/answer.
+** Con:
+*** Currently, the classes created are for the sole purpose of having static display indexes during `MatchTest`.
 * **Alternative 2:** Create a `List` of mapping that maps the actual index to the display index of the question and answer.
-** Pros: The implementation details will be contained within `MatchTest`.
-** Cons: Additional work is require to maintain the `List` data structure, to ensure that it is updated every time a question or answer is removed.
+** Cons:
+*** Additional work is required to maintain the `List` data structure, to ensure that it is updated every time a question or answer is removed from the UI.
+*** The questions and answers are displayed using `ListView`, and since the mapping of actual index to display index is not an attribute to the question/answer,
+the mapping will be needed to be passed into the UI component. This mapping will then be used by the constructor of `ListView` to
+create a static display index of question and answer. Hence, this design consideration was not implemented due to abstraction that is leaking into the UI.
 
 ===== The polymorphism of TriviaTest
 * **Alternative 1 (current choice):** Uses `TriviaTest`, `TriviaResultStorage` to accommodate the different testing feature in 3VIA.
-** Pros: Follows Open-Close Principle which increases the extensibility of the testing feature in 3VIA.
-** Pros: Increases the re-usability of similar codes, and promotes cleaner code.
-** Cons: The implementation of different tests have to follow the structure of TriviaTest very strictly.
+** Pro:
+*** Follows Open-Close Principle which increases the extensibility of the testing feature in 3VIA.
+*** Increases the re-usability of similar codes, and promotes cleaner code.
+** Con:
+*** The implementation of different tests have to follow the structure of TriviaTest very strictly.
 * **Alternative 2:** Implement each kinds of test as a standalone test with its own standalone class and event handler.
-** Pros: Easy to implement and each developer will have their freedom of how to implement their own test.
-** Cons: Will lead to code that is increasingly not manageable.
+** Pro:
+*** Easy to implement and each developer will have their freedom of how to implement their own test.
+** Con:
+*** Will lead to code that is increasingly not manageable.
 
 ===== How UI feedback is being received when a MatchCommand is executed
 * **Alternative 1 (current choice):** Uses `AsyncEventCenter` to dispatch its events.
-** Pros: The feedback received by the user is synchronised between question and answer.
-** Cons: More CPU intensive as it uses multi-threading.
-* **Alternative 2:** Uses `EventCenter` to dispatch its events.
-** Pros: Easier to debug code that does not use multi-threading and less CPU intensive.
-** Cons: The events will be dispatched and handle in a sequential order, as a result the UI feedback for question may not be in sync with feedback for answer.
-
+** Pro:
+*** The feedback received by the user is more synchronised between question and answer.
+** Con:
+*** More CPU intensive as it uses multi-threading.
+* **Alternative 2:** Uses `EventCenter` to dispatch its UI event.
+** Pro:
+*** Easier to debug code that does not use multi-threading and less CPU intensive.
+** Con:
+*** The events will be dispatched and handle in a sequential order, as a result the UI feedback for question may not be in sync with feedback for answer.
 // end::matchingtest[]
 
 // tag::dataencryption[]

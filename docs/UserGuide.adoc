@@ -89,7 +89,8 @@ Format: `learn [TOPIC]`
 
 === Editing a card : `edit`
 
-Edits an existing card at specified `INDEX` with updated input values. +
+Edits an existing card at specified `INDEX` with updated input values. After the edits are made, the card that was edited
+will be selected so that you can review the changes made to the card. +
 Format: `edit INDEX [q/QUESTION] [a/ANSWER] [t/TOPIC]...`
 
 ****
@@ -141,19 +142,30 @@ _Deletes the 2nd displayed card._
 `delete 1` +
 _Deletes the 1st card in the results of the `find` command._xs
 
-=== Selecting a card : `select`
+=== Viewing information related to a card : `select`
 
-Selects the card identified by the index number used in the displayed card list. Loads the Google search page for the card question. +
+Selects the card identified by the index number used in the displayed card list. Loads the Card Info Panel for the
+card. +
 Format: `select INDEX`
 
 Examples:
 
 * `learn` +
 `select 2` +
-_Selects and opens a Google search page for the 2nd displayed card._
+_Selects and opens a Card Info Panel for the 2nd displayed card._
 * `find Why` +
 `select 1` +
-_Selects and opens a Google search page for the 1st card in the results of the `find` command._
+_Selects and opens a Card Info Panel for the 1st card in the results of the `find` command._
+
+=== Research on a question : `research`
+
+Loads the Google search page for the question of the identified card. For any reason, if you are not able to load the
+Google search page, 3VIA will redirect you to DuckDuckGo search engine with the selected question as the search query. +
+Format: `research INDEX`
+
+[NOTE]
+You would need to have an internet connection to load the online search engine. If you are not able to load the
+Google's and DuckDUckGo's search engine, you will be shown a page with an error message.
 
 === Listing entered commands : `history`
 
@@ -229,6 +241,11 @@ _`delete 1` command is reapplied_ +
 _`clear` command is reapplied_ +
 // end::undoredo[]
 
+=== Clearing all entries : `clear`
+[WARNING]
+Use with caution! Clears all entries in 3VIA and reboots. +
+Format: `clear`
+
 === Starting an Open Ended Test: `testO` `[coming in v2.0]`
 
 Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer. +
@@ -256,24 +273,31 @@ Format: `c` (correct) OR `x` (wrong)
 Test is exited. +
 Format: `exit`
 
-:imagesDir: images/user_guide/match_test
-=== Starting a MatchTest: `testM`
+=== Start a MatchTest: `testM`
 
-Start a test of matching cards for a specified topic. In a MatchTest, all the questions and answers in that topic
-will be displayed. You will then have to match all the correct question and answer together. +
+Start a test of matching questions and answers for a specified topic. In a MatchTest, all the questions and answers in
+that topic will be displayed. You will then have to match all the correct question to their respective answer. +
 Format: `testM TOPIC`
 
-The following commands can only be used during a `Matching Test`.
+The following commands can only be used during a `MatchTest`.
 
-==== Enter the matching cards: match
+==== Enter the matching cards:
 
-Will match and pair the cards during a MatchTest. +
+Will match a pair of question and answer during a MatchTest. +
 Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 
 An example is given in the below screenshot, where the command of `1 2` will select the question and answer that is boxed
 in green.
 
-image::match_command.png[match command format]
+image::UserGuideMatchCommand.png[width="790"]
+
+Another way to match a pair of question and answer is to solely enter the index of the answer. By doing so, we will
+assume that you would be matching a question at the top to the answer that is specified. +
+Format: `INDEX_OF_ANSWER`
+
+An example of such a usage can be seen in the the below screenshot.
+
+image::UserGuideMatchCommandWithoutQuestion.png[width="790"]
 
 ==== Quit MatchTest:
 
@@ -293,8 +317,6 @@ be saved into your hard disk.
 Results of previous tests, questions, expected answers and the user’s answers for that particular topic will be displayed. +
 Format: `stats [TOPIC]`
 
-
-:imagesDir: images/user_guide/import
 // tag::import[]
 === Cram More Knowledge!: `import`
 Quickly import multiple flash cards from existing notes or documents into 3VIA.
@@ -393,11 +415,15 @@ e.g. `find Why`
 * *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
+* *Research* : `research INDEX`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Test* : `test TOPIC TIMELIMIT_IN_SECONDS`
-* *Matching Test* : `testM TOPIC`
-* *Correctness of answer* : `c` (correct) OR `x` (wrong)
+* *Open Ended Test* : `testO TOPIC TIMELIMIT_IN_SECONDS`
+** *Input the answer* : `YOUR_ANSWER`
+** *Correctness of answer* : `c` (correct) OR `x` (wrong)
+* *MatchTest* : `testM TOPIC`
+** *Match question to its answer* : `INDEX_OF_QUESTION INDEX_OF_ANSWER` or `INDEX_OF_ANSWER`
+** *Exit from MatchTest* : `exit`
 * *View statistics of test* : `stats [TOPIC]`
 * *Mass Import* : `import FILEPATH`

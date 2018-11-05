@@ -38,8 +38,8 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.GoogleCommand;
 import seedu.address.logic.commands.LearnCommand;
+import seedu.address.logic.commands.ResearchCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -180,10 +180,10 @@ public abstract class AppSystemTest {
     }
 
     /**
-     * Google the card at {@code index} of the displayed list.
+     * Research the card at {@code index} of the displayed list.
      */
-    protected void googleCard(Index index) {
-        executeCommand(GoogleCommand.COMMAND_WORD + " " + index.getOneBased());
+    protected void researchCard(Index index) {
+        executeCommand(ResearchCommand.COMMAND_WORD + " " + index.getOneBased());
     }
 
     /**
@@ -252,6 +252,10 @@ public abstract class AppSystemTest {
         assertEquals(expectedSelectedCardIndex.getZeroBased(), getCardListPanel().getSelectedCardIndex());
     }
 
+    protected void assertCardInfoPanelEmpty() {
+        assertFalse(getInfoPanel().getCardInfoPanel().isVisible());
+    }
+
     /**
      * Asserts that the browser's url and the selected card in the person list panel remain unchanged.
      * @see BrowserPanelHandle#isUrlChanged()
@@ -314,7 +318,7 @@ public abstract class AppSystemTest {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
         assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
-        assertEquals(Paths.get(".").resolve(testApp.getAddressBookFilePath()).toString(),
+        assertEquals(Paths.get(".").resolve(testApp.getTriviaBundleFilePath()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
     }

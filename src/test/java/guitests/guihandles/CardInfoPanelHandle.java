@@ -11,13 +11,19 @@ public class CardInfoPanelHandle extends NodeHandle<Node> {
     public static final String QUESTION_ID = "#cardInfoQuestion";
 
     private Label question;
+    private Node cardInfoNode;
 
     public CardInfoPanelHandle(Node cardInfoNode) {
         super(cardInfoNode);
         question = getChildNode(QUESTION_ID);
+        this.cardInfoNode = cardInfoNode;
     }
 
     public String getQuestion() {
         return question.getText();
+    }
+
+    public boolean isVisible() {
+        return cardInfoNode.isVisible();
     }
 }
