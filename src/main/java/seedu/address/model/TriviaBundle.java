@@ -58,6 +58,14 @@ public class TriviaBundle implements ReadOnlyTriviaBundle {
         setCards(newData.getCardList());
     }
 
+    /**
+     *
+     * Return if the card list {@code cards} can be cleared
+     */
+    public boolean canClearCardList() {
+        return !cards.isEmpty();
+    }
+
     //// card-level operations
 
     /**
@@ -85,12 +93,12 @@ public class TriviaBundle implements ReadOnlyTriviaBundle {
     }
 
     /**
-     * Adds a list of cards to the trivia bundle.
+     * Adds a list of cards to the trivia bundle and marks each of them as recently imported.
      * The cards must not already exist in the bundle.
      */
     public void addMultipleCards(UniqueCardList cardList) {
         for (Card c : cardList) {
-            cards.add(c);
+            cards.add(c.updateRecentlyImportedStatus(true));
         }
     }
 
@@ -111,6 +119,15 @@ public class TriviaBundle implements ReadOnlyTriviaBundle {
         requireNonNull(editedCard);
 
         cards.setCard(target, editedCard);
+    }
+
+    /**
+     * Resets the recently import status of all cards to false whenever a new import is executed.
+     */
+    public void resetRecentlyImportStatus() {
+        for (Card c : cards) {
+            cards.setCard(c, c.updateRecentlyImportedStatus(false));
+        }
     }
 
     //// util methods

@@ -14,6 +14,7 @@
             </attemptedCard>
             <answer>No.</answer>
             <isCorrect>true</isCorrect>
+            <timestamp>01 Jun 2016, 04:13 PM</timestamp>
         </attempt>
         <attempt>
             <attemptedCard>
@@ -23,6 +24,7 @@
             </attemptedCard>
             <answer>mass * acceleration</answer>
             <isCorrect>true</isCorrect>
+            <timestamp>01 Jun 2016, 04:13 PM</timestamp>
         </attempt>
     </results>
 
@@ -39,6 +41,7 @@
             </attemptedCard>
             <answer>git commit -m 'whatever you wanna say'</answer>
             <isCorrect>false</isCorrect>
+            <timestamp>01 Jun 2016, 04:13 PM</timestamp>
         </attempt>
         <attempt>
             <attemptedCard>
@@ -48,6 +51,7 @@
             </attemptedCard>
             <answer>LHL</answer>
             <isCorrect>false</isCorrect>
+            <timestamp>01 Jun 2016, 04:13 PM</timestamp>
         </attempt>
     </results>
 
@@ -64,6 +68,7 @@
             </attemptedCard>
             <answer>git commit -m 'whatever you wanna say'</answer>
             <isCorrect>false</isCorrect>
+            <timestamp>01 Jun 2016, 04:13 PM</timestamp>
         </attempt>
         <attempt>
             <attemptedCard>
@@ -73,6 +78,7 @@
             </attemptedCard>
             <answer>mass * acceleration</answer>
             <isCorrect>true</isCorrect>
+            <timestamp>01 Jun 2016, 04:13 PM</timestamp>
         </attempt>
     </results>
 

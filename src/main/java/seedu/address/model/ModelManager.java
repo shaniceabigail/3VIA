@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -17,6 +19,8 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TriviaBundleChangedEvent;
 import seedu.address.commons.events.model.TriviaResultsChangedEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
+import seedu.address.commons.events.ui.DisplayCardInfoEvent;
+import seedu.address.commons.events.ui.SetUpDisplayCardInfoEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
@@ -141,6 +145,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean canClearCardList() {
+        return versionedTriviaBundle.canClearCardList();
+    }
+
+    @Override
     public void updateCard(Card target, Card editedCard) {
         requireAllNonNull(target, editedCard);
 
@@ -259,6 +268,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean matchQuestionAndAnswer(Index questionIndex, Index answerIndex) throws IndexOutOfBoundsException {
         assert currentRunningTest instanceof MatchTest;
+        requireNonNull(answerIndex);
 
         MatchTest matchTest = (MatchTest) currentRunningTest;
         boolean isCorrectMatch = matchTest.match(questionIndex, answerIndex);
@@ -289,6 +299,12 @@ public class ModelManager extends ComponentManager implements Model {
         return triviaResults.getAttemptsByCard(card);
     }
 
+    @Override
+    @Subscribe
+    public void handleSetUpDisplayCardInfoEvent(SetUpDisplayCardInfoEvent event) {
+        Card selectedCard = event.selectedCard;
+        raise(new DisplayCardInfoEvent(selectedCard, triviaResults.getAttemptsByCard(selectedCard)));
+    }
 
 
     @Override
@@ -324,9 +340,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void addMultipleCards(UniqueCardList cards) {
+        versionedTriviaBundle.resetRecentlyImportStatus();
         versionedTriviaBundle.addMultipleCards(cards);
-        updateFilteredCardList(PREDICATE_SHOW_ALL_CARDS);
-        // TODO: raise an event to show in extra info pane
+        updateFilteredCardList(PREDICATE_SHOW_RECENTLY_IMPORTED_CARDS);
         indicateTriviaBundleChanged();
     }
 }

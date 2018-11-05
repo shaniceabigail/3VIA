@@ -13,12 +13,12 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.GoogleCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ImportCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LearnCommand;
 import seedu.address.logic.commands.MatchTestCommand;
-import seedu.address.logic.commands.OpenEndedCommand;
 import seedu.address.logic.commands.OpenEndedTestCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -65,6 +65,9 @@ public class AddressBookParser {
             case SelectCommand.COMMAND_WORD:
                 return new SelectCommandParser().parse(arguments);
 
+            case GoogleCommand.COMMAND_WORD:
+                return new GoogleCommandParser().parse(arguments);
+
             case DeleteCommand.COMMAND_WORD:
                 return new DeleteCommandParser().parse(arguments);
 
@@ -74,8 +77,8 @@ public class AddressBookParser {
             case FindCommand.COMMAND_WORD:
                 return new FindCommandParser().parse(arguments);
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+            case LearnCommand.COMMAND_WORD:
+                return new LearnCommandParser().parse(arguments);
 
             case HistoryCommand.COMMAND_WORD:
                 return new HistoryCommand();
@@ -128,13 +131,12 @@ public class AddressBookParser {
         case OPEN_ENDED_TEST:
             switch(commandWord) {
 
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+                case ExitCommand.COMMAND_WORD:
+                    return new ExitCommand();
 
-            default:
-                return new OpenEndedCommandAnswer(userInput);
+                default:
+                    return new OpenEndedCommandAnswer(userInput);
             }
-
         case OPEN_ENDED_TEST_QUESTION: //TODO remove and merge with oet
             switch(commandWord) {
 

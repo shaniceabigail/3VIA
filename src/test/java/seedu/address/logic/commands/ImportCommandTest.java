@@ -16,6 +16,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.SetUpDisplayCardInfoEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -46,12 +47,14 @@ public class ImportCommandTest {
         ModelStubAcceptingCardAdded modelStub = new ModelStubAcceptingCardAdded();
 
         ImportFile file = ImportFileUtil.getValidNoTopicImportFile();
-        Card validCard = new CardBuilder().withQuestion("question1").build();
+        Card validCard = new CardBuilder().withQuestion("question").withAnswer("answer").withTopics("NoTopic").build();
+        List<Card> cardList = Arrays.asList(validCard);
 
         CommandResult commandResult = new ImportCommand(file).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, file.getFileName()), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validCard), modelStub.cardsAdded);
+        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, cardList.size(), file.getFileName()),
+                commandResult.feedbackToUser);
+        assertEquals(cardList, modelStub.cardsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
@@ -63,11 +66,14 @@ public class ImportCommandTest {
         Card validCard1 = new CardBuilder().withQuestion("question1").withTopics("topic1").build();
         Card validCard2 = new CardBuilder().withQuestion("question2").withTopics("topic1").build();
         Card validCard3 = new CardBuilder().withQuestion("question3").withTopics("topic2", "topic3").build();
+        List<Card> cardList = Arrays.asList(validCard1, validCard2, validCard3);
+
 
         CommandResult commandResult = new ImportCommand(file).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, file.getFileName()), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validCard1, validCard2, validCard3), modelStub.cardsAdded);
+        assertEquals(String.format(ImportCommand.MESSAGE_SUCCESS, cardList.size(), file.getFileName()),
+                commandResult.feedbackToUser);
+        assertEquals(cardList, modelStub.cardsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
@@ -75,7 +81,7 @@ public class ImportCommandTest {
     public void execute_duplicateCardInTriviaBundle_throwsCommandException() throws Exception {
         ImportFile validImportFile = ImportFileUtil.getValidNoTopicImportFile();
         ImportCommand importCommand = new ImportCommand(validImportFile);
-        Card validCard = new CardBuilder().withQuestion("question1").build();
+        Card validCard = new CardBuilder().withQuestion("question").build();
 
         ModelStub modelStub = new ModelStubWithCard(validCard);
 
@@ -181,6 +187,12 @@ public class ImportCommandTest {
         }
 
         @Override
+        public boolean canClearCardList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
         public void updateCard(Card target, Card editedCard) {
             throw new AssertionError("This method should not be called.");
         }
@@ -269,9 +281,13 @@ public class ImportCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public boolean matchQuestionAndAnswer(Index questionIndex, Index answerIndex) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void handleSetUpDisplayCardInfoEvent(SetUpDisplayCardInfoEvent event) {
             throw new AssertionError("This method should not be called.");
         }
     }

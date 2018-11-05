@@ -41,7 +41,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Here are some example commands you can try:
 
-* *`list`* : lists all cards according to their topics
+* *`learn`* : Will direct you to the homepage with all the avaiable cards displayed.
 * **`add`**`add q/What is the formula for force? a/force = mass * acceleration a/Physics` : adds a card with question
 `What is the formula for force?` to the the trivia application.
 * **`delete`**`3` : deletes the 3rd card in the current list
@@ -80,14 +80,17 @@ Examples:
 * `add q/What is the formula for force? a/force = mass * acceleration t/Physics`
 * `add q/What is the capital of Singapore? a/Singapore t/GeneralKnowledge t/Geography`
 
-=== Listing all cards : `list`
+=== Start learning: `learn`
 
-Shows a list of all the cards. +
-Format: `list`
+Will direct you to the homepage with the cards you want to learn. If you want to learn from everything that is
+available in the deck, simply execute `learn`. If you want to learn from the cards that are related to a certain topic,
+simply enter `learn TOPIC`.  +
+Format: `learn [TOPIC]`
 
 === Editing a card : `edit`
 
-Edits an existing card at specified `INDEX` with updated input values. +
+Edits an existing card at specified `INDEX` with updated input values. After the edits are made, the card that was edited
+will be selected so that you can review the changes made to the card. +
 Format: `edit INDEX [q/QUESTION] [a/ANSWER] [t/TOPIC]...`
 
 ****
@@ -132,26 +135,32 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list` +
+* `learn` +
 `delete 2` +
 _Deletes the 2nd displayed card._
 * `find Why` +
 `delete 1` +
 _Deletes the 1st card in the results of the `find` command._xs
 
-=== Selecting a card : `select`
+=== Viewing information related to a card : `select`
 
-Selects the card identified by the index number used in the displayed card list. Loads the Google search page for the card question. +
+Selects the card identified by the index number used in the displayed card list. Loads the Card Info Panel for the
+card. +
 Format: `select INDEX`
 
 Examples:
 
-* `list` +
+* `learn` +
 `select 2` +
-_Selects and opens a Google search page for the 2nd displayed card._
+_Selects and opens a Card Info Panel for the 2nd displayed card._
 * `find Why` +
 `select 1` +
-_Selects and opens a Google search page for the 1st card in the results of the `find` command._
+_Selects and opens a Card Info Panel for the 1st card in the results of the `find` command._
+
+=== Research on a question : `google`
+
+Loads the Google search page for the question of the identified card. +
+Format: `google INDEX`
 
 === Listing entered commands : `history`
 
@@ -177,12 +186,12 @@ Undoable commands: those commands that modify the app's content (`add`, `delete`
 Examples:
 
 * `delete 1` +
-`list` +
+`learn` +
 `undo` +
 _`delete 1` command is reversed_
 
 * `select 1` +
-`list` +
+`learn` +
 `undo` +
 _The `undo` command not executed as there are no undoable commands previously executed._
 
@@ -194,7 +203,7 @@ _`clear` command is reversed +
 _`delete 1` command is reversed_
 
 * `import C:\Users\username\Desktop\text.txt` +
-`list` +
+`learn` +
 `undo` +
 _`import` command is reversed_
 
@@ -227,8 +236,7 @@ _`delete 1` command is reapplied_ +
 _`clear` command is reapplied_ +
 // end::undoredo[]
 
-=== Clearing all entries : `clear` `[coming in v2.0]`
-
+=== Clearing all entries : `clear`
 [WARNING]
 Use with caution! Clears all entries in 3VIA and reboots. +
 Format: `clear`
@@ -259,49 +267,106 @@ Format: `c` (correct) OR `x` (wrong)
 Test is exited. +
 Format: `exit`
 
-=== Starting a Matching Test: `testM`
+=== Start a MatchTest: `testM`
 
-Start a test of matching cards of a specified topic. In a test of matching cards, all the questions and answers in that topic
-will be displayed. The user will then have to match the correct question and answer together. +
+Start a test of matching questions and answers for a specified topic. In a MatchTest, all the questions and answers in
+that topic will be displayed. You will then have to match all the correct question to their respective answer. +
 Format: `testM TOPIC`
 
-The following commands can only be used during a `Matching Test`.
+The following commands can only be used during a `MatchTest`.
 
-==== Enter the matching cards: match
+==== Enter the matching cards:
 
-Will match and pair the cards during a matching test. +
+Will match a pair of question and answer during a MatchTest. +
 Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 
-==== Quit matching cards test:
+An example is given in the below screenshot, where the command of `1 2` will select the question and answer that is boxed
+in green.
 
-Test is exited. +
+image::UserGuideMatchCommand.png[width="790"]
+
+Another way to match a pair of question and answer is to solely enter the index of the answer. By doing so, we will
+assume that you would be matching a question at the top to the answer that is specified. +
+Format: `INDEX_OF_ANSWER`
+
+An example of such a usage can be seen in the the below screenshot.
+
+image::UserGuideMatchCommandWithoutQuestion.png[width="790"]
+
+==== Quit MatchTest:
+
+If you want to stop an ongoing MatchTest, you can enter the `exit` command at any time during the test. The command
+will bring you to the home page.
+
+After the MatchTest has ended, a result page will be shown. After reviewing your results, you can exit from the MatchTest by
+entering the `exit` command. The command will bring you to the home page. +
 Format: `exit`
+
+[NOTE]
+Your attempts from an incomplete MatchTest will be discarded. Only those attempts from a completed MatchTest will
+be saved into your hard disk.
 
 === View statistics for a certain test: `stats` `[coming in v2.0]`
 
 Results of previous tests, questions, expected answers and the user’s answers for that particular topic will be displayed. +
 Format: `stats [TOPIC]`
 
-=== Mass Import: `import` `[coming in v2.0]`
+=== Cram More Knowledge!: `import`
+Quickly import multiple flash cards from existing notes or documents into 3VIA.
 
-Imports multiple cards from a text file into 3VIA. +
 Format: `import FILEPATH`
 
+Example:
 ****
-* Ignores duplicated cards already in the app.
-* The `FILEPATH` refers to the absolute path of the file to be imported.
-* The file *must be a non empty text file*.
+* `import C:\Users\username\Desktop\file.txt` +
+_Imports the contents from the file.txt text file from the specified file location on Windows._
+* `import home/username/file.txt` +
+_Imports the contents from the file.txt text file from the specified file location on Linux._
 ****
 
-Examples:
-****
-* `import C:\Users\username\Desktop\text.txt`
-_Imports the contents from the text.txt file on a Windows desktop._
-* `import C:\Users\username\Desktop\text.txt`
-_Imports the contents from the text.txt file on a Mac desktop._
-* `import home/username/text.txt`
-_Imports the contents from the text.txt file on a Linux desktop._
-****
+IMPORTANT: The file path refers to the *absolute file path* of the import file.
+
+==== Creating your import file:
+
+Open your existing notes or create a new one. You may use any text editing programs such as Microsoft Word, Google Docs, etc.
+Below are 2 rules regarding the import file type and format that must be adhered too.
+
+. Import file type:
+* The file must be in *UTF-8 format*.
+* The file must be a *plain text file* (i.e. file.txt).
+
+[start = 2]
+. Import file format:
+
+image::import_file_format.png[import file format]
+[options = "header", cols = "1,2", caption=""]
+.Formating explaination
+|===
+|Keys| Purpose
+|kbd:[SPACE] + kbd:[t] + kbd:[/]| A space and "t/" prefix separates each topic
+|kbd:[TAB]| A tab space separates a question and an answer
+|kbd:[&#9166;]| A new line separates each card
+|===
+
+[WARNING]
+Duplicate questions in the import text file will result in import failure.
+
+==== Importing your file:
+
+Now that your file is ready, head over to 3VIA and lets begin the import.
+
+1. Enter the `import` command followed by the *absolute file path* of the import file you previously created in the command
+box as seen below.
+
+image::import_step1.png[import step 1 pic, 500,500]
+
+[start = 2]
+2. Hit enter/ return to confirm. 3VIA will now display a list of cards that has been added to you.
+
+image::import_step2.png[import step 2 pic, 800, 600]
+
+TIP: You can `edit` or `delete` any of the recently imported cards and/or even `undo` the import if you are not satisfied
+with the cards imported.
 
 === Exiting the program : `exit`
 
@@ -337,15 +402,18 @@ e.g. `delete 3`
 e.g. `edit 1 q/Why will the apple fall from the tree? a/Because of gravity!`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Why`
-* *List* : `list`
+* *Learn* : `learn [TOPIC]`
 * *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Test* : `test TOPIC TIMELIMIT_IN_SECONDS`
-* *Matching Test* : `testM TOPIC`
-* *Correctness of answer* : `c` (correct) OR `x` (wrong)
+* *Open Ended Test* : `testO TOPIC TIMELIMIT_IN_SECONDS`
+** *Input the answer* : `YOUR_ANSWER`
+** *Correctness of answer* : `c` (correct) OR `x` (wrong)
+* *MatchTest* : `testM TOPIC`
+** *Match question to its answer* : `INDEX_OF_QUESTION INDEX_OF_ANSWER` or `INDEX_OF_ANSWER`
+** *Exit from MatchTest* : `exit`
 * *View statistics of test* : `stats [TOPIC]`
 * *Mass Import* : `import FILEPATH`

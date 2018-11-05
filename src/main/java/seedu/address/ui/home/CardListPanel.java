@@ -6,16 +6,15 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
 
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ExtraInformationDisplay;
-import seedu.address.commons.events.ui.CardPanelSelectionChangedEvent;
-import seedu.address.commons.events.ui.ExtraInformationDisplayChangeEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.SetUpDisplayCardInfoEvent;
 import seedu.address.model.card.Card;
 import seedu.address.ui.UiPart;
 
@@ -26,6 +25,13 @@ public class CardListPanel extends UiPart<Region> {
     private static final String FXML = "home/CardListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(CardListPanel.class);
 
+    private final ChangeListener<Card> selectListener = (observable, oldValue, newValue) -> {
+        if (newValue != null) {
+            logger.fine("Selection in card list panel changed to : '" + newValue + "'");
+            raise(new SetUpDisplayCardInfoEvent(newValue));
+        }
+    };
+
     @FXML
     private ListView<Card> cardListView;
 
@@ -35,6 +41,10 @@ public class CardListPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    public void resetToOriginalState() {
+        cardListView.getSelectionModel().clearSelection();
+    }
+
     private void setConnections(ObservableList<Card> cardList) {
         cardListView.setItems(cardList);
         cardListView.setCellFactory(listView -> new CardListViewCell());
@@ -42,16 +52,8 @@ public class CardListPanel extends UiPart<Region> {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        cardListView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Selection in card list panel changed to : '" + newValue + "'");
-                        raise(new CardPanelSelectionChangedEvent(newValue));
-                        raise(new ExtraInformationDisplayChangeEvent(ExtraInformationDisplay.BROWSER));
-                    }
-                });
+        cardListView.getSelectionModel().selectedItemProperty().addListener(selectListener);
     }
-
 
     /**
      * Scrolls to the {@code CardView} at the {@code index} and selects it.
@@ -59,7 +61,8 @@ public class CardListPanel extends UiPart<Region> {
     private void scrollTo(int index) {
         Platform.runLater(() -> {
             cardListView.scrollTo(index);
-            cardListView.getSelectionModel().clearAndSelect(index);
+            cardListView.getSelectionModel().clearSelection();
+            cardListView.getSelectionModel().select(index);
         });
     }
 

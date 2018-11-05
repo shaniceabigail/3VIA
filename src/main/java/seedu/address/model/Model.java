@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.SetUpDisplayCardInfoEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.person.Person;
@@ -21,6 +22,8 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     /** {@code Predicate} that always evaluate to true */
     Predicate<Card> PREDICATE_SHOW_ALL_CARDS = unused -> true;
+
+    Predicate<Card> PREDICATE_SHOW_RECENTLY_IMPORTED_CARDS = c -> c.isRecentlyAdded();
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
@@ -60,7 +63,6 @@ public interface Model {
     /**
      * Returns true if the model has previous address book states to restore.
      */
-
     void commitAddressBook();
 
     /** Returns the TriviaBundle */
@@ -97,6 +99,11 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered card's list */
     ObservableList<Card> getFilteredCardList();
+
+    /**
+     * Return true if the card list is not empty
+     */
+    boolean canClearCardList();
 
     /**
      * Updates the filter of the filtered card list to filter by the given {@code predicate}.
@@ -175,4 +182,9 @@ public interface Model {
      * Return the Attempts in trivia test made by the given card.
      */
     List<Attempt> getAttemptsByCard(Card card);
+
+    /**
+     * Used to provide the necessary information to display card info.
+     */
+    void handleSetUpDisplayCardInfoEvent(SetUpDisplayCardInfoEvent event);
 }

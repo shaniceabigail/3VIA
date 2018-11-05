@@ -49,7 +49,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(1, 2, 1, true);
+    public static final Version VERSION = new Version(1, 3, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -103,15 +103,18 @@ public class MainApp extends Application {
                 AddressBook.class);
         initialTriviaBundleData = readData(storage::readTriviaBundle, SampleDataUtil::getSampleTriviaBundle,
                 TriviaBundle::new, TriviaBundle.class);
-        initialTriviaResults = readData(storage::readTriviaResults, SampleDataUtil::getSampleTriviaResults,
+        initialTriviaResults = readData(storage::readTriviaResults, TriviaResults::new,
                 TriviaResults::new, TriviaResults.class);
-
 
         return new ModelManager(initialData, initialTriviaBundleData, initialTriviaResults, userPrefs);
     }
 
     /**
      * A function that is used to read the different kinds of data from the hard disk.
+     *
+     * @param <E> represents the type of the ReadOnlyInterfaces of the different data.
+     * @param <T> represents the type of the actual class of the data.
+     * @return
      */
     private <E, T extends E> E readData(SupplierToReadData<Optional<E>> readAction, Supplier<E> sampleDataAction,
                                         Supplier<E> emptyDataAction, Class<T> dataClass) {
@@ -128,6 +131,7 @@ public class MainApp extends Application {
             logger.warning(String.format(StorageManager.MESSAGE_INCORRECT_DATA_FILE, dataClass.getSimpleName()));
             return emptyDataAction.get();
         }
+
     }
 
     /**

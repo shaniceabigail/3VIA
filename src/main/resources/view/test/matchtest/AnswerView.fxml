@@ -25,7 +25,7 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="answerText" text="\$answerText" styleClass="cell_big_label" />
+                <Label fx:id="answerText" text="\$answerText" wrapText="true" styleClass="cell_big_label" />
             </HBox>
         </VBox>
     </GridPane>

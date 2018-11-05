@@ -10,8 +10,6 @@ import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 import static seedu.address.ui.home.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -25,7 +23,9 @@ import org.junit.ClassRule;
 
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CardListPanelHandle;
+import guitests.guihandles.CardViewHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.InfoPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.PersonListPanelHandle;
@@ -38,7 +38,8 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.GoogleCommand;
+import seedu.address.logic.commands.LearnCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -46,7 +47,6 @@ import seedu.address.model.TriviaBundle;
 import seedu.address.testutil.TypicalCards;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.CommandBox;
-import seedu.address.ui.home.BrowserPanel;
 
 /**
  * A system test class for the application, which provides access to handles of GUI components and helper methods
@@ -135,6 +135,10 @@ public abstract class AppSystemTest {
         return mainWindowHandle.getBrowserPanel();
     }
 
+    public InfoPanelHandle getInfoPanel() {
+        return mainWindowHandle.getInfoPanel();
+    }
+
     public StatusBarFooterHandle getStatusBarFooter() {
         return mainWindowHandle.getStatusBarFooter();
     }
@@ -162,7 +166,7 @@ public abstract class AppSystemTest {
      * Displays all cards in the trivia bundle.
      */
     protected void showAllCards() {
-        executeCommand(ListCommand.COMMAND_WORD);
+        executeCommand(LearnCommand.COMMAND_WORD);
         assertEquals(getModel().getTriviaBundle().getCardList().size(), getModel().getFilteredCardList().size());
     }
 
@@ -176,7 +180,14 @@ public abstract class AppSystemTest {
     }
 
     /**
-     * Selects the card at {@code index} of the displayed list.
+     * Google the card at {@code index} of the displayed list.
+     */
+    protected void googleCard(Index index) {
+        executeCommand(GoogleCommand.COMMAND_WORD + " " + index.getOneBased());
+    }
+
+    /**
+     * Select the card at {@code index} of the displayed list.
      */
     protected void selectCard(Index index) {
         executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
@@ -234,17 +245,15 @@ public abstract class AppSystemTest {
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
         getCardListPanel().navigateToCard(getCardListPanel().getSelectedCardIndex());
-        String selectedCardQuestion = getCardListPanel().getHandleToSelectedCard().getQuestion();
-        URL expectedUrl;
-        try {
-            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardQuestion
-                    .replaceAll(" ", "%20"));
-        } catch (MalformedURLException mue) {
-            throw new AssertionError("URL expected to be valid.", mue);
-        }
-        assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
+        CardViewHandle expectedCardSelected = getCardListPanel().getHandleToSelectedCard();
+
+        assertEquals(expectedCardSelected.getQuestion(), getInfoPanel().getCardInfoPanel().getQuestion());
 
         assertEquals(expectedSelectedCardIndex.getZeroBased(), getCardListPanel().getSelectedCardIndex());
+    }
+
+    protected void assertCardInfoPanelEmpty() {
+        assertFalse(getInfoPanel().getCardInfoPanel().isVisible());
     }
 
     /**
@@ -309,7 +318,7 @@ public abstract class AppSystemTest {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
         assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
-        assertEquals(Paths.get(".").resolve(testApp.getAddressBookFilePath()).toString(),
+        assertEquals(Paths.get(".").resolve(testApp.getTriviaBundleFilePath()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
     }

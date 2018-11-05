@@ -1,5 +1,7 @@
 package seedu.address.model.test;
 
+import java.util.Date;
+
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
 
@@ -11,11 +13,20 @@ public class Attempt {
     protected final Card attemptedCard;
     protected final String answer;
     protected final boolean isCorrect;
+    protected final Date timestamp;
 
     public Attempt(Card attemptedCard, String answer, boolean isCorrect) {
         this.attemptedCard = attemptedCard;
         this.answer = answer;
         this.isCorrect = isCorrect;
+        timestamp = new Date();
+    }
+
+    public Attempt(Card attemptedCard, String answer, boolean isCorrect, Date timestamp) {
+        this.attemptedCard = attemptedCard;
+        this.answer = answer;
+        this.isCorrect = isCorrect;
+        this.timestamp = timestamp;
     }
 
     public Question getQuestion() {
@@ -32,6 +43,10 @@ public class Attempt {
 
     public boolean isCorrect() {
         return isCorrect;
+    }
+
+    public Date getTimestamp() {
+        return timestamp;
     }
 
     @Override

@@ -18,12 +18,30 @@ public class MatchCommandParser implements Parser<MatchCommand> {
     public MatchCommand parse(String args) throws ParseException {
         args = args.trim().replaceAll("\\s+", " ");
         String[] values = args.split(" ");
-        if (values.length < 2) {
+
+        if (isInvalidValues(values)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MatchCommand.MESSAGE_USAGE));
         }
+
+        if (values.length == 1) {
+            return createMatchCommandWithOneIndex(values);
+        } else {
+            return createMatchCommandWithTwoIndexes(values);
+        }
+    }
+
+    private boolean isInvalidValues(String[] values) {
+        return values.length > 2 || (values.length == 1 && values[0].isEmpty());
+    }
+
+    private MatchCommand createMatchCommandWithOneIndex(String[] values) throws ParseException {
+        Index answerIndex = ParserUtil.parseIndex(values[0]);
+        return new MatchCommand(null, answerIndex);
+    }
+
+    private MatchCommand createMatchCommandWithTwoIndexes(String[] values) throws ParseException {
         Index questionIndex = ParserUtil.parseIndex(values[0]);
         Index answerIndex = ParserUtil.parseIndex(values[1]);
-
         return new MatchCommand(questionIndex, answerIndex);
     }
 }

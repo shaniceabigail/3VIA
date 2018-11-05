@@ -29,23 +29,61 @@ import seedu.address.model.topic.Topic;
  */
 public class SampleDataUtil {
 
-    private static final Card Q_EARTH_ROUND = new Card(new Question("Why is the earth round?"),
-            new Answer("Because of gravity!"), getTopicSet("Physics"));
+    private static final Card Q_MOMENTUM_FORMULA = new Card(new Question("What is the formula for momentum?"),
+            new Answer("mass * velocity"), getTopicSet("Physics", "PhysicsFormula"));
     private static final Card Q_GIT_CLONE = new Card(
             new Question("Which git command will get a copy of an online repository to your computer?"),
             new Answer("git clone"), getTopicSet("Git"));
     private static final Card Q_FORCE_FORMULA = new Card(new Question("What is the formula for calculating force?"),
-            new Answer("mass * acceleration"), getTopicSet("Physics"));
+            new Answer("mass * acceleration"), getTopicSet("Physics", "PhysicsFormula"));
     private static final Card Q_GIT_MERGE = new Card(new Question("What are the ways to merge 2 branches?"),
             new Answer("rebase and merge"), getTopicSet("Git"));
     private static final Card Q_CAPITAL_OF_SG = new Card(new Question("What is the capital of Singapore?"),
             new Answer("Singapore"), getTopicSet("GeneralKnowledge"));
+    private static final Card Q_GRAVITATIONAL_FORMULA = new Card(
+            new Question("What is the formula for gravitational potential energy?"),
+            new Answer("mass * gravity * height"), getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_WORK_DONE_FORMULA = new Card(
+            new Question("What is the formula for work done?"),
+            new Answer("force * distance"), getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_POWER_FORMULA = new Card(
+            new Question("What is the formula for Power?"),
+            new Answer("Current(I) * Voltage(V)"), getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_RESISTANCE_FORMULA = new Card(
+            new Question("What is the formula for voltage?"),
+            new Answer("Current(I) * Resistance(R)"), getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_ELASTIC_ENERGY_FORMULA = new Card(
+            new Question("What is the formula for elastic potential energy?"),
+            new Answer("1/2 * SpringConstant(K) * SpringDisplacement(x)^2"),
+            getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_GRAV_FORCE_FORMULA = new Card(
+            new Question("What is the formula for calculating the gravitational force between 2 objects?"),
+            new Answer("(G(m1)(m2))/(r^2), where G is the universal constant, m1 and m2 represent the mass of each "
+                    + "object, r represent the distance between the objects"),
+            getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_PRESSURE_FORMULA = new Card(new Question("What is the formula for pressure?"),
+            new Answer("Force(F) / Area(A)"), getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_PRESSURE_IN_LIQUID_FORMULA = new Card(
+            new Question("What is the formula for pressure in liquid?"),
+            new Answer("DepthOfWater(d) * densityOfWater(p) * GravitationalFieldStrength(g)"),
+            getTopicSet("Physics", "PhysicsFormula"));
 
+    private static final Date ATTEMPT_ON_MOMENTUM_WRONG_TIMESTAMP = new Date(2018 - 1900, 6, 1, 16, 12);
+    private static final Date ATTEMPT_ON_MOMENTUM_CORRECT_TIMESTAMP = new Date(2018 - 1900, 6, 1, 16, 13);
+    private static final Date ATTEMPT_ON_GIT_CLONE_TIMESTAMP = new Date(2018 - 1900, 6, 1, 16, 14);
+    private static final Date ATTEMPT_ON_FORCE_FORMULA_TIMESTAMP = new Date(2018 - 1900, 6, 1, 16, 15);
+    private static final Date ATTEMPT_ON_GIT_MERGE_TIMESTAMP = new Date(2018 - 1900, 6, 2, 12, 30);
 
-    private static final Attempt ATTEMPT_ON_EARTH = new Attempt(Q_EARTH_ROUND, "mass * acceleration", false);
-    private static final Attempt ATTEMPT_ON_GIT_CLONE = new Attempt(Q_GIT_CLONE, "git clone", false);
-    private static final Attempt ATTEMPT_ON_FORCE_FORMULA = new Attempt(Q_FORCE_FORMULA, "mass * acceleration", true);
-    private static final Attempt ATTEMPT_ON_GIT_MERGE = new Attempt(Q_GIT_MERGE, "rebase and master", true);
+    private static final Attempt ATTEMPT_ON_MOMENTUM_WRONG = new Attempt(Q_MOMENTUM_FORMULA, "mass * acceleration",
+            false, ATTEMPT_ON_MOMENTUM_WRONG_TIMESTAMP);
+    private static final Attempt ATTEMPT_ON_MOMENTUM_CORRECT = new Attempt(Q_MOMENTUM_FORMULA, "mass * velocity",
+            true, ATTEMPT_ON_MOMENTUM_CORRECT_TIMESTAMP);
+    private static final Attempt ATTEMPT_ON_GIT_CLONE = new Attempt(Q_GIT_CLONE, "git copy",
+            false, ATTEMPT_ON_GIT_CLONE_TIMESTAMP);
+    private static final Attempt ATTEMPT_ON_FORCE_FORMULA = new Attempt(Q_FORCE_FORMULA, "mass * acceleration", true,
+            ATTEMPT_ON_FORCE_FORMULA_TIMESTAMP);
+    private static final Attempt ATTEMPT_ON_GIT_MERGE = new Attempt(Q_GIT_MERGE, "rebase and master", true,
+            ATTEMPT_ON_GIT_MERGE_TIMESTAMP);
 
     public static Person[] getSamplePersons() {
         return new Person[] {
@@ -71,20 +109,22 @@ public class SampleDataUtil {
     }
 
     public static Card[] getSampleCards() {
-        return new Card[] { Q_EARTH_ROUND, Q_GIT_CLONE, Q_FORCE_FORMULA, Q_GIT_MERGE, Q_CAPITAL_OF_SG };
+        return new Card[] {Q_MOMENTUM_FORMULA, Q_GIT_CLONE, Q_FORCE_FORMULA, Q_GIT_MERGE, Q_CAPITAL_OF_SG,
+            Q_GRAVITATIONAL_FORMULA, Q_WORK_DONE_FORMULA, Q_POWER_FORMULA, Q_RESISTANCE_FORMULA,
+            Q_ELASTIC_ENERGY_FORMULA, Q_GRAV_FORCE_FORMULA, Q_PRESSURE_FORMULA, Q_PRESSURE_IN_LIQUID_FORMULA };
     }
 
     public static TriviaResult[] getSampleResults() {
         return new TriviaResult[] {
             new TriviaResult(TestType.MATCH_TEST, new Topic("Physics"),
                     new Date(2018 - 1990, 0, 31, 8, 30), 9,
-                    Arrays.asList(ATTEMPT_ON_EARTH)),
+                    Arrays.asList(ATTEMPT_ON_MOMENTUM_WRONG, ATTEMPT_ON_MOMENTUM_CORRECT)),
             new TriviaResult(TestType.MATCH_TEST, new Topic("Git"),
                     new Date(2018 - 1990, 0, 31, 8, 0), 10,
                     Arrays.asList(ATTEMPT_ON_GIT_CLONE, ATTEMPT_ON_GIT_MERGE)),
             new TriviaResult(TestType.MATCH_TEST, new Topic("Physics"),
                     new Date(2018 - 1990, 0, 30, 14, 20), 11.5,
-                    Arrays.asList(ATTEMPT_ON_FORCE_FORMULA, ATTEMPT_ON_EARTH))
+                    Arrays.asList(ATTEMPT_ON_FORCE_FORMULA, ATTEMPT_ON_MOMENTUM_CORRECT))
         };
     }
 
