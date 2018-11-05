@@ -31,10 +31,11 @@
 <ul class="sectlevel2">
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
 <li><a href="#mass-import-feature">3.2. Mass Import Feature</a></li>
-<li><a href="#matchtest-feature">3.3. MatchTest Feature</a></li>
-<li><a href="#proposed-data-encryption">3.4. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.5. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.6. Configuration</a></li>
+<li><a href="#structure-of-triviatest">3.3. Structure of TriviaTest</a></li>
+<li><a href="#matchtest-feature">3.4. MatchTest Feature</a></li>
+<li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.6. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1058,15 +1059,153 @@ The 2 <code>TriviaBundle</code> operations are exposed in the Model interface as
 </div>
 </div>
 <div class="sect2">
-<h3 id="matchtest-feature"><a class="link" href="#matchtest-feature">3.3. MatchTest Feature</a></h3>
+<h3 id="structure-of-triviatest"><a class="link" href="#structure-of-triviatest">3.3. Structure of TriviaTest</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The life cycle of a matching test is facilitated by the <code>AppState</code> and <code>MatchTest</code> model.</p>
+<p>The term <code>TriviaTest</code> refers to a reference to the different kinds of testing features in 3VIA. Currently,
+there are 2 test features in 3VIA, namely, the Open-Ended Test and the Match Test.</p>
 </div>
 <div class="paragraph">
-<p>The <code>AppState</code> model defines the state of which the application is in. And the <code>MatchTest</code> model extends
-from <code>TriviaTest</code> which has the functionality of storing the necessary information that are needed in any kinds of test.</p>
+<p>Hence, the generic <code>TriviaTest</code> related classes were made to accommodate for the similarities between them. The classes that were
+constructed spans across the Model, Storage and UI component. For Model, we have <code>TriviaTest</code>, <code>TriviaResult</code>, as shown in
+<a href="#Design-Model">Section 2.4, &#8220;Model component&#8221;</a>. For Storage, we have <code>TriviaResultsStorage</code>, as shown in <a href="#Design-Storage">Section 2.5, &#8220;Storage component&#8221;</a>.
+For UI, we have <code>TriviaTestPage</code> and <code>TriviaTestResultPage</code>, as shown in <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</a>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="the-polymorphism-of-triviatest"><a class="link" href="#the-polymorphism-of-triviatest">The polymorphism of TriviaTest</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Uses different generic classes to accommodate the different testing feature in 3VIA.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Follows Open-Close Principle which increases the extensibility of the testing feature in 3VIA.</p>
+</li>
+<li>
+<p>Increases the re-usability of similar codes, and promotes cleaner code.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Con:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The implementation of different tests have to follow the structure of TriviaTest very strictly.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Implement each kinds of test as a standalone test with its own standalone class and event handlers.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pro:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Easy to implement and each developer will have their freedom of how to implement their own test.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Con:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Will lead to code that is increasingly not manageable.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="the-model-of-triviatest-s-results"><a class="link" href="#the-model-of-triviatest-s-results">The Model of TriviaTest&#8217;s Results</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Create another Model called <code>TriviaResult</code> to initialize the past TriviaTest&#8217;s
+tests and attempts.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pro:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>By creating another class called <code>TriviaResult</code> which will be used to record any past <code>TriviaTest</code> records, we can
+reduce the amount of data collected. Hence, improving the start up time of the application.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use <code>TriviaTest</code> itself to initialize the past TriviaTest&#8217;s tests and attempts.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pro:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Since <code>TriviaResult</code> is a subset <code>TriviaTest</code>, it is possible to remove the need of <code>TriviaResult</code>, thereby reducing the
+coupling of the application&#8217;s Model component.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Con:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>However, rebuilding a new but completed <code>TriviaTest</code> would be tedious and complicated. Hence, <code>TriviaResult</code> is
+needed separate the complexities that are involved in data collection and the actual life cycle of <code>TriviaTest</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="matchtest-feature"><a class="link" href="#matchtest-feature">3.4. MatchTest Feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The life cycle of a MatchTest is facilitated by the <code>AppState</code> and <code>MatchTest</code> model.</p>
+</div>
+<div class="paragraph">
+<p>The <code>AppState</code> model defines the state of which the application is in. And the <code>MatchTest</code> model is a subclass of
+<code>TriviaTest</code>.</p>
 </div>
 <div class="paragraph">
 <p>Additionally, <code>MatchTest</code> also implements the following operations:</p>
@@ -1141,7 +1280,7 @@ from <code>TriviaTest</code> which has the functionality of storing the necessar
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="the-static-display-indexes-of-the-listview-for-question-and-answer"><a class="link" href="#the-static-display-indexes-of-the-listview-for-question-and-answer">The static display indexes of the ListView for question and answer</a></h5>
 <div class="ulist">
@@ -1188,70 +1327,6 @@ from <code>TriviaTest</code> which has the functionality of storing the necessar
 <p>The questions and answers are displayed using <code>ListView</code>, and since the mapping of actual index to display index is not an attribute to the question/answer,
 the mapping will be needed to be passed into the UI component. This mapping will then be used by the constructor of <code>ListView</code> to
 create a static display index of question and answer. Hence, this design consideration was not implemented due to abstraction that is leaking into the UI.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect4">
-<h5 id="the-polymorphism-of-triviatest"><a class="link" href="#the-polymorphism-of-triviatest">The polymorphism of TriviaTest</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Uses <code>TriviaTest</code>, <code>TriviaResultStorage</code> to accommodate the different testing feature in 3VIA.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pro:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Follows Open-Close Principle which increases the extensibility of the testing feature in 3VIA.</p>
-</li>
-<li>
-<p>Increases the re-usability of similar codes, and promotes cleaner code.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Con:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The implementation of different tests have to follow the structure of TriviaTest very strictly.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Implement each kinds of test as a standalone test with its own standalone class and event handler.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pro:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Easy to implement and each developer will have their freedom of how to implement their own test.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Con:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Will lead to code that is increasingly not manageable.</p>
 </li>
 </ul>
 </div>
@@ -1326,20 +1401,20 @@ create a static display index of question and answer. Hence, this design conside
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.4. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.5. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.6, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1370,7 +1445,7 @@ create a static display index of question and answer. Hence, this design conside
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.6. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2362,4 +2437,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 11:51:28 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 15:48:20 UTC</div></div></div></body></html>
