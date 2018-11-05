@@ -25,7 +25,7 @@
       </stylesheets>
 
       <HBox>
-          <StackPane HBox.hgrow="NEVER" fx:id="navigationTabPlaceholder" styleClass="jfx-tab-pane">
+          <StackPane HBox.hgrow="NEVER" fx:id="navigationTabPlaceholder" styleClass="root">
           </StackPane>
         <VBox>
           <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
