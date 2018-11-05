@@ -8,8 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.DisplayGoogleSearchEvent;
 import seedu.address.commons.events.ui.DisplayImportHelpEvent;
+import seedu.address.commons.events.ui.DisplayResearchPageEvent;
 import seedu.address.logic.Logic;
 import seedu.address.ui.UiPart;
 
@@ -58,7 +58,7 @@ public class Homepage extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleDisplayGoogleSearchEvent(DisplayGoogleSearchEvent event) {
+    private void handleDisplayResearchPageEvent(DisplayResearchPageEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         cardListPanel.resetToOriginalState();
     }

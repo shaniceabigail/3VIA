@@ -157,10 +157,15 @@ _Selects and opens a Card Info Panel for the 2nd displayed card._
 `select 1` +
 _Selects and opens a Card Info Panel for the 1st card in the results of the `find` command._
 
-=== Research on a question : `google`
+=== Research on a question : `research`
 
-Loads the Google search page for the question of the identified card. +
-Format: `google INDEX`
+Loads the Google search page for the question of the identified card. For any reason, if you are not able to load the
+Google search page, 3VIA will redirect you to DuckDuckGo search engine with the selected question as the search query. +
+Format: `research INDEX`
+
+[NOTE]
+You would need to have an internet connection to load the online search engine. If you are not able to load the
+Google's and DuckDUckGo's search engine, you will be shown a page with an error message.
 
 === Listing entered commands : `history`
 
@@ -407,6 +412,7 @@ e.g. `find Why`
 * *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
+* *Research* : `research INDEX`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
