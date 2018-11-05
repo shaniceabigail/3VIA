@@ -132,17 +132,17 @@ public class AddressBookParser {
                 return new ExitCommand();
 
             default:
-                return new OpenEndedCommandParser().parse(userInput);
+                return new OpenEndedCommandAnswer(userInput);
             }
 
-        case OPEN_ENDED_TEST_QUESTION:
+        case OPEN_ENDED_TEST_QUESTION: //TODO remove and merge with oet
             switch(commandWord) {
 
                 case ExitCommand.COMMAND_WORD:
                     return new ExitCommand();
 
                 default:
-                    return new OpenEndedCommandParser().parse(userInput);
+                    return new OpenEndedCommandAnswer(userInput);
             }
 
         case OPEN_ENDED_TEST_ANSWER:

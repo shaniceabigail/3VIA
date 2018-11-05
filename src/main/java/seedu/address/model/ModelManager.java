@@ -25,6 +25,7 @@ import seedu.address.model.state.AppState;
 import seedu.address.model.state.State;
 import seedu.address.model.test.Attempt;
 import seedu.address.model.test.ReadOnlyTriviaResults;
+import seedu.address.model.test.TestType;
 import seedu.address.model.test.TriviaResult;
 import seedu.address.model.test.TriviaResults;
 import seedu.address.model.test.TriviaTest;
@@ -231,7 +232,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void startTriviaTest(TriviaTest test) {
         currentRunningTest = test;
-        appState.setAppState(State.MATCH_TEST);
+        if (test.getTestType() == TestType.MATCH_TEST) {
+            appState.setAppState(State.MATCH_TEST);
+        } else {
+            appState.setAppState(State.OPEN_ENDED_TEST);
+        }
         test.startTest();
         raise(new ShowTriviaTestViewEvent(test.getTestingPage()));
     }

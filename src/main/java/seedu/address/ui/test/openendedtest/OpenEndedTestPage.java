@@ -2,6 +2,8 @@ package seedu.address.ui.test.openendedtest;
 
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -18,30 +20,34 @@ public class OpenEndedTestPage extends TriviaTestPage {
     private static final String FXML = "test/openendedtest/OpenEndedTestPage.fxml";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private QuestionListPanel questionListPanel;
-
-    @javafx.fxml.FXML
-    private StackPane matchTestQuestionListPanelPlaceholder;
-
-    @FXML
-    private StackPane matchTestAnswerListPanelPlaceholder;
+    private OpenEndedTest openEndedTest;
+    private OpenEndedQuestionPage Qpage;
+    private Openanswer Apage;
 
     @FXML
-    private Label matchTestTopicText;
+    private StackPane questionPagePlaceholder;
 
     @FXML
-    private Label matchTestDurationText;
+    private StackPane answerPagePlaceholder;
+
+    @FXML
+    private Label openTestTopicText;
+
+    @FXML
+    private Label openTestDurationText;
 
     public OpenEndedTestPage(OpenEndedTest openEndedTest) {
         super(FXML);
 
-        //questionListPanel = new QuestionListPanel(openEndedTest.getQuestions());
-        matchTestQuestionListPanelPlaceholder.getChildren().add(questionListPanel.getRoot());
+        this.openEndedTest = openEndedTest;
 
-        matchTestTopicText.setText(openEndedTest.getTopic().topicName);
-        matchTestDurationText.textProperty().bind(openEndedTest.getDuration().asString());
 
         registerAsAnEventHandler(this);
+    }
+
+    @Subscribe
+    private void handler() {
+        openEndedTest.getNextCard();
     }
 
 }
