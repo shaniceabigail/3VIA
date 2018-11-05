@@ -23,7 +23,7 @@ Additionally, my main task was to implement a mass import feature.
 ** Justification: This feature incentivises non-existing users to use 3VIA more as the users can import their existing digital notes quickly.
 ** Highlights: This enhancement allows grouping of multiple pairs of questions and answers under a set of topics. Thereby reducing the need to repeatedly tag each question and answer pair with the same set of topics.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]]
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=hozongsien[Functional code & Test code]]
 
 * *Other contributions*:
 
@@ -31,12 +31,12 @@ Additionally, my main task was to implement a mass import feature.
 *** Conceptualized future releases.
 *** Assigned roles and responsibilities to team members.
 ** Enhancements to existing features:
-*** added the ability to delete multiple flash cards. [[link]]
+*** Ported list and select functions from original AddressBook to 3VIA.
 ** Documentation:
-*** Updated storage class diagram. [[link]]
+*** Updated storage class diagram for 3VIA.
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Reviewed PRs of team members to improve code quality.
+*** Reported bugs and suggestions for team members (examples:  https://github.com/CS2103-AY1819S1-W12-3/main/pull/79[1], https://github.com/CS2103-AY1819S1-W12-3/main/pull/99[2], https://github.com/CS2103-AY1819S1-W12-3/main/pull/110[3])
 
 == Contributions to the User Guide
 
