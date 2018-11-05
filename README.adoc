@@ -29,6 +29,6 @@ endif::[]
 _Marco Jakob_.
 * This application was adapted from https://github.com/se-edu/addressbook-level4[AddressBookLevel 4] created by https://github.com/se-edu/[SE-EDU]
 * Inspired by https://quizlet.com/[Quizlet]
-* Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
+* Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5], https://github.com/jfoenixadmin/JFoenix[JFoenix]
 
 == Licence : link:LICENSE[MIT]
