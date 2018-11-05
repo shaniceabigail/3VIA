@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -9,10 +11,13 @@ import com.google.common.eventbus.Subscribe;
 import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
@@ -47,6 +52,15 @@ public class NavigationTabController extends UiPart<Region> {
     @FXML
     private Tab customTab;
 
+    @FXML
+    private AnchorPane homeContainer;
+
+    @FXML
+    private AnchorPane settingsContainer;
+
+    @FXML
+    private AnchorPane testContainer;
+
 
 
     public NavigationTabController () {
@@ -62,7 +76,7 @@ public class NavigationTabController extends UiPart<Region> {
 
     /**
      * creates the view configuration of the tabs
-     */
+
 
     private void configureView() {
         //tabContainer.setSide(Side.LEFT);
@@ -74,15 +88,16 @@ public class NavigationTabController extends UiPart<Region> {
         tabContainer.getStyleClass().add("root");
 
         //list of tabs configured
-        createTab(homeTab, "Home", "file:/src/main/resources/images/tabIcons/home.png");
-        createTab(settingsTab, "Settings", "file:/src/main/resources/images/tabIcons/settings.png");
-        createTab(customTab, "Custom", "file:/main/resources/images/tabIcons/test.png");
+        createTab(homeTab, "Home", "file:/src/main/resources/images/tabIcons/home.png", homeContainer, "MainDisplay.fxml");
+        //createTab(settingsTab, "Settings", "file:/src/main/resources/images/tabIcons/settings.png", settingsContainer);
+        //createTab(customTab, "Custom", "file:/main/resources/images/tabIcons/test.png", testContainer);
     }
+     */
 
     /**
      * Configures a new tab
-     */
-    private void createTab(Tab tab, String title, String iconPath) {
+
+    private void createTab(Tab tab, String title, String iconPath, AnchorPane containerPane) {
         double imageWidth = 40.0;
 
         ImageView imageView = new ImageView(new Image(iconPath));
@@ -100,8 +115,22 @@ public class NavigationTabController extends UiPart<Region> {
         tab.setText(title);
         tab.setGraphic(tabPane);
 
+        if (containerPane != null && resourceURL != null) {
+            try {
+                Parent contentView = FXMLLoader.load(resourceURL);
+                containerPane.getChildren().add(contentView);
+                AnchorPane.setTopAnchor(contentView, 0.0);
+                AnchorPane.setBottomAnchor(contentView, 0.0);
+                AnchorPane.setRightAnchor(contentView, 0.0);
+                AnchorPane.setLeftAnchor(contentView, 0.0);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         listOfTabs.add(tab);
     }
+     */
 
     /**
      * Checks if tab called is a created tab
