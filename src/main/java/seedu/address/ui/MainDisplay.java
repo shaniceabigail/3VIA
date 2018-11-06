@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.NavigateToLearnPageEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestResultEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
@@ -86,6 +87,12 @@ public class MainDisplay extends UiPart<Region> {
     private void handleShowTriviaTestResultPage(ShowTriviaTestResultEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         changeToScene(triviaTestPlaceholder);
+    }
+
+    @Subscribe
+    private void handleCloseTriviaTestViewEvent(CloseTriviaTestViewEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        changeToScene(homepagePlaceholder);
     }
 
     @Subscribe
