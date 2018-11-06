@@ -334,7 +334,7 @@ image::ImportCommandActivityDiagram.png[ImportCommandActivityDiagram]
 
 Given below is an example usage scenario and how the import mechanism behaves.
 
-Step 1: The user enters the import command to import a file from an absolute file path. An `ImportCommand` object is initialised.
+Step 1: The user enters the import command to import a file from an absolute/ relative file path. An `ImportCommand` object is initialised.
 
 Step 2: When the `ImportCommand` executes, the desired import file is first verified to be valid. The following checks are done:
 
