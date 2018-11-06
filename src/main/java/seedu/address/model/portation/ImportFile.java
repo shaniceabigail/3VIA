@@ -24,6 +24,7 @@ import seedu.address.model.topic.Topic;
  */
 public class ImportFile {
     public static final String MESSAGE_INVALID_FILE = "Invalid file.";
+    public static final String MESSAGE_INVALID_FILE_TYPE = "Invalid file type.";
     public static final String MESSAGE_INVALID_FILE_FORMAT = "Invalid file format.";
     public static final String MESSAGE_INVALID_FILE_UNABLE_TO_READ = "Unable to read file.";
     public static final String MESSAGE_DUPLICATE_CARDS_FOUND = "Duplicate questions in file.";
@@ -38,15 +39,14 @@ public class ImportFile {
     /**
      * Ensures the file to be imported is valid, readable and non empty.
      */
-    public boolean isFileValid() {
+    public void isFileValid() throws InvalidImportFileException {
         if (!isValidFile()) {
-            return false;
+            throw new InvalidImportFileException(MESSAGE_INVALID_FILE);
         } else if (!isValidFileType()) {
-            return false;
+            throw new InvalidImportFileException(MESSAGE_INVALID_FILE_TYPE);
         } else if (!isValidFileFormat()) {
-            return false;
+            throw new InvalidImportFileException(MESSAGE_INVALID_FILE_FORMAT);
         }
-        return true;
     }
 
     /**

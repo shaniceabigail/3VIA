@@ -3,6 +3,9 @@ package seedu.address.model.portation;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.ImportFileUtil.INVALID_EMPTY_FILE;
+import static seedu.address.testutil.ImportFileUtil.INVALID_FILE_TYPE;
+import static seedu.address.testutil.ImportFileUtil.INVALID_NOT_A_FILE;
 
 import org.junit.Test;
 
@@ -20,14 +23,21 @@ public class ImportFileTest {
     }
 
     @Test
-    public void isFileValid() {
-        // invalid
-        assertFalse(ImportFileUtil.getInvalidImportFileType().isFileValid());
-        assertFalse(ImportFileUtil.getInvalidImportFileNotFile().isFileValid());
-        assertFalse(ImportFileUtil.getEmptyImportFile().isFileValid());
+    public void isFileValid_invalidFileType_throwsInvalidImportFileException() {
+        ImportFile invalid = new ImportFile(INVALID_FILE_TYPE.toString());
+        Assert.assertThrows(InvalidImportFileException.class, () -> invalid.isFileValid());
+    }
 
-        // valid
-        assertTrue(ImportFileUtil.getTypicalImportFile().isFileValid());
+    @Test
+    public void isFileValid_invalidEmptyFile_throwsInvalidImportFileException() {
+        ImportFile invalid = new ImportFile(INVALID_EMPTY_FILE.toString());
+        Assert.assertThrows(InvalidImportFileException.class, () -> invalid.isFileValid());
+    }
+
+    @Test
+    public void isFileValid_invalidNotFile_throwsInvalidImportFileException() {
+        ImportFile invalid = new ImportFile(INVALID_NOT_A_FILE.toString());
+        Assert.assertThrows(InvalidImportFileException.class, () -> invalid.isFileValid());
     }
 
     // no cards throw, duplicate card throw, invalid format, valid, valid no topic
