@@ -324,6 +324,7 @@ be saved into your hard disk.
 Results of previous tests, questions, expected answers and the user’s answers for that particular topic will be displayed. +
 Format: `stats [TOPIC]`
 
+// tag::import[]
 === Cram More Knowledge!: `import`
 Quickly import multiple flash cards from existing notes or documents into 3VIA.
 
@@ -351,7 +352,7 @@ Below are 2 rules regarding the import file type and format that must be adhered
 [start = 2]
 . Import file format:
 
-image::import_file_format.png[import file format]
+image::import_file_format.png[import file format pic]
 [options = "header", cols = "1,2", caption=""]
 .Formating explaination
 |===
@@ -368,19 +369,21 @@ Duplicate questions in the import text file will result in import failure.
 
 Now that your file is ready, head over to 3VIA and lets begin the import.
 
-1. Enter the `import` command followed by the *absolute file path* of the import file you previously created in the command
+. Enter the `import` command followed by the *absolute file path* of the import file you previously created in the command
 box as seen below.
 
-image::import_step1.png[import step 1 pic, 500,500]
+image::import_step1.png[import step 1 pic, 500]
 
 [start = 2]
-2. Hit enter/ return to confirm. 3VIA will now display a list of cards that has been added to you.
+. Hit enter/ return to confirm. 3VIA will now display a list of cards that has been imported.
 
-image::import_step2.png[import step 2 pic, 800, 600]
+image::import_step2.png[import step 2 pic, 700]
 
 TIP: You can `edit` or `delete` any of the recently imported cards and/or even `undo` the import if you are not satisfied
 with the cards imported.
+// end::import[]
 
+// tag::exit[]
 === Exiting the program : `exit`
 
 Exits the program. +
@@ -388,7 +391,7 @@ Format: `exit`
 
 [IMPORTANT]
 command `exit` used in any of the test page will bring you to the home page, whereas using the command `exit` in the homepage will exit the programme.
-
+// end::exit[]
 === Saving data
 3VIA saves data in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
