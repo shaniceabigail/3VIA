@@ -1,8 +1,6 @@
 package seedu.address.model.portation;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.ImportFileUtil.INVALID_EMPTY_FILE;
 import static seedu.address.testutil.ImportFileUtil.INVALID_FILE_TYPE;
 import static seedu.address.testutil.ImportFileUtil.INVALID_NOT_A_FILE;
@@ -11,6 +9,7 @@ import org.junit.Test;
 
 import seedu.address.logic.parser.fileparser.exceptions.FileParseException;
 import seedu.address.model.card.UniqueCardList;
+import seedu.address.model.portation.exceptions.InvalidImportFileException;
 import seedu.address.testutil.Assert;
 import seedu.address.testutil.CardBuilder;
 import seedu.address.testutil.ImportFileUtil;

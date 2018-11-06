@@ -1,4 +1,4 @@
-package seedu.address.model.portation;
+package seedu.address.model.portation.exceptions;
 
 /**
  * Represents an error of the file to be imported.

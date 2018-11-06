@@ -17,6 +17,7 @@ import seedu.address.logic.parser.fileparser.exceptions.FileParseException;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.card.exceptions.DuplicateCardException;
+import seedu.address.model.portation.exceptions.InvalidImportFileException;
 import seedu.address.model.topic.Topic;
 
 /**

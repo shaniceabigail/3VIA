@@ -6,7 +6,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.portation.ImportFile;
-import seedu.address.model.portation.InvalidImportFileException;
+import seedu.address.model.portation.exceptions.InvalidImportFileException;
 
 /**
  * Import cards from specified location to the trivia bundle.
