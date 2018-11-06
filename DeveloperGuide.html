@@ -787,11 +787,13 @@ Additionally, the import mechanism implements the following operations:</p>
 <p><code>TriviaBundle#haveAnyCard()</code>&#8201;&#8212;&#8201;Checks if the cards to add contain any duplicated cards already in the <code>TriviaBundle</code>.</p>
 </li>
 <li>
-<p><code>TriviaBundle#addMultipleCards()</code>&#8201;&#8212;&#8201;Adds multiple cards into the <code>TriviaBundle</code> at once.
-The 2 <code>TriviaBundle</code> operations are exposed in the Model interface as
-<code>Model#haveAnyCard()</code> and <code>Model#addMultipleCards()</code> respectively.</p>
+<p><code>TriviaBundle#addMultipleCards()</code>&#8201;&#8212;&#8201;Adds multiple cards into the <code>TriviaBundle</code> at once.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>The 2 <code>TriviaBundle</code> operations are exposed in the Model interface as
+<code>Model#haveAnyCard()</code> and <code>Model#addMultipleCards()</code> respectively.</p>
 </div>
 <div class="paragraph">
 <p>The following activity diagram summarizes what happens when a user executes the import command.</p>
@@ -939,55 +941,27 @@ The 2 <code>TriviaBundle</code> operations are exposed in the Model interface as
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Store all cards to be added in <code>TriviaBundle</code> before writing to file on hard disk.</p>
+<p><strong>Alternative 1 (current choice):</strong> Store all cards to be added in <code>TriviaBundle</code> before writing to file on the hard disk.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pro:</p>
-<div class="ulist">
-<ul>
+<p>Pros: Less IO intensive as only one write to file is needed.</p>
+</li>
 <li>
-<p>Less IO intensive as only one write to file is needed.</p>
+<p>Cons: May have heap memory issue if large amount of cards are stored temporarily.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Con:</p>
+<p><strong>Alternative 2:</strong> Writes a card to xml file after each card is added.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>May have heap memory issue if large amounts of cards are stored temporarily.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
+<p>Pros: Easy to implement.</p>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Writes a card to a xml file after each card is added.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pro:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Easy to implement.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Con:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>May have performance issue when large amount of cards are added.</p>
-</li>
-</ul>
-</div>
+<p>Cons: May have performance issue when large amount of cards are added.</p>
 </li>
 </ul>
 </div>
@@ -1000,55 +974,27 @@ The 2 <code>TriviaBundle</code> operations are exposed in the Model interface as
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Tokenize string according to defined characters between question and answer, and between cards.</p>
+<p><strong>Alternative 1 (current choice):</strong> Tokenize strings according to defined characters between question and answer, and between cards.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pro:</p>
-<div class="ulist">
-<ul>
+<p>Pros: Allows user to undo/ redo import as import is viewed by <code>VersionedAddressBook</code> as a single command.</p>
+</li>
 <li>
-<p>Allows user to undo/ redo import as import is viewed by <code>VersionedAddressBook</code> as a single command.</p>
+<p>Cons: May have memory performance issue as multiple cards are stored temporarily in the <code>TriviaBundle</code>.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>Con:</p>
+<p><strong>Alternative 2 (current choice):</strong> Tokenize strings based on AddCommand input format.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>May have memory performance issue as multiple cards are stored temporarily in the <code>TriviaBundle</code>.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
+<p>Pros: Easy to implement as it allows reuse of add command functions.</p>
 </li>
 <li>
-<p><strong>Alternative 2:</strong> Tokenize string based on AddCommand input format.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pro:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Easy to implement as it allows reuse of add command functions.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Con:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Unable to undo/ redo import of all cards as the import command is essentially multiple add commands.</p>
-</li>
-</ul>
-</div>
+<p>Cons: Unable to undo/ redo import of all cards as the import command is essentially multiple add commands.</p>
 </li>
 </ul>
 </div>
@@ -2437,4 +2383,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 15:48:20 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-06 08:54:23 UTC</div></div></div></body></html>
