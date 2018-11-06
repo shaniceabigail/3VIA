@@ -174,7 +174,7 @@ Google's and DuckDuckGo's search engine, you will be redirected to a page with a
 
 === Listing entered commands : `history`
 
-Lists all the commands that you have entered from your most recent command. +
+Lists all the commands (which includes the valid and invalid commands), that you have entered from your most recent command. +
 Format: `history`
 
 [NOTE]
