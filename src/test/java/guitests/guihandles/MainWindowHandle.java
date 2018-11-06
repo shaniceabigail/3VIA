@@ -7,26 +7,24 @@ import javafx.stage.Stage;
  */
 public class MainWindowHandle extends StageHandle {
 
-    private final CardListPanelHandle cardListPanel;
     private final ResultDisplayHandle resultDisplay;
     private final CommandBoxHandle commandBox;
     private final StatusBarFooterHandle statusBarFooter;
     private final MainMenuHandle mainMenu;
-    private final InfoPanelHandle infoPanelHandle;
+    private final MainDisplayHandle mainDisplay;
 
     public MainWindowHandle(Stage stage) {
         super(stage);
 
-        cardListPanel = new CardListPanelHandle(getChildNode(CardListPanelHandle.CARD_LIST_VIEW_ID));
         resultDisplay = new ResultDisplayHandle(getChildNode(ResultDisplayHandle.RESULT_DISPLAY_ID));
         commandBox = new CommandBoxHandle(getChildNode(CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         statusBarFooter = new StatusBarFooterHandle(getChildNode(StatusBarFooterHandle.STATUS_BAR_PLACEHOLDER));
         mainMenu = new MainMenuHandle(getChildNode(MainMenuHandle.MENU_BAR_ID));
-        infoPanelHandle = new InfoPanelHandle(getChildNode(InfoPanelHandle.INFO_ID));
+        mainDisplay = new MainDisplayHandle(getChildNode(MainDisplayHandle.MAIN_DISPLAY_ID));
     }
 
     public CardListPanelHandle getCardListPanel() {
-        return cardListPanel;
+        return mainDisplay.getCardListPanel();
     }
 
     public ResultDisplayHandle getResultDisplay() {
@@ -46,10 +44,10 @@ public class MainWindowHandle extends StageHandle {
     }
 
     public BrowserPanelHandle getBrowserPanel() {
-        return infoPanelHandle.getBrowserPanel();
+        return mainDisplay.getBrowserPanelHandle();
     }
 
     public InfoPanelHandle getInfoPanel() {
-        return infoPanelHandle;
+        return mainDisplay.getInfoPanelHandle();
     }
 }
