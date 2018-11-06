@@ -21,20 +21,20 @@ public class OpenEndedTestPage extends TriviaTestPage {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private OpenEndedTest openEndedTest;
-    private OpenEndedQuestionPage Qpage;
-    private Openanswer Apage;
+//    private OpenEndedQuestionPage Qpage;
+//    private Openanswer Apage;
 
-    @FXML
-    private StackPane questionPagePlaceholder;
-
-    @FXML
-    private StackPane answerPagePlaceholder;
-
-    @FXML
-    private Label openTestTopicText;
-
-    @FXML
-    private Label openTestDurationText;
+//    @FXML
+//    private StackPane questionPagePlaceholder;
+//
+//    @FXML
+//    private StackPane answerPagePlaceholder;
+//
+//    @FXML
+//    private Label openTestTopicText;
+//
+//    @FXML
+//    private Label openTestDurationText;
 
     public OpenEndedTestPage(OpenEndedTest openEndedTest) {
         super(FXML);
@@ -44,10 +44,10 @@ public class OpenEndedTestPage extends TriviaTestPage {
 
         registerAsAnEventHandler(this);
     }
-
-    @Subscribe
-    private void handler() {
-        openEndedTest.getNextCard();
-    }
+//
+//    @Subscribe
+//    private void handler() {
+//        openEndedTest.getNextCard();
+//    }
 
 }

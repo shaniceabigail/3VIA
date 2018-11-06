@@ -129,7 +129,7 @@ public class OpenEndedTest extends TriviaTest {
     }
 
     @Override
-    public Supplier<? extends TriviaTestPage> getTestingPage() { return () -> new OpenEndedTestPage(null); }
+    public Supplier<? extends TriviaTestPage> getTestingPage() { return () -> new OpenEndedTestPage(this); }
 
     @Override
     public Supplier<? extends TriviaTestResultPage> getResultPage() {
