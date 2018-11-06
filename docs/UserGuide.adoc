@@ -80,12 +80,14 @@ Examples:
 * `add q/What is the formula for force? a/force = mass * acceleration t/Physics`
 * `add q/What is the capital of Singapore? a/Singapore t/GeneralKnowledge t/Geography`
 
+// tag::learn[]
 === Start learning: `learn`
 
 Will direct you to the homepage with the cards you want to learn. If you want to learn from everything that is
 available in the deck, simply execute `learn`. If you want to learn from the cards that are related to a certain topic,
 simply enter `learn TOPIC`.  +
 Format: `learn [TOPIC]`
+// end::learn[]
 
 === Editing a card : `edit`
 
@@ -142,10 +144,10 @@ _Deletes the 2nd displayed card._
 `delete 1` +
 _Deletes the 1st card in the results of the `find` command._xs
 
+// tag::select[]
 === Viewing information related to a card : `select`
 
-Selects the card identified by the index number used in the displayed card list. Loads the Card Info Panel for the
-card. +
+Selects the card identified by the index number used in the displayed card list. Loads the card's information panel. +
 Format: `select INDEX`
 
 Examples:
@@ -156,16 +158,19 @@ _Selects and opens a Card Info Panel for the 2nd displayed card._
 * `find Why` +
 `select 1` +
 _Selects and opens a Card Info Panel for the 1st card in the results of the `find` command._
+// end::select[]
 
+// tag::research[]
 === Research on a question : `research`
 
-Loads the Google search page for the question of the identified card. For any reason, if you are not able to load the
-Google search page, 3VIA will redirect you to DuckDuckGo search engine with the selected question as the search query. +
+Loads the Google search page for the question of the identified card. If, for any reason, you are not able to load the
+Google search page, 3VIA will redirect you to DuckDuckGo's search engine with the selected question as the search query. +
 Format: `research INDEX`
 
 [NOTE]
 You would need to have an internet connection to load the online search engine. If you are not able to load the
-Google's and DuckDUckGo's search engine, you will be shown a page with an error message.
+Google's and DuckDuckGo's search engine, you will be redirected to a page with an error message.
+// end::research[]
 
 === Listing entered commands : `history`
 
@@ -273,10 +278,11 @@ Format: `c` (correct) OR `x` (wrong)
 Test is exited. +
 Format: `exit`
 
+// tag::matchtest[]
 === Start a MatchTest: `testM`
 
 Start a test of matching questions and answers for a specified topic. In a MatchTest, all the questions and answers in
-that topic will be displayed. You will then have to match all the correct question to their respective answer. +
+that topic will be displayed. You will then have to match all the questions to their respective answer. +
 Format: `testM TOPIC`
 
 The following commands can only be used during a `MatchTest`.
@@ -311,6 +317,7 @@ Format: `exit`
 [NOTE]
 Your attempts from an incomplete MatchTest will be discarded. Only those attempts from a completed MatchTest will
 be saved into your hard disk.
+// end::matchtest[]
 
 === View statistics for a certain test: `stats` `[coming in v2.0]`
 
@@ -389,11 +396,9 @@ command `exit` used in any of the test page will bring you to the home page, whe
 3VIA saves data in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::multiplayer[]
 === Multi-Player `[coming in v2.0]`
 
 _{explain how the user can enable/disable Multi-Player}_
-// end::multiplayer[]
 
 == FAQ
 
