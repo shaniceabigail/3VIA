@@ -10,7 +10,6 @@ public class OpenEndedAnswerCommand extends Command {
     public static String userAnswer;
 
     public static final String MESSAGE_ANSWER_RECORDED = "Answer recorded!\n";
-    public static final String MESSAGE_ANSWER_BLANK = "Please enter an answer!\n";
 
     public OpenEndedAnswerCommand(String userInput) {
         this.userAnswer = userInput;

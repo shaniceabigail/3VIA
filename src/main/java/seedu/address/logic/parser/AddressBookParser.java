@@ -135,7 +135,7 @@ public class AddressBookParser {
                     return new ExitCommand();
 
                 default:
-                    return new OpenEndedCommandAnswerParser(userInput);
+                    return new OpenEndedAnswerParser(userInput);
             }
 
         case OPEN_ENDED_TEST_ANSWER:
