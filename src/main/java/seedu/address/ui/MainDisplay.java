@@ -46,7 +46,7 @@ public class MainDisplay extends UiPart<Region> {
     @FXML
     private Tab homeTab;
     @FXML
-    private Tab settingsTab;
+    private Tab testTab;
     @FXML
     private Tab customTab;
     @FXML
@@ -59,9 +59,6 @@ public class MainDisplay extends UiPart<Region> {
         listOfTabs = new ArrayList<Tab>();
 
         tabContainer = new JFXTabPane();
-        homeTab = new Tab();
-        settingsTab = new Tab();
-        customTab = new Tab();
         currentTab = homeTab;
         this.configureView();
 
@@ -98,7 +95,7 @@ public class MainDisplay extends UiPart<Region> {
 
         //list of tabs configured
         createTab(homeTab, "Home", "file:/src/main/resources/images/tabIcons/home.png", homepagePlaceholder);
-        //createTab(settingsTab, "Settings", "file:/src/main/resources/images/tabIcons/settings.png", settingsContainer);
+        createTab(testTab, "Test", "file:/src/main/resources/images/tabIcons/settings.png", triviaTestPlaceholder);
         //createTab(customTab, "Custom", "file:/main/resources/images/tabIcons/test.png", testContainer);
     }
 
@@ -121,12 +118,10 @@ public class MainDisplay extends UiPart<Region> {
         tabPane.setCenter(imageView);
         tabPane.setBottom(label);
 
-        tab.setText(title);
-        tab.setGraphic(tabPane);
-
         if (containerPane != null) {
             try {
-                containerPane.setAlignment(Pos.CENTER_RIGHT);
+                tab = new Tab(title, containerPane);
+                tab.setGraphic(tabPane);
                 listOfTabs.add(tab);
             } catch (Exception e) {
                 throw new IllegalArgumentException("Exception error");

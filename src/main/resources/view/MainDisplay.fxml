@@ -6,19 +6,19 @@
 <StackPane fx:id="MainDisplay" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
      <JFXTabPane StackPane.alignment="CENTER_LEFT">
          <tabs>
-            <Tab text="Home">
+            <Tab text="Home" fx:id="homeTab">
                <content>
                    <StackPane fx:id="homepagePlaceholder" />
                   <StackPane prefHeight="150.0" prefWidth="200.0" />
                </content>
             </Tab>
-            <Tab text="Test">
+            <Tab text="Test" fx:id="testTab">
                <content>
                    <StackPane fx:id="triviaTestPlaceholder" />
                   <StackPane prefHeight="150.0" prefWidth="200.0" />
                </content>
             </Tab>
-            <Tab text="Settings">
+            <Tab text="Settings" fx:id="customTab">
                <content>
                   <StackPane prefHeight="150.0" prefWidth="200.0" />
                </content>

@@ -21,12 +21,8 @@
       <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
-        <URL value="@NavigationTabStyling.css"/>
+        <!--<URL value="@NavigationTabStyling.css"/>-->
       </stylesheets>
-
-      <HBox>
-          <StackPane HBox.hgrow="NEVER" fx:id="navigationTabPlaceholder" styleClass="root">
-          </StackPane>
         <VBox>
           <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
             <Menu mnemonicParsing="false" text="File">
@@ -52,7 +48,6 @@
           <StackPane fx:id="displayPagePlaceHolder" VBox.vgrow="ALWAYS"/>
           <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
         </VBox>
-      </HBox>
     </Scene>
   </scene>
 </fx:root>

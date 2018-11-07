@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  * Navigates to a different page
  */
 public class NavigationCommand extends Command {
-    public static final String COMMAND_WORD = "go/";
+    public static final String COMMAND_WORD = "test";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " : navigates to test menu\n"
             + "Example: " + COMMAND_WORD;
