@@ -6,16 +6,16 @@ import seedu.address.model.card.Card;
 /**
  * An event to signal the info panel to change to the google search panel.
  */
-public class DisplayGoogleSearchEvent extends BaseEvent {
+public class DisplayResearchPageEvent extends BaseEvent {
 
-    private final Card cardToGoogle;
+    private final Card cardToResearch;
 
-    public DisplayGoogleSearchEvent(Card cardToGoogle) {
-        this.cardToGoogle = cardToGoogle;
+    public DisplayResearchPageEvent(Card cardToResearch) {
+        this.cardToResearch = cardToResearch;
     }
 
-    public Card getCardToGoogle() {
-        return cardToGoogle;
+    public Card getCardToResearch() {
+        return cardToResearch;
     }
 
     @Override

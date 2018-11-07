@@ -10,8 +10,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.DisplayCardInfoEvent;
-import seedu.address.commons.events.ui.DisplayGoogleSearchEvent;
 import seedu.address.commons.events.ui.DisplayImportHelpEvent;
+import seedu.address.commons.events.ui.DisplayResearchPageEvent;
 import seedu.address.commons.events.ui.HideCardInfoPanelEvent;
 import seedu.address.ui.UiPart;
 
@@ -81,9 +81,9 @@ public class InfoPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleDisplayGoogleSearchEvent(DisplayGoogleSearchEvent event) {
+    private void handleDisplayResearchPageEvent(DisplayResearchPageEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        browserPanel.loadCardPage(event.getCardToGoogle());
+        browserPanel.loadCardPage(event.getCardToResearch());
         changeToPanel(browserPanelPlaceholder);
     }
 

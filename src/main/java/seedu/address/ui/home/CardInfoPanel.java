@@ -36,7 +36,7 @@ public class CardInfoPanel extends UiPart<Region> {
     @FXML
     private TextArea cardInfoAnswer;
     @FXML
-    private StackPane googleCommandTipPlaceholder;
+    private StackPane researchCommandTipPlaceholder;
     @FXML
     private StackPane cardExperiencePlaceholder;
     @FXML
@@ -45,8 +45,8 @@ public class CardInfoPanel extends UiPart<Region> {
     public CardInfoPanel() {
         super(FXML);
 
-        commandTipBox = new TipBox("Research more on a question by entering 'google INDEX'!");
-        googleCommandTipPlaceholder.getChildren().add(commandTipBox.getRoot());
+        commandTipBox = new TipBox("Research more on a question by entering 'research INDEX'!");
+        researchCommandTipPlaceholder.getChildren().add(commandTipBox.getRoot());
         registerAsAnEventHandler(this);
     }
 
