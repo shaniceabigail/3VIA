@@ -57,6 +57,13 @@ public class MatchTestUtil {
      */
     public static void completeMatchTest(Model model, Topic topic) {
         MatchTest matchTest = new MatchTest(topic, model.getTriviaBundle());
+        completeMatchTest(model, matchTest);
+    }
+
+    /**
+     * Will complete the given matchtest.
+     */
+    public static void completeMatchTest(Model model, MatchTest matchTest) {
         model.startTriviaTest(matchTest);
 
         List<MatchIndexPair> pairList = new ArrayList<>();

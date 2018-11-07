@@ -97,8 +97,8 @@ public class MatchTestPageTest extends GuiUnitTest {
 
         MatchTestPageHandle matchTestPageHandle = new MatchTestPageHandle(matchTestPage.getRoot());
 
-        assertEquals(matchTestPageHandle.getMatchTestTopic().getText(), matchTest.getTopic().topicName);
-        assertEquals(matchTestPageHandle.getMatchTestDuration().getText(),
+        assertEquals(matchTestPageHandle.getMatchTestTopic(), matchTest.getTopic().topicName);
+        assertEquals(matchTestPageHandle.getMatchTestDuration(),
                 matchTest.getDuration().getValue().toString() + " s");
 
         assertQuestionListPanelCorrect(matchTestPageHandle.getQuestionListPanelHandle(), matchTest.getQuestions());

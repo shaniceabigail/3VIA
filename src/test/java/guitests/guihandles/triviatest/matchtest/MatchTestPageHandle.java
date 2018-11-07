@@ -36,11 +36,11 @@ public class MatchTestPageHandle extends NodeHandle<Node> {
         return questionListPanelHandle;
     }
 
-    public Label getMatchTestTopic() {
-        return matchTestTopic;
+    public String getMatchTestTopic() {
+        return matchTestTopic.getText();
     }
 
-    public Label getMatchTestDuration() {
-        return matchTestDuration;
+    public String getMatchTestDuration() {
+        return matchTestDuration.getText();
     }
 }
