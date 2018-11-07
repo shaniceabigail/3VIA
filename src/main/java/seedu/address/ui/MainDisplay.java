@@ -121,8 +121,7 @@ public class MainDisplay extends UiPart<Region> {
 
         if (containerPane != null) {
             try {
-                tab = new Tab(title, containerPane);
-                tab.setGraphic(tabPane);
+                tab.setContent(containerPane);
                 listOfTabs.add(tab);
             } catch (Exception e) {
                 throw new IllegalArgumentException("Exception error");
