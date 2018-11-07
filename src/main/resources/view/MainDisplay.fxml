@@ -18,8 +18,9 @@
                   <StackPane prefHeight="150.0" prefWidth="200.0" />
                </content>
             </Tab>
-            <Tab text="Settings" fx:id="customTab">
+            <Tab text="Review" fx:id="reviewTab">
                <content>
+                   <StackPane fx:id="reviewPlaceholder" />
                   <StackPane prefHeight="150.0" prefWidth="200.0" />
                </content>
             </Tab>
