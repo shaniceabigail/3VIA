@@ -45,6 +45,7 @@ public class OpenEndedTest extends TriviaTest {
     private ArrayList<Card> referenceCards;
     private int numCorrect = 0;
     private int numWrong = 0;
+    private String userAnswer;
 
     public OpenEndedTest(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
         super(tag, triviaBundle);
@@ -92,6 +93,10 @@ public class OpenEndedTest extends TriviaTest {
     public int getNumCorrect() { return numCorrect; }
 
     public int getNumWrong() { return numWrong; }
+
+    public void recordAnswer(String userInput) {
+        userAnswer = userInput;
+    }
 
     @Override
     public void startTest() { startTimer(); }
