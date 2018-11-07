@@ -40,7 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private UserPrefs prefs;
     private HelpWindow helpWindow;
 
-    private NavigationTabController navigationTab;
+    //private NavigationTabController navigationTab;
     private MainDisplay mainDisplay;
 
     @FXML
@@ -134,8 +134,8 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getTriviaBundleFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        navigationTab = new NavigationTabController();
-        navigationTabPlaceholder.getChildren().add(navigationTab.getRoot());
+        /*navigationTab = new NavigationTabController();
+        navigationTabPlaceholder.getChildren().add(navigationTab.getRoot());*/
     }
 
     public void hide() {

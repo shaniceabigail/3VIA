@@ -29,7 +29,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  *
  * Adapted from http://synappse.co/blog/vertical-stateful-jfxtabpane-with-icons-in-javafx/
  *
- */
+
 public class NavigationTabController extends UiPart<Region> {
 
     private static final String FXML = "NavigationTab.fxml";
@@ -130,13 +130,13 @@ public class NavigationTabController extends UiPart<Region> {
 
         listOfTabs.add(tab);
     }
-     */
+
 
     /**
      * Checks if tab called is a created tab
      * @param newSelected
      * @return
-     */
+
     public boolean isValidTab(Tab newSelected) {
         return listOfTabs.contains(newSelected);
     }
@@ -159,3 +159,4 @@ public class NavigationTabController extends UiPart<Region> {
     }
 
 }
+ */

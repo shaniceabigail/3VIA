@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -8,14 +7,12 @@ import com.google.common.eventbus.Subscribe;
 import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -42,8 +39,8 @@ public class MainDisplay extends UiPart<Region> {
     private ArrayList<Tab> listOfTabs;
     private Tab currentTab;
 
-    @FXML
-    private StackPane mainDisplay;
+//    @FXML
+//    private StackPane mainDisplay;
     @FXML
     private JFXTabPane tabContainer;
     @FXML
@@ -74,7 +71,7 @@ public class MainDisplay extends UiPart<Region> {
         triviaTestPlaceholderPage = new TriviaTestPlaceholderPage();
         triviaTestPlaceholder.getChildren().add(triviaTestPlaceholderPage.getRoot());
 
-        bindNodesVisibilityProperty(mainDisplay);
+        //bindNodesVisibilityProperty(mainDisplay);
         resetToOriginalState();
         registerAsAnEventHandler(this);
     }
@@ -83,7 +80,7 @@ public class MainDisplay extends UiPart<Region> {
      * Hides all the other pages except for the homepage. The default page should be the homepage.
      */
     public void resetToOriginalState() {
-        mainDisplay.getChildren().forEach(node -> node.setVisible(false));
+        //mainDisplay.getChildren().forEach(node -> node.setVisible(false));
         homepagePlaceholder.setVisible(true);
     }
 
@@ -108,7 +105,7 @@ public class MainDisplay extends UiPart<Region> {
     /**
      * Configures a new tab
      */
-    private void createTab(Tab tab, String title, String iconPath, AnchorPane containerPane) {
+    private void createTab(Tab tab, String title, String iconPath, StackPane containerPane) {
         double imageWidth = 40.0;
 
         ImageView imageView = new ImageView(new Image(iconPath));
@@ -117,6 +114,7 @@ public class MainDisplay extends UiPart<Region> {
 
         Label label = new Label(title);
 
+        //set the tab's outlook into a border pane
         BorderPane tabPane = new BorderPane();
         tabPane.setRotate(90.0);
         tabPane.setMaxWidth(tabWidth);
@@ -128,28 +126,25 @@ public class MainDisplay extends UiPart<Region> {
 
         if (containerPane != null) {
             try {
-                Parent contentView = ;
-                containerPane.getChildren().add(contentView);
-                AnchorPane.setTopAnchor(contentView, 0.0);
-                AnchorPane.setBottomAnchor(contentView, 0.0);
-                AnchorPane.setRightAnchor(contentView, 0.0);
-                AnchorPane.setLeftAnchor(contentView, 0.0);
+                containerPane.setAlignment(Pos.CENTER_RIGHT);
                 listOfTabs.add(tab);
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Exception error");
             }
+
         }
     }
 
     /**
      * Change the given panel to the given UI region.
-     */
+
     private void changeToScene(Node changeTo) {
-        mainDisplay.getChildren().forEach(node -> {
+        //mainDisplay.getChildren().forEach(node -> {
             if (node.equals(changeTo)) {
                 if (changeTo.equals(homepage.getRoot())) {
                     homepage.resetToOriginalState();
-
+                    currentTab = homeTab;
+                    //change selected tab to home tab
                 }
                 node.setVisible(true);
             } else {
@@ -157,26 +152,26 @@ public class MainDisplay extends UiPart<Region> {
             }
         });
     }
-
+ */
     public void releaseResources() {
         homepage.releaseResources();
     }
-
+/**
     @Subscribe
     private void handleShowTriviaTestViewEvent(ShowTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        changeToScene(triviaTestPlaceholder);
+        //changeToScene(triviaTestPlaceholder);
     }
 
     @Subscribe
     private void handleShowTriviaTestResultPage(ShowTriviaTestResultEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        changeToScene(triviaTestPlaceholder);
+        //changeToScene(triviaTestPlaceholder);
     }
 
     @Subscribe
     private void handleNavigateToLearnPageEvent(NavigateToLearnPageEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        changeToScene(homepagePlaceholder);
-    }
+        //changeToScene(homepagePlaceholder);
+    } */
 }
