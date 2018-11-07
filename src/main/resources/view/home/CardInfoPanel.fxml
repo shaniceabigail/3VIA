@@ -56,7 +56,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </HBox>
-                   <StackPane fx:id="googleCommandTipPlaceholder" VBox.vgrow="ALWAYS" />
+                   <StackPane fx:id="researchCommandTipPlaceholder" VBox.vgrow="ALWAYS" />
                    <StackPane fx:id="cardExperiencePlaceholder" VBox.vgrow="ALWAYS" />
                    <StackPane fx:id="cardMostRecentMistakePlaceholder" VBox.vgrow="ALWAYS" />
                </children>

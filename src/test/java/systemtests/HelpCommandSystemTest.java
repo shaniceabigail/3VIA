@@ -12,8 +12,8 @@ import org.junit.Test;
 import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.GoogleCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ResearchCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.ui.StatusBarFooter;
 import seedu.address.ui.home.BrowserPanel;
@@ -40,11 +40,11 @@ public class HelpCommandSystemTest extends AppSystemTest {
         getMainMenu().openHelpWindowUsingAccelerator();
         assertHelpWindowOpen();
 
-        executeCommand(GoogleCommand.COMMAND_WORD + " " + INDEX_FIRST_CARD.getOneBased());
+        executeCommand(ResearchCommand.COMMAND_WORD + " " + INDEX_FIRST_CARD.getOneBased());
         getMainMenu().openHelpWindowUsingAccelerator();
         assertHelpWindowOpen();
 
-        // Clicking on the browser panel that was opened by the GoogleCommand above.
+        // Clicking on the browser panel that was opened by the ResearchCommand above.
         getInfoPanel().click();
         getMainMenu().openHelpWindowUsingAccelerator();
         assertHelpWindowNotOpen();

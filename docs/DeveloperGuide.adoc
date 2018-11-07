@@ -324,6 +324,7 @@ Additionally, the import mechanism implements the following operations:
 * `ImportFile#parseFileToCard` -- Parses a plain text file into a unique list of cards.
 * `TriviaBundle#haveAnyCard()` -- Checks if the cards to add contain any duplicated cards already in the `TriviaBundle`.
 * `TriviaBundle#addMultipleCards()` -- Adds multiple cards into the `TriviaBundle` at once.
+
 The 2 `TriviaBundle` operations are exposed in the Model interface as
 `Model#haveAnyCard()` and `Model#addMultipleCards()` respectively.
 
@@ -378,40 +379,70 @@ The `ObservableFile` interface allows the UI component to update the preview of 
 *** An additional step (command) is required to successfully import the cards into the application.
 
 ===== Aspect: How import executes
-
-* **Alternative 1 (current choice):** Store all cards to be added in `TriviaBundle` before writing to file on hard disk.
-** Pro:
-*** Less IO intensive as only one write to file is needed.
-** Con:
-*** May have heap memory issue if large amounts of cards are stored temporarily.
-* **Alternative 2:** Writes a card to a xml file after each card is added.
-** Pro:
-*** Easy to implement.
-** Con:
-*** May have performance issue when large amount of cards are added.
+* **Alternative 1 (current choice):** Store all cards to be added in `TriviaBundle` before writing to file on the hard disk.
+** Pros: Less IO intensive as only one write to file is needed.
+** Cons: May have heap memory issue if large amount of cards are stored temporarily.
+* **Alternative 2:** Writes a card to xml file after each card is added.
+** Pros: Easy to implement.
+** Cons: May have performance issue when large amount of cards are added.
 
 ===== Aspect: How the import file is parsed
-
-* **Alternative 1 (current choice):** Tokenize string according to defined characters between question and answer, and between cards.
-** Pro:
-*** Allows user to undo/ redo import as import is viewed by `VersionedAddressBook` as a single command.
-** Con:
-*** May have memory performance issue as multiple cards are stored temporarily in the `TriviaBundle`.
-* **Alternative 2:** Tokenize string based on AddCommand input format.
-** Pro:
-*** Easy to implement as it allows reuse of add command functions.
-** Con:
-*** Unable to undo/ redo import of all cards as the import command is essentially multiple add commands.
-
+* **Alternative 1 (current choice):** Tokenize strings according to defined characters between question and answer, and between cards.
+** Pros: Allows user to undo/ redo import as import is viewed by `VersionedAddressBook` as a single command.
+** Cons: May have memory performance issue as multiple cards are stored temporarily in the `TriviaBundle`.
+* **Alternative 2 (current choice):** Tokenize strings based on AddCommand input format.
+** Pros: Easy to implement as it allows reuse of add command functions.
+** Cons: Unable to undo/ redo import of all cards as the import command is essentially multiple add commands.
 // end::import[]
 
-// tag::matchingtest[]
+// tag::triviatest[]
+=== Structure of TriviaTest
+==== Current Implementation
+The term `TriviaTest` refers to a reference to the different kinds of testing features in 3VIA. Currently,
+there are 2 test features in 3VIA, namely, the Open-Ended Test and the Match Test.
+
+Hence, the generic `TriviaTest` related classes were made to accommodate for the similarities between them. The classes that were
+constructed spans across the Model, Storage and UI component. For Model, we have `TriviaTest`, `TriviaResult`, as shown in
+<<Design-Model>>. For Storage, we have `TriviaResultsStorage`, as shown in <<Design-Storage>>.
+For UI, we have `TriviaTestPage` and `TriviaTestResultPage`, as shown in <<Design-Ui>>.
+
+==== Design Considerations
+
+===== The polymorphism of TriviaTest
+* **Alternative 1 (current choice):** Uses different generic classes to accommodate the different testing feature in 3VIA.
+** Pros:
+*** Follows Open-Close Principle which increases the extensibility of the testing feature in 3VIA.
+*** Increases the re-usability of similar codes, and promotes cleaner code.
+** Con:
+*** The implementation of different tests have to follow the structure of TriviaTest very strictly.
+* **Alternative 2:** Implement each kinds of test as a standalone test with its own standalone class and event handlers.
+** Pro:
+*** Easy to implement and each developer will have their freedom of how to implement their own test.
+** Con:
+*** Will lead to code that is increasingly not manageable.
+
+===== The Model of TriviaTest's Results
+* **Alternative 1 (current choice):** Create another Model called `TriviaResult` to initialize the past TriviaTest's
+tests and attempts.
+** Pro:
+*** By creating another class called `TriviaResult` which will be used to record any past `TriviaTest` records, we can
+reduce the amount of data collected. Hence, improving the start up time of the application.
+* **Alternative 2:** Use `TriviaTest` itself to initialize the past TriviaTest's tests and attempts.
+** Pro:
+*** Since `TriviaResult` is a subset `TriviaTest`, it is possible to remove the need of `TriviaResult`, thereby reducing the
+coupling of the application's Model component.
+** Con:
+*** However, rebuilding a new but completed `TriviaTest` would be tedious and complicated. Hence, `TriviaResult` is
+needed separate the complexities that are involved in data collection and the actual life cycle of `TriviaTest`.
+// end::triviatest[]
+
+// tag::matchtest[]
 === MatchTest Feature
 ==== Current Implementation
-The life cycle of a matching test is facilitated by the `AppState` and `MatchTest` model.
+The life cycle of a MatchTest is facilitated by the `AppState` and `MatchTest` model.
 
-The `AppState` model defines the state of which the application is in. And the `MatchTest` model extends
-from `TriviaTest` which has the functionality of storing the necessary information that are needed in any kinds of test.
+The `AppState` model defines the state of which the application is in. And the `MatchTest` model is a subclass of
+`TriviaTest`.
 
 Additionally, `MatchTest` also implements the following operations:
 
@@ -463,19 +494,6 @@ Step 7. At this stage, the System will await `exit` command from the user so tha
 the mapping will be needed to be passed into the UI component. This mapping will then be used by the constructor of `ListView` to
 create a static display index of question and answer. Hence, this design consideration was not implemented due to abstraction that is leaking into the UI.
 
-===== The polymorphism of TriviaTest
-* **Alternative 1 (current choice):** Uses `TriviaTest`, `TriviaResultStorage` to accommodate the different testing feature in 3VIA.
-** Pro:
-*** Follows Open-Close Principle which increases the extensibility of the testing feature in 3VIA.
-*** Increases the re-usability of similar codes, and promotes cleaner code.
-** Con:
-*** The implementation of different tests have to follow the structure of TriviaTest very strictly.
-* **Alternative 2:** Implement each kinds of test as a standalone test with its own standalone class and event handler.
-** Pro:
-*** Easy to implement and each developer will have their freedom of how to implement their own test.
-** Con:
-*** Will lead to code that is increasingly not manageable.
-
 ===== How UI feedback is being received when a MatchCommand is executed
 * **Alternative 1 (current choice):** Uses `AsyncEventCenter` to dispatch its events.
 ** Pro:
@@ -487,7 +505,7 @@ create a static display index of question and answer. Hence, this design conside
 *** Easier to debug code that does not use multi-threading and less CPU intensive.
 ** Con:
 *** The events will be dispatched and handle in a sequential order, as a result the UI feedback for question may not be in sync with feedback for answer.
-// end::matchingtest[]
+// end::matchtest[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
