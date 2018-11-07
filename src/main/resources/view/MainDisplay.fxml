@@ -6,7 +6,7 @@
 <StackPane fx:id="MainDisplay" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
      <JFXTabPane StackPane.alignment="CENTER_LEFT">
          <tabs>
-            <Tab text="Home" fx:id="homeTab">
+            <Tab text="Learn" fx:id="learnTab">
                <content>
                    <StackPane fx:id="homepagePlaceholder" />
                   <StackPane prefHeight="150.0" prefWidth="200.0" />

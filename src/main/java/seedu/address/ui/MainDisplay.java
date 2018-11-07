@@ -5,23 +5,21 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 import com.jfoenix.controls.JFXTabPane;
+import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Pos;
 import javafx.geometry.Side;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
-import seedu.address.commons.events.ui.NavigateToLearnPageEvent;
-import seedu.address.commons.events.ui.ShowTriviaTestResultEvent;
-import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
+import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.Logic;
 import seedu.address.ui.home.Homepage;
 import seedu.address.ui.test.TriviaTestPlaceholderPage;
@@ -39,12 +37,12 @@ public class MainDisplay extends UiPart<Region> {
     private final double tabWidth = 90.0;
 
     private ArrayList<Tab> listOfTabs;
-    private Tab currentTab;
+    private TabPane tabPane;
 
     @FXML
     private JFXTabPane tabContainer;
     @FXML
-    private Tab homeTab;
+    private Tab learnTab;
     @FXML
     private Tab testTab;
     @FXML
@@ -61,7 +59,6 @@ public class MainDisplay extends UiPart<Region> {
         listOfTabs = new ArrayList<Tab>();
 
         tabContainer = new JFXTabPane();
-        currentTab = homeTab;
         this.configureView();
 
         homepage = new Homepage(logic);
@@ -94,9 +91,10 @@ public class MainDisplay extends UiPart<Region> {
         tabContainer.getStyleClass().add("root");
 
         //list of tabs configured
-        createTab(homeTab, "Home", "file:/src/main/resources/images/tabIcons/home.png", homepagePlaceholder);
+        createTab(learnTab, "Learn", "file:/src/main/resources/images/tabIcons/home.png", homepagePlaceholder);
         createTab(testTab, "Test", "file:/src/main/resources/images/tabIcons/settings.png", triviaTestPlaceholder);
         createTab(reviewTab, "Review", "file:/main/resources/images/tabIcons/test.png", reviewPlaceholder);
+        tabPane = new TabPane(learnTab, testTab, reviewTab);
     }
 
     /**
@@ -121,7 +119,6 @@ public class MainDisplay extends UiPart<Region> {
         if (containerPane != null) {
             try {
                 tab.setContent(containerPane);
-                listOfTabs.add(tab);
             } catch (Exception e) {
                 throw new IllegalArgumentException("Tab not added");
             }
@@ -130,5 +127,17 @@ public class MainDisplay extends UiPart<Region> {
     }
     public void releaseResources() {
         homepage.releaseResources();
+    }
+
+    @Subscribe
+    public void handleToggleTabEvent(ToggleTabEvent event) {
+        if (event.getToToggleTo() == "test") {
+            tabPane.getSelectionModel().select(testTab);
+        } else if (event.getToToggleTo() == "review") {
+            tabPane.getSelectionModel().select(reviewTab);
+        } else {
+            tabPane.getSelectionModel().select(learnTab);
+        }
+
     }
 }

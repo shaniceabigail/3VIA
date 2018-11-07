@@ -12,6 +12,10 @@ public class ToggleTabEvent extends BaseEvent {
         toToggleTo = tabToGo;
     }
 
+    public String getToToggleTo() {
+        return toToggleTo;
+    }
+
     @Override
     public String toString() {
         return getClass().getSimpleName();
