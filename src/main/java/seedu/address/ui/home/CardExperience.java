@@ -33,6 +33,10 @@ public class CardExperience extends UiPart<Region> {
     @FXML
     private Label numWrongAttemptsText;
 
+    public CardExperience() {
+        super(FXML);
+    }
+
     public CardExperience(List<Attempt> attemptsByCard) {
         super(FXML);
 
