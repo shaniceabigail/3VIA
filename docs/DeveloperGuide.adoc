@@ -364,13 +364,14 @@ image::ImportMultipleCardsSequenceDiagram.png[width="800"]
 *** A single formatting error in the text file will result in an import failure.
 * **Alternative 2:** 'Stages' the import file by first previewing the imported cards to the user. The actual import is done upon confirmation.
 ** Implementation details: +
-*** Given below is a class diagram describing the interactions for this import mechanism. +
+*** Given below is a class diagram for the alternative import implementation. +
 +
 image::AlternativeImportClassDiagram.png[width="800"]
 
-*** The `Format` class verifies the formatting of the text file, marks and displays the errors of the text file within the application for editing.
+*** The `Format` class verifies the formatting of the `ImportFile`, marks and displays the errors of the text file within the application for editing.
 +
-Each time an edit is detected, the `Format` class will verify the text file and the `FileParser` will attempt to parse the file into a `UniqueCardList` for import.
+The `FileParser` is dependent on `Format` to determine whether each line in the text file is a topic or a question and an answer pair.
+The `FileParser` parses the `ImportFile` into a `UniqueCardList` to be added.
 +
 The `ObservableFile` interface allows the UI component to update the preview of the cards each time the file is edited without a direct dependency to it.
 ** Pro:
