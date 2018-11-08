@@ -11,7 +11,7 @@
                <content>
                    <StackPane fx:id="homepagePlaceholder" >
                        <padding>
-                            <Insets top="20"/>
+                            <Insets top="15"/>
                        </padding>
                    </StackPane>
                </content>
