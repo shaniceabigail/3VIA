@@ -7,12 +7,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_GIT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOPIC_PHYSICS;
 import static seedu.address.testutil.ImportFileUtil.getImportCommand;
-import static seedu.address.testutil.MatchTestUtil.generateCorrectMatchAttempt;
-import static seedu.address.testutil.MatchTestUtil.getIndexes;
-import static seedu.address.testutil.TypicalCards.Q_DENSITY_FORMULA;
-import static seedu.address.testutil.TypicalCards.Q_EARTH_ROUND;
-import static seedu.address.testutil.TypicalCards.Q_FLAT_EARTH;
-import static seedu.address.testutil.TypicalCards.Q_FORCE_FORMULA;
+import static seedu.address.testutil.MatchTestUtil.completeMatchTest;
+import static seedu.address.testutil.MatchTestUtil.startMatchTest;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CARD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -52,7 +48,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.QuestionContainsKeywordsPredicate;
 import seedu.address.model.portation.ImportFile;
-import seedu.address.model.state.State;
 import seedu.address.model.test.TriviaResults;
 import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.model.topic.Topic;
@@ -119,7 +114,7 @@ public class AddressBookParserTest {
         assertTrue(parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
 
         // In Matching test state
-        model.startTriviaTest(new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle()));
+        startMatchTest(model, new Topic(VALID_TOPIC_PHYSICS));
         assertTrue(parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
@@ -184,6 +179,13 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void unableToParseMatchCommand_duringNormalState() throws Exception {
+        thrown.expect(ParseException.class);
+        thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
+        parseCommand("1 2");
+    }
+
+    @Test
     public void parseCommand_matchTest() throws Exception {
         assertTrue(parseCommand(MatchTestCommand.COMMAND_WORD + " " + VALID_TOPIC_PHYSICS)
                 instanceof MatchTestCommand);
@@ -202,19 +204,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_restrictCommandsDuringTestResult() throws Exception {
-        MatchTest matchTest = new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle());
-        model.startTriviaTest(matchTest);
-
-        Index[] earthIndexes = getIndexes(matchTest, Q_EARTH_ROUND);
-        Index[] forceIndexes = getIndexes(matchTest, Q_FORCE_FORMULA);
-        Index[] densityIndexes = getIndexes(matchTest, Q_DENSITY_FORMULA);
-
-        matchTest.respondToCorrectAttempt(generateCorrectMatchAttempt(Q_FLAT_EARTH, earthIndexes));
-        matchTest.respondToCorrectAttempt(generateCorrectMatchAttempt(Q_FORCE_FORMULA, forceIndexes));
-
-        // Complete the Match Test.
-        model.matchQuestionAndAnswer(densityIndexes[0], densityIndexes[1]);
-        assertEquals(model.getAppState(), State.MATCH_TEST_RESULT);
+        completeMatchTest(model, new Topic(VALID_TOPIC_PHYSICS));
 
         thrown.expect(ParseException.class);
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
@@ -223,19 +213,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_exitFromTestResult() throws Exception {
-        MatchTest matchTest = new MatchTest(new Topic(VALID_TOPIC_PHYSICS), model.getTriviaBundle());
-        model.startTriviaTest(matchTest);
-
-        Index[] earthIndexes = getIndexes(matchTest, Q_EARTH_ROUND);
-        Index[] forceIndexes = getIndexes(matchTest, Q_FORCE_FORMULA);
-        Index[] densityIndexes = getIndexes(matchTest, Q_DENSITY_FORMULA);
-
-        matchTest.respondToCorrectAttempt(generateCorrectMatchAttempt(Q_FLAT_EARTH, earthIndexes));
-        matchTest.respondToCorrectAttempt(generateCorrectMatchAttempt(Q_FORCE_FORMULA, forceIndexes));
-
-        // Complete the Match Test.
-        model.matchQuestionAndAnswer(densityIndexes[0], densityIndexes[1]);
-        assertEquals(model.getAppState(), State.MATCH_TEST_RESULT);
+        completeMatchTest(model, new Topic(VALID_TOPIC_PHYSICS));
 
         assertTrue(parseCommand("exit") instanceof ExitCommand);
     }

@@ -35,6 +35,9 @@ public class CardMostRecentMistake extends UiPart<Region> {
     @FXML
     private HBox expectedAnswerBox;
 
+    public CardMostRecentMistake() {
+        super(FXML);
+    }
 
     public CardMostRecentMistake(Card card) {
         super(FXML);

@@ -114,11 +114,11 @@ public class MatchTest extends TriviaTest {
     public void respondToCorrectAttempt(MatchAttempt attempt) {
         assert attempt.isCorrect();
 
-        removeCardFromUi(attempt);
-        if (isEndOfTest()) {
+        if (isAtLastMatch()) {
             stopTest();
             EventsCenter.getInstance().post(new ShowTriviaTestResultEvent(getResultPage()));
         }
+        removeCardFromUi(attempt);
     }
 
     /**
@@ -264,10 +264,6 @@ public class MatchTest extends TriviaTest {
                 .collect(Collectors.toList());
 
         return FXCollections.observableList(indexedAnswers);
-    }
-
-    private boolean isEndOfTest() {
-        return shuffledQuestions.isEmpty() && shuffledAnswers.isEmpty();
     }
 
     private boolean isAtLastMatch() {

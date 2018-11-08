@@ -98,7 +98,7 @@ public class CardListPanelHandle extends NodeHandle<ListView<Card>> {
     }
 
     /**
-     * Returns the card view handle of a person associated with the {@code index} in the list.
+     * Returns the card view handle of a card associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
     public CardViewHandle getCardViewHandle(int index) {
