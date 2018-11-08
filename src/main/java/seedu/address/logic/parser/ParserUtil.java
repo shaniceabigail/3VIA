@@ -146,21 +146,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tab} into a {@code Tab}.
-     * Leading and trailing white spaces will be trimmed.
-     * 
-     * @throws ParseException if the given {@code tab} is invalid.
-
-    public static ListOfTabs parseTab(String tab) throws ParseException {
-        requireNonNull(tab);
-        String trimmedTab = tab.trim();
-        if (!ListOfTabs.isValidTabListed(trimmedTab)) {
-            throw new ParseException(Tab.MESSAGE_TAB_CONSTRAINTS);
-        }
-        return new Tab(trimmedTab);
-    } */
-    
-    /**
      * Parses {@code Collection<String> topics} into a {@code Set<Topic>}.
      */
     public static Set<Topic> parseTopics(Collection<String> topics) throws ParseException {

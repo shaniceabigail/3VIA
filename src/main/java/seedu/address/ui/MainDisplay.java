@@ -1,16 +1,13 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 import com.jfoenix.controls.JFXTabPane;
-import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
 import javafx.scene.control.Label;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -36,7 +33,6 @@ public class MainDisplay extends UiPart<Region> {
     private final TriviaTestPlaceholderPage triviaTestPlaceholderPage;
     private final double tabWidth = 90.0;
 
-    private ArrayList<Tab> listOfTabs;
     private TabPane tabPane;
 
     @FXML
@@ -56,7 +52,7 @@ public class MainDisplay extends UiPart<Region> {
 
     public MainDisplay(Logic logic) {
         super(FXML);
-        listOfTabs = new ArrayList<Tab>();
+        tabPane = new TabPane();
 
         tabContainer = new JFXTabPane();
         this.configureView();
@@ -94,7 +90,6 @@ public class MainDisplay extends UiPart<Region> {
         createTab(learnTab, "Learn", "file:/src/main/resources/images/tabIcons/home.png", homepagePlaceholder);
         createTab(testTab, "Test", "file:/src/main/resources/images/tabIcons/settings.png", triviaTestPlaceholder);
         createTab(reviewTab, "Review", "file:/main/resources/images/tabIcons/test.png", reviewPlaceholder);
-        tabPane = new TabPane(learnTab, testTab, reviewTab);
     }
 
     /**
@@ -110,21 +105,20 @@ public class MainDisplay extends UiPart<Region> {
         Label label = new Label(title);
 
         //set the tab's outlook into a border pane
-        BorderPane tabPane = new BorderPane();
-        tabPane.setRotate(90.0);
-        tabPane.setMaxWidth(tabWidth);
-        tabPane.setCenter(imageView);
-        tabPane.setBottom(label);
+        BorderPane borderPane = new BorderPane();
+        borderPane.setRotate(90.0);
+        borderPane.setMaxWidth(tabWidth);
+        borderPane.setCenter(imageView);
+        borderPane.setBottom(label);
 
-        if (containerPane != null) {
-            try {
-                tab.setContent(containerPane);
-            } catch (Exception e) {
-                throw new IllegalArgumentException("Tab not added");
-            }
-
+        try {
+            tab.setContent(containerPane);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Tab not added");
         }
+
     }
+
     public void releaseResources() {
         homepage.releaseResources();
     }
