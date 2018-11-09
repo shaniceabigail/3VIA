@@ -34,6 +34,7 @@ import seedu.address.model.test.TriviaResult;
 import seedu.address.model.test.TriviaResults;
 import seedu.address.model.test.TriviaTest;
 import seedu.address.model.test.matchtest.MatchTest;
+import seedu.address.model.test.openendedtest.OpenEndedTest;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -284,12 +285,17 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Open Ended Tests ==========================================================================
     public boolean isOpenEndedTestAnswerCorrect(char in) {
         boolean isCorrect = (in == 'y' || in == 'Y');
+        OpenEndedTest openEndedTest = (OpenEndedTest) currentRunningTest;
+        openEndedTest.addAttempt(isCorrect);
         raise(new OpenEndedTestRecordIsCorrect(isCorrect));
         appState.setAppState(State.OPEN_ENDED_TEST_QUESTION);
         return isCorrect;
     }
 
-    public void addAttemptToOpenEndedTest(String userInput) {
+    public void recordAnswerToOpenEndedTest(String userInput) {
+        OpenEndedTest openEndedTest = (OpenEndedTest) currentRunningTest;
+        openEndedTest.recordAnswer(userInput);
+        raise(new OpenEndedTestNextQuestion());
         appState.setAppState(State.OPEN_ENDED_TEST_ANSWER);
     }
 
