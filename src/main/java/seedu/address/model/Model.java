@@ -179,6 +179,11 @@ public interface Model {
     boolean isOpenEndedTestAnswerCorrect(char in);
 
     /**
+     * Records user answer
+     */
+    void recordAnswerToOpenEndedTest(String userInput);
+
+    /**
      * Returns the result list for trivia test.
      */
     List<TriviaResult> getTriviaResultList();

@@ -40,9 +40,11 @@ public class OpenEndedTest extends TriviaTest {
 
     public final TestType testType = TestType.OPEN_ENDED_TEST;
     private List<Attempt> attempts;
-
     private ArrayList<Card> shuffledCards;
     private ArrayList<Card> referenceCards;
+
+
+    private Card currCard;
 
     private String userAnswer;
 
@@ -54,6 +56,8 @@ public class OpenEndedTest extends TriviaTest {
         attempts = new ArrayList<>();
 
         checkArgument(isValidTest(), MESSAGE_TEST_CONSTRAINS);
+
+        currCard = getNextCard();
     }
 
     /**
@@ -106,16 +110,23 @@ public class OpenEndedTest extends TriviaTest {
         return attempts;
     }
 
+    public Card getCurrCard() { return currCard; }
+
     private boolean isValidTest() {
         return shuffledCards.size() >= 1;
     }
 
-    public Attempt addAttempt(Boolean isCorrect) {
-        Attempt currAttempt = new Attempt(shuffledCards.remove(0), this.userAnswer, isCorrect);
+    public boolean addAttempt(char in) {
+        boolean isCorrect = (in == 'y' || in == 'Y');
+        Attempt currAttempt = new Attempt(currCard, this.userAnswer, isCorrect);
         attempts.add(currAttempt);
-        return currAttempt;
+        return isCorrect;
     }
 
+    public void advanceCard() { currCard = getNextCard(); }
+
+    @Override
+    public boolean isCompleted() { return (shuffledCards.size() == 0); }
 
     /**
      * Starts the timer of the test.

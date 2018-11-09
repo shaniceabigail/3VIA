@@ -128,14 +128,14 @@ public class AddressBookParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
 
-        case OPEN_ENDED_TEST:
+        case OPEN_ENDED_TEST_QUESTION:
             switch(commandWord) {
 
                 case ExitCommand.COMMAND_WORD:
                     return new ExitCommand();
 
                 default:
-                    return new OpenEndedAnswerParser(userInput);
+                    return new OpenEndedAnswerParser().parse(userInput);
             }
 
         case OPEN_ENDED_TEST_ANSWER:

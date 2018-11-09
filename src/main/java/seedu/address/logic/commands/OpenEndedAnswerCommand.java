@@ -19,6 +19,7 @@ public class OpenEndedAnswerCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         assert model.getCurrentRunningTest() instanceof OpenEndedTest;
+        model.recordAnswerToOpenEndedTest(userAnswer);
         return new CommandResult(MESSAGE_ANSWER_RECORDED);
     }
 

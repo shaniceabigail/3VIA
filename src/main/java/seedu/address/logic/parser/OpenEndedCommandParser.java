@@ -22,7 +22,6 @@ public class OpenEndedCommandParser implements Parser<OpenEndedCommand>{
         if (!(in == 'Y' || in == 'y' || in == 'N' || in == 'n')) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OpenEndedCommand.MESSAGE_USAGE));
         }
-
         return new OpenEndedCommand(in);
     }
 }

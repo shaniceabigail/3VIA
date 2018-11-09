@@ -24,45 +24,51 @@ public class OpenEndedTestPage extends TriviaTestPage {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private OpenEndedTest openEndedTest;
-    private ArrayList<Card> shuffledCards = openEndedTest.getShuffledCards();
     private Card card;
+    private String question;
+    private String answer;
+    private String userAnswer;
 
-//    private OpenEndedQuestionPage Qpage;
-//    private Openanswer Apage;
+    @FXML
+    private Label questionLabel;
 
-//    @FXML
-//    private StackPane questionPagePlaceholder;
-//
-//    @FXML
-//    private StackPane answerPagePlaceholder;
-//
-//    @FXML
-//    private Label openTestTopicText;
-//
-//    @FXML
-//    private Label openTestDurationText;
+    @FXML
+    private Label userAnswerLabel;
+
+    @FXML
+    private Label answerLabel;
 
     public OpenEndedTestPage(OpenEndedTest openEndedTest) {
         super(FXML);
 
         this.openEndedTest = openEndedTest;
+        this.card = openEndedTest.getCurrCard();
+        this.question = card.getQuestion().toString();
+        this.answer = "";
+        this.userAnswer = "";
+        questionLabel.setText(question);
+        userAnswerLabel.setText(userAnswer);
+        answerLabel.setText(answer);
 
         registerAsAnEventHandler(this);
     }
 
     @Subscribe
-    private void handleOpenEndedTestRecordIsCorrect(Boolean isCorrect) {
-        //show next question
+    private void handleOpenEndedTestRecordIsCorrect(Card card) {
+        this.card = card;
+        this.question = card.getQuestion().toString();
+        this.answer = "";
+        this.userAnswer = "";
+        questionLabel.setText(question);
+        userAnswerLabel.setText(userAnswer);
+        answerLabel.setText(answer);
     }
 
     @Subscribe
-    private void handleOpenEndedTestShowAnswer() {
-
+    private void handleOpenEndedTestShowAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
+        this.answer = card.getAnswer().toString();
+        userAnswerLabel.setText(userAnswer);
+        answerLabel.setText(answer);
     }
-//
-//    @Subscribe
-//    private void handler() {
-//        openEndedTest.getNextCard();
-//    }
-
 }

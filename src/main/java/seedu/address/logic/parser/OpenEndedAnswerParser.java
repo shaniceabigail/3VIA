@@ -8,4 +8,5 @@ public class OpenEndedAnswerParser implements Parser<OpenEndedAnswerCommand> {
     public OpenEndedAnswerCommand parse(String userInput) {
         return new OpenEndedAnswerCommand(userInput.trim());
     }
+
 }

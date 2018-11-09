@@ -247,10 +247,9 @@ public class ModelManager extends ComponentManager implements Model {
         if (test.getTestType() == TestType.MATCH_TEST) {
             appState.setAppState(State.MATCH_TEST);
         } else {
-            appState.setAppState(State.OPEN_ENDED_TEST);
+            appState.setAppState(State.OPEN_ENDED_TEST_QUESTION);
         }
         test.startTest();
-        raise(new ShowTriviaTestViewEvent(test.getTestingPage()));
     }
 
     @Override
@@ -285,20 +284,27 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Open Ended Tests ==========================================================================
+
     public boolean isOpenEndedTestAnswerCorrect(char in) {
-        boolean isCorrect = (in == 'y' || in == 'Y');
         OpenEndedTest openEndedTest = (OpenEndedTest) currentRunningTest;
-        openEndedTest.addAttempt(isCorrect);
-        Card nextCard = ((OpenEndedTest) currentRunningTest).getNextCard();
-        raise(new OpenEndedTestShowNextQuestion(nextCard));
-        appState.setAppState(State.OPEN_ENDED_TEST_QUESTION);
-        return isCorrect;
+        boolean isAnswerCorrect = openEndedTest.addAttempt(in);
+        if (!openEndedTest.isCompleted()) {
+            openEndedTest.advanceCard();
+            Card nextCard = openEndedTest.getCurrCard();
+            raise(new OpenEndedTestShowNextQuestion(nextCard));
+            appState.setAppState(State.OPEN_ENDED_TEST_QUESTION);
+        } else {
+            triviaResults.addTriviaResult(new TriviaResult(currentRunningTest));
+            raise(new TriviaResultsChangedEvent(triviaResults));
+            appState.setAppState(State.OPEN_ENDED_TEST_RESULT);
+        }
+        return isAnswerCorrect;
     }
 
     public void recordAnswerToOpenEndedTest(String userInput) {
         OpenEndedTest openEndedTest = (OpenEndedTest) currentRunningTest;
         openEndedTest.recordAnswer(userInput);
-        raise(new OpenEndedTestShowAnswer());
+        raise(new OpenEndedTestShowAnswer(userInput));
         appState.setAppState(State.OPEN_ENDED_TEST_ANSWER);
     }
 
