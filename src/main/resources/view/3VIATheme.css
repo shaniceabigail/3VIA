@@ -59,19 +59,6 @@
     -fx-background-color: derive(#ededed, 20%);
 }
 
-#cardInfoAnswer .content {
-    -fx-background-color: derive(#ededed, 30%);
-    -fx-border-color: derive(#ededed, 30%);
-}
-
-#cardInfoAnswer {
-    -fx-background-color: derive(#ededed, 30%);
-    -fx-text-inner-color: black;
-    -fx-font-family: Segoe UI Semibold;
-    -fx-opacity: 1;
-    -fx-font-size: 11pt;
-}
-
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
@@ -148,31 +135,31 @@
 
 .status-bar .label {
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#0ebed6, 30%);
-    -fx-border-color: derive(#0ebed6, 25%);
+    -fx-background-color: derive(#00BCD4, 30%);
+    -fx-border-color: derive(#00BCD4, 25%);
     -fx-border-width: 1px;
 }
 
 .status-bar-with-border .label {
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 .grid-pane {
-    -fx-background-color: derive(#0ebed6, 30%);
-    -fx-border-color: derive(#0ebed6, 30%);
+    -fx-background-color: #00BCD4;
+    -fx-border-color: derive(#00BCD4, 30%);
     -fx-border-width: 1px;
 }
 
 .grid-pane .stack-pane {
-    -fx-background-color: derive(#0ebed6, 30%);
+    -fx-background-color: #00BCD4;
 }
 
 .context-menu {
-    -fx-background-color: derive(#0ebed6, 50%);
+    -fx-background-color: derive(#00BCD4, 50%);
 }
 
 .context-menu .label {
@@ -308,15 +295,20 @@ additional 3VIA-specific css code
     -fx-text-fill: black !important;
 }
 
+#ImportHelpDisplay .content {
+    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-radius: 0;
+}
+
 #cardInfoAnswer .content {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 30%);
+    -fx-background-color: derive(#e0f3ff, 30%);
+    -fx-border-color: derive(#e0f3ff, 30%);
 }
 
 #cardInfoAnswer {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-text-inner-color: white;
-    -fx-font-family: Segoe UI Semibold;
+    -fx-background-color: derive(#e0f3ff, 30%);
+    -fx-text-inner-color: black;
+    -fx-font-family: "Segoe UI Semibold";
     -fx-opacity: 1;
     -fx-font-size: 11pt;
 }
@@ -348,13 +340,26 @@ additional 3VIA-specific css code
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #e0dede, transparent, #e0dede;
+    -fx-background-color: transparent, #e8e8e8, transparent, #e8e8e8;
     -fx-background-radius: 0;
 }
 
 #tags, #topics, #cardInfoTopics {
     -fx-hgap: 7;
     -fx-vgap: 3;
+}
+
+#cardProgress {
+    -fx-accent: green;
+}
+
+#cardProgress .bar {
+    -fx-background-insets: 0;
+}
+
+#cardProgress > .track {
+    -fx-control-inner-background: red;
+    -fx-background-insets: 0;
 }
 
 #tags .label, #topics .label, #cardInfoTopics .label {
