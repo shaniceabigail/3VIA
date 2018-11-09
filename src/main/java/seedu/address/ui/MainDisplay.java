@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.net.MalformedURLException;
-import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -9,7 +7,6 @@ import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
-import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -19,7 +16,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.ChangeModeEvent;
 import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.Logic;
 import seedu.address.ui.home.Homepage;
