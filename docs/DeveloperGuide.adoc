@@ -519,6 +519,32 @@ _{Explain here how the data encryption feature will be implemented}_
 
 // end::dataencryption[]
 
+=== Navigation Feature
+==== Current Implementation
+The Navigation Tab is designed for users to be aware of the different functionality of our app.
+We added a navigation tab feature, which only handles mouse events.
+At the present, the Navigation Tab is not a separate class on its own, and is embedded into the `MainDisplay` class.
+
+===== GUI Handling
+The tabs are expected to toggle according to the user's interaction:
+
+* Command Line [Work In Progress]
+* Mouse clicks
+* Keyboard shortcuts [future release]
+
+==== Design Considerations
+===== Location of Navigation tab
+* Side bar
+** pros: easy to see, optimized for user experience
+** cons: harder to implement
+
+* Top bar
+** pros: easier to implement
+** cons: less intuitive for users compared to side bar
+
+===== Icons on the Tabs
+We have added the icon images for the tabs, but implementation is still a work in progress.
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
