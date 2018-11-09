@@ -154,7 +154,7 @@ public interface Model {
     void stopTriviaTest();
 
     /**
-     * Match a question to another answer. To be used in a matching test.
+     * Match a question to another answer. To be used in a Match Test.
      */
     boolean matchQuestionAndAnswer(Index questionIndex, Index answerIndex);
 

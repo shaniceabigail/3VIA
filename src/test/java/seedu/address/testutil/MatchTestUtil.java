@@ -16,7 +16,7 @@ import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.model.topic.Topic;
 
 /**
- * A utility class for matching test.
+ * A utility class for Match Test.
  */
 public class MatchTestUtil {
     /**

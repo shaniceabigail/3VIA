@@ -113,7 +113,7 @@ public class AddressBookParserTest {
         assertTrue(parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
 
-        // In Matching test state
+        // In Match Test state
         startMatchTest(model, new Topic(VALID_TOPIC_PHYSICS));
         assertTrue(parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);

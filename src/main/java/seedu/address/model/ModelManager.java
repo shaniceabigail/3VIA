@@ -258,7 +258,7 @@ public class ModelManager extends ComponentManager implements Model {
         return currentRunningTest;
     }
 
-    //=========== Matching Tests ============================================================================
+    //=========== Match Tests ============================================================================
 
     @Override
     public boolean matchQuestionAndAnswer(Index questionIndex, Index answerIndex) throws IndexOutOfBoundsException {

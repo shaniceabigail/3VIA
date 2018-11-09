@@ -9,16 +9,16 @@ import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.model.topic.Topic;
 
 /**
- * The command which will executing the matching test of trivia.
+ * The command which will executing the Match Test of 3VIA.
  */
 public class MatchTestCommand extends Command {
     public static final String COMMAND_WORD = "testM";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Starts a matching test. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Starts a Match Test. "
             + "Parameters: TAG"
             + "Example: " + COMMAND_WORD + " Physics";
 
-    public static final String MESSAGE_SUCCESS = "Matching test started.";
+    public static final String MESSAGE_SUCCESS = "Match Test started.";
 
     private final Topic tag;
 
