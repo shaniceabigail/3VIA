@@ -99,10 +99,18 @@ public class ImportFile {
         return true;
     }
 
+    /**
+     * Raises an new event to display the import help display UI.
+     */
+    private void raiseExtraInformationDisplayEvent() {
+        EventsCenter.getInstance()
+                .post(new DisplayImportHelpEvent());
+    }
+
     // TODO: write the format here
     /**
-     * Parses a file in a specific format into a set of cards.
-     * @return The set of cards to be imported.
+     * Parses a file in a specific format into a list of cards.
+     * @return The list of cards to be imported.
      * @throws FileParseException If the format of the file is different from expected.
      */
     public UniqueCardList parseFileToCards() throws FileParseException {
@@ -134,14 +142,6 @@ public class ImportFile {
         }
 
         return cards;
-    }
-
-    /**
-     * Raises an new event to display the import help display UI.
-     */
-    private void raiseExtraInformationDisplayEvent() {
-        EventsCenter.getInstance()
-                    .post(new DisplayImportHelpEvent());
     }
 
     /**
