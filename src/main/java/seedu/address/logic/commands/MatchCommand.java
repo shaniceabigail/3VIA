@@ -30,6 +30,7 @@ public class MatchCommand extends Command {
     private final Index answerIndex;
 
     public MatchCommand(Index questionIndex, Index answerIndex) {
+        requireNonNull(answerIndex);
         this.questionIndex = questionIndex;
         this.answerIndex = answerIndex;
     }

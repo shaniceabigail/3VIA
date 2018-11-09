@@ -404,12 +404,13 @@ The `ObservableFile` interface allows the UI component to update the preview of 
 === Structure of TriviaTest
 ==== Current Implementation
 The term `TriviaTest` refers to a reference to the different kinds of testing features in 3VIA. Currently,
-there are 2 test features in 3VIA, namely, the Open-Ended Test and the Match Test.
+there are 2 test features in 3VIA, namely, the Open-Ended Test and the MatchTest.
 
 Hence, the generic `TriviaTest` related classes were made to accommodate for the similarities between them. The classes that were
 constructed spans across the Model, Storage and UI component. For Model, we have `TriviaTest`, `TriviaResult`, as shown in
-<<Design-Model>>. For Storage, we have `TriviaResultsStorage`, as shown in <<Design-Storage>>.
-For UI, we have `TriviaTestPage` and `TriviaTestResultPage`, as shown in <<Design-Ui>>.
+https://cs2103-ay1819s1-w12-3.github.io/main/DeveloperGuide.html#Design-Model[Model Diagram]. For Storage, we have
+`TriviaResultsStorage`, as shown in https://cs2103-ay1819s1-w12-3.github.io/main/DeveloperGuide.html#Design-Storage[Storage Diagram].
+For UI, we have `TriviaTestPage` and `TriviaTestResultPage`, as shown in https://cs2103-ay1819s1-w12-3.github.io/main/DeveloperGuide.html#Design-Ui[UI Diagram].
 
 ==== Design Considerations
 
@@ -426,19 +427,19 @@ For UI, we have `TriviaTestPage` and `TriviaTestResultPage`, as shown in <<Desig
 ** Con:
 *** Will lead to code that is increasingly not manageable.
 
-===== The Model of TriviaTest's Results
+===== The Model for TriviaTest's Results
 * **Alternative 1 (current choice):** Create another Model called `TriviaResult` to initialize the past TriviaTest's
 tests and attempts.
 ** Pro:
-*** By creating another class called `TriviaResult` which will be used to record any past `TriviaTest` records, we can
-reduce the amount of data collected. Hence, improving the start up time of the application.
+*** By creating another model `TriviaResult` instead of using `TriviaTest` for recording any past `TriviaTest` records, we can
+reduce the amount of data collected. Hence, improving the performance (e.g. the start up time) of the application.
 * **Alternative 2:** Use `TriviaTest` itself to initialize the past TriviaTest's tests and attempts.
 ** Pro:
 *** Since `TriviaResult` is a subset `TriviaTest`, it is possible to remove the need of `TriviaResult`, thereby reducing the
 coupling of the application's Model component.
 ** Con:
 *** However, rebuilding a new but completed `TriviaTest` would be tedious and complicated. Hence, `TriviaResult` is
-needed separate the complexities that are involved in data collection and the actual life cycle of `TriviaTest`.
+needed separate the complexities that are involved in data collection and the actual implementation of `TriviaTest`.
 // end::triviatest[]
 
 // tag::matchtest[]
@@ -451,17 +452,17 @@ The `AppState` model defines the state of which the application is in. And the `
 
 Additionally, `MatchTest` also implements the following operations:
 
-* `MatchTest#startTest()` -- Does the necessary initialisations to start a matching test.
-* `MatchTest#stopTest()` -- Does the necessary clean up to stop a matching test.
+* `MatchTest#startTest()` -- Does the necessary initialisations to start a MatchTest.
+* `MatchTest#stopTest()` -- Does the necessary clean up to stop a MatchTest.
 * `MatchTest#match(questionIndex, answerIndex)` -- Matches the question to the answer.
 
 These operations are exposed in the `Model` interface as `Model#startTriviaTest()`, `Model#stopTriviaTest()` and `Model#MatchQuestionAndAnswer` respectively.
 
-The following activity diagram shows the complete lifecycle of a matching test.
+The following activity diagram shows the complete lifecycle of a MatchTest.
 
 image::MatchTestActivityDiagram.png[width="800"]
 
-Given below is an example usage scenario and how the matching test behaves at each step.
+Given below is an example usage scenario and how the MatchTest behaves at each step.
 
 Step 1. The user enter the `testM` command and a new `MatchingTestCommand` will be created.
 
@@ -469,10 +470,10 @@ Step 2. The `MatchingTestCommand` will be executed and a new MatchTest Object wi
 
 image::StartingMatchTestSequenceDiagram.png[width="800"]
 
-Step 3. After the matching test has been started, the user can only input the following commands:
+Step 3. After the MatchTest has been started, the user can only input the following commands:
 
 * `QUESTION_INDEX ANSWER_INDEX` Will be used to define which question will be matched to the answer.
-* `exit` If the user input `exit`, the matching test will end and the information related to that matching test will not be recorded.
+* `exit` If the user input `exit`, the MatchTest will end and the information related to that MatchTest will not be recorded.
 
 Step 4. Suppose the user chose to match a question to an answer, the sequence will execute a list of steps, as shown in the sequence diagram below, to determine whether the match is correct.
 
@@ -485,6 +486,24 @@ Step 6. After all the question and answers are matched, the System will store th
 Step 7. At this stage, the System will await `exit` command from the user so that user can be taken back to the home page.
 
 ==== Design Considerations
+
+===== UI related considerations during a MatchTest
+* Below are the different aspect of the UI in the MatchTest that have been considered.
+** The UI feedback that are involved when user execute MatchCommand
+*** Due to the possibility of having to match a lot of questions and answers, after each successful match, the question and answer
+that are matched correctly will be removed. In addition, to improve user experience, a colored flashed will be played
+before their removal.
+** The Index of the question and answer
+*** The index of the question and answer is important because the user would be using it to identify which question is to be
+matched to which answer. The easy way to do this was to let `ListView` do it's job of re-indexing whenever an item is removed.
+However, doing so will cause confusion to the user as the index that is used to represent an item is now used to represent another item.
+Hence, in MatchTest, we have made the Indexes static.
+** The commands involved in matching
+*** The basic way for the user to matching a question to an answer is for them to provide the Index of the question and answer.
+However, when the list of questions and answers are long, the user will have problem keeping track on 2 lists. Hence, an
+alternative way is to require the user just key in the Index of the answer, and 3VIA will match the top question to that answer.
+This is more intuitive because the user just need to scroll through the answer list, allowing user to focus on finding the answer
+to match the first question.
 
 ===== The static display indexes of the ListView for question and answer
 * **Alternative 1 (current choice):** Created new classes namely, `IndexedQuestion` and `IndexedAnswer` to uniquely identify the cells in `ListView`.
@@ -499,8 +518,8 @@ Step 7. At this stage, the System will await `exit` command from the user so tha
 the mapping will be needed to be passed into the UI component. This mapping will then be used by the constructor of `ListView` to
 create a static display index of question and answer. Hence, this design consideration was not implemented due to abstraction that is leaking into the UI.
 
-===== How UI feedback is being received when a MatchCommand is executed
-* **Alternative 1 (current choice):** Uses `AsyncEventCenter` to dispatch its events.
+===== The UI feedback when a MatchCommand is executed
+* **Alternative 1 (current choice):** Uses `AsyncEventCenter` to dispatch its flash UI events.
 ** Pro:
 *** The feedback received by the user is more synchronised between question and answer.
 ** Con:
@@ -878,11 +897,11 @@ Use case ends.
 Use case resumes at step 4 on the next question.
 
 [discrete]
-=== Use case 4: Matching test
+=== Use case 4: MatchTest
 
 *MSS*
 
-1. User: Start matching test.
+1. User: Start MatchTest.
 2. System: Shows a list of question and answer.
 3. User: Select the matching question and answer.
 4. Repeat step 3 until user matched all the questions and answers correctly.

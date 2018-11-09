@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import seedu.address.commons.core.LogsCenter;
@@ -41,9 +42,11 @@ public class AnswerListPanel extends UiPart<Region> {
      * Custom {@code ListCell} that displays the graphics of a {@code Card} using a {@code AnswerView}.
      */
     class AnswerListViewCell extends ListCell<IndexedAnswer> {
+        private final Background originalBackground;
 
         public AnswerListViewCell() {
             registerAsAnEventHandler(this);
+            originalBackground = this.getBackground();
         }
 
 
@@ -63,9 +66,9 @@ public class AnswerListPanel extends UiPart<Region> {
         private void handleFlashMatchOutcomeEvent(FlashMatchOutcomeEvent event) {
             if (getIndex() == event.indexOfAnswer) {
                 if (event.isCorrect) {
-                    flashBackgroundColor(this, new Color(0, 1, 0, 1), this.getBackground());
+                    flashBackgroundColor(this, new Color(0, 1, 0, 1), originalBackground);
                 } else {
-                    flashBackgroundColor(this, new Color(1, 0, 0, 1), this.getBackground());
+                    flashBackgroundColor(this, new Color(1, 0, 0, 1), originalBackground);
                 }
             }
         }
