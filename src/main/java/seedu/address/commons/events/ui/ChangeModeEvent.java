@@ -12,7 +12,7 @@ public class ChangeModeEvent extends BaseEvent {
         toggleValue = true;
     }
 
-    public boolean getToggleValue() { return toggleValue;}
+    public boolean getToggleValue() { return toggleValue; }
 
     @Override
     public String toString() {

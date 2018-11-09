@@ -208,11 +208,14 @@ public class MainWindow extends UiPart<Stage> {
 
 
     @Subscribe
-    private void handleChangeModeEvent(ChangeModeEvent event) {
+    private void handleChangeModeEvent(ChangeModeEvent event) throws IllegalArgumentException {
         if (isDayMode && event.getToggleValue()) {
             loadStyle(vbox, "file:/src/main/resources/view/DarkTheme.css");
-        } else {
+            isDayMode = false;
+        } else if (!isDayMode && event.getToggleValue()) {
             loadStyle(vbox, "file:/src/main/resources/view/3VIATheme.css");
+        } else {
+            throw new IllegalArgumentException("Day and Night mode did not toggle properly.");
         }
     }
 }
