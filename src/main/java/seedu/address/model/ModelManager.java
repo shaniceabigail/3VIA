@@ -20,8 +20,8 @@ import seedu.address.commons.events.model.TriviaBundleChangedEvent;
 import seedu.address.commons.events.model.TriviaResultsChangedEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.DisplayCardInfoEvent;
-import seedu.address.commons.events.ui.OpenEndedTestShowAnswer;
-import seedu.address.commons.events.ui.OpenEndedTestShowNextQuestion;
+import seedu.address.commons.events.ui.OpenEndedTestShowAnswerEvent;
+import seedu.address.commons.events.ui.OpenEndedTestShowNextQuestionEvent;
 import seedu.address.commons.events.ui.SetUpDisplayCardInfoEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.model.card.Card;
@@ -250,6 +250,7 @@ public class ModelManager extends ComponentManager implements Model {
             appState.setAppState(State.OPEN_ENDED_TEST_QUESTION);
         }
         test.startTest();
+        raise(new ShowTriviaTestViewEvent(test.getTestingPage()));
     }
 
     @Override
@@ -285,13 +286,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Open Ended Tests ==========================================================================
 
+    @Override
     public boolean isOpenEndedTestAnswerCorrect(char in) {
         OpenEndedTest openEndedTest = (OpenEndedTest) currentRunningTest;
         boolean isAnswerCorrect = openEndedTest.addAttempt(in);
         if (!openEndedTest.isCompleted()) {
             openEndedTest.advanceCard();
             Card nextCard = openEndedTest.getCurrCard();
-            raise(new OpenEndedTestShowNextQuestion(nextCard));
+            raise(new OpenEndedTestShowNextQuestionEvent(nextCard));
             appState.setAppState(State.OPEN_ENDED_TEST_QUESTION);
         } else {
             triviaResults.addTriviaResult(new TriviaResult(currentRunningTest));
@@ -301,10 +303,11 @@ public class ModelManager extends ComponentManager implements Model {
         return isAnswerCorrect;
     }
 
+    @Override
     public void recordAnswerToOpenEndedTest(String userInput) {
         OpenEndedTest openEndedTest = (OpenEndedTest) currentRunningTest;
         openEndedTest.recordAnswer(userInput);
-        raise(new OpenEndedTestShowAnswer(userInput));
+        raise(new OpenEndedTestShowAnswerEvent(userInput));
         appState.setAppState(State.OPEN_ENDED_TEST_ANSWER);
     }
 

@@ -13,13 +13,9 @@ import java.util.stream.Collectors;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.util.Duration;
 import seedu.address.model.ReadOnlyTriviaBundle;
-import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
-import seedu.address.model.card.Question;
 import seedu.address.model.test.Attempt;
 import seedu.address.model.test.TestType;
 import seedu.address.model.test.TriviaTest;
@@ -41,7 +37,6 @@ public class OpenEndedTest extends TriviaTest {
     public final TestType testType = TestType.OPEN_ENDED_TEST;
     private List<Attempt> attempts;
     private ArrayList<Card> shuffledCards;
-    private ArrayList<Card> referenceCards;
 
 
     private Card currCard;
@@ -68,11 +63,10 @@ public class OpenEndedTest extends TriviaTest {
     private ArrayList<Card> shuffleCards(List<Card> cards) {
         ArrayList<Card> shuffledCards = new ArrayList<>(cards);
         Collections.shuffle(shuffledCards);
-        referenceCards = new ArrayList<>(shuffledCards);
         return shuffledCards;
     }
 
-    public Card getNextCard() {
+    private Card getNextCard() {
         if (shuffledCards.size() == 0) {
             return null;
         }
@@ -80,13 +74,6 @@ public class OpenEndedTest extends TriviaTest {
         shuffledCards.remove(0);
         return nextCard;
     }
-
-    public ArrayList<Card> getReferenceCards() {
-        return this.referenceCards;
-    }
-
-    public ArrayList<Card> getShuffledCards() { return shuffledCards; }
-
 
     @Override
     public void startTest() { startTimer(); }
