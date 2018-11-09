@@ -37,6 +37,8 @@ public class UiManager extends ComponentManager implements Ui {
     private UserPrefs prefs;
     private MainWindow mainWindow;
 
+
+
     public UiManager(Logic logic, Config config, UserPrefs prefs) {
         super();
         this.logic = logic;
@@ -117,4 +119,5 @@ public class UiManager extends ComponentManager implements Ui {
         showFileOperationAlertAndWait(FILE_OPS_ERROR_DIALOG_HEADER_MESSAGE, FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE,
                 event.exception);
     }
+
 }

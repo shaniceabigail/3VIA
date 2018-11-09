@@ -6,16 +6,18 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ChangeModeEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
@@ -39,9 +41,10 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
-
-    //private NavigationTabController navigationTab;
     private MainDisplay mainDisplay;
+    private VBox vbox;
+
+    private boolean isDayMode;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -63,6 +66,7 @@ public class MainWindow extends UiPart<Stage> {
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
+        isDayMode = true;
 
         // Set dependencies
         this.primaryStage = primaryStage;
@@ -133,9 +137,6 @@ public class MainWindow extends UiPart<Stage> {
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getTriviaBundleFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        /*navigationTab = new NavigationTabController();
-        navigationTabPlaceholder.getChildren().add(navigationTab.getRoot());*/
     }
 
     public void hide() {
@@ -178,6 +179,11 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    private void loadStyle(Parent node, String location) {
+        node.getStylesheets().clear();
+        node.getStylesheets().add(getClass().getResource(location).toExternalForm());
+    }
+
     public void releaseResources() {
         mainDisplay.releaseResources();
     }
@@ -198,5 +204,15 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+
+    @Subscribe
+    private void handleChangeModeEvent(ChangeModeEvent event) {
+        if (isDayMode && event.getToggleValue()) {
+            loadStyle(vbox, "file:/src/main/resources/view/DarkTheme.css");
+        } else {
+            loadStyle(vbox, "file:/src/main/resources/view/3VIATheme.css");
+        }
     }
 }

@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.net.MalformedURLException;
+import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -7,6 +9,7 @@ import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -16,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.ChangeModeEvent;
 import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.Logic;
 import seedu.address.ui.home.Homepage;
@@ -84,16 +88,22 @@ public class MainDisplay extends UiPart<Region> {
         tabContainer.setTabMinHeight(tabWidth);
         tabContainer.setTabMaxHeight(tabWidth);
         tabContainer.setRotateGraphic(true);
-        tabContainer.getStyleClass().add("root");
+        //tabContainer.getStyleClass().add("root");
 
         //list of tabs configured
         createTab(learnTab, "Learn", "file:/src/main/resources/images/tabIcons/home.png", homepagePlaceholder);
         createTab(testTab, "Test", "file:/src/main/resources/images/tabIcons/settings.png", triviaTestPlaceholder);
         createTab(reviewTab, "Review", "file:/main/resources/images/tabIcons/test.png", reviewPlaceholder);
+
+        logger.info("View has been configured");
     }
 
     /**
-     * Configures a new tab
+     * Creates a tab with the following parameters
+     * @param tab
+     * @param title
+     * @param iconPath
+     * @param containerPane
      */
     private void createTab(Tab tab, String title, String iconPath, StackPane containerPane) {
         double imageWidth = 40.0;
@@ -114,6 +124,7 @@ public class MainDisplay extends UiPart<Region> {
         try {
             tab.setContent(containerPane);
             tabPane = tab.getTabPane();
+            logger.info("tab created");
         } catch (Exception e) {
             throw new IllegalArgumentException("Tab not added");
         }
@@ -125,7 +136,7 @@ public class MainDisplay extends UiPart<Region> {
     }
 
     @Subscribe
-    public void handleToggleTabEvent(ToggleTabEvent event) {
+    private void handleToggleTabEvent(ToggleTabEvent event) {
         if (event.getToToggleTo().equals("test")) {
             tabPane.getSelectionModel().select(testTab);
         } else if (event.getToToggleTo().equals("review")) {

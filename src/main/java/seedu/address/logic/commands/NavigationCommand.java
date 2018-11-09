@@ -23,10 +23,6 @@ public class NavigationCommand extends Command {
         tabToGo = tabName;
     }
 
-    private String getTabToGo() {
-        return tabToGo;
-    }
-
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         EventsCenter.getInstance().post(new ToggleTabEvent(COMMAND_WORD));
