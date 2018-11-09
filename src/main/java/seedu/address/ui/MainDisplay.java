@@ -126,9 +126,9 @@ public class MainDisplay extends UiPart<Region> {
 
     @Subscribe
     public void handleToggleTabEvent(ToggleTabEvent event) {
-        if (event.getToToggleTo() == "test") {
+        if (event.getToToggleTo().equals("test")) {
             tabPane.getSelectionModel().select(testTab);
-        } else if (event.getToToggleTo() == "review") {
+        } else if (event.getToToggleTo().equals("review")) {
             tabPane.getSelectionModel().select(reviewTab);
         } else {
             tabPane.getSelectionModel().select(learnTab);

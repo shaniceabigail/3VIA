@@ -29,7 +29,7 @@ public class NavigationCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        EventsCenter.getInstance().post(new ToggleTabEvent(this.getTabToGo()));
+        EventsCenter.getInstance().post(new ToggleTabEvent(COMMAND_WORD));
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 }
