@@ -282,9 +282,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Open Ended Tests ==========================================================================
-    public void showAnswer() { }
+    public boolean isOpenEndedTestAnswerCorrect(char in) {
+        boolean isCorrect = (in == 'y' || in == 'Y');
+        raise(new OpenEndedTestRecordIsCorrect(isCorrect));
+        appState.setAppState(State.OPEN_ENDED_TEST_QUESTION);
+        return isCorrect;
+    }
 
-    public void recordAnswer(char in) { }
+    public void addAttemptToOpenEndedTest(String userInput) {
+        appState.setAppState(State.OPEN_ENDED_TEST_ANSWER);
+    }
 
 
     //=========== Trivia Test Results ==========================================================================

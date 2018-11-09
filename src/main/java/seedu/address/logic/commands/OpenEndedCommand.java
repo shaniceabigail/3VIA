@@ -16,9 +16,8 @@ public class OpenEndedCommand extends Command {
 
     public static final String MESSAGE_USAGE = "Key in Y if you answered correctly, N if you did not";
 
-    public static final String MESSAGE_ANSWER_SUCCESS = "Correct!";
-    public static final String MESSAGE_ANSWER_FAILURE = "Wrong!";
-    public static final String MESSAGE_SHOW_ANSWER = "Showing Answer!";
+    private static final String MESSAGE_ANSWER_SUCCESS = "Correct!";
+    private static final String MESSAGE_ANSWER_FAILURE = "Wrong!";
 
     private final char in;
 
@@ -31,9 +30,7 @@ public class OpenEndedCommand extends Command {
         requireNonNull(model);
         assert model.getCurrentRunningTest() instanceof OpenEndedTest;
 
-        if (in == 'A' || in == 'a') {
-            return new CommandResult(MESSAGE_SHOW_ANSWER);
-        } else if (in == 'Y' || in == 'y') {
+        if (model.isOpenEndedTestAnswerCorrect(in)) {
             return new CommandResult(MESSAGE_ANSWER_SUCCESS);
         } else {
             return new CommandResult(MESSAGE_ANSWER_FAILURE);

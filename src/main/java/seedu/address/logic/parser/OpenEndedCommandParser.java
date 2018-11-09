@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new MatchCommand object
  */
-public class OpenEndedCommandParser {
+public class OpenEndedCommandParser implements Parser<OpenEndedCommand>{
     /**
      * Parses the given {@code String} of arguments in the context of the {@code OpenEndedTestCommand}
      * and returns an OpenEndedTest object for execution.
@@ -18,8 +18,8 @@ public class OpenEndedCommandParser {
     public OpenEndedCommand parse(String args) throws ParseException {
         args = args.trim().replaceAll("\\s+", " ");
         String[] values = args.split(" ");
-        char in = args.charAt(0);
-        if (!(in == 'Y' || in == 'y' || in == 'N' || in == 'n' || in =='A' || in == 'a')) {
+        char in = values[0].charAt(0);
+        if (!(in == 'Y' || in == 'y' || in == 'N' || in == 'n')) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OpenEndedCommand.MESSAGE_USAGE));
         }
 

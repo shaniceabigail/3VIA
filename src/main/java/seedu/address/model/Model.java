@@ -174,6 +174,11 @@ public interface Model {
     boolean isInTestingState();
 
     /**
+     * Returns boolean on whether the open ended test answer is correct
+     */
+    boolean isOpenEndedTestAnswerCorrect(char in);
+
+    /**
      * Returns the result list for trivia test.
      */
     List<TriviaResult> getTriviaResultList();

@@ -43,8 +43,7 @@ public class OpenEndedTest extends TriviaTest {
 
     private ArrayList<Card> shuffledCards;
     private ArrayList<Card> referenceCards;
-    private int numCorrect = 0;
-    private int numWrong = 0;
+
     private String userAnswer;
 
     public OpenEndedTest(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
@@ -82,21 +81,6 @@ public class OpenEndedTest extends TriviaTest {
         return this.referenceCards;
     }
 
-    private boolean isEndOfTest() {
-        return shuffledCards.isEmpty();
-    }
-
-    public void attemptCorrect() { numCorrect += 1; }
-
-    public void attemptWrong() { numWrong += 1; }
-
-    public int getNumCorrect() { return numCorrect; }
-
-    public int getNumWrong() { return numWrong; }
-
-    public void recordAnswer(String userInput) {
-        userAnswer = userInput;
-    }
 
     @Override
     public void startTest() { startTimer(); }
@@ -106,6 +90,9 @@ public class OpenEndedTest extends TriviaTest {
         timer.stop();
     }
 
+    public void recordAnswer(String userInput) {
+        this.userAnswer = userInput;
+    }
 
     @Override
     public TestType getTestType() {
@@ -120,6 +107,13 @@ public class OpenEndedTest extends TriviaTest {
     private boolean isValidTest() {
         return shuffledCards.size() >= 1;
     }
+
+    public Attempt addAttempt(Boolean isCorrect) {
+        Attempt currAttempt = new Attempt(shuffledCards.remove(0), this.userAnswer, isCorrect);
+        attempts.add(currAttempt);
+        return currAttempt;
+    }
+
 
     /**
      * Starts the timer of the test.
@@ -138,7 +132,7 @@ public class OpenEndedTest extends TriviaTest {
 
     @Override
     public Supplier<? extends TriviaTestResultPage> getResultPage() {
-        return () -> new OpenEndedTestResultPage(null);
+        return () -> new OpenEndedTestResultPage(this);
     }
 
 }
