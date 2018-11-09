@@ -81,6 +81,8 @@ public class OpenEndedTest extends TriviaTest {
         return this.referenceCards;
     }
 
+    public ArrayList<Card> getShuffledCards() { return shuffledCards; }
+
 
     @Override
     public void startTest() { startTimer(); }

@@ -20,6 +20,8 @@ import seedu.address.commons.events.model.TriviaBundleChangedEvent;
 import seedu.address.commons.events.model.TriviaResultsChangedEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.DisplayCardInfoEvent;
+import seedu.address.commons.events.ui.OpenEndedTestShowAnswer;
+import seedu.address.commons.events.ui.OpenEndedTestShowNextQuestion;
 import seedu.address.commons.events.ui.SetUpDisplayCardInfoEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.model.card.Card;
@@ -287,7 +289,8 @@ public class ModelManager extends ComponentManager implements Model {
         boolean isCorrect = (in == 'y' || in == 'Y');
         OpenEndedTest openEndedTest = (OpenEndedTest) currentRunningTest;
         openEndedTest.addAttempt(isCorrect);
-        raise(new OpenEndedTestRecordIsCorrect(isCorrect));
+        Card nextCard = ((OpenEndedTest) currentRunningTest).getNextCard();
+        raise(new OpenEndedTestShowNextQuestion(nextCard));
         appState.setAppState(State.OPEN_ENDED_TEST_QUESTION);
         return isCorrect;
     }
@@ -295,7 +298,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void recordAnswerToOpenEndedTest(String userInput) {
         OpenEndedTest openEndedTest = (OpenEndedTest) currentRunningTest;
         openEndedTest.recordAnswer(userInput);
-        raise(new OpenEndedTestNextQuestion());
+        raise(new OpenEndedTestShowAnswer());
         appState.setAppState(State.OPEN_ENDED_TEST_ANSWER);
     }
 

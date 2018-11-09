@@ -1,5 +1,6 @@
 package seedu.address.ui.test.openendedtest;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -8,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.card.Card;
 import seedu.address.model.test.openendedtest.OpenEndedTest;
 import seedu.address.ui.test.TriviaTestPage;
 import seedu.address.ui.test.matchtest.QuestionListPanel;
@@ -17,10 +19,14 @@ import seedu.address.ui.test.matchtest.QuestionListPanel;
  */
 
 public class OpenEndedTestPage extends TriviaTestPage {
+
     private static final String FXML = "test/openendedtest/OpenEndedTestPage.fxml";
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private OpenEndedTest openEndedTest;
+    private ArrayList<Card> shuffledCards = openEndedTest.getShuffledCards();
+    private Card card;
+
 //    private OpenEndedQuestionPage Qpage;
 //    private Openanswer Apage;
 
@@ -41,8 +47,17 @@ public class OpenEndedTestPage extends TriviaTestPage {
 
         this.openEndedTest = openEndedTest;
 
-
         registerAsAnEventHandler(this);
+    }
+
+    @Subscribe
+    private void handleOpenEndedTestRecordIsCorrect(Boolean isCorrect) {
+        //show next question
+    }
+
+    @Subscribe
+    private void handleOpenEndedTestShowAnswer() {
+
     }
 //
 //    @Subscribe
