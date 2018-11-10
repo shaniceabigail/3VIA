@@ -1,13 +1,10 @@
 package seedu.address.ui;
 
-import java.net.MalformedURLException;
-import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
 import javafx.fxml.FXML;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -17,12 +14,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
-<<<<<<< HEAD
-import seedu.address.commons.events.ui.ChangeModeEvent;
-=======
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
->>>>>>> origin/master
 import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.Logic;
 import seedu.address.ui.home.Homepage;
@@ -79,7 +72,7 @@ public class MainDisplay extends UiPart<Region> {
      * creates the view configuration of the tabs
      */
     private void configureView() {
-        tabContainer.setSide(Side.LEFT);
+        //tabContainer.setSide(side.LEFT);
         tabContainer.setTabMinWidth(tabWidth);
         tabContainer.setTabMaxWidth(tabWidth);
         tabContainer.setTabMinHeight(tabWidth);
@@ -120,7 +113,7 @@ public class MainDisplay extends UiPart<Region> {
 
         try {
             tab.setContent(containerPane);
-            tabPane = tab.getTabPane();
+            //tabPane = tab.getTabPane();
             logger.info("tab created");
         } catch (Exception e) {
             throw new IllegalArgumentException("Tab not added");
