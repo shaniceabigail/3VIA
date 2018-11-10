@@ -6,7 +6,6 @@ import com.google.common.eventbus.Subscribe;
 import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Side;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -16,6 +15,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
+import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.Logic;
 import seedu.address.ui.home.Homepage;
@@ -53,9 +54,7 @@ public class MainDisplay extends UiPart<Region> {
     public MainDisplay(Logic logic) {
         super(FXML);
         tabPane = new TabPane();
-
-        tabContainer = new JFXTabPane();
-        this.configureView();
+        configureView();
 
         homepage = new Homepage(logic);
         homepagePlaceholder.getChildren().add(homepage.getRoot());
@@ -78,14 +77,6 @@ public class MainDisplay extends UiPart<Region> {
      * creates the view configuration of the tabs
      */
     private void configureView() {
-        tabContainer.setSide(Side.LEFT);
-        tabContainer.setTabMinWidth(tabWidth);
-        tabContainer.setTabMaxWidth(tabWidth);
-        tabContainer.setTabMinHeight(tabWidth);
-        tabContainer.setTabMaxHeight(tabWidth);
-        tabContainer.setRotateGraphic(true);
-        tabContainer.getStyleClass().add("root");
-
         //list of tabs configured
         createTab(learnTab, "Learn", "file:/src/main/resources/images/tabIcons/home.png", homepagePlaceholder);
         createTab(testTab, "Test", "file:/src/main/resources/images/tabIcons/settings.png", triviaTestPlaceholder);
@@ -126,13 +117,27 @@ public class MainDisplay extends UiPart<Region> {
 
     @Subscribe
     public void handleToggleTabEvent(ToggleTabEvent event) {
-        if (event.getToToggleTo() == "test") {
-            tabPane.getSelectionModel().select(testTab);
-        } else if (event.getToToggleTo() == "review") {
-            tabPane.getSelectionModel().select(reviewTab);
-        } else {
+        if (event.getToToggleTo().equals("learn")) {
             tabPane.getSelectionModel().select(learnTab);
+        } else if (event.getToToggleTo().equals("test")) {
+            tabPane.getSelectionModel().select(testTab);
+        } else if (event.getToToggleTo().equals("review")) {
+            tabPane.getSelectionModel().select(reviewTab);
         }
+    }
 
+    @Subscribe
+    private void handleShowTriviaTestViewEvent(ShowTriviaTestViewEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        tabPane.getSelectionModel().select(testTab);
+        learnTab.setDisable(true);
+        reviewTab.setDisable(true);
+    }
+
+    @Subscribe
+    private void handleCloseTriviaTestViewEvent(CloseTriviaTestViewEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        learnTab.setDisable(false);
+        reviewTab.setDisable(false);
     }
 }

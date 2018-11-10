@@ -7,7 +7,6 @@ import seedu.address.commons.events.BaseEvent;
  */
 public class CloseTriviaTestViewEvent extends BaseEvent {
 
-    /** For navigation to the matching test page. */
     public CloseTriviaTestViewEvent() {}
 
     @Override

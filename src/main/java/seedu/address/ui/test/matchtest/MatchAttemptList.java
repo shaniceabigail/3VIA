@@ -14,7 +14,7 @@ import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.ui.UiPart;
 
 /**
- * A section of the matching result page which shows the list of attempts made the the user in the matching test.
+ * A section of the matching result page which shows the list of attempts made the the user in the Match Test.
  */
 public class MatchAttemptList extends UiPart<Region> {
     private static final String FXML = "test/matchtest/MatchAttemptList.fxml";

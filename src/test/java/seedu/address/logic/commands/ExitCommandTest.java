@@ -46,7 +46,7 @@ public class ExitCommandTest {
 
     @Test
     public void execute_exit_success() {
-        // during NORMAL AppState
+        // during LEARN AppState
         CommandResult result = new ExitCommand().execute(model, commandHistory);
         assertEquals(MESSAGE_EXIT_FROM_APP, result.feedbackToUser);
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof ExitAppRequestEvent);

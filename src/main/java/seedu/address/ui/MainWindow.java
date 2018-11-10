@@ -58,9 +58,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane displayPagePlaceHolder;
 
-    @FXML
-    private StackPane navigationTabPlaceholder;
-
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
 
@@ -133,9 +130,6 @@ public class MainWindow extends UiPart<Stage> {
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getTriviaBundleFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        /*navigationTab = new NavigationTabController();
-        navigationTabPlaceholder.getChildren().add(navigationTab.getRoot());*/
     }
 
     public void hide() {
