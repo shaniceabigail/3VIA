@@ -387,3 +387,11 @@ additional 3VIA-specific css code
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.centered-aligned-text-area *.text {
+    -fx-text-alignment: center;
+}
+
+.centered-aligned-text-area .content {
+    -fx-background-color: derive(#ededed, 20%);
+}
