@@ -67,6 +67,10 @@
     -fx-background-color: #00BCD4;
 }
 
+.tab-pane .tab-header-background {
+    -fx-background-color: #00BCD4;
+}
+
 .pane-with-border {
      -fx-background-color: white;
      -fx-border-color: white;
