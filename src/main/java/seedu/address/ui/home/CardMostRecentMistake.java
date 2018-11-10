@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
@@ -29,9 +30,9 @@ public class CardMostRecentMistake extends UiPart<Region> {
     @FXML
     private Label timestampOfAttemptText;
     @FXML
-    private Label answerOfTheMistakeText;
+    private TextArea answerOfTheMistakeText;
     @FXML
-    private Label expectedAnswerText;
+    private TextArea expectedAnswerText;
     @FXML
     private HBox expectedAnswerBox;
 
