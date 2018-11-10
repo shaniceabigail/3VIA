@@ -2,6 +2,7 @@ package guitests.guihandles;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.model.card.Card;
@@ -18,8 +19,8 @@ public class CardMostRecentMistakeHandle extends NodeHandle<Node> {
     public static final String EXPECTED_ANSWER_HBOX_ID = "#expectedAnswerBox";
 
     private final Label timestampOfAttemptText;
-    private final Label answerOfTheMistakeText;
-    private final Label expectedAnswerText;
+    private final TextArea answerOfTheMistakeText;
+    private final TextArea expectedAnswerText;
     private final HBox expectedAnswerBox;
 
     public CardMostRecentMistakeHandle(Node cardMostRecentMistakeNode) {

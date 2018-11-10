@@ -22,6 +22,6 @@ public class TipBox extends UiPart<Region> {
     public TipBox(String tipText) {
         super(FXML);
 
-        tip.setText(tipText);
+        tip.setText(" " + tipText);
     }
 }

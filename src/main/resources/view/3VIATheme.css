@@ -27,6 +27,13 @@
     -fx-opacity: 1;
 }
 
+.label-bright-sub-header {
+    -fx-font-size: 15pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: black;
+    -fx-opacity: 1;
+}
+
 .label-header {
     -fx-font-size: 32pt;
     -fx-font-family: "Segoe UI Light";
@@ -34,11 +41,33 @@
     -fx-opacity: 1;
 }
 
+.scroll-pane {
+    -fx-background-color: derive(#ededed, 20%);
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: derive(#ededed, 20%);
+}
+
+.anchor-pane {
+    -fx-background-color: derive(#ededed, 20%);
+}
+
+.separator *.line {
+    -fx-border-style: solid;
+    -fx-border-width: 1 1 1 1; /* its make really one-pixel-border */
+    -fx-border-color: black;
+}
+
 /**
 * tab bar
 */
 
 .jfx-tab-pane .tab-header-background {
+    -fx-background-color: #00BCD4;
+}
+
+.tab-pane .tab-header-background {
     -fx-background-color: #00BCD4;
 }
 
@@ -107,14 +136,6 @@
 
 .stack-pane {
      -fx-background-color: derive(#ededed, 20%);
-}
-
-.hbox {
-    -fx-background-color: derive(#0ebed6, 20%);
-}
-
-.hbox-light {
-    -fx-background-color: derive(#0ebed6, 30%);
 }
 
 .status-bar {
@@ -369,4 +390,12 @@ additional 3VIA-specific css code
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+.centered-aligned-text-area *.text {
+    -fx-text-alignment: center;
+}
+
+.centered-aligned-text-area .content {
+    -fx-background-color: derive(#ededed, 20%);
 }
