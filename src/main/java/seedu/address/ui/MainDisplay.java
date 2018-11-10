@@ -5,10 +5,6 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.fxml.FXML;
-<<<<<<< HEAD
-import javafx.geometry.Side;
-=======
->>>>>>> origin/update-documentations
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;

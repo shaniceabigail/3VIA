@@ -19,11 +19,11 @@ import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.LearnCommand;
 import seedu.address.logic.commands.MatchTestCommand;
 import seedu.address.logic.commands.ModeCommand;
-import seedu.address.logic.commands.NavigationCommand;
 import seedu.address.logic.commands.OpenEndedTestCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ResearchCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.TestCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.state.State;
@@ -106,8 +106,8 @@ public class AddressBookParser {
             case ImportCommand.COMMAND_WORD:
                 return new ImportCommandParser().parse(arguments);
 
-            case NavigationCommand.COMMAND_WORD:
-                return new NavigationCommand(arguments);
+            case TestCommand.COMMAND_WORD:
+                return new TestCommand(arguments);
 
             case ModeCommand.COMMAND_WORD:
                 return new ModeCommand();
@@ -127,8 +127,8 @@ public class AddressBookParser {
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
 
-            case NavigationCommand.COMMAND_WORD:
-                return new NavigationCommand(arguments);
+            case TestCommand.COMMAND_WORD:
+                return new TestCommand(arguments);
 
             case LearnCommand.COMMAND_WORD:
                 return new LearnCommandParser().parse(arguments);
@@ -142,8 +142,8 @@ public class AddressBookParser {
 
         case REVIEW:
             switch (commandWord) {
-            case NavigationCommand.COMMAND_WORD:
-                return new NavigationCommand(arguments);
+            case TestCommand.COMMAND_WORD:
+                return new TestCommand(arguments);
 
             case LearnCommand.COMMAND_WORD:
                 return new LearnCommandParser().parse(arguments);
