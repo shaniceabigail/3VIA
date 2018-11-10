@@ -11,7 +11,7 @@ import seedu.address.model.test.matchtest.exceptions.AnswerNotFoundException;
 import seedu.address.model.test.matchtest.exceptions.QuestionNotFoundException;
 
 /**
- * The MatchCommand can only be used in a Matching test.
+ * The MatchCommand can only be used in a Match Test.
  */
 public class MatchCommand extends Command {
     public static final String COMMAND_WORD = "";
@@ -30,6 +30,7 @@ public class MatchCommand extends Command {
     private final Index answerIndex;
 
     public MatchCommand(Index questionIndex, Index answerIndex) {
+        requireNonNull(answerIndex);
         this.questionIndex = questionIndex;
         this.answerIndex = answerIndex;
     }

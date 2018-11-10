@@ -13,14 +13,15 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.GoogleCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.LearnCommand;
 import seedu.address.logic.commands.MatchTestCommand;
+import seedu.address.logic.commands.NavigationCommand;
 import seedu.address.logic.commands.OpenEndedTestCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.ResearchCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -53,7 +54,7 @@ public class AddressBookParser {
 
         switch (appState) {
 
-        case NORMAL:
+        case LEARN:
             switch (commandWord) {
 
             case AddCommand.COMMAND_WORD:
@@ -65,8 +66,8 @@ public class AddressBookParser {
             case SelectCommand.COMMAND_WORD:
                 return new SelectCommandParser().parse(arguments);
 
-            case GoogleCommand.COMMAND_WORD:
-                return new GoogleCommandParser().parse(arguments);
+            case ResearchCommand.COMMAND_WORD:
+                return new ResearchCommandParser().parse(arguments);
 
             case DeleteCommand.COMMAND_WORD:
                 return new DeleteCommandParser().parse(arguments);
@@ -104,6 +105,48 @@ public class AddressBookParser {
             case ImportCommand.COMMAND_WORD:
                 return new ImportCommandParser().parse(arguments);
 
+            case NavigationCommand.COMMAND_WORD:
+                return new NavigationCommand(arguments);
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+
+        case TEST:
+            switch (commandWord) {
+            case OpenEndedTestCommand.COMMAND_WORD:
+                return new OpenEndedTestCommandParser().parse(arguments);
+
+            case MatchTestCommand.COMMAND_WORD:
+                return new MatchTestCommandParser().parse(arguments);
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            case NavigationCommand.COMMAND_WORD:
+                return new NavigationCommand(arguments);
+
+            case LearnCommand.COMMAND_WORD:
+                return new LearnCommandParser().parse(arguments);
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+
+        case REVIEW:
+            switch (commandWord) {
+            case NavigationCommand.COMMAND_WORD:
+                return new NavigationCommand(arguments);
+
+            case LearnCommand.COMMAND_WORD:
+                return new LearnCommandParser().parse(arguments);
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
@@ -131,32 +174,32 @@ public class AddressBookParser {
         case OPEN_ENDED_TEST_QUESTION:
             switch(commandWord) {
 
-                case ExitCommand.COMMAND_WORD:
-                    return new ExitCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
-                default:
-                    return new OpenEndedAnswerParser().parse(userInput);
+            default:
+                return new OpenEndedAnswerParser().parse(userInput);
             }
 
         case OPEN_ENDED_TEST_ANSWER:
             switch(commandWord) {
 
-                case ExitCommand.COMMAND_WORD:
-                    return new ExitCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
-                default:
-                    return new OpenEndedCommandParser().parse(userInput);
-            }
+            default:
+                return new OpenEndedCommandParser().parse(userInput);
+                }
 
         case OPEN_ENDED_TEST_RESULT:
             switch(commandWord) {
 
-                case ExitCommand.COMMAND_WORD:
-                    return new ExitCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
-                default:
-                    return new OpenEndedCommandParser().parse(userInput);
-            }
+            default:
+                return new OpenEndedCommandParser().parse(userInput);
+                }
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

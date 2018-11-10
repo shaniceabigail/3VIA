@@ -24,8 +24,6 @@ public class CardInfoPanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Card card;
-    private TipBox commandTipBox;
     private CardExperience cardExperience;
     private CardMostRecentMistake cardMostRecentMistake;
 
@@ -36,7 +34,7 @@ public class CardInfoPanel extends UiPart<Region> {
     @FXML
     private TextArea cardInfoAnswer;
     @FXML
-    private StackPane googleCommandTipPlaceholder;
+    private StackPane researchCommandTipPlaceholder;
     @FXML
     private StackPane cardExperiencePlaceholder;
     @FXML
@@ -45,9 +43,13 @@ public class CardInfoPanel extends UiPart<Region> {
     public CardInfoPanel() {
         super(FXML);
 
-        commandTipBox = new TipBox("Research more on a question by entering 'google INDEX'!");
-        googleCommandTipPlaceholder.getChildren().add(commandTipBox.getRoot());
-        registerAsAnEventHandler(this);
+        TipBox commandTipBox = new TipBox("Research more on a question by entering 'research INDEX'!");
+        researchCommandTipPlaceholder.getChildren().add(commandTipBox.getRoot());
+
+        cardExperience = new CardExperience();
+        cardExperiencePlaceholder.getChildren().add(cardExperience.getRoot());
+        cardMostRecentMistake = new CardMostRecentMistake();
+        cardMostRecentMistakePlaceholder.getChildren().add(cardMostRecentMistake.getRoot());
     }
 
     /**
@@ -55,7 +57,6 @@ public class CardInfoPanel extends UiPart<Region> {
      */
     public void loadCardPage(Card card, List<Attempt> attemptsByCard) {
         cleanUp();
-        this.card = card;
 
         cardInfoQuestion.setText(card.getQuestion().value);
         cardInfoAnswer.setText(card.getAnswer().value);

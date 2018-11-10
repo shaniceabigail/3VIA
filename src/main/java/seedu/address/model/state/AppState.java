@@ -7,7 +7,7 @@ public class AppState {
     private State currentState;
 
     public AppState() {
-        currentState = State.NORMAL;
+        currentState = State.LEARN;
     }
 
     public void setAppState(State state) {

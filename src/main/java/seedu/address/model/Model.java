@@ -154,7 +154,7 @@ public interface Model {
     void stopTriviaTest();
 
     /**
-     * Match a question to another answer. To be used in a matching test.
+     * Match a question to another answer. To be used in a Match Test.
      */
     boolean matchQuestionAndAnswer(Index questionIndex, Index answerIndex);
 
@@ -167,6 +167,11 @@ public interface Model {
      * Get the app state that the application is currently in.
      */
     State getAppState();
+
+    /**
+     * Set the AppState of the model according to the given State
+     */
+    void setAppState(State state);
 
     /**
      * Return boolean on whether the model in in a testing state.

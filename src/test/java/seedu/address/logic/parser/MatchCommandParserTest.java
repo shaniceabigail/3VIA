@@ -27,12 +27,17 @@ public class MatchCommandParserTest {
 
     @Test
     public void test_parseFailure() {
+        // invalid format
         assertParseFailure(parser, "  ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 MatchCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "12 32 12", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 MatchCommand.MESSAGE_USAGE));
-        assertParseFailure(parser, "sd sa", ParserUtil.MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, "sd", ParserUtil.MESSAGE_INVALID_INDEX);
-        assertParseFailure(parser, "    sd    ", ParserUtil.MESSAGE_INVALID_INDEX);
+
+        // non-integers
+        assertParseFailure(parser, "sd sa", String.format(ParserUtil.MESSAGE_INVALID_INDEX, "sd"));
+        // negative numbers
+        assertParseFailure(parser, "-1 -100", String.format(ParserUtil.MESSAGE_INVALID_INDEX, "-1"));
+        // zero
+        assertParseFailure(parser, "0", String.format(ParserUtil.MESSAGE_INVALID_INDEX, 0));
     }
 }
