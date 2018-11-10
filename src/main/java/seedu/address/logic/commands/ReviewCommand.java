@@ -5,26 +5,23 @@ import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
-/**
- * Navigates tab and current page to testPage
- */
-public class TestCommand extends Command {
-    public static final String COMMAND_WORD = "test";
+public class ReviewCommand extends Command {
+    public static final String COMMAND_WORD = "review";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " : navigates to test menu\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " : navigates to review page\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Successfully navigated to test";
+    public static final String MESSAGE_SUCCESS = "Successfully navigated to review page";
 
     private String tabToGo;
 
-    public TestCommand(String tabName) {
+    public ReviewCommand(String tabName) {
         tabToGo = tabName;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        EventsCenter.getInstance().post(new ToggleTabEvent("test"));
+        EventsCenter.getInstance().post(new ToggleTabEvent("review"));
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 }

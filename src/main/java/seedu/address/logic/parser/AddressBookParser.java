@@ -22,6 +22,7 @@ import seedu.address.logic.commands.ModeCommand;
 import seedu.address.logic.commands.OpenEndedTestCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ResearchCommand;
+import seedu.address.logic.commands.ReviewCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.TestCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -112,6 +113,9 @@ public class AddressBookParser {
             case ModeCommand.COMMAND_WORD:
                 return new ModeCommand();
 
+            case ReviewCommand.COMMAND_WORD:
+                return new ReviewCommand(arguments);
+
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
@@ -135,6 +139,9 @@ public class AddressBookParser {
 
             case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
+
+            case ReviewCommand.COMMAND_WORD:
+                return new ReviewCommand(arguments);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
