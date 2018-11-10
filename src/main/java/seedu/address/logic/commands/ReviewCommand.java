@@ -5,6 +5,9 @@ import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
+/**
+ * Navigates to the Review page
+ */
 public class ReviewCommand extends Command {
     public static final String COMMAND_WORD = "review";
 

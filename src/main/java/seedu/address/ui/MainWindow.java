@@ -211,11 +211,11 @@ public class MainWindow extends UiPart<Stage> {
 
         if (isDayMode && event.getToggleValue()) {
             releaseResources();
-            currentScene.getStylesheets().add(getClass().getResource("file:/src/main/resources/view/DarkTheme.css").toExternalForm());
+            currentScene.getStylesheets().add(getClass().getResource("file:/DarkTheme.css").toExternalForm());
             isDayMode = false;
         } else if (!isDayMode && event.getToggleValue()) {
             releaseResources();
-            currentScene.getStylesheets().add(getClass().getResource("file:/src/main/resources/view/3VIATheme.css").toExternalForm());
+            currentScene.getStylesheets().add(getClass().getResource("file:/3VIATheme.css").toExternalForm());
             isDayMode = true;
         } else {
             throw new IllegalArgumentException("Day and Night mode did not toggle properly.");

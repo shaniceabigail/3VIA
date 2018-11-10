@@ -14,7 +14,7 @@ import seedu.address.model.card.TopicIsKeywordPredicate;
 import seedu.address.model.state.State;
 
 /**
- * Lists all persons in the address book to the user.
+ * Navigates to show learn page.
  */
 public class LearnCommand extends Command {
 
