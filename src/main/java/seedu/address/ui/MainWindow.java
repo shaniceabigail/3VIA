@@ -213,9 +213,11 @@ public class MainWindow extends UiPart<Stage> {
         currentScene.getStylesheets().clear();
 
         if (isDayMode && event.getToggleValue()) {
+            releaseResources();
             currentScene.getStylesheets().add(getClass().getResource("file:/src/main/resources/view/DarkTheme.css").toExternalForm());
             isDayMode = false;
         } else if (!isDayMode && event.getToggleValue()) {
+            releaseResources();
             currentScene.getStylesheets().add(getClass().getResource("file:/src/main/resources/view/3VIATheme.css").toExternalForm());
             isDayMode = true;
         } else {
