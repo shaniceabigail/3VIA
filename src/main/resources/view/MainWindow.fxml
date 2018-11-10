@@ -6,7 +6,6 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.Scene?>
@@ -19,8 +18,8 @@
   <scene>
     <Scene>
       <stylesheets>
-        <!--<URL value="@3VIATheme.css" />-->
           <URL value="@DarkTheme.css" />
+        <URL value="@3VIATheme.css" />
         <URL value="@Extensions.css" />
         <!--<URL value="@NavigationTabStyling.css"/>-->
       </stylesheets>

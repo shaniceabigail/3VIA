@@ -55,7 +55,7 @@ public class AddressBookParser {
 
         switch (appState) {
 
-        case NORMAL:
+        case LEARN:
             switch (commandWord) {
 
             case AddCommand.COMMAND_WORD:
@@ -111,6 +111,45 @@ public class AddressBookParser {
 
             case ModeCommand.COMMAND_WORD:
                 return new ModeCommand();
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+
+        case TEST:
+            switch (commandWord) {
+            case OpenEndedTestCommand.COMMAND_WORD:
+                return new OpenEndedTestCommandParser().parse(arguments);
+
+            case MatchTestCommand.COMMAND_WORD:
+                return new MatchTestCommandParser().parse(arguments);
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            case NavigationCommand.COMMAND_WORD:
+                return new NavigationCommand(arguments);
+
+            case LearnCommand.COMMAND_WORD:
+                return new LearnCommandParser().parse(arguments);
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+
+        case REVIEW:
+            switch (commandWord) {
+            case NavigationCommand.COMMAND_WORD:
+                return new NavigationCommand(arguments);
+
+            case LearnCommand.COMMAND_WORD:
+                return new LearnCommandParser().parse(arguments);
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

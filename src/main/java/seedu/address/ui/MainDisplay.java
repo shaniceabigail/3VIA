@@ -3,10 +3,12 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
-import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
+<<<<<<< HEAD
 import javafx.geometry.Side;
+=======
+>>>>>>> origin/update-documentations
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -16,6 +18,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
+
+import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
+import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.Logic;
 import seedu.address.ui.home.Homepage;
@@ -33,10 +38,8 @@ public class MainDisplay extends UiPart<Region> {
     private final TriviaTestPlaceholderPage triviaTestPlaceholderPage;
     private final double tabWidth = 90.0;
 
-    private TabPane tabPane;
-
     @FXML
-    private JFXTabPane tabContainer;
+    private TabPane tabContainer;
     @FXML
     private Tab learnTab;
     @FXML
@@ -52,10 +55,7 @@ public class MainDisplay extends UiPart<Region> {
 
     public MainDisplay(Logic logic) {
         super(FXML);
-        tabPane = new TabPane();
-
-        tabContainer = new JFXTabPane();
-        this.configureView();
+        configureView();
 
         homepage = new Homepage(logic);
         homepagePlaceholder.getChildren().add(homepage.getRoot());
@@ -63,22 +63,21 @@ public class MainDisplay extends UiPart<Region> {
         triviaTestPlaceholderPage = new TriviaTestPlaceholderPage();
         triviaTestPlaceholder.getChildren().add(triviaTestPlaceholderPage.getRoot());
 
-        resetToOriginalState();
         registerAsAnEventHandler(this);
     }
 
     /**
-     * Hides all the other pages except for the homepage. The default page should be the homepage.
+     * Restore all the pages to its original state. Currently only homepage is required for this restoration.
      */
-    public void resetToOriginalState() {
-        homepagePlaceholder.setVisible(true);
+    private void resetToOriginalState() {
+        homepage.resetToOriginalState();
     }
 
     /**
      * creates the view configuration of the tabs
      */
     private void configureView() {
-        tabContainer.setSide(Side.LEFT);
+        //tabContainer.setSide(side.LEFT);
         tabContainer.setTabMinWidth(tabWidth);
         tabContainer.setTabMaxWidth(tabWidth);
         tabContainer.setTabMinHeight(tabWidth);
@@ -119,7 +118,7 @@ public class MainDisplay extends UiPart<Region> {
 
         try {
             tab.setContent(containerPane);
-            tabPane = tab.getTabPane();
+            //tabPane = tab.getTabPane();
             logger.info("tab created");
         } catch (Exception e) {
             throw new IllegalArgumentException("Tab not added");
@@ -132,14 +131,29 @@ public class MainDisplay extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleToggleTabEvent(ToggleTabEvent event) {
-        if (event.getToToggleTo().equals("test")) {
-            tabPane.getSelectionModel().select(testTab);
+    public void handleToggleTabEvent(ToggleTabEvent event) {
+        if (event.getToToggleTo().equals("learn")) {
+            tabContainer.getSelectionModel().select(learnTab);
+        } else if (event.getToToggleTo().equals("test")) {
+            tabContainer.getSelectionModel().select(testTab);
         } else if (event.getToToggleTo().equals("review")) {
-            tabPane.getSelectionModel().select(reviewTab);
-        } else {
-            tabPane.getSelectionModel().select(learnTab);
+            tabContainer.getSelectionModel().select(reviewTab);
         }
+    }
 
+    @Subscribe
+    private void handleShowTriviaTestViewEvent(ShowTriviaTestViewEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        tabContainer.getSelectionModel().select(testTab);
+        learnTab.setDisable(true);
+        reviewTab.setDisable(true);
+    }
+
+    @Subscribe
+    private void handleCloseTriviaTestViewEvent(CloseTriviaTestViewEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        learnTab.setDisable(false);
+        reviewTab.setDisable(false);
+        resetToOriginalState();
     }
 }

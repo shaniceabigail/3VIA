@@ -11,7 +11,7 @@ import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.ui.test.TriviaTestResultPage;
 
 /**
- * The page that shows up after the user has completed a matching test.
+ * The page that shows up after the user has completed a Match Test.
  */
 public class MatchTestResultPage extends TriviaTestResultPage {
     private static final String FXML = "test/matchtest/MatchTestResultPage.fxml";

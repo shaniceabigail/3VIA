@@ -10,7 +10,7 @@ import seedu.address.model.test.matchtest.MatchTest;
 import seedu.address.ui.test.TriviaTestPage;
 
 /**
- * The page that shows up when the user is in a matching test.
+ * The page that shows up when the user is in a Match Test.
  */
 public class MatchTestPage extends TriviaTestPage {
     private static final String FXML = "test/matchtest/MatchTestPage.fxml";

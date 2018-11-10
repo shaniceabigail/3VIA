@@ -11,7 +11,7 @@ import seedu.address.model.test.matchtest.exceptions.AnswerNotFoundException;
 import seedu.address.model.test.matchtest.exceptions.QuestionNotFoundException;
 
 /**
- * The MatchCommand can only be used in a Matching test.
+ * The MatchCommand can only be used in a Match Test.
  */
 public class MatchCommand extends Command {
     public static final String COMMAND_WORD = "";
