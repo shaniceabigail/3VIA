@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.topic.Topic;
 
 /**
- * The command which will executing the matching test of trivia.
+ * The command which will executing the Open Ended Test of 3VIA.
  */
 public class OpenEndedTestCommand extends Command {
     public static final String COMMAND_WORD = "testO";

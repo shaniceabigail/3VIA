@@ -285,6 +285,10 @@ Start a test of matching questions and answers for a specified topic. In a Match
 that topic will be displayed. You will then have to match all the questions to their respective answer. +
 Format: `testM TOPIC`
 
+[NOTE]
+The navigation tabs will be disabled during the Match Test. If you want to navigate to other pages, you would need to exit
+the Match Test by entering the `exit` command, as described in the section on https://cs2103-ay1819s1-w12-3.github.io/main/UserGuide.html#quit-matchtest[Quit MatchTest].
+
 The following commands can only be used during a `MatchTest`.
 
 ==== Enter the matching cards:

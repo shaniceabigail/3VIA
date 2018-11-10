@@ -427,5 +427,11 @@
     -fx-background-insets: 0;
 }
 
+.centered-aligned-text-area *.text {
+    -fx-text-alignment: center;
+}
 
+.centered-aligned-text-area .content {
+    -fx-background-color: derive(#ededed, 20%);
+}
 
