@@ -231,8 +231,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean isInTestingState() {
-        return appState.getState() == State.TEST || appState.getState() == State.MATCH_TEST
-                || appState.getState() == State.MATCH_TEST_RESULT;
+        return getAppState() == State.MATCH_TEST || getAppState() == State.MATCH_TEST_RESULT;
+    }
+
+    @Override
+    public void setAppState(State state) {
+        appState.setAppState(state);
     }
 
     //=========== Trivia Tests ==============================================================================
@@ -248,7 +252,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void stopTriviaTest() {
         currentRunningTest.stopTest();
-        appState.setAppState(State.NORMAL);
+        appState.setAppState(State.TEST);
         raise(new CloseTriviaTestViewEvent());
         currentRunningTest = null;
     }

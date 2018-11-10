@@ -109,7 +109,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_exit() throws Exception {
-        // In NORMAL state
+        // In LEARN state
         assertTrue(parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
 

@@ -169,6 +169,11 @@ public interface Model {
     State getAppState();
 
     /**
+     * Set the AppState of the model according to the given State
+     */
+    void setAppState(State state);
+
+    /**
      * Return boolean on whether the model in in a testing state.
      */
     boolean isInTestingState();
