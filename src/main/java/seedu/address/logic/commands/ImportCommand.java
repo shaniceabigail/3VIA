@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.DisplayImportHelpEvent;
+import seedu.address.commons.events.ui.DisplayImportSuccessEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -56,8 +59,17 @@ public class ImportCommand extends Command {
 
         model.addMultipleCards(cardsToImport);
         model.commitTriviaBundle();
+        raiseDisplayImportSuccessEvent();
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, cardsToImport.size(), importFile.getFileName()));
+    }
+
+    /**
+     * Raises a new event to display info in the info panel upon successful import.
+     */
+    private void raiseDisplayImportSuccessEvent() {
+        EventsCenter.getInstance()
+                .post(new DisplayImportSuccessEvent());
     }
 
     @Override

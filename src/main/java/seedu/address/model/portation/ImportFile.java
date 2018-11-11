@@ -77,7 +77,7 @@ public class ImportFile {
             String line;
             while ((line = br.readLine()) != null) {
                 if (!FileParserUtil.isValidLineFormat(line)) {
-                    raiseExtraInformationDisplayEvent(); // displays an example of a correct file format
+                    raiseExtraInformationDisplayEvent();
                     return false;
                 }
             }

@@ -35,7 +35,7 @@ public class FileParserUtil {
     }
 
     /**
-     * Returns true if the trimmed line does not contain any text.
+     * Returns true if the line after trimmed is empty.
      */
     public static boolean isEmpty(String line) {
         requireNonNull(line);
@@ -45,7 +45,7 @@ public class FileParserUtil {
 
     /**
      * Returns true if the line contains topics (i.e. t/topic).
-     * line should not be empty.
+     * Line should not be empty.
      *
      * @throws FileParseException If the line is empty;
      */
