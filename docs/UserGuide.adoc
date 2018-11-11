@@ -291,7 +291,7 @@ the Match Test by entering the `exit` command, as described in the section on ht
 
 The following commands can only be used during a `MatchTest`.
 
-==== Enter the matching cards:
+==== Match question and answer:
 
 Will match a pair of question and answer during a MatchTest. +
 Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
@@ -312,10 +312,10 @@ image::UserGuideMatchCommandWithoutQuestion.png[width="790"]
 ==== Quit MatchTest:
 
 If you want to stop an ongoing MatchTest, you can enter the `exit` command at any time during the test. The command
-will bring you to the home page.
+will bring you to the test menu page.
 
 After the MatchTest has ended, a result page will be shown. After reviewing your results, you can exit from the MatchTest by
-entering the `exit` command. The command will bring you to the home page. +
+entering the `exit` command. The command will bring you to the test menu page. +
 Format: `exit`
 
 [NOTE]
