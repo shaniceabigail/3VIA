@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ui.DisplayImportHelpEvent;
 import seedu.address.commons.events.ui.DisplayImportSuccessEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -68,8 +67,7 @@ public class ImportCommand extends Command {
      * Raises a new event to display info in the info panel upon successful import.
      */
     private void raiseDisplayImportSuccessEvent() {
-        EventsCenter.getInstance()
-                .post(new DisplayImportSuccessEvent());
+        EventsCenter.getInstance().post(new DisplayImportSuccessEvent());
     }
 
     @Override

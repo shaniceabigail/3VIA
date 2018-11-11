@@ -37,7 +37,10 @@ public class ImportFile {
     }
 
     /**
-     * Ensures the file to be imported is valid, readable and non empty.
+     * Returns true if the file to be imported is a valid file, non empty, readable and
+     * is a supported file format.
+     *
+     * @see SupportedImportFileTypes
      */
     public void isFileValid() throws InvalidImportFileException {
         if (!isValidFile()) {
@@ -91,12 +94,11 @@ public class ImportFile {
      * Raises a new event to display information regarding the correct import file format.
      */
     private void raiseExtraInformationDisplayEvent() {
-        EventsCenter.getInstance()
-                .post(new DisplayImportHelpEvent());
+        EventsCenter.getInstance().post(new DisplayImportHelpEvent());
     }
 
     /**
-     * Parses a file in a specific format into a list of cards.
+     * Parses a text file in a specific format into a {@link UniqueCardList}.
      *
      * @return The list of cards to be imported.
      * @throws FileParseException If the format of the file is different from expected.
@@ -120,7 +122,6 @@ public class ImportFile {
                     cards.add(cardToAdd);
                 }
             }
-
         } catch (IOException ioe) {
             throw new FileParseException(MESSAGE_INVALID_FILE_UNABLE_TO_READ, ioe);
         } catch (FileParseException fpe) {
