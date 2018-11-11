@@ -167,7 +167,12 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `BrowserPanel`, `MainDisplay`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+
+.Structure of the TestPage Component
+image::TestPageDiagram.png[width="800"]
+
+Structure for the Test Page Component has also been modified to expand the functionality of the application.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -513,6 +518,32 @@ abstraction that is leaking into the UI.
 _{Explain here how the data encryption feature will be implemented}_
 
 // end::dataencryption[]
+
+=== Navigation Feature
+==== Current Implementation
+The Navigation Tab is designed for users to be aware of the different functionality of our app.
+We added a navigation tab feature, which only handles mouse events.
+At the present, the Navigation Tab is not a separate class on its own, and is embedded into the `MainDisplay` class.
+
+===== GUI Handling
+The tabs are expected to toggle according to the user's interaction:
+
+* Command Line [Work In Progress]
+* Mouse clicks
+* Keyboard shortcuts [future release]
+
+==== Design Considerations
+===== Location of Navigation tab
+* Side bar
+** pros: easy to see, optimized for user experience
+** cons: harder to implement
+
+* Top bar
+** pros: easier to implement
+** cons: less intuitive for users compared to side bar
+
+===== Icons on the Tabs
+We have added the icon images for the tabs, but implementation is still a work in progress.
 
 === Logging
 

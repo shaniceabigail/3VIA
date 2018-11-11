@@ -72,14 +72,28 @@ public class MainDisplay extends UiPart<Region> {
      * creates the view configuration of the tabs
      */
     private void configureView() {
+        //tabContainer.setSide(side.LEFT);
+        tabContainer.setTabMinWidth(tabWidth);
+        tabContainer.setTabMaxWidth(tabWidth);
+        tabContainer.setTabMinHeight(tabWidth);
+        tabContainer.setTabMaxHeight(tabWidth);
+        tabContainer.setRotateGraphic(true);
+        //tabContainer.getStyleClass().add("root");
+
         //list of tabs configured
         createTab(learnTab, "Learn", "file:/src/main/resources/images/tabIcons/home.png", homepagePlaceholder);
         createTab(testTab, "Test", "file:/src/main/resources/images/tabIcons/settings.png", triviaTestPlaceholder);
         createTab(reviewTab, "Review", "file:/main/resources/images/tabIcons/test.png", reviewPlaceholder);
+
+        logger.info("View has been configured");
     }
 
     /**
-     * Configures a new tab
+     * Creates a tab with the following parameters
+     * @param tab
+     * @param title
+     * @param iconPath
+     * @param containerPane
      */
     private void createTab(Tab tab, String title, String iconPath, StackPane containerPane) {
         double imageWidth = 40.0;
@@ -99,6 +113,8 @@ public class MainDisplay extends UiPart<Region> {
 
         try {
             tab.setContent(containerPane);
+            //tabPane = tab.getTabPane();
+            logger.info("tab created");
         } catch (Exception e) {
             throw new IllegalArgumentException("Tab not added");
         }
