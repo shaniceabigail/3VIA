@@ -9,6 +9,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.DisplayImportHelpEvent;
+import seedu.address.commons.events.ui.DisplayImportSuccessEvent;
 import seedu.address.commons.events.ui.DisplayResearchPageEvent;
 import seedu.address.logic.Logic;
 import seedu.address.ui.UiPart;
@@ -67,5 +68,11 @@ public class Homepage extends UiPart<Region> {
     private void handleDisplayImportHelpEvent(DisplayImportHelpEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         cardListPanel.resetToOriginalState();
+    }
+
+    @Subscribe
+    private void handleImportSuccessEvent(DisplayImportSuccessEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        infoPanel.resetToOriginalState();
     }
 }

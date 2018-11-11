@@ -67,6 +67,33 @@ public class SampleDataUtil {
             new Question("What is the formula for pressure in liquid?"),
             new Answer("DepthOfWater(d) * densityOfWater(p) * GravitationalFieldStrength(g)"),
             getTopicSet("Physics", "PhysicsFormula"));
+    private static final Card Q_DIFFERENCE_BETWEEN_FRAMEWORK_LIBRARIES = new Card(
+            new Question("What is the main difference between a framework and a library?"),
+            new Answer("Libraries are meant to be used ‘as is’ while frameworks are meant"
+                    + "to be customized/extended"),
+            getTopicSet("CS2103T", "ComputerScience"));
+    private static final Card Q_DIFFERENCE_BETWEEN_ASSOCIATION_DEPENDENCIES = new Card(
+            new Question("What is the difference between an association and a"
+                    + "dependency in a UML?"),
+            new Answer("Association is a reference based relationship between 2 classes. "
+                    + "A dependency is normally created when you receive a "
+                    + "reference to a class as part of a particular operation/ method."),
+            getTopicSet("CS2103T", "ComputerScience", "UML"));
+    private static final Card Q_DESIGN_PATTERN = new Card(
+            new Question("What is a design pattern?"),
+            new Answer("An elegant reusable solution to a commonly recurring problem with"
+                    + "a given context in software design."),
+            getTopicSet("CS2103T", "ComputerScience"));
+    private static final Card Q_PURPOSE_OF_STAGING = new Card(
+            new Question("What is the purpose of staging?"),
+            new Answer("This intermediate step allows us to commit only some changes while"
+                    + "saving other changes for a later commit."),
+            getTopicSet("CS2103T", "ComputerScience", "Git"));
+    private static final Card Q_REVISION_CONTROL = new Card(
+            new Question("What is revision control?"),
+            new Answer("The process of managing multiple versions of a piece of information."),
+            getTopicSet("CS2103T", "ComputerScience"));
+
 
     private static final Date ATTEMPT_ON_MOMENTUM_WRONG_TIMESTAMP = new Date(2018 - 1900, 6, 1, 16, 12);
     private static final Date ATTEMPT_ON_MOMENTUM_CORRECT_TIMESTAMP = new Date(2018 - 1900, 6, 1, 16, 13);
@@ -111,7 +138,9 @@ public class SampleDataUtil {
     public static Card[] getSampleCards() {
         return new Card[] {Q_MOMENTUM_FORMULA, Q_GIT_CLONE, Q_FORCE_FORMULA, Q_GIT_MERGE, Q_CAPITAL_OF_SG,
             Q_GRAVITATIONAL_FORMULA, Q_WORK_DONE_FORMULA, Q_POWER_FORMULA, Q_RESISTANCE_FORMULA,
-            Q_ELASTIC_ENERGY_FORMULA, Q_GRAV_FORCE_FORMULA, Q_PRESSURE_FORMULA, Q_PRESSURE_IN_LIQUID_FORMULA };
+            Q_ELASTIC_ENERGY_FORMULA, Q_GRAV_FORCE_FORMULA, Q_PRESSURE_FORMULA, Q_PRESSURE_IN_LIQUID_FORMULA,
+            Q_DIFFERENCE_BETWEEN_FRAMEWORK_LIBRARIES, Q_DIFFERENCE_BETWEEN_ASSOCIATION_DEPENDENCIES,
+            Q_DESIGN_PATTERN, Q_PURPOSE_OF_STAGING, Q_REVISION_CONTROL};
     }
 
     public static TriviaResult[] getSampleResults() {

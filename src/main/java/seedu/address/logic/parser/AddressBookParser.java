@@ -18,6 +18,8 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.LearnCommand;
 import seedu.address.logic.commands.MatchTestCommand;
+import seedu.address.logic.commands.ModeCommand;
+import seedu.address.logic.commands.NavigationCommand;
 import seedu.address.logic.commands.OpenEndedTestCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ResearchCommand;
@@ -53,7 +55,7 @@ public class AddressBookParser {
 
         switch (appState) {
 
-        case NORMAL:
+        case LEARN:
             switch (commandWord) {
 
             case AddCommand.COMMAND_WORD:
@@ -103,6 +105,51 @@ public class AddressBookParser {
 
             case ImportCommand.COMMAND_WORD:
                 return new ImportCommandParser().parse(arguments);
+
+            case NavigationCommand.COMMAND_WORD:
+                return new NavigationCommand(arguments);
+
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+
+        case TEST:
+            switch (commandWord) {
+            case OpenEndedTestCommand.COMMAND_WORD:
+                return new OpenEndedTestCommandParser().parse(arguments);
+
+            case MatchTestCommand.COMMAND_WORD:
+                return new MatchTestCommandParser().parse(arguments);
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            case NavigationCommand.COMMAND_WORD:
+                return new NavigationCommand(arguments);
+
+            case LearnCommand.COMMAND_WORD:
+                return new LearnCommandParser().parse(arguments);
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
+
+        case REVIEW:
+            switch (commandWord) {
+            case NavigationCommand.COMMAND_WORD:
+                return new NavigationCommand(arguments);
+
+            case LearnCommand.COMMAND_WORD:
+                return new LearnCommandParser().parse(arguments);
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

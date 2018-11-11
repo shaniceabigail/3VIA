@@ -114,15 +114,15 @@ public class MatchTest extends TriviaTest {
     public void respondToCorrectAttempt(MatchAttempt attempt) {
         assert attempt.isCorrect();
 
-        removeCardFromUi(attempt);
-        if (isEndOfTest()) {
+        if (isAtLastMatch()) {
             stopTest();
             EventsCenter.getInstance().post(new ShowTriviaTestResultEvent(getResultPage()));
         }
+        removeCardFromUi(attempt);
     }
 
     /**
-     * Add and return an attempt to the matching test.
+     * Add and return an attempt to the Match Test.
      *
      * @param questionIndex The index of the question to match.
      * @param answerIndex The index of the answer to match.
@@ -185,7 +185,7 @@ public class MatchTest extends TriviaTest {
 
     /**
      * Remove the involved card that is answered correctly from the UI.
-     * @param attempt The attempt that was made by the user in the matching test.
+     * @param attempt The attempt that was made by the user in the Match Test.
      */
     private void removeCardFromUi(MatchAttempt attempt) {
         assert attempt.isCorrect();
@@ -209,7 +209,7 @@ public class MatchTest extends TriviaTest {
     }
 
     /**
-     * Starts the timer of the matching test.
+     * Starts the timer of the Match Test.
      */
     private void startTimer() {
         DecimalFormat timerFormat = new DecimalFormat("#.#");
@@ -264,10 +264,6 @@ public class MatchTest extends TriviaTest {
                 .collect(Collectors.toList());
 
         return FXCollections.observableList(indexedAnswers);
-    }
-
-    private boolean isEndOfTest() {
-        return shuffledQuestions.isEmpty() && shuffledAnswers.isEmpty();
     }
 
     private boolean isAtLastMatch() {

@@ -6,11 +6,12 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CARDS;
 import java.util.function.Predicate;
 
 import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.events.ui.NavigateToLearnPageEvent;
+import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.TopicIsKeywordPredicate;
+import seedu.address.model.state.State;
 
 /**
  * Lists all persons in the address book to the user.
@@ -38,7 +39,9 @@ public class LearnCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredCardList(learnCondition);
-        EventsCenter.getInstance().post(new NavigateToLearnPageEvent());
+        EventsCenter.getInstance().post(new ToggleTabEvent(COMMAND_WORD));
+        model.setAppState(State.LEARN);
+        EventsCenter.getInstance().post(new ToggleTabEvent("learn"));
         return new CommandResult(String.format(MESSAGE_SUCCESS, topicKeyword));
     }
 }

@@ -1,7 +1,7 @@
 package seedu.address.ui.home;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.ui.UiPart;
 
@@ -10,17 +10,14 @@ import seedu.address.ui.UiPart;
  */
 public class ImportHelpDisplay extends UiPart<Region> {
     private static final String FXML = "home/ImportHelpDisplay.fxml";
-    private static final String IMPORT_FORMAT = " t/topic1 t/topic2\n"
-            + "Question1 \tAnswer1\n"
-            + "Question2 \tAnswer2\n"
-            + "Question3 \tAnswer3\n";
+    private static final String IMPORT_FORMAT_LABEL_HEADER = "Import File Format";
 
     @FXML
-    private TextArea importHelp;
+    private Label importFileFormatHeader;
 
     public ImportHelpDisplay() {
         super(FXML);
-        importHelp.setText(IMPORT_FORMAT);
+        importFileFormatHeader.setText(IMPORT_FORMAT_LABEL_HEADER);
         registerAsAnEventHandler(this);
     }
 }

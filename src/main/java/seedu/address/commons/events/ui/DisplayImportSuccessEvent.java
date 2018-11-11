@@ -3,9 +3,9 @@ package seedu.address.commons.events.ui;
 import seedu.address.commons.events.BaseEvent;
 
 /**
- * An UI event to trigger a navigation to learn page.
+ * Represents the visibility change in the {@link seedu.address.ui.home.InfoPanel} upon a successful import.
  */
-public class NavigateToLearnPageEvent extends BaseEvent {
+public class DisplayImportSuccessEvent extends BaseEvent {
 
     @Override
     public String toString() {

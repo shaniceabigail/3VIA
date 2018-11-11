@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +16,7 @@ import seedu.address.logic.parser.fileparser.exceptions.FileParseException;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
 import seedu.address.model.card.exceptions.DuplicateCardException;
+import seedu.address.model.portation.exceptions.InvalidImportFileException;
 import seedu.address.model.topic.Topic;
 
 /**
@@ -24,6 +24,7 @@ import seedu.address.model.topic.Topic;
  */
 public class ImportFile {
     public static final String MESSAGE_INVALID_FILE = "Invalid file.";
+    public static final String MESSAGE_INVALID_FILE_TYPE = "Invalid file type.";
     public static final String MESSAGE_INVALID_FILE_FORMAT = "Invalid file format.";
     public static final String MESSAGE_INVALID_FILE_UNABLE_TO_READ = "Unable to read file.";
     public static final String MESSAGE_DUPLICATE_CARDS_FOUND = "Duplicate questions in file.";
@@ -36,17 +37,19 @@ public class ImportFile {
     }
 
     /**
-     * Ensures the file to be imported is valid, readable and non empty.
+     * Returns true if the file to be imported is a valid file, non empty, readable and
+     * is a supported file format.
+     *
+     * @see SupportedImportFileTypes
      */
-    public boolean isFileValid() {
+    public void isFileValid() throws InvalidImportFileException {
         if (!isValidFile()) {
-            return false;
+            throw new InvalidImportFileException(MESSAGE_INVALID_FILE);
         } else if (!isValidFileType()) {
-            return false;
+            throw new InvalidImportFileException(MESSAGE_INVALID_FILE_TYPE);
         } else if (!isValidFileFormat()) {
-            return false;
+            throw new InvalidImportFileException(MESSAGE_INVALID_FILE_FORMAT);
         }
-        return true;
     }
 
     /**
@@ -62,19 +65,11 @@ public class ImportFile {
     }
 
     /**
-     * Checks if file is a readable .txt format.
-     * @return true if file is a readable text file.
+     * Returns true if file is readable and is in a supported file type.
      */
     private boolean isValidFileType() {
-        try {
-            String fileType = Files.probeContentType(importFile.toPath());
-            if (!fileType.equals("text/plain")) {
-                return false;
-            }
-        } catch (IOException ioe) {
-            return false;
-        }
-        return true;
+        ImportFileType fileType = new ImportFileType(importFile.toPath());
+        return fileType.isFileTypeSupported();
     }
 
     /**
@@ -84,13 +79,10 @@ public class ImportFile {
         try (BufferedReader br = new BufferedReader(new FileReader(importFile))) {
             String line;
             while ((line = br.readLine()) != null) {
-                if (FileParserUtil.isEmpty(line) || FileParserUtil.isTopicValidFormat(line)
-                        || FileParserUtil.isQuestionAnswerValidFormat(line)) {
-                    continue;
+                if (!FileParserUtil.isValidLineFormat(line)) {
+                    raiseExtraInformationDisplayEvent();
+                    return false;
                 }
-
-                raiseExtraInformationDisplayEvent();
-                return false;
             }
         } catch (IOException ioe) {
             return false;
@@ -98,10 +90,17 @@ public class ImportFile {
         return true;
     }
 
-    // TODO: write the format here
     /**
-     * Parses a file in a specific format into a set of cards.
-     * @return The set of cards to be imported.
+     * Raises a new event to display information regarding the correct import file format.
+     */
+    private void raiseExtraInformationDisplayEvent() {
+        EventsCenter.getInstance().post(new DisplayImportHelpEvent());
+    }
+
+    /**
+     * Parses a text file in a specific format into a {@link UniqueCardList}.
+     *
+     * @return The list of cards to be imported.
      * @throws FileParseException If the format of the file is different from expected.
      */
     public UniqueCardList parseFileToCards() throws FileParseException {
@@ -123,7 +122,6 @@ public class ImportFile {
                     cards.add(cardToAdd);
                 }
             }
-
         } catch (IOException ioe) {
             throw new FileParseException(MESSAGE_INVALID_FILE_UNABLE_TO_READ, ioe);
         } catch (FileParseException fpe) {
@@ -133,14 +131,6 @@ public class ImportFile {
         }
 
         return cards;
-    }
-
-    /**
-     * Raises an new event to display the import help display UI.
-     */
-    private void raiseExtraInformationDisplayEvent() {
-        EventsCenter.getInstance()
-                    .post(new DisplayImportHelpEvent());
     }
 
     /**

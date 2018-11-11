@@ -239,6 +239,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setAppState(State state) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean isInTestingState() {
             throw new AssertionError("This method should not be called.");
         }

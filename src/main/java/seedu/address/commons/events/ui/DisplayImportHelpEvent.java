@@ -4,7 +4,6 @@ import seedu.address.commons.events.BaseEvent;
 
 /**
  * Represents the visibility change in the import help display.
- *
  */
 public class DisplayImportHelpEvent extends BaseEvent {
 
