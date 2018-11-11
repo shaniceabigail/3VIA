@@ -27,7 +27,15 @@ public class FileParserUtil {
     private static final String QUESTION_ANSWER_SEPARATOR = "\t";
 
     /**
-     * Returns true if the trimmed line does not contain any text.
+     * Returns true if the String is either empty, contains possible topics or contains a possible
+     * question and answer pair.
+     */
+    public static boolean isValidLineFormat(String line) {
+        return isEmpty(line) || isTopicValidFormat(line) || isQuestionAnswerValidFormat(line);
+    }
+
+    /**
+     * Returns true if the line after trimmed is empty.
      */
     public static boolean isEmpty(String line) {
         requireNonNull(line);
@@ -37,7 +45,7 @@ public class FileParserUtil {
 
     /**
      * Returns true if the line contains topics (i.e. t/topic).
-     * line should not be empty.
+     * Line should not be empty.
      *
      * @throws FileParseException If the line is empty;
      */
