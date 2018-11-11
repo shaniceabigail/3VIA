@@ -33,7 +33,6 @@ import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.MainApp;
 import seedu.address.TestApp;
-import seedu.address.commons.core.AsyncEventsCenter;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
@@ -84,7 +83,6 @@ public abstract class AppSystemTest {
     public void tearDown() {
         setupHelper.tearDownStage();
         EventsCenter.clearSubscribers();
-        AsyncEventsCenter.clearSubscribers();
     }
 
     /**
