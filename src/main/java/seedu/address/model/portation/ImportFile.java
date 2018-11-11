@@ -6,7 +6,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -63,19 +62,11 @@ public class ImportFile {
     }
 
     /**
-     * Checks if file is a readable .txt format.
-     * @return true if file is a readable text file.
+     * Returns true if file is readable and is in a supported file type.
      */
     private boolean isValidFileType() {
-        try {
-            String fileType = Files.probeContentType(importFile.toPath());
-            if (!fileType.equals("text/plain")) {
-                return false;
-            }
-        } catch (IOException ioe) {
-            return false;
-        }
-        return true;
+        ImportFileType fileType = new ImportFileType(importFile.toPath());
+        return fileType.isFileTypeSupported();
     }
 
     /**
@@ -85,13 +76,10 @@ public class ImportFile {
         try (BufferedReader br = new BufferedReader(new FileReader(importFile))) {
             String line;
             while ((line = br.readLine()) != null) {
-                if (FileParserUtil.isEmpty(line) || FileParserUtil.isTopicValidFormat(line)
-                        || FileParserUtil.isQuestionAnswerValidFormat(line)) {
-                    continue;
+                if (!FileParserUtil.isValidLineFormat(line)) {
+                    raiseExtraInformationDisplayEvent(); // displays an example of a correct file format
+                    return false;
                 }
-
-                raiseExtraInformationDisplayEvent();
-                return false;
             }
         } catch (IOException ioe) {
             return false;
@@ -100,16 +88,16 @@ public class ImportFile {
     }
 
     /**
-     * Raises an new event to display the import help display UI.
+     * Raises a new event to display information regarding the correct import file format.
      */
     private void raiseExtraInformationDisplayEvent() {
         EventsCenter.getInstance()
                 .post(new DisplayImportHelpEvent());
     }
 
-    // TODO: write the format here
     /**
      * Parses a file in a specific format into a list of cards.
+     *
      * @return The list of cards to be imported.
      * @throws FileParseException If the format of the file is different from expected.
      */

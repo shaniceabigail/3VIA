@@ -18,11 +18,11 @@ public class ImportCommand extends Command {
             + "Parameters: "
             + "File path\n"
             + "Example: " + COMMAND_WORD + " "
-            + "C:\\Users\\username\\Desktop\\cards.txt";
+            + "file.txt";
 
     public static final String MESSAGE_SUCCESS = "%1$s card(s) imported from: %2$s.";
     public static final String MESSAGE_FAIL = "The file failed to import: %1$s";
-    public static final String MESSAGE_INVALID_IMPORT_FILE_NO_CARDS_FOUND = "No cards found.";
+    public static final String MESSAGE_NO_CARDS_FOUND = "No cards found.";
     public static final String MESSAGE_DUPLICATE_CARD = "Some cards already exists in the trivia bundle.";
     private final ImportFile importFile;
 
@@ -47,7 +47,7 @@ public class ImportCommand extends Command {
         UniqueCardList cardsToImport = importFile.parseFileToCards();
 
         if (cardsToImport.isEmpty()) {
-            throw new CommandException(MESSAGE_INVALID_IMPORT_FILE_NO_CARDS_FOUND);
+            throw new CommandException(MESSAGE_NO_CARDS_FOUND);
         }
 
         if (model.haveAnyCard(cardsToImport)) {
