@@ -18,7 +18,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import seedu.address.MainApp;
-import seedu.address.commons.core.AsyncEventsCenter;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.BaseEvent;
 
@@ -87,7 +86,6 @@ public abstract class UiPart<T> {
      */
     protected void registerAsAnEventHandler(Object handler) {
         EventsCenter.getInstance().registerHandler(handler);
-        AsyncEventsCenter.getInstance().registerHandler(handler);
     }
 
     /**
