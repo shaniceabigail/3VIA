@@ -254,10 +254,27 @@ _`delete 1` command is reapplied_ +
 _`clear` command is reapplied_ +
 // end::undoredo[]
 
+// tag::clear[]
 === Clearing all entries : `clear`
 [WARNING]
 Use with caution! Clears all entries in 3VIA and reboots. +
+
+
+Clear all entries and existing card list(If there exists). +
 Format: `clear`
+
+Examples:
+
+* `add q/Why is the earth round? a/Because of gravity t/Physics` +
+`clear` +
+_Card list has been cleared_.
+
+* `delete 1` +
+`delete 2` +
+`delete 3` +
+`clear` +
+_No cards to be cleared_.
+// end::clear[]
 
 === Starting an Open Ended Test: `testO` `[coming in v2.0]`
 
@@ -336,10 +353,26 @@ Your attempts from an incomplete MatchTest will be discarded. Only those attempt
 be saved into your hard disk.
 // end::matchtest2[]
 
-=== View statistics for a certain test: `stats` `[coming in v2.0]`
+// tag::stats[]
+=== View statistics for a certain test or overall learning path: `stats` `[coming in v2.0]`
 
 Results of previous tests, questions, expected answers and the user’s answers for that particular topic will be displayed. +
-Format: `stats [TOPIC]`
+A summary of testing results will be displayed in statistics page.
+
+Format: `stats TOPIC` _or_ `stats` _or_
+`stats HL`
+
+Example:
+
+`stats Physics` +
+_Displays the overall statistics of questions attempted of Physics_.
+
+`stats` +
+_Displays the overall statistics of all questions attempted_.
+
+`stats HL` +
+_Displays card list sorted by high to low times of mistakes_
+// end::stats[]
 
 // tag::import[]
 === Cram More Knowledge!: `import`
@@ -449,5 +482,5 @@ e.g.`select 2`
 * *MatchTest* : `testM TOPIC`
 ** *Match question to its answer* : `INDEX_OF_QUESTION INDEX_OF_ANSWER` or `INDEX_OF_ANSWER`
 ** *Exit from MatchTest* : `exit`
-* *View statistics of test* : `stats [TOPIC]`
+* *View statistics of test* : `stats [TOPIC]` _or_ `stats` _or_ `stats HL`
 * *Mass Import* : `import FILEPATH`
