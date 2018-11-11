@@ -23,7 +23,7 @@ Additionally, my assigned role was to review the code quality written by each me
 ** Justification: This feature incentivises non-existing users to use 3VIA more as the users can import their existing digital notes quickly.
 ** Highlights: This enhancement allows grouping of multiple pairs of questions and answers under a set of topics. Thereby reducing the need to repeatedly tag each question and answer pair with the same set of topics.
 
-* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=hozongsien[Functional code & Test code]]
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=hozongsien[Functional code]]
 
 * *Other contributions*:
 

@@ -240,7 +240,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 This section describes some noteworthy details on how certain features are implemented.
 
 // tag::undoredo[]
-=== Undo/Redo feature
+=== Undo/Redo Feature
 ==== Current Implementation
 
 The undo/redo mechanism is facilitated by `VersionedAddressBook`.
@@ -323,11 +323,14 @@ image::UndoRedoActivityDiagram.png[width="650"]
 === Mass Import Feature
 
 ==== Current implementation
-The import mechanism is facilitated by `ImportFile` and `TriviaBundle`.
+The import mechanism allows the user to add multiple cards quickly into 3VIA.
+This is done by parsing an external file in a specified format and file type but with minimal syntax.
+
+The import mechanism is facilitated mainly by `ImportFile` and `TriviaBundle`.
 Additionally, the import mechanism implements the following operations:
 
-* `ImportFile#parseFileToCard` -- Parses a plain text file into a unique list of cards.
-* `TriviaBundle#haveAnyCard()` -- Checks if the cards to add contain any duplicated cards already in the `TriviaBundle`.
+* `ImportFile#parseFileToCard()` -- Parses a plain text file into a unique list of cards.
+* `TriviaBundle#haveAnyCard()` -- Checks if the cards to add contain any duplicated cards already in `TriviaBundle`.
 * `TriviaBundle#addMultipleCards()` -- Adds multiple cards into the `TriviaBundle` at once.
 
 The 2 `TriviaBundle` operations are exposed in the Model interface as
@@ -339,37 +342,47 @@ image::ImportCommandActivityDiagram.png[ImportCommandActivityDiagram]
 
 Given below is an example usage scenario and how the import mechanism behaves.
 
-Step 1: The user enters the import command to import a file from an absolute/ relative file path. An `ImportCommand` object is initialised.
+Step 1: The user enters the import command to import a file from an absolute or relative file path.
+An `ImportCommand` object is initialised.
 
-Step 2: When the `ImportCommand` executes, the desired import file is first verified to be valid. The following checks are done:
+Step 2: When the `ImportCommand` executes, the desired import file is first verified to be valid by calling `ImportFile#isFileValid()`.
+The following checks are done:
 
-* the import path points to a file
-* the import file is of plain text type (file.txt)
-* the import file is readable
-* the import file text is in the correct format
+* `#isValidFile()` -- the import file's path points to a file and the file is non-empty.
+* `#isValidFileType()` the import file is of a supported file type (i.e. plain/text file format).
+* `#isValidFileFormat()` the import file is readable and the text in the import file is in the specified format.
 
 Step 3: Once verified, the import file is parsed to form a unique list of cards that is stored in `UniqueCardList`.
 
-Step 4: `TriviaBundle#haveAnyCard()` checks every card in the unique card list against the existing list of cards in `TriviaBundle` for duplicates.
+NOTE: An empty `UniqueCardList` is also considered as an import failure as no cards were parsed from the given text file.
+A  `CommandException` will be thrown, and the user is informed that no cards (question and answer pair) were found in the text file.
 
-Step 5: The unique card list is then added into `TriviaBundle` via `TriviaBundle#addMultipleCards()`. The number of cards and the cards imported are displayed to the user for verification. +
+Step 4: `TriviaBundle#haveAnyCard()` checks every card in the `UniqueCardList` against the existing list of cards in `TriviaBundle` for duplicates.
+If duplicates are found, the import fails and a `DuplicateCardException` is raised.
+
+Step 5: The `UniqueCardList` is then added into `TriviaBundle` via `TriviaBundle#addMultipleCards()`.
+The number of cards and the cards imported are displayed to the user for verification. +
 
 The sequence diagram below describes the import of multiple cards.
+Each card is added repeatedly by invoking `TriviaBundle#add()`until all cards in the `UniqueCardList` are added.
 
 image::ImportMultipleCardsSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
-===== Aspect: Need for pre-import preview
+===== Aspect: Pre-import preview
 * **Alternative 1: (current implementation)** Single step to import cards from a text file.
 ** Pros:
 *** A single command can be executed quickly for an import.
 *** Post import edits can be done using existing commands such as `edit`, `delete`, etc.
 ** Con:
 *** A single formatting error in the text file will result in an import failure.
-* **Alternative 2:** 'Stages' the import file by first previewing the imported cards to the user. The actual import is done upon confirmation.
+* **Alternative 2:** 'Stages' the import file by first previewing the imported cards to the user.
+Edits to the import file can be done directly to the text file within the application during this phase.
+The actual import is then done upon confirmation.
+
 ** Implementation details: +
-*** Given below is a class diagram for the alternative import implementation. +
+*** Given below is a class diagram describing the structure for the alternative import implementation. +
 +
 image::AlternativeImportClassDiagram.png[width="800"]
 
@@ -386,19 +399,20 @@ The `ObservableFile` interface allows the UI component to update the preview of 
 
 ===== Aspect: How import executes
 * **Alternative 1 (current choice):** Store all cards to be added in `TriviaBundle` before writing to file on the hard disk.
-** Pros: Less IO intensive as only one write to file is needed.
-** Cons: May have heap memory issue if large amount of cards are stored temporarily.
-* **Alternative 2:** Writes a card to xml file after each card is added.
-** Pros: Easy to implement.
-** Cons: May have performance issue when large amount of cards are added.
+** Pro: Less IO intensive as only one write to file is needed.
+** Con: May have heap memory issue if large amount of cards are stored temporarily.
+* **Alternative 2:** Writes a card to a xml file after each card is added.
+** Pro: Easy to implement.
+** Con: May have performance issue when large amount of cards are added.
 
 ===== Aspect: How the import file is parsed
 * **Alternative 1 (current choice):** Tokenize strings according to defined characters between question and answer, and between cards.
-** Pros: Allows user to undo/ redo import as import is viewed by `VersionedAddressBook` as a single command.
-** Cons: May have memory performance issue as multiple cards are stored temporarily in the `TriviaBundle`.
-* **Alternative 2 (current choice):** Tokenize strings based on AddCommand input format.
-** Pros: Easy to implement as it allows reuse of add command functions.
-** Cons: Unable to undo/ redo import of all cards as the import command is essentially multiple add commands.
+** Pro: Allows the user to undo/ redo an import as the execution of the import only executes `VersionedAddressBook#commit()` once.
+** Con: May have memory performance issue as multiple cards are stored temporarily in the `TriviaBundle`.
+* **Alternative 2 (current choice):** Tokenize strings based on the `AddCommand` input format.
+** Pro: Easy to implement as it allows reuse of the `AddCommand` functions.
+** Con: Unable to undo/ redo import of cards as the execution of the import command executes `VersionedAddressBook#commit()` multiple times.
+A successful undo/ redo of the import of all cards would require multiple executions of the undo/ redo command.
 // end::import[]
 
 // tag::triviatest[]
