@@ -41,7 +41,6 @@ public class LearnCommand extends Command {
         model.updateFilteredCardList(learnCondition);
         EventsCenter.getInstance().post(new ToggleTabEvent(COMMAND_WORD));
         model.setAppState(State.LEARN);
-        EventsCenter.getInstance().post(new ToggleTabEvent("learn"));
         return new CommandResult(String.format(MESSAGE_SUCCESS, topicKeyword));
     }
 }
