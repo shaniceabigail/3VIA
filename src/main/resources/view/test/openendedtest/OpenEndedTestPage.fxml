@@ -8,7 +8,7 @@
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
-            <Label fx:id="questionLabel" alignment="CENTER" layoutX="22.0" layoutY="13.0" prefHeight="93.0" prefWidth="545.0" text="\$questionText" textAlignment="CENTER" />
+            <Label fx:id="questionLabel" alignment="CENTER" layoutX="22.0" layoutY="13.0" prefHeight="93.0" prefWidth="545.0" text="\$questionText" textAlignment="CENTER" wrapText="true" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
          <children>
@@ -16,11 +16,11 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <Label fx:id="userAnswerLabel" alignment="CENTER" layoutX="14.0" layoutY="27.0" prefHeight="219.0" prefWidth="268.0" text="\$userAnswer" />
+                        <Label fx:id="userAnswerLabel" alignment="CENTER" layoutX="14.0" layoutY="27.0" prefHeight="219.0" prefWidth="268.0" text="\$userAnswer" wrapText="true" />
                      </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <Label fx:id="answerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="27.0" prefHeight="219.0" prefWidth="268.0" text="\$answer" />
+                        <Label fx:id="answerLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="27.0" prefHeight="219.0" prefWidth="268.0" text="\$answer" wrapText="true" />
                      </children></AnchorPane>
               </items>
             </SplitPane>

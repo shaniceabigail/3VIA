@@ -9,12 +9,14 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.model.test.openendedtest.OpenEndedTest;
 import seedu.address.ui.test.TriviaTestResultPage;
+import seedu.address.ui.test.openendedtest.OpenEndedTestAttemptList;
 
 public class OpenEndedTestResultPage extends TriviaTestResultPage {
     private static final String FXML = "test/openendedtest/OpenEndedTestResultPage.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
     private final OpenEndedTest openEndedTest;
+    private final OpenEndedTestAttemptList openEndedTestAttemptList;
 
     @javafx.fxml.FXML
     private Label testDateText;
@@ -39,5 +41,8 @@ public class OpenEndedTestResultPage extends TriviaTestResultPage {
         durationText.setText(String.valueOf(openEndedTest.getDuration().getValue()) + "s");
         topicText.setText(openEndedTest.getTopic().topicName);
         numOfCardsText.setText(String.valueOf(openEndedTest.getCardsTested().size()));
+
+        openEndedTestAttemptList = new OpenEndedTestAttemptList(openEndedTest);
+        attemptListPlaceholder.getChildren().add(openEndedTestAttemptList.getRoot());
     }
 }
