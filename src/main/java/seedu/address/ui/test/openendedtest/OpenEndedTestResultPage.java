@@ -9,7 +9,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.DateUtil;
 import seedu.address.model.test.openendedtest.OpenEndedTest;
 import seedu.address.ui.test.TriviaTestResultPage;
-import seedu.address.ui.test.openendedtest.OpenEndedTestAttemptList;
 
 public class OpenEndedTestResultPage extends TriviaTestResultPage {
     private static final String FXML = "test/openendedtest/OpenEndedTestResultPage.fxml";

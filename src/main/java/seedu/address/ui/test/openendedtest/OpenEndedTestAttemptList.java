@@ -1,20 +1,17 @@
 package seedu.address.ui.test.openendedtest;
 
-import java.util.logging.Logger;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.test.Attempt;
 import seedu.address.model.test.openendedtest.OpenEndedTest;
 import seedu.address.ui.UiPart;
 
 /**
- * A section of the matching result page which shows the list of attempts made the the user in the Match Test.
+ * A section of the matching result page which shows the list of attempts made the the user in the Open Ended Test.
  */
 public class OpenEndedTestAttemptList extends UiPart<Region> {
     private static final String FXML = "test/openendedtest/OpenEndedAttemptList.fxml";
@@ -33,7 +30,7 @@ public class OpenEndedTestAttemptList extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Attempt} using a {@code MatchAttemptView}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Attempt}
      */
     class AttemptListViewCell extends ListCell<Attempt> {
         @Override
