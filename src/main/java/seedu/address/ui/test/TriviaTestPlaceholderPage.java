@@ -72,6 +72,8 @@ public class TriviaTestPlaceholderPage extends UiPart<Region> {
     @Subscribe
     private void handleCloseTriviaTestViewEvent(CloseTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        triviaTestPagePlaceholder.getChildren().clear();
+        triviaTestResultPagePlaceholder.getChildren().clear();
         changeToScene(triviaTestMenuPagePlaceholder);
     }
 

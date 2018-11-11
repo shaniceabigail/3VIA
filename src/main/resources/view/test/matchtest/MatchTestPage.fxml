@@ -9,15 +9,23 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <HBox prefHeight="60.0" prefWidth="690.0" styleClass="hbox">
+   <HBox prefHeight="60.0" prefWidth="690.0">
       <children>
-         <Region prefHeight="100.0" prefWidth="229.0" HBox.hgrow="ALWAYS" />
+         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+            <children>
+                 <Label text="Topic: " styleClass="label-bright">
+                  <HBox.margin>
+                     <Insets left="15.0" />
+                  </HBox.margin>
+               </Label>
+                 <Label fx:id="matchTestTopicText" styleClass="label-bright-sub-header" text="\$topicText" />
+            </children>
+         </HBox>
+         <Region prefHeight="60.0" prefWidth="61.0" HBox.hgrow="ALWAYS" />
          <StackPane prefHeight="100.0" prefWidth="391.0">
             <children>
-                <HBox alignment="CENTER">
-                    <Label styleClass="label-bright-header" text="Topic: " />
-                    <Label fx:id="matchTestTopicText" styleClass="label-bright-header" text="\$topicText" />
-                </HBox>
+                <HBox alignment="CENTER" />
+               <Label styleClass="label-bright-header" text="Match Test" />
             </children>
          </StackPane>
          <Region prefHeight="200.0" prefWidth="82.25" HBox.hgrow="ALWAYS" />
@@ -25,7 +33,7 @@
             <children>
                 <HBox alignment="CENTER_LEFT">
                     <Label styleClass="label-bright" text="Duration: " />
-                    <Label fx:id="matchTestDurationText" styleClass="label-bright" text="\$durationText" />
+                    <Label fx:id="matchTestDurationText" styleClass="label-bright-sub-header" text="\$durationText" />
                 </HBox>
             </children>
          </StackPane>
