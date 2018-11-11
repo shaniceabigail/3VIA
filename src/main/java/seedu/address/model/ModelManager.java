@@ -23,6 +23,7 @@ import seedu.address.commons.events.ui.DisplayCardInfoEvent;
 import seedu.address.commons.events.ui.OpenEndedTestShowAnswerEvent;
 import seedu.address.commons.events.ui.OpenEndedTestShowNextQuestionEvent;
 import seedu.address.commons.events.ui.SetUpDisplayCardInfoEvent;
+import seedu.address.commons.events.ui.ShowTriviaTestResultEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
@@ -235,7 +236,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean isInTestingState() {
-        return getAppState() == State.MATCH_TEST || getAppState() == State.MATCH_TEST_RESULT;
+        return getAppState() == State.MATCH_TEST || getAppState() == State.MATCH_TEST_RESULT
+                || getAppState() == State.OPEN_ENDED_TEST_QUESTION || getAppState() == State.OPEN_ENDED_TEST_ANSWER
+                || getAppState() == State.OPEN_ENDED_TEST_RESULT;
     }
 
     @Override
@@ -302,6 +305,7 @@ public class ModelManager extends ComponentManager implements Model {
         } else {
             triviaResults.addTriviaResult(new TriviaResult(currentRunningTest));
             raise(new TriviaResultsChangedEvent(triviaResults));
+            raise(new ShowTriviaTestResultEvent(openEndedTest.getResultPage()));
             appState.setAppState(State.OPEN_ENDED_TEST_RESULT);
         }
         return isAnswerCorrect;

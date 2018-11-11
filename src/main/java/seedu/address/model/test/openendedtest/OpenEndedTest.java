@@ -46,7 +46,7 @@ public class OpenEndedTest extends TriviaTest {
     public OpenEndedTest(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
         super(tag, triviaBundle);
 
-        shuffledCards = shuffleCards(cards);
+        this.shuffledCards = shuffleCards(cards);
 
         attempts = new ArrayList<>();
 
@@ -113,7 +113,7 @@ public class OpenEndedTest extends TriviaTest {
     public void advanceCard() { currCard = getNextCard(); }
 
     @Override
-    public boolean isCompleted() { return (shuffledCards.size() == 0); }
+    public boolean isCompleted() { return (this.shuffledCards.size() == 0); }
 
     /**
      * Starts the timer of the test.
