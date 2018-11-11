@@ -74,7 +74,9 @@ test cases.
 
 include::../UserGuide.adoc[tag=research]
 
-include::../UserGuide.adoc[tag=matchtest]
+include::../UserGuide.adoc[tag=matchtest1]
+
+include::../UserGuide.adoc[tag=matchtest2]
 
 == Contributions to the Developer Guide
 

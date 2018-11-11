@@ -41,7 +41,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Here are some example commands you can try:
 
-* *`learn`* : Will direct you to the homepage with all the avaiable cards displayed.
+* *`learn`* : Will direct you to the learn page with all the avaiable cards displayed.
 * **`add`**`add q/What is the formula for force? a/force = mass * acceleration a/Physics` : adds a card with question
 `What is the formula for force?` to the the trivia application.
 * **`delete`**`3` : deletes the 3rd card in the current list
@@ -75,6 +75,14 @@ Format: `add q/QUESTION a/ANSWER [t/TOPIC]...`
 [TIP]
 A card can have any number of topics. If there are no topics specified, `NoTopic` will be assigned to the card.
 
+====
+*Notes*
+
+* 3VIA does not allow duplicated questions.
+* Questions are compared without regards to their case sensitivity. Hence question of "why is..." is same as "Why is...".
+* When adding questions and answers, 3VIA will automatically trim the whitespaces that are found in preceding and endings of the text.
+====
+
 Examples:
 
 * `add q/What is the formula for force? a/force = mass * acceleration t/Physics`
@@ -83,7 +91,7 @@ Examples:
 // tag::learn[]
 === Start learning: `learn`
 
-Will direct you to the homepage with the cards you want to learn. If you want to learn from everything that is
+Will direct you to the learn page with the cards you want to learn. If you want to learn from everything that is
 available in the deck, simply execute `learn`. If you want to learn from the cards that are related to a certain topic,
 simply enter `learn TOPIC`.  +
 Format: `learn [TOPIC]`
@@ -278,7 +286,7 @@ Format: `c` (correct) OR `x` (wrong)
 Test is exited. +
 Format: `exit`
 
-// tag::matchtest[]
+// tag::matchtest1[]
 === Start a MatchTest: `testM`
 
 Start a test of matching questions and answers for a specified topic. In a MatchTest, all the questions and answers in
@@ -308,6 +316,11 @@ Format: `INDEX_OF_ANSWER`
 An example of such a usage can be seen in the the below screenshot.
 
 image::UserGuideMatchCommandWithoutQuestion.png[width="790"]
+// end::matchtest1[]
+[NOTE]
+If you have 2 questions with the same answer, then there will be 2 possibilities in matching 1 of the questions.
+Also note that answers are case sensitive. Hence the answer of "f = m * a" is not equal to "F = m * A".
+// tag::matchtest2[]
 
 ==== Quit MatchTest:
 
@@ -321,7 +334,7 @@ Format: `exit`
 [NOTE]
 Your attempts from an incomplete MatchTest will be discarded. Only those attempts from a completed MatchTest will
 be saved into your hard disk.
-// end::matchtest[]
+// end::matchtest2[]
 
 === View statistics for a certain test: `stats` `[coming in v2.0]`
 
@@ -394,8 +407,10 @@ Exits the program. +
 Format: `exit`
 
 [IMPORTANT]
-command `exit` used in any of the test page will bring you to the home page, whereas using the command `exit` in the homepage will exit the programme.
+If the `exit` Command is used during in any of the testing mode, it will bring you to the test menu page instead of
+exiting from the programme. If you want to exit from the program, execute the `exit` command again.
 // end::exit[]
+
 === Saving data
 3VIA saves data in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
