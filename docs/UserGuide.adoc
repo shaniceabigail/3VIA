@@ -42,7 +42,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Here are some example commands you can try:
 
 * *`learn`* : Will direct you to the learn page with all the avaiable cards displayed.
-* **`add`**`add q/What is the formula for force? a/force = mass * acceleration a/Physics` : adds a card with question
+* *`add`*: `add q/What is the formula for force? a/force = mass * acceleration t/Physics` : adds a card with question
 `What is the formula for force?` to the the trivia application.
 * **`delete`**`3` : deletes the 3rd card in the current list
 * *`mode`* :  changes the light theme mode to a darker mode
@@ -153,7 +153,7 @@ Examples:
 _Deletes the 2nd displayed card._
 * `find Why` +
 `delete 1` +
-_Deletes the 1st card in the results of the `find` command._xs
+_Deletes the 1st card in the results of the `find` command._
 
 // tag::select[]
 === Viewing information related to a card : `select`
