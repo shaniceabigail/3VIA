@@ -1050,23 +1050,6 @@ A related set of cards grouped together.
 Refers to all the cards in the application.
 
 [appendix]
-== Product Survey
-
-*Product Name*
-
-Author:
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
-
-[appendix]
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
@@ -1088,29 +1071,27 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
 
-_{ more test cases ... }_
+=== Deleting a card
 
-=== Deleting a person
+. Deleting a card while all cards are listed
 
-. Deleting a person while all persons are listed
-
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all cards using the `learn` command. Multiple cards in the list.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First card is deleted from the list. Details of the deleted card shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
+   Expected: No card is deleted. Error details shown in the status message. Status bar remains the same.
+.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) +
    Expected: Similar to previous.
 
-_{ more test cases ... }_
+=== MatchTest
 
-=== Saving data
+. Starting a `MatchTest` with a specified topic.
 
-. Dealing with missing/corrupted data files
-
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
-_{ more test cases ... }_
+.. Test case: `testM Physics` +
+   Expected: Suppose that there are more than 1 cards in the topic, `MatchTest` would start normally.
+`` Test case: 'testM GeneralKnowledge' +
+   Expected: Suppose that there are 1 or less cards in the topic, `MatchTest` would not start. Error details would be in the status message.
+. Matching question and answer.
 
 === Importing cards
 
