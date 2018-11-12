@@ -139,27 +139,27 @@ public class FileParserUtilTest {
                 new Topic(VALID_TOPIC_2_WITHOUT_PREFIX)));
 
         Assert.assertThrows(NullPointerException.class, () ->
-                FileParserUtil.stringToCard((String[]) null, validTopicSet));
+                FileParserUtil.parseLineToCard((String[]) null, validTopicSet));
     }
 
     @Test
     public void stringToCard_nullTopicSet_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () ->
-                FileParserUtil.stringToCard(VALID_CARD_STRING, (Set<Topic>) null));
+                FileParserUtil.parseLineToCard(VALID_CARD_STRING, (Set<Topic>) null));
     }
 
     @Test
     public void stringToCard_inValidValue_throwsFileParseException() {
         Set<Topic> emptySet = new HashSet<>();
         Assert.assertThrows(FileParseException.class, () ->
-                FileParserUtil.stringToCard(INVALID_CARD_STRING, emptySet));
+                FileParserUtil.parseLineToCard(INVALID_CARD_STRING, emptySet));
     }
 
     @Test
     public void stringToCard_validValueNoTopic_returnsCard() {
         Set<Topic> emptySet = new HashSet<>();
         Card expectedCard = new Card(new Question(VALID_QUESTION), new Answer(VALID_ANSWER), emptySet);
-        Card actualCard = FileParserUtil.stringToCard(VALID_CARD_STRING, emptySet);
+        Card actualCard = FileParserUtil.parseLineToCard(VALID_CARD_STRING, emptySet);
 
         assertEquals(expectedCard, actualCard);
     }
@@ -170,7 +170,7 @@ public class FileParserUtilTest {
                 new Topic(VALID_TOPIC_2_WITHOUT_PREFIX)));
 
         Card expectedCard = new Card(new Question(VALID_QUESTION), new Answer(VALID_ANSWER), validTopicSet);
-        Card actualCard = FileParserUtil.stringToCard(VALID_CARD_STRING, validTopicSet);
+        Card actualCard = FileParserUtil.parseLineToCard(VALID_CARD_STRING, validTopicSet);
 
         assertEquals(expectedCard, actualCard);
     }

@@ -110,15 +110,14 @@ public class ImportFile {
         try (BufferedReader br = new BufferedReader(new FileReader(importFile))) {
             String line;
             while ((line = br.readLine()) != null) {
-                if (FileParserUtil.isEmpty(line)) { // allows new line between cards and topics
+                if (FileParserUtil.isEmpty(line)) { // skips empty lines between cards and topics
                     continue;
                 }
 
                 if (FileParserUtil.isTopic(line)) {
                     topicSet = FileParserUtil.parseLineToTopicSet(line);
                 } else {
-                    String[] cardString = FileParserUtil.parseLineToQuestionAnswerPair(line);
-                    Card cardToAdd = FileParserUtil.stringToCard(cardString, topicSet);
+                    Card cardToAdd = FileParserUtil.parseLineToCard(line, topicSet);
                     cards.add(cardToAdd);
                 }
             }
