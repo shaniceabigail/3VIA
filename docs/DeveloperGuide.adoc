@@ -364,7 +364,7 @@ Step 5: The `UniqueCardList` is then added into `TriviaBundle` via `TriviaBundle
 The number of cards and the cards imported are displayed to the user for verification. +
 
 The sequence diagram below describes the import of multiple cards.
-Each card is added repeatedly by invoking `TriviaBundle#add()`until all cards in the `UniqueCardList` are added.
+Each card is added repeatedly by invoking `TriviaBundle#add()` until all cards in the `UniqueCardList` are added.
 
 image::ImportMultipleCardsSequenceDiagram.png[width="800"]
 
@@ -1034,3 +1034,31 @@ _{ more test cases ... }_
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 _{ more test cases ... }_
+
+=== Importing cards
+
+. Importing a list of cards
+.. Prerequisites: Create an empty text/plain file named `file.txt`.
+Copy it's absolute/ relative file path. (i.e file.txt)
+.. Add a few question and answer pairs into `file.txt`.
+The question and answer should be separated by a `TAB` space.
+Additionally, each question and answer pair is separated by a new line.
+Make sure to follow the format as specified in the User Guide.
+Save the file. +
++
+Test case: `import file.txt` +
+Expected: Import success. The name of the file and the number of cards
+imported will be displayed in the results display.
+.. Add a topic " t/topic" (note the whitespace before "t/") above the question and answer pairs.
+Save the file. +
++
+Test case: `import file.txt` +
+Expected: Import success. The name of the file and the number of cards
+imported will be displayed in the results display.
+The cards added should be tagged with the respective topics added.
+
+.. Remove all text in the `file.txt`. Save the file. +
++
+Test case: `import file.txt` +
+Expected: Import failure. No card will be imported.
+Error details shown in the results display.
