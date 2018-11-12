@@ -209,12 +209,17 @@ public class MainWindow extends UiPart<Stage> {
         currentScene.getStylesheets().clear();
 
         if (isDayMode && event.getToggleValue()) {
-            currentScene.getStylesheets().add(getClass().getResource("/view/DarkTheme.css").toExternalForm());
-            currentScene.getStylesheets().add(getClass().getResource("/view/Extensions.css").toExternalForm());
+            currentScene.getStylesheets().add(getClass()
+                    .getResource("/view/DarkTheme.css").toExternalForm());
+            currentScene.getStylesheets().add(getClass()
+                    .getResource("/view/Extensions.css").toExternalForm());
             isDayMode = false;
+            
         } else if (!isDayMode && event.getToggleValue()) {
-            currentScene.getStylesheets().add(getClass().getResource("/view/3VIATheme.css").toExternalForm());
-            currentScene.getStylesheets().add(getClass().getResource("/view/LightThemeExtensions.css").toExternalForm());
+            currentScene.getStylesheets().add(getClass()
+                    .getResource("/view/3VIATheme.css").toExternalForm());
+            currentScene.getStylesheets().add(getClass()
+                    .getResource("/view/LightThemeExtensions.css").toExternalForm());
             isDayMode = true;
         } else {
             throw new IllegalArgumentException("Day and Night mode did not toggle properly.");

@@ -28,6 +28,8 @@ public class TabClickEvent extends BaseEvent {
     }
 
     @Override
-    public String toString() { return "Current tab selected is " + prevTab
-                + "ToGo tab is " + updatedTab + "/n"; }
+    public String toString() {
+        return ("Current tab selected is " + prevTab
+        + ", ToGo tab is " + updatedTab + "/n");
+    }
 }
