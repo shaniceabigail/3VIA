@@ -74,11 +74,11 @@ public class MainDisplay extends UiPart<Region> {
      */
     private void configureView() {
         //tabContainer.setSide(side.LEFT);
-        tabContainer.setTabMinWidth(tabWidth);
-        tabContainer.setTabMaxWidth(tabWidth);
-        tabContainer.setTabMinHeight(tabWidth);
-        tabContainer.setTabMaxHeight(tabWidth);
-        tabContainer.setRotateGraphic(true);
+//        tabContainer.setTabMinWidth(tabWidth);
+//        tabContainer.setTabMaxWidth(tabWidth);
+//        tabContainer.setTabMinHeight(tabWidth);
+//        tabContainer.setTabMaxHeight(tabWidth);
+//        tabContainer.setRotateGraphic(true);
         //tabContainer.getStyleClass().add("root");
 
         //list of tabs configured

@@ -341,7 +341,7 @@ additional 3VIA-specific css code
 #commandTextField {
     -fx-background-color: transparent #ffd6d6 transparent #ffd6d6;
     -fx-background-insets: 0;
-    -fx-border-color: #ffd6d6 #ffd6d6 #ffd6d6 #ffd6d6;
+    -fx-border-color: #75c1e5 #75c1e5 #75c1e5 #75c1e5;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";
