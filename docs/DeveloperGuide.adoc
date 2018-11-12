@@ -512,13 +512,6 @@ create a static display index of question and answer. Hence, this design conside
 abstraction that is leaking into the UI.
 // end::matchtest[]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
-
 === Navigation Feature
 ==== Current Implementation
 The Navigation Tab is designed for users to be aware of the different functionality of our app.
