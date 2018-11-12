@@ -1,10 +1,11 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.state.State;
 
 /**
  * Navigates tab and current page to testPage
@@ -25,7 +26,8 @@ public class TestCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        model.setAppState(State.TEST);
+        requireNonNull(model);
+
         EventsCenter.getInstance().post(new ToggleTabEvent("test"));
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }

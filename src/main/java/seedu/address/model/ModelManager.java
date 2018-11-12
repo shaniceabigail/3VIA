@@ -19,7 +19,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.commons.events.model.TabClickEvent;
+import seedu.address.commons.events.model.TabChangeEvent;
 import seedu.address.commons.events.model.TriviaBundleChangedEvent;
 import seedu.address.commons.events.model.TriviaResultsChangedEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
@@ -345,16 +345,17 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new DisplayCardInfoEvent(selectedCard, triviaResults.getAttemptsByCard(selectedCard)));
     }
 
+    @Override
     @Subscribe
-    public void handleChangeTabAtClickInUi(TabClickEvent event) {
+    public void handleChangeTab(TabChangeEvent event) {
         State toGo = LEARN;
-        if ("learn".equals(event.getUpdatedTab())) {
+        if ("Learn".equals(event.getUpdatedTab())) {
             toGo = LEARN;
 
-        } else if ("test".equals(event.getUpdatedTab())) {
+        } else if ("Test".equals(event.getUpdatedTab())) {
             toGo = TEST;
 
-        } else if ("review".equals(event.getUpdatedTab())) {
+        } else if ("Review".equals(event.getUpdatedTab())) {
             toGo = REVIEW;
 
         }

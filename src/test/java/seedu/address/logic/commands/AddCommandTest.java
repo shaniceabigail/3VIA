@@ -16,6 +16,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.model.TabChangeEvent;
 import seedu.address.commons.events.ui.SetUpDisplayCardInfoEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -30,6 +31,7 @@ import seedu.address.model.state.State;
 import seedu.address.model.test.Attempt;
 import seedu.address.model.test.TriviaResult;
 import seedu.address.model.test.TriviaTest;
+import seedu.address.testutil.Assert;
 import seedu.address.testutil.CardBuilder;
 
 public class AddCommandTest {
@@ -276,6 +278,11 @@ public class AddCommandTest {
         @Override
         public void recordAnswerToOpenEndedTest(String userinput) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void handleChangeTab(TabChangeEvent event) {
+            throw new AssertionError("This message should not be called.");
         }
     }
 
