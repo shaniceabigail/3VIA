@@ -304,9 +304,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Subscribe
-    public void handleChangeTabAtClickInUi(TabClickEvent event) throws Exception {
-        State toGo;
-
+    public void handleChangeTabAtClickInUi(TabClickEvent event) {
+        State toGo = LEARN;
         if ("learn".equals(event.getUpdatedTab())) {
             toGo = LEARN;
 
@@ -316,10 +315,7 @@ public class ModelManager extends ComponentManager implements Model {
         } else if ("review".equals(event.getUpdatedTab())) {
             toGo = REVIEW;
 
-        } else {
-            throw new Exception("Updated tab not valid");
         }
-
         appState.setAppState(toGo);
 
     }

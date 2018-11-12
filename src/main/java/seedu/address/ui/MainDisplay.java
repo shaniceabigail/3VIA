@@ -8,6 +8,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
@@ -58,8 +59,18 @@ public class MainDisplay extends UiPart<Region> {
 
         triviaTestPlaceholderPage = new TriviaTestPlaceholderPage();
         triviaTestPlaceholder.getChildren().add(triviaTestPlaceholderPage.getRoot());
+        addListener();
 
         registerAsAnEventHandler(this);
+    }
+
+    /**
+     * initialise listener for clicks on tabs
+     */
+    private void addListener() {
+        tabContainer.getSelectionModel().selectedItemProperty()
+                .addListener((ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) ->
+                        EventsCenter.getInstance().post(new TabClickEvent(oldValue.getText(), newValue.getText())));
     }
 
     /**
@@ -79,14 +90,12 @@ public class MainDisplay extends UiPart<Region> {
         createTab(testTab, "Test", triviaTestPlaceholder);
         createTab(reviewTab, "Review", reviewPlaceholder);
 
-        tabContainer.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<Tab>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
-                        EventsCenter.getInstance().post(new TabClickEvent(oldValue.getText(), newValue.getText()));
-                    }
-                }
-        );
+        /*
+tabContainer.getSelectionModel().selectedItemProperty()
+.addListener((ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) ->
+EventsCenter.getInstance().post(new TabClickEvent(oldValue.getText(), newValue.getText()))
+);
+        */
         logger.info("View has been configured");
     }
 
