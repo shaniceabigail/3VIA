@@ -3,18 +3,17 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
+import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
-
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ToggleTabEvent;
@@ -34,7 +33,7 @@ public class MainDisplay extends UiPart<Region> {
     private final TriviaTestPlaceholderPage triviaTestPlaceholderPage;
 
     @FXML
-    private TabPane tabContainer;
+    private JFXTabPane tabContainer;
     @FXML
     private Tab learnTab;
     @FXML
@@ -89,19 +88,11 @@ public class MainDisplay extends UiPart<Region> {
      * @param containerPane
      */
     private void createTab(Tab tab, String title, String iconPath, StackPane containerPane) {
-        double imageWidth = 40.0;
-
-        ImageView imageView = new ImageView(new Image(iconPath));
-        imageView.setFitHeight(imageWidth);
-        imageView.setFitWidth(imageWidth);
-
         Label label = new Label(title);
 
         //set the tab's outlook into a border pane
         BorderPane borderPane = new BorderPane();
         borderPane.setRotate(90.0);
-        //borderPane.setMaxWidth(tabWidth);
-        borderPane.setCenter(imageView);
         borderPane.setBottom(label);
 
         try {

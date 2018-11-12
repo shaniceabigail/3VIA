@@ -19,6 +19,7 @@
     <Scene>
       <stylesheets>
         <URL value="@3VIATheme.css" />
+        <URL value="@LightThemeExtensions.css" />
       </stylesheets>
         <VBox>
           <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
