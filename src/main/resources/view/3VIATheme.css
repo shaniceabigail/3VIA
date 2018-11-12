@@ -3,13 +3,10 @@
     background-color: white;
 }
 
-/**
-* asciidoc classes
-*/
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: #555555;
+    -fx-text-fill: #75c1e5;
     -fx-opacity: 0.9;
 }
 
@@ -59,10 +56,6 @@
     -fx-border-color: black;
 }
 
-/**
-* tab bar
-*/
-
 .jfx-tab-pane .tab-header-background {
     -fx-background-color: #00BCD4;
 }
@@ -74,7 +67,7 @@
 .pane-with-border {
      -fx-background-color: white;
      -fx-border-color: white;
-     -fx-border-top-width: 1px;
+     -fx-border-width: 1 1 1 1;
 }
 
 .split-pane:horizontal .split-pane-divider, .split-pane:vertical .split-pane-divider {
@@ -335,7 +328,7 @@ additional 3VIA-specific css code
 }
 
 #cardPane #cardViewPane {
-    -fx-background-color: transparent;
+    -fx-background-color: #ededed;
     -fx-border-width: 0;
 }
 
@@ -348,7 +341,7 @@ additional 3VIA-specific css code
 #commandTextField {
     -fx-background-color: transparent #ffd6d6 transparent #ffd6d6;
     -fx-background-insets: 0;
-    -fx-border-color: #ffd6d6 #ffd6d6 #ffffff #ffd6d6;
+    -fx-border-color: #75c1e5 #75c1e5 #75c1e5 #75c1e5;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Segoe UI Light";

@@ -3,7 +3,7 @@ package seedu.address.commons.events.ui;
 import seedu.address.commons.events.BaseEvent;
 
 /**
- * An event changing the current mode of the app
+ * An event changing the current stylesheet / day or night mode of the app
  */
 public class ChangeModeEvent extends BaseEvent {
     private boolean toggleValue;
