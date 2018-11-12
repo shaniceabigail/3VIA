@@ -72,13 +72,14 @@
 <li><a href="#use-cases">Appendix C: Use Cases</a></li>
 <li><a href="#non-functional-requirements">Appendix D: Non Functional Requirements</a></li>
 <li><a href="#glossary">Appendix E: Glossary</a></li>
-<li><a href="#product-survey">Appendix F: Product Survey</a></li>
-<li><a href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a>
+<li><a href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
-<li><a href="#launch-and-shutdown">G.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-person">G.2. Deleting a person</a></li>
-<li><a href="#saving-data">G.3. Saving data</a></li>
-<li><a href="#importing-cards">G.4. Importing cards</a></li>
+<li><a href="#launch-and-shutdown">F.1. Launch and Shutdown</a></li>
+<li><a href="#deleting-a-card">F.2. Deleting a card</a></li>
+<li><a href="#matchtest">F.3. MatchTest</a></li>
+<li><a href="#selecting-a-card">F.4. Selecting a card</a></li>
+<li><a href="#researching-on-a-card">F.5. Researching on a card</a></li>
+<li><a href="#importing-cards">F.6. Importing cards</a></li>
 </ul>
 </li>
 </ul>
@@ -2422,44 +2423,7 @@ b. Require developers to download those libraries manually (this creates extra w
 </div>
 </div>
 <div class="sect1">
-<h2 id="product-survey"><a class="link" href="#product-survey">Appendix F: Product Survey</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Product Name</strong></p>
-</div>
-<div class="paragraph">
-<p>Author:</p>
-</div>
-<div class="paragraph">
-<p>Pros:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Cons:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix G: Instructions for Manual Testing</a></h2>
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix F: Instructions for Manual Testing</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Given below are instructions to test the app manually.</p>
@@ -2477,7 +2441,7 @@ These instructions only provide a starting point for testers to work on; testers
 </table>
 </div>
 <div class="sect2">
-<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">G.1. Launch and Shutdown</a></h3>
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">F.1. Launch and Shutdown</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2510,31 +2474,28 @@ Expected: The most recent window size and location is retained.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">G.2. Deleting a person</a></h3>
+<h3 id="deleting-a-card"><a class="link" href="#deleting-a-card">F.2. Deleting a card</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Deleting a person while all persons are listed</p>
+<p>Deleting a card while all cards are listed</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+<p>Prerequisites: List all cards using the <code>learn</code> command. Multiple cards in the list.</p>
 </li>
 <li>
 <p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+Expected: First card is deleted from the list. Details of the deleted card shown in the status message. Timestamp in the status bar is updated.</p>
 </li>
 <li>
 <p>Test case: <code>delete 0</code><br>
-Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+Expected: No card is deleted. Error details shown in the status message. Status bar remains the same.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size)<br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
@@ -2542,32 +2503,131 @@ Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">G.3. Saving data</a></h3>
+<h3 id="matchtest"><a class="link" href="#matchtest">F.3. MatchTest</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Dealing with missing/corrupted data files</p>
+<p>Starting a <code>MatchTest</code> with a specified topic.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
+<p>Test case: <code>testM Physics</code><br>
+   Expected: Suppose that there are more than 1 cards in the topic, <code>MatchTest</code> would start normally.
+<code>` Test case: 'testM GeneralKnowledge'<br>
+   Expected: Suppose that there are 1 or less cards in the topic, `MatchTest</code> would not start. Error details would be in the status message.</p>
+</li>
+<li>
+<p>Prerequisites: There are more than 1 cards in the topic of Physics.<br>
+Test case: <code>testM Physics</code><br>
+Expected: <code>MatchTest</code> would start normally.</p>
+</li>
+<li>
+<p>Prerequisites: Suppose that there are 1 or less cards in the topic of GeneralKnowledge.<br>
+Test case: <code>testM GeneralKnowledge</code><br>
+Expected: <code>MatchTest</code> would not start. Error details would be in the status message.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Matching question and answer<br></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: In a <code>MatchTest</code>, and that index 3 and 4 are valid indexes that exist in the question and answer list respectively.<br>
+Test case: <code>3 4</code><br>
+Expected: If <code>3 4</code> is a correct match, you should observe there will be a green flash on question with index 3 and answer with
+index 4. And the followed by the question and answer being removed. If <code>3 4</code> is a wrong match, you should observe that there
+will be a red flash on question with index 3 and answer with index 4.</p>
+</li>
+<li>
+<p>Prerequisites: In a <code>MatchTest</code>, and there is an answer with index of 2.<br>
+Test case: <code>2</code><br>
+Expected: Will be a repeat of the above test case but with the index of the question at the top of the question
+list and answer with index of 2.</p>
+</li>
+<li>
+<p>Prerequisites: In a <code>MatchTest</code>.<br>
+Test case: <code>wrong</code><br>
+Expected: Error details would be in the status message.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>At result page of <code>MatchTest</code><br>
+Prerequisites: At the ResultPage of <code>MatchTest</code>.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>exit</code><br>
+Expected: Should observe you are being redirected to <code>TriviaTestMenuPage</code>.</p>
+</li>
+<li>
+<p>Test case: <code>anothercommand</code><br>
+Expected: Error details would be in the status message.</p>
 </li>
 </ol>
 </div>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="importing-cards"><a class="link" href="#importing-cards">G.4. Importing cards</a></h3>
+<h3 id="selecting-a-card"><a class="link" href="#selecting-a-card">F.4. Selecting a card</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Selecting a card while all cards are listed<br>
+Prerequisites: List all cards using the <code>learn</code> command. Multiple cards in the list.<br></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>select 1</code><br>
+Expected: First card is selected from the list. Details of the card shown in the information panel.</p>
+</li>
+<li>
+<p>Test case: <code>select 0</code><br>
+Expected: No card is selected. Error details shown in the status message.</p>
+</li>
+<li>
+<p>Other incorrect select commands to try: <code>select</code>, <code>select x</code> (where x is larger than the list size)<br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="researching-on-a-card"><a class="link" href="#researching-on-a-card">F.5. Researching on a card</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Researching on a card while all cards are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There is internet connection. List all cards using the <code>research</code> command. Multiple cards in the list.<br>
+Test case: <code>research 1</code><br>
+Expected: Shows the online resources of the card&#8217;s question in the information panel.</p>
+</li>
+<li>
+<p>Prerequisites: There is no internet connection. List all cards using the <code>research</code> command. Multiple cards in the list.<br>
+Test case: <code>research 1</code><br>
+Expected: Shows error details on the information panel.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="importing-cards"><a class="link" href="#importing-cards">F.6. Importing cards</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2615,4 +2675,4 @@ Error details shown in the results display.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:55:27 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:00:45 UTC</div></div></div></body></html>
