@@ -143,6 +143,9 @@ public class AddressBookParser {
             case ReviewCommand.COMMAND_WORD:
                 return new ReviewCommand(arguments);
 
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
+
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
@@ -158,6 +161,9 @@ public class AddressBookParser {
             case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
 
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
+
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
@@ -168,6 +174,9 @@ public class AddressBookParser {
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
 
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
+
             default:
                 return new MatchCommandParser().parse(userInput);
             }
@@ -177,6 +186,9 @@ public class AddressBookParser {
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
+
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
