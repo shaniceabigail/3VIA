@@ -151,18 +151,6 @@ public class OpenEndedTest extends TriviaTest {
         return correct;
     }
 
-    /**
-     * Starts the timer of the test.
-     */
-    private void startTimer() {
-        DecimalFormat timerFormat = new DecimalFormat("#.#");
-        timer = new Timeline(new KeyFrame(Duration.seconds(0.1), ev -> {
-            duration.setValue(Double.parseDouble(timerFormat.format(duration.getValue() + 0.1)));
-        }));
-        timer.setCycleCount(Animation.INDEFINITE);
-        timer.play();
-    }
-
     @Override
     public Supplier<? extends TriviaTestPage> getTestingPage() {
         return () -> new OpenEndedTestPage(this);

@@ -1,12 +1,16 @@
 package seedu.address.model.test;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Supplier;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.ObservableList;
+import javafx.util.Duration;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.TopicIsKeywordPredicate;
@@ -33,6 +37,18 @@ public abstract class TriviaTest {
         duration = new SimpleDoubleProperty(0);
         isCompleted = false;
         cards = triviaBundle.getListOfCardFilteredByTopic(new TopicIsKeywordPredicate(topic.topicName));
+    }
+
+    /**
+     * Starts the timer of the Trivia Test.
+     */
+    protected void startTimer() {
+        DecimalFormat timerFormat = new DecimalFormat("#.#");
+        timer = new Timeline(new KeyFrame(Duration.seconds(0.1), ev -> {
+            duration.setValue(Double.parseDouble(timerFormat.format(duration.getValue() + 0.1)));
+        }));
+        timer.setCycleCount(Animation.INDEFINITE);
+        timer.play();
     }
 
     public abstract void startTest();
