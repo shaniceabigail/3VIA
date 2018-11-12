@@ -2,6 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.state.State.LEARN;
+import static seedu.address.model.state.State.REVIEW;
+import static seedu.address.model.state.State.TEST;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -16,6 +19,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.TabClickEvent;
 import seedu.address.commons.events.model.TriviaBundleChangedEvent;
 import seedu.address.commons.events.model.TriviaResultsChangedEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
@@ -299,7 +303,26 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new DisplayCardInfoEvent(selectedCard, triviaResults.getAttemptsByCard(selectedCard)));
     }
 
+    @Subscribe
+    public void handleChangeTabAtClickInUi(TabClickEvent event) throws Exception {
+        State toGo;
 
+        if ("learn".equals(event.getUpdatedTab())) {
+            toGo = LEARN;
+
+        } else if ("test".equals(event.getUpdatedTab())) {
+            toGo = TEST;
+
+        } else if ("review".equals(event.getUpdatedTab())) {
+            toGo = REVIEW;
+
+        } else {
+            throw new Exception("Updated tab not valid");
+        }
+
+        appState.setAppState(toGo);
+
+    }
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -11,7 +13,9 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.TabClickEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ToggleTabEvent;
@@ -71,10 +75,18 @@ public class MainDisplay extends UiPart<Region> {
     private void configureView() {
 
         //list of tabs configured
-        createTab(learnTab, "Learn", "file:/src/main/resources/images/tabIcons/home.png", homepagePlaceholder);
-        createTab(testTab, "Test", "file:/src/main/resources/images/tabIcons/settings.png", triviaTestPlaceholder);
-        createTab(reviewTab, "Review", "file:/main/resources/images/tabIcons/test.png", reviewPlaceholder);
+        createTab(learnTab, "Learn", homepagePlaceholder);
+        createTab(testTab, "Test", triviaTestPlaceholder);
+        createTab(reviewTab, "Review", reviewPlaceholder);
 
+        tabContainer.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<Tab>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
+                        EventsCenter.getInstance().post(new TabClickEvent(oldValue.getText(), newValue.getText()));
+                    }
+                }
+        );
         logger.info("View has been configured");
     }
 
@@ -82,10 +94,9 @@ public class MainDisplay extends UiPart<Region> {
      * Creates a tab with the following parameters
      * @param tab
      * @param title
-     * @param iconPath
      * @param containerPane
      */
-    private void createTab(Tab tab, String title, String iconPath, StackPane containerPane) {
+    private void createTab(Tab tab, String title, StackPane containerPane) {
         Label label = new Label(title);
 
         //set the tab's outlook into a border pane
