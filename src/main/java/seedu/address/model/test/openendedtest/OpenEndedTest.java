@@ -137,9 +137,13 @@ public class OpenEndedTest extends TriviaTest {
         return (this.shuffledCards.size() == 0);
     }
 
+    /**
+     * Retrieves total number of correct attempts currently in <List> Attempts
+     * @return int of correct attempts
+     */
     public int getCorrectAttempts() {
         int correct = 0;
-        for (int i = 0; i < this.attempts.size(); i+=1) {
+        for (int i = 0; i < this.attempts.size(); i += 1) {
             if (attempts.get(i).isCorrect()) {
                 correct += 1;
             }
