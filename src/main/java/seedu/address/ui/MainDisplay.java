@@ -114,7 +114,6 @@ public class MainDisplay extends UiPart<Region> {
 
         try {
             tab.setContent(containerPane);
-            //tabPane = tab.getTabPane();
             logger.info("tab created");
         } catch (Exception e) {
             throw new IllegalArgumentException("Tab not added");

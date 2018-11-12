@@ -18,10 +18,7 @@
   <scene>
     <Scene>
       <stylesheets>
-          <URL value="@DarkTheme.css" />
         <URL value="@3VIATheme.css" />
-        <URL value="@Extensions.css" />
-        <!--<URL value="@NavigationTabStyling.css"/>-->
       </stylesheets>
         <VBox>
           <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
