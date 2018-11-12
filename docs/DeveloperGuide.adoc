@@ -542,20 +542,22 @@ The tabs are expected to toggle and display their respective tab contents accord
 
 ===== Icons on the Tabs
 We have added the icon images for the tabs, but implementation is still a work in progress.
-//end:: NavigationTabCommands[]
+// end::NavigationTabCommands[]
 
-//tag:: ModeCommand[]
+// tag::ModeCommand[]
 === Day and Night Mode Feature
 ==== Current Implementation
 Mode allows you to toggle between day and night mode anywhere in the app and it can be accessed as a command in any AppState of 3VIA.
 
+.Day Mode / Light Theme
+image::3VIATheme.png[width="800"]
 
-[caption = Day Mode, image::3VIATheme.png[width="800"]]
+.Night Mode / Dark Theme
 image::DarkTheme.png[width="800"]
 ==== GUI Handling
-The default of the application is a "Day Themed" stylesheet, meaning a generally white background
-with dark text. The command will swap the current theme set to a darker theme.
-//end::ModeCommand[]
+The default of the application is a "Day Theme" stylesheet, meaning a generally white background
+with dark text. The command will swap the current theme set to a "Dark Theme" stylesheet with each command created.
+// end::ModeCommand[]
 
 === Logging
 
