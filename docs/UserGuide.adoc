@@ -75,6 +75,8 @@ Format: `add q/QUESTION a/ANSWER [t/TOPIC]...`
 [TIP]
 A card can have any number of topics. If there are no topics specified, `NoTopic` will be assigned to the card.
 
+[WARNING]
+`[t/TOPIC]` is case sensitive
 ====
 *Notes*
 

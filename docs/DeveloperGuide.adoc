@@ -543,7 +543,10 @@ We have added the icon images for the tabs, but implementation is still a work i
 //tag:: ModeCommand[]
 === Mode Feature
 ==== Current Implementation
-Mode can be accessed as a command in any AppState of 3VIA, which allows you to toggle the mode anywhere in the app.
+Mode can be accessed as a command in any AppState of 3VIA, which allows you to toggle between day and night mode anywhere in the app.
+
+==== GUI Handling
+The command will swap the current theme
 //end::ModeCommand[]
 
 === Logging
