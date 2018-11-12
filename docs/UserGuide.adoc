@@ -413,7 +413,8 @@ image::import_file_format.png[import file format pic]
 |===
 
 [WARNING]
-Duplicate questions in the import text file will result in import failure.
+Duplicate questions in the import text file will result in an import failure.
+Duplicated answers with different questions are allowed.
 
 ==== Importing your file:
 
