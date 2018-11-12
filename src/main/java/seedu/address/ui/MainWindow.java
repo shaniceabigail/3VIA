@@ -6,13 +6,12 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
@@ -42,12 +41,15 @@ public class MainWindow extends UiPart<Stage> {
     private UserPrefs prefs;
     private HelpWindow helpWindow;
     private MainDisplay mainDisplay;
-    private VBox vbox;
+    private Scene currentScene;
 
     private boolean isDayMode;
 
     @FXML
     private StackPane commandBoxPlaceholder;
+
+    @FXML
+    private MenuItem exitAppItem;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -176,11 +178,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void loadStyle(Parent node, String location) {
-        node.getStylesheets().clear();
-        node.getStylesheets().add(getClass().getResource(location).toExternalForm());
-    }
-
     public void releaseResources() {
         mainDisplay.releaseResources();
     }
@@ -206,11 +203,21 @@ public class MainWindow extends UiPart<Stage> {
 
     @Subscribe
     private void handleChangeModeEvent(ChangeModeEvent event) throws IllegalArgumentException {
+        currentScene = primaryStage.getScene();
+        currentScene.getStylesheets().clear();
+
         if (isDayMode && event.getToggleValue()) {
-            loadStyle(vbox, "file:/src/main/resources/view/DarkTheme.css");
+            currentScene.getStylesheets().add(getClass()
+                    .getResource("/view/DarkTheme.css").toExternalForm());
+            currentScene.getStylesheets().add(getClass()
+                    .getResource("/view/Extensions.css").toExternalForm());
             isDayMode = false;
         } else if (!isDayMode && event.getToggleValue()) {
-            loadStyle(vbox, "file:/src/main/resources/view/3VIATheme.css");
+            currentScene.getStylesheets().add(getClass()
+                    .getResource("/view/3VIATheme.css").toExternalForm());
+            currentScene.getStylesheets().add(getClass()
+                    .getResource("/view/LightThemeExtensions.css").toExternalForm());
+            isDayMode = true;
         } else {
             throw new IllegalArgumentException("Day and Night mode did not toggle properly.");
         }

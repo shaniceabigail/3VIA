@@ -16,6 +16,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.model.TabChangeEvent;
 import seedu.address.commons.events.ui.SetUpDisplayCardInfoEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -304,6 +305,11 @@ public class ImportCommandTest {
         @Override
         public boolean isOpenEndedTestAnswerCorrect(char in) {
             throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void handleChangeTab(TabChangeEvent event) {
+            throw new AssertionError("This method should not be called.");
         }
     }
 

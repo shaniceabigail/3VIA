@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.model.TabChangeEvent;
 import seedu.address.commons.events.ui.SetUpDisplayCardInfoEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
@@ -202,4 +203,6 @@ public interface Model {
      * Used to provide the necessary information to display card info.
      */
     void handleSetUpDisplayCardInfoEvent(SetUpDisplayCardInfoEvent event);
+
+    void handleChangeTab(TabChangeEvent event);
 }

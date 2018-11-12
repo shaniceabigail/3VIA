@@ -26,8 +26,8 @@ of the more test features.
 recorded down. This data collection would also allow for wide array of analysis allowing us to customize 3VIA for the user.
 
 ** Added *the ability to perform matching test in 3VIA* [Main Feature]
-*** What it does: In this test, the user would be given a list of questions and answers. They have to match the correct
-questions to their correct answer.
+*** What it does: In this test, the user would be given a list of questions and answers. They have to match the questions
+to their correct answer.
 *** Justification: It is 1 of the 2 testing features in 3VIA. It allows users to be able to test themselves on concepts and
 misconceptions that spans different questions. Allowing users to draw comparisons and similarities between different questions
 and answers, coming up with insights that are not possible by just testing themselves on a per question basis.
@@ -37,7 +37,7 @@ are being considered.
 
 * *Minor enhancement*:
 ** Added `CardInfoPanel`
-*** Designed and implement `CardInfoPanel` to allow user to receive feedback and track their progress in each card
+*** Designed and implemented `CardInfoPanel` to allow user to receive feedback and track their progress in each card
 (which consist of a question and an answer) in 3VIA.
 
 ** Added `learn` Command
