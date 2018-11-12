@@ -7,13 +7,10 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <HBox alignment="CENTER" prefHeight="72.0" prefWidth="340.0" VBox.vgrow="NEVER">
+   <HBox alignment="CENTER" prefHeight="72.0" prefWidth="340.0" VBox.vgrow="NEVER" styleClass="standard-background-color">
          <Label styleClass="label-bright-header" text="Match Test Completed!" />
-      <VBox.margin>
-         <Insets top="5.0" />
-      </VBox.margin>
    </HBox>
-   <HBox alignment="CENTER" prefHeight="74.0" prefWidth="340.0" VBox.vgrow="NEVER">
+   <HBox alignment="CENTER" prefHeight="74.0" prefWidth="340.0" VBox.vgrow="NEVER" styleClass="standard-background-color">
       <children>
          <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
             <children>
@@ -45,7 +42,7 @@
          </HBox>
       </children>
    </HBox>
-   <HBox alignment="CENTER" prefHeight="74.0" prefWidth="340.0" VBox.vgrow="NEVER">
+   <HBox alignment="CENTER" prefHeight="74.0" prefWidth="340.0" VBox.vgrow="NEVER" styleClass="standard-background-color">
       <children>
          <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
             <children>
@@ -77,7 +74,7 @@
          </HBox>
       </children>
    </HBox>
-   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" styleClass="standard-background-color">
       <children>
          <Label fx:id="numOfAttemptsText" style="-fx-font-size: 15pt" styleClass="label-bright" text="\$numOfAttemptsText" />
       </children>
