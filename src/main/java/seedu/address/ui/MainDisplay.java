@@ -3,13 +3,11 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
-import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -33,7 +31,7 @@ public class MainDisplay extends UiPart<Region> {
     private final TriviaTestPlaceholderPage triviaTestPlaceholderPage;
 
     @FXML
-    private JFXTabPane tabContainer;
+    private TabPane tabContainer;
     @FXML
     private Tab learnTab;
     @FXML

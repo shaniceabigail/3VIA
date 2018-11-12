@@ -158,6 +158,9 @@ public class AddressBookParser {
             case LearnCommand.COMMAND_WORD:
                 return new LearnCommandParser().parse(arguments);
 
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
             case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
 
