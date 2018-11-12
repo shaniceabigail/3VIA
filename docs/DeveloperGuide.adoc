@@ -512,6 +512,59 @@ create a static display index of question and answer. Hence, this design conside
 abstraction that is leaking into the UI.
 // end::matchtest[]
 
+// tag::openendedtest[]
+=== Open Ended Test
+
+==== Current Implementation
+The implementation of an OpenEndedTest is facilitated by the `AppState` and `OpenEndedTest` model.
+
+The `AppState` model defines the state of which the application is in, and that will affect the type of interactions the user can have with the program. The `OpenEndedTest` model is a subclass of
+`TriviaTest`.
+
+Additionally, `OpenEndedTest` also implements the following operations:
+
+* `OpenEndedTest#startTest()` -- Does the necessary initialisations to start a OpenEndedTest.
+* `OpenEndedTest#stopTest()` -- Does the necessary clean up to stop a OpenEndedTest.
+* `OpenEndedTest#recordAnswer(userInput)` -- Records the user's answer to a question.
+* `OpenEndedTest#addAttempt(userInput)` -- Records the user's input of whether an attempt is correct, and stores it together with the user's answer into an Attempt.
+
+These operations are exposed in the `Model` interface as `Model#startTriviaTest()`, `Model#stopTriviaTest()`, `recordAnswerToOpenEndedTest` and `isOpenEndedTestAnswerCorrect` respectively.
+
+The following activity diagram shows the complete lifecycle of a OpenEndedTest.
+
+//image::.png[width="800"]
+
+Given below is an example usage scenario and how the OpenEndedTest behaves at each step.
+
+Step 1. The user enter the `testO` command and a new `OpenEndedTestCommand` will be created.
+
+Step 2. The `OpenEndedTestCommand` will be executed and a new OpenEndedTest Object will be created as shown in the below Sequence diagram.
+
+//image::.png[width="800"]
+
+Step 3. After the OpenEndedTest has been started, the user can only input the following commands:
+
+* `USER_INPUT` Will be the user's answer to the question. It can be a blank line.
+* `IS_ANSWER_CORRECT` The user will indicate if the question was answered correctly.
+* `exit` If the user input `exit`, the OpenEndedTest will end and the information related to that OpenEndedTest will not be recorded.
+
+Step 4. Suppose the user chose to match a question to an answer, the sequence will execute a list of steps, as shown in the sequence diagram below, to determine whether the match is correct.
+
+//image::.png[width="800"]
+
+Step 5. If there are still existing unmatched question and answers, the System will go back to step 3.
+
+Step 6. After all the question and answers are matched, the System will store the results on the hard disk and display the test's result.
+
+Step 7. At this stage, the System will await `exit` command from the user so that user can be taken back to the home page.
+
+
+==== Design Considerations
+
+===== UI related considerations during a OpenEndedTest
+
+// end::openendedtest[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
