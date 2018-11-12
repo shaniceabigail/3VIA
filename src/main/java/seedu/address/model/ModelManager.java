@@ -24,7 +24,10 @@ import seedu.address.commons.events.model.TriviaBundleChangedEvent;
 import seedu.address.commons.events.model.TriviaResultsChangedEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.DisplayCardInfoEvent;
+import seedu.address.commons.events.ui.OpenEndedTestShowAnswerEvent;
+import seedu.address.commons.events.ui.OpenEndedTestShowNextQuestionEvent;
 import seedu.address.commons.events.ui.SetUpDisplayCardInfoEvent;
+import seedu.address.commons.events.ui.ShowTriviaTestResultEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.UniqueCardList;
@@ -33,10 +36,12 @@ import seedu.address.model.state.AppState;
 import seedu.address.model.state.State;
 import seedu.address.model.test.Attempt;
 import seedu.address.model.test.ReadOnlyTriviaResults;
+import seedu.address.model.test.TestType;
 import seedu.address.model.test.TriviaResult;
 import seedu.address.model.test.TriviaResults;
 import seedu.address.model.test.TriviaTest;
 import seedu.address.model.test.matchtest.MatchTest;
+import seedu.address.model.test.openendedtest.OpenEndedTest;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -235,7 +240,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean isInTestingState() {
-        return getAppState() == State.MATCH_TEST || getAppState() == State.MATCH_TEST_RESULT;
+        return getAppState() == State.MATCH_TEST || getAppState() == State.MATCH_TEST_RESULT
+                || getAppState() == State.OPEN_ENDED_TEST_QUESTION || getAppState() == State.OPEN_ENDED_TEST_ANSWER
+                || getAppState() == State.OPEN_ENDED_TEST_RESULT;
     }
 
     @Override
@@ -248,7 +255,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void startTriviaTest(TriviaTest test) {
         currentRunningTest = test;
-        appState.setAppState(State.MATCH_TEST);
+        if (test.getTestType() == TestType.MATCH_TEST) {
+            appState.setAppState(State.MATCH_TEST);
+        } else {
+            appState.setAppState(State.OPEN_ENDED_TEST_QUESTION);
+        }
         test.startTest();
         raise(new ShowTriviaTestViewEvent(test.getTestingPage()));
     }
@@ -283,6 +294,37 @@ public class ModelManager extends ComponentManager implements Model {
 
         return isCorrectMatch;
     }
+
+    //=========== Open Ended Tests ==========================================================================
+
+    @Override
+    public boolean isOpenEndedTestAnswerCorrect(char in) {
+        assert currentRunningTest instanceof OpenEndedTest;
+        OpenEndedTest openEndedTest = (OpenEndedTest) currentRunningTest;
+        boolean isAnswerCorrect = openEndedTest.addAttempt(in);
+        if (!openEndedTest.isCompleted()) {
+            openEndedTest.advanceCard();
+            Card nextCard = openEndedTest.getCurrCard();
+            raise(new OpenEndedTestShowNextQuestionEvent(nextCard));
+            appState.setAppState(State.OPEN_ENDED_TEST_QUESTION);
+        } else {
+            triviaResults.addTriviaResult(new TriviaResult(currentRunningTest));
+            raise(new TriviaResultsChangedEvent(triviaResults));
+            raise(new ShowTriviaTestResultEvent(openEndedTest.getResultPage()));
+            appState.setAppState(State.OPEN_ENDED_TEST_RESULT);
+        }
+        return isAnswerCorrect;
+    }
+
+    @Override
+    public void recordAnswerToOpenEndedTest(String userInput) {
+        assert currentRunningTest instanceof OpenEndedTest;
+        OpenEndedTest openEndedTest = (OpenEndedTest) currentRunningTest;
+        openEndedTest.recordAnswer(userInput);
+        raise(new OpenEndedTestShowAnswerEvent(userInput));
+        appState.setAppState(State.OPEN_ENDED_TEST_ANSWER);
+    }
+
 
     //=========== Trivia Test Results ==========================================================================
 

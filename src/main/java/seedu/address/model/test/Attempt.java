@@ -2,6 +2,7 @@ package seedu.address.model.test;
 
 import java.util.Date;
 
+import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.Question;
 
@@ -31,6 +32,10 @@ public class Attempt {
 
     public Question getQuestion() {
         return attemptedCard.getQuestion();
+    }
+
+    public Answer getAnswer() {
+        return attemptedCard.getAnswer();
     }
 
     public Card getAttemptedCard() {
