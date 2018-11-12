@@ -404,7 +404,7 @@ The `ObservableFile` interface allows the UI component to update the preview of 
 === Structure of TriviaTest
 ==== Current Implementation
 The term `TriviaTest` refers to a reference to the different kinds of testing features in 3VIA. Currently,
-there are 2 test features in 3VIA, namely, the Open-Ended Test and the MatchTest.
+there are 2 test features in 3VIA, namely, the Open-Ended Test and the `MatchTest`.
 
 Hence, the generic `TriviaTest` related classes were made to accommodate for the similarities between them. The classes that were
 constructed spans across the Model, Storage and UI component. For Model, we have `TriviaTest`, `TriviaResult`, as shown in
@@ -439,36 +439,36 @@ needed separate the complexities that are involved in data collection and the ac
 // tag::matchtest[]
 === MatchTest Feature
 ==== Current Implementation
-The implementation of a MatchTest is facilitated by the `AppState` and `MatchTest` model.
+The implementation of this feature is facilitated by the `AppState` and `MatchTest` model.
 
 The `AppState` model defines the state of which the application is in. And the `MatchTest` model is a subclass of
 `TriviaTest`.
 
 Additionally, `MatchTest` also implements the following operations:
 
-* `MatchTest#startTest()` -- Does the necessary initialisations to start a MatchTest.
-* `MatchTest#stopTest()` -- Does the necessary clean up to stop a MatchTest.
+* `MatchTest#startTest()` -- Does the necessary initialisations to start a `MatchTest`.
+* `MatchTest#stopTest()` -- Does the necessary clean up to stop a `MatchTest`.
 * `MatchTest#match(questionIndex, answerIndex)` -- Matches the question to the answer.
 
 These operations are exposed in the `Model` interface as `Model#startTriviaTest()`, `Model#stopTriviaTest()` and `Model#MatchQuestionAndAnswer` respectively.
 
-The following activity diagram shows the complete lifecycle of a MatchTest.
+The following activity diagram shows the complete lifecycle of a `MatchTest`.
 
 image::MatchTestActivityDiagram.png[width="800"]
 
-Given below is an example usage scenario and how the MatchTest behaves at each step.
+Given below is an example usage scenario and how the `MatchTest` behaves at each step.
 
 Step 1. The user enter the `testM` command and a new `MatchTestCommand` will be created.
 
-Step 2. The `MatchTestCommand` will be executed and a new MatchTest Object will be created as shown in the below Sequence diagram.
+Step 2. The `MatchTestCommand` will be executed and a new `MatchTest` Object will be created as shown in the below Sequence diagram.
 
 image::StartingMatchTestSequenceDiagram.png[width="800"]
 
-Step 3. After the MatchTest has been started, the user can only input the following commands:
+Step 3. After the `MatchTest` has been started, the user can only input the following commands:
 
 * `QUESTION_INDEX ANSWER_INDEX` Will be used to define which question will be matched to the answer.
 * `ANSWER_INDEX` Another way to match the question (at the top of the question list) to its defined answer.
-* `exit` If the user input `exit`, the MatchTest will end and the information related to that MatchTest will not be recorded.
+* `exit` If the user input `exit`, the `MatchTest` will end and the information related to that `MatchTest` will not be recorded.
 
 Step 4. Suppose the user chose to match a question to an answer, the sequence will execute a list of steps, as shown in the sequence diagram below, to determine whether the match is correct.
 
@@ -483,7 +483,7 @@ Step 7. At this stage, the System will await `exit` command from the user so tha
 ==== Design Considerations
 
 ===== UI related considerations during a MatchTest
-* Below are the different aspect of the UI in the MatchTest that have been considered.
+* Below are the different aspect of the UI in the `MatchTest` that have been considered.
 ** The UI feedback that are involved when user execute MatchCommand
 *** Due to the possibility of having to match a lot of questions and answers, after each successful match, the question and answer
 that are matched correctly will be removed. In addition, to improve user experience, a colored flashed will be played
@@ -492,7 +492,7 @@ before their removal.
 *** The index of the question and answer is important because the user would be using it to identify which question is to be
 matched to which answer. The easy way to do this was to let `ListView` do it's job of re-indexing whenever an item is removed.
 However, doing so will cause confusion to the user as the index that is used to represent an item is now used to represent another item.
-Hence, in MatchTest, we have made the Indexes static.
+Hence, in `MatchTest`, we have made the Indexes static.
 ** The commands involved in matching
 *** The basic way for the user to matching a question to an answer is for them to provide the Index of the question and answer.
 However, when the list of questions and answers are long, the user will have problem keeping track on 2 lists. Hence, an
@@ -882,11 +882,11 @@ Use case resumes at step 4 on the next question.
 
 *MSS*
 
-1. User: Start MatchTest.
+1. User: Start `MatchTest`.
 2. System: Shows a list of question and answer.
 3. User: Select the matching question and answer.
 4. Repeat step 3 until user matched all the questions and answers correctly.
-5. System: Record down the statistics of the test.
+5. System: Record down and show the results of the test.
 
 +
 Use case ends.
@@ -896,9 +896,9 @@ Use case ends.
 [none]
 * 3a. Question and answer matched wrongly.
 [none]
-** 3a1. System: Indicates that question and answer matched are wrong.
+** 3a1. System: Indicates that question and answer matched are wrongly.
 +
-Use case ends.
+Use case resumes at step 3.
 
 [none]
 * 4a. User exit from the test without completing it.
