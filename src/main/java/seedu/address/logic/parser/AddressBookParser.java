@@ -263,7 +263,7 @@ public class AddressBookParser {
                 return new HelpCommand();
 
             default:
-                return new OpenEndedCommandParser().parse(userInput);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
 
         default:
