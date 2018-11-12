@@ -512,6 +512,7 @@ create a static display index of question and answer. Hence, this design conside
 abstraction that is leaking into the UI.
 // end::matchtest[]
 
+// tag::NavigationTabCommands[]
 === Navigation Feature
 ==== Current Implementation
 The Navigation Tab is designed for users to be aware of the different functionality of our app.
@@ -537,6 +538,13 @@ The tabs are expected to toggle according to the user's interaction:
 
 ===== Icons on the Tabs
 We have added the icon images for the tabs, but implementation is still a work in progress.
+//end:: NavigationTabCommands[]
+
+//tag:: ModeCommand[]
+=== Mode Feature
+==== Current Implementation
+Mode can be accessed as a command in any AppState of 3VIA, which allows you to toggle the mode anywhere in the app.
+//end::ModeCommand[]
 
 === Logging
 
