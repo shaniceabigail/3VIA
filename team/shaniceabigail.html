@@ -199,6 +199,87 @@ We have added the icon images for the tabs, but implementation is still a work i
 Mode can be accessed as a command in any AppState of 3VIA, which allows you to toggle the mode anywhere in the app.</p>
 </div>
 <div class="paragraph">
+<p>=== [Proposed] Delete Multiple <code>Coming in v2.0</code>
+==== Current Implementation
+The delete mechanism is facilitated by <code>TriviaBundleParser</code>, <code>DeleteCommandParser</code>, <code>ParserUtil</code>, <code>DeleteCommand</code> and <code>Index</code>.</p>
+</div>
+<div class="paragraph">
+<p>Currently, <code>DeleteCommandParser</code> invokes <code>ParserUtil#parseIndex()</code> which parses a <code>oneBasedIndex</code> input into an <code>Index</code>.
+The <code>DeleteCommand</code> executes the deletion of a card using the <code>zeroBasedIndex</code> as specified in <code>Index</code>.</p>
+</div>
+<div class="paragraph">
+<p>==== Proposed Enhancement
+To delete a range of cards from 1 to 5, <code>delete 1-5</code> will be executed.
+The proposed deletion of multiple cards will utilise the following operations:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>ParserUtil#parseIndex()</code>&#8201;&#8212;&#8201;takes in a one based index.</p>
+</li>
+<li>
+<p><code>ParserUtil#parseMultipleIndex()</code>&#8201;&#8212;&#8201;takes in a range of one based indexes in a specified format.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Both of the above methods will return a set of <code>Index</code>.</p>
+</div>
+<div class="paragraph">
+<p>Given below is an example implementation of how <code>delete 1-5</code> will behave at each step.</p>
+</div>
+<div class="paragraph">
+<p>Step 1. <code>DeleteCommandParser</code> will determine if the given input deletes a single card or multiple cards.
+This can be done by determining if the input contains a <code>-</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 2. In this example, <code>ParserUtil#parseMultipleIndex()</code> will execute and return a set of <code>Index</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 3. The set of <code>Index</code> is used to initialise <code>DeleteCommand</code>.</p>
+</div>
+<div class="paragraph">
+<p>Step 4. When <code>DeleteCommand#execute()</code> is invoked. A zero based index is obtained from each <code>Index</code> in the set.
+Each zero based index is then used to delete the cards, similar to the current implementation of <code>delete</code>.</p>
+</div>
+<div class="paragraph">
+<p>==== Design Consideration</p>
+</div>
+<div class="paragraph">
+<p>===== Aspect: Separate or single delete command</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Single delete command.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pro: Reduces the number of commands for the user to remember.</p>
+</li>
+<li>
+<p>Con: Users may be unaware of this functionality being available
+as the name of the command does not describe deleting multiple cards.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Separate delete command for deleting multiple cards.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pro: The command will describe the action of deleting multiple cards clearly (i.e. <code>deleteMultiple 1-5</code>).</p>
+</li>
+<li>
+<p>Con: There will be more commands for the user to remember.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
 <p>=== Logging</p>
 </div>
 <div class="paragraph">
@@ -1204,7 +1285,55 @@ Expected: Similar to previous.</p>
 <div class="paragraph">
 <p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
+<div class="paragraph">
+<p>=== Importing cards</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Importing a list of cards</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Create an empty text/plain file named <code>file.txt</code>.
+Copy it&#8217;s absolute/ relative file path. (i.e file.txt)</p>
+</li>
+<li>
+<p>Add a few question and answer pairs into <code>file.txt</code>.
+The question and answer should be separated by a <code>TAB</code> space.
+Additionally, each question and answer pair is separated by a new line.
+Make sure to follow the format as specified in the User Guide.
+Save the file.<br></p>
+<div class="paragraph">
+<p>Test case: <code>import file.txt</code><br>
+Expected: Import success. The name of the file and the number of cards
+imported will be displayed in the results display.</p>
+</div>
+</li>
+<li>
+<p>Add a topic " t/topic" (note the whitespace before "t/") above the question and answer pairs.
+Save the file.<br></p>
+<div class="paragraph">
+<p>Test case: <code>import file.txt</code><br>
+Expected: Import success. The name of the file and the number of cards
+imported will be displayed in the results display.
+The cards added should be tagged with the respective topics added.</p>
+</div>
+</li>
+<li>
+<p>Remove all text in the <code>file.txt</code>. Save the file.<br></p>
+<div class="paragraph">
+<p>Test case: <code>import file.txt</code><br>
+Expected: Import failure. No card will be imported.
+Error details shown in the results display.</p>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:56:49 UTC</div></div></div></body></html>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:39:41 UTC</div></div></div></body></html>

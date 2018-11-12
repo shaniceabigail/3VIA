@@ -711,21 +711,21 @@ A summary of testing results will be displayed in statistics page.</p>
 <em>Imports the contents from the file.txt text file from the specified file location on Windows.</em></p>
 </li>
 <li>
-<p><code>import home/username/file.txt</code><br>
-<em>Imports the contents from the file.txt text file from the specified file location on Linux.</em></p>
+<p><code>import file.txt</code><br>
+<em>Imports the contents from the file.txt text file relative to the location of the 3VIA application.</em></p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="admonitionblock important">
+<div class="admonitionblock tip">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-important" title="Important"></i>
+<i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-The file path refers to the <strong>absolute file path</strong> of the import file.
+The file path refers to either the <strong>absolute file path</strong> or the <strong>relative file path</strong> of the import file.
 </td>
 </tr>
 </table>
@@ -799,7 +799,8 @@ Below are 2 rules regarding the import file type and format that must be adhered
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-Duplicate questions in the import text file will result in import failure.
+Duplicate questions in the import text file will result in an import failure.
+Duplicated answers with different questions are allowed.
 </td>
 </tr>
 </table>
@@ -813,27 +814,27 @@ Duplicate questions in the import text file will result in import failure.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Enter the <code>import</code> command followed by the <strong>absolute file path</strong> of the import file you previously created in the command
+<p>Enter the <code>import</code> command followed by the absolute/ relative file path of the import file you previously created in the command
 box as seen below.</p>
-</li>
-</ol>
-</div>
 <div class="imageblock">
 <div class="content">
 <img src="images/import_step1.png" alt="import step 1 pic" width="500">
 </div>
 </div>
+</li>
+</ol>
+</div>
 <div class="olist arabic">
 <ol class="arabic" start="2">
 <li>
 <p>Hit enter/ return to confirm. 3VIA will now display a list of cards that has been imported.</p>
-</li>
-</ol>
-</div>
 <div class="imageblock">
 <div class="content">
-<img src="images/import_step2.png" alt="import step 2 pic" width="700">
+<img src="images/import_step2.png" alt="import step 2 pic" width="500">
 </div>
+</div>
+</li>
+</ol>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -975,4 +976,4 @@ e.g.<code>select 2</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:56:49 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:39:41 UTC</div></div></div></body></html>
