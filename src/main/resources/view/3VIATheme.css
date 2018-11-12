@@ -38,7 +38,7 @@
     -fx-opacity: 1;
 }
 
-.scroll-pane {
+.scroll-pane, .standard-background-color {
     -fx-background-color: derive(#ededed, 20%);
 }
 

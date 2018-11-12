@@ -3,7 +3,7 @@
     background-color: #383838; /* Used in the default.html file */
 }
 
-.scroll-pane {
+.scroll-pane, .standard-background-color {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
