@@ -20,6 +20,7 @@ import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.Logic;
 import seedu.address.ui.home.Homepage;
+import seedu.address.ui.review.ReviewPage;
 import seedu.address.ui.test.TriviaTestPlaceholderPage;
 
 /**
@@ -35,6 +36,7 @@ public class MainDisplay extends UiPart<Region> {
     private final ChangeListener<Tab> changeTabListener = (observableValue, oldValue, newValue) -> {
         EventsCenter.getInstance().post(new TabChangeEvent(newValue.getText()));
     };
+    private final ReviewPage reviewPage;
 
     @FXML
     private TabPane tabContainer;
@@ -61,6 +63,9 @@ public class MainDisplay extends UiPart<Region> {
         triviaTestPlaceholderPage = new TriviaTestPlaceholderPage();
         triviaTestPlaceholder.getChildren().add(triviaTestPlaceholderPage.getRoot());
         addTabListener();
+
+        reviewPage = new ReviewPage();
+        reviewPlaceholder.getChildren().add(reviewPage.getRoot());
 
         registerAsAnEventHandler(this);
     }
@@ -90,7 +95,6 @@ public class MainDisplay extends UiPart<Region> {
      * creates the view configuration of the tabs
      */
     private void configureView() {
-
         //list of tabs configured
         createTab(learnTab, "Learn", homepagePlaceholder);
         createTab(testTab, "Test", triviaTestPlaceholder);
