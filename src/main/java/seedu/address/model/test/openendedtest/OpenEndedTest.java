@@ -2,13 +2,11 @@ package seedu.address.model.test.openendedtest;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -66,6 +64,10 @@ public class OpenEndedTest extends TriviaTest {
         return shuffledCards;
     }
 
+    /**
+     * Retrieves the next card from shuffledCards, and removes it from shuffledCards
+     * @return card
+     */
     private Card getNextCard() {
         if (shuffledCards.size() == 0) {
             return null;
@@ -76,7 +78,9 @@ public class OpenEndedTest extends TriviaTest {
     }
 
     @Override
-    public void startTest() { startTimer(); }
+    public void startTest() {
+        startTimer();
+    }
 
     @Override
     public void stopTest() {
@@ -97,12 +101,19 @@ public class OpenEndedTest extends TriviaTest {
         return attempts;
     }
 
-    public Card getCurrCard() { return currCard; }
+    public Card getCurrCard() {
+        return currCard;
+    }
 
     private boolean isValidTest() {
         return shuffledCards.size() >= 1;
     }
 
+    /**
+     * Creates a new attempt with the question, answer, user answer and whether it was right or wrong
+     * @param in The user input to indicate if the user answered correctly or wrong
+     * @return A boolean value corresponding to the correctness of the attempt
+     */
     public boolean addAttempt(char in) {
         boolean isCorrect = (in == 'y' || in == 'Y');
         Attempt currAttempt = new Attempt(currCard, this.userAnswer, isCorrect);

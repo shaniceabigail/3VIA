@@ -6,10 +6,14 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.test.openendedtest.OpenEndedTest;
 
+/**
+ * The command that will record the answer for the user's attempt
+ */
 public class OpenEndedAnswerCommand extends Command {
-    public static String userAnswer;
+    private static String userAnswer;
 
-    public static final String MESSAGE_ANSWER_RECORDED = "Answer recorded!\n";
+    private static final String MESSAGE_ANSWER_RECORDED = "Answer recorded!\n" + "Please compare your answer and enter" +
+            "y if it is correct, n if it is not";
 
     public OpenEndedAnswerCommand(String userInput) {
         this.userAnswer = userInput;

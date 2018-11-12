@@ -61,7 +61,6 @@ public class MatchTest extends TriviaTest {
 
         shuffledQuestions = getQuestions(cards);
         shuffledAnswers = getAnswers(cards);
-
         attempts = new ArrayList<>();
 
         checkArgument(isValidMatchTest(), String.format(MESSAGE_MATCH_TEST_CONSTRAINS, cards.size(), topic.topicName));
@@ -284,9 +283,7 @@ public class MatchTest extends TriviaTest {
     public Supplier<? extends TriviaTestPage> getTestingPage() { return () -> new MatchTestPage(this); }
 
     @Override
-    public Supplier<? extends TriviaTestResultPage> getResultPage() {
-        return () -> new MatchTestResultPage(this);
-    }
+    public Supplier<? extends TriviaTestResultPage> getResultPage() { return () -> new MatchTestResultPage(this); }
 
     @Override
     public boolean equals(Object obj) {

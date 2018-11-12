@@ -30,27 +30,17 @@ public class Attempt {
         this.timestamp = timestamp;
     }
 
-    public Question getQuestion() {
-        return attemptedCard.getQuestion();
-    }
+    public Question getQuestion() { return attemptedCard.getQuestion(); }
 
     public Answer getAnswer() { return attemptedCard.getAnswer(); }
 
-    public Card getAttemptedCard() {
-        return attemptedCard;
-    }
+    public Card getAttemptedCard() { return attemptedCard; }
 
-    public String getRawAnswer() {
-        return answer;
-    }
+    public String getRawAnswer() { return answer; }
 
-    public boolean isCorrect() {
-        return isCorrect;
-    }
+    public boolean isCorrect() { return isCorrect; }
 
-    public Date getTimestamp() {
-        return timestamp;
-    }
+    public Date getTimestamp() { return timestamp; }
 
     @Override
     public boolean equals(Object other) {

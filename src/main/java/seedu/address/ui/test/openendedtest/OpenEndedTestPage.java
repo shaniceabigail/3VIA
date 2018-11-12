@@ -50,7 +50,7 @@ public class OpenEndedTestPage extends TriviaTestPage {
 
     @Subscribe
     private void handleOpenEndedTestShowNextQuestion(OpenEndedTestShowNextQuestionEvent event) {
-        this.card = event.card;
+        this.card = event.getCard();
         this.question = this.card.getQuestion().value;
         this.answer = "";
         this.userAnswer = "";
@@ -61,7 +61,7 @@ public class OpenEndedTestPage extends TriviaTestPage {
 
     @Subscribe
     private void handleOpenEndedTestShowAnswer(OpenEndedTestShowAnswerEvent event) {
-        this.userAnswer = event.userAnswer;
+        this.userAnswer = event.getUserAnswer();
         this.answer = this.card.getAnswer().toString();
         userAnswerLabel.setText(this.userAnswer);
         answerLabel.setText(this.answer);

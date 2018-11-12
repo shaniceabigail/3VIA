@@ -10,7 +10,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.TopicIsKeywordPredicate;
-import seedu.address.model.state.AppState;
 import seedu.address.model.topic.Topic;
 import seedu.address.ui.test.TriviaTestPage;
 import seedu.address.ui.test.TriviaTestResultPage;

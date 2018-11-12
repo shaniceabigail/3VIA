@@ -10,6 +10,9 @@ import seedu.address.commons.util.DateUtil;
 import seedu.address.model.test.openendedtest.OpenEndedTest;
 import seedu.address.ui.test.TriviaTestResultPage;
 
+/**
+ * The page that shows up after the user has completed Open Ended Test.
+ */
 public class OpenEndedTestResultPage extends TriviaTestResultPage {
     private static final String FXML = "test/openendedtest/OpenEndedTestResultPage.fxml";
 

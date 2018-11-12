@@ -189,7 +189,7 @@ public class AddressBookParser {
 
             default:
                 return new OpenEndedCommandParser().parse(userInput);
-                }
+            }
 
         case OPEN_ENDED_TEST_RESULT:
             switch(commandWord) {
@@ -199,7 +199,7 @@ public class AddressBookParser {
 
             default:
                 return new OpenEndedCommandParser().parse(userInput);
-                }
+            }
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
