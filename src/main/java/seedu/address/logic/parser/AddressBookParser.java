@@ -80,9 +80,6 @@ public class AddressBookParser {
             case FindCommand.COMMAND_WORD:
                 return new FindCommandParser().parse(arguments);
 
-            case LearnCommand.COMMAND_WORD:
-                return new LearnCommandParser().parse(arguments);
-
             case HistoryCommand.COMMAND_WORD:
                 return new HistoryCommand();
 
@@ -107,14 +104,19 @@ public class AddressBookParser {
             case ImportCommand.COMMAND_WORD:
                 return new ImportCommandParser().parse(arguments);
 
+                /* commands for navigation */
+            case LearnCommand.COMMAND_WORD:
+                return new LearnCommandParser().parse(arguments);
+
             case TestCommand.COMMAND_WORD:
                 return new TestCommand(arguments);
 
-            case ModeCommand.COMMAND_WORD:
-                return new ModeCommand();
-
             case ReviewCommand.COMMAND_WORD:
                 return new ReviewCommand(arguments);
+
+                /* commands for UI change */
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -131,18 +133,20 @@ public class AddressBookParser {
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
 
-            case TestCommand.COMMAND_WORD:
-                return new TestCommand(arguments);
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
 
+                /* commands for navigation */
             case LearnCommand.COMMAND_WORD:
                 return new LearnCommandParser().parse(arguments);
 
-            case HelpCommand.COMMAND_WORD:
-                return new HelpCommand();
+            case TestCommand.COMMAND_WORD:
+                return new TestCommand(arguments);
 
             case ReviewCommand.COMMAND_WORD:
                 return new ReviewCommand(arguments);
 
+                /* commands for UI change */
             case ModeCommand.COMMAND_WORD:
                 return new ModeCommand();
 
@@ -152,18 +156,23 @@ public class AddressBookParser {
 
         case REVIEW:
             switch (commandWord) {
-            case TestCommand.COMMAND_WORD:
-                return new TestCommand(arguments);
-
-            case LearnCommand.COMMAND_WORD:
-                return new LearnCommandParser().parse(arguments);
-
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
 
             case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
 
+                /* commands for navigation */
+            case LearnCommand.COMMAND_WORD:
+                return new LearnCommandParser().parse(arguments);
+
+            case TestCommand.COMMAND_WORD:
+                return new TestCommand(arguments);
+
+            case ReviewCommand.COMMAND_WORD:
+                return new ReviewCommand(arguments);
+
+                /* commands for UI change */
             case ModeCommand.COMMAND_WORD:
                 return new ModeCommand();
 
@@ -203,6 +212,9 @@ public class AddressBookParser {
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
 
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
+
             default:
                 return new OpenEndedAnswerParser().parse(userInput);
             }
@@ -213,6 +225,9 @@ public class AddressBookParser {
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
 
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
+
             default:
                 return new OpenEndedCommandParser().parse(userInput);
             }
@@ -222,6 +237,9 @@ public class AddressBookParser {
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
+
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
 
             default:
                 return new OpenEndedCommandParser().parse(userInput);
