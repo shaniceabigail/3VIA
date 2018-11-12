@@ -172,7 +172,7 @@ The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `Re
 .Structure of the TestPage Component
 image::TestPageDiagram.png[width="800"]
 
-Structure for the Test Page Component has also been modified to expand the functionality of the application.
+Structure for the Test Page Component has also been modified to contain and expand the functionality of the application.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -527,24 +527,26 @@ create a static display index of question and answer. Hence, this design conside
 abstraction that is leaking into the UI.
 // end::matchtest[]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
-
 // tag::NavigationTabCommands[]
 === Navigation Feature
 ==== Current Implementation
-The Navigation Tab is designed for users to be aware of the different functionality of our app.
-We added a navigation tab feature, which only handles mouse events.
+The Navigation Tab is designed for users to be aware of the different functionality of our app and paired with its relevant content.
+We added a navigation tab feature which can be accessed through commands of the tabs the user wants to navigate to.
+
+The contents of the each AppState, or the functionalities of that page is attached to the tab itself, to allow the user to check and use the app more efficiently.
+Commands and mouse click events will handle the updating of AppState.
+
+.Toggle Tab Event
+image::ToggleTabActivityDiagram.png[width="1000"]
+
+==== Handling event
 At the present, the Navigation Tab is not a separate class on its own, and is embedded into the `MainDisplay` class.
+Event raised is ToggleTabEvent.
 
 ===== GUI Handling
-The tabs are expected to toggle according to the user's interaction:
+The tabs are expected to toggle and display their respective tab contents according to the user's interaction:
 
-* Command Line [Work In Progress]
+* Commands from Command Line Interface
 * Mouse clicks
 * Keyboard shortcuts [future release]
 
@@ -554,19 +556,43 @@ The tabs are expected to toggle according to the user's interaction:
 ** pros: easy to see, optimized for user experience
 ** cons: harder to implement
 
-* Top bar
+* Top bar (_currently implemented_)
 ** pros: easier to implement
-** cons: less intuitive for users compared to side bar
+** cons: less visually intuitive for users compared to side bar
+
+==== Using external library
+Originally we were using JFoenix, however due to a bug which causes the alignment of our pages to the tabs to be visually off,
+we decided to implement a regular tab.
+
+* Library used: https://github.com/jfoenixadmin/JFoenix[JFoenix]
+* Tutorial inspiration: http://synappse.co/blog/vertical-stateful-jfxtabpane-with-icons-in-javafx/[Vertical Tabs]
 
 ===== Icons on the Tabs
 We have added the icon images for the tabs, but implementation is still a work in progress.
-//end:: NavigationTabCommands[]
+// end::NavigationTabCommands[]
 
-//tag:: ModeCommand[]
-=== Mode Feature
+// tag::ModeCommand[]
+=== Day and Night Mode Feature
 ==== Current Implementation
-Mode can be accessed as a command in any AppState of 3VIA, which allows you to toggle the mode anywhere in the app.
-//end::ModeCommand[]
+Mode allows you to toggle between day and night mode anywhere in the app and it can be accessed as a command in any AppState of 3VIA.
+
+.Day Mode / Light Theme
+image::3VIATheme.png[width="800"]
+
+.Night Mode / Dark Theme
+image::DarkTheme.png[width="800"]
+
+.Mode activity diagram
+image::ModeActivityDiagram.png[width="800"]
+
+==== Handling event
+Event is handled in the `MainWindow.java`.
+
+==== GUI Handling
+The default of the application is a "Day Theme" stylesheet, meaning a generally white background
+with dark text. The command will swap the current theme set to a "Dark Theme" stylesheet.
+Each time the the `mode` command is called, the boolean in `MainDisplay.java` acts as a toggle between the 2 themes.
+// end::ModeCommand[]
 
 // tag::deleteMultiple[]
 === [Proposed] Delete Multiple `Coming in v2.0`

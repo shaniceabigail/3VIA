@@ -9,12 +9,8 @@
 
 == Overview
 
-<<<<<<< HEAD:docs/team/shaniceabigal.adoc
-3VIA is a desktop application that can be used for learners to recap their subjects, through active recall. The app focuses on learning, testing and reviewing, to ensure that the user can go through an iteration, and have any resource they need.
-=======
 3VIA is a desktop trivia application used by learners for material iteration in active recall.
 The user interacts with it using a Command Line Interface (CLI), and it has a GUI created with JavaFX. It is written in Java, and has about 12 kLoC.
->>>>>>> update-documentations:docs/team/shaniceabigail.adoc
 
 == Summary of contributions
 
@@ -31,7 +27,7 @@ The user interacts with it using a Command Line Interface (CLI), and it has a GU
 
 * *Minor enhancement*: modified the "learn" and "review" command to allow navigation between tabs.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=shaniceabigail[Reposense]
 
 * *Other contributions*:
 
@@ -42,11 +38,10 @@ The user interacts with it using a Command Line Interface (CLI), and it has a GU
 ** Tools:
 *** Integrated a third party library (JFoenix) to the project (https://github.com[#73])
 
-
 == Contributions to the User Guide
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Given below are sections I contributed to the User Guide. They highlight my ability to write documentation for end-users._
 |===
 
 include::../UserGuide.adoc[tag=NavigationTabCommands]

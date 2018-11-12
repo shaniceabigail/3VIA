@@ -45,6 +45,7 @@ Here are some example commands you can try:
 * **`add`**`add q/What is the formula for force? a/force = mass * acceleration a/Physics` : adds a card with question
 `What is the formula for force?` to the the trivia application.
 * **`delete`**`3` : deletes the 3rd card in the current list
+* *`mode`* :  changes the light theme mode to a darker mode
 * *`exit`* : exits the app
 ====
 Refer to <<Features>> for more details of each command.
@@ -75,6 +76,8 @@ Format: `add q/QUESTION a/ANSWER [t/TOPIC]...`
 [TIP]
 A card can have any number of topics. If there are no topics specified, `NoTopic` will be assigned to the card.
 
+[WARNING]
+`[t/TOPIC]` is case sensitive
 ====
 *Notes*
 
@@ -283,7 +286,12 @@ Format: `learn`, `test`, `review`
 // end::NavigationTabCommands[]
 
 //tag::ModeCommand[]
-=== Toggling between the day and night mode of the app: `mode`
+=== Changing the day and night mode of the app: `mode`
+.Day Mode / Light Theme
+image::3VIATheme.png[width="800"]
+
+.Night Mode / Dark Theme
+image::DarkTheme.png[width="800"]
 Type `mode` in any page, or section of the app to switch between the modes to suit your comfort in learning and using 3VIA.
 Format: `mode`
 // end::ModeCommand[]
@@ -460,17 +468,23 @@ exiting from the programme. If you want to exit from the program, execute the `e
 3VIA saves data in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== Multi-Player `[coming in v2.0]`
-
-_{explain how the user can enable/disable Multi-Player}_
-
 == FAQ
 
 *Q*: How do I transfer my data to another computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous 3VIA application folder.
 
 == Command Summary
+=== Non-page Dependent Commands
+.Non-page dependent Commands
+image::NonPageDependent.png[width="800"]
 
+=== Navigation Commands
+.Navigation Commands
+image::NavigationCommands.png[width="800"]
+
+=== Learn Commands
+* *Learn* : `learn [TOPIC]`
+* *Mass Import* : `import FILEPATH`
 * *Add* `add q/QUESTION a/ANSWER [t/TOPIC]...` +
 e.g. `add q/What is the formula for force? a/force = mass * acceleration t/Physics`
 * *Clear* : `clear`
@@ -480,19 +494,21 @@ e.g. `delete 3`
 e.g. `edit 1 q/Why will the apple fall from the tree? a/Because of gravity!`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Why`
-* *Learn* : `learn [TOPIC]`
-* *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
 * *Research* : `research INDEX`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+
+=== Test Commands
 * *Open Ended Test* : `testO TOPIC TIMELIMIT_IN_SECONDS`
 ** *Input the answer* : `YOUR_ANSWER`
 ** *Correctness of answer* : `c` (correct) OR `x` (wrong)
 * *MatchTest* : `testM TOPIC`
 ** *Match question to its answer* : `INDEX_OF_QUESTION INDEX_OF_ANSWER` or `INDEX_OF_ANSWER`
-** *Exit from MatchTest* : `exit`
 * *View statistics of test* : `stats [TOPIC]` _or_ `stats` _or_ `stats HL`
-* *Mass Import* : `import FILEPATH`
+* *History* : `history`
+
+=== Review Commands
+* *History* : `history`
