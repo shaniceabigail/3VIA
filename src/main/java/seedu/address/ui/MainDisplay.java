@@ -32,7 +32,6 @@ public class MainDisplay extends UiPart<Region> {
 
     private final Homepage homepage;
     private final TriviaTestPlaceholderPage triviaTestPlaceholderPage;
-    private final double tabWidth = 90.0;
 
     @FXML
     private TabPane tabContainer;
@@ -73,13 +72,6 @@ public class MainDisplay extends UiPart<Region> {
      * creates the view configuration of the tabs
      */
     private void configureView() {
-        //tabContainer.setSide(side.LEFT);
-//        tabContainer.setTabMinWidth(tabWidth);
-//        tabContainer.setTabMaxWidth(tabWidth);
-//        tabContainer.setTabMinHeight(tabWidth);
-//        tabContainer.setTabMaxHeight(tabWidth);
-//        tabContainer.setRotateGraphic(true);
-        //tabContainer.getStyleClass().add("root");
 
         //list of tabs configured
         createTab(learnTab, "Learn", "file:/src/main/resources/images/tabIcons/home.png", homepagePlaceholder);
@@ -108,7 +100,7 @@ public class MainDisplay extends UiPart<Region> {
         //set the tab's outlook into a border pane
         BorderPane borderPane = new BorderPane();
         borderPane.setRotate(90.0);
-        borderPane.setMaxWidth(tabWidth);
+        //borderPane.setMaxWidth(tabWidth);
         borderPane.setCenter(imageView);
         borderPane.setBottom(label);
 
