@@ -276,6 +276,18 @@ _Card list has been cleared_.
 _No cards to be cleared_.
 // end::clear[]
 
+//tag::NavigationTabCommands[]
+=== Navigation to another tab
+You can type `learn` to go to learn page, `test` to go to test page and `review` to go to review page. But in case you forget, type any of the tab names and you'll navigate there, as long as you're not in the middle of a test! No running away from the test you're doing, you can do this and keep learning!
+Format: `learn`, `test`, `review`
+// end::NavigationTabCommands[]
+
+//tag::ModeCommand[]
+=== Toggling between the day and night mode of the app: `mode`
+Type `mode` in any page, or section of the app to switch between the modes to suit your comfort in learning and using 3VIA.
+Format: `mode`
+// end::ModeCommand[]
+
 //tag::openendedtest[]
 === Starting an Open Ended Test: `testO`
 Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer. +
