@@ -9,12 +9,8 @@
 
 == Overview
 
-<<<<<<< HEAD:docs/team/shaniceabigal.adoc
-3VIA is a desktop application that can be used for learners to recap their subjects, through active recall. The app focuses on learning, testing and reviewing, to ensure that the user can go through an iteration, and have any resource they need.
-=======
 3VIA is a desktop trivia application used by learners for material iteration in active recall.
 The user interacts with it using a Command Line Interface (CLI), and it has a GUI created with JavaFX. It is written in Java, and has about 12 kLoC.
->>>>>>> update-documentations:docs/team/shaniceabigail.adoc
 
 == Summary of contributions
 
