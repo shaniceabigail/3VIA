@@ -176,11 +176,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void loadStyle(Parent node, String location) {
-        node.getStylesheets().clear();
-        node.getStylesheets().add(getClass().getResource(location).toExternalForm());
-    }
-
     public void releaseResources() {
         mainDisplay.releaseResources();
     }

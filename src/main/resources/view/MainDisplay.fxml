@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTabPane?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.StackPane?>
-
 <StackPane fx:id="MainDisplay" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
-     <TabPane fx:id="tabContainer">
+     <JFXTabPane fx:id="tabContainer">
          <tabs>
             <Tab fx:id="learnTab" closable="false" text="Learn">
                <content>
@@ -28,5 +27,5 @@
                </content>
             </Tab>
          </tabs>
-      </TabPane>
+      </JFXTabPane>
 </StackPane>
