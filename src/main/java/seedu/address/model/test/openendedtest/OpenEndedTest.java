@@ -121,10 +121,14 @@ public class OpenEndedTest extends TriviaTest {
         return isCorrect;
     }
 
-    public void advanceCard() { currCard = getNextCard(); }
+    public void advanceCard() {
+        currCard = getNextCard();
+    }
 
     @Override
-    public boolean isCompleted() { return (this.shuffledCards.size() == 0); }
+    public boolean isCompleted() {
+        return (this.shuffledCards.size() == 0);
+    }
 
     /**
      * Starts the timer of the test.
@@ -139,7 +143,9 @@ public class OpenEndedTest extends TriviaTest {
     }
 
     @Override
-    public Supplier<? extends TriviaTestPage> getTestingPage() { return () -> new OpenEndedTestPage(this); }
+    public Supplier<? extends TriviaTestPage> getTestingPage() {
+        return () -> new OpenEndedTestPage(this);
+    }
 
     @Override
     public Supplier<? extends TriviaTestResultPage> getResultPage() {

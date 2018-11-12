@@ -12,8 +12,8 @@ import seedu.address.model.test.openendedtest.OpenEndedTest;
 public class OpenEndedAnswerCommand extends Command {
     private static String userAnswer;
 
-    private static final String MESSAGE_ANSWER_RECORDED = "Answer recorded!\n" + "Please compare your answer and enter" +
-            "y if it is correct, n if it is not";
+    private static final String MESSAGE_ANSWER_RECORDED = "Answer recorded!\n" + "Please compare your answer and enter"
+            + "y if it is correct, n if it is not";
 
     public OpenEndedAnswerCommand(String userInput) {
         this.userAnswer = userInput;
