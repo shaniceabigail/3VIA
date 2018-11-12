@@ -19,11 +19,12 @@ import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.LearnCommand;
 import seedu.address.logic.commands.MatchTestCommand;
 import seedu.address.logic.commands.ModeCommand;
-import seedu.address.logic.commands.NavigationCommand;
 import seedu.address.logic.commands.OpenEndedTestCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ResearchCommand;
+import seedu.address.logic.commands.ReviewCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.TestCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.state.State;
@@ -79,9 +80,6 @@ public class AddressBookParser {
             case FindCommand.COMMAND_WORD:
                 return new FindCommandParser().parse(arguments);
 
-            case LearnCommand.COMMAND_WORD:
-                return new LearnCommandParser().parse(arguments);
-
             case HistoryCommand.COMMAND_WORD:
                 return new HistoryCommand();
 
@@ -106,9 +104,17 @@ public class AddressBookParser {
             case ImportCommand.COMMAND_WORD:
                 return new ImportCommandParser().parse(arguments);
 
-            case NavigationCommand.COMMAND_WORD:
-                return new NavigationCommand(arguments);
+                /* commands for navigation */
+            case LearnCommand.COMMAND_WORD:
+                return new LearnCommandParser().parse(arguments);
 
+            case TestCommand.COMMAND_WORD:
+                return new TestCommand(arguments);
+
+            case ReviewCommand.COMMAND_WORD:
+                return new ReviewCommand(arguments);
+
+                /* commands for UI change */
             case ModeCommand.COMMAND_WORD:
                 return new ModeCommand();
 
@@ -127,14 +133,25 @@ public class AddressBookParser {
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
 
-            case NavigationCommand.COMMAND_WORD:
-                return new NavigationCommand(arguments);
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
 
+            case HistoryCommand.COMMAND_WORD:
+                return new HistoryCommand();
+
+                /* commands for navigation */
             case LearnCommand.COMMAND_WORD:
                 return new LearnCommandParser().parse(arguments);
 
-            case HelpCommand.COMMAND_WORD:
-                return new HelpCommand();
+            case TestCommand.COMMAND_WORD:
+                return new TestCommand(arguments);
+
+            case ReviewCommand.COMMAND_WORD:
+                return new ReviewCommand(arguments);
+
+                /* commands for UI change */
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -142,14 +159,28 @@ public class AddressBookParser {
 
         case REVIEW:
             switch (commandWord) {
-            case NavigationCommand.COMMAND_WORD:
-                return new NavigationCommand(arguments);
-
-            case LearnCommand.COMMAND_WORD:
-                return new LearnCommandParser().parse(arguments);
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
             case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
+
+            case HistoryCommand.COMMAND_WORD:
+                return new HistoryCommand();
+
+                /* commands for navigation */
+            case LearnCommand.COMMAND_WORD:
+                return new LearnCommandParser().parse(arguments);
+
+            case TestCommand.COMMAND_WORD:
+                return new TestCommand(arguments);
+
+            case ReviewCommand.COMMAND_WORD:
+                return new ReviewCommand(arguments);
+
+                /* commands for UI change */
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -161,6 +192,12 @@ public class AddressBookParser {
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
 
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
             default:
                 return new MatchCommandParser().parse(userInput);
             }
@@ -170,6 +207,12 @@ public class AddressBookParser {
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
+
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -181,6 +224,12 @@ public class AddressBookParser {
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
 
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
             default:
                 return new OpenEndedAnswerParser().parse(userInput);
             }
@@ -191,6 +240,12 @@ public class AddressBookParser {
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
 
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
             default:
                 return new OpenEndedCommandParser().parse(userInput);
             }
@@ -200,6 +255,12 @@ public class AddressBookParser {
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
+
+            case ModeCommand.COMMAND_WORD:
+                return new ModeCommand();
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

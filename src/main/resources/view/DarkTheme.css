@@ -1,9 +1,9 @@
 .background {
-    -fx-background-color: derive(#e8c87f, 20%);
+    -fx-background-color: derive(#1d1d1d, 20%);
     background-color: #383838; /* Used in the default.html file */
 }
-/*
-.scroll-pane {
+
+.scroll-pane, .standard-background-color {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
@@ -14,7 +14,7 @@
 .anchor-pane {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
-*/
+
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Segoe UI Semibold";
@@ -49,11 +49,11 @@
     -fx-text-fill: white;
     -fx-opacity: 1;
 }
-/*
+
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
-}*/
+}
 
 .tab-pane {
     -fx-padding: 0 0 0 1;
@@ -129,7 +129,7 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#ffe7b2, 0%);
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .list-cell {
@@ -172,7 +172,8 @@
 }
 
 .stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-padding: #383838;
 }
 
 .hbox {
@@ -432,6 +433,6 @@
 }
 
 .centered-aligned-text-area .content {
-    -fx-background-color: derive(#ededed, 20%);
+    -fx-background-color: derive(#1d1d1d, 20%);
 }
 

@@ -4,21 +4,23 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.TabChangeEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.Logic;
 import seedu.address.ui.home.Homepage;
+import seedu.address.ui.review.ReviewPage;
 import seedu.address.ui.test.TriviaTestPlaceholderPage;
 
 /**
@@ -31,7 +33,10 @@ public class MainDisplay extends UiPart<Region> {
 
     private final Homepage homepage;
     private final TriviaTestPlaceholderPage triviaTestPlaceholderPage;
-    private final double tabWidth = 90.0;
+    private final ChangeListener<Tab> changeTabListener = (observableValue, oldValue, newValue) -> {
+        EventsCenter.getInstance().post(new TabChangeEvent(newValue.getText()));
+    };
+    private final ReviewPage reviewPage;
 
     @FXML
     private TabPane tabContainer;
@@ -57,8 +62,26 @@ public class MainDisplay extends UiPart<Region> {
 
         triviaTestPlaceholderPage = new TriviaTestPlaceholderPage();
         triviaTestPlaceholder.getChildren().add(triviaTestPlaceholderPage.getRoot());
+        addTabListener();
+
+        reviewPage = new ReviewPage();
+        reviewPlaceholder.getChildren().add(reviewPage.getRoot());
 
         registerAsAnEventHandler(this);
+    }
+
+    /**
+     * Add tab change listener.
+     */
+    private void addTabListener() {
+        tabContainer.getSelectionModel().selectedItemProperty().addListener(changeTabListener);
+    }
+
+    /**
+     * Remove the tab change listener.
+     */
+    private void removeTabListener() {
+        tabContainer.getSelectionModel().selectedItemProperty().removeListener(changeTabListener);
     }
 
     /**
@@ -72,18 +95,10 @@ public class MainDisplay extends UiPart<Region> {
      * creates the view configuration of the tabs
      */
     private void configureView() {
-        //tabContainer.setSide(side.LEFT);
-        tabContainer.setTabMinWidth(tabWidth);
-        tabContainer.setTabMaxWidth(tabWidth);
-        tabContainer.setTabMinHeight(tabWidth);
-        tabContainer.setTabMaxHeight(tabWidth);
-        tabContainer.setRotateGraphic(true);
-        //tabContainer.getStyleClass().add("root");
-
         //list of tabs configured
-        createTab(learnTab, "Learn", "file:/src/main/resources/images/tabIcons/home.png", homepagePlaceholder);
-        createTab(testTab, "Test", "file:/src/main/resources/images/tabIcons/settings.png", triviaTestPlaceholder);
-        createTab(reviewTab, "Review", "file:/main/resources/images/tabIcons/test.png", reviewPlaceholder);
+        createTab(learnTab, "Learn", homepagePlaceholder);
+        createTab(testTab, "Test", triviaTestPlaceholder);
+        createTab(reviewTab, "Review", reviewPlaceholder);
 
         logger.info("View has been configured");
     }
@@ -92,28 +107,18 @@ public class MainDisplay extends UiPart<Region> {
      * Creates a tab with the following parameters
      * @param tab
      * @param title
-     * @param iconPath
      * @param containerPane
      */
-    private void createTab(Tab tab, String title, String iconPath, StackPane containerPane) {
-        double imageWidth = 40.0;
-
-        ImageView imageView = new ImageView(new Image(iconPath));
-        imageView.setFitHeight(imageWidth);
-        imageView.setFitWidth(imageWidth);
-
+    private void createTab(Tab tab, String title, StackPane containerPane) {
         Label label = new Label(title);
 
         //set the tab's outlook into a border pane
         BorderPane borderPane = new BorderPane();
         borderPane.setRotate(90.0);
-        borderPane.setMaxWidth(tabWidth);
-        borderPane.setCenter(imageView);
         borderPane.setBottom(label);
 
         try {
             tab.setContent(containerPane);
-            //tabPane = tab.getTabPane();
             logger.info("tab created");
         } catch (Exception e) {
             throw new IllegalArgumentException("Tab not added");
@@ -139,9 +144,12 @@ public class MainDisplay extends UiPart<Region> {
     @Subscribe
     private void handleShowTriviaTestViewEvent(ShowTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+
+        removeTabListener();
         tabContainer.getSelectionModel().select(testTab);
         learnTab.setDisable(true);
         reviewTab.setDisable(true);
+        addTabListener();
     }
 
     @Subscribe

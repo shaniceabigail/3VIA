@@ -2,6 +2,9 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.state.State.LEARN;
+import static seedu.address.model.state.State.REVIEW;
+import static seedu.address.model.state.State.TEST;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -16,6 +19,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.TabChangeEvent;
 import seedu.address.commons.events.model.TriviaBundleChangedEvent;
 import seedu.address.commons.events.model.TriviaResultsChangedEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
@@ -341,7 +345,23 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new DisplayCardInfoEvent(selectedCard, triviaResults.getAttemptsByCard(selectedCard)));
     }
 
+    @Override
+    @Subscribe
+    public void handleChangeTab(TabChangeEvent event) {
+        State toGo = LEARN;
+        if ("Learn".equals(event.getUpdatedTab())) {
+            toGo = LEARN;
 
+        } else if ("Test".equals(event.getUpdatedTab())) {
+            toGo = TEST;
+
+        } else if ("Review".equals(event.getUpdatedTab())) {
+            toGo = REVIEW;
+
+        }
+        appState.setAppState(toGo);
+
+    }
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

@@ -42,9 +42,10 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Here are some example commands you can try:
 
 * *`learn`* : Will direct you to the learn page with all the avaiable cards displayed.
-* **`add`**`add q/What is the formula for force? a/force = mass * acceleration a/Physics` : adds a card with question
+* *`add`*: `add q/What is the formula for force? a/force = mass * acceleration t/Physics` : adds a card with question
 `What is the formula for force?` to the the trivia application.
 * **`delete`**`3` : deletes the 3rd card in the current list
+* *`mode`* :  changes the light theme mode to a darker mode
 * *`exit`* : exits the app
 ====
 Refer to <<Features>> for more details of each command.
@@ -75,6 +76,8 @@ Format: `add q/QUESTION a/ANSWER [t/TOPIC]...`
 [TIP]
 A card can have any number of topics. If there are no topics specified, `NoTopic` will be assigned to the card.
 
+[WARNING]
+`[t/TOPIC]` is case sensitive
 ====
 *Notes*
 
@@ -150,7 +153,7 @@ Examples:
 _Deletes the 2nd displayed card._
 * `find Why` +
 `delete 1` +
-_Deletes the 1st card in the results of the `find` command._xs
+_Deletes the 1st card in the results of the `find` command._
 
 // tag::select[]
 === Viewing information related to a card : `select`
@@ -171,12 +174,12 @@ _Selects and opens a Card Info Panel for the 1st card in the results of the `fin
 // tag::research[]
 === Research on a question : `research`
 
-Loads the Google search page for the question of the identified card. If, for any reason, you are not able to load the
+Loads the Google search page for the question of the identified card. If you are not able to load the
 Google search page, 3VIA will redirect you to DuckDuckGo's search engine with the selected question as the search query. +
 Format: `research INDEX`
 
 [NOTE]
-You would need to have an internet connection to load the online search engine. If you are not able to load the
+You would need to have an internet connection to load the online search engine. If you are not able to load both the
 Google's and DuckDuckGo's search engine, you will be redirected to a page with an error message.
 // end::research[]
 
@@ -205,7 +208,7 @@ Examples:
 
 * `delete 1` +
 `undo` +
-_`delete 1` command is reversed._
+_The `delete 1` command is reversed_
 
 * `select 1` +
 `learn` +
@@ -215,15 +218,14 @@ _The `undo` command not executed as there are no undoable commands previously ex
 * `delete 1` +
 `clear` +
 `undo` +
-_`clear` command is reversed_ +
+_The `clear` command is reversed_ +
 `undo` +
-_`delete 1` command is reversed_ +
-_Multiple commands can be reversed._
+_The `delete 1` command is reversed_.
 
 * `import C:\Users\username\Desktop\text.txt` +
 `learn` +
 `undo` +
-_`import` command is reversed as learn is not an undoable command._
+_The `import` command is reversed_
 
 === Redoing the previously undone command : `redo`
 
@@ -283,6 +285,23 @@ _Card list has been cleared_.
 _No cards to be cleared_.
 // end::clear[]
 
+//tag::NavigationTabCommands[]
+=== Navigation to another tab
+You can type `learn` to go to learn page, `test` to go to test page and `review` to go to review page. But in case you forget, type any of the tab names and you'll navigate there, as long as you're not in the middle of a test! No running away from the test you're doing, you can do this and keep learning!
+Format: `learn`, `test`, `review`
+// end::NavigationTabCommands[]
+
+//tag::ModeCommand[]
+=== Changing the day and night mode of the app: `mode`
+.Day Mode / Light Theme
+image::3VIATheme.png[width="800"]
+
+.Night Mode / Dark Theme
+image::DarkTheme.png[width="800"]
+Type `mode` in any page, or section of the app to switch between the modes to suit your comfort in learning and using 3VIA.
+Format: `mode`
+// end::ModeCommand[]
+
 //tag::openendedtest[]
 === Starting an Open Ended Test: `testO`
 Start an open-ended test of a specified topic. In an open-ended test, the user will key in their answer to the questions, and get the choose whether he/she has answered correctly by comparing their answers with the expected answer. +
@@ -314,28 +333,28 @@ Format: `exit`
 // tag::matchtest1[]
 === Start a MatchTest: `testM`
 
-Start a test of matching questions and answers for a specified topic. In a MatchTest, all the questions and answers in
+Start a test of matching questions and answers for a specified topic. In a `MatchTest`, all the questions and answers in
 that topic will be displayed. You will then have to match all the questions to their respective answer. +
 Format: `testM TOPIC`
 
 [NOTE]
-The navigation tabs will be disabled during the Match Test. If you want to navigate to other pages, you would need to exit
-the Match Test by entering the `exit` command, as described in the section on https://cs2103-ay1819s1-w12-3.github.io/main/UserGuide.html#quit-matchtest[Quit MatchTest].
+The navigation tabs will be disabled during the `MatchTest`. If you want to navigate to other pages, you would need to exit
+the `MatchTest` by entering the `exit` command, as described in the section on https://cs2103-ay1819s1-w12-3.github.io/main/UserGuide.html#quit-matchtest[Quit MatchTest].
 
 The following commands can only be used during a `MatchTest`.
 
 ==== Match question and answer:
 
-Will match a pair of question and answer during a MatchTest. +
+Will match a pair of question and answer during a `MatchTest`. +
 Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 
-An example is given in the below screenshot, where the command of `1 2` will select the question and answer that is boxed
+An example is given in the below screenshot, where the command of `2 3` will select the question and answer that is boxed
 in green.
 
 image::UserGuideMatchCommand.png[width="790"]
 
 Another way to match a pair of question and answer is to solely enter the index of the answer. By doing so, we will
-assume that you would be matching a question at the top to the answer that is specified. +
+assume that you would be matching first question to the answer that is specified. +
 Format: `INDEX_OF_ANSWER`
 
 An example of such a usage can be seen in the the below screenshot.
@@ -349,36 +368,35 @@ Also note that answers are case sensitive. Hence the answer of "f = m * a" is no
 
 ==== Quit MatchTest:
 
-If you want to stop an ongoing MatchTest, you can enter the `exit` command at any time during the test. The command
+If you want to stop an ongoing `MatchTest`, you can enter the `exit` command at any time during the test. The command
 will bring you to the test menu page.
 
-After the MatchTest has ended, a result page will be shown. After reviewing your results, you can exit from the MatchTest by
+After the `MatchTest` has ended, a result page will be shown. After reviewing your results, you can exit from the `MatchTest` by
 entering the `exit` command. The command will bring you to the test menu page. +
 Format: `exit`
 
 [NOTE]
-Your attempts from an incomplete MatchTest will be discarded. Only those attempts from a completed MatchTest will
-be saved into your hard disk.
+Only those attempts from a completed `MatchTest` will be saved into your hard disk.
 // end::matchtest2[]
 
 // tag::stats[]
-=== View statistics for a certain test or overall learning path: `stats` `[coming in v2.0]`
+=== View statistics for a certain test or overall learning path: `review` `[coming in v2.0]`
 
 Results of previous tests, questions, expected answers and the user’s answers for that particular topic will be displayed. +
-A summary of testing results will be displayed in statistics page.
+A summary of testing results will be displayed in review page.
 
-Format: `stats TOPIC` _or_ `stats` _or_
-`stats HL`
+Format: `review TOPIC` _or_ `review` _or_
+`review HL`
 
 Example:
 
-`stats Physics` +
+`review Physics` +
 _Displays the overall statistics of questions attempted of Physics_.
 
-`stats` +
+`review` +
 _Displays the overall statistics of all questions attempted_.
 
-`stats HL` +
+`review HL` +
 _Displays card list sorted by high to low times of mistakes_
 // end::stats[]
 
@@ -392,11 +410,11 @@ Example:
 ****
 * `import C:\Users\username\Desktop\file.txt` +
 _Imports the contents from the file.txt text file from the specified file location on Windows._
-* `import home/username/file.txt` +
-_Imports the contents from the file.txt text file from the specified file location on Linux._
+* `import file.txt` +
+_Imports the contents from the file.txt text file relative to the location of the 3VIA application._
 ****
 
-IMPORTANT: The file path refers to the *absolute file path* of the import file.
+TIP: The file path refers to either the *absolute file path* or the *relative file path* of the import file.
 
 ==== Creating your import file:
 
@@ -421,21 +439,22 @@ image::import_file_format.png[import file format pic]
 |===
 
 [WARNING]
-Duplicate questions in the import text file will result in import failure.
+Duplicate questions in the import text file will result in an import failure.
+Duplicated answers with different questions are allowed.
 
 ==== Importing your file:
 
 Now that your file is ready, head over to 3VIA and lets begin the import.
 
-. Enter the `import` command followed by the *absolute file path* of the import file you previously created in the command
+. Enter the `import` command followed by the absolute/ relative file path of the import file you previously created in the command
 box as seen below.
-
++
 image::import_step1.png[import step 1 pic, 500]
 
 [start = 2]
 . Hit enter/ return to confirm. 3VIA will now display a list of cards that has been imported.
-
-image::import_step2.png[import step 2 pic, 700]
++
+image::import_step2.png[import step 2 pic, 500]
 
 TIP: You can `edit` or `delete` any of the recently imported cards and/or even `undo` the import if you are not satisfied
 with the cards imported.
@@ -456,17 +475,23 @@ exiting from the programme. If you want to exit from the program, execute the `e
 3VIA saves data in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== Multi-Player `[coming in v2.0]`
-
-_{explain how the user can enable/disable Multi-Player}_
-
 == FAQ
 
 *Q*: How do I transfer my data to another computer? +
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous 3VIA application folder.
 
 == Command Summary
+=== Non-page Dependent Commands
+.Non-page dependent Commands
+image::NonPageDependent.png[width="800"]
 
+=== Navigation Commands
+.Navigation Commands
+image::NavigationCommands.png[width="800"]
+
+=== Learn Commands
+* *Learn* : `learn [TOPIC]`
+* *Mass Import* : `import FILEPATH`
 * *Add* `add q/QUESTION a/ANSWER [t/TOPIC]...` +
 e.g. `add q/What is the formula for force? a/force = mass * acceleration t/Physics`
 * *Clear* : `clear`
@@ -476,20 +501,22 @@ e.g. `delete 3`
 e.g. `edit 1 q/Why will the apple fall from the tree? a/Because of gravity!`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Why`
-* *Learn* : `learn [TOPIC]`
-* *Help* : `help`
 * *Select* : `select INDEX` +
 e.g.`select 2`
 * *Research* : `research INDEX`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+
+=== Test Commands
+
 * *Open Ended Test* : `testO TOPIC`
 ** *Input the answer* : `YOUR_ANSWER`
 ** *Correctness of answer* : `Y` (correct) OR `N` (wrong)
 ** *Exit from OpenEndedTest* : `exit`
 * *MatchTest* : `testM TOPIC`
 ** *Match question to its answer* : `INDEX_OF_QUESTION INDEX_OF_ANSWER` or `INDEX_OF_ANSWER`
-** *Exit from MatchTest* : `exit`
-* *View statistics of test* : `stats [TOPIC]` _or_ `stats` _or_ `stats HL`
-* *Mass Import* : `import FILEPATH`
+* *History* : `history`
+
+=== Review Commands
+* *History* : `history`
