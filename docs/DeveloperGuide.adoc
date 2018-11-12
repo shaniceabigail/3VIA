@@ -516,13 +516,17 @@ abstraction that is leaking into the UI.
 === Navigation Feature
 ==== Current Implementation
 The Navigation Tab is designed for users to be aware of the different functionality of our app.
-We added a navigation tab feature, which only handles mouse events.
+We added a navigation tab feature which can be accessed through commands of the tabs the user wants to navigate to.
+
+The contents of the each AppState, or the functionalities of that page is attached to the tab itself.
+Commands and mouse click events will handle the updating of AppState.
+
 At the present, the Navigation Tab is not a separate class on its own, and is embedded into the `MainDisplay` class.
 
 ===== GUI Handling
-The tabs are expected to toggle according to the user's interaction:
+The tabs are expected to toggle and display their respective tab contents according to the user's interaction:
 
-* Command Line [Work In Progress]
+* Commands from Command Line Interface
 * Mouse clicks
 * Keyboard shortcuts [future release]
 
@@ -532,21 +536,24 @@ The tabs are expected to toggle according to the user's interaction:
 ** pros: easy to see, optimized for user experience
 ** cons: harder to implement
 
-* Top bar
+* Top bar (_currently implemented_)
 ** pros: easier to implement
-** cons: less intuitive for users compared to side bar
+** cons: less visually intuitive for users compared to side bar
 
 ===== Icons on the Tabs
 We have added the icon images for the tabs, but implementation is still a work in progress.
 //end:: NavigationTabCommands[]
 
 //tag:: ModeCommand[]
-=== Mode Feature
+=== Day and Night Mode Feature
 ==== Current Implementation
-Mode can be accessed as a command in any AppState of 3VIA, which allows you to toggle between day and night mode anywhere in the app.
+Mode allows you to toggle between day and night mode anywhere in the app and it can be accessed as a command in any AppState of 3VIA.
 
+
+image::MatchTestActivityDiagram.png[width="800"]
 ==== GUI Handling
-The command will swap the current theme
+The default of the application is a "Day Themed" stylesheet, meaning a generally white background
+with dark text. The command will swap the current theme set to a darker theme.
 //end::ModeCommand[]
 
 === Logging
