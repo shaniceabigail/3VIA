@@ -523,7 +523,10 @@ Commands and mouse click events will handle the updating of AppState.
 
 .Toggle Tab Event
 image::ToggleTabActivityDiagram.png[width="1000"]
+
+==== Handling event
 At the present, the Navigation Tab is not a separate class on its own, and is embedded into the `MainDisplay` class.
+Event raised is ToggleTabEvent.
 
 ===== GUI Handling
 The tabs are expected to toggle and display their respective tab contents according to the user's interaction:
@@ -566,6 +569,9 @@ image::DarkTheme.png[width="800"]
 
 .Mode activity diagram
 image::ModeActivityDiagram.png[width="800"]
+
+==== Handling event
+Event is handled in the `MainWindow.java`.
 
 ==== GUI Handling
 The default of the application is a "Day Theme" stylesheet, meaning a generally white background
