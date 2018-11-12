@@ -515,10 +515,10 @@ abstraction that is leaking into the UI.
 // tag::NavigationTabCommands[]
 === Navigation Feature
 ==== Current Implementation
-The Navigation Tab is designed for users to be aware of the different functionality of our app.
+The Navigation Tab is designed for users to be aware of the different functionality of our app and paired with its relevant content.
 We added a navigation tab feature which can be accessed through commands of the tabs the user wants to navigate to.
 
-The contents of the each AppState, or the functionalities of that page is attached to the tab itself.
+The contents of the each AppState, or the functionalities of that page is attached to the tab itself, to allow the user to check and use the app more efficiently.
 Commands and mouse click events will handle the updating of AppState.
 
 .Toggle Tab Event
@@ -542,6 +542,13 @@ The tabs are expected to toggle and display their respective tab contents accord
 ** pros: easier to implement
 ** cons: less visually intuitive for users compared to side bar
 
+==== Using external library
+Originally we were using JFoenix, however due to a bug which causes the alignment of our pages to the tabs to be visually off,
+we decided to implement a regular tab.
+
+* Library used: https://github.com/jfoenixadmin/JFoenix[JFoenix]
+* Tutorial inspiration: http://synappse.co/blog/vertical-stateful-jfxtabpane-with-icons-in-javafx/[Vertical Tabs]
+
 ===== Icons on the Tabs
 We have added the icon images for the tabs, but implementation is still a work in progress.
 // end::NavigationTabCommands[]
@@ -556,9 +563,14 @@ image::3VIATheme.png[width="800"]
 
 .Night Mode / Dark Theme
 image::DarkTheme.png[width="800"]
+
+.Mode activity diagram
+image::ModeActivityDiagram.png[width="800"]
+
 ==== GUI Handling
 The default of the application is a "Day Theme" stylesheet, meaning a generally white background
-with dark text. The command will swap the current theme set to a "Dark Theme" stylesheet with each command created.
+with dark text. The command will swap the current theme set to a "Dark Theme" stylesheet.
+Each time the the `mode` command is called, the boolean in `MainDisplay.java` acts as a toggle between the 2 themes.
 // end::ModeCommand[]
 
 === Logging
