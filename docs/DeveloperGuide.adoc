@@ -167,7 +167,12 @@ image::UiClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/ui/Ui.java[`Ui.java`]
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `BrowserPanel`, `MainDisplay`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+
+.Structure of the TestPage Component
+image::TestPageDiagram.png[width="800"]
+
+Structure for the Test Page Component has also been modified to expand the functionality of the application.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
@@ -411,36 +416,30 @@ For UI, we have `TriviaTestPage` and `TriviaTestResultPage`, as shown in https:/
 
 ===== The polymorphism of TriviaTest
 * **Alternative 1 (current choice):** Uses different generic classes to accommodate the different testing feature in 3VIA.
-** Pros:
-*** Follows Open-Close Principle which increases the extensibility of the testing feature in 3VIA.
-*** Increases the re-usability of similar codes, and promotes cleaner code.
-** Con:
-*** The implementation of different tests have to follow the structure of TriviaTest very strictly.
+** Pros: Follows Open-Close Principle which increases the extensibility of the testing feature in 3VIA.
+It will also Increase the re-usability of similar codes.
+** Cons: The implementation of different tests have to follow the structure of TriviaTest very strictly.
+
 * **Alternative 2:** Implement each kinds of test as a standalone test with its own standalone class and event handlers.
-** Pro:
-*** Easy to implement and each developer will have their freedom of how to implement their own test.
-** Con:
-*** Will lead to code that is increasingly not manageable.
+** Pros: Easy to implement and each developer will have their freedom of how to implement their own test.
+** Cons: Will lead to code that is increasingly not manageable.
 
 ===== The Model for TriviaTest's Results
-* **Alternative 1 (current choice):** Create another Model called `TriviaResult` to initialize the past TriviaTest's
+* **Alternative 1 (current choice):** Create another Model called `TriviaResult` is created to initialize the past TriviaTest's
 tests and attempts.
-** Pro:
-*** By creating another model `TriviaResult` instead of using `TriviaTest` for recording any past `TriviaTest` records, we can
+** Pros: By creating another model `TriviaResult` instead of using `TriviaTest` for recording any past `TriviaTest` records, we can
 reduce the amount of data collected. Hence, improving the performance (e.g. the start up time) of the application.
 * **Alternative 2:** Use `TriviaTest` itself to initialize the past TriviaTest's tests and attempts.
-** Pro:
-*** Since `TriviaResult` is a subset `TriviaTest`, it is possible to remove the need of `TriviaResult`, thereby reducing the
-coupling of the application's Model component.
-** Con:
-*** However, rebuilding a new but completed `TriviaTest` would be tedious and complicated. Hence, `TriviaResult` is
+** Pros: Since `TriviaResult` is a subset `TriviaTest`, it is possible to remove the need of `TriviaResult`, thereby reducing
+the coupling and dependencies of the application's Model component.
+** Cons: However, rebuilding a new but completed `TriviaTest` would be tedious and complicated. Hence, `TriviaResult` is
 needed separate the complexities that are involved in data collection and the actual implementation of `TriviaTest`.
 // end::triviatest[]
 
 // tag::matchtest[]
 === MatchTest Feature
 ==== Current Implementation
-The life cycle of a MatchTest is facilitated by the `AppState` and `MatchTest` model.
+The implementation of a MatchTest is facilitated by the `AppState` and `MatchTest` model.
 
 The `AppState` model defines the state of which the application is in. And the `MatchTest` model is a subclass of
 `TriviaTest`.
@@ -459,15 +458,16 @@ image::MatchTestActivityDiagram.png[width="800"]
 
 Given below is an example usage scenario and how the MatchTest behaves at each step.
 
-Step 1. The user enter the `testM` command and a new `MatchingTestCommand` will be created.
+Step 1. The user enter the `testM` command and a new `MatchTestCommand` will be created.
 
-Step 2. The `MatchingTestCommand` will be executed and a new MatchTest Object will be created as shown in the below Sequence diagram.
+Step 2. The `MatchTestCommand` will be executed and a new MatchTest Object will be created as shown in the below Sequence diagram.
 
 image::StartingMatchTestSequenceDiagram.png[width="800"]
 
 Step 3. After the MatchTest has been started, the user can only input the following commands:
 
 * `QUESTION_INDEX ANSWER_INDEX` Will be used to define which question will be matched to the answer.
+* `ANSWER_INDEX` Another way to match the question (at the top of the question list) to its defined answer.
 * `exit` If the user input `exit`, the MatchTest will end and the information related to that MatchTest will not be recorded.
 
 Step 4. Suppose the user chose to match a question to an answer, the sequence will execute a list of steps, as shown in the sequence diagram below, to determine whether the match is correct.
@@ -502,28 +502,14 @@ to match the first question.
 
 ===== The static display indexes of the ListView for question and answer
 * **Alternative 1 (current choice):** Created new classes namely, `IndexedQuestion` and `IndexedAnswer` to uniquely identify the cells in `ListView`.
-** Pro:
-*** Finding the exact question and answer is easy as what the user see is a representative of the Id that identifies the question/answer.
-** Con:
-*** Currently, the classes created are for the sole purpose of having static display indexes during `MatchTest`.
+** Pros: Finding the exact question and answer is easy as what the user see is a representative of the Id that identifies the question/answer.
+** Cons: Currently, the classes created are for the sole purpose of having static display indexes during `MatchTest`.
 * **Alternative 2:** Create a `List` of mapping that maps the actual index to the display index of the question and answer.
-** Cons:
-*** Additional work is required to maintain the `List` data structure, to ensure that it is updated every time a question or answer is removed from the UI.
-*** The questions and answers are displayed using `ListView`, and since the mapping of actual index to display index is not an attribute to the question/answer,
+** Cons: Additional work is required to maintain the `List` data structure, to ensure that it is updated every time a question or answer is removed from the UI. +
+In addition, The questions and answers are displayed using `ListView`, and since the mapping of actual index to display index is not an attribute to the question/answer,
 the mapping will be needed to be passed into the UI component. This mapping will then be used by the constructor of `ListView` to
-create a static display index of question and answer. Hence, this design consideration was not implemented due to abstraction that is leaking into the UI.
-
-===== The UI feedback when a MatchCommand is executed
-* **Alternative 1 (current choice):** Uses `AsyncEventCenter` to dispatch its flash UI events.
-** Pro:
-*** The feedback received by the user is more synchronised between question and answer.
-** Con:
-*** More CPU intensive as it uses multi-threading.
-* **Alternative 2:** Uses `EventCenter` to dispatch its UI event.
-** Pro:
-*** Easier to debug code that does not use multi-threading and less CPU intensive.
-** Con:
-*** The events will be dispatched and handle in a sequential order, as a result the UI feedback for question may not be in sync with feedback for answer.
+create a static display index of question and answer. Hence, this design consideration was not implemented due to
+abstraction that is leaking into the UI.
 // end::matchtest[]
 
 // tag::dataencryption[]
@@ -532,6 +518,32 @@ create a static display index of question and answer. Hence, this design conside
 _{Explain here how the data encryption feature will be implemented}_
 
 // end::dataencryption[]
+
+=== Navigation Feature
+==== Current Implementation
+The Navigation Tab is designed for users to be aware of the different functionality of our app.
+We added a navigation tab feature, which only handles mouse events.
+At the present, the Navigation Tab is not a separate class on its own, and is embedded into the `MainDisplay` class.
+
+===== GUI Handling
+The tabs are expected to toggle according to the user's interaction:
+
+* Command Line [Work In Progress]
+* Mouse clicks
+* Keyboard shortcuts [future release]
+
+==== Design Considerations
+===== Location of Navigation tab
+* Side bar
+** pros: easy to see, optimized for user experience
+** cons: harder to implement
+
+* Top bar
+** pros: easier to implement
+** cons: less intuitive for users compared to side bar
+
+===== Icons on the Tabs
+We have added the icon images for the tabs, but implementation is still a work in progress.
 
 === Logging
 

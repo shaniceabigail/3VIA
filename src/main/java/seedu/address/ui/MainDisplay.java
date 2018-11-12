@@ -3,7 +3,6 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
-import com.jfoenix.controls.JFXTabPane;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -34,10 +33,8 @@ public class MainDisplay extends UiPart<Region> {
     private final TriviaTestPlaceholderPage triviaTestPlaceholderPage;
     private final double tabWidth = 90.0;
 
-    private TabPane tabPane;
-
     @FXML
-    private JFXTabPane tabContainer;
+    private TabPane tabContainer;
     @FXML
     private Tab learnTab;
     @FXML
@@ -53,7 +50,6 @@ public class MainDisplay extends UiPart<Region> {
 
     public MainDisplay(Logic logic) {
         super(FXML);
-        tabPane = new TabPane();
         configureView();
 
         homepage = new Homepage(logic);
@@ -62,29 +58,42 @@ public class MainDisplay extends UiPart<Region> {
         triviaTestPlaceholderPage = new TriviaTestPlaceholderPage();
         triviaTestPlaceholder.getChildren().add(triviaTestPlaceholderPage.getRoot());
 
-        resetToOriginalState();
         registerAsAnEventHandler(this);
     }
 
     /**
-     * Hides all the other pages except for the homepage. The default page should be the homepage.
+     * Restore all the pages to its original state. Currently only homepage is required for this restoration.
      */
-    public void resetToOriginalState() {
-        homepagePlaceholder.setVisible(true);
+    private void resetToOriginalState() {
+        homepage.resetToOriginalState();
     }
 
     /**
      * creates the view configuration of the tabs
      */
     private void configureView() {
+        //tabContainer.setSide(side.LEFT);
+        tabContainer.setTabMinWidth(tabWidth);
+        tabContainer.setTabMaxWidth(tabWidth);
+        tabContainer.setTabMinHeight(tabWidth);
+        tabContainer.setTabMaxHeight(tabWidth);
+        tabContainer.setRotateGraphic(true);
+        //tabContainer.getStyleClass().add("root");
+
         //list of tabs configured
         createTab(learnTab, "Learn", "file:/src/main/resources/images/tabIcons/home.png", homepagePlaceholder);
         createTab(testTab, "Test", "file:/src/main/resources/images/tabIcons/settings.png", triviaTestPlaceholder);
         createTab(reviewTab, "Review", "file:/main/resources/images/tabIcons/test.png", reviewPlaceholder);
+
+        logger.info("View has been configured");
     }
 
     /**
-     * Configures a new tab
+     * Creates a tab with the following parameters
+     * @param tab
+     * @param title
+     * @param iconPath
+     * @param containerPane
      */
     private void createTab(Tab tab, String title, String iconPath, StackPane containerPane) {
         double imageWidth = 40.0;
@@ -104,7 +113,8 @@ public class MainDisplay extends UiPart<Region> {
 
         try {
             tab.setContent(containerPane);
-            tabPane = tab.getTabPane();
+            //tabPane = tab.getTabPane();
+            logger.info("tab created");
         } catch (Exception e) {
             throw new IllegalArgumentException("Tab not added");
         }
@@ -118,18 +128,18 @@ public class MainDisplay extends UiPart<Region> {
     @Subscribe
     public void handleToggleTabEvent(ToggleTabEvent event) {
         if (event.getToToggleTo().equals("learn")) {
-            tabPane.getSelectionModel().select(learnTab);
+            tabContainer.getSelectionModel().select(learnTab);
         } else if (event.getToToggleTo().equals("test")) {
-            tabPane.getSelectionModel().select(testTab);
+            tabContainer.getSelectionModel().select(testTab);
         } else if (event.getToToggleTo().equals("review")) {
-            tabPane.getSelectionModel().select(reviewTab);
+            tabContainer.getSelectionModel().select(reviewTab);
         }
     }
 
     @Subscribe
     private void handleShowTriviaTestViewEvent(ShowTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        tabPane.getSelectionModel().select(testTab);
+        tabContainer.getSelectionModel().select(testTab);
         learnTab.setDisable(true);
         reviewTab.setDisable(true);
     }
@@ -139,5 +149,6 @@ public class MainDisplay extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         learnTab.setDisable(false);
         reviewTab.setDisable(false);
+        resetToOriginalState();
     }
 }

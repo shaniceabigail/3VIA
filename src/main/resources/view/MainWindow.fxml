@@ -20,6 +20,7 @@
     <Scene>
       <stylesheets>
         <URL value="@3VIATheme.css" />
+          <!--<URL value="@3VIADarkTheme.css" />-->
         <URL value="@Extensions.css" />
         <!--<URL value="@NavigationTabStyling.css"/>-->
       </stylesheets>

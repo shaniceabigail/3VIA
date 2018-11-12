@@ -67,6 +67,10 @@
     -fx-background-color: #00BCD4;
 }
 
+.tab-pane .tab-header-background {
+    -fx-background-color: #00BCD4;
+}
+
 .pane-with-border {
      -fx-background-color: white;
      -fx-border-color: white;
@@ -386,4 +390,12 @@ additional 3VIA-specific css code
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
+
+.centered-aligned-text-area *.text {
+    -fx-text-alignment: center;
+}
+
+.centered-aligned-text-area .content {
+    -fx-background-color: derive(#ededed, 20%);
 }
