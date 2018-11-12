@@ -20,8 +20,6 @@ import seedu.address.model.topic.Topic;
 import seedu.address.testutil.Assert;
 
 public class FileParserUtilTest {
-    private static final String QUESTION_ANSWER_PAIR_SEPARATOR = "\t";
-
     private static final String WHITESPACE = " \t\r\n";
     private static final String VALID_TOPIC_1 = " t/topic1";
     private static final String VALID_TOPIC_1_WITHOUT_PREFIX = "topic1";
@@ -31,14 +29,11 @@ public class FileParserUtilTest {
     private static final String VALID_QUESTION = "question";
     private static final String VALID_ANSWER = "answer";
 
-    private static final String[] VALID_CARD_STRING = {"question", "answer"};
-
     private static final String INVALID_EMPTY_TOPIC = " ";
     private static final String INVALID_TOPIC = "topic";
     private static final String INVALID_QUESTION_ANSWER_PAIR_WITHOUT_TAB = "question answer";
     private static final String INVALID_QUESTION_ANSWER_PAIR_WITHOUT_ANSWER = "question\t";
     private static final String INVALID_QUESTION_ANSWER_PAIR_WITH_EXTRA_SUFFIX = "question\tanswer\textra";
-    private static final String[] INVALID_CARD_STRING = {"question"};
 
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
@@ -101,76 +96,57 @@ public class FileParserUtilTest {
     }
 
     @Test
-    public void parseLineToQuestionAnswerPair_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () ->
-                FileParserUtil.parseLineToQuestionAnswerPair((String) null));
-    }
-
-    @Test
-    public void parseLineToQuestionAnswerPair_invalidValueWithoutAnswer_throwsFileParseException() {
-        Assert.assertThrows(FileParseException.class, () ->
-                FileParserUtil.parseLineToQuestionAnswerPair(INVALID_QUESTION_ANSWER_PAIR_WITHOUT_ANSWER));
-    }
-
-    @Test
-    public void parseLineToQuestionAnswerPair_invalidValueWithExtraInfo_throwsFileParseException() {
-        Assert.assertThrows(FileParseException.class, () ->
-                FileParserUtil.parseLineToQuestionAnswerPair(INVALID_QUESTION_ANSWER_PAIR_WITH_EXTRA_SUFFIX));
-    }
-
-    @Test
-    public void parseLineToQuestionAnswerPair_invalidValueWithoutTab_throwsFileParseException() {
-        Assert.assertThrows(FileParseException.class, () ->
-                FileParserUtil.parseLineToQuestionAnswerPair(INVALID_QUESTION_ANSWER_PAIR_WITHOUT_TAB));
-    }
-
-    @Test
-    public void parseLineToTopicSet_validValue_returnsQuestionAnswerPair() {
-        String[] expectedCardStringPair = VALID_QUESTION_ANSWER_PAIR.split(QUESTION_ANSWER_PAIR_SEPARATOR);
-        String[] actualCardStringPair = FileParserUtil.parseLineToQuestionAnswerPair(VALID_QUESTION_ANSWER_PAIR);
-
-        assertEquals(expectedCardStringPair, actualCardStringPair);
-    }
-
-    // topic valid, valid with empty topic
-    @Test
-    public void stringToCard_nullCardString_throwsNullPointerException() {
+    public void parseLineToCard_nullString_throwsNullPointerException() {
         Set<Topic> validTopicSet = new HashSet<>(Arrays.asList(new Topic(VALID_TOPIC_1_WITHOUT_PREFIX),
                 new Topic(VALID_TOPIC_2_WITHOUT_PREFIX)));
 
         Assert.assertThrows(NullPointerException.class, () ->
-                FileParserUtil.stringToCard((String[]) null, validTopicSet));
+                FileParserUtil.parseLineToCard((String) null, validTopicSet));
     }
 
     @Test
-    public void stringToCard_nullTopicSet_throwsNullPointerException() {
+    public void parseLineToCard_nullTopicSet_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () ->
-                FileParserUtil.stringToCard(VALID_CARD_STRING, (Set<Topic>) null));
+                FileParserUtil.parseLineToCard(VALID_QUESTION_ANSWER_PAIR, (Set<Topic>) null));
     }
 
     @Test
-    public void stringToCard_inValidValue_throwsFileParseException() {
+    public void parseLineToCard_inValidValueNoTab_throwsFileParseException() {
         Set<Topic> emptySet = new HashSet<>();
         Assert.assertThrows(FileParseException.class, () ->
-                FileParserUtil.stringToCard(INVALID_CARD_STRING, emptySet));
+                FileParserUtil.parseLineToCard(INVALID_QUESTION_ANSWER_PAIR_WITHOUT_TAB, emptySet));
     }
 
     @Test
-    public void stringToCard_validValueNoTopic_returnsCard() {
+    public void parseLineToCard_inValidValueNoAnswer_throwsFileParseException() {
+        Set<Topic> emptySet = new HashSet<>();
+        Assert.assertThrows(FileParseException.class, () ->
+                FileParserUtil.parseLineToCard(INVALID_QUESTION_ANSWER_PAIR_WITHOUT_ANSWER, emptySet));
+    }
+
+    @Test
+    public void parseLineToCard_inValidValueWithExtraInfo_throwsFileParseException() {
+        Set<Topic> emptySet = new HashSet<>();
+        Assert.assertThrows(FileParseException.class, () ->
+                FileParserUtil.parseLineToCard(INVALID_QUESTION_ANSWER_PAIR_WITH_EXTRA_SUFFIX, emptySet));
+    }
+
+    @Test
+    public void parseLineToCard_validValueNoTopic_returnsCard() {
         Set<Topic> emptySet = new HashSet<>();
         Card expectedCard = new Card(new Question(VALID_QUESTION), new Answer(VALID_ANSWER), emptySet);
-        Card actualCard = FileParserUtil.stringToCard(VALID_CARD_STRING, emptySet);
+        Card actualCard = FileParserUtil.parseLineToCard(VALID_QUESTION_ANSWER_PAIR, emptySet);
 
         assertEquals(expectedCard, actualCard);
     }
 
     @Test
-    public void stringToCard_validValueWithTopic_returnsCard() {
+    public void parseLineToCard_validValueWithTopic_returnsCard() {
         Set<Topic> validTopicSet = new HashSet<>(Arrays.asList(new Topic(VALID_TOPIC_1_WITHOUT_PREFIX),
                 new Topic(VALID_TOPIC_2_WITHOUT_PREFIX)));
 
         Card expectedCard = new Card(new Question(VALID_QUESTION), new Answer(VALID_ANSWER), validTopicSet);
-        Card actualCard = FileParserUtil.stringToCard(VALID_CARD_STRING, validTopicSet);
+        Card actualCard = FileParserUtil.parseLineToCard(VALID_QUESTION_ANSWER_PAIR, validTopicSet);
 
         assertEquals(expectedCard, actualCard);
     }
