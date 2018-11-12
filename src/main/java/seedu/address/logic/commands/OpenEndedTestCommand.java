@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TOPIC;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.test.openendedtest.OpenEndedTest;
 import seedu.address.model.topic.Topic;
 
 /**
@@ -32,8 +33,8 @@ public class OpenEndedTestCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         try {
-            //OpenEndedTest test = new OpenEndedTest(tag, model.getTriviaBundle());
-            //model.startTriviaTest(test);
+            OpenEndedTest test = new OpenEndedTest(tag, model.getTriviaBundle());
+            model.startTriviaTest(test);
             return new CommandResult(String.format(MESSAGE_SUCCESS));
         } catch (IllegalArgumentException e) {
             throw new CommandException(e.getMessage());

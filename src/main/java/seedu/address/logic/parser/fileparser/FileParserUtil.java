@@ -64,7 +64,7 @@ public class FileParserUtil {
      * Returns true if the line contains a topic that is in the specified format.
      * i.e. " t/topic". Whitespace before prefix "t/" is required.
      */
-    public static boolean isTopicValidFormat(String line) {
+    private static boolean isTopicValidFormat(String line) {
         requireNonNull(line);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(line, PREFIX_TOPIC);
         try {
@@ -82,15 +82,10 @@ public class FileParserUtil {
      * Returns true if the line contains a question answer pair that is in the specified format.
      * i.e. "question" + "\t" + "answer".
      */
-    public static boolean isQuestionAnswerValidFormat(String line) {
-        requireNonNull(line);
-        String[] cardString = line.split(QUESTION_ANSWER_SEPARATOR);
-        if (cardString.length != 2) {
-            return false;
-        }
+    private static boolean isQuestionAnswerValidFormat(String line) {
         try {
             Set<Topic> topicSet = new HashSet<>();
-            stringToCard(cardString, topicSet);
+            parseLineToCard(line, topicSet);
         } catch (FileParseException pe) {
             return false;
         }
@@ -128,38 +123,18 @@ public class FileParserUtil {
     }
 
     /**
-     * Splits string into a question and answer pair string. Using "\t" as
-     * a line separator.
-     *
-     * @param line Line read from text file.
-     * @return An array containing a pair of question and answer in that order.
-     * @throws FileParseException If the format of the line read is different from the expected.
-     */
-    public static String[] parseLineToQuestionAnswerPair(String line) throws FileParseException {
-        requireNonNull(line);
-        String[] cardString = line.split(QUESTION_ANSWER_SEPARATOR);
-        if (cardString.length != 2) {
-            throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
-        }
-        return cardString;
-    }
-
-    /**
      * Converts a question and answer string pair into a card with specified topics.
      * The pair should only consist of 1 question followed by 1 answer. The order is important.
      *
-     * @param cardString The question and answer string pair.
+     * @param line The question and answer string pair.
      * @return The card created from the question and answer string pair.
      * @throws FileParseException if the question and/ or answer format is different from expected.
      */
-    public static Card stringToCard (String[] cardString, Set<Topic> topicSet) throws FileParseException {
-        requireNonNull(cardString);
+    public static Card parseLineToCard(String line, Set<Topic> topicSet) throws FileParseException {
+        requireNonNull(line);
         requireNonNull(topicSet);
 
-        if (cardString.length != 2) {
-            throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
-        }
-
+        String[] cardString = parseLineToQuestionAnswerPair(line);
         try {
             Question question = ParserUtil.parseQuestion(cardString[0]);
             Answer answer = ParserUtil.parseAnswer(cardString[1]);
@@ -167,5 +142,22 @@ public class FileParserUtil {
         } catch (ParseException pe) {
             throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
         }
+    }
+
+    /**
+     * Splits a string into a question and answer pair. Using "\t" as
+     * a line separator.
+     *
+     * @param line Line read from text file.
+     * @return An array containing a pair of question and answer in that order.
+     * @throws FileParseException If the format of the line read is different from the expected.
+     */
+    private static String[] parseLineToQuestionAnswerPair(String line) throws FileParseException {
+        requireNonNull(line);
+        String[] cardString = line.split(QUESTION_ANSWER_SEPARATOR);
+        if (cardString.length != 2) {
+            throw new FileParseException(MESSAGE_INVALID_FILE_FORMAT);
+        }
+        return cardString;
     }
 }

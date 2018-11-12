@@ -175,6 +175,36 @@ public class AddressBookParser {
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
 
+        case OPEN_ENDED_TEST_QUESTION:
+            switch(commandWord) {
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            default:
+                return new OpenEndedAnswerParser().parse(userInput);
+            }
+
+        case OPEN_ENDED_TEST_ANSWER:
+            switch(commandWord) {
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            default:
+                return new OpenEndedCommandParser().parse(userInput);
+            }
+
+        case OPEN_ENDED_TEST_RESULT:
+            switch(commandWord) {
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            default:
+                return new OpenEndedCommandParser().parse(userInput);
+            }
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
