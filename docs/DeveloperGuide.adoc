@@ -521,6 +521,8 @@ We added a navigation tab feature which can be accessed through commands of the 
 The contents of the each AppState, or the functionalities of that page is attached to the tab itself.
 Commands and mouse click events will handle the updating of AppState.
 
+.Toggle Tab Event
+image::ToggleTabActivityDiagram.png[width="1000"]
 At the present, the Navigation Tab is not a separate class on its own, and is embedded into the `MainDisplay` class.
 
 ===== GUI Handling
