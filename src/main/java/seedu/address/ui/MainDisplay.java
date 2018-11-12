@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.beans.value.ObservableValue;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
@@ -14,7 +14,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.TabClickEvent;
+import seedu.address.commons.events.model.TabChangeEvent;
 import seedu.address.commons.events.ui.CloseTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ShowTriviaTestViewEvent;
 import seedu.address.commons.events.ui.ToggleTabEvent;
@@ -32,6 +32,9 @@ public class MainDisplay extends UiPart<Region> {
 
     private final Homepage homepage;
     private final TriviaTestPlaceholderPage triviaTestPlaceholderPage;
+    private final ChangeListener<Tab> changeTabListener = (observableValue, oldValue, newValue) -> {
+        EventsCenter.getInstance().post(new TabChangeEvent(newValue.getText()));
+    };
 
     @FXML
     private TabPane tabContainer;
@@ -57,18 +60,23 @@ public class MainDisplay extends UiPart<Region> {
 
         triviaTestPlaceholderPage = new TriviaTestPlaceholderPage();
         triviaTestPlaceholder.getChildren().add(triviaTestPlaceholderPage.getRoot());
-        addListener();
+        addTabListener();
 
         registerAsAnEventHandler(this);
     }
 
     /**
-     * initialise listener for clicks on tabs
+     * Add tab change listener.
      */
-    private void addListener() {
-        tabContainer.getSelectionModel().selectedItemProperty()
-                .addListener((ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) ->
-                        EventsCenter.getInstance().post(new TabClickEvent(oldValue.getText(), newValue.getText())));
+    private void addTabListener() {
+        tabContainer.getSelectionModel().selectedItemProperty().addListener(changeTabListener);
+    }
+
+    /**
+     * Remove the tab change listener.
+     */
+    private void removeTabListener() {
+        tabContainer.getSelectionModel().selectedItemProperty().removeListener(changeTabListener);
     }
 
     /**
@@ -88,12 +96,6 @@ public class MainDisplay extends UiPart<Region> {
         createTab(testTab, "Test", triviaTestPlaceholder);
         createTab(reviewTab, "Review", reviewPlaceholder);
 
-        /*
-tabContainer.getSelectionModel().selectedItemProperty()
-.addListener((ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) ->
-EventsCenter.getInstance().post(new TabClickEvent(oldValue.getText(), newValue.getText()))
-);
-        */
         logger.info("View has been configured");
     }
 
@@ -138,9 +140,12 @@ EventsCenter.getInstance().post(new TabClickEvent(oldValue.getText(), newValue.g
     @Subscribe
     private void handleShowTriviaTestViewEvent(ShowTriviaTestViewEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+
+        removeTabListener();
         tabContainer.getSelectionModel().select(testTab);
         learnTab.setDisable(true);
         reviewTab.setDisable(true);
+        addTabListener();
     }
 
     @Subscribe

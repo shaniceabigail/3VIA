@@ -6,7 +6,6 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ToggleTabEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.state.State;
 
 /**
  * Navigates to the Review page
@@ -28,7 +27,6 @@ public class ReviewCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.setAppState(State.REVIEW);
         EventsCenter.getInstance().post(new ToggleTabEvent("review"));
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }

@@ -11,7 +11,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.card.Card;
 import seedu.address.model.card.TopicIsKeywordPredicate;
-import seedu.address.model.state.State;
 
 /**
  * Navigates to show learn page.
@@ -38,9 +37,9 @@ public class LearnCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
+
         model.updateFilteredCardList(learnCondition);
         EventsCenter.getInstance().post(new ToggleTabEvent(COMMAND_WORD));
-        model.setAppState(State.LEARN);
         return new CommandResult(String.format(MESSAGE_SUCCESS, topicKeyword));
     }
 }
