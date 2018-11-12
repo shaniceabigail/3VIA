@@ -438,7 +438,6 @@ Format: <code>undo</code></p>
 <ul>
 <li>
 <p><code>delete 1</code><br>
-<code>learn</code><br>
 <code>undo</code><br>
 <em>The <code>delete 1</code> command is reversed</em></p>
 </li>
@@ -498,7 +497,15 @@ The <code>redo</code> command was not executed as there are no <code>undo</code>
 <code>redo</code><br>
 <em>`delete 1` command is reapplied</em><br>
 <code>redo</code><br>
-<em>`clear` command is reapplied</em><br></p>
+<em>`clear` command is reapplied.</em></p>
+</li>
+<li>
+<p><code>import C:\Users\username\Desktop\text.txt</code><br>
+<code>learn</code><br>
+<code>undo</code><br>
+<em>`import` command is reversed</em><br>
+<code>redo</code><br>
+<em>`import` command is reapplied.</em></p>
 </li>
 </ul>
 </div>
@@ -570,7 +577,7 @@ Format: <code>mode</code></p>
 <div class="sect2">
 <h3 id="starting-an-open-ended-test-code-testo-code"><a class="link" href="#starting-an-open-ended-test-code-testo-code">3.15. Starting an Open Ended Test: <code>testO</code></a></h3>
 <div class="paragraph">
-<p>Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer.<br>
+<p>Start an open-ended test of a specified topic. In an open-ended test, the user will key in their answer to the questions, and get the choose whether he/she has answered correctly by comparing their answers with the expected answer.<br>
 Format: <code>testO TOPIC</code></p>
 </div>
 <div class="sidebarblock">
@@ -598,6 +605,7 @@ Format: <code>ANSWER_FROM_USER</code></p>
 <h4 id="determining-the-correctness-of-your-answer"><a class="link" href="#determining-the-correctness-of-your-answer">3.15.2. Determining the correctness of your answer:</a></h4>
 <div class="paragraph">
 <p>After answering the question, you would be given a comparison between the expected and actual answer you entered. You would be required to determine the correctness of your answer since the questions are open ended. The app will keep track of your score.<br>
+Note: Any input that begins with 'Y' or 'N' will be acceptable inputs.<br>
 Format: <code>Y</code> (correct) OR <code>N</code> (wrong)</p>
 </div>
 </div>
@@ -1004,7 +1012,10 @@ e.g.<code>select 2</code></p>
 <p><strong>Input the answer</strong> : <code>YOUR_ANSWER</code></p>
 </li>
 <li>
-<p><strong>Correctness of answer</strong> : <code>c</code> (correct) OR <code>x</code> (wrong)</p>
+<p><strong>Correctness of answer</strong> : <code>Y</code> (correct) OR <code>N</code> (wrong)</p>
+</li>
+<li>
+<p><strong>Exit from OpenEndedTest</strong> : <code>exit</code></p>
 </li>
 </ul>
 </div>
@@ -1036,4 +1047,4 @@ e.g.<code>select 2</code></p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:00:45 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:14:46 UTC</div></div></div></body></html>
