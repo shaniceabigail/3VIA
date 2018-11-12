@@ -27,16 +27,17 @@ The user interacts with it using a Command Line Interface (CLI), and it has a GU
 
 * *Minor enhancement*: modified the "learn" and "review" command to allow navigation between tabs.
 
-* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=shaniceabigail[Reposense]
+* *Code contributed*: https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=shaniceabigail[Shanice's Reposense]
 
 * *Other contributions*:
 
 ** Enhancements to existing features:
-*** Redesigned GUI colour scheme (Pull requests https://github.com[#155])
+*** Redesigned GUI colour scheme: PR https://github.com/CS2103-AY1819S1-W12-3/main/pull/155[#155]
 ** Documentation:
-*** Edited existing contents of the User Guide: https://github.com[#159]
+*** Edited existing contents of the User Guide: PR https://github.com/CS2103-AY1819S1-W12-3/main/pull/159[#159]
+*** Added and edited User and Developer guides: PR https://github.com/CS2103-AY1819S1-W12-3/main/pull/180[#180]
 ** Tools:
-*** Integrated a third party library (JFoenix) to the project (https://github.com[#73])
+*** Integrated a third party library (JFoenix) to the project: PR https://github.com/CS2103-AY1819S1-W12-3/main/pull/73[#73]
 
 == Contributions to the User Guide
 
