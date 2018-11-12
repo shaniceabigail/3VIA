@@ -550,7 +550,8 @@ We have added the icon images for the tabs, but implementation is still a work i
 Mode allows you to toggle between day and night mode anywhere in the app and it can be accessed as a command in any AppState of 3VIA.
 
 
-image::MatchTestActivityDiagram.png[width="800"]
+[caption = Day Mode, image::3VIATheme.png[width="800"]]
+image::DarkTheme.png[width="800"]
 ==== GUI Handling
 The default of the application is a "Day Themed" stylesheet, meaning a generally white background
 with dark text. The command will swap the current theme set to a darker theme.

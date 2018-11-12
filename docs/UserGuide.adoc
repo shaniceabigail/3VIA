@@ -285,7 +285,7 @@ Format: `learn`, `test`, `review`
 // end::NavigationTabCommands[]
 
 //tag::ModeCommand[]
-=== Toggling between the day and night mode of the app: `mode`
+=== Changing the day and night mode of the app: `mode`
 Type `mode` in any page, or section of the app to switch between the modes to suit your comfort in learning and using 3VIA.
 Format: `mode`
 // end::ModeCommand[]

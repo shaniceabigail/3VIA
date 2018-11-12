@@ -41,7 +41,7 @@ The user interacts with it using a Command Line Interface (CLI), and it has a GU
 == Contributions to the User Guide
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Given below are sections I contributed to the User Guide. They highlight my ability to write documentation for end-users._
 |===
 
 include::../UserGuide.adoc[tag=NavigationTabCommands]
