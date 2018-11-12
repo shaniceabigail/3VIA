@@ -47,7 +47,7 @@ to type in intuitive commands such as `learn Physics` or `learn` if the user wan
 ** Added `research` Command
 ***  The `research` Command allow users to browse online resources that are related to the questions in 3VIA.
 
-* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=junwei96&sort=displayName&since=2018-09-12&until=2018-11-12&timeframe=day&reverse=false&repoSort=true[Functional code]]
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=junwei96[Functional code]]
 
 * *Other contributions*:
 
