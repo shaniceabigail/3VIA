@@ -202,7 +202,7 @@ public class AddressBookParser {
                 return new ExitCommand();
 
             default:
-                return new OpenEndedCommandParser().parse(userInput);
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
 
         default:

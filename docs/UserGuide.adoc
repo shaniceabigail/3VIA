@@ -484,9 +484,10 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Open Ended Test* : `testO TOPIC TIMELIMIT_IN_SECONDS`
+* *Open Ended Test* : `testO TOPIC`
 ** *Input the answer* : `YOUR_ANSWER`
-** *Correctness of answer* : `c` (correct) OR `x` (wrong)
+** *Correctness of answer* : `Y` (correct) OR `N` (wrong)
+** *Exit from OpenEndedTest* : `exit`
 * *MatchTest* : `testM TOPIC`
 ** *Match question to its answer* : `INDEX_OF_QUESTION INDEX_OF_ANSWER` or `INDEX_OF_ANSWER`
 ** *Exit from MatchTest* : `exit`
