@@ -507,6 +507,7 @@ e.g.`select 2`
 ** *Correctness of answer* : `c` (correct) OR `x` (wrong)
 * *MatchTest* : `testM TOPIC`
 ** *Match question to its answer* : `INDEX_OF_QUESTION INDEX_OF_ANSWER` or `INDEX_OF_ANSWER`
+* *History* : `history`
 
 === Review Commands
 * *History* : `history`
