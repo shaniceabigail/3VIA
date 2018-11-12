@@ -30,6 +30,7 @@ import seedu.address.model.state.State;
 import seedu.address.model.test.Attempt;
 import seedu.address.model.test.TriviaResult;
 import seedu.address.model.test.TriviaTest;
+import seedu.address.testutil.Assert;
 import seedu.address.testutil.CardBuilder;
 
 public class AddCommandTest {
@@ -265,6 +266,16 @@ public class AddCommandTest {
 
         @Override
         public void handleSetUpDisplayCardInfoEvent(SetUpDisplayCardInfoEvent event) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isOpenEndedTestAnswerCorrect(char in) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void recordAnswerToOpenEndedTest(String userinput) {
             throw new AssertionError("This method should not be called.");
         }
     }
