@@ -403,11 +403,11 @@ Example:
 ****
 * `import C:\Users\username\Desktop\file.txt` +
 _Imports the contents from the file.txt text file from the specified file location on Windows._
-* `import home/username/file.txt` +
-_Imports the contents from the file.txt text file from the specified file location on Linux._
+* `import file.txt` +
+_Imports the contents from the file.txt text file relative to the location of the 3VIA application._
 ****
 
-IMPORTANT: The file path refers to the *absolute file path* of the import file.
+TIP: The file path refers to either the *absolute file path* or the *relative file path* of the import file.
 
 ==== Creating your import file:
 
@@ -432,21 +432,22 @@ image::import_file_format.png[import file format pic]
 |===
 
 [WARNING]
-Duplicate questions in the import text file will result in import failure.
+Duplicate questions in the import text file will result in an import failure.
+Duplicated answers with different questions are allowed.
 
 ==== Importing your file:
 
 Now that your file is ready, head over to 3VIA and lets begin the import.
 
-. Enter the `import` command followed by the *absolute file path* of the import file you previously created in the command
+. Enter the `import` command followed by the absolute/ relative file path of the import file you previously created in the command
 box as seen below.
-
++
 image::import_step1.png[import step 1 pic, 500]
 
 [start = 2]
 . Hit enter/ return to confirm. 3VIA will now display a list of cards that has been imported.
-
-image::import_step2.png[import step 2 pic, 700]
++
+image::import_step2.png[import step 2 pic, 500]
 
 TIP: You can `edit` or `delete` any of the recently imported cards and/or even `undo` the import if you are not satisfied
 with the cards imported.
