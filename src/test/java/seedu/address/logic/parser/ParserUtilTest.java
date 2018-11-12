@@ -22,7 +22,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.portation.ImportFile;
-import seedu.address.model.test.TimeLimit;
 import seedu.address.model.topic.Topic;
 import seedu.address.testutil.Assert;
 
@@ -210,15 +209,6 @@ public class ParserUtilTest {
                 new Topic(VALID_TOPIC_2)));
 
         assertEquals(expectedTopicSet, actualTopicSet);
-    }
-
-    @Test
-    public void parseTimeLimit() throws Exception {
-        assertEquals(new TimeLimit("2"), ParserUtil.parseTimeLimit("  2   "));
-
-        thrown.expect(ParseException.class);
-        ParserUtil.parseTimeLimit("notTimeLimit");
-        ParserUtil.parseTimeLimit("-5");
     }
 
     @Test

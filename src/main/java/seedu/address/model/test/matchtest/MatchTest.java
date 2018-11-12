@@ -2,7 +2,6 @@ package seedu.address.model.test.matchtest;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,13 +12,9 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.util.Duration;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.FlashMatchOutcomeEvent;
@@ -67,10 +62,12 @@ public class MatchTest extends TriviaTest {
     }
 
     /**
-     * The logic associated to matching a question and a answer.
+     * The logic associated to matching a question and a answer. In addition to matching, the MatchAttempt will also
+     * be added the the AttemptList.
      *
-     * @param questionIndex The index of the question to match.
-     * @param answerIndex The index of the answer to match.
+     * Will throw QuestionNotFoundException and AnswerNotFoundException when the question or answer index does not exist
+     * in the display list of question and answer respectively.
+     *
      * @return a boolean which signify whether the match is success or failure.
      */
     public boolean match(Index questionIndex, Index answerIndex) throws QuestionNotFoundException,
@@ -108,7 +105,12 @@ public class MatchTest extends TriviaTest {
     }
 
     /**
-     * Responds to an correct attempt accordingly.
+     * To use this function, we assume that the attempt is correct,
+     *
+     * We respond to the correct attempt by removing the question and answer from the UI.
+     *
+     * If we are at the last match of question and answer and the incoming attempt is correct, we would post an Event
+     * which will show the TriviaResultPage.
      */
     public void respondToCorrectAttempt(MatchAttempt attempt) {
         assert attempt.isCorrect();
@@ -141,7 +143,9 @@ public class MatchTest extends TriviaTest {
     }
 
     /**
-     * Will return the IndexedQuestion that was attempted. Note that the parameter of {@code questionIndex} can be null.
+     * Will return the IndexedQuestion that is identified by the given Index parameter.
+     *
+     * Note that the parameter of {@code questionIndex} can be null.
      * If {@code questionIndex} is null, the first the IndexedQuestion in the list of shuffledQuestions will be
      * returned.
      *
@@ -161,7 +165,7 @@ public class MatchTest extends TriviaTest {
     }
 
     /**
-     * Will return the IndexedAnswer that was matched.
+     * Will return the IndexedAnswer that is identified by the given Index parameter.
      *
      * Note that it uses the Id that is associated to IndexedAnswer to identify the selected IndexedAnswer.
      */
@@ -173,7 +177,7 @@ public class MatchTest extends TriviaTest {
     }
 
     /**
-     * Will return the attempted card which is based on which IndexedQuestion did the user match.
+     * Will return the attempted card which is based on which IndexedQuestion that is given in the parameter.
      */
     private Card getAttemptedCard(IndexedQuestion question) {
         return cards.stream()
@@ -183,8 +187,9 @@ public class MatchTest extends TriviaTest {
     }
 
     /**
+     * This function assumes that the attempt given in parameter is correct.
+     *
      * Remove the involved card that is answered correctly from the UI.
-     * @param attempt The attempt that was made by the user in the Match Test.
      */
     private void removeCardFromUi(MatchAttempt attempt) {
         assert attempt.isCorrect();
@@ -194,8 +199,7 @@ public class MatchTest extends TriviaTest {
     }
 
     /**
-     * Will create an UI event to indicate on the UI on whether the match is successful or not.
-     * @param attempt The attempt of that match command.
+     * Will create an UI event to indicate on the UI on whether the given attempt is correct or not.
      */
     private void postOutcomeOfMatch(MatchAttempt attempt) {
         EventsCenter.getInstance().post(new FlashMatchOutcomeEvent(
@@ -207,18 +211,6 @@ public class MatchTest extends TriviaTest {
         return cards.size() > 1;
     }
 
-    /**
-     * Starts the timer of the Match Test.
-     */
-    private void startTimer() {
-        DecimalFormat timerFormat = new DecimalFormat("#.#");
-        timer = new Timeline(new KeyFrame(Duration.seconds(0.1), ev -> {
-            duration.setValue(Double.parseDouble(timerFormat.format(duration.getValue() + 0.1)));
-        }));
-        timer.setCycleCount(Animation.INDEFINITE);
-        timer.play();
-    }
-
     public ObservableList<IndexedQuestion> getQuestions() {
         return this.shuffledQuestions;
     }
@@ -226,7 +218,6 @@ public class MatchTest extends TriviaTest {
     /**
      * Retrieve a randomized modifiable observable list of questions to allow changes in the UI.
      * @param cards The cards to retrieve the questions from.
-     * @return an observable list of questions
      */
     private ObservableList<IndexedQuestion> getQuestions(List<Card> cards) {
         List<Question> questions = cards.stream()
@@ -249,7 +240,6 @@ public class MatchTest extends TriviaTest {
     /**
      * Retrieve a randomized modifiable observable list of answers to allow changes in the UI.
      * @param cards The cards to retrieve the answers from.
-     * @return an observable list of answers
      */
     private ObservableList<IndexedAnswer> getAnswers(List<Card> cards) {
         List<Answer> answers = cards.stream()
