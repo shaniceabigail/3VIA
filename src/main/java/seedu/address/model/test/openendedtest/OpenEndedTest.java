@@ -2,16 +2,11 @@ package seedu.address.model.test.openendedtest;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
 import seedu.address.model.ReadOnlyTriviaBundle;
 import seedu.address.model.card.Card;
 import seedu.address.model.test.Attempt;
