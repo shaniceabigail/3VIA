@@ -1020,7 +1020,7 @@ Additionally, the import mechanism implements the following operations:</p>
 <h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The term <code>TriviaTest</code> refers to a reference to the different kinds of testing features in 3VIA. Currently,
-there are 2 test features in 3VIA, namely, the Open-Ended Test and the MatchTest.</p>
+there are 2 test features in 3VIA, namely, the Open-Ended Test and the <code>MatchTest</code>.</p>
 </div>
 <div class="paragraph">
 <p>Hence, the generic <code>TriviaTest</code> related classes were made to accommodate for the similarities between them. The classes that were
@@ -1071,12 +1071,12 @@ It will also Increase the re-usability of similar codes.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Alternative 1 (current choice):</strong> Create another Model called <code>TriviaResult</code> is created to initialize the past TriviaTest&#8217;s
+<p><strong>Alternative 1 (current choice):</strong> Another Model called <code>TriviaResult</code> is created to initialize the past TriviaTest&#8217;s
 tests and attempts.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Pros: By creating another model <code>TriviaResult</code> instead of using <code>TriviaTest</code> for recording any past <code>TriviaTest</code> records, we can
+<p>Pros: By creating <code>TriviaResult</code> instead of using <code>TriviaTest</code> for recording any past <code>TriviaTest</code> records, we can
 reduce the amount of data collected. Hence, improving the performance (e.g. the start up time) of the application.</p>
 </li>
 </ul>
@@ -1107,7 +1107,7 @@ needed separate the complexities that are involved in data collection and the ac
 <div class="sect3">
 <h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The implementation of a MatchTest is facilitated by the <code>AppState</code> and <code>MatchTest</code> model.</p>
+<p>This feature is facilitated by the <code>AppState</code> and <code>MatchTest</code> model.</p>
 </div>
 <div class="paragraph">
 <p>The <code>AppState</code> model defines the state of which the application is in. And the <code>MatchTest</code> model is a subclass of
@@ -1119,10 +1119,10 @@ needed separate the complexities that are involved in data collection and the ac
 <div class="ulist">
 <ul>
 <li>
-<p><code>MatchTest#startTest()</code>&#8201;&#8212;&#8201;Does the necessary initialisations to start a MatchTest.</p>
+<p><code>MatchTest#startTest()</code>&#8201;&#8212;&#8201;Does the necessary initialisations to start a <code>MatchTest</code>.</p>
 </li>
 <li>
-<p><code>MatchTest#stopTest()</code>&#8201;&#8212;&#8201;Does the necessary clean up to stop a MatchTest.</p>
+<p><code>MatchTest#stopTest()</code>&#8201;&#8212;&#8201;Does the necessary clean up to stop a <code>MatchTest</code>.</p>
 </li>
 <li>
 <p><code>MatchTest#match(questionIndex, answerIndex)</code>&#8201;&#8212;&#8201;Matches the question to the answer.</p>
@@ -1133,7 +1133,7 @@ needed separate the complexities that are involved in data collection and the ac
 <p>These operations are exposed in the <code>Model</code> interface as <code>Model#startTriviaTest()</code>, <code>Model#stopTriviaTest()</code> and <code>Model#MatchQuestionAndAnswer</code> respectively.</p>
 </div>
 <div class="paragraph">
-<p>The following activity diagram shows the complete lifecycle of a MatchTest.</p>
+<p>The following activity diagram shows the complete lifecycle of a <code>MatchTest</code>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1141,13 +1141,11 @@ needed separate the complexities that are involved in data collection and the ac
 </div>
 </div>
 <div class="paragraph">
-<p>Given below is an example usage scenario and how the MatchTest behaves at each step.</p>
+<p>The sequence below is an example scenario and how the <code>MatchTest</code> behaves at each step.</p>
 </div>
 <div class="paragraph">
-<p>Step 1. The user enter the <code>testM</code> command and a new <code>MatchTestCommand</code> will be created.</p>
-</div>
-<div class="paragraph">
-<p>Step 2. The <code>MatchTestCommand</code> will be executed and a new MatchTest Object will be created as shown in the below Sequence diagram.</p>
+<p>Step 1. User enters the <code>testM</code> command and a new <code>MatchTestCommand</code> will be created and executed, triggering a
+string of events as shown in the sequence diagram below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1155,23 +1153,24 @@ needed separate the complexities that are involved in data collection and the ac
 </div>
 </div>
 <div class="paragraph">
-<p>Step 3. After the MatchTest has been started, the user can only input the following commands:</p>
+<p>Step 2. After the <code>MatchTest</code> has been started, the user can only input the following commands:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>QUESTION_INDEX ANSWER_INDEX</code> Will be used to define which question will be matched to the answer.</p>
+<p><code>QUESTION_INDEX ANSWER_INDEX</code> Will be used to specify which question will be matched to the specified answer.</p>
 </li>
 <li>
-<p><code>ANSWER_INDEX</code> Another way to match the question (at the top of the question list) to its defined answer.</p>
+<p><code>ANSWER_INDEX</code> Another way to match the question (at the top of the question list) to its specified answer.</p>
 </li>
 <li>
-<p><code>exit</code> If the user input <code>exit</code>, the MatchTest will end and the information related to that MatchTest will not be recorded.</p>
+<p><code>exit</code> If the user input <code>exit</code> during a <code>MatchTest</code>, the <code>MatchTest</code> will end and the information related to that <code>MatchTest</code> will not be recorded.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Step 4. Suppose the user chose to match a question to an answer, the sequence will execute a list of steps, as shown in the sequence diagram below, to determine whether the match is correct.</p>
+<p>Step 3. Suppose the user choose to match a question to an answer, a list of steps will be executed as shown in the sequence
+diagram below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1179,13 +1178,13 @@ needed separate the complexities that are involved in data collection and the ac
 </div>
 </div>
 <div class="paragraph">
-<p>Step 5. If there are still existing unmatched question and answers, the System will go back to step 3.</p>
+<p>Step 4. If there are still existing unmatched questions and answers, the System will go back to step 3.</p>
 </div>
 <div class="paragraph">
-<p>Step 6. After all the question and answers are matched, the System will store the results on the hard disk and display the test&#8217;s result.</p>
+<p>Step 5. After all the question and answers are matched, the System will store the results on the hard disk and display the test&#8217;s result.</p>
 </div>
 <div class="paragraph">
-<p>Step 7. At this stage, the System will await <code>exit</code> command from the user so that user can be taken back to the home page.</p>
+<p>Step 6. At this stage, the System will await <code>exit</code> command from the user so that user can be taken back to the test menu page.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1195,16 +1194,16 @@ needed separate the complexities that are involved in data collection and the ac
 <div class="ulist">
 <ul>
 <li>
-<p>Below are the different aspect of the UI in the MatchTest that have been considered.</p>
+<p>Below are the different aspect of the UI in the <code>MatchTest</code> that have been considered.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>The UI feedback that are involved when user execute MatchCommand</p>
+<p>The UI feedback that are involved after the execution of <code>MatchCommand</code></p>
 <div class="ulist">
 <ul>
 <li>
 <p>Due to the possibility of having to match a lot of questions and answers, after each successful match, the question and answer
-that are matched correctly will be removed. In addition, to improve user experience, a colored flashed will be played
+that are matched correctly will be removed. In addition, to improve user experience, a colored flash will be flashed
 before their removal.</p>
 </li>
 </ul>
@@ -1218,7 +1217,7 @@ before their removal.</p>
 <p>The index of the question and answer is important because the user would be using it to identify which question is to be
 matched to which answer. The easy way to do this was to let <code>ListView</code> do it&#8217;s job of re-indexing whenever an item is removed.
 However, doing so will cause confusion to the user as the index that is used to represent an item is now used to represent another item.
-Hence, in MatchTest, we have made the Indexes static.</p>
+Hence, in <code>MatchTest</code>, we have made the Indexes static.</p>
 </li>
 </ul>
 </div>
@@ -1229,10 +1228,10 @@ Hence, in MatchTest, we have made the Indexes static.</p>
 <ul>
 <li>
 <p>The basic way for the user to matching a question to an answer is for them to provide the Index of the question and answer.
-However, when the list of questions and answers are long, the user will have problem keeping track on 2 lists. Hence, an
-alternative way is to require the user just key in the Index of the answer, and 3VIA will match the top question to that answer.
-This is more intuitive because the user just need to scroll through the answer list, allowing user to focus on finding the answer
-to match the first question.</p>
+However, when the list of questions and answers are long, the user will have problem keeping track of 2 lists. Hence, an
+alternative way is to require the user just key in the Index of the answer, and 3VIA will match the first question in the list
+to that specified answer. This is more intuitive because the user just need to scroll through the answer list,
+allowing user to focus on finding the answer to match the first question.</p>
 </li>
 </ul>
 </div>
@@ -1267,7 +1266,7 @@ to match the first question.</p>
 <li>
 <p>Cons: Additional work is required to maintain the <code>List</code> data structure, to ensure that it is updated every time a question or answer is removed from the UI.<br>
 In addition, The questions and answers are displayed using <code>ListView</code>, and since the mapping of actual index to display index is not an attribute to the question/answer,
-the mapping will be needed to be passed into the UI component. This mapping will then be used by the constructor of <code>ListView</code> to
+the mapping needs to be passed into the UI component. This mapping will then be used by the constructor of <code>ListView</code> to
 create a static display index of question and answer. Hence, this design consideration was not implemented due to
 abstraction that is leaking into the UI.</p>
 </li>
@@ -2081,7 +2080,7 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User: Start MatchTest.</p>
+<p>User: Start <code>MatchTest</code>.</p>
 </li>
 <li>
 <p>System: Shows a list of question and answer.</p>
@@ -2093,7 +2092,7 @@ b. Require developers to download those libraries manually (this creates extra w
 <p>Repeat step 3 until user matched all the questions and answers correctly.</p>
 </li>
 <li>
-<p>System: Record down the statistics of the test.</p>
+<p>System: Record down and show the results of the test.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2110,9 +2109,9 @@ b. Require developers to download those libraries manually (this creates extra w
 <div class="ulist none">
 <ul class="none">
 <li>
-<p>3a1. System: Indicates that question and answer matched are wrong.</p>
+<p>3a1. System: Indicates that question and answer matched are wrongly.</p>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Use case resumes at step 3.</p>
 </div>
 </li>
 </ul>
@@ -2388,4 +2387,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 10:07:33 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 11:39:43 UTC</div></div></div></body></html>
