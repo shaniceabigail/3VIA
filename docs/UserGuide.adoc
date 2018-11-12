@@ -171,12 +171,12 @@ _Selects and opens a Card Info Panel for the 1st card in the results of the `fin
 // tag::research[]
 === Research on a question : `research`
 
-Loads the Google search page for the question of the identified card. If, for any reason, you are not able to load the
+Loads the Google search page for the question of the identified card. If you are not able to load the
 Google search page, 3VIA will redirect you to DuckDuckGo's search engine with the selected question as the search query. +
 Format: `research INDEX`
 
 [NOTE]
-You would need to have an internet connection to load the online search engine. If you are not able to load the
+You would need to have an internet connection to load the online search engine. If you are not able to load both the
 Google's and DuckDuckGo's search engine, you will be redirected to a page with an error message.
 // end::research[]
 
@@ -321,13 +321,13 @@ The following commands can only be used during a `MatchTest`.
 Will match a pair of question and answer during a `MatchTest`. +
 Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 
-An example is given in the below screenshot, where the command of `1 2` will select the question and answer that is boxed
+An example is given in the below screenshot, where the command of `2 3` will select the question and answer that is boxed
 in green.
 
 image::UserGuideMatchCommand.png[width="790"]
 
 Another way to match a pair of question and answer is to solely enter the index of the answer. By doing so, we will
-assume that you would be matching a question at the top to the answer that is specified. +
+assume that you would be matching first question to the answer that is specified. +
 Format: `INDEX_OF_ANSWER`
 
 An example of such a usage can be seen in the the below screenshot.
@@ -349,8 +349,7 @@ entering the `exit` command. The command will bring you to the test menu page. +
 Format: `exit`
 
 [NOTE]
-Your attempts from an incomplete `MatchTest` will be discarded. Only those attempts from a completed `MatchTest` will
-be saved into your hard disk.
+Only those attempts from a completed `MatchTest` will be saved into your hard disk.
 // end::matchtest2[]
 
 // tag::stats[]
