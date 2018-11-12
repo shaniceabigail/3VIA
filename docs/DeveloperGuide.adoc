@@ -342,25 +342,25 @@ image::ImportCommandActivityDiagram.png[ImportCommandActivityDiagram]
 
 Given below is an example usage scenario and how the import mechanism behaves.
 
-Step 1: The user enters the import command to import a file from an absolute or relative file path.
+Step 1. The user enters the import command to import a file from an absolute or relative file path.
 An `ImportCommand` object is initialised.
 
-Step 2: When the `ImportCommand` executes, the desired import file is first verified to be valid by calling `ImportFile#isFileValid()`.
+Step 2. When the `ImportCommand` executes, the desired import file is first verified to be valid by calling `ImportFile#isFileValid()`.
 The following checks are done:
 
 * `#isValidFile()` -- the import file's path points to a file and the file is non-empty.
 * `#isValidFileType()` the import file is of a supported file type (i.e. plain/text file format).
 * `#isValidFileFormat()` the import file is readable and the text in the import file is in the specified format.
 
-Step 3: Once verified, the import file is parsed to form a unique list of cards that is stored in `UniqueCardList`.
+Step 3. Once verified, the import file is parsed to form a unique list of cards that is stored in `UniqueCardList`.
 
 NOTE: An empty `UniqueCardList` is also considered as an import failure as no cards were parsed from the given text file.
 A  `CommandException` will be thrown, and the user is informed that no cards (question and answer pair) were found in the text file.
 
-Step 4: `TriviaBundle#haveAnyCard()` checks every card in the `UniqueCardList` against the existing list of cards in `TriviaBundle` for duplicates.
+Step 4. `TriviaBundle#haveAnyCard()` checks every card in the `UniqueCardList` against the existing list of cards in `TriviaBundle` for duplicates.
 If duplicates are found, the import fails and a `DuplicateCardException` is raised.
 
-Step 5: The `UniqueCardList` is then added into `TriviaBundle` via `TriviaBundle#addMultipleCards()`.
+Step 5. The `UniqueCardList` is then added into `TriviaBundle` via `TriviaBundle#addMultipleCards()`.
 The number of cards and the cards imported are displayed to the user for verification. +
 
 The sequence diagram below describes the import of multiple cards.
@@ -407,11 +407,11 @@ The `ObservableFile` interface allows the UI component to update the preview of 
 
 ===== Aspect: How the import file is parsed
 * **Alternative 1 (current choice):** Tokenize strings according to defined characters between question and answer, and between cards.
-** Pro: Allows the user to undo/ redo an import as the execution of the import only executes `VersionedAddressBook#commit()` once.
+** Pro: Allows the user to undo/ redo an import as the execution of the import only executes `VersionedTriviaBundle#commit()` once.
 ** Con: May have memory performance issue as multiple cards are stored temporarily in the `TriviaBundle`.
 * **Alternative 2 (current choice):** Tokenize strings based on the `AddCommand` input format.
 ** Pro: Easy to implement as it allows reuse of the `AddCommand` functions.
-** Con: Unable to undo/ redo import of cards as the execution of the import command executes `VersionedAddressBook#commit()` multiple times.
+** Con: Unable to undo/ redo import of cards as the execution of the import command executes `VersionedTriviaBundle#commit()` multiple times.
 A successful undo/ redo of the import of all cards would require multiple executions of the undo/ redo command.
 // end::import[]
 
@@ -559,6 +559,49 @@ The tabs are expected to toggle according to the user's interaction:
 
 ===== Icons on the Tabs
 We have added the icon images for the tabs, but implementation is still a work in progress.
+
+// tag::deleteMultiple[]
+=== [Proposed] Delete Multiple `Coming in v2.0`
+==== Current Implementation
+The delete mechanism is facilitated by `TriviaBundleParser`, `DeleteCommandParser`, `ParserUtil`, `DeleteCommand` and `Index`.
+
+Currently, `DeleteCommandParser` invokes `ParserUtil#parseIndex()` which parses a `oneBasedIndex` input into an `Index`.
+The `DeleteCommand` executes the deletion of a card using the `zeroBasedIndex` as specified in `Index`.
+
+==== Proposed Enhancement
+To delete a range of cards from 1 to 5, `delete 1-5` will be executed.
+The proposed deletion of multiple cards will utilise the following operations:
+
+* `ParserUtil#parseIndex()` -- takes in a one based index.
+* `ParserUtil#parseMultipleIndex()` -- takes in a range of one based indexes in a specified format.
+
+Both of the above methods will return a set of `Index`.
+
+Given below is an example implementation of how `delete 1-5` will behave at each step.
+
+Step 1. `DeleteCommandParser` will determine if the given input deletes a single card or multiple cards.
+This can be done by determining if the input contains a `-`.
+
+Step 2. In this example, `ParserUtil#parseMultipleIndex()` will execute and return a set of `Index`.
+
+Step 3. The set of `Index` is used to initialise `DeleteCommand`.
+
+Step 4. When `DeleteCommand#execute()` is invoked. A zero based index is obtained from each `Index` in the set.
+Each zero based index is then used to delete the cards, similar to the current implementation of `delete`.
+
+==== Design Consideration
+
+===== Aspect: Separate or single delete command
+
+* **Alternative 1 (current choice):** Single delete command.
+** Pro: Reduces the number of commands for the user to remember.
+** Con: Users may be unaware of this functionality being available
+as the name of the command does not describe deleting multiple cards.
+* **Alternative 2:** Separate delete command for deleting multiple cards.
+** Pro: The command will describe the action of deleting multiple cards clearly (i.e. `deleteMultiple 1-5`).
+** Con: There will be more commands for the user to remember.
+
+// end::deleteMultiple[]
 
 === Logging
 
