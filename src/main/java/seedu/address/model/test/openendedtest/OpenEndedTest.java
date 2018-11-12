@@ -2,86 +2,175 @@ package seedu.address.model.test.openendedtest;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.function.Supplier;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 import seedu.address.model.ReadOnlyTriviaBundle;
-import seedu.address.model.card.Answer;
 import seedu.address.model.card.Card;
-import seedu.address.model.card.Question;
+import seedu.address.model.test.Attempt;
+import seedu.address.model.test.TestType;
 import seedu.address.model.test.TriviaTest;
 import seedu.address.model.topic.Topic;
+import seedu.address.ui.test.TriviaTestPage;
+import seedu.address.ui.test.TriviaTestResultPage;
+import seedu.address.ui.test.openendedtest.OpenEndedTestPage;
+import seedu.address.ui.test.openendedtest.OpenEndedTestResultPage;
 
 /**
  * Represents a trivia test that is started by the user.
- * For a {@code OpenEndedTest} to start, there must be more than 1 cards related to the topic
+ * For a {@code OpenEndedTest} to start, there must be at least 1 card related to the topic
  * that is specified in the test.
  */
-public abstract class OpenEndedTest extends TriviaTest {
-    public static final String MESSAGE_TEST_CONSTRAINS = "OpenEndedTest needs more than 1 card with the"
+public class OpenEndedTest extends TriviaTest {
+    public static final String MESSAGE_TEST_CONSTRAINS = "OpenEndedTest needs at least 1 card with the"
             + " corresponding topic to proceed.";
 
-    private final ObservableList<Question> shuffledQuestions;
-    private final ObservableList<Answer> shuffledAnswers;
+    public final TestType testType = TestType.OPEN_ENDED_TEST;
+
+    private List<Attempt> attempts;
+
+
+    private ArrayList<Card> shuffledCards;
+
+
+    private Card currCard;
+
+    private String userAnswer;
 
     public OpenEndedTest(Topic tag, ReadOnlyTriviaBundle triviaBundle) {
         super(tag, triviaBundle);
 
-        shuffledQuestions = getQuestions(cards);
-        shuffledAnswers = getAnswers(cards);
+        this.shuffledCards = shuffleCards(cards);
+
+        attempts = new ArrayList<>();
 
         checkArgument(isValidTest(), MESSAGE_TEST_CONSTRAINS);
-    }
 
-    public ObservableList<Question> getQuestions() {
-        return this.shuffledQuestions;
-    }
-
-    /**
-     * Retrieve a randomized modifiable observable list of questions to allow changes in the UI.
-     * @param cards The cards to retrieve the questions from.
-     * @return an observable list of questions
-     */
-    private ObservableList<Question> getQuestions(List<Card> cards) {
-        List<Question> questions = cards.stream()
-                .map(Card::getQuestion)
-                .collect(Collectors.toList());
-        Collections.shuffle(questions);
-        return FXCollections.observableList(questions);
-    }
-
-    public ObservableList<Answer> getAnswers() {
-        return this.shuffledAnswers;
+        currCard = getNextCard();
     }
 
     /**
-     * Retrieve a randomized modifiable observable list of answers to allow changes in the UI.
-     * @param cards The cards to retrieve the answers from.
-     * @return an observable list of answers
+     * Retrieve a randomized list of cards
+     * @param cards The cards to shuffle from.
+     * @return an list of cards
      */
-    private ObservableList<Answer> getAnswers(List<Card> cards) {
-        List<Answer> answers = cards.stream()
-                .map(Card::getAnswer)
-                .collect(Collectors.toList());
-        Collections.shuffle(answers);
-        return FXCollections.observableList(answers);
+    private ArrayList<Card> shuffleCards(List<Card> cards) {
+        ArrayList<Card> shuffledCards = new ArrayList<>(cards);
+        Collections.shuffle(shuffledCards);
+        return shuffledCards;
+    }
+
+    /**
+     * Retrieves the next card from shuffledCards, and removes it from shuffledCards
+     * @return card
+     */
+    private Card getNextCard() {
+        if (shuffledCards.size() == 0) {
+            return null;
+        }
+        Card nextCard = shuffledCards.get(0);
+        shuffledCards.remove(0);
+        return nextCard;
     }
 
     @Override
     public void startTest() {
-
+        startTimer();
     }
 
     @Override
     public void stopTest() {
+        timer.stop();
+    }
 
+    public void recordAnswer(String userInput) {
+        this.userAnswer = userInput;
+    }
+
+    @Override
+    public TestType getTestType() {
+        return testType;
+    }
+
+    @Override
+    public List<Attempt> getAttempts() {
+        return attempts;
+    }
+
+    public ArrayList<Card> getShuffledCards() {
+        return shuffledCards;
+    }
+
+    public Card getCurrCard() {
+        return currCard;
     }
 
     private boolean isValidTest() {
-        return getQuestions().size() > 1;
+        return shuffledCards.size() >= 1;
+    }
+
+    /**
+     * Creates a new attempt with the question, answer, user answer and whether it was right or wrong
+     * @param in The user input to indicate if the user answered correctly or wrong
+     * @return A boolean value corresponding to the correctness of the attempt
+     */
+    public boolean addAttempt(char in) {
+        boolean isCorrect = (in == 'y' || in == 'Y');
+        Attempt currAttempt = new Attempt(currCard, this.userAnswer, isCorrect);
+        attempts.add(currAttempt);
+        return isCorrect;
+    }
+
+    public void advanceCard() {
+        currCard = getNextCard();
+    }
+
+    @Override
+    public boolean isCompleted() {
+        return (this.shuffledCards.size() == 0);
+    }
+
+    /**
+     * Retrieves total number of correct attempts currently in attempts
+     * @return int of correct attempts
+     */
+    public int getCorrectAttempts() {
+        int correct = 0;
+        for (int i = 0; i < this.attempts.size(); i += 1) {
+            if (attempts.get(i).isCorrect()) {
+                correct += 1;
+            }
+        }
+        return correct;
+    }
+
+    /**
+     * Starts the timer of the test.
+     */
+    private void startTimer() {
+        DecimalFormat timerFormat = new DecimalFormat("#.#");
+        timer = new Timeline(new KeyFrame(Duration.seconds(0.1), ev -> {
+            duration.setValue(Double.parseDouble(timerFormat.format(duration.getValue() + 0.1)));
+        }));
+        timer.setCycleCount(Animation.INDEFINITE);
+        timer.play();
+    }
+
+    @Override
+    public Supplier<? extends TriviaTestPage> getTestingPage() {
+        return () -> new OpenEndedTestPage(this);
+    }
+
+    @Override
+    public Supplier<? extends TriviaTestResultPage> getResultPage() {
+        return () -> new OpenEndedTestResultPage(this);
     }
 
 }

@@ -61,7 +61,6 @@ public class MatchTest extends TriviaTest {
 
         shuffledQuestions = getQuestions(cards);
         shuffledAnswers = getAnswers(cards);
-
         attempts = new ArrayList<>();
 
         checkArgument(isValidMatchTest(), String.format(MESSAGE_MATCH_TEST_CONSTRAINS, cards.size(), topic.topicName));
