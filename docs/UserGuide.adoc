@@ -507,3 +507,7 @@ e.g.`select 2`
 * *MatchTest* : `testM TOPIC`
 ** *Match question to its answer* : `INDEX_OF_QUESTION INDEX_OF_ANSWER` or `INDEX_OF_ANSWER`
 * *View statistics of test* : `stats [TOPIC]` _or_ `stats` _or_ `stats HL`
+* *History* : `history`
+
+=== Review Commands
+* *History* : `history`
