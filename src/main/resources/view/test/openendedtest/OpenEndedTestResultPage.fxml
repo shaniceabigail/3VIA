@@ -33,7 +33,7 @@
                 <children>
                     <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                         <children>
-                            <Label styleClass="label-bright" text="No. of cards: " />
+                            <Label styleClass="label-bright" text="Final Score: " />
                         </children>
                     </HBox>
                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="100.0" HBox.hgrow="ALWAYS">

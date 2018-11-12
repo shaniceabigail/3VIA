@@ -295,6 +295,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean isOpenEndedTestAnswerCorrect(char in) {
+        assert currentRunningTest instanceof OpenEndedTest;
         OpenEndedTest openEndedTest = (OpenEndedTest) currentRunningTest;
         boolean isAnswerCorrect = openEndedTest.addAttempt(in);
         if (!openEndedTest.isCompleted()) {
@@ -313,6 +314,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void recordAnswerToOpenEndedTest(String userInput) {
+        assert currentRunningTest instanceof OpenEndedTest;
         OpenEndedTest openEndedTest = (OpenEndedTest) currentRunningTest;
         openEndedTest.recordAnswer(userInput);
         raise(new OpenEndedTestShowAnswerEvent(userInput));

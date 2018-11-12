@@ -276,13 +276,13 @@ _Card list has been cleared_.
 _No cards to be cleared_.
 // end::clear[]
 
-=== Starting an Open Ended Test: `testO` `[coming in v2.0]`
-bStart an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer. +
-Format: `test t/TOPIC [TIMELIMIT_IN_SECONDS]`
+//tag::openendedtest[]
+=== Starting an Open Ended Test: `testO`
+Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer. +
+Format: `testO TOPIC`
 
 ****
 * The test aims to test the knowledge of the user with the existing questions of a specified topic that are in the trivia application.
-* The user can also set the time limit (in seconds) for each question using the optional field `TIMELIMIT_IN_SECONDS`
 ****
 
 The following commands can only be used during an `Open Ended Test`.
@@ -295,12 +295,13 @@ Format: `ANSWER_FROM_USER`
 ==== Determining the correctness of your answer:
 
 After answering the question, you would be given a comparison between the expected and actual answer you entered. You would be required to determine the correctness of your answer since the questions are open ended. The app will keep track of your score. +
-Format: `c` (correct) OR `x` (wrong)
+Format: `Y` (correct) OR `N` (wrong)
 
 ==== Quit the test:
 
 Test is exited. +
 Format: `exit`
+//end::openendedtest[]
 
 // tag::matchtest1[]
 === Start a MatchTest: `testM`

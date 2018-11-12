@@ -19,24 +19,12 @@ public class OpenEndedTestCommandParser implements Parser<OpenEndedTestCommand> 
      * @throws ParseException if the user input does not conform the expected format
      */
     public OpenEndedTestCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TOPIC);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_TOPIC)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (args.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, OpenEndedTestCommand.MESSAGE_USAGE));
         }
 
-        Topic tag = ParserUtil.parseTopic(argMultimap.getValue(PREFIX_TOPIC).get());
+        Topic tag = ParserUtil.parseTopic(args);
 
         return new OpenEndedTestCommand(tag);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

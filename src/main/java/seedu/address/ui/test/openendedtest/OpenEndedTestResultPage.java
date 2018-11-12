@@ -42,7 +42,8 @@ public class OpenEndedTestResultPage extends TriviaTestResultPage {
         testDateText.setText(DateUtil.format(openEndedTest.getTestDate()));
         durationText.setText(String.valueOf(openEndedTest.getDuration().getValue()) + "s");
         topicText.setText(openEndedTest.getTopic().topicName);
-        numOfCardsText.setText(String.valueOf(openEndedTest.getCardsTested().size()));
+        numOfCardsText.setText(String.valueOf(openEndedTest.getCorrectAttempts()) + " / "
+                + String.valueOf(openEndedTest.getCardsTested().size()));
 
         openEndedTestAttemptList = new OpenEndedTestAttemptList(openEndedTest);
         attemptListPlaceholder.getChildren().add(openEndedTestAttemptList.getRoot());

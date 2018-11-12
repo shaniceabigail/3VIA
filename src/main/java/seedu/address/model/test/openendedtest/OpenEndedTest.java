@@ -33,7 +33,10 @@ public class OpenEndedTest extends TriviaTest {
             + " corresponding topic to proceed.";
 
     public final TestType testType = TestType.OPEN_ENDED_TEST;
+
     private List<Attempt> attempts;
+
+
     private ArrayList<Card> shuffledCards;
 
 
@@ -101,6 +104,10 @@ public class OpenEndedTest extends TriviaTest {
         return attempts;
     }
 
+    public ArrayList<Card> getShuffledCards() {
+        return shuffledCards;
+    }
+
     public Card getCurrCard() {
         return currCard;
     }
@@ -128,6 +135,16 @@ public class OpenEndedTest extends TriviaTest {
     @Override
     public boolean isCompleted() {
         return (this.shuffledCards.size() == 0);
+    }
+
+    public int getCorrectAttempts() {
+        int correct = 0;
+        for (int i = 0; i < this.attempts.size(); i+=1) {
+            if (attempts.get(i).isCorrect()) {
+                correct += 1;
+            }
+        }
+        return correct;
     }
 
     /**

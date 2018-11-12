@@ -26,13 +26,28 @@ public class OpenEndedTestPage extends TriviaTestPage {
     private String question;
     private String answer;
     private String userAnswer;
+    private final String totalNumOfQns;
 
     @FXML
     private Label questionLabel;
+
     @FXML
     private Label userAnswerLabel;
+
     @FXML
     private Label answerLabel;
+
+    @FXML
+    private Label topic;
+
+    @FXML
+    private Label duration;
+
+    @FXML
+    private Label qnsNo;
+
+    @FXML
+    private Label totalNumQns;
 
     public OpenEndedTestPage(OpenEndedTest openEndedTest) {
         super(FXML);
@@ -41,9 +56,15 @@ public class OpenEndedTestPage extends TriviaTestPage {
         this.question = card.getQuestion().value;
         this.answer = "";
         this.userAnswer = "";
+        this.totalNumOfQns = " of " + (openEndedTest.getShuffledCards().size() + 1) + " questions";
         questionLabel.setText(question);
         userAnswerLabel.setText(userAnswer);
         answerLabel.setText(answer);
+        totalNumQns.setText(totalNumOfQns);
+        qnsNo.setText((openEndedTest.getAttempts().size() + 1) + "");
+
+        topic.setText(openEndedTest.getTopic().topicName);
+        duration.textProperty().bind(openEndedTest.getDuration().asString().concat(" s"));
 
         registerAsAnEventHandler(this);
     }
@@ -57,6 +78,7 @@ public class OpenEndedTestPage extends TriviaTestPage {
         questionLabel.setText(question);
         userAnswerLabel.setText(userAnswer);
         answerLabel.setText(answer);
+        qnsNo.setText((openEndedTest.getAttempts().size() + 1) + "");
     }
 
     @Subscribe
