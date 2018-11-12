@@ -138,7 +138,7 @@ public class OpenEndedTest extends TriviaTest {
     }
 
     /**
-     * Retrieves total number of correct attempts currently in <List> Attempts
+     * Retrieves total number of correct attempts currently in attempts
      * @return int of correct attempts
      */
     public int getCorrectAttempts() {
