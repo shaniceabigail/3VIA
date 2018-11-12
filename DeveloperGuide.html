@@ -33,12 +33,11 @@
 <li><a href="#mass-import-feature">3.2. Mass Import Feature</a></li>
 <li><a href="#structure-of-triviatest">3.3. Structure of TriviaTest</a></li>
 <li><a href="#matchtest-feature">3.4. MatchTest Feature</a></li>
-<li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
-<li><a href="#navigation-feature">3.6. Navigation Feature</a></li>
-<li><a href="#mode-feature">3.7. Mode Feature</a></li>
-<li><a href="#proposed-delete-multiple-code-coming-in-v2-0-code">3.8. [Proposed] Delete Multiple <code>Coming in v2.0</code></a></li>
-<li><a href="#logging">3.9. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.10. Configuration</a></li>
+<li><a href="#navigation-feature">3.5. Navigation Feature</a></li>
+<li><a href="#day-and-night-mode-feature">3.6. Day and Night Mode Feature</a></li>
+<li><a href="#proposed-delete-multiple-code-coming-in-v2-0-code">3.7. [Proposed] Delete Multiple <code>Coming in v2.0</code></a></li>
+<li><a href="#logging">3.8. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.9. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -451,7 +450,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <div class="title">Figure 6. Structure of the TestPage Component</div>
 </div>
 <div class="paragraph">
-<p>Structure for the Test Page Component has also been modified to expand the functionality of the application.</p>
+<p>Structure for the Test Page Component has also been modified to contain and expand the functionality of the application.</p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/CS2103-AY1819S1-W12-3/main/blob/master/src/main/java/seedu/address/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/CS2103-AY1819S1-W12-3/main/blob/master/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
@@ -1305,29 +1304,39 @@ abstraction that is leaking into the UI.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></h3>
-<div class="paragraph">
-<p><em>{Explain here how the data encryption feature will be implemented}</em></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="navigation-feature"><a class="link" href="#navigation-feature">3.6. Navigation Feature</a></h3>
+<h3 id="navigation-feature"><a class="link" href="#navigation-feature">3.5. Navigation Feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The Navigation Tab is designed for users to be aware of the different functionality of our app.
-We added a navigation tab feature, which only handles mouse events.
-At the present, the Navigation Tab is not a separate class on its own, and is embedded into the <code>MainDisplay</code> class.</p>
+<p>The Navigation Tab is designed for users to be aware of the different functionality of our app and paired with its relevant content.
+We added a navigation tab feature which can be accessed through commands of the tabs the user wants to navigate to.</p>
+</div>
+<div class="paragraph">
+<p>The contents of the each AppState, or the functionalities of that page is attached to the tab itself, to allow the user to check and use the app more efficiently.
+Commands and mouse click events will handle the updating of AppState.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ToggleTabActivityDiagram.png" alt="ToggleTabActivityDiagram" width="1000">
+</div>
+<div class="title">Figure 11. Toggle Tab Event</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="handling-event"><a class="link" href="#handling-event">3.5.2. Handling event</a></h4>
+<div class="paragraph">
+<p>At the present, the Navigation Tab is not a separate class on its own, and is embedded into the <code>MainDisplay</code> class.
+Event raised is ToggleTabEvent.</p>
 </div>
 <div class="sect4">
 <h5 id="gui-handling"><a class="link" href="#gui-handling">GUI Handling</a></h5>
 <div class="paragraph">
-<p>The tabs are expected to toggle according to the user&#8217;s interaction:</p>
+<p>The tabs are expected to toggle and display their respective tab contents according to the user&#8217;s interaction:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Command Line [Work In Progress]</p>
+<p>Commands from Command Line Interface</p>
 </li>
 <li>
 <p>Mouse clicks</p>
@@ -1340,7 +1349,7 @@ At the present, the Navigation Tab is not a separate class on its own, and is em
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.6.2. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.3. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="location-of-navigation-tab"><a class="link" href="#location-of-navigation-tab">Location of Navigation tab</a></h5>
 <div class="ulist">
@@ -1359,20 +1368,37 @@ At the present, the Navigation Tab is not a separate class on its own, and is em
 </div>
 </li>
 <li>
-<p>Top bar</p>
+<p>Top bar (<em>currently implemented</em>)</p>
 <div class="ulist">
 <ul>
 <li>
 <p>pros: easier to implement</p>
 </li>
 <li>
-<p>cons: less intuitive for users compared to side bar</p>
+<p>cons: less visually intuitive for users compared to side bar</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="using-external-library"><a class="link" href="#using-external-library">3.5.4. Using external library</a></h4>
+<div class="paragraph">
+<p>Originally we were using JFoenix, however due to a bug which causes the alignment of our pages to the tabs to be visually off,
+we decided to implement a regular tab.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Library used: <a href="https://github.com/jfoenixadmin/JFoenix">JFoenix</a></p>
+</li>
+<li>
+<p>Tutorial inspiration: <a href="http://synappse.co/blog/vertical-stateful-jfxtabpane-with-icons-in-javafx/">Vertical Tabs</a></p>
+</li>
+</ul>
 </div>
 <div class="sect4">
 <h5 id="icons-on-the-tabs"><a class="link" href="#icons-on-the-tabs">Icons on the Tabs</a></h5>
@@ -1383,18 +1409,50 @@ At the present, the Navigation Tab is not a separate class on its own, and is em
 </div>
 </div>
 <div class="sect2">
-<h3 id="mode-feature"><a class="link" href="#mode-feature">3.7. Mode Feature</a></h3>
+<h3 id="day-and-night-mode-feature"><a class="link" href="#day-and-night-mode-feature">3.6. Day and Night Mode Feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.7.1. Current Implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>Mode can be accessed as a command in any AppState of 3VIA, which allows you to toggle the mode anywhere in the app.</p>
+<p>Mode allows you to toggle between day and night mode anywhere in the app and it can be accessed as a command in any AppState of 3VIA.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/3VIATheme.png" alt="3VIATheme" width="800">
+</div>
+<div class="title">Figure 12. Day Mode / Light Theme</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DarkTheme.png" alt="DarkTheme" width="800">
+</div>
+<div class="title">Figure 13. Night Mode / Dark Theme</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ModeActivityDiagram.png" alt="ModeActivityDiagram" width="800">
+</div>
+<div class="title">Figure 14. Mode activity diagram</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="handling-event-2"><a class="link" href="#handling-event-2">3.6.2. Handling event</a></h4>
+<div class="paragraph">
+<p>Event is handled in the <code>MainWindow.java</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="gui-handling-2"><a class="link" href="#gui-handling-2">3.6.3. GUI Handling</a></h4>
+<div class="paragraph">
+<p>The default of the application is a "Day Theme" stylesheet, meaning a generally white background
+with dark text. The command will swap the current theme set to a "Dark Theme" stylesheet.
+Each time the the <code>mode</code> command is called, the boolean in <code>MainDisplay.java</code> acts as a toggle between the 2 themes.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-delete-multiple-code-coming-in-v2-0-code"><a class="link" href="#proposed-delete-multiple-code-coming-in-v2-0-code">3.8. [Proposed] Delete Multiple <code>Coming in v2.0</code></a></h3>
+<h3 id="proposed-delete-multiple-code-coming-in-v2-0-code"><a class="link" href="#proposed-delete-multiple-code-coming-in-v2-0-code">3.7. [Proposed] Delete Multiple <code>Coming in v2.0</code></a></h3>
 <div class="sect3">
-<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.8.1. Current Implementation</a></h4>
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The delete mechanism is facilitated by <code>TriviaBundleParser</code>, <code>DeleteCommandParser</code>, <code>ParserUtil</code>, <code>DeleteCommand</code> and <code>Index</code>.</p>
 </div>
@@ -1404,7 +1462,7 @@ The <code>DeleteCommand</code> executes the deletion of a card using the <code>z
 </div>
 </div>
 <div class="sect3">
-<h4 id="proposed-enhancement"><a class="link" href="#proposed-enhancement">3.8.2. Proposed Enhancement</a></h4>
+<h4 id="proposed-enhancement"><a class="link" href="#proposed-enhancement">3.7.2. Proposed Enhancement</a></h4>
 <div class="paragraph">
 <p>To delete a range of cards from 1 to 5, <code>delete 1-5</code> will be executed.
 The proposed deletion of multiple cards will utilise the following operations:</p>
@@ -1441,7 +1499,7 @@ Each zero based index is then used to delete the cards, similar to the current i
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-consideration"><a class="link" href="#design-consideration">3.8.3. Design Consideration</a></h4>
+<h4 id="design-consideration"><a class="link" href="#design-consideration">3.7.3. Design Consideration</a></h4>
 <div class="sect4">
 <h5 id="aspect-separate-or-single-delete-command"><a class="link" href="#aspect-separate-or-single-delete-command">Aspect: Separate or single delete command</a></h5>
 <div class="ulist">
@@ -1479,14 +1537,14 @@ as the name of the command does not describe deleting multiple cards.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.9. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.8. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.10, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.9, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1517,7 +1575,7 @@ as the name of the command does not describe deleting multiple cards.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.10. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.9. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1583,7 +1641,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 11. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 15. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -2557,4 +2615,4 @@ Error details shown in the results display.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:39:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:49:11 UTC</div></div></div></body></html>

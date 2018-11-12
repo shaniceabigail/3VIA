@@ -26,18 +26,25 @@
 <li><a href="#redoing-the-previously-undone-command-code-redo-code">3.11. Redoing the previously undone command : <code>redo</code></a></li>
 <li><a href="#clearing-all-entries-code-clear-code">3.12. Clearing all entries : <code>clear</code></a></li>
 <li><a href="#navigation-to-another-tab">3.13. Navigation to another tab</a></li>
-<li><a href="#toggling-between-the-day-and-night-mode-of-the-app-code-mode-code">3.14. Toggling between the day and night mode of the app: <code>mode</code></a></li>
+<li><a href="#changing-the-day-and-night-mode-of-the-app-code-mode-code">3.14. Changing the day and night mode of the app: <code>mode</code></a></li>
 <li><a href="#starting-an-open-ended-test-code-testo-code">3.15. Starting an Open Ended Test: <code>testO</code></a></li>
 <li><a href="#start-a-matchtest-code-testm-code">3.16. Start a MatchTest: <code>testM</code></a></li>
 <li><a href="#view-statistics-for-a-certain-test-or-overall-learning-path-code-stats-code-code-coming-in-v2-0-code">3.17. View statistics for a certain test or overall learning path: <code>stats</code> <code>[coming in v2.0]</code></a></li>
 <li><a href="#cram-more-knowledge-code-import-code">3.18. Cram More Knowledge!: <code>import</code></a></li>
 <li><a href="#exiting-the-program-code-exit-code">3.19. Exiting the program : <code>exit</code></a></li>
 <li><a href="#saving-data">3.20. Saving data</a></li>
-<li><a href="#multi-player-code-coming-in-v2-0-code">3.21. Multi-Player <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
-<li><a href="#command-summary">5. Command Summary</a></li>
+<li><a href="#command-summary">5. Command Summary</a>
+<ul class="sectlevel2">
+<li><a href="#non-page-dependent-commands">5.1. Non-page Dependent Commands</a></li>
+<li><a href="#navigation-commands">5.2. Navigation Commands</a></li>
+<li><a href="#learn-commands">5.3. Learn Commands</a></li>
+<li><a href="#test-commands">5.4. Test Commands</a></li>
+<li><a href="#review-commands">5.5. Review Commands</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -94,6 +101,9 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 </li>
 <li>
 <p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd card in the current list</p>
+</li>
+<li>
+<p><strong><code>mode</code></strong> :  changes the light theme mode to a darker mode</p>
 </li>
 <li>
 <p><strong><code>exit</code></strong> : exits the app</p>
@@ -165,6 +175,18 @@ Format: <code>add q/QUESTION a/ANSWER [t/TOPIC]&#8230;&#8203;</code></p>
 </td>
 <td class="content">
 A card can have any number of topics. If there are no topics specified, <code>NoTopic</code> will be assigned to the card.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<code>[t/TOPIC]</code> is case sensitive
 </td>
 </tr>
 </table>
@@ -527,7 +549,19 @@ Format: <code>learn</code>, <code>test</code>, <code>review</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="toggling-between-the-day-and-night-mode-of-the-app-code-mode-code"><a class="link" href="#toggling-between-the-day-and-night-mode-of-the-app-code-mode-code">3.14. Toggling between the day and night mode of the app: <code>mode</code></a></h3>
+<h3 id="changing-the-day-and-night-mode-of-the-app-code-mode-code"><a class="link" href="#changing-the-day-and-night-mode-of-the-app-code-mode-code">3.14. Changing the day and night mode of the app: <code>mode</code></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/3VIATheme.png" alt="3VIATheme" width="800">
+</div>
+<div class="title">Figure 1. Day Mode / Light Theme</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DarkTheme.png" alt="DarkTheme" width="800">
+</div>
+<div class="title">Figure 2. Night Mode / Dark Theme</div>
+</div>
 <div class="paragraph">
 <p>Type <code>mode</code> in any page, or section of the app to switch between the modes to suit your comfort in learning and using 3VIA.
 Format: <code>mode</code></p>
@@ -878,12 +912,6 @@ exiting from the programme. If you want to exit from the program, execute the <c
 There is no need to save manually.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="multi-player-code-coming-in-v2-0-code"><a class="link" href="#multi-player-code-coming-in-v2-0-code">3.21. Multi-Player <code>[coming in v2.0]</code></a></h3>
-<div class="paragraph">
-<p><em>{explain how the user can enable/disable Multi-Player}</em></p>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -898,8 +926,34 @@ There is no need to save manually.</p>
 <div class="sect1">
 <h2 id="command-summary"><a class="link" href="#command-summary">5. Command Summary</a></h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="non-page-dependent-commands"><a class="link" href="#non-page-dependent-commands">5.1. Non-page Dependent Commands</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/NonPageDependent.png" alt="NonPageDependent" width="800">
+</div>
+<div class="title">Figure 3. Non-page dependent Commands</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="navigation-commands"><a class="link" href="#navigation-commands">5.2. Navigation Commands</a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="images/NavigationCommands.png" alt="NavigationCommands" width="800">
+</div>
+<div class="title">Figure 4. Navigation Commands</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="learn-commands"><a class="link" href="#learn-commands">5.3. Learn Commands</a></h3>
 <div class="ulist">
 <ul>
+<li>
+<p><strong>Learn</strong> : <code>learn [TOPIC]</code></p>
+</li>
+<li>
+<p><strong>Mass Import</strong> : <code>import FILEPATH</code></p>
+</li>
 <li>
 <p><strong>Add</strong> <code>add q/QUESTION a/ANSWER [t/TOPIC]&#8230;&#8203;</code><br>
 e.g. <code>add q/What is the formula for force? a/force = mass * acceleration t/Physics</code></p>
@@ -920,12 +974,6 @@ e.g. <code>edit 1 q/Why will the apple fall from the tree? a/Because of gravity!
 e.g. <code>find Why</code></p>
 </li>
 <li>
-<p><strong>Learn</strong> : <code>learn [TOPIC]</code></p>
-</li>
-<li>
-<p><strong>Help</strong> : <code>help</code></p>
-</li>
-<li>
 <p><strong>Select</strong> : <code>select INDEX</code><br>
 e.g.<code>select 2</code></p>
 </li>
@@ -941,6 +989,13 @@ e.g.<code>select 2</code></p>
 <li>
 <p><strong>Redo</strong> : <code>redo</code></p>
 </li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="test-commands"><a class="link" href="#test-commands">5.4. Test Commands</a></h3>
+<div class="ulist">
+<ul>
 <li>
 <p><strong>Open Ended Test</strong> : <code>testO TOPIC TIMELIMIT_IN_SECONDS</code></p>
 <div class="ulist">
@@ -961,9 +1016,6 @@ e.g.<code>select 2</code></p>
 <li>
 <p><strong>Match question to its answer</strong> : <code>INDEX_OF_QUESTION INDEX_OF_ANSWER</code> or <code>INDEX_OF_ANSWER</code></p>
 </li>
-<li>
-<p><strong>Exit from MatchTest</strong> : <code>exit</code></p>
-</li>
 </ul>
 </div>
 </li>
@@ -971,9 +1023,20 @@ e.g.<code>select 2</code></p>
 <p><strong>View statistics of test</strong> : <code>stats [TOPIC]</code> <em>or</em> <code>stats</code> <em>or</em> <code>stats HL</code></p>
 </li>
 <li>
-<p><strong>Mass Import</strong> : <code>import FILEPATH</code></p>
+<p><strong>History</strong> : <code>history</code></p>
 </li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:39:41 UTC</div></div></div></body></html>
+<div class="sect2">
+<h3 id="review-commands"><a class="link" href="#review-commands">5.5. Review Commands</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>History</strong> : <code>history</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:49:11 UTC</div></div></div></body></html>

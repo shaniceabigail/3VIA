@@ -10,19 +10,14 @@
 <h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:docs/team/shaniceabigal.adoc
-3VIA is a desktop application that can be used for learners to recap their subjects, through active recall. The app focuses on learning, testing and reviewing, to ensure that the user can go through an iteration, and have any resource they need.</p>
-</div>
-<div class="exampleblock">
-<div class="content">
-<div class="paragraph">
 <p>3VIA is a desktop trivia application used by learners for material iteration in active recall.
-The user interacts with it using a Command Line Interface (CLI), and it has a GUI created with JavaFX. It is written in Java, and has about 12 kLoC.
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; update-documentations:docs/team/shaniceabigail.adoc</p>
+The user interacts with it using a Command Line Interface (CLI), and it has a GUI created with JavaFX. It is written in Java, and has about 12 kLoC.</p>
 </div>
-<div class="paragraph">
-<p>== Summary of contributions</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
@@ -64,7 +59,7 @@ The user interacts with it using a Command Line Interface (CLI), and it has a GU
 <p><strong>Minor enhancement</strong>: modified the "learn" and "review" command to allow navigation between tabs.</p>
 </li>
 <li>
-<p><strong>Code contributed</strong>: [<a href="https://github.com">Functional code</a>] [<a href="https://github.com">Test code</a>] <em>{give links to collated code files}</em></p>
+<p><strong>Code contributed</strong>: <a href="https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&amp;search=shaniceabigail">Reposense</a></p>
 </li>
 <li>
 <p><strong>Other contributions</strong>:</p>
@@ -105,32 +100,52 @@ The user interacts with it using a Command Line Interface (CLI), and it has a GU
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>== Contributions to the User Guide</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 100%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They highlight my ability to write documentation for end-users.</em></p></td>
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="navigation-to-another-tab"><a class="link" href="#navigation-to-another-tab">Navigation to another tab</a></h3>
 <div class="paragraph">
-<p>=== Navigation to another tab
-You can type <code>learn</code> to go to learn page, <code>test</code> to go to test page and <code>review</code> to go to review page. But in case you forget, type any of the tab names and you&#8217;ll navigate there, as long as you&#8217;re not in the middle of a test! No running away from the test you&#8217;re doing, you can do this and keep learning!
+<p>You can type <code>learn</code> to go to learn page, <code>test</code> to go to test page and <code>review</code> to go to review page. But in case you forget, type any of the tab names and you&#8217;ll navigate there, as long as you&#8217;re not in the middle of a test! No running away from the test you&#8217;re doing, you can do this and keep learning!
 Format: <code>learn</code>, <code>test</code>, <code>review</code></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="changing-the-day-and-night-mode-of-the-app-code-mode-code"><a class="link" href="#changing-the-day-and-night-mode-of-the-app-code-mode-code">Changing the day and night mode of the app: <code>mode</code></a></h3>
+<div class="imageblock">
+<div class="content">
+<img src="../images/3VIATheme.png" alt="3VIATheme" width="800">
+</div>
+<div class="title">Figure 1. Day Mode / Light Theme</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/DarkTheme.png" alt="DarkTheme" width="800">
+</div>
+<div class="title">Figure 2. Night Mode / Dark Theme</div>
+</div>
 <div class="paragraph">
-<p>=== Toggling between the day and night mode of the app: <code>mode</code>
-Type <code>mode</code> in any page, or section of the app to switch between the modes to suit your comfort in learning and using 3VIA.
+<p>Type <code>mode</code> in any page, or section of the app to switch between the modes to suit your comfort in learning and using 3VIA.
 Format: <code>mode</code></p>
 </div>
-<div class="paragraph">
-<p>== Contributions to the Developer Guide</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 100%;">
@@ -141,21 +156,40 @@ Format: <code>mode</code></p>
 </tr>
 </tbody>
 </table>
+<div class="sect2">
+<h3 id="navigation-feature"><a class="link" href="#navigation-feature">Navigation Feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
-<p>=== Navigation Feature
-==== Current Implementation
-The Navigation Tab is designed for users to be aware of the different functionality of our app.
-We added a navigation tab feature, which only handles mouse events.
-At the present, the Navigation Tab is not a separate class on its own, and is embedded into the <code>MainDisplay</code> class.</p>
+<p>The Navigation Tab is designed for users to be aware of the different functionality of our app and paired with its relevant content.
+We added a navigation tab feature which can be accessed through commands of the tabs the user wants to navigate to.</p>
 </div>
 <div class="paragraph">
-<p>===== GUI Handling
-The tabs are expected to toggle according to the user&#8217;s interaction:</p>
+<p>The contents of the each AppState, or the functionalities of that page is attached to the tab itself, to allow the user to check and use the app more efficiently.
+Commands and mouse click events will handle the updating of AppState.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ToggleTabActivityDiagram.png" alt="ToggleTabActivityDiagram" width="1000">
+</div>
+<div class="title">Figure 3. Toggle Tab Event</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="handling-event"><a class="link" href="#handling-event">Handling event</a></h4>
+<div class="paragraph">
+<p>At the present, the Navigation Tab is not a separate class on its own, and is embedded into the <code>MainDisplay</code> class.
+Event raised is ToggleTabEvent.</p>
+</div>
+<div class="sect4">
+<h5 id="gui-handling"><a class="link" href="#gui-handling">GUI Handling</a></h5>
+<div class="paragraph">
+<p>The tabs are expected to toggle and display their respective tab contents according to the user&#8217;s interaction:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Command Line [Work In Progress]</p>
+<p>Commands from Command Line Interface</p>
 </li>
 <li>
 <p>Mouse clicks</p>
@@ -165,1175 +199,108 @@ The tabs are expected to toggle according to the user&#8217;s interaction:</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>==== Design Considerations
-===== Location of Navigation tab
-* Side bar
-<strong> pros: easy to see, optimized for user experience
-</strong> cons: harder to implement</p>
 </div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="location-of-navigation-tab"><a class="link" href="#location-of-navigation-tab">Location of Navigation tab</a></h5>
 <div class="ulist">
 <ul>
 <li>
-<p>Top bar</p>
+<p>Side bar</p>
+<div class="ulist">
+<ul>
+<li>
+<p>pros: easy to see, optimized for user experience</p>
+</li>
+<li>
+<p>cons: harder to implement</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Top bar (<em>currently implemented</em>)</p>
 <div class="ulist">
 <ul>
 <li>
 <p>pros: easier to implement</p>
 </li>
 <li>
-<p>cons: less intuitive for users compared to side bar</p>
+<p>cons: less visually intuitive for users compared to side bar</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>===== Icons on the Tabs
-We have added the icon images for the tabs, but implementation is still a work in progress.</p>
 </div>
-<div class="paragraph">
-<p>=== Mode Feature
-==== Current Implementation
-Mode can be accessed as a command in any AppState of 3VIA, which allows you to toggle the mode anywhere in the app.</p>
 </div>
+<div class="sect3">
+<h4 id="using-external-library"><a class="link" href="#using-external-library">Using external library</a></h4>
 <div class="paragraph">
-<p>=== [Proposed] Delete Multiple <code>Coming in v2.0</code>
-==== Current Implementation
-The delete mechanism is facilitated by <code>TriviaBundleParser</code>, <code>DeleteCommandParser</code>, <code>ParserUtil</code>, <code>DeleteCommand</code> and <code>Index</code>.</p>
-</div>
-<div class="paragraph">
-<p>Currently, <code>DeleteCommandParser</code> invokes <code>ParserUtil#parseIndex()</code> which parses a <code>oneBasedIndex</code> input into an <code>Index</code>.
-The <code>DeleteCommand</code> executes the deletion of a card using the <code>zeroBasedIndex</code> as specified in <code>Index</code>.</p>
-</div>
-<div class="paragraph">
-<p>==== Proposed Enhancement
-To delete a range of cards from 1 to 5, <code>delete 1-5</code> will be executed.
-The proposed deletion of multiple cards will utilise the following operations:</p>
+<p>Originally we were using JFoenix, however due to a bug which causes the alignment of our pages to the tabs to be visually off,
+we decided to implement a regular tab.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>ParserUtil#parseIndex()</code>&#8201;&#8212;&#8201;takes in a one based index.</p>
+<p>Library used: <a href="https://github.com/jfoenixadmin/JFoenix">JFoenix</a></p>
 </li>
 <li>
-<p><code>ParserUtil#parseMultipleIndex()</code>&#8201;&#8212;&#8201;takes in a range of one based indexes in a specified format.</p>
+<p>Tutorial inspiration: <a href="http://synappse.co/blog/vertical-stateful-jfxtabpane-with-icons-in-javafx/">Vertical Tabs</a></p>
 </li>
 </ul>
 </div>
+<div class="sect4">
+<h5 id="icons-on-the-tabs"><a class="link" href="#icons-on-the-tabs">Icons on the Tabs</a></h5>
 <div class="paragraph">
-<p>Both of the above methods will return a set of <code>Index</code>.</p>
+<p>We have added the icon images for the tabs, but implementation is still a work in progress.</p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="day-and-night-mode-feature"><a class="link" href="#day-and-night-mode-feature">Day and Night Mode Feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
 <div class="paragraph">
-<p>Given below is an example implementation of how <code>delete 1-5</code> will behave at each step.</p>
-</div>
-<div class="paragraph">
-<p>Step 1. <code>DeleteCommandParser</code> will determine if the given input deletes a single card or multiple cards.
-This can be done by determining if the input contains a <code>-</code>.</p>
-</div>
-<div class="paragraph">
-<p>Step 2. In this example, <code>ParserUtil#parseMultipleIndex()</code> will execute and return a set of <code>Index</code>.</p>
-</div>
-<div class="paragraph">
-<p>Step 3. The set of <code>Index</code> is used to initialise <code>DeleteCommand</code>.</p>
-</div>
-<div class="paragraph">
-<p>Step 4. When <code>DeleteCommand#execute()</code> is invoked. A zero based index is obtained from each <code>Index</code> in the set.
-Each zero based index is then used to delete the cards, similar to the current implementation of <code>delete</code>.</p>
-</div>
-<div class="paragraph">
-<p>==== Design Consideration</p>
-</div>
-<div class="paragraph">
-<p>===== Aspect: Separate or single delete command</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Single delete command.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pro: Reduces the number of commands for the user to remember.</p>
-</li>
-<li>
-<p>Con: Users may be unaware of this functionality being available
-as the name of the command does not describe deleting multiple cards.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Separate delete command for deleting multiple cards.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pro: The command will describe the action of deleting multiple cards clearly (i.e. <code>deleteMultiple 1-5</code>).</p>
-</li>
-<li>
-<p>Con: There will be more commands for the user to remember.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>=== Logging</p>
-</div>
-<div class="paragraph">
-<p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">[Implementation-Configuration]</a>)</p>
-</li>
-<li>
-<p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
-</li>
-<li>
-<p>Currently log messages are output through: <code>Console</code> and to a <code>.log</code> file.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Logging Levels</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>SEVERE</code> : Critical problem detected which may possibly cause the termination of the application</p>
-</li>
-<li>
-<p><code>WARNING</code> : Can continue, but with caution</p>
-</li>
-<li>
-<p><code>INFO</code> : Information showing the noteworthy actions by the App</p>
-</li>
-<li>
-<p><code>FINE</code> : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size</p>
-</li>
-</ul>
-</div>
-<div id="Implementation-Configuration" class="paragraph">
-<p>=== Configuration</p>
-</div>
-<div class="paragraph">
-<p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
-</div>
-<div class="paragraph">
-<p>== Documentation</p>
-</div>
-<div class="paragraph">
-<p>We use asciidoc for writing documentation.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-We chose asciidoc over Markdown because asciidoc, although a bit more complex than Markdown, provides more flexibility in formatting.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>=== Editing Documentation</p>
-</div>
-<div class="paragraph">
-<p>See <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to learn how to render <code>.adoc</code> files locally to preview the end result of your edits.
-Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows you to preview the changes you have made to your <code>.adoc</code> files in real-time.</p>
-</div>
-<div class="paragraph">
-<p>=== Publishing Documentation</p>
-</div>
-<div class="paragraph">
-<p>See <a href="UsingTravis.html#deploying-github-pages">UsingTravis.adoc</a> to learn how to deploy GitHub Pages using Travis.</p>
-</div>
-<div class="paragraph">
-<p>=== Converting Documentation to PDF format</p>
-</div>
-<div class="paragraph">
-<p>We use <a href="https://www.google.com/chrome/browser/desktop/">Google Chrome</a> for converting documentation to PDF format, as Chrome&#8217;s PDF engine preserves hyperlinks used in webpages.</p>
-</div>
-<div class="paragraph">
-<p>Here are the steps to convert the project documentation files to PDF format.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Follow the instructions in <a href="UsingGradle.html#rendering-asciidoc-files">UsingGradle.adoc</a> to convert the AsciiDoc files in the <code>docs/</code> directory to HTML format.</p>
-</li>
-<li>
-<p>Go to your generated HTML files in the <code>build/docs</code> folder, right click on them and select <code>Open with</code> &#8594; <code>Google Chrome</code>.</p>
-</li>
-<li>
-<p>Within Chrome, click on the <code>Print</code> option in Chrome&#8217;s menu.</p>
-</li>
-<li>
-<p>Set the destination to <code>Save as PDF</code>, then click <code>Save</code> to save a copy of the file in PDF format. For best results, use the settings indicated in the screenshot below.</p>
-</li>
-</ol>
+<p>Mode allows you to toggle between day and night mode anywhere in the app and it can be accessed as a command in any AppState of 3VIA.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
+<img src="../images/3VIATheme.png" alt="3VIATheme" width="800">
 </div>
-<div class="title">Figure 1. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 4. Day Mode / Light Theme</div>
 </div>
-<div id="Docs-SiteWideDocSettings" class="paragraph">
-<p>=== Site-wide Documentation Settings</p>
+<div class="imageblock">
+<div class="content">
+<img src="../images/DarkTheme.png" alt="DarkTheme" width="800">
 </div>
-<div class="paragraph">
-<p>The <a href="{repoURL}/build.gradle"><code>build.gradle</code></a> file specifies some project-specific <a href="https://asciidoctor.org/docs/user-manual/#attributes">asciidoc attributes</a> which affects how all documentation files within this project are rendered.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Attributes left unset in the <code>build.gradle</code> file will use their <strong>default value</strong>, if any.
-</td>
-</tr>
-</table>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 1. List of site-wide attributes</caption>
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 50%;">
-<col style="width: 25%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Attribute name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>site-name</code></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>The name of the website.
-If set, the name will be displayed near the top of the page.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>not set</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>site-githuburl</code></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>URL to the site&#8217;s repository on <a href="https://github.com">GitHub</a>.
-Setting this will add a "View on GitHub" link in the navigation bar.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>not set</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>site-seedu</code></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Define this attribute if the project is an official SE-EDU project.
-This will render the SE-EDU navigation bar at the top of the page, and add some SE-EDU-specific navigation items.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>not set</em></p></td>
-</tr>
-</tbody>
-</table>
-<div id="Docs-PerFileDocSettings" class="paragraph">
-<p>=== Per-file Documentation Settings</p>
-</div>
-<div class="paragraph">
-<p>Each <code>.adoc</code> file may also specify some file-specific <a href="https://asciidoctor.org/docs/user-manual/#attributes">asciidoc attributes</a> which affects how the file is rendered.</p>
-</div>
-<div class="paragraph">
-<p>Asciidoctor&#8217;s <a href="https://asciidoctor.org/docs/user-manual/#builtin-attributes">built-in attributes</a> may be specified and used as well.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-Attributes left unset in <code>.adoc</code> files will use their <strong>default value</strong>, if any.
-</td>
-</tr>
-</table>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 2. List of per-file attributes, excluding Asciidoctor&#8217;s built-in attributes</caption>
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 50%;">
-<col style="width: 25%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Attribute name</th>
-<th class="tableblock halign-left valign-top">Description</th>
-<th class="tableblock halign-left valign-top">Default value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>site-section</code></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Site section that the document belongs to.
-This will cause the associated item in the navigation bar to be highlighted.
-One of: <code>UserGuide</code>, <code>DeveloperGuide</code>, <code>LearningOutcomes</code>*, <code>AboutUs</code>, <code>ContactUs</code></p>
-</div>
-<div class="paragraph">
-<p><em>* Official SE-EDU projects only</em></p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>not set</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>no-site-header</code></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Set this attribute to remove the site navigation bar.</p>
-</div></div></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>not set</em></p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>=== Site Template</p>
-</div>
-<div class="paragraph">
-<p>The files in <a href="{repoURL}/docs/stylesheets"><code>docs/stylesheets</code></a> are the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS stylesheets</a> of the site.
-You can modify them to change some properties of the site&#8217;s design.</p>
-</div>
-<div class="paragraph">
-<p>The files in <a href="{repoURL}/docs/templates"><code>docs/templates</code></a> controls the rendering of <code>.adoc</code> files into HTML5.
-These template files are written in a mixture of <a href="https://www.ruby-lang.org">Ruby</a> and <a href="http://slim-lang.com">Slim</a>.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Modifying the template files in <a href="{repoURL}/docs/templates"><code>docs/templates</code></a> requires some knowledge and experience with Ruby and Asciidoctor&#8217;s API.
-You should only modify them if you need greater control over the site&#8217;s layout than what stylesheets can provide.
-The SE-EDU team does not provide support for modified template files.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div id="Testing" class="paragraph">
-<p>== Testing</p>
-</div>
-<div class="paragraph">
-<p>=== Running Tests</p>
-</div>
-<div class="paragraph">
-<p>There are three ways to run tests.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-The most reliable way to run tests is the 3rd one. The first two methods might fail some GUI tests due to platform/resolution-specific idiosyncrasies.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><strong>Method 1: Using IntelliJ JUnit test runner</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>To run all tests, right-click on the <code>src/test/java</code> folder and choose <code>Run 'All Tests'</code></p>
-</li>
-<li>
-<p>To run a subset of tests, you can right-click on a test package, test class, or a test and choose <code>Run 'ABC'</code></p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Method 2: Using Gradle</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Open a console and run the command <code>gradlew clean allTests</code> (Mac/Linux: <code>./gradlew clean allTests</code>)</p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run tests using Gradle.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p><strong>Method 3: Using Gradle (headless)</strong></p>
-</div>
-<div class="paragraph">
-<p>Thanks to the <a href="https://github.com/TestFX/TestFX">TestFX</a> library we use, our GUI tests can be run in the <em>headless</em> mode. In the headless mode, GUI tests do not show up on the screen. That means the developer can do other things on the Computer while the tests are running.</p>
-</div>
-<div class="paragraph">
-<p>To run tests in headless mode, open a console and run the command <code>gradlew clean headless allTests</code> (Mac/Linux: <code>./gradlew clean headless allTests</code>)</p>
-</div>
-<div class="paragraph">
-<p>=== Types of tests</p>
-</div>
-<div class="paragraph">
-<p>We have two types of tests:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>GUI Tests</strong> - These are tests involving the GUI. They include,</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><em>System Tests</em> that test the entire App by simulating user actions on the GUI. These are in the <code>systemtests</code> package.</p>
-</li>
-<li>
-<p><em>Unit tests</em> that test the individual components. These are in <code>seedu.address.ui</code> package.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p><strong>Non-GUI Tests</strong> - These are tests not involving the GUI. They include,</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><em>Unit tests</em> targeting the lowest level methods/classes.<br>
-e.g. <code>seedu.address.commons.StringUtilTest</code></p>
-</li>
-<li>
-<p><em>Integration tests</em> that are checking the integration of multiple code units (those code units are assumed to be working).<br>
-e.g. <code>seedu.address.storage.StorageManagerTest</code></p>
-</li>
-<li>
-<p>Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together.<br>
-e.g. <code>seedu.address.logic.LogicManagerTest</code></p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>=== Troubleshooting Testing
-<strong>Problem: <code>HelpWindowTest</code> fails with a <code>NullPointerException</code>.</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Reason: One of its dependencies, <code>HelpWindow.html</code> in <code>src/main/resources/docs</code> is missing.</p>
-</li>
-<li>
-<p>Solution: Execute Gradle task <code>processResources</code>.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>== Dev Ops</p>
-</div>
-<div class="paragraph">
-<p>=== Build Automation</p>
-</div>
-<div class="paragraph">
-<p>See <a href="UsingGradle.html">UsingGradle.adoc</a> to learn how to use Gradle for build automation.</p>
-</div>
-<div class="paragraph">
-<p>=== Continuous Integration</p>
-</div>
-<div class="paragraph">
-<p>We use <a href="https://travis-ci.org/">Travis CI</a> and <a href="https://www.appveyor.com/">AppVeyor</a> to perform <em>Continuous Integration</em> on our projects. See <a href="UsingTravis.html">UsingTravis.adoc</a> and <a href="UsingAppVeyor.html">UsingAppVeyor.adoc</a> for more details.</p>
-</div>
-<div class="paragraph">
-<p>=== Coverage Reporting</p>
-</div>
-<div class="paragraph">
-<p>We use <a href="https://coveralls.io/">Coveralls</a> to track the code coverage of our projects. See <a href="UsingCoveralls.html">UsingCoveralls.adoc</a> for more details.</p>
-</div>
-<div class="paragraph">
-<p>=== Documentation Previews
-When a pull request has changes to asciidoc files, you can use <a href="https://www.netlify.com/">Netlify</a> to see a preview of how the HTML version of those asciidoc files will look like when the pull request is merged. See <a href="UsingNetlify.html">UsingNetlify.adoc</a> for more details.</p>
-</div>
-<div class="paragraph">
-<p>=== Making a Release</p>
-</div>
-<div class="paragraph">
-<p>Here are the steps to create a new release.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Update the version number in <a href="{repoURL}/src/main/java/seedu/address/MainApp.java"><code>MainApp.java</code></a>.</p>
-</li>
-<li>
-<p>Generate a JAR file <a href="UsingGradle.html#creating-the-jar-file">using Gradle</a>.</p>
-</li>
-<li>
-<p>Tag the repo with the version number. e.g. <code>v0.1</code></p>
-</li>
-<li>
-<p><a href="https://help.github.com/articles/creating-releases/">Create a new release using GitHub</a> and upload the JAR file you created.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>=== Managing Dependencies</p>
-</div>
-<div class="paragraph">
-<p>A project often depends on third-party libraries. For example, Address Book depends on the <a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
-a. Include those libraries in the repo (this bloats the repo size)<br>
-b. Require developers to download those libraries manually (this creates extra work for developers)</p>
-</div>
-<div class="paragraph">
-<p>== Product Scope</p>
-</div>
-<div class="paragraph">
-<p><strong>Target user profile</strong>:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>For students/learners who wants to reinforce their knowledge</p>
-</li>
-<li>
-<p>can type fast</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p><strong>Value proposition</strong>: help students memorise and test their knowledge quickly</p>
-</div>
-<div class="paragraph">
-<p>== User Stories</p>
-</div>
-<div class="paragraph">
-<p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p>
-</div>
-<table class="tableblock frame-all grid-all" style="width: 59%;">
-<colgroup>
-<col style="width: 22%;">
-<col style="width: 23%;">
-<col style="width: 25%;">
-<col style="width: 30%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Priority</th>
-<th class="tableblock halign-left valign-top">As a &#8230;&#8203;</th>
-<th class="tableblock halign-left valign-top">I want to &#8230;&#8203;</th>
-<th class="tableblock halign-left valign-top">So that I can&#8230;&#8203;</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">curious learner</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to test my knowledge</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be sure that I have memorised the content</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">hardworking learner</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have different testing mechanisms</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">reinforce my knowledge and clear any misconceptions.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">list all the contents in a deck of cards</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">review all the contents in one glance</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">to search for questions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">look-up answers to questions that I can’t remember</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">mass import multiple cards at the same time from a single file</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">input large amount of data at once</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">efficient user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a timer on the time to answer each question</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">improve the ability to recall information quickly</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">curious user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">research more on the question</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">learn at a greater depth</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">consistent user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">revise on the contents which I’m not familiar with more often</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">memorise those content permanently</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">multilingual user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">input text in different languages</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">learn another language</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">competitive user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a multi player function</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">challenge my friends’ knowledge</p></td>
-</tr>
-</tbody>
-</table>
-<div class="paragraph">
-<p>== Use Cases</p>
-</div>
-<div class="paragraph">
-<p>(For all use cases below, the <strong>System</strong> is the <code>3VIA</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
-</div>
-<h3 id="use-case-1-find-more-info-on-a-topic" class="discrete">Use case 1: Find more info on a topic</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User: Search for a certain question using keywords.</p>
-</li>
-<li>
-<p>System: Shows a list of questions that meets the search criteria.</p>
-</li>
-<li>
-<p>User: Select a question.</p>
-</li>
-<li>
-<p>System: Displays the question and answer.</p>
-</li>
-<li>
-<p>User: Request more info regarding the question.</p>
-</li>
-<li>
-<p>System: Display more info.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. No matches.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. System: Indicates no question.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>2a. User wants to see more question</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a1. User request for matching questions again.</p>
-<div class="paragraph">
-<p>Use case resumes at step 2.</p>
+<div class="title">Figure 5. Night Mode / Dark Theme</div>
 </div>
-</li>
-</ul>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ModeActivityDiagram.png" alt="ModeActivityDiagram" width="800">
 </div>
-</li>
-</ul>
+<div class="title">Figure 6. Mode activity diagram</div>
 </div>
-<h3 id="use-case-2-add-card" class="discrete">Use case 2: Add Card</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User: Adds question, answer and topic(s).</p>
-</li>
-<li>
-<p>System: Displays the question and answer added.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a. Incorrect format.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>1a1. System: Indicates format entered is incorrect.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-3-open-ended-test" class="discrete">Use case 3: Open-Ended Test</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User: User start open-ended test.</p>
-</li>
-<li>
-<p>System: Displays list of questions with topic.</p>
-</li>
-<li>
-<p>User: Confirms questions to be tested.</p>
-</li>
-<li>
-<p>System: Displays question and starts the timer (if specified) for the question.</p>
-</li>
-<li>
-<p>User: Key in the user’s answer.</p>
-</li>
-<li>
-<p>System: Display the correct answer and wait for the user to determine the correctness of the question.</p>
-</li>
-<li>
-<p>User: User determine the correctness of the question.</p>
-</li>
-<li>
-<p>Repeat step 4 until all cards have been viewed and answered.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a. Topic not found</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a1. System: Indicates topic not found.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>4a. Time limit exceeded and user did not answer the question</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>4a1. System: Continue to next question at step 4.</p>
-<div class="paragraph">
-<p>Use case resumes at step 4 on the next question.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-4-matchtest" class="discrete">Use case 4: MatchTest</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User: Start <code>MatchTest</code>.</p>
-</li>
-<li>
-<p>System: Shows a list of question and answer.</p>
-</li>
-<li>
-<p>User: Select the matching question and answer.</p>
-</li>
-<li>
-<p>Repeat step 3 until user matched all the questions and answers correctly.</p>
-</li>
-<li>
-<p>System: Record down and show the results of the test.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>3a. Question and answer matched wrongly.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>3a1. System: Indicates that question and answer matched are wrongly.</p>
-<div class="paragraph">
-<p>Use case resumes at step 3.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>4a. User exit from the test without completing it.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>4a1. System: Step 5 will not be carried out.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="use-case-5-import" class="discrete">Use case 5: Import</h3>
-<div class="paragraph">
-<p><strong>MSS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>User: Input import command.</p>
-</li>
-<li>
-<p>System: Parses import file, displays the cards and the number of cards imported.</p>
-</li>
-<li>
-<p>User: Reviews cards imported.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a. Invalid file.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a1. System: Display invalid file path.</p>
-<div class="paragraph">
-<p>Use case ends.</p>
-</div>
-</li>
-</ul>
-</div>
-</li>
-</ul>
 </div>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a. Wrong text format.</p>
-<div class="ulist none">
-<ul class="none">
-<li>
-<p>2a1. System: Displays error, import failure.</p>
+<div class="sect3">
+<h4 id="handling-event-2"><a class="link" href="#handling-event-2">Handling event</a></h4>
 <div class="paragraph">
-<p>Use case ends.</p>
+<p>Event is handled in the <code>MainWindow.java</code>.</p>
 </div>
-</li>
-</ul>
 </div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>== Non Functional Requirements</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>9</code> or higher installed.</p>
-</li>
-<li>
-<p>The maximum number of question that the app can have should not be capped.</p>
-</li>
-<li>
-<p>The application should be intuitive and easy to use.</p>
-</li>
-<li>
-<p>The application should still work, without internet access.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>== Glossary</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1"><a id="mainstream-os"></a> Mainstream OS</dt>
-<dd>
-<p>Windows, Linux, Unix, OS-X</p>
-</dd>
-<dt class="hdlist1"><a id="card"></a> Card</dt>
-<dd>
-<p>A question and answer pair.</p>
-</dd>
-<dt class="hdlist1"><a id="deck"></a> Deck</dt>
-<dd>
-<p>A related set of cards grouped together.</p>
-</dd>
-<dt class="hdlist1"><a id="bundle"></a> Bundle</dt>
-<dd>
-<p>Refers to all the cards in the application.</p>
-</dd>
-</dl>
-</div>
-<div class="paragraph">
-<p>== Product Survey</p>
-</div>
-<div class="paragraph">
-<p><strong>Product Name</strong></p>
-</div>
-<div class="paragraph">
-<p>Author:</p>
-</div>
-<div class="paragraph">
-<p>Pros:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Cons:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>== Instructions for Manual Testing</p>
-</div>
-<div class="paragraph">
-<p>Given below are instructions to test the app manually.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-These instructions only provide a starting point for testers to work on; testers are expected to do more <em>exploratory</em> testing.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>=== Launch and Shutdown</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Initial launch</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Download the jar file and copy into an empty folder</p>
-</li>
-<li>
-<p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Saving window preferences</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Resize the window to an optimum size. Move the window to a different location. Close the window.</p>
-</li>
-<li>
-<p>Re-launch the app by double-clicking the jar file.<br>
-Expected: The most recent window size and location is retained.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
-<div class="paragraph">
-<p>=== Deleting a person</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Deleting a person while all persons are listed</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
-</li>
-<li>
-<p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
-</li>
-<li>
-<p>Test case: <code>delete 0</code><br>
-Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
-</li>
-<li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
-Expected: Similar to previous.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
-<div class="paragraph">
-<p>=== Saving data</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Dealing with missing/corrupted data files</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
-<div class="paragraph">
-<p>=== Importing cards</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Importing a list of cards</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: Create an empty text/plain file named <code>file.txt</code>.
-Copy it&#8217;s absolute/ relative file path. (i.e file.txt)</p>
-</li>
-<li>
-<p>Add a few question and answer pairs into <code>file.txt</code>.
-The question and answer should be separated by a <code>TAB</code> space.
-Additionally, each question and answer pair is separated by a new line.
-Make sure to follow the format as specified in the User Guide.
-Save the file.<br></p>
-<div class="paragraph">
-<p>Test case: <code>import file.txt</code><br>
-Expected: Import success. The name of the file and the number of cards
-imported will be displayed in the results display.</p>
-</div>
-</li>
-<li>
-<p>Add a topic " t/topic" (note the whitespace before "t/") above the question and answer pairs.
-Save the file.<br></p>
+<div class="sect3">
+<h4 id="gui-handling-2"><a class="link" href="#gui-handling-2">GUI Handling</a></h4>
 <div class="paragraph">
-<p>Test case: <code>import file.txt</code><br>
-Expected: Import success. The name of the file and the number of cards
-imported will be displayed in the results display.
-The cards added should be tagged with the respective topics added.</p>
-</div>
-</li>
-<li>
-<p>Remove all text in the <code>file.txt</code>. Save the file.<br></p>
-<div class="paragraph">
-<p>Test case: <code>import file.txt</code><br>
-Expected: Import failure. No card will be imported.
-Error details shown in the results display.</p>
-</div>
-</li>
-</ol>
-</div>
-</li>
-</ol>
+<p>The default of the application is a "Day Theme" stylesheet, meaning a generally white background
+with dark text. The command will swap the current theme set to a "Dark Theme" stylesheet.
+Each time the the <code>mode</code> command is called, the boolean in <code>MainDisplay.java</code> acts as a toggle between the 2 themes.</p>
 </div>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:39:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:49:11 UTC</div></div></div></body></html>
