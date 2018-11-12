@@ -17,7 +17,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.portation.ImportFile;
-import seedu.address.model.test.TimeLimit;
 import seedu.address.model.topic.Topic;
 
 /**
@@ -155,20 +154,6 @@ public class ParserUtil {
             topicSet.add(parseTopic(topicName));
         }
         return topicSet;
-    }
-
-    /**
-     * Parses {@code String timeLimit} into a float
-     *
-     * @throws ParseException if the given {@code timeLimit} is invalid
-     */
-    public static TimeLimit parseTimeLimit(String timeLimit) throws ParseException {
-        requireNonNull(timeLimit);
-        String trimmedTimeLimit = timeLimit.trim();
-        if (!TimeLimit.isValidTimeLimit(timeLimit)) {
-            throw new ParseException(TimeLimit.MESSAGE_TIME_LIMIT_CONSTRAINTS);
-        }
-        return new TimeLimit(trimmedTimeLimit);
     }
 
     /**

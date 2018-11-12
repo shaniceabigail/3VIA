@@ -295,6 +295,16 @@ public class ImportCommandTest {
         public void handleSetUpDisplayCardInfoEvent(SetUpDisplayCardInfoEvent event) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void recordAnswerToOpenEndedTest(String userInput) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isOpenEndedTestAnswerCorrect(char in) {
+            throw new AssertionError("This method should not be called");
+        }
     }
 
     /**

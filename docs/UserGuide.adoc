@@ -171,12 +171,12 @@ _Selects and opens a Card Info Panel for the 1st card in the results of the `fin
 // tag::research[]
 === Research on a question : `research`
 
-Loads the Google search page for the question of the identified card. If, for any reason, you are not able to load the
+Loads the Google search page for the question of the identified card. If you are not able to load the
 Google search page, 3VIA will redirect you to DuckDuckGo's search engine with the selected question as the search query. +
 Format: `research INDEX`
 
 [NOTE]
-You would need to have an internet connection to load the online search engine. If you are not able to load the
+You would need to have an internet connection to load the online search engine. If you are not able to load both the
 Google's and DuckDuckGo's search engine, you will be redirected to a page with an error message.
 // end::research[]
 
@@ -254,19 +254,35 @@ _`delete 1` command is reapplied_ +
 _`clear` command is reapplied_ +
 // end::undoredo[]
 
+// tag::clear[]
 === Clearing all entries : `clear`
 [WARNING]
 Use with caution! Clears all entries in 3VIA and reboots. +
+
+
+Clear all entries and existing card list(If there exists). +
 Format: `clear`
 
-=== Starting an Open Ended Test: `testO` `[coming in v2.0]`
+Examples:
 
+* `add q/Why is the earth round? a/Because of gravity t/Physics` +
+`clear` +
+_Card list has been cleared_.
+
+* `delete 1` +
+`delete 2` +
+`delete 3` +
+`clear` +
+_No cards to be cleared_.
+// end::clear[]
+
+//tag::openendedtest[]
+=== Starting an Open Ended Test: `testO`
 Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer. +
-Format: `test t/TOPIC [TIMELIMIT_IN_SECONDS]`
+Format: `testO TOPIC`
 
 ****
 * The test aims to test the knowledge of the user with the existing questions of a specified topic that are in the trivia application.
-* The user can also set the time limit (in seconds) for each question using the optional field `TIMELIMIT_IN_SECONDS`
 ****
 
 The following commands can only be used during an `Open Ended Test`.
@@ -279,38 +295,39 @@ Format: `ANSWER_FROM_USER`
 ==== Determining the correctness of your answer:
 
 After answering the question, you would be given a comparison between the expected and actual answer you entered. You would be required to determine the correctness of your answer since the questions are open ended. The app will keep track of your score. +
-Format: `c` (correct) OR `x` (wrong)
+Format: `Y` (correct) OR `N` (wrong)
 
 ==== Quit the test:
 
 Test is exited. +
 Format: `exit`
+//end::openendedtest[]
 
 // tag::matchtest1[]
 === Start a MatchTest: `testM`
 
-Start a test of matching questions and answers for a specified topic. In a MatchTest, all the questions and answers in
+Start a test of matching questions and answers for a specified topic. In a `MatchTest`, all the questions and answers in
 that topic will be displayed. You will then have to match all the questions to their respective answer. +
 Format: `testM TOPIC`
 
 [NOTE]
-The navigation tabs will be disabled during the Match Test. If you want to navigate to other pages, you would need to exit
-the Match Test by entering the `exit` command, as described in the section on https://cs2103-ay1819s1-w12-3.github.io/main/UserGuide.html#quit-matchtest[Quit MatchTest].
+The navigation tabs will be disabled during the `MatchTest`. If you want to navigate to other pages, you would need to exit
+the `MatchTest` by entering the `exit` command, as described in the section on https://cs2103-ay1819s1-w12-3.github.io/main/UserGuide.html#quit-matchtest[Quit MatchTest].
 
 The following commands can only be used during a `MatchTest`.
 
 ==== Match question and answer:
 
-Will match a pair of question and answer during a MatchTest. +
+Will match a pair of question and answer during a `MatchTest`. +
 Format: `INDEX_OF_QUESTION INDEX_OF_ANSWER`
 
-An example is given in the below screenshot, where the command of `1 2` will select the question and answer that is boxed
+An example is given in the below screenshot, where the command of `2 3` will select the question and answer that is boxed
 in green.
 
 image::UserGuideMatchCommand.png[width="790"]
 
 Another way to match a pair of question and answer is to solely enter the index of the answer. By doing so, we will
-assume that you would be matching a question at the top to the answer that is specified. +
+assume that you would be matching first question to the answer that is specified. +
 Format: `INDEX_OF_ANSWER`
 
 An example of such a usage can be seen in the the below screenshot.
@@ -324,22 +341,37 @@ Also note that answers are case sensitive. Hence the answer of "f = m * a" is no
 
 ==== Quit MatchTest:
 
-If you want to stop an ongoing MatchTest, you can enter the `exit` command at any time during the test. The command
+If you want to stop an ongoing `MatchTest`, you can enter the `exit` command at any time during the test. The command
 will bring you to the test menu page.
 
-After the MatchTest has ended, a result page will be shown. After reviewing your results, you can exit from the MatchTest by
+After the `MatchTest` has ended, a result page will be shown. After reviewing your results, you can exit from the `MatchTest` by
 entering the `exit` command. The command will bring you to the test menu page. +
 Format: `exit`
 
 [NOTE]
-Your attempts from an incomplete MatchTest will be discarded. Only those attempts from a completed MatchTest will
-be saved into your hard disk.
+Only those attempts from a completed `MatchTest` will be saved into your hard disk.
 // end::matchtest2[]
 
-=== View statistics for a certain test: `stats` `[coming in v2.0]`
+// tag::stats[]
+=== View statistics for a certain test or overall learning path: `stats` `[coming in v2.0]`
 
 Results of previous tests, questions, expected answers and the user’s answers for that particular topic will be displayed. +
-Format: `stats [TOPIC]`
+A summary of testing results will be displayed in statistics page.
+
+Format: `stats TOPIC` _or_ `stats` _or_
+`stats HL`
+
+Example:
+
+`stats Physics` +
+_Displays the overall statistics of questions attempted of Physics_.
+
+`stats` +
+_Displays the overall statistics of all questions attempted_.
+
+`stats HL` +
+_Displays card list sorted by high to low times of mistakes_
+// end::stats[]
 
 // tag::import[]
 === Cram More Knowledge!: `import`
@@ -449,5 +481,5 @@ e.g.`select 2`
 * *MatchTest* : `testM TOPIC`
 ** *Match question to its answer* : `INDEX_OF_QUESTION INDEX_OF_ANSWER` or `INDEX_OF_ANSWER`
 ** *Exit from MatchTest* : `exit`
-* *View statistics of test* : `stats [TOPIC]`
+* *View statistics of test* : `stats [TOPIC]` _or_ `stats` _or_ `stats HL`
 * *Mass Import* : `import FILEPATH`

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <HBox prefHeight="60.0" prefWidth="690.0">
+   <HBox prefHeight="60.0" prefWidth="690.0" styleClass="standard-background-color">
       <children>
          <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
             <children>
