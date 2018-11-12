@@ -456,30 +456,29 @@ The following activity diagram shows the complete lifecycle of a `MatchTest`.
 
 image::MatchTestActivityDiagram.png[width="800"]
 
-The diagram below is an example scenario and how the `MatchTest` behaves at each step.
+The sequence below is an example scenario and how the `MatchTest` behaves at each step.
 
-Step 1. The user enter the `testM` command and a new `MatchTestCommand` will be created.
-
-Step 2. The `MatchTestCommand` will be executed and a new `MatchTest` Object will be created as shown in the below Sequence diagram.
+Step 1. User enters the `testM` command and a new `MatchTestCommand` will be created and executed, triggering a
+string of events as shown in the sequence diagram below.
 
 image::StartingMatchTestSequenceDiagram.png[width="800"]
 
-Step 3. After the `MatchTest` has been started, the user can only input the following commands:
+Step 2. After the `MatchTest` has been started, the user can only input the following commands:
 
-* `QUESTION_INDEX ANSWER_INDEX` Will be used to define which question will be matched to the answer.
+* `QUESTION_INDEX ANSWER_INDEX` Will be used to specify which question will be matched to the specified answer.
 * `ANSWER_INDEX` Another way to match the question (at the top of the question list) to its specified answer.
-* `exit` If the user input `exit`, the `MatchTest` will end and the information related to that `MatchTest` will not be recorded.
+* `exit` If the user input `exit` during a `MatchTest`, the `MatchTest` will end and the information related to that `MatchTest` will not be recorded.
 
-Step 4. Suppose the user chose to match a question to an answer, a list of steps will be executed as shown in the sequence
+Step 3. Suppose the user choose to match a question to an answer, a list of steps will be executed as shown in the sequence
 diagram below.
 
 image::MatchCommandSequenceDiagram.png[width="800"]
 
-Step 5. If there are still existing unmatched question and answers, the System will go back to step 3.
+Step 4. If there are still existing unmatched questions and answers, the System will go back to step 3.
 
-Step 6. After all the question and answers are matched, the System will store the results on the hard disk and display the test's result.
+Step 5. After all the question and answers are matched, the System will store the results on the hard disk and display the test's result.
 
-Step 7. At this stage, the System will await `exit` command from the user so that user can be taken back to the test menu page.
+Step 6. At this stage, the System will await `exit` command from the user so that user can be taken back to the test menu page.
 
 ==== Design Considerations
 
