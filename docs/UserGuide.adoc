@@ -204,9 +204,8 @@ Undoable commands: those commands that modify the app's content (`add`, `delete`
 Examples:
 
 * `delete 1` +
-`learn` +
 `undo` +
-_`delete 1` command is reversed_
+_`delete 1` command is reversed._
 
 * `select 1` +
 `learn` +
@@ -216,14 +215,15 @@ _The `undo` command not executed as there are no undoable commands previously ex
 * `delete 1` +
 `clear` +
 `undo` +
-_`clear` command is reversed +
+_`clear` command is reversed_ +
 `undo` +
-_`delete 1` command is reversed_
+_`delete 1` command is reversed_ +
+_Multiple commands can be reversed._
 
 * `import C:\Users\username\Desktop\text.txt` +
 `learn` +
 `undo` +
-_`import` command is reversed_
+_`import` command is reversed as learn is not an undoable command._
 
 === Redoing the previously undone command : `redo`
 
@@ -251,7 +251,14 @@ _`delete 1` command is reversed_ +
 `redo` +
 _`delete 1` command is reapplied_ +
 `redo` +
-_`clear` command is reapplied_ +
+_`clear` command is reapplied._
+
+* `import C:\Users\username\Desktop\text.txt` +
+`learn` +
+`undo` +
+_`import` command is reversed_ +
+`redo` +
+_`import` command is reapplied._
 // end::undoredo[]
 
 // tag::clear[]
@@ -278,7 +285,7 @@ _No cards to be cleared_.
 
 //tag::openendedtest[]
 === Starting an Open Ended Test: `testO`
-Start an open-ended test of a specified topic. In an open-ended test, the user will get the choose whether he/she has answered correctly by comparing their answers with the expected answer. +
+Start an open-ended test of a specified topic. In an open-ended test, the user will key in their answer to the questions, and get the choose whether he/she has answered correctly by comparing their answers with the expected answer. +
 Format: `testO TOPIC`
 
 ****
@@ -295,6 +302,7 @@ Format: `ANSWER_FROM_USER`
 ==== Determining the correctness of your answer:
 
 After answering the question, you would be given a comparison between the expected and actual answer you entered. You would be required to determine the correctness of your answer since the questions are open ended. The app will keep track of your score. +
+Note: Any input that begins with 'Y' or 'N' will be acceptable inputs. +
 Format: `Y` (correct) OR `N` (wrong)
 
 ==== Quit the test:
