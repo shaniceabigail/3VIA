@@ -49,7 +49,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
-    private MenuItem exitAppItem;
+    private MenuItem undoMenuItem;
 
     @FXML
     private MenuItem helpMenuItem;
